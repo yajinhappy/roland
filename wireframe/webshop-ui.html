@@ -630,7 +630,7 @@
     border-radius: 3px; border: 1px solid #C4CCD5; color: #545C69; background: #fff; }
   .ws-pact span.p { border-color: #2C333D; background: #2C333D; color: #fff; }
 
-  /* ---- 우측 : 인증 · 장바구니 · 결제 ---- */
+  /* ---- 우측 : 인증 · 선택 상품 · 결제 ---- */
   .ws-card { border: 1px solid #D5DBE2; border-radius: 4px; background: #fff;
     position: relative; }
   .ws-ch { padding: 11px 13px; border-bottom: 1px solid #EDF0F4; display: flex;
@@ -796,7 +796,7 @@
   .mo-acts .p { background: #2F6490; color: #fff; }
   .mo-acts .s { border: 1px solid #C4CCD5; background: #fff; color: #434A57; font-weight: 500; }
 
-  /* ── MO 장바구니 행 ── */
+  /* ── MO 선택 상품 행 ── */
   .mo-ci { display: flex; align-items: center; gap: 9px; padding: 9px 0;
     border-bottom: 1px solid #F1F3F6; }
   .mo-ci:last-child { border-bottom: 0; }
@@ -1305,7 +1305,7 @@
               <div class="ws-host" style="border-radius:0;border:0;position:relative;">
                 <div class="mk mk-w" style="position:absolute;top:18px;left:-33px;">H0</div>
                 <div class="ws-util tb">
-                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                   <span class="ts">SEARCH</span>
@@ -1430,7 +1430,7 @@
 
               <div class="ws-host" style="border-radius:0;border:0;">
                 <div class="ws-util tb">
-                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                   <span class="ts">SEARCH</span>
@@ -1519,7 +1519,7 @@
               <div class="ws-host" style="border-radius:0;border:0;position:relative;">
                 <div class="mk mk-w" style="position:absolute;top:14px;left:-33px;">H0</div>
                 <div class="ws-util mo">
-                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span class="ts">로그인</span>
                 </div>
@@ -1629,7 +1629,7 @@
 
               <div class="ws-host" style="border-radius:0;border:0;">
                 <div class="ws-util mo">
-                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span class="ts">로그인</span>
                 </div>
@@ -1713,14 +1713,14 @@
       <div class="imm">
         <div class="imm-h">통화 — 웹샵에서 선택하지 않는다</div>
         <div class="imm-r"><span class="imm-k">웹샵</span><span class="imm-v">법인 <b>기본 통화로 표시</b>만 한다 — 선택 UI를 두지 않는다</span></div>
-        <div class="imm-r"><span class="imm-k">선택 시점</span><span class="imm-v"><b>통합 결제창</b>에서 고른다 — 결제수단이 통화에 따라 달라지므로 같은 화면에서 정하는 것이 맞다</span></div>
+        <div class="imm-r"><span class="imm-k">선택 시점</span><span class="imm-v"><b>통합 결제창</b>에서 선택한다 — 결제수단이 통화에 따라 달라지므로 선택 시점을 결제창으로 모은다</span></div>
         <div class="imm-r"><span class="imm-k">구조</span><span class="imm-v">한 법인이 여러 국가를 운영해 <b>허용 통화가 복수</b>다 — 대만 법인은 TWD · HKD · MOP · USD</span></div>
         <div class="imm-r"><span class="imm-k">기본값</span><span class="imm-v">접속 국가로 판정 · 매칭 없으면 <b>법인 기본 통화</b></span></div>
       </div>
 
       <div class="imm">
         <div class="imm-h">기기별 레이아웃 기준</div>
-        <div class="imm-r"><span class="imm-k">PC</span><span class="imm-v">좌 상품 리스트 <b>3열</b> + <b>우측 고정</b> 인증 · 장바구니 · 결제</span></div>
+        <div class="imm-r"><span class="imm-k">PC</span><span class="imm-v">좌 상품 리스트 <b>3열</b> + <b>우측 고정</b> 인증 · 선택 상품 · 결제</span></div>
         <div class="imm-r"><span class="imm-k">TABLET 768</span><span class="imm-v">우측 고정을 버리고 <b>하단 주문 바 + 시트</b> · 그리드 3열 · 시트 필드 <b>2열</b></span></div>
         <div class="imm-r"><span class="imm-k">MO 375</span><span class="imm-v">같은 구조에 그리드 <b>2열</b> · 시트 필드 <b>1열</b></span></div>
       </div>
@@ -1839,19 +1839,19 @@
         <p class="dr-b">누르면 <b>통합 결제창</b>이 열린다. 웹샵은 결제수단을 알지 못한다.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">전달</span><span class="spec-v">상품 · 지급 대상만 — <b>금액 · 수량 · 통화는 보내지 않는다</b></span></div>
-          <div class="spec-r"><span class="spec-k">활성 조건</span><span class="spec-v">캐릭터 인증 · 상품 1개 이상 · <b>필수 동의 체크</b></span></div>
-          <div class="spec-r"><span class="spec-k">TABLET 접힘</span><span class="spec-v">하단 바 <b>한 줄</b> — 건수 · 금액 · [결제하기]를 나란히</span></div>
-          <div class="spec-r"><span class="spec-k">MO 접힘</span><span class="spec-v">하단 바 <b>두 줄</b> — 건수 · 금액 위, [결제하기] 아래</span></div>
+          <div class="spec-r"><span class="spec-k">활성 조건</span><span class="spec-v">캐릭터 인증 · <b>상품 1개</b> · 필수 동의 체크</span></div>
+          <div class="spec-r"><span class="spec-k">TABLET 접힘</span><span class="spec-v">하단 바 <b>한 줄</b> — 상품명 · 금액 · [결제하기]를 나란히</span></div>
+          <div class="spec-r"><span class="spec-k">MO 접힘</span><span class="spec-v">하단 바 <b>두 줄</b> — 상품명 · 금액 위, [결제하기] 아래</span></div>
           <div class="spec-r"><span class="spec-k">MO 펼침</span><span class="spec-v">바를 올리면 <b>선택 상품 → 받을 캐릭터 → 동의 → 금액 → [결제하기]</b> 순서의 시트</span></div>
         </div>
       </div>
 
       <div class="imm">
         <div class="imm-h">통합 결제창 적용 범위</div>
-        <div class="imm-r"><span class="imm-k">웹샵</span><span class="imm-v">이 화면의 [결제하기]</span></div>
+        <div class="imm-r"><span class="imm-k">웹샵</span><span class="imm-v">본 화면의 [결제하기]</span></div>
         <div class="imm-r"><span class="imm-k">인게임</span><span class="imm-v">게임 안 상점의 구매하기</span></div>
         <div class="imm-r"><span class="imm-k">GNJOY</span><span class="imm-v">포털 내 상품 구매 — 포인트 등</span></div>
-        <div class="imm-r"><span class="imm-k">결제창 화면</span><span class="imm-v"><b><a href="payment-checkout-currency.html" style="color:#2F6490;">통합 결제창 화면정의서</a></b> 참조 — 결제수단 · 통화 선택은 <b>핀 8</b></span></div>
+        <div class="imm-r"><span class="imm-k">결제창 화면</span><span class="imm-v"><b><a href="payment-checkout-currency.html" style="color:#2F6490;">통합 결제창 화면정의서</a></b> 참조 — 통화 · 금액은 <b>핀 2</b> · 결제수단은 <b>핀 3 · 4</b></span></div>
       </div>
     </div>
   </div>
@@ -1966,6 +1966,11 @@
                   <span class="tg-x">&#10005;</span>
                 </div>
                 <span class="tg-hint"><em>i</em>구매한 아이템은 <b>이 캐릭터</b>로 지급됩니다</span>
+                <div class="fld" style="margin-top:10px;">
+                  <span class="lbl-k">이메일</span>
+                  <div class="inp"><span style="font-size:12px;color:#98A2AE;">영수증 수신용 이메일</span></div>
+                  <span class="tg-hint"><em>i</em>주문 · 영수증 안내를 받을 주소입니다</span>
+                </div>
               </div>
             </div>
           </div>
@@ -2122,7 +2127,7 @@
             <span class="tg-lbl"><em>A1 · 비로그인 진입 · 필드 2열</em></span>
             <div class="ws-tb" style="height:600px;">
               <div class="ws-util tb">
-                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                 <span class="ts">SEARCH</span>
@@ -2171,7 +2176,7 @@
             <span class="tg-lbl"><em>A3 · 비회원 인증 완료</em></span>
             <div class="ws-tb" style="height:470px;">
               <div class="ws-util tb">
-                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                 <span class="ts">SEARCH</span>
@@ -2188,6 +2193,11 @@
                       <span class="tg-x">&#10005;</span>
                     </div>
                     <span class="tg-hint"><em>i</em>구매한 아이템은 <b>이 캐릭터</b>로 지급됩니다</span>
+                    <div class="fld" style="margin-top:10px;">
+                      <span class="lbl-k">이메일</span>
+                      <div class="inp"><span style="font-size:12px;color:#98A2AE;">영수증 수신용 이메일</span></div>
+                      <span class="tg-hint"><em>i</em>주문 · 영수증 안내를 받을 주소입니다</span>
+                    </div>
                     <div style="display:flex;align-items:center;gap:18px;padding-top:10px;border-top:1px solid #E4E8ED;">
                       <span style="font-size:11.5px;color:#6C7480;">총 결제 금액</span>
                       <span style="font-size:18px;font-weight:600;color:#171B22;font-family:'IBM Plex Mono',monospace;margin-left:auto;">₩ 4,900</span>
@@ -2202,7 +2212,7 @@
             <span class="tg-lbl"><em>B1 · 로그인 · 복수 보유</em></span>
             <div class="ws-tb" style="height:470px;">
               <div class="ws-util tb">
-                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                 <span class="ts">SEARCH</span>
@@ -2237,7 +2247,7 @@
             <span class="tg-lbl"><em>T · 캐릭터 ID 확인 · 팝오버</em></span>
             <div class="ws-tb" style="height:520px;">
               <div class="ws-util tb">
-                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                 <span class="ts">SEARCH</span>
@@ -2289,7 +2299,7 @@
             <span class="tg-lbl"><em>A1</em>최초 진입 · 비로그인</span>
             <div class="ws-mo" style="height:560px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">로그인</span>
               </div>
@@ -2337,7 +2347,7 @@
             <span class="tg-lbl"><em>A2</em>인증번호 발송 완료</span>
             <div class="ws-mo" style="height:560px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">로그인</span>
               </div>
@@ -2376,9 +2386,9 @@
           <!-- ── A3 · 인증 완료 ── -->
           <div class="tg-cell">
             <span class="tg-lbl"><em>A3</em>비회원 인증 완료</span>
-            <div class="ws-mo" style="height:560px;">
+            <div class="ws-mo" style="height:620px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">로그인</span>
               </div>
@@ -2394,6 +2404,11 @@
                       <span class="tg-x">&#10005;</span>
                     </div>
                     <span class="tg-hint"><em>i</em>구매한 아이템은 <b>이 캐릭터</b>로 지급됩니다</span>
+                    <div class="fld" style="margin-top:10px;">
+                      <span class="lbl-k">이메일</span>
+                      <div class="inp"><span style="font-size:12px;color:#98A2AE;">영수증 수신용 이메일</span></div>
+                      <span class="tg-hint"><em>i</em>주문 · 영수증 안내를 받을 주소입니다</span>
+                    </div>
 
                     <div class="tg-or"><i></i><b>선택 상품 · 프리미엄 성장석</b><i></i></div>
                     <div class="ws-tot" style="border:1px solid #E4E8ED;border-radius:3px;">
@@ -2411,7 +2426,7 @@
             <span class="tg-lbl"><em>A4</em>인증 완료 후 로그인 · 대상 변경 알림</span>
             <div class="ws-mo" style="height:520px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">내 정보</span>
               </div>
@@ -2454,7 +2469,7 @@
             <span class="tg-lbl"><em>B1</em>로그인 · 복수 보유</span>
             <div class="ws-mo" style="height:520px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">내 정보</span>
               </div>
@@ -2489,7 +2504,7 @@
             <span class="tg-lbl"><em>B2</em>로그인 · 단일 보유 · 자동 선택</span>
             <div class="ws-mo" style="height:520px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">내 정보</span>
               </div>
@@ -2522,7 +2537,7 @@
             <span class="tg-lbl"><em>B3</em>로그인 · 캐릭터 미보유</span>
             <div class="ws-mo" style="height:520px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">내 정보</span>
               </div>
@@ -2551,7 +2566,7 @@
             <span class="tg-lbl"><em>E</em>오류 상태</span>
             <div class="ws-mo" style="height:520px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">로그인</span>
               </div>
@@ -2587,7 +2602,7 @@
             <span class="tg-lbl"><em>T</em>캐릭터 ID 확인 · 바텀시트</span>
             <div class="ws-mo" style="height:520px;">
               <div class="ws-util mo">
-                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                 <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                 <span class="ts">로그인</span>
               </div>
@@ -2624,8 +2639,8 @@
     <div class="dcol">
       <div class="imm">
         <div class="imm-h">회원 · 비회원 흐름 구분</div>
-        <div class="imm-r"><span class="imm-k">비회원</span><span class="imm-v"><b>서버 + 캐릭터 ID + 인증번호</b>로 대상을 특정한다 — A1 → A2 → A3</span></div>
-        <div class="imm-r"><span class="imm-k">회원</span><span class="imm-v">계정에 연결된 <b>목록에서 선택</b>한다 — 인증 절차 없음</span></div>
+        <div class="imm-r"><span class="imm-k">비회원</span><span class="imm-v"><b>서버 + 캐릭터 ID + 인증번호</b>로 대상을 특정하고 <b>영수증 이메일</b>을 받는다 — A1 → A2 → A3</span></div>
+        <div class="imm-r"><span class="imm-k">회원</span><span class="imm-v">계정에 연결된 <b>목록에서 선택</b>한다 — 인증 절차 없음 · 이메일은 계정 등록 주소를 사용한다</span></div>
         <div class="imm-r"><span class="imm-k">공통</span><span class="imm-v">대상이 확정되기 전에는 <b>[결제하기] 비활성</b></span></div>
       </div>
 
@@ -2633,7 +2648,7 @@
         <div class="imm-h">상태별 노출 기준</div>
         <div class="imm-r"><span class="imm-k">A1</span><span class="imm-v"><b>로그인 유도 O</b> · 입력 3칸 · 확정 표시 X</span></div>
         <div class="imm-r"><span class="imm-k">A2</span><span class="imm-v"><b>로그인 유도 X</b> · 입력 잠금 + 인증번호만 활성</span></div>
-        <div class="imm-r"><span class="imm-k">A3</span><span class="imm-v"><b>로그인 유도 X</b> · 입력 전부 사라지고 <b>확정 한 줄 + [✕]</b></span></div>
+        <div class="imm-r"><span class="imm-k">A3</span><span class="imm-v"><b>로그인 유도 X</b> · 인증 입력이 <b>확정 한 줄 + [✕]</b>로 바뀌고 <b>이메일 입력</b>이 남는다</span></div>
         <div class="imm-r"><span class="imm-k">A4</span><span class="imm-v">A3에서 로그인 시 — <b>딤 + 알림</b> · [확인] 전까지 조작 불가</span></div>
         <div class="imm-r"><span class="imm-k">복귀 경로</span><span class="imm-v">A3의 [✕] → A1 · A2의 [변경] → A1 · A4의 [확인] → B</span></div>
       </div>
@@ -2663,9 +2678,10 @@
         <div class="dr-h"><span class="mk">3</span><span class="dr-t">A3 · 비회원 인증 완료</span><span class="src">확정</span></div>
         <p class="dr-b">입력 영역을 <b>한 줄 결과로 대체</b>하고 초기화 버튼을 남긴다.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v"><b>서버 / 캐릭터명</b> — 입력했던 ID가 아니라 화면에 보이는 이름</span></div>
+          <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v"><b>서버 / 캐릭터명</b> — 입력은 캐릭터 ID로 받고 확정 이후 화면은 캐릭터명으로 표기한다. 결제창 · 결제 완료 · 영수증까지 동일하다</span></div>
           <div class="spec-r"><span class="spec-k">로그인 유도</span><span class="spec-v"><b>[✕]를 누를 때까지 보이지 않는다</b> — 대상이 확정된 뒤에는 필요 없는 선택지다</span></div>
           <div class="spec-r"><span class="spec-k">[✕]</span><span class="spec-v">초기화 → <b>A1로 되돌아가고 로그인 유도가 다시 나타난다.</b> 선택 상품은 유지</span></div>
+          <div class="spec-r"><span class="spec-k">이메일</span><span class="spec-v">확정 아래에 <b>영수증 수신용 이메일</b> 입력 — 비회원은 계정이 없어 주문 · 영수증 안내를 보낼 곳이 필요하다. 미입력 시 [결제하기] 비활성</span></div>
           <div class="spec-r"><span class="spec-k">유지</span><span class="spec-v">결제 완료까지 이 상태를 유지 — 결제창에도 같은 값이 전달된다</span></div>
           <div class="spec-r"><span class="spec-k">해당 영역 외</span><span class="spec-v">로그인이 필요하면 <b>상단 포털 유틸(H0)의 로그인</b>을 쓴다</span></div>
         </div>
@@ -2872,7 +2888,7 @@
 
               <div class="ws-host" style="border-radius:0;border:0;">
                 <div class="ws-util tb">
-                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                   <span class="ts">SEARCH</span>
@@ -3066,7 +3082,7 @@
                   <span><b>&#9993;</b> 게임 내 <b>계정 우편함 발송 완료</b></span>
                   <span class="cp-recv">
                     <span>서버 <b>발할라</b></span>
-                    <span>캐릭터 ID <b class="mono">frontera_knight</b></span>
+                    <span>캐릭터 <b>프론테라기사</b></span>
                   </span>
                 </div>
               </div>
@@ -3102,7 +3118,7 @@
             <div class="ws-tb" style="height:880px;">
               <div class="ws-host" style="border-radius:0;border:0;">
                 <div class="ws-util tb">
-                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                   <span class="ts">SEARCH</span>
@@ -3136,7 +3152,7 @@
                   <span><b>&#9993;</b> 게임 내 <b>계정 우편함 발송 완료</b></span>
                   <span class="cp-recv">
                     <span>서버 <b>발할라</b></span>
-                    <span>캐릭터 ID <b class="mono">frontera_knight</b></span>
+                    <span>캐릭터 <b>프론테라기사</b></span>
                   </span>
                 </div>
               </div>
@@ -3175,7 +3191,7 @@
             <div class="ws-mo" style="height:760px;">
               <div class="ws-host" style="border-radius:0;border:0;">
                 <div class="ws-util mo">
-                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span class="ts">로그인</span>
                 </div>
@@ -3206,7 +3222,7 @@
                   <span><b>&#9993;</b> 게임 내 <b>계정 우편함 발송 완료</b></span>
                   <span class="cp-recv">
                     <span>서버 <b>발할라</b></span>
-                    <span>캐릭터 ID <b class="mono">frontera_knight</b></span>
+                    <span>캐릭터 <b>프론테라기사</b></span>
                   </span>
                 </div>
               </div>
@@ -3243,7 +3259,7 @@
         <div class="imm-h">수령 방법은 하나다</div>
         <div class="imm-r"><span class="imm-k">방식</span><span class="imm-v">서버 검증 완료 즉시 <b>게임 내 계정 우편함으로 자동 발송</b>한다</span></div>
         <div class="imm-r"><span class="imm-k">회원 · 비회원</span><span class="imm-v"><b>동일하다</b> — 양쪽 모두 결제 전에 서버 · 캐릭터를 확정하므로 화면이 갈리지 않는다</span></div>
-        <div class="imm-r"><span class="imm-k">진입</span><span class="imm-v">결제 페이지에서 <b>자동 복귀</b>하는 화면이다 — 유저가 직접 진입하지 않는다</span></div>
+        <div class="imm-r"><span class="imm-k">진입</span><span class="imm-v"><b>통합 결제창</b>에서 자동 복귀하는 화면이다 — 유저가 직접 진입하지 않는다</span></div>
       </div>
 
       <div class="dr">
@@ -3253,6 +3269,7 @@
           <div class="spec-r"><span class="spec-k">문구</span><span class="spec-v">구매하신 아이템이 <b>게임 내 우편함으로 발송</b>되었습니다</span></div>
           <div class="spec-r"><span class="spec-k">보조 문구</span><span class="spec-v">게임에 접속해 우편함에서 수령해 주세요</span></div>
           <div class="spec-r"><span class="spec-k">검증 지연</span><span class="spec-v"><b>「처리 중」 상태</b>를 노출하고 완료 시 자동 갱신한다</span></div>
+          <div class="spec-r"><span class="spec-k">환불 안내</span><span class="spec-v">「결제 완료 후 자동 환불이 제공되지 않으며, 환불 문의는 <b>고객센터</b>로 접수해야 합니다」 — 결제창 고지와 동일 문구를 완료 화면에도 노출한다</span></div>
         </div>
       </div>
 
@@ -3260,7 +3277,7 @@
         <div class="dr-h"><span class="mk">2</span><span class="dr-t">수령 방법</span><span class="src">핵심</span></div>
         <p class="dr-b">이 화면의 본체다. <b>어느 캐릭터로 보냈는지</b>를 명시한다.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v">계정 우편함 발송 완료 + <b>서버명 · 캐릭터 ID</b></span></div>
+          <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v">계정 우편함 발송 완료 + <b>서버명 · 캐릭터명</b> — 입력은 캐릭터 ID로 받되 확정 이후 화면은 캐릭터명으로 표기한다</span></div>
           <div class="spec-r"><span class="spec-k">근거</span><span class="spec-v">결제 전에 확정한 <b>지급 대상</b>을 그대로 보여준다 — 유저가 어디서 받는지 알 수 있다</span></div>
           <div class="spec-r"><span class="spec-k">중복 배제</span><span class="spec-v">수령 대상을 여기서만 노출하고 <b>주문 상세에는 넣지 않는다</b></span></div>
           <div class="spec-r"><span class="spec-k">발송 실패</span><span class="spec-v"><b>재발송 대상</b>으로 표기하고 고객센터 안내를 노출한다</span></div>
@@ -3511,7 +3528,7 @@
             <div class="ws-tb" style="height:760px;">
               <div class="ws-host" style="border-radius:0;border:0;">
                 <div class="ws-util tb">
-                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span style="width:1px;height:14px;background:#DCE2E8;"></span>
                   <span class="ts">SEARCH</span>
@@ -3574,7 +3591,7 @@
             <div class="ws-mo" style="height:740px;">
               <div class="ws-host" style="border-radius:0;border:0;">
                 <div class="ws-util mo">
-                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span class="ts">내 정보</span>
                 </div>
@@ -3629,7 +3646,7 @@
             <div class="ws-mo" style="height:620px;">
               <div class="ws-host" style="border-radius:0;border:0;">
                 <div class="ws-util mo">
-                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">PORTAL 로고</span></div>
+                  <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
                   <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
                   <span class="ts">로그인</span>
                 </div>
@@ -3689,7 +3706,7 @@
         <div class="spec">
           <div class="spec-r"><span class="spec-k">배너</span><span class="spec-v">전용 배너를 <b>별도 등록하지 않는다</b> — 관리자 설정값을 그대로 따른다</span></div>
           <div class="spec-r"><span class="spec-k">탭 전환</span><span class="spec-v">상단 구조가 유지되어 <b>화면이 튀지 않는다</b></span></div>
-          <div class="spec-r"><span class="spec-k">통화 선택</span><span class="spec-v">유지 — 과거 구매는 <b>결제 당시 통화</b>로 표기한다</span></div>
+          <div class="spec-r"><span class="spec-k">통화 표기</span><span class="spec-v">과거 구매는 <b>결제 당시 확정된 통화</b>로 표기한다 — 웹샵에는 통화 선택 UI가 없다</span></div>
         </div>
       </div>
 
@@ -3753,7 +3770,7 @@
       <div class="warn">
         <div class="warn-h">확정 필요 사항</div>
         <p class="warn-b"><b>비회원 조회 인증 방식</b> — 원안은 서버 + 캐릭터 ID다.
-        결제 완료 화면에서는 <b>주문번호 + 캐릭터 인증</b>으로 안내하고 있어 <b>둘을 일치시켜야</b> 한다.<br><br>
+        결제 완료 화면은 주문번호 보관 안내 노출 여부를 조회 방식 확정과 함께 정하도록 두었다. <b>두 화면의 인증 방식을 같은 시점에 확정</b>한다.<br><br>
         <b>조회 가능 기간 상한</b> — 최근 12개월 등의 상한을 둘지.<br><br>
         <b>영수증 발급 주체</b> — 결제수단별 영수증 종류(신용카드 매출전표 · 현금영수증)와 PG 제공 화면 연동 여부.</p>
       </div>
@@ -4074,7 +4091,7 @@
             <table class="tbl">
               <thead><tr><th style="width:130px;">화면</th><th>진입 경로</th><th style="width:190px;">미결 사항</th></tr></thead>
               <tbody>
-                <tr><td><b>결제 완료</b></td><td>결제 페이지에서 결제 완료 후 <b>자동 복귀</b></td><td class="bad-cell">비회원 주문번호 보관 안내 노출 여부</td></tr>
+                <tr><td><b>결제 완료</b></td><td><b>통합 결제창</b>에서 결제 완료 후 자동 복귀</td><td class="bad-cell">비회원 주문번호 보관 안내 노출 여부</td></tr>
                 <tr><td><b>구매내역</b></td><td>메뉴바 <b>[구매내역]</b> 탭</td><td class="bad-cell">비회원 조회 인증 방식 · 조회 기간 상한</td></tr>
                 <tr><td><b>FAQ</b></td><td>메뉴바 <b>[FAQ]</b> 탭</td><td>콘텐츠 관리 주체</td></tr>
               </tbody>
@@ -4087,11 +4104,12 @@
               <thead><tr><th style="width:120px;">항목</th><th>요건</th></tr></thead>
               <tbody>
                 <tr><td><b>완료 메시지</b></td><td>구매 아이템이 <b>게임 내 우편함으로 발송</b>되었습니다 + 「게임에 접속해 우편함에서 수령해 주세요」</td></tr>
-                <tr><td><b>수령 방법</b></td><td>서버 검증 완료 즉시 <b>계정 우편함 자동 발송</b> · <b>서버명 · 캐릭터 ID</b> 표기 — 결제 전 확정한 지급 대상을 그대로 노출</td></tr>
+                <tr><td><b>수령 방법</b></td><td>서버 검증 완료 즉시 <b>계정 우편함 자동 발송</b> · <b>서버명 · 캐릭터명</b> 표기 — 결제 전 확정한 지급 대상을 그대로 노출</td></tr>
                 <tr><td><b>회원 · 비회원</b></td><td><b>동일</b> — 양쪽 모두 결제 전에 서버 · 캐릭터를 확정하므로 화면이 갈리지 않는다</td></tr>
-                <tr><td><b>주문 상세</b></td><td>주문번호 <span class="mono">YYYYMMDD-일련번호</span> / 구매일시 / 상품 / 결제 금액 / 결제수단(<b>PG 응답값 그대로</b>) / <b>수령 대상</b></td></tr>
+                <tr><td><b>주문 상세</b></td><td>주문번호 <span class="mono">YYYYMMDD-일련번호</span> / 구매일시 / 상품 / 결제 금액 / 결제수단(<b>PG 응답값 그대로</b>) — 수령 대상은 위 카드에만 노출하고 <b>중복 표기하지 않는다</b></td></tr>
                 <tr><td><b>검증 지연</b></td><td><b>「처리 중」 상태 화면</b> 노출 후 완료 시 자동 갱신</td></tr>
                 <tr><td><b>발송 실패</b></td><td><b>재발송 대상</b>으로 표기 + 고객센터 안내</td></tr>
+                <tr><td><b>환불 고지</b></td><td>자동 환불 미제공 · 환불 문의는 <b>고객센터 접수</b>. 결제창 고지와 동일 문구를 완료 화면에도 노출한다</td></tr>
                 <tr><td><b>액션</b></td><td>[구매내역] · [상점으로 돌아가기] — <b>선택 상품 초기화</b></td></tr>
                 <tr><td><b>비회원 주문번호</b></td><td class="bad-cell">주문이 계정에 귀속되지 않는다. 구매내역 조회에 주문번호가 필요하면 <b>보관 안내 노출</b> — 조회 방식 확정과 함께 정한다</td></tr>
               </tbody>
@@ -4125,7 +4143,7 @@
             이에 따라 「아이템별 쿠폰 개별 발급」 · 「수량만큼 발급하고 <span class="mono">상품명 (1/2)</span> 표기」 ·
             「[복사] · [전체 복사]」 · 「이메일 발송」 · 「1회 사용 · 재발급 불가」 · 「미사용 쿠폰 폐기」가 모두 <b>불필요</b>해졌다.
             단건 결제 결정으로 「구매 상품 <span class="mono">대표 상품명 외 N건</span>」도 미해당이며,
-            결제수단을 웹샵 위젯에서 선택하는 원안은 <b>결제 페이지 선택 방식으로 대체</b>되었다.
+            결제수단을 웹샵 위젯에서 선택하는 원안은 <b>통합 결제창 선택 방식으로 대체</b>되었다.
           </div>
         </div>
 
@@ -4139,7 +4157,7 @@
               <tbody>
                 <tr><td><span class="tag-g">있음</span></td><td><b>대상 확인</b></td><td>이 계정 · 캐릭터가 있는지 답한다</td><td>2걸음</td></tr>
                 <tr><td><span class="tag-g">있음</span></td><td><b>지급</b></td><td>결제가 끝났으니 지급해달라</td><td>4걸음</td></tr>
-                <tr><td><span class="tag-g">있음</span></td><td><b>회수</b></td><td>환불됐으니 지급한 것을 되돌려달라</td><td>환불</td></tr>
+                <tr><td><span class="tag-r">없음</span></td><td><b>회수</b></td><td>환불됐으니 지급한 것을 되돌려달라</td><td class="bad-cell">Phase 2 — Phase 1은 지사 GM이 인게임에서 수동 회수</td></tr>
                 <tr><td><span class="tag-r">없음</span></td><td><b>인증번호 우편함 발송</b></td><td>포털이 만든 코드를 <b>해당 캐릭터 우편함에 넣어달라</b></td><td class="bad-cell">A1 · A2 인증</td></tr>
                 <tr><td><span class="tag-r">없음</span></td><td><b>계정 캐릭터 목록</b></td><td>이 계정에 연결된 서버 · 캐릭터를 돌려달라</td><td class="bad-cell">B1 · B2 선택</td></tr>
                 <tr><td><span class="tag-a">대체 가능</span></td><td><b>서버 목록</b></td><td>이 게임의 서버 목록</td><td>받을 캐릭터 서버</td></tr>
@@ -4181,7 +4199,7 @@
             <table class="tbl">
               <thead><tr><th style="width:150px;">항목</th><th>확정 필요 사항</th></tr></thead>
               <tbody>
-                <tr><td><b>세금 표기</b></td><td>지금 금액이 한 줄이다. 해외는 <b>세금 포함 총액을 먼저</b> 노출해야 하고, 국가마다 포함 · 별도 표기 의무가 다르다</td></tr>
+                <tr><td><b>세금 표기</b></td><td><b>확정</b> — 어드민 등록 <b>세금포함 최종가</b> 단일 금액만 노출한다. 외세 계산 · 청구지 검증 · 세금 분리 영수증은 PG 승인 레이어에 위임하며 결제창은 국가별로 분기하지 않는다</td></tr>
                 <tr><td><b>판매 기간 종료</b></td><td>선택해 둔 상품이 결제 전에 판매 종료되면 — 결제를 막을지, 선택을 비울지</td></tr>
                 <tr><td><b>한정 상품</b></td><td>「1인 1회」를 <b>캐릭터당인지 계정당인지</b>. 비회원은 계정을 특정할 수 없어 계정당은 검증이 안 된다</td></tr>
                 <tr><td><b>재고</b></td><td>수량 제한 상품을 둘 것인지. 두면 선택 시점과 결제 시점 사이의 <b>선점 처리</b>가 필요하다</td></tr>
@@ -4334,7 +4352,7 @@
         <div class="dr-h"><span class="mk">1</span><span class="dr-t">미작성 화면</span><span class="src">미작성</span></div>
         <p class="dr-b"><b>결제 완료 · 구매내역 · FAQ</b> 3개 화면이 미작성이다. 요건은 기존 화면정의서에서 확보했다.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">결제 완료</span><span class="spec-v"><b>우편함 발송 단일 흐름</b> · 서버명 · 캐릭터 ID 표기. 결제 페이지에서 복귀하는 화면이므로 <b>착수 우선순위 1</b></span></div>
+          <div class="spec-r"><span class="spec-k">결제 완료</span><span class="spec-v"><b>우편함 발송 단일 흐름</b> · 서버명 · 캐릭터명 표기. 통합 결제창에서 복귀하는 화면이므로 <b>착수 우선순위 1</b></span></div>
           <div class="spec-r"><span class="spec-k">구매내역</span><span class="spec-v">비회원은 계정이 없어 <b>주문번호 + 캐릭터 인증</b>으로 조회한다 — 인증 방식 확정 필요</span></div>
           <div class="spec-r"><span class="spec-k">FAQ</span><span class="spec-v">법인별 결제수단 · 환불 정책이 상이하므로 <b>내용이 다르다</b> — 관리 주체 확정 필요</span></div>
           <div class="spec-r"><span class="spec-k">착수 순서</span><span class="spec-v">결제 완료 &rarr; 구매내역 &rarr; FAQ. <b>FAQ 없이 운영 가능하나</b> 앞의 둘 없이는 CS 대응이 불가하다</span></div>

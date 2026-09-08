@@ -290,7 +290,8 @@
   <p class="stand"><b>본사가 통합 결제 모듈과 웹샵 템플릿을 단일 구성으로 제공하고, 각 지사는 자사 PG 키를 연동해 사용한다.</b>
   매출과 자금은 본사를 경유하지 않고 해당 지사에 직접 귀속된다.</p>
   <div class="meta">
-    <span><b>대상</b> 웹샵 템플릿 · 통합 결제 페이지 · 지사 연동</span>
+    <span><b>대상</b> 웹샵 템플릿 · 통합 결제창 · 지사 연동</span>
+    <span><b>기준 문서</b> 통합웹샵 / 통합결제 기획</span>
     <span><b>연계 문서</b> 포털 메인 구조 · 랜드 회원·인증 설계</span>
     <span><b>작성</b> 2026-09-08</span>
   </div>
@@ -309,9 +310,9 @@
     <table>
       <thead><tr><th style="width:180px;">구성요소</th><th>구성 내용</th><th style="width:170px;">지사 설정 범위</th></tr></thead>
       <tbody>
-        <tr><td><b>웹샵 템플릿</b></td><td>상품 목록 · 상품 상세 · 지급 대상 확인 · 선택 상품 · 결제 요청. 호스트 페이지에 삽입하는 <b>SDK 형태</b></td><td>설정 없음 — 데이터 등록만</td></tr>
-        <tr><td><b>통합 결제 페이지</b></td><td>결제수단 선택 및 결제 진행. 웹샵 도메인의 <b>독립 페이지</b></td><td>설정 없음</td></tr>
-        <tr><td><b>관리자</b></td><td>지사 등록 · 키 발급 · 상품 · 가격 · 모니터링 · 환불 · 정산 대사</td><td><b>자사 법인 범위</b>로 제한</td></tr>
+        <tr><td><b>웹샵 템플릿</b></td><td>상품 목록 · 상품 상세 · 지급 대상 확인 · 선택 상품 · 결제 요청. 본사 서버에서 구동하고 <b>리버스 프록시</b>로 지사 도메인 하위 경로에 연결한다</td><td>설정 없음 — 데이터 등록만</td></tr>
+        <tr><td><b>통합 결제창</b></td><td>통화 · 결제수단 선택 및 결제 진행. <b>독립 URL 페이지</b> — 모달 · 팝업 · iFrame을 사용하지 않는다</td><td>설정 없음</td></tr>
+        <tr><td><b>관리자</b></td><td>지사 · 게임 등록 · 키 발급 · 상품 · 가격 · <b>점검 및 킬스위치</b> · 모니터링 · 환불 · 정산 대사</td><td><b>자사 법인 범위</b>로 제한</td></tr>
       </tbody>
     </table>
   </div>
@@ -328,9 +329,9 @@
 
       <text x="480" y="26" class="dt a" text-anchor="middle">본사 제공</text>
       <rect x="140" y="42" width="200" height="46" rx="5" class="bx-key"/>
-      <text x="240" y="70" class="ds a" text-anchor="middle">웹샵 템플릿 (SDK)</text>
+      <text x="240" y="70" class="ds a" text-anchor="middle">웹샵 템플릿 (프록시)</text>
       <rect x="380" y="42" width="200" height="46" rx="5" class="bx-key"/>
-      <text x="480" y="70" class="ds a" text-anchor="middle">통합 결제 페이지</text>
+      <text x="480" y="70" class="ds a" text-anchor="middle">통합 결제창</text>
       <rect x="620" y="42" width="200" height="46" rx="5" class="bx-key"/>
       <text x="720" y="70" class="ds a" text-anchor="middle">관리자</text>
 
@@ -375,7 +376,7 @@
       <tbody>
         <tr><td><b>도메인</b></td><td><span class="mono">ro-abyss.com.tw</span></td><td>지사</td></tr>
         <tr><td><b>웹샵 경로</b></td><td><span class="mono">/shop</span></td><td>지사</td></tr>
-        <tr><td><b>PG 머천트 · 키</b></td><td>MyCard · GASH — 대만 법인 명의 계약</td><td><b>본사</b> — 지사 원문 조회 불가</td></tr>
+        <tr><td><b>PG 머천트 · 키</b></td><td>MyCard · GASH — 대만 법인 명의 계약</td><td><b>지사</b>가 등록 — 등록 후에는 지사도 원문 조회 불가</td></tr>
         <tr><td><b>정산 계좌</b></td><td>대만 법인 계좌</td><td>지사</td></tr>
         <tr><td><b>허용 통화</b></td><td><span class="mono">TWD · HKD · MOP · USD</span></td><td>지사</td></tr>
         <tr><td><b>게임</b></td><td><span class="mono">ro_abyss</span></td><td>지사</td></tr>
@@ -405,7 +406,7 @@
         <tr><td><b>Host 헤더</b></td><td><span class="mono">proxy_set_header Host $host</span>로 <b>지사 도메인을 유지</b>해 전달</td><td class="bad-cell">법인 판정 불가 — 전체 라우팅 미성립</td></tr>
         <tr><td><b>경로</b></td><td>어드민 등록 경로와 프록시 <span class="mono">location</span>을 <b>동일하게</b> 설정</td><td class="bad-cell">웹샵 미노출</td></tr>
         <tr><td><b>로그인 세션</b></td><td>동일 출처이므로 <b>지사 세션 쿠키가 자동 전송</b>된다. 별도 연동이 없다</td><td>iFrame 사용 시 <b>3rd-Party Cookie 차단</b></td></tr>
-        <tr><td><b>결제 전환</b></td><td>결제 페이지로 <b>화면 전체 전환</b></td><td class="bad-cell">PG 결제창의 프레임 내 로드 제한</td></tr>
+        <tr><td><b>결제 전환</b></td><td>통합 결제창으로 <b>화면 전체 전환</b></td><td class="bad-cell">PG 결제창의 프레임 내 로드 제한</td></tr>
         <tr><td><b>본사 호스팅 형태</b></td><td>프록시 없이 본사 도메인에서 서비스하며 <b>URL 경로에 지사 코드를 포함</b>한다 — <span class="mono">/{branch}/{game}</span></td><td class="bad-cell">단일 도메인으로는 법인 판정 불가</td></tr>
       </tbody>
     </table>
@@ -467,7 +468,7 @@
     <table>
       <thead><tr><th style="width:170px;">구분</th><th>결정 방식</th></tr></thead>
       <tbody>
-        <tr><td><b>법인</b></td><td>서버가 <b>등록 도메인</b> 기준으로 판정. 미등록 도메인은 로드 거부</td></tr>
+        <tr><td><b>법인</b></td><td>서버가 판정한다 — 형태 1은 <b>Host 헤더</b>, 형태 2는 <b>URL 경로의 지사 코드</b>. 미등록 도메인 · 미등록 경로는 로드 거부</td></tr>
         <tr><td><b>결제 키</b></td><td>해당 법인 머천트의 인증키. <b>서버에만 보관하며 프론트엔드는 보유하지 않는다</b></td></tr>
         <tr><td><b>입금 계좌</b></td><td>PG 계약 명의가 지사이므로 <b>대금이 해당 법인 계좌로 입금</b></td></tr>
         <tr><td><b>매출</b></td><td>입금 계좌가 해당 법인이므로 <b>해당 법인 매출로 계상</b>. 본사 매출로 계상되지 않는다</td></tr>
@@ -625,7 +626,7 @@
   <p class="cap">채널을 가르는 기준은 <b>로그인 필요 여부</b>다.
   웹샵은 <b>비회원 구매를 지원</b>해야 하므로 캐릭터 기반 상품으로 한정하며 — <b>회원 구매도 동일하게 지원한다</b> —
   로그인이 전제인 상품군은 <b>지사 포털에서 처리</b>한다.
-  통합 결제 페이지는 두 채널을 모두 지원하므로 <b>결제 모듈 변경은 발생하지 않는다.</b></p>
+  통합 결제창은 두 채널을 모두 지원하므로 <b>결제 모듈 변경은 발생하지 않는다.</b></p>
 
   <h3>지사 포털 반영 시 확정 사항</h3>
 
@@ -664,7 +665,9 @@
 <footer class="doc">
   <h4>관련 문서</h4>
   <ul>
-    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a></b> — 본 구조의 화면 정의. 활용안 2형태 · 처리 방식 9단계 · 기타사항 7건</li>
+    <li><b><a href="webshop-payment-prd.html">통합웹샵 / 통합결제 기획</a></b> — 상위 기준 문서. 아키텍처 · 프로비저닝 · 장애 대응 · 환불 정책</li>
+    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a></b> — 본 구조의 화면 정의. 웹샵 메인 · 받을 캐릭터 조건 처리 · 상품 상세 · 결제 완료 · 구매내역 · 활용안 2형태 · 기타사항 7건</li>
+    <li><b><a href="../../wireframe/payment-checkout-currency.html">통합 결제창 화면정의서</a></b> — 통화 · 결제수단 선택 화면</li>
     <li><b><a href="payment.html">결제 설계</a></b> — 본사 · 지사 역할 분담 및 관리자 구성</li>
     <li><b><a href="land-auth.html">랜드 회원·인증 설계</a></b> — 계정 모델 · GNJOY 9종 바인딩 · 유일성 규칙</li>
     <li><b><a href="global-payment.html">글로벌 결제 설계 (상세)</a></b> — 규격 · 필드 · 확인 필요 사항 19건</li>
