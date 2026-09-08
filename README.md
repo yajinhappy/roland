@@ -9,7 +9,7 @@
 | 파일 | 문서명 |
 |---|---|
 | `wireframe/portal-main-auth-screens.html` | 라그나로크 포털 화면정의서 |
-| `wireframe/webshop-ui.html` | **웹샵 UI 구성** — 7 탭 · 핀 42건 · PC · TABLET · MO |
+| `wireframe/webshop-ui.html` | **웹샵 화면정의서** — 7 탭 · 핀 42건 · PC · TABLET · MO |
 | `wireframe/payment-checkout-currency.html` | 통합 결제창 화면정의서 |
 
 ### 설계
@@ -68,14 +68,14 @@
 |---|---|
 | `_build/gen_nav.py` | 문서 목록 단일 소스. NAV 수정 후 아래 빌드를 다시 실행 |
 | `_build/build_v2.py` | 결제 개요 · 결제 설계 · 통합결제/웹샵 구조 · 통합웹샵/통합결제 기획 |
-| `_build/build_ws.py` | 웹샵 UI 구성 |
+| `_build/build_ws.py` | 웹샵 화면정의서 |
 
 ### 검증
 
 | 스크립트 | 확인 항목 |
 |---|---|
 | `_build/linkcheck.js` | 내부 링크 · 절대경로 · 끊긴 링크 |
-| `_build/wscheck.js` | 웹샵 UI 구성 — 화면 · 탭 · 순서 일치, 핀↔설명 대응 |
+| `_build/wscheck.js` | 웹샵 화면정의서 — 화면 · 탭 · 순서 일치, 핀↔설명 대응 |
 | `_build/finalcheck.py` | 전 문서 태그 균형 · 미정의 클래스 |
 | `_build/consistency.py` | 문서 간 용어 · 전제 불일치 |
 
