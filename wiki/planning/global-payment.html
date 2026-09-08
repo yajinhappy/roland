@@ -1,0 +1,1915 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>글로벌 결제 설계</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #EDEEF1; --surface: #FFFFFF; --surface-2: #F5F6F8;
+    --line: #D9DEE5; --hair: #E7EAEF;
+    --ink: #171B22; --ink-mid: #434A57; --ink-soft: #6C7480; --ink-faint: #949BA7;
+    --accent: #2F6490; --accent-soft: #EBF3F9; --accent-line: #AECAE0;
+    --warm: #8A6420; --warm-soft: #F8F2E6; --warm-line: #E2D5B9;
+    --bad: #8C3A3A; --bad-soft: #F9EEEE; --bad-line: #E0BEBE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #12151B; --surface: #191D25; --surface-2: #1F242D;
+      --line: #333A46; --hair: #272D37;
+      --ink: #E9ECF2; --ink-mid: #B6BDC9; --ink-soft: #8B93A1; --ink-faint: #6B7280;
+      --accent: #7BAAD2; --accent-soft: #1B2836; --accent-line: #2E4A66;
+      --warm: #D9B571; --warm-soft: #2A2418; --warm-line: #4A3E24;
+      --bad: #D89393; --bad-soft: #2C1C1C; --bad-line: #4E3030;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12151B; --surface: #191D25; --surface-2: #1F242D;
+    --line: #333A46; --hair: #272D37;
+    --ink: #E9ECF2; --ink-mid: #B6BDC9; --ink-soft: #8B93A1; --ink-faint: #6B7280;
+    --accent: #7BAAD2; --accent-soft: #1B2836; --accent-line: #2E4A66;
+    --warm: #D9B571; --warm-soft: #2A2418; --warm-line: #4A3E24;
+    --bad: #D89393; --bad-soft: #2C1C1C; --bad-line: #4E3030;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  /* 한글은 어절 중간에서 끊기면 읽기 어려우므로 keep-all 로 어절 단위 줄바꿈 */
+  body { background: var(--ground); color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.78; -webkit-font-smoothing: antialiased;
+    word-break: keep-all; overflow-wrap: break-word; }
+  p, li, td, th, figcaption, .lede, .stand, .cap, .row .d, .note p, .part p, dd {
+    text-wrap: pretty; }
+  h1, h2, h3, h4, h5, .row .t, .card h5 { text-wrap: balance; word-break: keep-all; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; word-break: normal; }
+
+  .shell { display: flex; align-items: flex-start; gap: 0; }
+  .tscroll, .flow, .cols, pre, .note, ul.rule { max-width: 1560px; }
+
+  /* ── LNB ───────────────────────────────────────── */
+  .lnb { position: sticky; top: 0; align-self: flex-start; flex: none; width: 262px;
+    height: 100vh; overflow-y: auto; padding: 26px 20px 28px 24px; overscroll-behavior: contain;
+    border-right: 1px solid var(--line); background: var(--surface); }
+  .lnb .bmark { display: block; font-size: 14px; font-weight: 600; letter-spacing: -.018em;
+    color: var(--ink); margin-bottom: 3px; }
+  .lnb .bsub { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9.5px;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 16px; }
+  .lnb .grp { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 15px 0 5px; }
+  .lnb .grp:first-of-type { margin-top: 0; }
+  .lnb a { display: block; text-decoration: none; color: var(--ink-soft); font-size: 13px;
+    padding: 5px 11px; border-radius: 4px; line-height: 1.4; }
+  .lnb a:hover { background: var(--surface-2); color: var(--ink); }
+  .lnb a.on { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+  .lnb a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .lnb .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 9px;
+    letter-spacing: .08em; color: var(--warm); border: 1px solid var(--warm-line);
+    background: var(--warm-soft); border-radius: 3px; padding: 1px 5px; margin-left: 6px;
+    vertical-align: 1px; }
+
+  /* ── 본문 ──────────────────────────────────────── */
+  main { flex-grow: 1; min-width: 0; padding: 40px 52px 110px; }
+  @media (max-width: 860px) {
+    .shell { display: block; }
+    .lnb { position: static; width: auto; height: auto; border-right: 0;
+      border-bottom: 1px solid var(--line); }
+    main { padding: 28px 22px 80px; }
+  }
+
+  header.mast { padding-bottom: 24px; border-bottom: 2px solid var(--ink); }
+  .kick { font-family: "IBM Plex Mono", monospace; font-size: .72rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+  h1 { font-size: clamp(1.7rem, 3.6vw, 2.25rem); font-weight: 600; line-height: 1.3;
+    letter-spacing: -.026em; margin: 0 0 12px; }
+  .stand { font-size: 1.02rem; color: var(--ink-mid); max-width: 76ch; margin: 0; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--hair); font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem; color: var(--ink-faint); }
+  .meta b { color: var(--ink-soft); font-weight: 500; }
+
+  .part { margin-top: 62px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .part .n { font-family: "IBM Plex Mono", monospace; font-size: .7rem; letter-spacing: .16em;
+    color: var(--accent); display: block; margin-bottom: 6px; }
+  .part h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -.026em; margin: 0 0 8px; }
+  .part p { margin: 0; color: var(--ink-mid); max-width: 76ch; font-size: .95rem; }
+
+  section { margin-top: 46px; scroll-margin-top: 24px; }
+  h3 { font-size: 1.18rem; font-weight: 600; letter-spacing: -.022em; line-height: 1.45;
+    margin: 0 0 8px; }
+  .lede { color: var(--ink-mid); max-width: 76ch; margin: 0 0 22px; }
+  h4 { font-size: .93rem; font-weight: 600; margin: 30px 0 12px; letter-spacing: -.012em; }
+  p { max-width: 76ch; margin: 0 0 14px; }
+  b { font-weight: 600; }
+
+  .tscroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 5px;
+    background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .86rem; }
+  thead th { text-align: left; font-size: .69rem; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-faint); background: var(--surface-2);
+    padding: 11px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--hair); vertical-align: top;
+    color: var(--ink-mid); line-height: 1.68; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+  .cap { font-size: .78rem; color: var(--ink-faint); margin: 10px 0 0; max-width: 80ch;
+    line-height: 1.7; }
+
+  ul.rule { list-style: none; padding: 0; margin: 0; counter-reset: r; }
+  ul.rule > li { counter-increment: r; position: relative; padding: 15px 0 15px 42px;
+    border-bottom: 1px solid var(--hair); color: var(--ink-mid); max-width: 80ch; }
+  ul.rule > li:last-child { border-bottom: 0; }
+  ul.rule > li::before { content: counter(r); position: absolute; left: 0; top: 15px;
+    width: 25px; height: 25px; border-radius: 50%; background: var(--accent); color: #fff;
+    font-family: "IBM Plex Mono", monospace; font-size: .7rem;
+    display: flex; align-items: center; justify-content: center; }
+  ul.rule b { color: var(--ink); }
+
+  .flow { display: flex; flex-direction: column; gap: 10px; margin: 0 0 12px; }
+  .row { display: flex; gap: 14px; align-items: flex-start; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 5px; padding: 15px 18px; }
+  .row.key { border-color: var(--accent-line); background: var(--accent-soft); }
+  .row .k { font-family: "IBM Plex Mono", monospace; font-size: .74rem; color: var(--accent);
+    flex: none; width: 20px; padding-top: 2px; }
+  .row .b { flex-grow: 1; min-width: 0; }
+  .row .t { font-weight: 600; font-size: .95rem; display: block; margin-bottom: 4px; }
+  .row .d { font-size: .87rem; color: var(--ink-mid); line-height: 1.72; max-width: 92ch; }
+
+  pre { font-family: "IBM Plex Mono", monospace; font-size: .8rem; line-height: 1.85;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 20px; overflow-x: auto; margin: 0 0 12px; color: var(--ink-mid);
+    word-break: normal; }
+  pre b { color: var(--ink); font-weight: 500; }
+  pre .a { color: var(--accent); }
+  pre .f { color: var(--ink-faint); }
+
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 20px 20px; }
+  .card h5 { margin: 0 0 10px; font-size: .72rem; font-family: "IBM Plex Mono", monospace;
+    letter-spacing: .1em; text-transform: uppercase; padding-bottom: 9px;
+    border-bottom: 1px solid var(--hair); font-weight: 600; }
+  .card.a h5 { color: var(--ink-faint); }
+  .card.b h5 { color: var(--accent); }
+  .card.warn h5 { color: var(--bad); }
+  .card ul { list-style: none; margin: 0; padding: 0; font-size: .87rem; }
+  .card li { padding: 7px 0; color: var(--ink-mid); border-bottom: 1px solid var(--hair); }
+  .card li:last-child { border-bottom: 0; }
+  .card li b { color: var(--ink); }
+
+  .note { background: var(--warm-soft); border: 1px solid var(--warm-line); border-radius: 5px;
+    padding: 16px 20px; margin: 0 0 14px; }
+  .note .lb { font-family: "IBM Plex Mono", monospace; font-size: .68rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--warm); display: block; margin-bottom: 7px; }
+  .note p { margin: 0; font-size: .89rem; color: var(--ink-mid); max-width: 80ch; }
+  .note.q { background: var(--accent-soft); border-color: var(--accent-line); }
+  .note.q .lb { color: var(--accent); }
+  .note.bad { background: var(--bad-soft); border-color: var(--bad-line); }
+  .note.bad .lb { color: var(--bad); }
+
+  /* 원문 인용 */
+  blockquote { margin: 0 0 14px; padding: 14px 20px; border-left: 3px solid var(--accent-line);
+    background: var(--surface); border-radius: 0 5px 5px 0; max-width: 92ch; }
+  blockquote p { margin: 0 0 6px; font-size: .89rem; color: var(--ink-mid); max-width: none; }
+  blockquote p:last-child { margin: 0; }
+  blockquote .src { font-family: "IBM Plex Mono", monospace; font-size: .68rem;
+    letter-spacing: .06em; color: var(--ink-faint); display: block; margin-top: 8px; }
+  blockquote em { font-style: normal; color: var(--ink); font-weight: 500; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--ink); }
+  .ext { display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font-family: "IBM Plex Mono", monospace; font-size: .72rem; letter-spacing: .02em;
+    color: var(--accent); border: 1px solid var(--accent-line); background: var(--accent-soft);
+    padding: 4px 10px; border-radius: 4px; white-space: nowrap; }
+  .ext::after { content: "↗"; font-size: .95em; opacity: .65; }
+  .ext:hover { border-color: var(--accent); color: var(--accent); filter: brightness(.97); }
+  .ext:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .sechead { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 0 0 8px; }
+  .sechead h3 { margin: 0; }
+  td a { word-break: break-all; }
+
+  .verdict { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: .66rem;
+    letter-spacing: .08em; text-transform: uppercase; border-radius: 3px; padding: 2px 7px;
+    vertical-align: 2px; white-space: nowrap; }
+  .verdict.yes { color: var(--accent); border: 1px solid var(--accent-line);
+    background: var(--accent-soft); }
+  .verdict.no { color: var(--bad); border: 1px solid var(--bad-line);
+    background: var(--bad-soft); }
+
+  footer.doc { margin-top: 62px; padding-top: 20px; border-top: 1px solid var(--line);
+    font-size: .78rem; color: var(--ink-faint); }
+  footer.doc p { max-width: 80ch; margin: 0 0 6px; line-height: 1.7; }
+  footer.doc h4 { font-size: .78rem; color: var(--ink-soft); margin: 18px 0 8px; }
+  footer.doc ul { margin: 0 0 6px; padding-left: 18px; }
+  footer.doc li { margin-bottom: 4px; line-height: 1.7; }
+
+  @media print {
+    .lnb { display: none; }
+    body { background: #fff; font-size: 11pt; }
+    main { padding: 0; }
+    .row, .card, pre, .tscroll, blockquote, .note { break-inside: avoid; }
+  }
+
+  /* ---- Part 4 : 대조 도식 ---- */
+  .dia { margin: 20px 0 10px; max-width: 1560px; }
+  .dia svg { width: 100%; height: auto; display: block;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px; }
+  .dia figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: 9px;
+    text-wrap: pretty; word-break: keep-all; }
+  .dia svg text { font-family: "IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;
+    fill: var(--ink-mid); }
+  .dia svg .dh { font-size: 12.5px; font-weight: 600; fill: var(--ink); }
+  .dia svg .dt { font-size: 12px; font-weight: 600; fill: var(--ink); }
+  .dia svg .ds { font-size: 10.5px; fill: var(--ink-mid); }
+  .dia svg .dx { font-size: 9.5px; fill: var(--ink-soft); }
+  .dia svg .dl { font-size: 9.5px; letter-spacing: .06em; }
+  .dia svg .a { fill: var(--accent); }
+  .dia svg .f { fill: var(--ink-faint); }
+  .dia svg .bad { fill: var(--bad); }
+  .dia svg .ln { stroke: var(--ink-faint); stroke-width: 1.1; fill: none; }
+  .dia svg .ln-hair { stroke: var(--hair); stroke-width: 1; fill: none; }
+  .dia svg .bx-key { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+  .dia svg .bx-pill { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+  .dia svg .bx-mute { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  .dia svg .bx-bad { fill: var(--bad-soft); stroke: var(--bad-line); stroke-width: 1;
+    stroke-dasharray: 4 3; }
+  .dia svg .chip rect { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  .dia svg .chip text { font-size: 10px; fill: var(--ink-soft); }
+  .grp2 { font-size: .78rem; font-weight: 600; color: var(--ink-soft);
+    margin: 26px 0 8px; padding-left: 10px; border-left: 2px solid var(--accent-line); }
+  .verdict.ko { font-family: inherit; letter-spacing: 0; text-transform: none;
+    font-size: .72rem; font-weight: 600; }
+  td.bad-cell { background: var(--bad-soft); }
+
+  /* LNB 스크롤바 — 평소 숨김 · 커서 올릴 때만 노출 (gutter 고정으로 레이아웃 이동 없음) */
+  .lnb { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+  .lnb:hover { scrollbar-color: var(--line) transparent; }
+  .lnb::-webkit-scrollbar { width: 6px; }
+  .lnb::-webkit-scrollbar-track { background: transparent; }
+  .lnb::-webkit-scrollbar-thumb { background: transparent; border-radius: 3px;
+    transition: background .15s ease; }
+  .lnb:hover::-webkit-scrollbar-thumb { background: var(--line); }
+  .lnb:hover::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+</style>
+<body>
+<div class="shell">
+
+<nav class="lnb">
+  <span class="bmark">글로벌 결제 설계</span>
+  <span class="bsub">Ragnarok Portal · 2026-09</span>
+
+  <p class="grp">목표 · 역할</p>
+  <a href="#g1">원칙</a>
+  <a href="#g2">본사와 지사</a>
+  <a href="#g3">권한과 스코프</a>
+  <a href="#g4">지원 PG 목록</a>
+
+  <p class="grp">구조</p>
+  <a href="#a1">거버넌스 모델</a>
+  <a href="#a2">법인 · 머천트 · 채널</a>
+  <a href="#a3">격리 규칙</a>
+  <a href="#a4">7대 기준 데이터</a>
+
+  <p class="grp">지사</p>
+  <a href="#b1">지사 코드</a>
+  <a href="#b2">지사별 편차</a>
+
+  <p class="grp">결제</p>
+  <a href="#c1">진입 경로</a>
+  <a href="#c2">상품 유형</a>
+  <a href="#c3">결제 플로우</a>
+  <a href="#c4">채널 노출 필터</a>
+  <a href="#c5">게임 연동 4대 API</a>
+  <a href="#c6">라우팅과 한도</a>
+
+  <p class="grp">상품 · 가격</p>
+  <a href="#h1">상품 2계층</a>
+  <a href="#h2">Price Tier</a>
+  <a href="#h3">SKU × PG 동기화</a>
+
+  <p class="grp">정산</p>
+  <a href="#d1">직정산 구조</a>
+  <a href="#d2">세무 분리</a>
+  <a href="#d3">원장과 T+1 대사</a>
+
+  <p class="grp">환불</p>
+  <a href="#e1">Capability 제약</a>
+  <a href="#e2">환불 분기</a>
+  <a href="#e3">모델별 환불 규칙</a>
+
+  <p class="grp">운영<span class="tag">라이프사이클</span></p>
+  <a href="#f1">8단계 어드민</a>
+  <a href="#f2">엣지케이스 10</a>
+  <a href="#f3">문서 간 불일치</a>
+</nav>
+
+<main>
+
+<header class="mast">
+  <p class="kick">Design · Payment</p>
+  <h1>글로벌 결제 설계</h1>
+  <p class="stand">라그나로크 포털의 결제 · 정산 · 세무 구조 정리.
+  <b>본사는 플랫폼 제공자 · 지사는 테넌트</b>라는 분담선이 이 문서의 축이며,
+  회원·인증 설계가 정의한 랜드 계정 위에 결제 계층이 얹히는 관계.
+  모든 항목은 마스터 아키텍처 v1.0 · 프로토타입 마스터 데이터 · 공식 Global Network와 대조해 근거를 표기.</p>
+  <div class="meta">
+    <span><b>대상</b> 해외 법인 9 — 결제 적용 5 · PG 8 · 결제 채널 24+</span>
+    <span><b>대조 기준</b> 통합 결제 플랫폼 상세 설계 v1.0 · <span class="mono">mock_data.js</span> · 공식 Global Network</span>
+    <span><b>정리</b> 2026-09-07</span>
+  </div>
+</header>
+
+<div class="part">
+  <span class="n">Part 1</span>
+  <h2>목표와 역할</h2>
+  <p>본사와 지사가 무엇을 나눠 갖는가 · 그 분담이 어떤 기준에서 갈리는가 · 플랫폼의 경계는 어디인가.</p>
+</div>
+
+<section id="g1">
+  <h3>원칙</h3>
+  <p>세 문장으로 줄인다. 이후 모든 설계 판단은 이 셋에서 도출된다.</p>
+
+  <ul class="rule">
+    <li><b>본사는 플랫폼 제공자 · 지사는 테넌트.</b> 본사가 쥐는 것은 <b>「바뀌면 안 되는 것」</b>(계약 · 키 · 규격), 지사가 쥐는 것은 <b>「현지가 아는 것」</b>(게임사 · 상품 · 가격 · 채널). 본사는 게이트키퍼가 아니라 인프라 공급자다.</li>
+    <li><b>자금은 PG에서 지사 계좌로 직접.</b> 본사 미경유 · <b>본사 수수료 없음</b>. 본사 장부에 해외 매출이 계상되지 않으므로 이전가격 · 외국환 송금 이슈가 발생하지 않는다.</li>
+    <li><b>모든 데이터는 <span class="mono">entity_id</span>로 격리.</b> 귀속 법인은 유저가 아니라 <b>구매 대상 게임 서버</b>가 결정한다.</li>
+  </ul>
+
+  <div class="note bad">
+    <span class="lb">본사가 게이트키퍼가 아니라는 것의 결과</span>
+    <p>본사 역할에 컴플라이언스도 재무 감독도 없으므로 <b>본사 승인 게이트가 성립하지 않는다</b>.
+    정산 계좌 변경은 <b>지사 내 2인 승인</b>으로, 법정 한도는 <b>지사 설정</b>으로, 가격 변경 승인은 <b>지사 내부</b>로 닫힌다.
+    본사는 감사 로그를 보관할 뿐이다. <b>예외는 PG 키 하나</b> — 마스터 계약 주체가 본사라는 근거가 있다.</p>
+  </div>
+</section>
+
+<section id="g2">
+  <h3>본사와 지사</h3>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>본사 — 플랫폼 제공</h5>
+      <ul>
+        <li><b>PG 마스터 계약</b> — 우위 조건 협상. 계약은 지사 명의, 협상은 본사</li>
+        <li><b>지원 PG 목록</b> = 어댑터 구현 목록. 플랫폼의 경계</li>
+        <li><b>전 지사 머천트 키 세팅 · Vault 보관</b> — 지사는 마스킹 조회만</li>
+        <li><b>공통값</b> — 결제 가능 통화 · PG · 채널 · PG 물리 제약</li>
+        <li><b>시스템 제공</b> — 결제창 · D2C 웹샵 · 결제 허브 · 어드민 · 대사 엔진 · ERP 커넥터</li>
+        <li><b>연동 규격 정의</b> — 경로 · 필드명 · 서명 헤더 · 멱등 · 재시도. 버전 고정 배포</li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h5>지사 — 운영</h5>
+      <ul>
+        <li><b>법인 · 세무</b> — 통화 · 세무 규격 · 정산 계좌 (지사 내 2인 승인)</li>
+        <li><b>결제 구성</b> — 지원 목록 내 통화 · PG · 채널 선택 · 채널별 최소/최대 · 우선순위 · 법정 한도</li>
+        <li><b>상품</b> — SKU 정의 · 가격 · 판매 여부 · 보너스 · 계정 한도 · PG 콘솔 등록</li>
+        <li><b>게임사 온보딩</b> — 규격 전달 · 정보 수령 · 검증 전체</li>
+        <li><b>환불 · CS</b> — 분기 처리 · 수기 계좌 송금</li>
+        <li><b>정산</b> — 대사 결과 확인 · 불일치 대응 · ERP 수신</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="grp2">Step별 분담 — 본사 열은 전부 「제공」, 지사 열은 전부 「운영」</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Step</th><th>본사 (제공)</th><th>지사 (운영)</th></tr></thead>
+      <tbody>
+        <tr><td><b>—</b> 플랫폼 경계</td><td><b>지원 PG 목록 · 어댑터</b></td><td>지원 목록 내에서 선택</td></tr>
+        <tr><td><b>1</b> 법인 · 세무</td><td>기능</td><td>입력 · 지사 내 2차 승인</td></tr>
+        <tr><td><b>2</b> PG · 머천트</td><td class="bad-cell"><b>마스터 계약 · 키 세팅</b></td><td>마스킹 조회 · 채널 토글</td></tr>
+        <tr><td><b>3</b> 게임 · Webhook</td><td class="bad-cell"><b>연동 규격 정의</b></td><td><b>게임사 온보딩 전체</b></td></tr>
+        <tr><td><b>4</b> 상품 · 가격</td><td>기능 · Price Tier 정의</td><td><b>SKU 정의 · 가격 · 판매 설정</b></td></tr>
+        <tr><td><b>5</b> 라우팅 · 한도</td><td>엔진 · PG 물리 제약 등재</td><td><b>채널 선택 · 최소/최대 · 순서 · 법정 한도</b></td></tr>
+        <tr><td><b>6</b> 모니터링</td><td>통합 뷰</td><td>자사 뷰</td></tr>
+        <tr><td><b>7</b> 환불 · CS</td><td>분기 엔진</td><td>CS · 수기 송금</td></tr>
+        <tr><td><b>8</b> 정산 대사</td><td>대사 엔진 · ERP 커넥터</td><td>확인 · ERP 수신</td></tr>
+        <tr><td><b>—</b> 결제창 · 웹샵</td><td><b>제공</b></td><td>브랜딩 · 노출</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">붉게 표시한 두 칸이 본사가 유일하게 정책까지 쥐는 지점 — <b>키와 규격</b>. 나머지는 전부 기능 제공에 그친다.</p>
+
+  <div class="note q">
+    <span class="lb">규격이 본사 소유여야 하는 이유</span>
+    <p>규격까지 지사가 정하면 어떻게 되는지 이미 데이터에 나와 있다 —
+    등록된 9개 서버의 <span class="mono">verify</span> 경로가 <b>4종으로 갈라져 있다</b>(Part 8 참조).
+    「단 2개의 표준 API」 전제가 깨지면 게임마다 어댑터가 필요해져 설계 목적 자체가 무너진다.</p>
+  </div>
+</section>
+
+<section id="g3">
+  <h3>권한과 스코프</h3>
+  <p>역할 5종. 데이터 격리는 <span class="mono">entity_id</span>가 이미 전 마스터의 파티션 키이므로
+  <b>권한에 스코프만 걸면 자동으로 성립</b>한다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>역할</th><th>스코프</th><th>주요 권한</th><th>불가</th></tr></thead>
+      <tbody>
+        <tr><td><b>본사 Super Admin</b></td><td>전 법인</td><td>지원 PG 등재 · 머천트 키 세팅 · 연동 규격 배포 · Price Tier 정의 · 전사 통합 조회</td><td>—</td></tr>
+        <tr><td><b>본사 재무</b></td><td>전 법인 · 읽기</td><td>전사 대사 결과 · 감사 로그 조회</td><td>정책 변경 · 키 조회</td></tr>
+        <tr><td><b>지사 운영</b></td><td>자기 법인</td><td>게임사 온보딩 · 상품 · 가격 · 채널 선택 · 한도 · CS</td><td><b>키 원문 조회</b> · 타 법인 조회 · 규격 변경</td></tr>
+        <tr><td><b>지사 재무</b></td><td>자기 법인</td><td>정산 계좌 승인 · 수기 송금 승인 · 대사 확인 · ERP 수신</td><td>상품 · 채널 설정</td></tr>
+        <tr><td><b>게임팀</b></td><td>자기 게임 · 서버</td><td>엔드포인트 등록 · Ping Test · 배송 로그 조회</td><td>머천트 · 가격 · 한도</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lb">2인 승인이 필요한 조작 2종</span>
+    <p><b>정산 계좌 변경</b>(자금 도착지) · <b>수기 계좌 송금</b>(자금 유출).
+    둘 다 지사 운영이 요청하고 <b>지사 재무가 승인</b>한다. 요청자와 승인자가 같을 수 없다.
+    본사는 개입하지 않고 감사 로그만 보관한다.</p>
+  </div>
+
+  <p class="cap">PayPal Enterprise 는 법인마다 고유 이메일 계정을 만들어 계정이 증식하고 퇴사 · 인수인계 시 관리 공백이 생긴다. 포털은 <b>운영자 계정과 법인 접근을 분리</b>해 권한 부여로 해결하므로 계정이 늘지 않는다.</p>
+</section>
+
+<section id="g4">
+  <h3>지원 PG 목록</h3>
+  <p>본사의 실질적인 통제 수단은 계약이 아니라 <b>어댑터 구현 여부</b>다.
+  지원 목록에 없는 PG는 지사가 임의로 붙일 수 없고, <b>지원 PG 목록이 곧 플랫폼의 경계</b>다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>단계</th><th>내용</th><th>주체</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b> 요청</td><td>지사가 현지 PG 지원을 요청 — 시장 근거 · 예상 거래량 · 결제수단 구성 첨부</td><td>지사</td></tr>
+        <tr><td><b>2</b> 판단</td><td>어댑터 구현 난도 · 5대 인터페이스 충족 가능 여부 · 정산 리포트 제공 형태 검토</td><td>본사</td></tr>
+        <tr><td><b>3</b> 마스터 협상</td><td>그룹 단위 조건 협상 — 요청 지사 단독 물량이 아니라 그룹 물량 기준</td><td>본사</td></tr>
+        <tr><td><b>4</b> 어댑터 구현</td><td><span class="mono">IPaymentAdapter</span> 구현 · PG 물리 제약 등재 · 사전등록 요구 여부 기록</td><td>본사</td></tr>
+        <tr><td><b>5</b> 등재</td><td>지원 목록 편입 → 전 지사가 선택 가능해진다</td><td>본사</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">미착수 법인 4개(GGL · GGU · GGH · GGV)는 이 프로세스를 통과해야 결제를 붙일 수 있다. Hive 도 동일한 방식이다 — 「PortOne(권장) · Xsolla · MyCard(직접 계약 시)」로 지원 목록을 한정한다.</p>
+
+  <p class="grp2">계약 방식 3분류 — 2단계 판단의 기준</p>
+  <p>PG가 다중 법인을 어떻게 다루는가는 셋으로 갈린다.
+  <b>중요한 것은 자금이 갈라지는가가 아니라 판매자 명의가 갈라지는가</b>다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>방식</th><th>구조</th><th>판매자 명의</th><th>지사별 온보딩</th><th>직정산 원칙</th></tr></thead>
+      <tbody>
+        <tr><td><b>A-1</b><br>명의 분리형</td><td>PG가 서브머천트를 <b>독립 법인 실체로</b> 취급 · 검증된 법인 계좌로 직접 이체</td><td><b>지사</b></td><td>KYC · KYB 필수</td><td><span class="verdict yes">부합</span></td></tr>
+        <tr><td><b>A-2</b><br>자금 분할형</td><td>플랫폼 명의로 수취한 뒤 셀러에게 분배 · 플랫폼 잔액 경유</td><td class="bad-cell"><b>본사</b></td><td>가벼움 · KYB 불요</td><td class="bad-cell"><span class="verdict no">위반</span></td></tr>
+        <tr><td><b>B</b><br>지사별 계약형</td><td>법인별 독립 MID를 각각 발급 · 어댑터에 계정으로 등록</td><td><b>지사</b></td><td>가맹 계약 N건</td><td><span class="verdict yes">부합</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">A-2를 채택하면 원칙 2가 깨진다</span>
+    <p>Airwallex 문서는 플랫폼 MoR 모델을
+    <span class="mono">accepting all payments in its own name and distributing proceeds to sellers</span>
+    로 명시한다 — <b>본사 명의로 수취</b>한다는 뜻이다.
+    PayerMax의 <span class="mono">another merchant under the same entity</span> 표현과 미정산 · 정산 · 송금 3계정 잔액 구조도 같은 성격으로 보인다.
+    <b>본사가 자금을 만지는 순간 해외 매출이 본사 장부에 계상</b>되고 이전가격 · 외국환 이슈가 되살아난다.</p>
+  </div>
+
+  <div class="note q">
+    <span class="lb">A-1 도 「계약 1건」이 아니다</span>
+    <p>Airwallex 문서 —
+    <span class="mono">KYB check is only required if the customer will be onboarded as Merchant-Of-Record</span>.
+    즉 <b>명의를 분리하려면 지사별 KYB가 필수</b>다.
+    A-1의 실제 형태는 <b>마스터 계약 1건 + 지사별 온보딩 N건</b>이며, 이는 우리가 세운
+    「본사 마스터 협상 · 지사 명의 계약」과 같다.
+    <b>A와 B의 실질 차이는 계약서 수가 아니라 콘솔 통합 여부</b>다.</p>
+  </div>
+
+  <p class="grp2">지원 PG 마스터 — 15개사</p>
+  <p>운영 중 8건과 검토 대상 7건을 하나의 목록으로 관리한다.
+  <b>1차 5법인의 주 결제망이 전부 포함</b>되어야 실현 가능성이 성립한다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>PG</th><th>방식</th><th>분리 방법</th><th>주 사용 법인</th><th>커버리지</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td><b>토스페이먼츠</b></td><td>B</td><td>국내 단일 가맹 계약</td><td>GV</td><td>한국</td><td><span class="verdict yes">운영</span></td></tr>
+        <tr><td><b>Stripe</b></td><td><b>A-1</b></td><td>Organization → 법인별 Stripe Account · Tax ID · Payout 계좌 독립</td><td>GVI</td><td>글로벌 카드</td><td><span class="verdict yes">운영</span></td></tr>
+        <tr><td><b>PayPal</b></td><td>B</td><td>법인별 Business Account · Enterprise 로 링크</td><td>GVI</td><td>200+ 지역</td><td><span class="verdict yes">운영</span></td></tr>
+        <tr><td><b>MyCard</b></td><td>B</td><td>법인별 MID → 어댑터 등록</td><td>GVC</td><td>대만 상위 50 모바일 게임의 80%</td><td><span class="verdict yes">운영</span></td></tr>
+        <tr><td><b>GASH</b></td><td>B</td><td>법인별 MID → 어댑터 등록</td><td>GVC</td><td>대만 · 3,000+ 게임</td><td><span class="verdict yes">운영</span></td></tr>
+        <tr><td><b>SoftBank Payment</b></td><td>B</td><td>법인별 MID → 어댑터 등록</td><td>GGA</td><td>일본</td><td><span class="verdict yes">운영</span></td></tr>
+        <tr><td><b>일본 편의점 수납</b></td><td>B</td><td>법인별 MID → 어댑터 등록</td><td>GGA</td><td>일본 · Lawson · FamilyMart · 7-Eleven</td><td><span class="verdict yes">운영</span></td></tr>
+        <tr><td><b>2C2P · PromptPay</b></td><td>B</td><td>법인별 MID → 어댑터 등록</td><td>GGT</td><td>태국 · SEA</td><td><span class="verdict yes">운영</span></td></tr>
+        <tr><td><b>Adyen</b></td><td><b>A-1</b></td><td><b>1 Merchant Account = 1 Legal Entity 엄격</b> · Transfer Instrument 직접 이체</td><td>검토</td><td>35개국 · 27개 결제수단</td><td><span class="verdict ko">검토</span></td></tr>
+        <tr><td><b>Xsolla</b></td><td>MoR<br><b>또는 PSP</b></td><td>MoR = Xsolla 판매자 · <b>PSP = 스튜디오가 자체 MoR</b>(홍콩 우선 · Adyen 백엔드)</td><td>GGV 검토</td><td>200+ 시장 · 160+ 통화</td><td><span class="verdict ko">검토</span></td></tr>
+        <tr><td><b>Airwallex</b></td><td class="bad-cell"><b>A-1 / A-2</b></td><td>셀러 MoR(full connected account · KYB) <b>또는</b> 플랫폼 MoR(Holding Account 분배)</td><td>검토</td><td>150+ 국 지급</td><td><span class="verdict ko">검토</span></td></tr>
+        <tr><td><b>Antom</b> · Alipay+</td><td><b>A-1</b> 준함</td><td>서브머천트가 payee · 다만 <b>마켓플레이스가 settlement order 개시</b></td><td>검토</td><td>아시아 중심</td><td><span class="verdict ko">검토</span></td></tr>
+        <tr><td><b>PayerMax</b></td><td class="bad-cell"><b>A-2 의심</b></td><td>다중 사업 계정 · <b>통합 자금</b> — 미정산 · 정산 · 송금 3계정 잔액 구조</td><td>검토</td><td>150개국 · 600+ 결제수단</td><td class="bad-cell"><span class="verdict no">확인 필요</span></td></tr>
+        <tr><td><b>EBANX</b></td><td>A 미확인</td><td>마켓플레이스 분할 지급 — <b>명의 분리 여부 미확인</b></td><td>검토</td><td>중남미 20+ 국 · 200+ 결제수단</td><td class="bad-cell"><span class="verdict no">확인 필요</span></td></tr>
+        <tr><td><b>Razer Gold · GOC Pay</b><br><b>Oneverse · JollyMax · PagSeguro</b></td><td>B</td><td>법인별 계약 → 어댑터 등록</td><td>GGL · GGU 검토</td><td>SEA · 중동 · 중남미</td><td><span class="verdict ko">검토</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">Fiuu(구 Razer Merchant Services)는 Razer Gold 계열과 별개 서비스이며 말레이시아 <span class="mono">GGU</span> 착수 시 함께 검토 대상. 상세는 <a href="../benchmark/pg-multi-entity.html">PG 다중법인 구조 벤치마킹</a> 참조.</p>
+
+  <div class="note bad">
+    <span class="lb">2단계에서 실제로 걸리는 것</span>
+    <p>어댑터 5대 인터페이스 중 <b><span class="mono">fetchSettlementReport</span></b> 가 병목이다.
+    Oneverse · GOC-PAY 같은 파트너십형 게이트웨이가 정산 리포트를 어떤 형태로 주는지 확인되지 않았고,
+    이게 없으면 T+1 대사가 돌지 않는다. <b>대사 불가 PG를 등재할지</b>가 판단 기준의 핵심.</p>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 2</span>
+  <h2>구조</h2>
+  <p>제어 흐름과 자금 흐름의 분리 · 법인에서 채널까지의 3계층 · 전 트랜잭션을 가르는 격리 키.</p>
+</div>
+
+<section id="a1">
+  <h3>거버넌스 모델</h3>
+  <p>본사는 <b>계약 · 키 · 정책</b>만 중앙에서 쥔다. 유저가 낸 돈은 본사를 거치지 않고
+  PG사에서 해당 지사 법인의 현지 계좌로 직접 입금된다.
+  두 흐름이 같은 방향으로 흐르지 않는다는 점이 이 설계의 핵심.</p>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 396" role="img" aria-label="본사 중앙 계약과 지사 직정산의 분리 구조도">
+      <defs>
+        <marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="480" y="15" class="dl f" text-anchor="middle">제어 흐름 — 계약 · 인증키 · 정책은 본사에서 아래로만 내려간다</text>
+
+      <rect x="250" y="26" width="460" height="52" rx="5" class="bx-mute"/>
+      <text x="480" y="47" class="dt" text-anchor="middle">본사 (HQ) 중앙 어드민</text>
+      <text x="480" y="66" class="ds" text-anchor="middle">PG 마스터 계약 · 머천트 발급 · Secret Key(KMS Vault) · 라우팅 · 세무 정책</text>
+
+      <line x1="480" y1="78" x2="480" y2="104" class="ln" marker-end="url(#pa)"/>
+      <text x="492" y="96" class="dx f">키 · 정책 주입</text>
+
+      <rect x="250" y="106" width="460" height="58" rx="5" class="bx-key"/>
+      <text x="480" y="129" class="dt a" text-anchor="middle">포털 결제 허브</text>
+      <text x="480" y="149" class="ds" text-anchor="middle">세션 발급 · 스마트 라우팅 · Tax Engine · 배송 웹훅 · 복식부기 원장</text>
+
+      <rect x="30" y="110" width="184" height="50" rx="5" class="bx-mute"/>
+      <text x="122" y="131" class="dt" text-anchor="middle">유저</text>
+      <text x="122" y="150" class="ds" text-anchor="middle">회원 결제창 · D2C 웹샵</text>
+      <line x1="214" y1="135" x2="246" y2="135" class="ln" marker-end="url(#pa)"/>
+
+      <rect x="746" y="110" width="184" height="50" rx="5" class="bx-mute"/>
+      <text x="838" y="131" class="dt" text-anchor="middle">PG사 8종</text>
+      <text x="838" y="150" class="ds" text-anchor="middle">머천트 단위 승인</text>
+      <line x1="714" y1="135" x2="742" y2="135" class="ln" marker-end="url(#pa)"/>
+
+      <line x1="480" y1="164" x2="480" y2="192" class="ln" marker-end="url(#pa)"/>
+      <rect x="250" y="194" width="460" height="48" rx="5" class="bx-mute"/>
+      <text x="480" y="215" class="dt" text-anchor="middle">지사 게임 서버</text>
+      <text x="480" y="233" class="ds" text-anchor="middle">POST /deliver — HMAC 서명 · 멱등키</text>
+
+      <line x1="30" y1="272" x2="930" y2="272" class="ln-hair"/>
+      <text x="480" y="292" class="dl f" text-anchor="middle">자금 흐름 — PG에서 지사 계좌로 직접 · 본사 미경유</text>
+
+      <path d="M838 160 L838 328 L716 328" class="ln" stroke-dasharray="5 4" marker-end="url(#pa)"/>
+      <rect x="250" y="302" width="460" height="52" rx="5" class="bx-key"/>
+      <text x="480" y="323" class="dt a" text-anchor="middle">지사 법인 현지 은행 계좌</text>
+      <text x="480" y="342" class="ds" text-anchor="middle">GV · GVI · GVC · GGA · GGT — 법인별 1:1 · 결제 적용 5개 법인</text>
+
+      <text x="480" y="380" class="ds f" text-anchor="middle">본사 장부에 해외 매출이 계상되지 않으므로 이전가격 · 외국환 송금 이슈가 발생하지 않는다</text>
+    </svg>
+    <figcaption>제어는 본사에서 단방향 · 자금은 PG에서 지사로 단방향. 두 흐름이 만나는 지점은 결제 허브의 원장뿐.</figcaption>
+  </figure>
+
+  <div class="note q">
+    <span class="lb">이 구조가 성립하는 이유</span>
+    <p>본사 대규모 거래량으로 <b>MDR을 한 번에 협상</b>하되 대금은 지사가 직접 수취하므로,
+    본사가 해외 매출을 계상하고 다시 송금하는 경로가 사라진다.
+    수수료 협상력과 세무 분리를 동시에 얻는 조합.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">이 원칙을 깨는 유혹 — 본사 PG 라이선스</span>
+    <p>스마일게이트는 스토브페이 법인을 세워 선불업(2025-03)과 <b>PG업(2025-09) 라이선스를 취득</b>해
+    입점 게임사 결제를 직접 대행한다. 수수료 절감 효과는 크지만
+    <b>본사가 자금을 만지는 순간 위 그림의 자금 흐름 레인이 무너진다</b>.
+    이 방향이 제안될 경우 직정산 원칙과의 트레이드오프로 다뤄야 한다 —
+    <a href="../benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a> 참조.</p>
+  </div>
+</section>
+
+<section id="a2">
+  <h3>법인 · 머천트 · 채널</h3>
+  <p>결제 마스터는 <b>지사 법인 → 머천트 → 결제 채널</b> 3계층이고, 머천트 아래에 <b>프로젝트(게임)</b>가 병렬로 붙는다.
+  계약과 정산 계좌는 머천트에 붙고 · 결제창에 보이는 것은 채널 · 매출을 발생시키는 것은 프로젝트.</p>
+
+<pre>지사 법인 (Entity)  ── <b>머천트</b> (정산 주체 · PG 계약 단위)
+                          ├── <b>채널</b> (결제수단 · 최소/최대 · Capability)
+                          └── <b>프로젝트</b> (게임) ── 상품(SKU)</pre>
+
+  <p class="cap"><b>용어</b> — 머천트는 PG 문서의 서브머천트 · Merchant Account · MID에 대응하는 계층이며 시스템 식별자는 <span class="mono">merchant_id</span>(구 <span class="mono">mid_code</span>). 프로젝트는 PG 문서의 Project · Sub-account에 대응하고 포털에서는 게임 마스터(Step 3)와 1:1이다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th></th><th>지사 법인</th><th>머천트</th><th>채널</th><th>프로젝트</th></tr></thead>
+      <tbody>
+        <tr><td><b>무엇</b></td><td>매출 귀속 주체</td><td>정산 주체 · PG 계약 단위</td><td>결제창 UI 단위</td><td>게임 · 매출 발생 단위</td></tr>
+        <tr><td><b>키</b></td><td><span class="mono">entity_id</span></td><td><span class="mono">merchant_id</span></td><td><span class="mono">channel_id</span></td><td><span class="mono">game_id</span></td></tr>
+        <tr><td><b>수량 관계</b></td><td>—</td><td>1 법인 : N 머천트<br><span class="mono">(법인 × PG)</span></td><td>1 머천트 : N 채널</td><td>1 머천트 : N 프로젝트</td></tr>
+        <tr><td><b>귀속 제약</b></td><td>—</td><td><b>1 머천트 : 1 법인 — 엄격</b></td><td>머천트 종속</td><td>1 게임 : N 법인 가능<br><span class="mono">(서버로 갈림)</span></td></tr>
+        <tr><td><b>등록 주체</b></td><td>지사</td><td><b>본사</b></td><td>본사 등재 · <b>지사 선택</b></td><td><b>지사</b></td></tr>
+        <tr><td><b>붙는 정보</b></td><td>사업자번호 · 세무 규격 · 정산 계좌</td><td>Secret Key · 수수료율 · 정산 주기 · Capability · 물리 제약</td><td>결제 폼 · 최소/최대 · 노출 순서 · 고지 문구</td><td>엔드포인트 · HMAC 키 · SKU · 게임별 한도</td></tr>
+        <tr><td><b>변경 시점</b></td><td>법인 설립 · 폐쇄</td><td>계약 체결 · 종료</td><td><b>런타임 실시간 토글</b></td><td>게임 런칭 · 종료</td></tr>
+        <tr><td><b>증분 비용</b></td><td>—</td><td><b>계약 1회</b></td><td>등재 시 자동</td><td><b>등록 1회</b></td></tr>
+        <tr><td><b>예</b></td><td>GVC</td><td><span class="mono">GRAVITY_TW_MYCARD_LIVE</span></td><td>선불카드 핀 · 편의점 바코드</td><td>ROO · ROX</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">증분 비용 행이 이 구조의 목적이다 — <b>신규 게임 = 프로젝트 등록 1회 · 신규 지사 = 머천트 계약 1회 · 신규 PG = 어댑터 1회</b>. 채널만 실시간 토글 대상인 이유는 법인 · 머천트가 계약의 산출물이라 런타임에 바뀔 수 없고 PG 장애는 채널 단위로 발생하기 때문이다. Hive 도 동일하다 — 「설정된 PG사는 삭제할 수 없고 비활성화만 가능」.</p>
+
+  <div class="note bad">
+    <span class="lb">프로젝트는 양쪽에 등록된다</span>
+    <p>A-1 방식 PG(Adyen · Stripe 등)는 <b>PG 콘솔에도 프로젝트 · 서브어카운트를 만들어야</b> 한다.
+    포털 게임 마스터와 PG 프로젝트가 <b>이중 등록</b>이므로 SKU와 마찬가지로 <b>동기화 상태 관리</b>가 필요하다 —
+    Part 5 「SKU × PG 동기화」와 같은 문제의 게임 단위 버전.</p>
+  </div>
+
+  <p class="grp2">현재 운영 중인 머천트 8건</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>머천트</th><th>법인</th><th>PG</th><th>방식</th><th>MDR</th><th>정산 주기</th><th>온라인 환불</th><th>정기결제</th></tr></thead>
+      <tbody>
+        <tr><td><b>MID_KR_TOSS_01</b></td><td>GV</td><td>토스페이먼츠</td><td>B</td><td>2.1%</td><td>T+2</td><td><span class="verdict yes">가능</span></td><td><span class="verdict yes">가능</span></td></tr>
+        <tr><td><b>MID_TW_MYCARD_01</b></td><td>GVC</td><td>MyCard</td><td>B</td><td>5.5%</td><td>T+7</td><td><span class="verdict no">불가</span></td><td><span class="verdict no">불가</span></td></tr>
+        <tr><td><b>MID_TW_GASH_01</b></td><td>GVC</td><td>GASH</td><td>B</td><td>4.8%</td><td>T+7</td><td><span class="verdict no">불가</span></td><td><span class="verdict no">불가</span></td></tr>
+        <tr><td><b>MID_US_STRIPE_01</b></td><td>GVI</td><td>Stripe</td><td><b>A-1</b></td><td>2.9% + $0.30</td><td>T+2</td><td><span class="verdict yes">가능</span></td><td><span class="verdict yes">가능</span></td></tr>
+        <tr><td><b>MID_US_PAYPAL_01</b></td><td>GVI</td><td>PayPal</td><td>B</td><td>3.49% + $0.49</td><td>T+1</td><td><span class="verdict yes">가능</span></td><td><span class="verdict yes">가능</span></td></tr>
+        <tr><td><b>MID_JP_SBPS_01</b></td><td>GGA</td><td>SoftBank Payment</td><td>B</td><td>3.2%</td><td>월 2회</td><td><span class="verdict yes">가능</span></td><td><span class="verdict yes">가능</span></td></tr>
+        <tr><td><b>MID_JP_KONBINI_01</b></td><td>GGA</td><td>편의점 현금 수납</td><td>B</td><td>4.0%</td><td>월 2회</td><td><span class="verdict no">불가</span></td><td><span class="verdict no">불가</span></td></tr>
+        <tr><td><b>MID_TH_2C2P_01</b></td><td>GGT</td><td>2C2P · PromptPay</td><td>B</td><td>3.6%</td><td>T+3</td><td><span class="verdict yes">가능</span></td><td><span class="verdict no">불가</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">식별자는 프로토타입 <span class="mono">mock_data.js</span> 기준(구 <span class="mono">MID_</span> 접두). 수치는 실계약 체결 시 계약서 값으로 대체 필요 — 대사 엔진의 기준 수수료율이 이 값이므로 오차가 그대로 불일치 건으로 잡힌다. 8건 중 Stripe만 A-1(명의 분리형)이고 나머지는 B(지사별 계약형)다.</p>
+</section>
+
+<section id="a3">
+  <h3>격리 규칙</h3>
+  <p>결제 플랫폼은 단일 코어에서 동작하지만 데이터는 <span class="mono">entity_id</span>로 완전 분리.
+  이 키가 없으면 어느 법인의 매출인지 결정되지 않으므로 <b>전표 생성 자체가 불가</b>.</p>
+
+  <ul class="rule">
+    <li><b>모든 결제 전표는 <span class="mono">entity_id</span>를 필수 컬럼으로 가진다.</b> DB 파티션 키이자 인덱스 선두 컬럼. 조회 · 정산 · 리포트 전 경로에서 강제 필터로 걸린다.</li>
+    <li><b>귀속 법인은 유저가 아니라 서버가 결정한다.</b> 유저의 국적 · 접속 IP가 아니라 <b>구매 대상 게임 서버가 속한 지사</b>가 매출 귀속처. 대만 서버 캐릭터에 충전하면 한국 유저라도 GVC 매출.</li>
+    <li><b>세션 발급 시점에 법인이 확정되고 이후 변경 불가.</b> 결제창 토큰에 <span class="mono">entity_id</span>가 봉인되므로 세션 도중 지사 전환은 새 세션 발급으로만 가능.</li>
+    <li><b>머천트 선택은 확정된 법인의 머천트 풀 안에서만 이루어진다.</b> 라우팅 엔진이 타 법인 머천트를 고를 경로가 존재하지 않는다 — 매출 귀속 오류의 구조적 차단.</li>
+    <li><b>권한 스코프도 같은 키를 쓴다.</b> 지사 운영자에게 <span class="mono">entity_id</span> 스코프를 걸면 자기 법인 머천트 · 전표 · 상품만 보인다 — 별도 격리 로직이 필요 없다.</li>
+    <li><b>원장 · 인보이스 · ERP 전송이 모두 <span class="mono">entity_id</span>로 분기한다.</b> 대사 결과와 회계 전표가 법인별로 독립 생성되어 각 지사 ERP로 나뉘어 전송.</li>
+  </ul>
+</section>
+
+<section id="a4">
+  <h3>7대 기준 데이터</h3>
+  <p>결제 1건을 성립시키는 데 필요한 마스터. 하나라도 미등록이면 결제창이 열리지 않는다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>기준 데이터</th><th>결정하는 것</th><th>등록 단계</th><th>주체</th></tr></thead>
+      <tbody>
+        <tr><td><b>지사 법인</b></td><td>매출 귀속처 · 입금 계좌 · 세무 규격</td><td>Step 1</td><td>지사</td></tr>
+        <tr><td><b>게임 · 서버</b></td><td>캐릭터 검증 대상 · 인게임 DB 네임스페이스</td><td>Step 3</td><td>지사</td></tr>
+        <tr><td><b>결제 통화</b></td><td>결제창 표시가 · PG 전송 통화 코드</td><td>Step 1 — 법인 종속</td><td>지사</td></tr>
+        <tr><td><b>PG · 결제수단</b></td><td>노출 UI · 호출 API · 환불 가능 여부</td><td>Step 2</td><td><b>본사</b> 등재 · 지사 선택</td></tr>
+        <tr><td><b>상품 카탈로그</b></td><td>과금 유형 · 통화별 가격 · 계정당 한도</td><td>Step 4</td><td>지사</td></tr>
+        <tr><td><b>지급 엔드포인트</b></td><td>게임 서버 Webhook URL · HMAC Secret</td><td>Step 3</td><td>지사</td></tr>
+        <tr><td><b>세무 · 영수증 정책</b></td><td>부가세 포함가 여부 · 법정 증빙 연동</td><td>Step 1</td><td>지사</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">Step 번호는 Part 8의 8단계 어드민 라이프사이클과 대응. 등록 순서가 곧 의존 순서다. 7종 중 6종이 지사 소유이고 본사가 등재하는 것은 PG 하나뿐.</p>
+</section>
+
+<div class="part">
+  <span class="n">Part 3</span>
+  <h2>지사</h2>
+  <p>매출이 귀속되는 법인과 그 법인의 통화 · 세율 · 법정 증빙 · 정산 주기.</p>
+</div>
+
+<section id="b1">
+  <h3>지사 코드</h3>
+  <p>결제 귀속 단위는 <b>실제 해외 법인</b>이며, 회원·인증 설계의 <b>GNJOY 9종과 동일한 코드 집합</b>을 쓴다.
+  두 문서가 같은 <span class="mono">entity_id</span>를 공유하므로
+  「이 유저가 어느 지사 계정을 바인딩했는가」와 「이 결제가 어느 지사 매출인가」를 같은 키로 조인할 수 있다.
+  다만 <b>결정 방식은 다르다</b> — 계정 바인딩은 유저가 고르고, 결제 귀속은 <b>구매 대상 게임 서버가 결정</b>한다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Entity ID</th><th>법인명</th><th>소재</th><th>통화</th><th>결제 적용</th><th>주 결제망</th></tr></thead>
+      <tbody>
+        <tr><td><b>GV</b></td><td>GRAVITY Co., Ltd. — 그라비티</td><td>서울 · 본사</td><td>KRW</td><td><span class="verdict yes">1차</span></td><td>토스페이먼츠</td></tr>
+        <tr><td><b>GVI</b></td><td>GRAVITY INTERACTIVE, Inc. — 그라비티 인터렉티브</td><td>Buena Park, US</td><td>USD</td><td><span class="verdict yes">1차</span></td><td>Stripe · PayPal</td></tr>
+        <tr><td><b>GVC</b></td><td>GRAVITY COMMUNICATIONS Co., Ltd. — 그라비티 커뮤니케이션즈</td><td>Taipei, TW</td><td>TWD</td><td><span class="verdict yes">1차</span></td><td>MyCard · GASH</td></tr>
+        <tr><td><b>GGA</b></td><td>GRAVITY GAME ARISE Co., Ltd. — 그라비티 게임 어라이즈</td><td>Tokyo, JP</td><td>JPY</td><td><span class="verdict yes">1차</span></td><td>SoftBank Payment · 편의점</td></tr>
+        <tr><td><b>GGT</b></td><td>GRAVITY GAME TECH Co., Ltd. — 그라비티 게임 테크</td><td>Bangkok, TH</td><td>THB</td><td><span class="verdict yes">1차</span></td><td>2C2P · PromptPay</td></tr>
+        <tr><td><b>GGL</b></td><td>PT. GRAVITY GAME LINK — 그라비티 게임 링크</td><td>Jakarta, ID</td><td>IDR</td><td><span class="verdict no">미적용</span></td><td>GoPay · OVO · Dana · ShopeePay</td></tr>
+        <tr><td><b>GGH</b></td><td>GRAVITY GAME HUB PTE. LTD. — 그라비티 게임 허브</td><td>Singapore</td><td>SGD</td><td><span class="verdict no">미적용</span></td><td>미정</td></tr>
+        <tr><td><b>GGV</b></td><td>GRAVITY GAME VISION Co., Ltd. — 그라비티 게임 비전</td><td>Hong Kong</td><td>HKD</td><td><span class="verdict no">미적용</span></td><td>미정</td></tr>
+        <tr><td><b>GGU</b></td><td>GRAVITY GAME UNITE SDN. BHD. — 그라비티 게임 유나이트</td><td>Kuala Lumpur, MY</td><td>MYR</td><td><span class="verdict no">미적용</span></td><td>Fiuu 등 현지 게이트웨이</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">출처 — 공식 Global Network 페이지. 국내 자회사 그라비티 네오싸이언(GRAVITY NEOCYON)은 퍼블리싱 법인이 아니므로 결제 귀속 대상에서 제외. 통화는 소재 기준 기본값이며 실제 정산 통화는 머천트 계약으로 확정.</p>
+
+  <div class="note q">
+    <span class="lb">코드 체계를 실제 법인 코드로 확정할 것</span>
+    <p>현재 결제 자료는 서로 다른 코드를 쓴다 —
+    설계서 v1.0은 <span class="mono">HQ · GTT · GTH · GTA · GVI</span>,
+    프로토타입은 <span class="mono">KR_HQ · TW_COMM · US_INTER · JP_ARISE · TH_TECH</span>.
+    둘 다 실제 법인 코드가 아니며, 특히 <b>설계서는 <span class="mono">GVI</span>를 인도네시아에 배정</b>했으나
+    <span class="mono">GVI</span>는 <b>북미(Gravity Interactive)</b>이고 인도네시아는 <span class="mono">GGL</span>이다.
+    <span class="mono">entity_id</span>는 전 전표의 파티션 키이자 회원·인증과의 조인 키이므로
+    <b>실제 법인 코드 9종을 정본으로 채택</b>하고 나머지는 폐기하는 것이 옳다.</p>
+  </div>
+
+  <p class="grp2">코드 매핑 — 마이그레이션 기준</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>정본 (채택)</th><th>설계서 v1.0</th><th>프로토타입</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td><b>GV</b> 한국</td><td>HQ</td><td>KR_HQ</td><td>—</td></tr>
+        <tr><td><b>GVI</b> 북미</td><td>GTA</td><td>US_INTER</td><td class="bad-cell">설계서가 <span class="mono">GVI</span>를 인도네시아에 배정 — 실제로는 북미</td></tr>
+        <tr><td><b>GVC</b> 대만</td><td>GTT</td><td>TW_COMM</td><td>—</td></tr>
+        <tr><td><b>GGA</b> 일본</td><td class="bad-cell">누락</td><td>JP_ARISE</td><td>설계서 5법인 목록에 일본 부재</td></tr>
+        <tr><td><b>GGT</b> 태국</td><td>GTH</td><td>TH_TECH</td><td>—</td></tr>
+        <tr><td><b>GGL</b> 인도네시아</td><td class="bad-cell">GVI (오배정)</td><td class="bad-cell">누락</td><td>프로토타입에 인도네시아 부재</td></tr>
+        <tr><td><b>GGH · GGV · GGU</b></td><td class="bad-cell">누락</td><td class="bad-cell">누락</td><td>싱가포르 · 홍콩 · 말레이시아 — 양쪽 모두 미반영</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">홍콩 관할이 겹친다</span>
+    <p>프로토타입은 대만 법인(<span class="mono">GVC</span>)의 관할을 <b>「대만 · 홍콩 · 마카오」</b>로 잡고 있으나,
+    홍콩에는 <b><span class="mono">GGV</span>(Gravity Game Vision)</b>라는 별도 법인이 존재한다.
+    홍콩 매출을 <span class="mono">GVC</span>로 계상할지 <span class="mono">GGV</span>로 계상할지는
+    <b>법인 간 매출 귀속 문제</b>이므로 재무 확인이 선행되어야 하며, 결제창 라우팅보다 상위 결정이다.</p>
+  </div>
+</section>
+
+<section id="b2">
+  <h3>지사별 편차</h3>
+  <p>같은 상품을 같은 코드로 팔아도 법인마다 가격 표기 방식 · 세금 계산 시점 · 발행 증빙이 다르다.
+  이 편차를 결제창이 아니라 <b>Tax Engine이 흡수</b>한다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>법인</th><th>세금 체계</th><th>가격 표시</th><th>법정 증빙</th></tr></thead>
+      <tbody>
+        <tr><td><b>GV</b></td><td>부가가치세 10%</td><td><b>세금 포함가</b> 표시</td><td>국세청 현금영수증 API · 전자세금계산서</td></tr>
+        <tr><td><b>GVC</b></td><td>영업세 5%</td><td><b>세금 포함가</b> 표시</td><td>재정부 전자발표 e-GUI 자동 교부</td></tr>
+        <tr><td><b>GGA</b></td><td>소비세 10%</td><td><b>총액표시 의무</b> — 포함가</td><td>적격청구서 — 인보이스 등록번호 기재</td></tr>
+        <tr><td><b>GVI</b></td><td>주별 Sales Tax 0~10%</td><td><b>세전가 표시</b> → 결제창에서 주별 가산</td><td>1099-K 리포트 데이터 생성</td></tr>
+        <tr><td><b>GGT</b></td><td>부가가치세 7%</td><td><b>세금 포함가</b> 표시</td><td>태국 국세청 e-Tax Invoice</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">GVI만 계산 시점이 다르다</span>
+    <p>포함가 4개 법인은 <b>상품 등록 시점</b>에 세액이 확정되지만, GVI는 유저 거주 주가 결정되는
+    <b>결제창 진입 시점</b>에야 총액이 확정된다. 상품 가격표만 보고 결제 금액을 예측할 수 없는 유일한 법인이므로,
+    D2C 웹샵 카드 UI와 결제창 총액이 불일치하는 것이 정상 — <b>이를 오류로 처리하지 않도록 주의</b>.</p>
+  </div>
+
+  <p class="grp2">결제 미적용 4개 법인 — 확장 시 검토 항목</p>
+  <p>법인은 이미 존재하고 GNJOY도 운영되므로 <b>결제만 붙이면 되는 상태</b>.
+  각각 세무 · 결제망 쟁점이 다르며, 결제망은 Part 1의 <a href="#g4">지원 PG 등재</a> 프로세스를 통과해야 한다.</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>법인</th><th>세무 쟁점</th><th>결제망 쟁점</th></tr></thead>
+      <tbody>
+        <tr><td><b>GGL</b> 인도네시아</td><td>부가가치세 PPN 11% · 현지 전자세금계산서</td><td>e-Wallet 중심 — GoPay · OVO · Dana · ShopeePay · Alfamart 어댑터 신규</td></tr>
+        <tr><td><b>GGU</b> 말레이시아</td><td>SST 8% (디지털 서비스세)</td><td><b>Fiuu</b> 등 현지 게이트웨이 — 「1 로그인 = 1 MID」 제약이 운영 부담으로 들어온다</td></tr>
+        <tr><td><b>GGH</b> 싱가포르</td><td>GST 9% · OVR 제도 등록 여부</td><td>카드 중심 — Adyen · Stripe 확장 또는 <b>Xsolla PSP 확장 예정 지역</b></td></tr>
+        <tr><td><b>GGV</b> 홍콩</td><td>부가세 부재 · 법인세만</td><td>카드 · AlipayHK · WeChat Pay HK · <b>Xsolla PSP 즉시 대상</b> — 단 <b>GVC 관할 중복 정리 선행</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="note q">
+    <span class="lb">Xsolla PSP — 홍콩 · 싱가포르 우선 대상</span>
+    <p>Xsolla 는 2025-08 Adyen 파트너십과 함께 <b>Xsolla PSP</b> 를 발표했다 —
+    <span class="mono">a powerful new solution for studios that want to operate as their own Merchant of Record</span>.
+    기존 MoR과 달리 <b>스튜디오가 판매자 · 세무 신고 주체</b>가 되므로 <b>직정산 원칙과 충돌하지 않는다</b>.
+    <span class="mono">available to eligible merchants registered in Hong Kong, with phased expansion into Europe, Singapore, and the United States</span>
+    이므로 <b><span class="mono">GGV</span>(홍콩)는 즉시 대상 · <span class="mono">GGH</span>(싱가포르)는 확장 예정</b>이다.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">그래도 자체 구축과 중복된다</span>
+    <p>Xsolla PSP의 <b>백엔드는 Adyen 의 글로벌 acquiring 네트워크</b>이므로 Adyen 직접 계약과 사실상 같은 경로다.
+    PSP는 Xsolla 의 결제창 · 웹샵 인프라를 함께 쓰는 상품이라 <b>포털이 직접 만드는 결제창 · 웹샵과 겹친다</b>.
+    결제창을 자체 구축하는 전제에서는 <b>Adyen 직접 계약이 더 단순</b>하며,
+    PSP는 「자체 구축분을 쓰지 않고 통째로 위임할 리전」에만 의미가 있다.</p>
+  </div>
+
+  <p class="grp2">법인과 무관하게 걸리는 규제</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>리전 · 법령</th><th>쟁점</th><th>영향</th></tr></thead>
+      <tbody>
+        <tr><td><b>EU</b> VAT OSS/MOSS</td><td>소비자 거주국별 17~27% 자동 적용</td><td>GVI와 동일하게 결제창 시점 계산 · <b>법인 미설립이므로 MoR 검토 대상</b></td></tr>
+        <tr><td><b>일본</b> 자금결제법</td><td>유료 충전 캐시와 무료 지급 캐시의 DB 분리 의무</td><td>포털 캐시 도입 시 유료 · 무료 2계정 분리 설계 필요</td></tr>
+        <tr><td><b>한국</b> 전자상거래법</td><td>7일 미사용 청약철회</td><td>환불 정책의 법인별 파라미터 기준값</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 4</span>
+  <h2>결제</h2>
+  <p>두 개의 진입 경로 · 네 개의 상품 유형 · 하나의 결제창. 결제창에 무엇이 보일지는 8단계 필터가 결정한다.</p>
+</div>
+
+<section id="c1">
+  <h3>진입 경로</h3>
+  <p>결제창은 하나지만 <b>들어오는 문은 둘</b>. 무엇이 다른가는 인증 여부가 아니라
+  <b>귀속 법인과 지급 대상을 무엇으로 확정하는가</b>에서 갈린다.</p>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>회원 결제창 — 로그인</h5>
+      <ul>
+        <li><b>진입</b> 포털 One-ID · 인게임 클라이언트 웹뷰</li>
+        <li><b>지급 대상</b> 세션에 바인딩된 계정 · 그 계정의 캐릭터</li>
+        <li><b>법인 확정</b> 선택한 서버의 <span class="mono">entity_id</span></li>
+        <li><b>한도</b> 계정 단위 누적 한도 적용 가능</li>
+        <li><b>판매 가능 유형</b> <b>4종 전부</b></li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h5>D2C 다이렉트 웹샵 — 비로그인</h5>
+      <ul>
+        <li><b>진입</b> PC · 모바일 웹 브라우저</li>
+        <li><b>지급 대상</b> 서버 + 캐릭터명 → <span class="mono">POST /verify</span></li>
+        <li><b>법인 확정</b> 선택한 서버의 <span class="mono">entity_id</span></li>
+        <li><b>한도</b> <b>1회 · 일 한도 강제</b> — 초과 시 KYC 요구</li>
+        <li><b>판매 가능 유형</b> <b>제한 — 아래 매트릭스</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="grp2">로그인 요구 매트릭스 — 상품 유형이 결정한다</p>
+  <p>계정 단위 상품은 계정을 알아야 하는데 비로그인은 계정이 없다.
+  <span class="mono">/verify</span> 응답의 <span class="mono">account_id</span>로 처리하면
+  <b>타인 계정에 정액제를 걸 수 있게</b> 되고 계정당 1회 제한도 걸 수 없다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>상품 유형</th><th>지급 대상</th><th>비로그인</th><th>사유</th></tr></thead>
+      <tbody>
+        <tr><td><b>인게임 아이템</b></td><td>캐릭터</td><td><span class="verdict yes">가능</span></td><td>캐릭터 검증만으로 대상 확정 · 선물 포함</td></tr>
+        <tr><td><b>게임 포인트</b></td><td>게임 계정 지갑</td><td><span class="verdict ko">조건부</span></td><td><span class="mono">account_id</span> 역추적 지급 · 타인 계정이면 <b>「선물」로 명시 동의</b></td></tr>
+        <tr><td><b>정액제</b></td><td>포털 계정</td><td class="bad-cell"><span class="verdict no">불가</span></td><td>계정 권한 변경 · 중복 연장 판단 필요</td></tr>
+        <tr><td><b>구독</b></td><td>포털 계정</td><td class="bad-cell"><span class="verdict no">불가</span></td><td>빌링키 보관 · 해지 창구가 계정에 종속</td></tr>
+        <tr><td><b>1회 한정</b> (유형 무관)</td><td>—</td><td class="bad-cell"><span class="verdict no">미노출</span></td><td>누적 추적 수단이 없어 중복을 막을 수 없다</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">「1회 한정」은 유형과 독립된 별도 축이다. 인게임 아이템이라도 1회 한정이면 D2C에 노출하지 않는다.</p>
+
+  <div class="note q">
+    <span class="lb">D2C가 존재하는 이유</span>
+    <p>모바일 인앱결제 수수료 30%를 우회하고 지사 직정산 PG(2.1~5.5%)로 결제를 유도하는 공식 웹 채널.
+    절감분의 일부를 <b>추가 보너스 재화</b>로 유저에게 환원해 웹샵 이동 동기를 만든다.
+    Epic Games Store 도 <b>자체 인게임 결제를 쓰는 개발사는 그 매출을 100% 보유</b>하도록 열어두고 있으며,
+    2025년 PC 게임 D2C 거래액은 <b>$1B을 넘겼다</b>.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">비로그인의 대가</span>
+    <p>계정 인증이 없으므로 <b>연령 · 법정 한도 · 본인확인이 모두 결제 건 단위로만 통제</b>된다.
+    누적 결제 추적이 불가능한 경로이므로 금액 상한이 낮게 걸릴 수밖에 없고,
+    상한을 넘기는 유저는 결국 포털 로그인으로 유도된다 — <b>D2C는 고액 결제 경로가 아니다</b>.</p>
+  </div>
+
+  <div class="note">
+    <span class="lb">선물하기 — 청구권 귀속</span>
+    <p>타인 캐릭터 지정이 곧 선물이다. 비로그인 선물은 환불 시 <b>청구인이 결제자인지 수령자인지</b> 다툼이 된다.
+    결제자 연락처를 필수 수집하고 <b>환불 청구권을 결제자에게 귀속</b>시킨다.</p>
+  </div>
+</section>
+
+<section id="c2">
+  <h3>상품 유형</h3>
+  <p><b>4종.</b> 결제 자체보다 <b>결제 이후에 무엇이 어디에 남는가</b>가 다르고, 그 차이가 배송 대상과 환불 규칙을 결정한다.
+  「패키지」는 유형이 아니라 <b>구성 방식</b>이다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>유형</th><th>결제 후 동작</th><th>지급 대상</th><th>매출 인식</th><th>필요 Capability</th></tr></thead>
+      <tbody>
+        <tr><td><b>인게임 아이템</b><br><span class="mono">ITEM</span></td><td>배송 웹훅 즉시 호출 → 인게임 우편함</td><td>캐릭터</td><td>즉시</td><td>—</td></tr>
+        <tr><td><b>게임 포인트</b><br><span class="mono">POINT</span></td><td>게임 계정 지갑에 잔액 가산</td><td>게임 계정</td><td>즉시</td><td>—</td></tr>
+        <tr><td><b>정액제</b><br><span class="mono">PERIOD</span></td><td>계정 권한 <span class="mono">valid_until</span> 연장</td><td>포털 계정</td><td>즉시</td><td>—</td></tr>
+        <tr><td><b>구독</b><br><span class="mono">SUBSCRIPTION</span></td><td>빌링키 등록 → 매월 자동 승인</td><td>포털 계정</td><td><b>매 승인 시점</b></td><td class="bad-cell"><b>빌링키</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="grp2">구성 속성 — 단품 · 동일 유형 묶음 · 복합 묶음</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>구성</th><th>예</th><th>배송</th><th>1차 범위</th></tr></thead>
+      <tbody>
+        <tr><td><b>단품</b></td><td>다이아몬드 1,000</td><td>웹훅 1회</td><td><span class="verdict yes">포함</span></td></tr>
+        <tr><td><b>동일 유형 묶음</b></td><td>아이템 3종 스타터 패키지</td><td>웹훅 1회 · 대상 식별자 동일</td><td><span class="verdict yes">포함</span></td></tr>
+        <tr><td><b>복합 묶음</b></td><td>포인트 + 아이템 + 정액제</td><td class="bad-cell">웹훅 2회 이상 · 대상 식별자 상이</td><td class="bad-cell"><span class="verdict no">제외</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">복합 묶음을 1차에서 제외하는 이유</span>
+    <p>포인트 + 아이템 + 정액제가 섞이면 지급 대상이 <b>캐릭터와 계정으로 갈라져</b>
+    <span class="mono">/deliver</span> 웹훅이 2회 이상으로 쪼개지고, <b>부분 실패</b>(아이템은 갔는데 정액제 미적용)가 발생한다.
+    확장 시에는 <b>구성요소 단위 멱등키</b> + <b>전부 성공까지 <span class="mono">DELIVERED</span> 미부여</b> +
+    실패분만 재시도 방식이 필요하다. 1차는 <b>동일 유형 묶음까지만</b> 허용한다.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">포털 캐시도 1차에서 제외</span>
+    <p>지사를 넘나드는 통합 캐시는 「GV에서 충전 → GVC에서 사용」 시
+    <b>선수금은 GV · 매출은 GVC</b>가 되어 법인 간 채권채무가 발생하는데 그 정산 규칙이 정해져 있지 않다.
+    또한 충전 시점에 매출을 잡으면 미사용 잔액이 과대 매출이 되므로 <b>충전 원장과 사용 원장 분리</b>가 선행되어야 하고,
+    일본 자금결제법의 유료 · 무료 캐시 분리 요건도 얹힌다.
+    1차는 <b>게임 전용 포인트만</b> 다룬다.</p>
+  </div>
+
+  <div class="note q">
+    <span class="lb">정액제와 구독을 나눈 이유</span>
+    <p>1회 구매 기간권과 빌링키 자동 결제는 완전히 다르다 —
+    <b>필요 Capability</b>(빌링키) · <b>환불 규칙</b>(일할 계산 vs 다음 주기 해지) · <b>해지 UI 필요 여부</b>가 갈린다.
+    Steam 도 Recurring In-Game Billing 을 별도 규격으로 두고 사용자와 billing agreement 를 따로 체결한다.
+    묶어두면 GVC · GGT 에서 판매 수단이 없다는 제약이 검토되지 않는다.</p>
+  </div>
+</section>
+
+<section id="c3">
+  <h3>결제 플로우</h3>
+  <p>결제창 열림부터 회계 분개까지 7단계. 3~4단계는 유저에게 보이지 않고, 6단계 실패가 가장 잦다.</p>
+
+  <div class="flow">
+    <div class="row"><span class="k">01</span><div class="b">
+      <span class="t">상점 진입</span>
+      <span class="d">D2C 웹샵 또는 포털 회원 로그인. 이 시점에 게임 · 서버 선택으로 <span class="mono">entity_id</span> 후보가 정해진다</span></div></div>
+    <div class="row"><span class="k">02</span><div class="b">
+      <span class="t">지급 대상 확정</span>
+      <span class="d">캐릭터 상품이면 <span class="mono">POST /v1/portal/character/verify</span> → 200 OK. 계정 상품이면 로그인 세션에서 확정</span></div></div>
+    <div class="row key"><span class="k">03</span><div class="b">
+      <span class="t">세션 발급 · 채널 구성</span>
+      <span class="d"><span class="mono">POST /v1/portal/checkout/sessions</span> → 8단계 필터로 노출 채널 확정. 금액 · 통화 · 법인이 <b>15분 봉인</b></span></div></div>
+    <div class="row"><span class="k">04</span><div class="b">
+      <span class="t">Tax Engine</span>
+      <span class="d">법인별 세율 · 계산 방식에 따라 세액 분리. GVI만 이 시점에 총액이 확정된다</span></div></div>
+    <div class="row"><span class="k">05</span><div class="b">
+      <span class="t">PG 승인</span>
+      <span class="d">선택 채널의 MID · Secret Key로 승인 요청 → 승인 완료 웹훅을 결제 허브가 수신</span></div></div>
+    <div class="row key"><span class="k">06</span><div class="b">
+      <span class="t">게임 서버 배송 웹훅</span>
+      <span class="d"><span class="mono">POST /v1/portal/items/deliver</span> — HMAC 서명 · 멱등키. <b>실패 시 여기서 격리된다</b></span></div></div>
+    <div class="row"><span class="k">07</span><div class="b">
+      <span class="t">회계 분개</span>
+      <span class="d">지사별 복식부기 원장 기록 → T+1 배치로 지사 ERP 전송</span></div></div>
+  </div>
+
+  <p class="grp2">트랜잭션 상태 머신</p>
+  <p>PG 웹훅은 순서가 뒤바뀌어 도착할 수 있다. 상태 전이를 명시적으로 제한해
+  <b>승인 없는 환불 · 배송 없는 완료</b>가 성립하지 않게 한다.</p>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 250" role="img" aria-label="결제 트랜잭션 상태 머신">
+      <defs>
+        <marker id="sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <rect x="24" y="60" width="150" height="46" rx="5" class="bx-mute"/>
+      <text x="99" y="80" class="dt" text-anchor="middle">SESSION_OPEN</text>
+      <text x="99" y="97" class="dx f" text-anchor="middle">TTL 15분</text>
+
+      <line x1="174" y1="83" x2="214" y2="83" class="ln" marker-end="url(#sa)"/>
+
+      <rect x="216" y="60" width="150" height="46" rx="5" class="bx-mute"/>
+      <text x="291" y="80" class="dt" text-anchor="middle">AUTHORIZED</text>
+      <text x="291" y="97" class="dx f" text-anchor="middle">PG 승인</text>
+
+      <line x1="366" y1="83" x2="406" y2="83" class="ln" marker-end="url(#sa)"/>
+
+      <rect x="408" y="60" width="168" height="46" rx="5" class="bx-key"/>
+      <text x="492" y="80" class="dt a" text-anchor="middle">PAID</text>
+      <text x="492" y="97" class="dx f" text-anchor="middle">배송 대기</text>
+
+      <line x1="576" y1="83" x2="616" y2="83" class="ln" marker-end="url(#sa)"/>
+
+      <rect x="618" y="60" width="150" height="46" rx="5" class="bx-mute"/>
+      <text x="693" y="80" class="dt" text-anchor="middle">DELIVERED</text>
+      <text x="693" y="97" class="dx f" text-anchor="middle">우편 발송 완료</text>
+
+      <line x1="768" y1="83" x2="808" y2="83" class="ln" marker-end="url(#sa)"/>
+
+      <rect x="810" y="60" width="126" height="46" rx="5" class="bx-mute"/>
+      <text x="873" y="80" class="dt" text-anchor="middle">SETTLED</text>
+      <text x="873" y="97" class="dx f" text-anchor="middle">T+1 대사 완료</text>
+
+      <path d="M492 106 L492 146" class="ln" marker-end="url(#sa)"/>
+      <rect x="378" y="148" width="228" height="46" rx="5" class="bx-bad"/>
+      <text x="492" y="168" class="dt bad" text-anchor="middle">PAID_PENDING_DELIVERY</text>
+      <text x="492" y="185" class="dx f" text-anchor="middle">배송 실패 격리 · 재시도 큐</text>
+      <text x="504" y="132" class="dx bad">웹훅 실패</text>
+
+      <path d="M606 171 L693 171 L693 110" class="ln" stroke-dasharray="4 3" marker-end="url(#sa)"/>
+      <text x="706" y="148" class="dx f">재시도 성공</text>
+
+      <rect x="24" y="148" width="240" height="46" rx="5" class="bx-mute"/>
+      <text x="144" y="168" class="dt" text-anchor="middle">REFUNDED · PARTIAL_REFUNDED</text>
+      <text x="144" y="185" class="dx f" text-anchor="middle">PAID · DELIVERED 에서만 진입</text>
+      <path d="M424 106 L330 106 L330 171 L268 171" class="ln" marker-end="url(#sa)"/>
+      <text x="338" y="130" class="dx f">환불 승인</text>
+
+      <text x="480" y="226" class="ds f" text-anchor="middle">환불 웹훅이 승인 웹훅보다 먼저 도착해도 SUCCESS 상태를 거치지 않은 전이는 거부되고 보류 큐로 이동한다</text>
+    </svg>
+    <figcaption>상태 머신이 방어하는 것은 웹훅 순서 역전 · 중복 배송 · 승인 없는 환불 3가지.</figcaption>
+  </figure>
+
+  <p class="grp2">실패 상태 5종</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>상태</th><th>원인</th><th>유저 안내</th></tr></thead>
+      <tbody>
+        <tr><td><span class="mono">SESSION_EXPIRED</span></td><td>15분 초과</td><td>새 환율로 세션 재생성 유도</td></tr>
+        <tr><td><span class="mono">PG_DECLINED</span></td><td>PG 승인 거절</td><td>PG 원문 사유 · 다른 수단 안내</td></tr>
+        <tr><td><span class="mono">USER_CANCELED</span></td><td>유저 이탈</td><td>상점 복귀</td></tr>
+        <tr><td><span class="mono">PENDING_DEPOSIT</span></td><td>편의점 · 가상계좌 입금 대기</td><td><b>입금 안내</b>로 종료 — 완료 화면이 아니다</td></tr>
+        <tr><td><span class="mono">PAID_PENDING_DELIVERY</span></td><td>배송 웹훅 실패</td><td class="bad-cell"><b>「결제 완료 · 지급 처리 중」</b> — 결제 실패로 표시 금지</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lb">결과 수신 — 프론트 결과로 지급을 판단하지 않는다</span>
+    <p>iframe · 팝업은 <span class="mono">postMessage</span> · 리다이렉트는 <span class="mono">return_url</span> +
+    <span class="mono">session_id</span> · 확인용 <span class="mono">GET /checkout/sessions/{id}</span>.
+    <b>진실의 원천은 <span class="mono">/deliver</span> 웹훅</b>이며, 프론트 결과는 화면 전환용이다.</p>
+  </div>
+</section>
+
+<section id="c4">
+  <h3>채널 노출 필터</h3>
+  <p>결제창의 결제수단 목록은 고정이 아니다. <b>지사가 켠 것은 후보군</b>이고,
+  실제 노출은 8단계를 통과한 부분집합이다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>#</th><th>필터</th><th>기준 소유</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td>해당 법인의 머천트 풀</td><td>본사</td></tr>
+        <tr><td><b>2</b></td><td>지사가 <b>법인 활성화</b>한 채널</td><td>지사</td></tr>
+        <tr><td><b>3</b></td><td>그중 <b>해당 게임에서 활성화</b>된 채널</td><td>지사</td></tr>
+        <tr><td><b>4</b></td><td>상품 유형 Capability 충족 — 구독 → 빌링키 · 보장상품 → 환불 가능</td><td>본사 (PG 제약)</td></tr>
+        <tr><td><b>5</b></td><td>결제 금액이 <b>[채널 최소, 채널 최대]</b> 범위 안</td><td>본사 물리 제약 ∩ 지사 설정</td></tr>
+        <tr><td><b>6</b></td><td>법정 한도 · 계정 누적 · 진입 경로 한도 충족</td><td>지사</td></tr>
+        <tr><td><b>7</b></td><td><b>사전등록 요구 PG</b>인 경우 해당 SKU가 등록 완료 상태</td><td>지사 (동기화 상태)</td></tr>
+        <tr><td><b>8</b></td><td>헬스체크 정상</td><td>시스템</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">통과분을 지사 지정 우선순위로 정렬한다. Hive 도 「국가별 결제수단 보기」로 조합 결과를 조회하게 한다.</p>
+
+  <div class="note q">
+    <span class="lb">보완책 2개</span>
+    <p><b>① 예상 노출 미리보기</b> — 어드민에서 게임 × 상품 × 금액을 넣으면 어떤 채널이 뜨고
+    무엇이 <b>몇 번 필터에서 걸렸는지</b>를 표시한다. 「켰는데 왜 안 보이냐」 문의를 여기서 차단한다.<br>
+    <b>② 「결제수단 없음」을 정식 상태로 정의</b> — 사유 코드(금액 초과 · 한도 · 수단 없음)와 대안 안내를 표시한다.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">「결제수단 없음」은 정상 동작이다</span>
+    <p>고액 상품에서는 최대 한도가 낮은 선불카드 · 편의점이 빠져 <b>카드만</b> 남고,
+    소액에서는 최소가 높은 계좌이체가 빠져 <b>간편결제만</b> 남는다.
+    구독 상품은 GVC · GGT 에서 빌링키 지원 채널이 없어 <b>교집합이 비어버린다</b>.
+    전부 빠지는 경우를 오류가 아니라 상태로 다뤄야 한다.</p>
+  </div>
+
+  <p class="grp2">상품 유형별 결제창 표시요소</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>표시요소</th><th>인게임 아이템</th><th>게임 포인트</th><th>정액제</th><th>구독</th></tr></thead>
+      <tbody>
+        <tr><td><b>지급 대상</b></td><td>캐릭터</td><td>게임 계정</td><td>포털 계정</td><td>포털 계정</td></tr>
+        <tr><td>캐릭터 검증 카드</td><td>●</td><td>●</td><td>—</td><td>—</td></tr>
+        <tr><td>계정 확인</td><td>—</td><td>●</td><td>●</td><td>●</td></tr>
+        <tr><td>수량 선택</td><td>●</td><td>●</td><td>—</td><td>—</td></tr>
+        <tr><td>세금 표기 (GVI만 세전)</td><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+        <tr><td>웹샵 보너스</td><td>●</td><td>●</td><td>—</td><td>—</td></tr>
+        <tr><td>환불 불가 고지</td><td>채널 종속</td><td>채널 종속</td><td>채널 종속</td><td>—</td></tr>
+        <tr><td><b>구독 약관 · 해지 안내</b></td><td>—</td><td>—</td><td>—</td><td><b>●</b></td></tr>
+        <tr><td><b>결제 주기 · 다음 결제일</b></td><td>—</td><td>—</td><td>—</td><td><b>●</b></td></tr>
+        <tr><td>1회 한정 배지</td><td>조건부</td><td>—</td><td>조건부</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="c5">
+  <h3>게임 연동 4대 API</h3>
+  <p>규격은 <b>2계층</b>이다 — <b>규격 정의는 본사</b>(경로 · 필드명 · 서명 헤더 · 멱등 · 재시도),
+  <b>운영은 지사</b>(게임사 컨택 · 키 발급 · URL 등록 · 검증). 지사는 규격을 바꿀 수 없다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>방향</th><th>API</th><th>역할</th><th>규격 상태</th></tr></thead>
+      <tbody>
+        <tr><td><b>상점 → 포털</b></td><td><span class="mono">POST /v1/portal/checkout/sessions</span></td><td>결제 세션 발급 · 금액 봉인 · 채널 확정</td><td class="bad-cell"><b>미정의</b></td></tr>
+        <tr><td><b>포털 → 게임</b></td><td><span class="mono">POST /v1/portal/character/verify</span></td><td>캐릭터 실존 검증 · 계정 매핑</td><td>정의됨 — 경로 표준화 필요</td></tr>
+        <tr><td><b>포털 → 게임</b></td><td><span class="mono">POST /v1/portal/items/deliver</span></td><td>지급 · 멱등 보장</td><td>정의됨 — 필드명 · 서명헤더 확정 필요</td></tr>
+        <tr><td><b>포털 → 게임</b></td><td><span class="mono">POST /v1/portal/items/revoke</span></td><td>환불 시 재화 회수</td><td class="bad-cell"><b>미정의</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">「2대 API」로 알려져 있었으나 실제로는 4개다. 세션 발급은 방향이 반대(상점 → 포털)라 누락되어 있었고, 회수는 환불 워크플로우에만 등장했다.</p>
+
+  <h4>① 결제 세션 발급 — <span class="mono">POST /v1/portal/checkout/sessions</span></h4>
+  <p>게임 · 웹샵이 결제창을 여는 유일한 경로. <b>링크가 아니라 API 1콜</b>이다.</p>
+
+<pre><span class="f">// Request</span>   <span class="f">Authorization: Bearer &lt;상점 API 키&gt;</span>
+{
+  <span class="a">"server_id"</span>: "TW_BAPHOMET",
+  <span class="a">"character_guid"</span>: "CHA_9928174",   <span class="f">// 캐릭터 상품일 때</span>
+  <span class="a">"sku_id"</span>: "ROO_DIAMOND_1000",
+  <span class="a">"quantity"</span>: 1,
+  <span class="a">"entry_point"</span>: "INGAME",           <span class="f">// INGAME · WEBSHOP · PORTAL</span>
+  <span class="a">"locale"</span>: "zh-TW",
+  <span class="a">"return_url"</span>: "https://shop.../done"
+}
+<span class="f">// amount 를 보내지 않는다 — 허브가 SKU 마스터에서 계산한다</span>
+
+<span class="f">// Response — 200 OK</span>
+{
+  <span class="a">"session_id"</span>: "cs_9f21…",
+  <span class="a">"checkout_url"</span>: <b>"https://pay.gravity.com/c/cs_9f21…"</b>,
+  <span class="a">"entity_id"</span>: <b>"GVC"</b>,          <span class="f">// server_id 로 역추적된 값</span>
+  <span class="a">"currency"</span>: "TWD",
+  <span class="a">"amount"</span>: 270,
+  <span class="a">"tax_amount"</span>: 13,
+  <span class="a">"bonus_quantity"</span>: 100,
+  <span class="a">"expires_at"</span>: "2026-09-07T11:15:00Z"
+}</pre>
+
+  <div class="note q">
+    <span class="lb">왜 링크로는 안 되는가</span>
+    <p><b>① 금액 위변조</b> — URL에 금액이 있으면 조작된다.
+    <b>② 동결 대상 부재</b> — 금액 · 통화 · 환율 · <span class="mono">entity_id</span>를 15분 봉인할 상태가 링크에는 없다.
+    <b>③ 채널이 동적</b> — 8단계 필터 결과는 링크 생성 시점에 알 수 없다.</p>
+  </div>
+
+  <h4>② 캐릭터 검증 — <span class="mono">POST /v1/portal/character/verify</span></h4>
+  <p>결제 전 캐릭터 실존과 계정 매핑을 확인한다. <b>D2C 비로그인 결제의 유일한 신원 확인 수단</b>이라 응답 지연이 곧 이탈이다.</p>
+
+<pre><span class="f">// Request</span>
+{ <span class="a">"game_id"</span>: "ROO", <span class="a">"server_id"</span>: "TW_BAPHOMET",
+  <span class="a">"character_name"</span>: "艾莉絲_法師" }
+
+<span class="f">// Response — 200 OK · 500ms 미만</span>
+{ <span class="a">"status"</span>: "SUCCESS", <span class="a">"character_guid"</span>: <b>"CHA_9928174"</b>,
+  <span class="a">"account_id"</span>: "ACC_881923", <span class="a">"level"</span>: 88,
+  <span class="a">"job_class"</span>: "High Wizard" }</pre>
+
+  <h4>③ 지급 — <span class="mono">POST /v1/portal/items/deliver</span></h4>
+  <p>결제 완료 시 허브가 호출. <span class="mono">X-Gravity-HMAC-SHA256</span> 서명을 포함하고,
+  동일 <span class="mono">order_id</span>는 <b>몇 번 도착해도 1회만 지급</b>되어야 한다.</p>
+
+<pre><span class="f">// Request</span>
+{
+  <span class="a">"order_id"</span>: <b>"ORD-20260907-88219"</b>,   <span class="f">// 멱등 키</span>
+  <span class="a">"entity_id"</span>: <b>"GVC"</b>,
+  <span class="a">"target"</span>: { <span class="a">"type"</span>: "CHARACTER",  <span class="f">// CHARACTER · GAME_ACCOUNT · PORTAL_ACCOUNT</span>
+               <span class="a">"id"</span>: "CHA_9928174" },
+  <span class="a">"sku_id"</span>: "ROO_DIAMOND_1000",
+  <span class="a">"item_code"</span>: "ITEM_DIAMOND",
+  <span class="a">"quantity"</span>: <b>1000</b>,                <span class="f">// 기본 수량 — 보너스 제외</span>
+  <span class="a">"bonus_quantity"</span>: <b>100</b>,            <span class="f">// 웹샵 보너스 — 별도 필드</span>
+  <span class="a">"paid_amount"</span>: 270,
+  <span class="a">"currency"</span>: "TWD",
+  <span class="a">"timestamp"</span>: 1788745200
+}
+
+<span class="f">// Response — 200 OK</span>
+{ <span class="a">"result"</span>: "DELIVERED", <span class="a">"in_game_mail_id"</span>: "MAIL_771928",
+  <span class="a">"delivered_at"</span>: "2026-09-07T11:00:00Z" }</pre>
+
+  <p class="cap"><span class="mono">target</span> 을 타입 + 식별자 구조로 둔 것은 유형에 따라 지급 대상이 캐릭터 · 게임 계정 · 포털 계정으로 갈리기 때문이다. 설계서 v1.0은 <span class="mono">character_guid</span> 단일 필드였다.</p>
+
+  <div class="note bad">
+    <span class="lb">확정 필요 — <span class="mono">quantity</span> 의 보너스 포함 여부</span>
+    <p>설계서 v1.0 예시는 <span class="mono">"quantity": 1200</span> 으로 <b>보너스 포함</b>처럼 읽히는데,
+    Step 4 규격은 <b><span class="mono">bonus_quantity</span> 별도 필드</b>라고 한다.
+    게임 서버가 <span class="mono">quantity</span> 만 보고 지급하면 <b>보너스가 누락되거나 이중 지급</b>된다.
+    위 예시는 <b>분리 방식으로 가정</b>했으나 확정된 규격이 아니다.</p>
+  </div>
+
+  <h4>④ 회수 — <span class="mono">POST /v1/portal/items/revoke</span></h4>
+  <p>환불 승인 시 재화를 회수한다. <b>요청 · 응답 규격이 정의되어 있지 않다.</b>
+  부분 회수 · 잔여 부족 · 계정 동결의 반환 형태가 <b>환불 승인 여부를 좌우</b>하므로 확정이 시급하다.</p>
+
+  <div class="note">
+    <span class="lb">게임팀 구현 요건 4가지</span>
+    <p><b>HTTPS · TLS 1.3</b> 의무 · <b>HMAC 서명 검증</b> 필수 · <b>멱등키 저장</b> 필수 ·
+    <span class="mono">/verify</span> 응답 <b>500ms 미만</b>. 어드민 Step 3에서 실제 HTTP 핑과
+    <b>규격 준수 판정</b>(경로 · 필드명 · 서명 헤더)을 통과해야 등록이 완료된다.</p>
+  </div>
+
+  <p class="grp2">지사가 게임사와 주고받는 것</p>
+  <div class="cols">
+    <div class="card b">
+      <h5>전달 — Outbound</h5>
+      <ul>
+        <li>연동 규격서 — <b>본사 발행 · 버전 고정</b></li>
+        <li>HMAC Secret Key — 발급 직후 1회만 평문</li>
+        <li>샌드박스 환경 · 테스트 계정 · 테스트 캐릭터</li>
+        <li><b>웹훅 발신 IP 대역</b> — 게임사 방화벽 등록용</li>
+        <li>재시도 정책 · 멱등 규칙</li>
+        <li>지급 실패 시 CS 에스컬레이션 창구</li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h5>수령 — Inbound</h5>
+      <ul>
+        <li>4대 API URL — <b>환경별 2세트</b>(sandbox · live)</li>
+        <li>서버 목록 — <span class="mono">server_id</span> ↔ 표시명 ↔ 귀속 법인</li>
+        <li><b><span class="mono">item_code</span> 목록 및 <span class="mono">sku_id</span> 매핑</b></li>
+        <li>게임 서버 인바운드 IP allowlist 등록 여부</li>
+        <li>응답 SLA · <b>정기 점검 창(시간대)</b></li>
+        <li><span class="mono">/revoke</span> 지원 범위 — 부분 회수 가능 여부</li>
+        <li><span class="mono">character_guid</span> 포맷 · 기술 담당자 · 에스컬레이션 채널</li>
+      </ul>
+    </div>
+  </div>
+  <p class="cap">정기 점검 시간대를 받아두지 않으면 점검 중 배송 실패를 장애로 오판한다.</p>
+</section>
+
+<section id="c6">
+  <h3>라우팅과 한도</h3>
+  <p>PG는 전부 동일 인터페이스로 추상화. 신규 PG 추가 시 코어 · 프론트 수정 없이 어댑터만 등록한다.</p>
+
+<pre><span class="f">// 결제 플랫폼 공통 PG 어댑터 표준 인터페이스</span>
+export interface <b>IPaymentAdapter</b> {
+  readonly providerId: string;      <span class="f">// "STRIPE" · "TOSS" · "MYCARD" · "SOFTBANK"</span>
+
+  createPaymentSession(ctx, req): Promise&lt;PaymentSessionRes&gt;;   <span class="f">// 1. 세션 생성</span>
+  verifyAndParseWebhook(ctx, headers, body): Promise&lt;WebhookEvent&gt;; <span class="f">// 2. 웹훅 서명 검증</span>
+  capturePayment(ctx, paymentId, amount): Promise&lt;CaptureRes&gt;;  <span class="f">// 3. 승인 · 캡처</span>
+  refundPayment(ctx, req): Promise&lt;RefundRes&gt;;                  <span class="f">// 4. 환불 — 지원 시</span>
+  fetchSettlementReport(ctx, date): Promise&lt;SettlementItem[]&gt;;  <span class="f">// 5. 대사용 리포트</span>
+  <b>registerProduct?(ctx, sku): Promise&lt;RegisterRes&gt;;</b>            <span class="f">// 6. 상품 사전등록 — 요구 PG만</span>
+}</pre>
+
+  <p class="cap">6번은 신규 제안이다. 상품 사전등록을 요구하는 PG(MyCard · GASH · 통신사 소액)에서 지사의 이중 등록 작업을 자동화한다 — Part 5 「SKU × PG 동기화」 참조.</p>
+
+  <p class="grp2">라우팅 정책</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>규칙</th><th>동작</th><th>소유</th></tr></thead>
+      <tbody>
+        <tr><td><b>채널 사용 여부</b></td><td>법인 활성화 → 게임별 활성화. <b>아래로 갈수록 좁아지기만</b> 한다</td><td>지사</td></tr>
+        <tr><td><b>우선순위</b></td><td>통과 채널의 노출 순서. 1순위가 기본 선택</td><td>지사</td></tr>
+        <tr><td><b>Failover</b></td><td>연속 3회 타임아웃 시 차순위로 즉시 우회</td><td>시스템</td></tr>
+        <tr><td><b>긴급 차단</b></td><td>채널 토글 OFF 시 <b>1초 내</b> 제거 · 복구는 수동 재개만</td><td>본사 · 지사 개방 여부 미결</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="grp2">한도 4계층 상속</p>
+  <p>같은 채널이라도 게임마다 최소 · 최대가 달라야 할 수 있다 —
+  게임별 유저 연령대 · 객단가 · 상품 가격대가 다르기 때문.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>계층</th><th>범위</th><th>소유</th><th>성격</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b> PG 물리 제약</td><td>MID × 채널 × 통화</td><td>본사</td><td class="bad-cell"><b>못 넘음</b></td></tr>
+        <tr><td><b>2</b> 법정 한도</td><td>법인 × 연령 × 수단</td><td>지사</td><td class="bad-cell"><b>못 넘음</b></td></tr>
+        <tr><td><b>3</b> 법인 기본</td><td>법인 × 채널</td><td>지사</td><td>기본값</td></tr>
+        <tr><td><b>4</b> <b>게임별 재정의</b></td><td>법인 × <b>게임</b> × 채널</td><td>지사</td><td>필요한 게임만 덮어씀</td></tr>
+        <tr><td><b>+</b> 진입 경로</td><td>D2C 비로그인</td><td>지사</td><td>별도 축</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">실효 한도 = min(전부) · 재정의는 좁게만</span>
+    <p>게임별 설정이 법정 한도나 PG 제약을 <b>넘어서 넓힐 수 없다</b>.
+    막지 않으면 지사 운영자 실수 하나로 법령 위반이 발생한다.
+    채널 사용 여부도 같은 상속이며 <b>법인에서 끈 채널을 게임에서 켤 수 없다</b>.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">Failover는 환불 가능성을 바꾼다</span>
+    <p>1순위 채널이 죽어 우회했을 때 <b>두 채널의 Capability가 다를 수 있다</b>.
+    GVC는 1~3순위가 모두 온라인 환불 불가이고, GGA는 3순위(편의점 현금)만 불가라
+    <b>자동 환불 가능 상품이 환불 불가로 바뀐다</b>.
+    Failover 후보는 <b>동일 Capability 등급 안에서만</b> 선정하고,
+    불가피할 때는 사전 고지 팝업을 <b>다시 띄워 동의를 새로 받는다</b>.
+    동의 거부 시 처리(결제 중단 · 1순위 복구 대기)는 미확정.</p>
+  </div>
+
+  <div class="note q">
+    <span class="lb">상품 등록 검증이 게임 스코프로 바뀐다</span>
+    <p>지금은 SKU 등록 시 「법인 통화별 PG 최소 결제 한도 충족」만 본다.
+    게임별 채널 한도가 생기면 <b>「이 게임에서 이 가격의 상품을 살 수 있는 채널이 하나라도 있는가」</b>를 검증해야 한다.
+    없으면 그 상품은 등록돼도 아무도 못 산다. Hive 는 이 검증이 없어
+    범위 이탈 상품이 <b>유저의 결제 시도 시점에 에러</b>로 드러난다.</p>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 5</span>
+  <h2>상품과 가격</h2>
+  <p>무엇을 파는가와 어디서 얼마에 파는가를 분리한다 · 가격 관리 부담 · PG 콘솔 이중 등록.</p>
+</div>
+
+<section id="h1">
+  <h3>상품 2계층</h3>
+  <p>「상품 관리는 지사」를 그대로 적용하면 문제가 생긴다 —
+  <b>하나의 게임을 여러 지사가 서비스</b>하기 때문이다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>게임</th><th>서비스 법인</th><th>서버</th></tr></thead>
+      <tbody>
+        <tr><td><b>라그나로크 오리진</b></td><td>GV · GVI · GVC</td><td>KR_HERA · NA_CHAOS · TW_BAPHOMET · TW_PORING</td></tr>
+        <tr><td><b>라그나로크 온라인</b></td><td>GV · GGA · GGT</td><td>KR_BAPHOMET · JP_RADGAMES · TH_SARAH</td></tr>
+        <tr><td><b>라그나로크X</b></td><td>GVC · GGT</td><td>TW_ROX_01 · SEA_ROX_01</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">같은 「다이아몬드 1,000개」를 3개 지사가 각자 SKU로 만들면 <b>전 세계 판매량을 집계할 수 없다</b> — Part 8의 통합 모니터링이 의미를 잃는다.</p>
+
+  <p class="grp2">소유를 두 계층으로 나눈다</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>계층</th><th>무엇</th><th>소유</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td><b>상품 정의</b><br>무엇을 파는가</td><td><span class="mono">sku_id</span> · 과금 유형 · 구성 · <span class="mono">item_code</span> 매핑 · 기본 지급 수량</td><td><b>게임 주관 지사</b></td><td><span class="mono">ROO_DIAMOND_1000</span></td></tr>
+        <tr><td><b>판매 설정</b><br>어디서 얼마에 파는가</td><td>판매 여부 · 통화별 가격 · 웹샵 보너스 · 계정 한도 · 노출 기간</td><td><b>각 지사</b></td><td>GVC NT$ 270 · GVI $8.99 · GGT 미판매</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">이 분리가 얻는 것</span>
+    <p>지사 자율성은 그대로다 — 가격 · 프로모션 · 판매 여부를 전부 지사가 결정한다.
+    동시에 <span class="mono">sku_id</span>가 하나로 유지되어 <b>통합 집계가 성립</b>한다.
+    다른 지사가 그 게임을 새로 런칭하면 SKU를 새로 만드는 게 아니라 <b>자기 통화 열만 채운다</b>.</p>
+  </div>
+
+  <p class="grp2">게임 마스터도 같은 2계층</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>계층</th><th>무엇</th><th>소유</th></tr></thead>
+      <tbody>
+        <tr><td><b>게임 정의</b></td><td>게임 코드 · 연동 규격 버전 · SKU 정의</td><td>게임 주관 지사</td></tr>
+        <tr><td><b>서버 등록</b></td><td><span class="mono">server_id</span> · 4대 API URL · HMAC 키 · 헬스체크</td><td>각 지사</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">Part 8 Step 3의 그리드가 이미 <b>행 단위를 게임 × 서버</b>로 두고 있어 스코프를 서버에 걸면 그대로 맞는다.</p>
+
+  <div class="note bad">
+    <span class="lb">확정 필요 — 게임 주관 지사 지정 규칙</span>
+    <p>게임마다 1개 법인이 SKU 정의를 소유해야 하는데 그 지정 규칙이 없다.
+    라그나로크X는 GVC · 라그나로크 온라인은 GV 같은 식으로 게임별로 정하면 되지만,
+    <b>주관 지사가 서비스를 종료하는 경우</b>의 이관 절차도 함께 정의해야 한다.</p>
+  </div>
+</section>
+
+<section id="h2">
+  <h3>Price Tier</h3>
+  <p>현재 구조는 SKU 12종 × 5통화 = <b>60셀을 지사가 직접 관리</b>한다. 법인이 9개로 늘면 108셀이다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>SKU</th><th>유형</th><th>GV<br><span class="mono">KRW</span></th><th>GVC<br><span class="mono">TWD</span></th><th>GVI<br><span class="mono">USD 세전</span></th><th>GGA<br><span class="mono">JPY</span></th><th>GGT<br><span class="mono">THB</span></th></tr></thead>
+      <tbody>
+        <tr><td><b>다이아몬드 1,000</b></td><td>아이템</td><td>11,000</td><td>270</td><td>8.99</td><td>1,200</td><td>320</td></tr>
+        <tr><td><b>다이아몬드 5,000</b></td><td>아이템</td><td>55,000</td><td>1,350</td><td>44.99</td><td>6,000</td><td>1,590</td></tr>
+        <tr><td><b>스타터 패키지</b></td><td>아이템 묶음</td><td>33,000</td><td>810</td><td>24.99</td><td>3,500</td><td>890</td></tr>
+        <tr><td><b>10,000 KP</b></td><td>포인트</td><td>10,000</td><td>250</td><td>7.99</td><td>1,000</td><td>260</td></tr>
+        <tr><td><b>클래식 30일 이용권</b></td><td>정액제</td><td>9,900</td><td>240</td><td>7.99</td><td>980</td><td>250</td></tr>
+        <tr><td><b>VIP 멤버십</b></td><td>구독</td><td>8,900</td><td class="bad-cell">미판매</td><td>6.99</td><td>900</td><td class="bad-cell">미판매</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">VIP 멤버십의 GVC · GGT 열이 비어 있는 것은 가격 미정이 아니라 <b>빌링키 지원 채널이 없어 판매 불가</b>하기 때문이다. 빈칸과 「미판매」를 구분해야 한다.</p>
+
+  <p class="grp2">Tier 방식 — Hive 차용</p>
+  <p>본사가 Tier별 통화 금액표를 정의하고, 지사는 상품에 <b>Tier만 붙인다</b>.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Tier</th><th>KRW</th><th>TWD</th><th>USD</th><th>JPY</th><th>THB</th><th>정의</th></tr></thead>
+      <tbody>
+        <tr><td><b>T1</b></td><td>1,100</td><td>30</td><td>0.99</td><td>120</td><td>35</td><td>본사</td></tr>
+        <tr><td><b>T5</b></td><td>11,000</td><td>270</td><td>8.99</td><td>1,200</td><td>320</td><td>본사</td></tr>
+        <tr><td><b>T9</b></td><td>55,000</td><td>1,350</td><td>44.99</td><td>6,000</td><td>1,590</td><td>본사</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">Tier 가 한 번에 해결하는 것 3개</span>
+    <p><b>① 관리 부담</b> — 108셀 → 상품별 Tier 지정 1회.
+    <b>② PG 최소 · 최대 검증</b> — Tier 단위로 한 번만 검증하면 그 Tier를 쓰는 모든 상품에 적용된다.
+    <b>③ 가격 일관성</b> — 같은 Tier 상품의 가격이 지사별로 어긋나는 일이 없다.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">확정 필요 3건</span>
+    <p><b>① 채택 여부</b> — Tier 방식인지 통화별 개별 입력 유지인지.
+    <b>② Tier 개수와 간격</b> — 현지 심리적 가격대를 몇 단계로 커버할지.
+    <b>③ 환율 변동 시 갱신</b> — Tier 금액표를 언제 · 누가 갱신하며, 진행 중 세션의 동결가는 어떻게 되는지.
+    Hive 도 Tier를 쓰지만 갱신 주기 · 환율 대응은 공개 문서에서 확인되지 않았다.</p>
+  </div>
+
+  <div class="note">
+    <span class="lb">Tier를 쓰더라도 예외는 남는다</span>
+    <p><b>GVI는 세전가</b>라 결제창 총액이 Tier 금액과 다르다.
+    또 현지 프로모션 가격(한정 할인)은 Tier를 벗어날 수 있으므로 <b>Tier 지정 + 개별 오버라이드</b>를 함께 허용해야 한다.</p>
+  </div>
+</section>
+
+<section id="h3">
+  <h3>SKU × PG 동기화</h3>
+  <p>「각 PG 콘솔에 동일 상품ID로 등록」은 세 가지가 겹친 실무 리스크다.</p>
+
+  <ul class="rule">
+    <li><b>PG마다 요구 여부가 다르다.</b> 카드 PG(토스 · Stripe · PayPal)는 상품 등록 개념이 없고 금액만 보낸다. 게임 특화 PG(MyCard · GASH · 통신사 소액)는 상품 코드 <b>사전 등록이 필수</b>다. 「모든 PG 콘솔에 등록」은 전제가 틀렸다.</li>
+    <li><b>「동일 상품ID」는 코드 규칙의 교집합을 요구한다.</b> PG마다 길이 · 문자셋 제약이 다르므로 하나라도 안 맞으면 그 PG만 다른 ID를 써야 하고, 그 순간 「동일 ID」 전제가 깨진다.</li>
+    <li><b>이중 등록이 곧 장애 원인이다.</b> 포털에 만들고 PG 콘솔에 또 만드는데 누락되거나 가격이 어긋나면 결제 실패다. <b>동기화 상태를 포털이 추적하지 않으면</b> 지사 운영자가 엑셀로 관리하게 된다.</li>
+  </ul>
+
+  <p class="grp2">6단계 해결책</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>#</th><th>내용</th><th>주체</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td>PG 마스터에 2개 필드 등재 — <b>상품 사전등록 요구 여부</b> · <b>상품코드 규칙</b>(길이 · 문자셋)</td><td>본사</td></tr>
+        <tr><td><b>2</b></td><td>SKU 코드 체계를 <b>전 지원 PG의 교집합</b>으로 제한 · 등록 시 검증 · 위반 시 저장 거부</td><td>본사</td></tr>
+        <tr><td><b>3</b></td><td>SKU × 머천트 <b>동기화 상태</b> 관리</td><td>시스템</td></tr>
+        <tr><td><b>4</b></td><td>미등록 상태면 <b>결제창에서 해당 채널 자동 제외</b> — Part 4 필터 7번</td><td>시스템</td></tr>
+        <tr><td><b>5</b></td><td><b>「PG 등록 필요 목록」 워크리스트</b> + PG 콘솔 업로드용 CSV 내보내기</td><td>지사</td></tr>
+        <tr><td><b>6</b></td><td>가능한 PG는 어댑터 <span class="mono">registerProduct()</span> 로 <b>API 자동 등록</b> — 이중 작업 제거</td><td>본사</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="grp2">동기화 상태 4종</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>상태</th><th>의미</th><th>결제창 노출</th><th>조치</th></tr></thead>
+      <tbody>
+        <tr><td>등록 불필요</td><td>사전등록을 요구하지 않는 PG</td><td><span class="verdict yes">노출</span></td><td>없음</td></tr>
+        <tr><td><span class="verdict yes">등록됨</span></td><td>PG 콘솔에 등록 완료 · 가격 일치</td><td><span class="verdict yes">노출</span></td><td>없음</td></tr>
+        <tr><td class="bad-cell"><b>미등록</b></td><td>사전등록 요구 PG인데 등록 안 됨</td><td class="bad-cell"><b>자동 제외</b></td><td>워크리스트 표시</td></tr>
+        <tr><td class="bad-cell"><b>불일치</b></td><td>등록됐으나 <b>가격이 다름</b></td><td class="bad-cell"><b>자동 제외</b></td><td>워크리스트 표시 · 우선 처리</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">「불일치」를 미등록과 분리한 이유 — 등록은 됐는데 가격이 어긋난 건이 <b>가장 늦게 발견되고 정산 차액으로 이어진다</b>. 결제는 성공하는데 금액이 달라 대사에서 잡힌다.</p>
+
+  <div class="note q">
+    <span class="lb">이 접근이 과하지 않다는 근거</span>
+    <p>Hive 도 <span class="mono">marketPid ↔ gamePid</span> 2계층 매핑으로 이중 등록을 <b>제거하지 않고 관리</b>한다.
+    STOVE 는 상품 마스터를 플랫폼이 단독 보유해 문제를 없애지만 게임사 자율성을 포기한다.
+    Steam · Epic 은 플랫폼이 MoR이라 외부 PG 등록 자체가 없다.
+    <b>동기화 상태 관리는 우리 조건에서 유일하게 성립하는 해법</b>이며,
+    여기에 「미등록 채널 자동 제외」를 더해 장애를 사전 차단한다 —
+    <a href="../benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a> 참조.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">확정 필요 — SKU 코드 체계</span>
+    <p>교집합 규칙을 먼저 정해야 상품을 하나도 등록할 수 없다.
+    <b>게임사에 규격서를 배포하기 전에 확정</b>되어야 하며, 배포 후 바꾸면 전 게임 재연동이다.
+    현재 프로토타입 코드(<span class="mono">RO_DIAMOND_1000</span>)는 게임 구분이 없어
+    Part 5의 상품 2계층과도 맞지 않는다 — <span class="mono">ROO_DIAMOND_1000</span> 형태로의 전환이 필요하다.</p>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 6</span>
+  <h2>정산</h2>
+  <p>대금이 지사로 직접 들어가는 구조 · 법인별 세무 분리 · 매일 새벽 돌아가는 대사 엔진.</p>
+</div>
+
+<section id="d1">
+  <h3>직정산 구조</h3>
+  <p>결제 허브는 <b>돈을 만지지 않는다</b>. 데이터의 중계와 모니터링만 하고, 자금은 PG에서 지사 계좌로 간다.
+  이 원칙이 깨지는 순간 본사에 해외 매출이 계상되고 이전가격 이슈가 따라 붙는다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>주체</th><th>쥐는 것</th><th>쥐지 않는 것</th></tr></thead>
+      <tbody>
+        <tr><td><b>본사 HQ</b></td><td>PG 계약 · MID 발급 · Secret Key · 라우팅 정책 · 통합 모니터링</td><td><b>대금 · 매출 계상 · 세무 신고</b></td></tr>
+        <tr><td><b>지사 법인</b></td><td>정산 계좌 · 매출 인식 · 법정 인보이스 · 현지 세무 신고 · ERP</td><td>PG 협상 · 인증키 · 라우팅 룰</td></tr>
+        <tr><td><b>결제 허브</b></td><td>세션 · 라우팅 · 세액 계산 · 배송 웹훅 · 원장 기록 · 대사</td><td>자금 보관 · 자금 이동</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">정산 주기가 법인마다 다르다는 점</span>
+    <p>T+1(PayPal) · T+2(토스 · Stripe) · T+3(2C2P) · T+7(MyCard · GASH) · 월 2회(SoftBank).
+    <b>같은 날 결제된 건이 서로 다른 날 입금</b>되므로 대사는 결제일이 아니라 <b>PG 정산일 기준</b>으로 돌아야 하고,
+    지사 자금 계획도 MID별 주기를 반영해야 한다. T+7 비중이 높은 대만이 가장 민감.</p>
+  </div>
+</section>
+
+<section id="d2">
+  <h3>세무 분리</h3>
+  <p>Tax Engine이 법인 코드로 세율 · 계산 시점 · 증빙 규격을 분기한다. 결제창은 결과만 표시.</p>
+
+  <ul class="rule">
+    <li><b>세금 포함가 법인은 상품 등록 시 세액이 확정된다.</b> KR · TW · JP · TH. 표시가에서 역산해 순매출과 예수금을 분리.</li>
+    <li><b>세전가 법인은 결제창 진입 시 확정된다.</b> US. 유저 거주 주가 정해져야 총액이 나오므로 상품 카드 가격과 결제 총액이 다르다.</li>
+    <li><b>법정 증빙은 결제 성공 직후 자동 교부된다.</b> 대만 e-GUI · 태국 e-Tax · 한국 현금영수증은 API 연동. 교부 실패는 결제 실패로 처리하지 않고 <b>재발행 큐</b>로 분리.</li>
+    <li><b>청약철회 규정이 국가마다 다르다.</b> 한국 전자상거래법 7일 미사용 환불 · EU 14일 쿨링오프(디지털 콘텐츠 포기 동의 UI 필요). 환불 정책은 법인별 파라미터.</li>
+    <li><b>개인정보 보관 요건이 정산 데이터에도 걸린다.</b> EU GDPR 삭제권 · 한국 개인정보보호법 보관기간 분리. 전표의 유저 식별자는 <b>익명화 시점</b>을 별도 정의해야 한다.</li>
+  </ul>
+</section>
+
+<section id="d3">
+  <h3>원장과 T+1 대사</h3>
+  <p>결제 1건이 곧 분개 1건. 지사별 복식부기 원장에 기록되고, 다음 날 PG 정산 리포트와 대조된다.</p>
+
+  <h4>분개 예시 — GVC · MyCard · 1,000 TWD</h4>
+
+<pre><span class="f">[차변 Debit]</span>
+  PG 미수금 <span class="f">(MyCard Clearing Account)</span>        <b>945</b> TWD
+  지급 수수료 <span class="f">(MDR 5.5%)</span>                      <b>55</b> TWD
+                                              <span class="f">─────────</span>
+                                                  1,000 TWD
+
+<span class="f">[대변 Credit]</span>
+  게임 매출 <span class="f">(Gravity TW Game Revenue)</span>          <b>952</b> TWD
+  부가가치세 예수금 <span class="f">(TW e-GUI VAT 5%)</span>          <b>48</b> TWD
+                                              <span class="f">─────────</span>
+                                                  1,000 TWD</pre>
+
+  <p class="cap">MDR은 머천트 마스터의 5.5% 적용. 설계서 v1.0 본문 예시는 3.0% 기준이라 수치가 다름 — Part 8 「문서 간 불일치」 참조.</p>
+
+  <p class="grp2">T+1 자동 대사 절차</p>
+  <div class="flow">
+    <div class="row"><span class="k">01</span><div class="b">
+      <span class="t">PG 정산 리포트 수집</span>
+      <span class="d">매일 새벽 각 PG의 Settlement Report를 CSV · API로 자동 수집. 어댑터의 <span class="mono">fetchSettlementReport</span></span></div></div>
+    <div class="row"><span class="k">02</span><div class="b">
+      <span class="t">1:1 대조</span>
+      <span class="d">내부 승인 원장 vs PG 리포트. <b>트랜잭션 ID · 승인 금액 vs 정산 금액 · MDR</b> 3개 축 검증</span></div></div>
+    <div class="row key"><span class="k">03</span><div class="b">
+      <span class="t">불일치 분류</span>
+      <span class="d"><b>Matched</b> · <b>Fee Discrepancy</b>(수수료 차액) · <b>Missing</b>(누락). 1원 · 1센트 단위까지 적발</span></div></div>
+    <div class="row"><span class="k">04</span><div class="b">
+      <span class="t">전표 생성 · ERP 전송</span>
+      <span class="d">일치 건만 <span class="mono">entity_id</span>별 회계 전표로 변환 → 지사 ERP(SAP · NetSuite)로 자동 전송</span></div></div>
+    <div class="row"><span class="k">05</span><div class="b">
+      <span class="t">원장 잠금</span>
+      <span class="d">대사 완료 구간은 불변 잠금. 이후 수정은 역분개로만 가능 — 감사 로그 보존</span></div></div>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">대사가 잡아내지 못하는 구멍</span>
+    <p>대사는 <b>PG가 보고한 것과 우리가 아는 것</b>을 비교한다.
+    양쪽에 모두 없는 거래 — 결제창은 열렸으나 세션이 만료되어 원장에 남지 않고 PG에도 승인이 없는 건 —
+    은 대사 대상이 아니다. <b>세션 발급 로그와 승인 원장의 대조</b>가 별도로 필요하며 현재 설계에 없다.</p>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 7</span>
+  <h2>환불</h2>
+  <p>환불 가능 여부를 결정하는 것은 정책이 아니라 <b>PG의 물리적 제약</b>. 정책은 그 위에 얹힌다.</p>
+</div>
+
+<section id="e1">
+  <h3>Capability 제약</h3>
+  <p>대만 MyCard 선불카드 · 편의점 현금 수납 · 일본 Konbini는 <b>온라인 API 취소가 원천 불가능</b>하다.
+  기술적 제약이므로 운영 정책으로 우회할 수 없고, 결제창 단계에서 처리되어야 한다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Capability</th><th>가능</th><th>불가</th><th>결제창 처리</th></tr></thead>
+      <tbody>
+        <tr><td><b>온라인 전액 취소</b></td><td>토스 · Stripe · PayPal · SoftBank · 2C2P</td><td class="bad-cell">MyCard · GASH · 편의점 현금</td><td>불가 수단은 사전 고지 팝업 동의 강제</td></tr>
+        <tr><td><b>부분 환불</b></td><td>토스 · Stripe · PayPal · SoftBank</td><td class="bad-cell">MyCard · GASH · 편의점 · 2C2P 일부</td><td>부분 환불 대상 상품에서 해당 채널 제외</td></tr>
+        <tr><td><b>정기결제 빌링키</b></td><td>토스 · Stripe · PayPal · SoftBank</td><td class="bad-cell">MyCard · GASH · 편의점 · 2C2P</td><td>구독 상품 선택 시 해당 채널 미노출</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">필터링은 상품 속성과 채널 Capability의 교집합</span>
+    <p>어드민에서 상품을 <b>「100% 자동 환불 보장」</b>으로 설정하면 환불 불가 채널이 결제창에서 <b>자동 제외</b>된다.
+    보장 상품이 아니면 노출은 하되 <b>「본 수단은 자동 환불이 불가하며 고객센터를 통한 계좌 환불이 필요합니다」</b> 고지 팝업을 강제한다.
+    즉 <b>결제 채널 목록은 유저마다 · 상품마다 다르게 렌더링</b>된다.</p>
+  </div>
+</section>
+
+<section id="e2">
+  <h3>환불 분기</h3>
+  <p>환불 요청은 두 번 갈린다. 첫 번째는 <b>운영 모드</b>(자동 · CS 검토), 두 번째는 <b>PG Capability</b>(API · 수기).</p>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>자동 환불 — 조건 충족 시</h5>
+      <ul>
+        <li><b>조건</b> 미수령 · 미사용 · 7일 이내</li>
+        <li><b>1</b> 게임 서버 실시간 검증 — 재화 소모 여부</li>
+        <li><b>2</b> PG 환불 API 자동 호출</li>
+        <li><b>3</b> 게임 재화 회수 웹훅 · 원장 역분개</li>
+        <li><b>소요</b> 유저 대기 없음</li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h5>CS 수동 — 운영자 승인 경유</h5>
+      <ul>
+        <li><b>조건</b> 자동 조건 미충족 · CS 검토 모드 설정</li>
+        <li><b>API 지원</b> 백오피스 원클릭 환불</li>
+        <li><b>API 미지원</b> 유저 계좌 수기 송금 워크플로우</li>
+        <li><b>접수</b> 통장 사본 · 신분증 모달</li>
+        <li><b>승인</b> 지사 재무팀 2차 검수 후 송금</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">재화가 이미 소모된 경우</span>
+    <p>가챠 소진 후 환불 요청이 가장 흔한 분쟁 유형. 현재 설계는
+    <b>계정 임시 동결 또는 잔여분 부분 환불</b>로만 규정되어 있고 판단 기준이 없다.
+    소모율 몇 % 이상이면 거부인지 · 부분 환불 시 회수 대상 재화의 우선순위가 무엇인지가
+    <span class="mono">/revoke</span> 규격과 함께 확정되어야 한다.</p>
+  </div>
+</section>
+
+<section id="e3">
+  <h3>모델별 환불 규칙</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>과금 모델</th><th>환불 가능 구간</th><th>계산</th><th>회수 대상</th></tr></thead>
+      <tbody>
+        <tr><td><b>인게임 재화</b></td><td>우편 수령 전 — 즉시 취소</td><td>전액</td><td>우편함 미수령 아이템</td></tr>
+        <tr><td>　</td><td>수령 후 — 회수 검증 필요</td><td>소모분 차감</td><td>인벤토리 잔여 아이템</td></tr>
+        <tr><td><b>시간제 · 정액제</b></td><td>접속 이력 0분 · 7일 이내</td><td><b>전액</b></td><td><span class="mono">valid_until</span> 원복</td></tr>
+        <tr><td>　</td><td>접속 이력 있음</td><td><b>일할 계산</b></td><td>잔여 기간</td></tr>
+        <tr><td><b>포털 캐시</b></td><td>미사용</td><td><b>100%</b></td><td>원장 잔액</td></tr>
+        <tr><td>　</td><td>부분 사용</td><td>잔여 금액</td><td>원장 잔액 — 사용분 제외</td></tr>
+        <tr><td><b>정기결제</b></td><td>다음 주기 전 해지</td><td>당월 미환불 · <b>혜택 유지</b></td><td>없음 — 빌링키 해지</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">공통 전제 — 위 구간을 충족해도 결제 채널이 온라인 환불 불가면 전부 수기 송금 워크플로우로 이관된다. <b>Capability가 정책보다 상위</b>.</p>
+</section>
+
+<div class="part">
+  <span class="n">Part 8</span>
+  <h2>운영</h2>
+  <p>어드민 8단계 · 오픈 후 실제로 터지는 10가지 · 현재 문서들이 서로 어긋나 있는 지점.</p>
+</div>
+
+<section id="f1">
+  <h3>8단계 어드민</h3>
+  <p>신규 지사 설립부터 일일 마감까지의 실무 순서를 그대로 메뉴 구조로 옮긴 것.
+  Step 1~5는 <b>기반 구축</b> · Step 6~8은 <b>일상 운영</b>이며, 앞 단계가 비면 뒤 단계가 동작하지 않는다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Step</th><th>단계</th><th>핵심 산출물</th><th>선행 의존</th><th>담당</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td>지사 법인 · 세무 등록</td><td>법인 코드 · 통화 · 사업자번호 · 인보이스 규격 · 정산 계좌</td><td>—</td><td>지사</td></tr>
+        <tr><td><b>2</b></td><td>PG 계약 · 머천트 관리</td><td>머천트 · Secret Key(Vault) · 채널별 수수료율 · 실시간 토글</td><td>Step 1</td><td><b>본사</b></td></tr>
+        <tr><td><b>3</b></td><td>게임 · Webhook 연동</td><td>게임 코드 · <span class="mono">/verify</span> · <span class="mono">/deliver</span> URL · HMAC 키 · Ping Test</td><td>Step 1</td><td>지사</td></tr>
+        <tr><td><b>4</b></td><td>상품 SKU · 가격 세팅</td><td>SKU 마스터 · 통화별 가격 매트릭스 · 웹샵 보너스</td><td>Step 1 · 3</td><td>지사</td></tr>
+        <tr><td><b>5</b></td><td>스마트 라우팅 · 한도</td><td>국가별 우선순위 · Failover 규칙 · 연령 · 수단별 한도</td><td>Step 2</td><td>지사</td></tr>
+        <tr><td><b>6</b></td><td>실시간 결제 모니터링</td><td>통합 전표 그리드 · 배송 추적 · 복식부기 원장 모달</td><td>Step 1~5</td><td>양쪽</td></tr>
+        <tr><td><b>7</b></td><td>환불 · CS 분쟁 처리</td><td>지능형 분기 · 원클릭 API 취소 · 수기 송금 워크플로우</td><td>Step 6</td><td>지사</td></tr>
+        <tr><td><b>8</b></td><td>T+1 정산 대사 · ERP</td><td>자동 대사 엔진 · 차액 적발 · ERP 전송 CSV</td><td>Step 6</td><td>지사 · 본사</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">신규 지사 온보딩 소요는 Step 1~5의 직렬 처리 시간에 PG 가맹 심사 기간이 더해진다 — MID 발급이 임계경로.</p>
+</section>
+
+<section id="f2">
+  <h3>엣지케이스 10</h3>
+  <p>서비스 오픈 후 실제로 발생하는 예외. 각각의 방어 아키텍처가 어느 계층에 있는지가 중요하다.</p>
+
+  <ul class="rule">
+    <li><b>비동기 · 지연 입금 중 상품 만료</b> — 편의점 · 가상계좌는 입금까지 시차가 있어 그 사이 이벤트가 끝나거나 캐릭터가 삭제될 수 있다. 주문서에 <b>TTL 24시간</b> 부여 · 입금 시점에 상품이 만료됐으면 <b>해당 지사 게임 포인트로 자동 대체 충전</b>.</li>
+    <li><b>결제 성공 후 인게임 지급 실패</b> — 게임 서버 점검 · 네트워크 타임아웃으로 발생하는 Ghost Tx. <b>Saga 보상 트랜잭션</b>으로 재시도 큐(1 · 5 · 15 · 60분) 가동 · 실패 누적 시 CS 수동 지급 큐로 이관. 상태는 <span class="mono">PAID_PENDING_DELIVERY</span>로 격리.</li>
+    <li><b>VPN 환율 차익 우회 결제</b> — 저환율 국가 웹샵으로 우회해 헐값 대량 결제. <b>3중 검증</b> — 접속 IP 국가 · 계정 국가 · 카드 발행국. 불일치 시 차단 또는 <b>글로벌 기준가(USD) 강제 적용</b>.</li>
+    <li><b>가챠 소진 후 차지백</b> — 결제 후 뽑기를 소진하고 카드사에 도난 신고. 차지백 웹훅 수신 즉시 <b>계정 자동 정지</b> · 약관 동의 이력과 IP 로그를 증빙으로 자동 제출.</li>
+    <li><b>미성년자 결제 · 법정 한도 우회</b> — D2C 비로그인 고액 결제 시도. <b>1회 · 월 한도 제한</b> · 일정 금액 초과 시 포털 본인 · 연령 인증(KYC) 강제.</li>
+    <li><b>정기 구독 카드 갱신 실패</b> — 카드 만료 · 한도 초과로 승인 거절. <b>유예기간 3일</b> 부여 후 혜택 유지 · 매일 1회 재결제 시도 · 카드 갱신 알림 발송.</li>
+    <li><b>D2C 타인 캐릭터 오입력</b> — 비로그인 UID 오타로 엉뚱한 캐릭터에 충전. 결제 직전 <span class="mono">/verify</span> 호출 결과로 <b>캐릭터 외형 · 레벨 · 직업 확인 팝업</b> 강제.</li>
+    <li><b>환율 급변동 · 주문서 불일치</b> — 주문서 생성과 결제 완료 사이 환율 급변. 주문서 생성 시 <b>환율 15분 스냅샷 동결</b> · 만료 시 <span class="mono">SESSION_EXPIRED</span> 후 새 환율로 세션 재생성.</li>
+    <li><b>동일 계정 동시 다중 결제</b> — 1회 한정 패키지를 멀티 브라우저에서 동시 시도. 결제 시작 시 <b>Redis 분산 락</b> 획득 · 게임 서버 주문 멱등 검증.</li>
+    <li><b>PG 웹훅 순서 역전</b> — 환불 웹훅이 승인 웹훅보다 먼저 도착. <b>상태 머신</b>으로 <span class="mono">SUCCESS</span>를 거치지 않은 <span class="mono">REFUND</span> 전이를 거부.</li>
+  </ul>
+
+  <div class="note">
+    <span class="lb">방어 계층 분포</span>
+    <p>10건 중 결제창(프론트) 방어는 3건(3 · 7 · 8), 결제 허브(백엔드) 방어는 5건(1 · 2 · 9 · 10 · 6),
+    운영 · CS 방어는 2건(4 · 5). <b>절반이 백엔드 상태 관리</b>에 몰려 있으므로
+    상태 머신과 멱등 처리의 구현 품질이 전체 안정성을 좌우한다.</p>
+  </div>
+</section>
+
+<section id="f3">
+  <h3>문서 간 불일치</h3>
+  <p>현재 결제 자료는 <b>마스터 아키텍처 v1.0 · 기획 위키 · 프로토타입 마스터 데이터</b> 3종이며 서로 어긋나는 지점이 있다.
+  법인 코드는 <b>공식 Global Network의 실제 법인 코드를 기준</b>으로 대조했고,
+  나머지는 구현 착수 전 정본 확정이 필요한 항목만 정리.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>항목</th><th>설계서 · 위키</th><th>프로토타입</th><th>영향</th></tr></thead>
+      <tbody>
+        <tr><td><b>법인 코드 체계</b></td><td>HQ · GTT · GTH · GTA · GVI<br><span class="mono">— 실제 법인 코드 아님</span></td><td>KR_HQ · TW_COMM · US_INTER · JP_ARISE · TH_TECH<br><span class="mono">— 실제 법인 코드 아님</span></td><td class="bad-cell"><b>큼</b> — 파티션 키 · 회원·인증과의 조인 키. <b>정본은 GV · GVI · GVC · GGA · GGT · GGL · GGH · GGV · GGU</b></td></tr>
+        <tr><td><b><span class="mono">GVI</span> 배정</b></td><td class="bad-cell">인도네시아로 배정</td><td>US_INTER — 북미</td><td class="bad-cell"><b>큼</b> — <span class="mono">GVI</span>는 <b>Gravity Interactive · 북미</b>. 인도네시아는 <span class="mono">GGL</span></td></tr>
+        <tr><td><b>대상 법인 수</b></td><td>5 — 일본 누락</td><td>5 — 인도네시아 누락</td><td class="bad-cell"><b>큼</b> — 실제 해외 법인은 <b>9개</b>. 결제 미적용 4개(GGL · GGH · GGV · GGU)가 양쪽 모두에 부재</td></tr>
+        <tr><td><b>홍콩 관할</b></td><td>미언급</td><td>대만 법인이 홍콩 · 마카오 관할</td><td><b>중</b> — 홍콩에 <span class="mono">GGV</span> 별도 법인 존재. 매출 귀속 재무 확인 필요</td></tr>
+        <tr><td><b>배송 페이로드 필드</b></td><td><span class="mono">"entity_id": "GTT"</span></td><td><span class="mono">"entity_code": "TW_COMM"</span></td><td><b>중</b> — 게임팀 연동 규격</td></tr>
+        <tr><td><b>API 경로</b></td><td><span class="mono">/api/v1/character/verify</span></td><td><span class="mono">/v1/portal/character/verify</span></td><td><b>중</b> — 게임팀 연동 규격</td></tr>
+        <tr><td><b>서명 헤더</b></td><td><span class="mono">X-Gravity-HMAC-SHA256</span></td><td><span class="mono">X-Portal-Signature: sha256=</span></td><td><b>중</b> — 검증 로직</td></tr>
+        <tr><td><b>MyCard MDR</b></td><td>분개 예시 3.0%</td><td>MID 마스터 5.5%</td><td><b>중</b> — 대사 엔진 기준값</td></tr>
+        <tr><td><b>엣지케이스 수록</b></td><td>마스터 10건 · 위키 3건</td><td>—</td><td><b>소</b> — 위키 보강 필요</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">표준 규격인데 게임별 경로가 제각각</span>
+    <p>프로토타입 게임 마스터의 실제 등록값을 보면
+    <span class="mono">/v1/portal/character/verify</span> · <span class="mono">/v1/character/verify</span> ·
+    <span class="mono">/api/v1/verify</span> · <span class="mono">/v1/verify</span> 네 가지가 혼재한다.
+    <b>「단 2개의 표준 REST API」라는 전제가 성립하려면 경로 · 필드명 · 서명 헤더가 하나로 고정</b>되어야 하고,
+    그렇지 않으면 게임마다 별도 어댑터가 필요해져 설계 목적 자체가 무너진다.</p>
+  </div>
+</section>
+
+<footer class="doc">
+  <h4>관련 문서</h4>
+  <ul>
+    <li>PG 다중법인 구조 벤치마킹 — <span class="mono">wiki/benchmark/pg-multi-entity.html</span></li>
+    <li>랜드 회원·인증 설계 — <span class="mono">wiki/planning/land-auth.html</span></li>
+    <li>글로벌 게임 포털 &amp; 통합 결제(PG) 플랫폼 상세 설계 및 운영 가이드 v1.0 — <span class="mono">2026-09 · 대외비</span></li>
+    <li>통합 프로토타입 마스터 데이터 — <span class="mono">js/mock_data.js</span> · 어드민 8단계 <span class="mono">js/app.js</span></li>
+  </ul>
+
+  <h4>확인 필요 사항 — 19건</h4>
+  <p>구현 착수 전 확정이 필요한 항목. <b>★★★ 4건은 게임사에 규격서를 배포하기 전에</b> 정해져야 한다 — 배포 후 바꾸면 전 게임 재연동이다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>#</th><th>항목</th><th>주체</th><th>시급</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td><b>SKU 코드 체계</b> — 전 지원 PG 코드 규칙의 교집합. 게임 단위 접두(<span class="mono">ROO_</span>) 전환 포함</td><td>본사</td><td>★★★</td></tr>
+        <tr><td><b>2</b></td><td><b><span class="mono">quantity</span> 의 보너스 포함 여부</b> — 설계서는 포함, Step 4 규격은 별도 필드. 지급 누락 · 이중 지급 직결</td><td>본사</td><td>★★★</td></tr>
+        <tr><td><b>3</b></td><td><b><span class="mono">sku_id</span> ↔ <span class="mono">item_code</span> 매핑 소유자</b> — 포털이 내려주는지 게임이 해석하는지. 현재 둘 다 전송 중이라 우선순위 규칙 없음</td><td>본사</td><td>★★★</td></tr>
+        <tr><td><b>4</b></td><td><b><span class="mono">/revoke</span> 규격</b> — 부분 회수 · 잔여 부족 · 계정 동결의 요청 · 응답 형태</td><td>본사</td><td>★★★</td></tr>
+        <tr><td><b>5</b></td><td><b>Price Tier 채택 여부</b> — Tier 방식 vs 통화별 개별 입력. Tier 개수 · 환율 변동 시 갱신 규칙 포함</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>6</b></td><td><b>법인 코드 정본 채택</b> — 실제 법인 코드 9종을 <span class="mono">entity_id</span> 로 확정하고 설계서 · 프로토타입 임시 코드 폐기</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>7</b></td><td><b>게임 주관 지사 지정 규칙</b> — 게임별 SKU 정의 소유 법인 · 서비스 종료 시 이관 절차</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>8</b></td><td><b>신규 PG 등재 프로세스</b> — 대사 불가 PG(<span class="mono">fetchSettlementReport</span> 미지원)를 등재할지</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>9</b></td><td><b>웹샵 도메인 규칙</b> — <span class="mono">{game}-{region}</span> 게임×지사별 vs 지사별 통합 웹샵에 게임 탭</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>10</b></td><td><b>결제창 · 웹샵 지사 커스터마이징 범위</b> — 로고 · 언어 · 약관 · CS 링크 중 어디까지</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>11</b></td><td><b>게임 포인트 비로그인 지급 허용 여부</b> — <span class="mono">account_id</span> 역추적 지급과 「선물」 동의 처리</td><td>지사 정책</td><td>★★</td></tr>
+        <tr><td><b>12</b></td><td><b>채널 긴급차단 권한 지사 개방 여부</b> — 키는 못 봐도 자기 법인 채널 ON/OFF는 열어줄지</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>13</b></td><td><b>PayerMax · EBANX 판매자 명의 확인</b> — 「통합 자금」 · 「마켓플레이스 분할」이 자금 분할형(A-2)이면 <b>직정산 원칙 위반</b>. 공개 문서로 미확인 · PG 직접 확인 필요</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>14</b></td><td><b>Xsolla PSP 채택 여부</b> — GGV 홍콩 즉시 대상 · GGH 싱가포르 확장 예정. 백엔드가 Adyen이라 <b>Adyen 직접 계약과 중복</b> — 어느 쪽이 단순한지</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>15</b></td><td><b>A-1 채택 시 지사별 KYB 부담</b> — 명의 분리에 KYB 필수. 법인 9개 × PG 수만큼 온보딩이 발생</td><td>본사</td><td>★★</td></tr>
+        <tr><td><b>16</b></td><td><b>Failover 등급 하락 시 동의 거부 처리</b> — 결제 중단인지 1순위 복구 대기인지</td><td>본사</td><td>★</td></tr>
+        <tr><td><b>17</b></td><td><b>지사용 정산 리포트 API</b> — 지사 ERP 직접 연동 제공 vs CSV 내보내기 유지</td><td>본사</td><td>★</td></tr>
+        <tr><td><b>18</b></td><td><b>머천트 활성화 게이트</b> — 본사 키 세팅 즉시 라이브인지 지사 확인 후인지</td><td>본사</td><td>★</td></tr>
+        <tr><td><b>19</b></td><td><b>홍콩 매출 귀속</b> — <span class="mono">GVC</span>(대만) 관할인지 <span class="mono">GGV</span>(홍콩 법인) 매출인지</td><td>재무</td><td>★</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>2차 범위로 미룬 항목</h4>
+  <ul>
+    <li><b>포털 캐시</b> — 지사 간 전환 시 선수금 · 매출 귀속과 법인 간 정산 규칙 미정. 충전 · 사용 원장 분리와 일본 자금결제법 유료 · 무료 캐시 분리가 선행</li>
+    <li><b>복합 패키지</b> — 지급 대상이 캐릭터와 계정으로 갈려 웹훅이 쪼개짐. 구성요소 단위 멱등키 설계 필요</li>
+    <li><b>미착수 4개 법인</b> — GGL 인도네시아 · GGU 말레이시아 · GGH 싱가포르 · GGV 홍콩</li>
+    <li><b>EU 리전</b> — VAT OSS 대응 · 법인 미설립 시 MoR 사용 여부와 매출 귀속 법인 결정</li>
+    <li><b>대사 사각지대</b> — 세션 발급 로그와 승인 원장의 대조. 양쪽에 모두 없는 이탈 건 추적</li>
+  </ul>
+
+  <p style="margin-top:18px">라그나로크 포털 · 글로벌 결제 설계 · 2026-09-07</p>
+</footer>
+</main>
+</div>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.lnb a'));
+  var map = {};
+  links.forEach(function (a) {
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) map[el.id] = a;
+  });
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove('on'); });
+      var a = map[e.target.id];
+      if (a) a.classList.add('on');
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  Object.keys(map).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
+</script>
+
+
+<style>
+  #docnav { position: fixed; left: 14px; bottom: 14px; z-index: 2147483000;
+    font-family: "Pretendard", "Malgun Gothic", -apple-system, sans-serif; }
+  #docnav * { box-sizing: border-box; }
+  #docnav-b { display: inline-flex; align-items: center; gap: 7px; height: 32px;
+    padding: 0 13px; border: 1px solid #C9D1D9; border-radius: 16px; background: #fff;
+    color: #3B4654; font-size: 12px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(23,27,34,.14); }
+  #docnav-b:hover { border-color: #2F6490; color: #2F6490; }
+  #docnav-b i { font-style: normal; font-size: 9px; }
+  #docnav-m { display: none; position: absolute; left: 0; bottom: 38px; min-width: 236px;
+    padding: 6px; border: 1px solid #D5DBE2; border-radius: 8px; background: #fff;
+    box-shadow: 0 8px 26px rgba(23,27,34,.16); }
+  #docnav.on #docnav-m { display: block; }
+  #docnav-m .g { padding: 7px 10px 4px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .04em; color: #97A0AC; }
+  #docnav-m a { display: block; padding: 8px 10px; border-radius: 5px; font-size: 12.5px;
+    color: #2C333D; text-decoration: none; white-space: nowrap; }
+  #docnav-m a:hover { background: #F1F4F7; }
+  #docnav-m a.on { color: #2F6490; font-weight: 700; background: #EDF3F8; }
+  @media print { #docnav { display: none; } }
+</style>
+<div id="docnav">
+  <div id="docnav-m">
+    <div class="g">화면정의서</div>
+    <a href="../../wireframe/portal-main-auth-screens.html">라그나로크 포털 화면정의서</a>
+    <a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a>
+    <a href="../../wireframe/payment-checkout-currency.html">통합 결제창 화면정의서</a>
+    <a href="../../wireframe/payment-admin-screens.html">결제 관리자 화면정의서</a>
+    <div class="g">설계</div>
+    <a href="portal-main-structure.html">포털 메인 구조</a>
+    <a href="land-auth.html">랜드 회원·인증 설계</a>
+    <a href="payment.html">결제 설계 — 프로세스 · 구조</a>
+    <a href="payment-webshop-structure.html">통합결제 / 웹샵 구조</a>
+    <a href="global-payment.html" class="on">글로벌 결제 설계 (상세)</a>
+    <div class="g">벤치마킹</div>
+    <a href="../benchmark/ip-portal.html">IP 포털 벤치마킹</a>
+    <a href="../benchmark/nc-auth.html">NC 회원·인증 통합 벤치마킹</a>
+    <a href="../benchmark/pg-multi-entity.html">PG 다중법인 구조 벤치마킹</a>
+    <a href="../benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a>
+    <a href="../benchmark/webshop-payment.html">웹샵 결제 벤치마킹</a>
+    <div class="g">전체</div>
+    <a href="../../index.html">문서 목록</a>
+  </div>
+  <span id="docnav-b">문서 <i>&#9650;</i></span>
+</div>
+<script>
+(function () {
+  var n = document.getElementById('docnav'), b = document.getElementById('docnav-b');
+  b.addEventListener('click', function (e) { e.stopPropagation(); n.classList.toggle('on'); });
+  document.addEventListener('click', function () { n.classList.remove('on'); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') n.classList.remove('on');
+  });
+})();
+</script>
+</body>
+</html>

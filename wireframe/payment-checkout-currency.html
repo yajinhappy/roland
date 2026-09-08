@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>통합 결제창 화면정의서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: #E9EBEF; color: #171B22;
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow: hidden; }
+  .app { height: 100%; display: flex; flex-direction: column; }
+
+  /* 상단 — 문서 크롬 한 줄. 화면 이동과 보기 토글만 둔다 */
+  .nav { flex: none; display: flex; align-items: stretch; height: 56px; padding: 0 26px;
+    background: #fff; border-bottom: 1px solid #D9DEE5; overflow-x: auto;
+    scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .brand { display: flex; align-items: center; gap: 10px; margin-right: 22px;
+    padding-right: 22px; border-right: 1px solid #E4E8ED; align-self: center; height: 26px;
+    flex: none; }
+  .brand b { color: #171B22; font-size: 13.5px; font-weight: 600; letter-spacing: -.015em;
+    white-space: nowrap; }
+  .brand span { color: #8A929E; font-size: 11.5px; letter-spacing: .01em; white-space: nowrap; }
+  .nvg { display: flex; align-items: center; flex: none; padding: 0 12px 0 4px;
+    font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .12em;
+    color: #A0A8B4; }
+  .nv { display: flex; flex-direction: column; justify-content: center; gap: 1px; border: 0;
+    border-bottom: 2px solid transparent; background: transparent; color: #6C7480;
+    padding: 0 12px; cursor: pointer; font-family: inherit; flex: none; text-align: left; }
+  .nv b { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .07em;
+    font-weight: 500; color: #A0A8B4; }
+  .nv span { font-size: 12.5px; letter-spacing: -.01em; white-space: nowrap; }
+  .nv:hover { color: #171B22; }
+  .nv:hover b { color: #6C7480; }
+  .nv.on { color: #171B22; border-bottom-color: #2F6490; font-weight: 500; }
+  .nv.on b { color: #2F6490; }
+  .nv:focus-visible { outline: 2px solid #2F6490; outline-offset: -3px; }
+
+  .stage { flex-grow: 1; min-height: 0; position: relative; background: #E9EBEF; }
+  .screen { display: none; height: 100%; }
+  .screen.on { display: block; }
+
+  .screen .wstage > div { flex: none; background: #fff; border-radius: 4px;
+    box-shadow: 0 0 0 1px rgba(23, 27, 34, .07),
+                0 2px 4px rgba(23, 27, 34, .06),
+                0 22px 50px -20px rgba(23, 27, 34, .30); }
+  .screen .pane-mo .wstage > div { border-radius: 14px; }
+
+  .pane { flex-grow: 1; min-height: 0; display: none; }
+  .pane.on { display: flex; }
+  .pane > .wstage { width: 100%; }
+
+  /* ---- 스크롤바 — 없애지 않되 얇게, 자리는 항상 잡아 둔다 ---- */
+  .screen .wstage, .screen .dcol {
+    scrollbar-width: thin; scrollbar-color: #C3CBD4 transparent;
+    scrollbar-gutter: stable; }
+  .screen .wstage::-webkit-scrollbar,
+  .screen .dcol::-webkit-scrollbar { width: 10px; height: 10px; }
+  .screen .wstage::-webkit-scrollbar-track,
+  .screen .dcol::-webkit-scrollbar-track { background: transparent; }
+  .screen .wstage::-webkit-scrollbar-thumb,
+  .screen .dcol::-webkit-scrollbar-thumb { background: #C3CBD4; border-radius: 5px;
+    border: 3px solid transparent; background-clip: content-box; }
+  .screen .wstage::-webkit-scrollbar-thumb:hover,
+  .screen .dcol::-webkit-scrollbar-thumb:hover { background: #96A3B0;
+    background-clip: content-box; }
+
+  /* ---- 디스크립션 — 덮지 않고 밀어내는 방식 ---- */
+  body.desc-off .screen .dcol { display: none !important; }
+
+  .screen .wstage .mk, .screen .wstage .mk-s { cursor: pointer;
+    transition: box-shadow .12s, background .12s; }
+  .screen .wstage .mk:hover, .screen .wstage .mk-s:hover { background: #2A5273 !important; }
+  .screen .wstage .mk.act, .screen .wstage .mk-s.act { background: #2A5273 !important;
+    box-shadow: 0 0 0 4px rgba(61, 110, 150, .22); }
+  .screen .dr.hit, .screen .dr-alt.hit { background: #EDF4F9 !important;
+    box-shadow: inset 3px 0 0 #3D6E96; }
+
+  .ctl { margin-left: auto; display: flex; align-items: center; gap: 12px; flex: none;
+    padding-left: 16px; }
+
+  .tabctl { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+  .pcw { display: none; align-items: center; gap: 9px; }
+  .wcol.is-pc .pcw { display: flex; }
+  .pcw-lbl { color: #7A828E; font-size: 11px; letter-spacing: .01em; }
+  .pcw-seg { display: flex; border: 1px solid #C9D0D9; border-radius: 4px;
+    overflow: hidden; background: #fff; }
+  .wbtn { border: 0; border-left: 1px solid #C9D0D9; background: #fff; color: #6C7480;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; padding: 0 13px; height: 30px;
+    cursor: pointer; }
+  .wbtn:first-child { border-left: 0; }
+  .wbtn:hover { background: #EEF1F4; color: #171B22; }
+  .wbtn.on { background: #2F6490; color: #fff; }
+  .wbtn:focus-visible { outline: 2px solid #171B22; outline-offset: -2px; }
+  .zoom { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: #7A828E;
+    letter-spacing: .04em; min-width: 108px; text-align: right; }
+
+  .desc-btn { display: flex; align-items: center; gap: 8px; border: 1px solid #C9D0D9;
+    background: #fff; color: #434A57; font-family: inherit; font-size: 12px;
+    padding: 0 15px; height: 32px; border-radius: 4px; cursor: pointer; align-self: center;
+    white-space: nowrap; }
+  .desc-btn:hover { background: #EEF1F4; color: #171B22; }
+  .desc-btn:focus-visible { outline: 2px solid #2F6490; outline-offset: 1px; }
+  .desc-btn i { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    color: #99A2AE; }
+  .desc-btn .lbl-off { display: none; }
+  .desc-btn .lbl-on { display: inline; }
+  body.desc-off .desc-btn { background: #2F6490; border-color: #2F6490; color: #fff; }
+  body.desc-off .desc-btn i { color: #B9D3E6; }
+  body.desc-off .desc-btn .lbl-off { display: inline; }
+  body.desc-off .desc-btn .lbl-on { display: none; }
+
+  /* ══════════════ 화면 내부 ══════════════ */
+  a { color: #2F6490; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; word-break: normal; }
+  .shd { display: none; }
+  .wrap2 { flex-grow: 1; min-height: 0; padding: 0; display: flex; gap: 0; align-items: stretch; }
+
+  /* ---- 디스크립션 컬럼 ---- */
+  .dcol { order: 1; width: 430px; flex: none; min-height: 0; overflow-y: auto;
+    display: flex; flex-direction: column; background: #fff;
+    border-left: 1px solid #D9DEE5; padding: 0 0 44px; }
+  .dcol h4 { position: sticky; top: 0; z-index: 3; margin: 0; height: 56px;
+    display: flex; align-items: center; padding: 0 24px;
+    font-size: 11.5px; font-weight: 600; color: #545C69;
+    background: #fff; border-bottom: 1px solid #E4E8ED; }
+  .dr, .dr-alt { display: flex; flex-direction: column; gap: 11px;
+    padding: 18px 24px 22px; border-bottom: 1px solid #EAEDF1; background: #fff; }
+  .dr-alt { background: #F3F8FC; }
+  .dr-h { display: flex; align-items: center; gap: 10px; }
+  .dr-t { font-size: 14px; font-weight: 600; color: #171B22; letter-spacing: -.012em; }
+  .dr-b { margin: 0; font-size: 12.5px; line-height: 1.78; color: #434A57;
+    word-break: keep-all; }
+  .dr-b b { color: #171B22; font-weight: 600; }
+  .src { font-size: 10.5px; color: #5E6875; background: #EEF1F4;
+    border: 1px solid #DFE4EA; border-radius: 3px; padding: 2px 8px;
+    margin-left: auto; white-space: nowrap; }
+  .spec { border: 1px solid #E1E6EC; border-radius: 4px; overflow: hidden; background: #fff; }
+  .spec-r { display: flex; gap: 10px; padding: 8px 11px; border-bottom: 1px solid #EFF2F5; }
+  .spec-r:last-child { border-bottom: 0; }
+  .spec-k { flex: none; width: 96px; font-size: 11px; color: #171B22; font-weight: 500;
+    line-height: 1.6; }
+  .spec-v { font-size: 11px; color: #676E7B; line-height: 1.62; word-break: keep-all; }
+  .spec-v b { color: #2F6490; font-weight: 600; }
+  .imm { border: 1px solid #C6DCEC; border-radius: 4px; overflow: hidden; background: #FAFDFF; }
+  .imm-h { font-size: 10px; letter-spacing: .06em; font-weight: 600; color: #2F6490;
+    background: #E9F3FA; padding: 6px 11px; border-bottom: 1px solid #D5E6F2; }
+  .imm-r { display: flex; gap: 10px; padding: 7px 11px; border-bottom: 1px solid #EDF4F9; }
+  .imm-r:last-child { border-bottom: 0; }
+  .imm-k { flex: none; width: 72px; font-size: 10.5px; color: #4A7FA5; line-height: 1.6; }
+  .imm-v { font-size: 11px; color: #434A57; line-height: 1.6; word-break: keep-all; }
+  .warn { border: 1px solid #E0BEBE; border-radius: 4px; overflow: hidden; background: #FDF7F7; }
+  .warn-h { font-size: 10px; letter-spacing: .06em; font-weight: 600; color: #8C3A3A;
+    background: #F9EEEE; padding: 6px 11px; border-bottom: 1px solid #EBD3D3; }
+  .warn-b { font-size: 11px; color: #434A57; line-height: 1.7; padding: 8px 11px;
+    margin: 0; word-break: keep-all; }
+
+  /* ---- 캔버스 ---- */
+  .wcol { order: 0; flex-grow: 1; min-width: 0; min-height: 0; background: #E9EBEF;
+    display: flex; flex-direction: column; }
+  .tabs { flex: none; display: flex; align-items: center; height: 56px; padding: 0 26px; }
+  .tab { border: 1px solid #C9D0D9; border-right: 0; background: #fff; color: #6C7480;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .06em;
+    width: 74px; height: 30px; cursor: pointer; border-radius: 0; padding: 0; }
+  .tab-on { border: 1px solid #2F6490; border-right: 0; background: #2F6490; color: #fff;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: .06em;
+    width: 74px; height: 30px; cursor: pointer; border-radius: 0; padding: 0; }
+  .tabs > button:first-of-type { border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
+  .tabs > button:last-of-type { border-right: 1px solid #C9D0D9;
+    border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+  .tabs > button.tab-on:last-of-type { border-right-color: #2F6490; }
+  .tab:focus-visible, .tab-on:focus-visible { outline: 2px solid #171B22; outline-offset: 2px; }
+  .wstage { flex-grow: 1; min-height: 0; overflow: auto; padding: 2px 26px 44px;
+    display: flex; justify-content: center; align-items: flex-start; }
+
+  /* ---- 공통 요소 ---- */
+  .bx { border: 1px solid #D5DBE2; background: #FFF; border-radius: 3px; }
+  .img { border: 1px dashed #A5B2BF; background: #F0F4F7; border-radius: 3px;
+    display: flex; align-items: center; justify-content: center; text-align: center; }
+  .sp { font-size: 10px; color: #78859A; line-height: 1.6; letter-spacing: 0; }
+  .key { border: 1px dashed #8FB2CE; background: #F4F9FC; }
+  .lbl-k { font-size: 10.5px; letter-spacing: .04em; font-weight: 600; color: #2F6490; }
+  .t { font-size: 13px; color: #2C333D; line-height: 1.5; }
+  .tm { font-size: 12px; color: #6C7480; line-height: 1.55; }
+  .ts { font-size: 11px; color: #868E9A; }
+  .tx { font-size: 10px; color: #98A2AE; }
+  .h { font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #171B22; }
+  .h-s { font-size: 15px; font-weight: 600; letter-spacing: -.015em; color: #171B22; }
+  .ttl { font-size: 30px; font-weight: 600; letter-spacing: -.03em; color: #1D242D; line-height: 1.2; }
+  .ttl-s { font-size: 22px; font-weight: 600; letter-spacing: -.025em; color: #1D242D; line-height: 1.25; }
+  .num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+
+  .btn, .btn-p, .btn-m, .btn-mo, .btn-s, .btn-ps { white-space: nowrap; }
+  .btn { border: 1px solid #AEB7C2; background: #fff; color: #434A57; font-size: 12.5px;
+    padding: 10px 18px; text-align: center; border-radius: 4px; }
+  .btn-p { border: 1px solid #2C333D; background: #2C333D; color: #fff; font-size: 12.5px;
+    padding: 10px 18px; text-align: center; border-radius: 4px; }
+  .btn-m { border: 1px solid #2C333D; background: #2C333D; color: #fff; font-size: 13px;
+    padding: 13px 16px; text-align: center; border-radius: 4px; }
+  .btn-mo { border: 1px solid #AEB7C2; background: #fff; color: #434A57; font-size: 13px;
+    padding: 13px 16px; text-align: center; border-radius: 4px; }
+  .btn-s { border: 1px solid #C4CCD5; background: #fff; color: #545C69; font-size: 11px;
+    padding: 5px 11px; text-align: center; border-radius: 3px; }
+  .btn-ps { border: 1px solid #2F6490; background: #2F6490; color: #fff; font-size: 11px;
+    padding: 5px 11px; text-align: center; border-radius: 3px; }
+
+  .chip { border: 1px solid #D5DBE2; background: #F3F5F7; font-size: 10.5px; padding: 4px 10px;
+    border-radius: 20px; color: #6C7480; white-space: nowrap; }
+  .chip-on { border: 1px solid #2F6490; background: #2F6490; font-size: 10.5px; padding: 4px 10px;
+    border-radius: 20px; color: #fff; white-space: nowrap; }
+  .tag { border: 1px solid #AECAE0; background: #EBF3F9; color: #2F6490; font-size: 10px;
+    padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .tag-g { border: 1px solid #B4D6C2; background: #EDF7F1; color: #2E6B45; font-size: 10px;
+    padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .tag-r { border: 1px solid #E0BEBE; background: #F9EEEE; color: #8C3A3A; font-size: 10px;
+    padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .tag-a { border: 1px solid #E2D5B9; background: #F8F2E6; color: #8A6420; font-size: 10px;
+    padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .tag-n { border: 1px solid #D5DBE2; background: #F3F5F7; color: #6C7480; font-size: 10px;
+    padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+
+  .mk { width: 20px; height: 20px; border-radius: 50%; background: #2F6490; color: #fff;
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center; flex: none;
+    box-shadow: 0 0 0 2px #fff; z-index: 36; }
+  .mk-s { width: 18px; height: 18px; border-radius: 50%; background: #2F6490; color: #fff;
+    font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center; flex: none;
+    box-shadow: 0 0 0 2px #fff; z-index: 36; }
+  .sec { position: relative; }
+  .ico { flex: none; color: #6C7480; }
+  .gnb { font-size: 13.5px; font-weight: 500; letter-spacing: -.005em; color: #232B35;
+    white-space: nowrap; }
+  .shd .id, .shd .nm { display: none; }
+
+  /* ---- 어드민 셸 ---- */
+  .ahd { height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 24px;
+    border-bottom: 1px solid #E4E8ED; background: #fff; }
+  .alogo { font-size: 13px; font-weight: 600; letter-spacing: -.015em; color: #171B22; }
+  .ent { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px;
+    border: 1px solid #C9D0D9; border-radius: 4px; background: #fff; font-size: 12px;
+    color: #2C333D; white-space: nowrap; }
+  .ent .mono { font-size: 11px; color: #2F6490; font-weight: 500; }
+  .abody { display: flex; align-items: stretch; min-height: 0; }
+  .snb { width: 232px; flex: none; border-right: 1px solid #E4E8ED; background: #FAFBFC;
+    padding: 16px 0 28px; }
+  .snb-g { padding: 12px 20px 6px; font-family: "IBM Plex Mono", monospace; font-size: 9.5px;
+    letter-spacing: .11em; color: #98A2AE; }
+  .snb-i { display: flex; align-items: center; gap: 10px; padding: 9px 20px; font-size: 12.5px;
+    color: #545C69; border-left: 2px solid transparent; }
+  .snb-i .mono { font-size: 10px; color: #A0A8B4; flex: none; width: 30px; }
+  .snb-i.on { background: #EBF3F9; color: #2F6490; font-weight: 600;
+    border-left-color: #2F6490; }
+  .snb-i.on .mono { color: #2F6490; }
+  .amain { flex-grow: 1; min-width: 0; padding: 24px 28px 36px; background: #F7F8FA; }
+  .atitle { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 4px; }
+  .abar { display: flex; align-items: center; gap: 8px; margin: 18px 0 14px; }
+  .fltr { display: flex; align-items: center; gap: 7px; height: 32px; padding: 0 11px;
+    border: 1px solid #C9D0D9; border-radius: 4px; background: #fff; font-size: 11.5px;
+    color: #545C69; white-space: nowrap; }
+  .card { background: #fff; border: 1px solid #E1E6EC; border-radius: 4px; }
+  .card-h { display: flex; align-items: center; gap: 10px; padding: 13px 16px;
+    border-bottom: 1px solid #EDF0F4; }
+
+  /* ---- 데이터 그리드 ---- */
+  .tbl { width: 100%; border-collapse: collapse; }
+  .tbl th { text-align: left; font-size: 10.5px; font-weight: 600; letter-spacing: .05em;
+    color: #7A828E; background: #F5F7F9; padding: 9px 12px; border-bottom: 1px solid #E1E6EC;
+    white-space: nowrap; }
+  .tbl td { padding: 11px 12px; border-bottom: 1px solid #EFF2F5; font-size: 12px;
+    color: #545C69; vertical-align: middle; }
+  .tbl tr:last-child td { border-bottom: 0; }
+  .tbl td b { color: #171B22; font-weight: 600; }
+  .tbl td .mono { font-size: 11px; }
+  .tbl-z tr:nth-child(even) td { background: #FCFDFE; }
+
+  /* ---- 폼 ---- */
+  .fgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; }
+  .fld { display: flex; flex-direction: column; gap: 6px; }
+  .fld > label { font-size: 11px; color: #545C69; font-weight: 500; }
+  .fld > label i { font-style: normal; color: #8C3A3A; margin-left: 3px; }
+  .inp { height: 34px; border: 1px solid #C9D0D9; border-radius: 4px; background: #fff;
+    display: flex; align-items: center; padding: 0 11px; font-size: 12px; color: #6C7480; }
+  .inp.fill { color: #2C333D; }
+  .inp.sel { justify-content: space-between; }
+  .inp.lock { background: #F3F5F7; color: #98A2AE; }
+  .hint { font-size: 10.5px; color: #98A2AE; line-height: 1.55; }
+
+  /* ---- 스위치 ---- */
+  .sw { width: 34px; height: 19px; border-radius: 10px; background: #C9D0D9; position: relative;
+    flex: none; }
+  .sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 15px; height: 15px;
+    border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(23,27,34,.2); }
+  .sw.on { background: #2F6490; }
+  .sw.on::after { left: auto; right: 2px; }
+
+  /* ---- 상태 점 ---- */
+  .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; display: inline-block; }
+  .dot-g { background: #3E9A63; }
+  .dot-r { background: #C0504D; }
+  .dot-a { background: #D3A03C; }
+  .dot-n { background: #B4BCC6; }
+
+  /* ---- 모달 ---- */
+  .scrim { position: absolute; inset: 0; background: rgba(23,27,34,.34); z-index: 40;
+    display: flex; align-items: flex-start; justify-content: center; padding-top: 64px; }
+  .modal { background: #fff; border-radius: 6px; box-shadow: 0 20px 60px rgba(23,27,34,.34);
+    display: flex; flex-direction: column; overflow: visible; position: relative; }
+  .modal-h { display: flex; align-items: center; gap: 10px; padding: 15px 20px;
+    border-bottom: 1px solid #E4E8ED; }
+  .modal-b { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .modal-f { padding: 14px 20px; border-top: 1px solid #E4E8ED; background: #FAFBFC;
+    display: flex; justify-content: flex-end; gap: 8px; }
+
+  /* ---- 결제창 ---- */
+  .pay-h { background: #2C333D; color: #fff; padding: 15px 20px; display: flex;
+    align-items: center; gap: 10px; border-radius: 6px 6px 0 0; }
+  .pay-h b { font-size: 13.5px; font-weight: 600; }
+  .pay-h span { font-size: 10.5px; color: #A9B4C0; }
+  .mtd { border: 1px solid #D5DBE2; border-radius: 4px; padding: 11px 8px; text-align: center;
+    background: #fff; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .mtd.on { border: 1px solid #2F6490; background: #EBF3F9; }
+  .mtd .gl { width: 22px; height: 22px; border: 1px dashed #A5B2BF; border-radius: 3px;
+    background: #F0F4F7; }
+  .mtd .nm { font-size: 10.5px; color: #434A57; line-height: 1.4; word-break: keep-all; }
+  .mtd.on .nm { color: #2F6490; font-weight: 600; }
+  .sum { border-top: 1px solid #E4E8ED; padding-top: 12px; display: flex; flex-direction: column;
+    gap: 7px; }
+  .sum-r { display: flex; justify-content: space-between; font-size: 12px; color: #6C7480; }
+  .sum-r.tot { font-size: 15px; color: #171B22; font-weight: 600; padding-top: 9px;
+    border-top: 1px solid #E4E8ED; }
+
+  /* ---- 웹샵 ---- */
+  .pcard { border: 1px solid #E1E6EC; border-radius: 5px; background: #fff; overflow: hidden;
+    display: flex; flex-direction: column; }
+  .pcard .thumb { height: 118px; border-bottom: 1px solid #EDF0F4; }
+  .pcard .body { padding: 12px 13px 14px; display: flex; flex-direction: column; gap: 7px;
+    flex-grow: 1; }
+  .bonus { background: #EDF7F1; border: 1px solid #B4D6C2; color: #2E6B45; font-size: 10px;
+    padding: 3px 7px; border-radius: 3px; align-self: flex-start; }
+  .cut2 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+    line-clamp: 2; overflow: hidden; }
+
+  /* ---- 콘솔 / 코드 ---- */
+  .con { background: #1D242D; border-radius: 4px; padding: 13px 15px;
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; line-height: 1.75;
+    color: #B8C2CE; white-space: pre-wrap; word-break: break-all; }
+  .con b { color: #8FC4EE; font-weight: 500; }
+  .con i { font-style: normal; color: #7E8B99; }
+  .con u { text-decoration: none; color: #8AC79E; }
+
+
+  /* ---- 통합 결제창 — 7행 위계 ---- */
+  .pay-sec { display: flex; flex-direction: column; gap: 9px; }
+  .pay-lbl { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .12em;
+    color: #98A2AE; display: flex; align-items: center; gap: 7px; }
+  .pay-lbl i { font-style: normal; width: 15px; height: 15px; border-radius: 3px;
+    background: #EEF1F4; color: #7A828E; font-size: 9px; display: flex;
+    align-items: center; justify-content: center; letter-spacing: 0; }
+  .pay-lbl b { color: #8C3A3A; font-weight: 600; letter-spacing: 0; }
+
+  /* 2행 가격 — 가장 무겁다 */
+  .price-box { display: flex; align-items: flex-end; gap: 10px; }
+  .price-cur { font-size: 15px; font-weight: 600; color: #6C7480; padding-bottom: 5px; }
+  .price-num { font-size: 38px; font-weight: 600; letter-spacing: -.035em; color: #171B22;
+    line-height: 1; font-variant-numeric: tabular-nums; }
+  .price-sub { display: flex; flex-direction: column; gap: 2px; padding-bottom: 3px;
+    margin-left: auto; text-align: right; }
+
+  /* 3행 결제수단 그룹 — 중간 무게 · 큰 타일 */
+  .grp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 8px; }
+  .grp-tile { border: 1px solid #D5DBE2; border-radius: 5px; background: #fff;
+    padding: 13px 10px 12px; display: flex; flex-direction: column; align-items: center;
+    gap: 7px; text-align: center; position: relative; }
+  .grp-tile .gi { width: 26px; height: 26px; border: 1px dashed #A5B2BF; border-radius: 4px;
+    background: #F0F4F7; }
+  .grp-tile .gn { font-size: 12px; color: #2C333D; line-height: 1.35; word-break: keep-all; }
+  .grp-tile .gc { font-family: "IBM Plex Mono", monospace; font-size: 9px; color: #A0A8B4; }
+  .grp-tile.on { border: 2px solid #2F6490; background: #EBF3F9; padding: 12px 9px 11px; }
+  .grp-tile.on .gn { color: #2F6490; font-weight: 600; }
+  .grp-tile.on .gc { color: #4A7FA5; }
+  .grp-tile.off { background: #F7F8FA; border-style: dashed; }
+  .grp-tile.off .gn, .grp-tile.off .gc { color: #B4BCC6; }
+
+  /* 4행 PG + 채널 — 가벼움 · 목록형 · 개수 많아도 견딘다 */
+  .ch-wrap { border: 1px solid #AECAE0; border-left: 3px solid #2F6490; border-radius: 4px;
+    background: #FAFDFF; overflow: hidden; }
+  .ch-head { display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+    border-bottom: 1px solid #DCEAF4; }
+  .ch-head .t { font-size: 11px; font-weight: 600; color: #2F6490; }
+  .ch-head .c { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; color: #7FA8C6;
+    margin-left: auto; }
+  .ch-list { max-height: 208px; overflow-y: auto; scrollbar-width: thin;
+    scrollbar-color: #C3CBD4 transparent; scrollbar-gutter: stable; }
+  .ch-list::-webkit-scrollbar { width: 8px; }
+  .ch-list::-webkit-scrollbar-thumb { background: #C3CBD4; border-radius: 4px;
+    border: 2px solid transparent; background-clip: content-box; }
+  .ch-pg { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .06em;
+    color: #7A828E; background: #EEF1F4; padding: 5px 12px; border-bottom: 1px solid #E7EBEF; }
+  .ch-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px;
+    border-bottom: 1px solid #EDF4F9; background: #fff; }
+  .ch-item:last-child { border-bottom: 0; }
+  .ch-item .rd { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #C4CCD5;
+    flex: none; background: #fff; }
+  .ch-item.on { background: #EBF3F9; }
+  .ch-item.on .rd { border: 4px solid #2F6490; }
+  .ch-item .nm { font-size: 12px; color: #2C333D; }
+  .ch-item.on .nm { font-weight: 600; }
+  .ch-item .sub { font-size: 10px; color: #98A2AE; }
+  .ch-item.dis { background: #F7F8FA; }
+  .ch-item.dis .nm, .ch-item.dis .sub { color: #B4BCC6; }
+  .ch-item .rt { margin-left: auto; display: flex; align-items: center; gap: 5px; flex: none; }
+
+  /* 5행 동의 — 가벼움 */
+  .agree { display: flex; gap: 9px; align-items: flex-start; padding: 9px 11px;
+    border: 1px solid #E4E8ED; border-radius: 4px; background: #FAFBFC; }
+  .agree.must { border-color: #E0BEBE; background: #FDF7F7; }
+  .agree .cb { width: 14px; height: 14px; border: 1.5px solid #9FAAB6; border-radius: 2px;
+    flex: none; margin-top: 2px; background: #fff; }
+  .agree.must .cb { border-color: #8C3A3A; }
+  .agree .tt { font-size: 11.5px; line-height: 1.6; color: #434A57; word-break: keep-all; }
+  .agree .tt b { color: #171B22; }
+  .agree.must .tt b { color: #8C3A3A; }
+  .agree .lk { font-size: 10.5px; color: #2F6490; margin-left: auto; flex: none;
+    text-decoration: underline; }
+
+  /* 6행 결제 버튼 — 가장 무겁다 */
+  .paybtn { border-radius: 5px; background: #2C333D; color: #fff; padding: 12px 0 13px;
+    display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .paybtn .a { font-size: 17px; font-weight: 600; letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums; }
+  .paybtn .b { font-size: 12.5px; color: #B8C2CE; }
+  .paybtn.dis { background: #C4CCD5; }
+  .paybtn.dis .b { color: #EEF1F4; }
+
+  /* 7행 유의사항 — 가장 가볍다 */
+  .notice { border-top: 1px solid #EDF0F4; padding-top: 11px; display: flex;
+    flex-direction: column; gap: 4px; }
+  .notice li { font-size: 10.5px; color: #98A2AE; line-height: 1.65; list-style: none;
+    padding-left: 9px; position: relative; word-break: keep-all; }
+  .notice li::before { content: ""; position: absolute; left: 0; top: 7px; width: 3px;
+    height: 3px; border-radius: 50%; background: #C4CCD5; }
+  .notice ul { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+
+  /* 어드민 입력 표기 */
+  .adm-tag { font-family: "IBM Plex Mono", monospace; font-size: 8.5px; letter-spacing: .06em;
+    color: #8A6420; background: #F8F2E6; border: 1px solid #E2D5B9; border-radius: 2px;
+    padding: 1px 5px; white-space: nowrap; }
+
+
+  /* ---- 결제 페이지 (팝업 아님) ---- */
+  .pay-page { display: flex; flex-direction: column; background: #F7F8FA; }
+  .pay-topbar { flex: none; height: 54px; display: flex; align-items: center; gap: 12px;
+    padding: 0 24px; background: #fff; border-bottom: 1px solid #E4E8ED; }
+  .pay-topbar .bk { width: 8px; height: 8px; border-left: 1.5px solid #6C7480;
+    border-bottom: 1.5px solid #6C7480; transform: rotate(45deg); flex: none; }
+  .pay-topbar b { font-size: 13.5px; font-weight: 600; color: #171B22; letter-spacing: -.015em; }
+  .pay-topbar .sub { font-size: 10.5px; color: #98A2AE; }
+  .pay-topbar .sec-badge { margin-left: auto; display: flex; align-items: center; gap: 6px;
+    font-size: 10.5px; color: #6C7480; }
+  .pay-topbar .lock { width: 11px; height: 11px; border: 1.5px solid #7A828E;
+    border-radius: 2px; flex: none; }
+
+  /* 단일 컬럼 · 중앙 정렬 — 1~7행 순서 유지 */
+  .pay-col { width: 100%; max-width: 680px; margin: 0 auto; padding: 24px 0 32px;
+    display: flex; flex-direction: column; gap: 20px; }
+  .pay-card { background: #fff; border: 1px solid #E4E8ED; border-radius: 6px;
+    padding: 18px 20px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* 4행 채널 — 로고 박스 그리드 */
+  .ch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    padding: 11px 12px 13px; }
+  .ch-box { border: 1px solid #D5DBE2; border-radius: 4px; background: #fff;
+    padding: 8px 6px 7px; display: flex; flex-direction: column; align-items: center;
+    gap: 6px; text-align: center; }
+  .ch-box .lg { width: 100%; height: 26px; border: 1px dashed #A5B2BF; border-radius: 3px;
+    background: #F0F4F7; display: flex; align-items: center; justify-content: center;
+    font-size: 8px; color: #78859A; letter-spacing: 0; line-height: 1.2; }
+  .ch-box .nm { font-size: 10.5px; color: #2C333D; line-height: 1.3; word-break: keep-all; }
+  .ch-box .sub { font-family: "IBM Plex Mono", monospace; font-size: 8.5px; color: #A0A8B4; }
+  .ch-box.on { border: 2px solid #2F6490; background: #EBF3F9; padding: 7px 5px 6px; }
+  .ch-box.on .nm { color: #2F6490; font-weight: 600; }
+  .ch-box.on .lg { border-color: #7FA8C6; background: #E3EEF7; color: #4A7FA5; }
+  .ch-box.dis { background: #F7F8FA; border-style: dashed; }
+  .ch-box.dis .nm, .ch-box.dis .sub { color: #B4BCC6; }
+  .ch-box.dis .lg { border-color: #D5DBE2; color: #B4BCC6; }
+
+  /* 5행 — 조건 미충족으로 미노출되는 동의 항목 */
+  .agree.hid { border-style: dashed; background: #FAFBFC; opacity: .6; }
+  .agree.hid .cb { border-color: #C4CCD5; }
+  .agree.hid .tt { color: #98A2AE; }
+
+  /* 6행 — 뷰포트를 벗어나면 하단 고정 바로 승격 */
+  .paybar { position: sticky; bottom: 0; background: #fff;
+    border-top: 1px solid #E4E8ED; padding: 11px 20px 13px;
+    box-shadow: 0 -4px 14px rgba(23,27,34,.07); }
+  .paybar .row { width: 100%; max-width: 680px; margin: 0 auto; }
+  .stick-note { display: flex; align-items: center; gap: 7px; font-size: 10px;
+    color: #A0A8B4; padding: 4px 0 0; }
+  .stick-note i { font-style: normal; width: 3px; height: 3px; border-radius: 50%;
+    background: #C4CCD5; flex: none; }
+
+  /* ---- 스텝 레일 ---- */
+  .rail { display: flex; align-items: center; gap: 0; }
+  .rail-i { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #98A2AE;
+    white-space: nowrap; }
+  .rail-i .n { width: 18px; height: 18px; border-radius: 50%; background: #E1E6EC;
+    color: #7A828E; font-family: "IBM Plex Mono", monospace; font-size: 9.5px;
+    display: flex; align-items: center; justify-content: center; }
+  .rail-i.done .n { background: #B4D6C2; color: #2E6B45; }
+  .rail-i.on { color: #2F6490; font-weight: 600; }
+  .rail-i.on .n { background: #2F6490; color: #fff; }
+  .rail-l { width: 22px; height: 1px; background: #DDE3E9; margin: 0 9px; flex: none; }
+
+  /* ---- 통합 결제창 — 전용 컴포넌트 ---- */
+  /* 통화 표시 행 — 읽기 전용. 서버가 이미 정한 통화를 보여주기만 한다(선택 UI 아님) */
+  .cur-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    border: 1px solid #D5DBE2; border-radius: 5px; background: #fff; }
+  .cur-row .flag { width: 22px; height: 16px; border: 1px dashed #A5B2BF; border-radius: 2px;
+    background: #F0F4F7; flex: none; font-size: 8px; color: #78859A; display: flex;
+    align-items: center; justify-content: center; }
+  .cur-row .cn { display: flex; flex-direction: column; gap: 2px; }
+  .cur-row .cn b { font-size: 12.5px; color: #171B22; font-weight: 600; }
+  .cur-row .cn span { font-size: 10px; color: #98A2AE; }
+  .cur-row .cv { margin-left: auto; font-family: "IBM Plex Mono", monospace;
+    font-size: 11px; color: #7A828E; }
+  .price-note { font-size: 10.5px; color: #98A2AE; line-height: 1.6; word-break: keep-all; }
+
+  /* 결제수단 depth1 — 카테고리 타일(그룹 코드) */
+  .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .cat-tile { border: 1px solid #D5DBE2; border-radius: 5px; background: #fff;
+    padding: 12px 34px 11px 12px; display: flex; flex-direction: column; gap: 5px;
+    position: relative; }
+  .cat-tile.on { border: 2px solid #2F6490; background: #EBF3F9; padding: 11px 33px 10px 11px; }
+  .cat-tile .cn { font-size: 12.5px; color: #2C333D; font-weight: 600; }
+  .cat-tile.on .cn { color: #2F6490; }
+  .cat-tile .badge { position: absolute; top: 10px; right: 10px; font-family: "IBM Plex Mono", monospace;
+    font-size: 8.5px; color: #7A828E; background: #EEF1F4; padding: 2px 6px; border-radius: 8px;
+    white-space: nowrap; }
+  .cat-tile.on .badge { background: #DCEAF4; color: #2F6490; }
+  .cat-tile .prev { font-size: 10px; color: #98A2AE; word-break: keep-all; }
+
+  /* 결제수단 depth2 — 채널 칩(3열) · 6종 초과 시 내부 스크롤 + 하단 페이드 */
+  .chip-wrap { position: relative; }
+  .chip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px;
+    max-height: 150px; overflow-y: auto; padding-right: 2px; scrollbar-width: thin;
+    scrollbar-color: #C3CBD4 transparent; }
+  .chip-grid::-webkit-scrollbar { width: 7px; }
+  .chip-grid::-webkit-scrollbar-thumb { background: #C3CBD4; border-radius: 4px; }
+  .chip { border: 1px solid #D5DBE2; border-radius: 5px; background: #fff;
+    padding: 9px 6px; text-align: center; font-size: 10.5px; color: #2C333D; word-break: keep-all; }
+  .chip.on { border: 2px solid #2F6490; background: #EBF3F9; color: #2F6490; font-weight: 600; }
+  .chip-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 30px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 82%); pointer-events: none; }
+  .chip-more { text-align: center; font-family: "IBM Plex Mono", monospace; font-size: 9px;
+    color: #98A2AE; padding-top: 2px; }
+
+  /* 게임 · 계정 정보 블록 */
+  .acc-info { display: flex; align-items: stretch; gap: 0; border: 1px solid #D5DBE2;
+    border-radius: 5px; background: #fff; padding: 12px 16px; }
+  .acc-info.stack { flex-direction: column; gap: 9px; padding: 11px 13px; }
+  .acc-info .seg { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+  .acc-info.stack .seg { flex-direction: row; align-items: baseline; justify-content: space-between; }
+  .acc-info .k { font-family: "IBM Plex Mono", monospace; font-size: 10.5px;
+    letter-spacing: .08em; color: #98A2AE; }
+  .acc-info .v { font-size: 12.5px; color: #171B22; font-weight: 600; }
+  .acc-info .div { width: 1px; align-self: stretch; background: #E4E8ED; margin: 0 16px; flex: none; }
+  .acc-info.stack .rowl { display: flex; flex-direction: column; gap: 8px; }
+  .acc-info.stack .rowl > div { display: flex; align-items: baseline; justify-content: space-between;
+    padding-bottom: 8px; border-bottom: 1px solid #F1F4F7; }
+  .acc-info.stack .rowl > div:last-child { border-bottom: 0; padding-bottom: 0; }
+</style>
+
+<div class="app">
+  <nav class="nav">
+    <span class="brand"><b>RAGNAROK PORTAL</b><span>통합 결제창 화면정의서</span></span>
+    <span class="nvg">통합 결제창</span>
+    <button type="button" class="nv" data-go="s09"><b>PAY-MC</b><span>통합 결제창</span></button>
+    <span class="ctl">
+      <a href="payment-admin-screens.html" class="desc-btn" style="text-decoration:none;">
+        <i>▸</i><span>관리자 화면정의서</span>
+      </a>
+      <button type="button" class="desc-btn" id="descBtn" title="D">
+        <i>☰</i><span class="lbl-on">디스크립션 접기</span><span class="lbl-off">디스크립션 펴기</span>
+      </button>
+    </span>
+  </nav>
+  <div class="stage">
+<section class="screen" id="s09">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="shd"><span class="id">PAY-MC</span><span class="nm">통합 결제창</span></div>
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs">
+        <button type="button" class="tab tab-on" data-dev="pc">PC</button>
+        <button type="button" class="tab" data-dev="tb">TABLET</button>
+        <button type="button" class="tab" data-dev="mo">MO</button>
+      </div>
+
+      <!-- ═══════════════ PC — 페이지 방식 ═══════════════ -->
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe pay-page" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="sec pay-topbar" style="position:relative;">
+          <div class="mk" style="position:absolute;top:18px;left:-10px;">7</div>
+          <div class="mk" style="position:absolute;top:38px;left:-10px;">8</div>
+          <span class="bk"></span>
+          <b>Gravity Payment</b>
+        </div>
+
+        <div class="pay-col" style="position:relative;">
+          <div class="mk" style="position:absolute;top:16px;left:-34px;">1</div>
+          <div class="mk" style="position:absolute;top:106px;left:-34px;">2</div>
+          <div class="mk" style="position:absolute;top:356px;left:-34px;">3</div>
+          <div class="mk" style="position:absolute;top:506px;left:-34px;">4</div>
+          <div class="mk" style="position:absolute;top:676px;left:-34px;">5</div>
+          <div class="mk" style="position:absolute;top:786px;left:-34px;">6</div>
+
+          <div class="pay-card">
+
+            <!-- ═ 1 · 게임 · 계정 정보 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>1</i> 게임 · 계정 정보</span>
+              <div class="acc-info">
+                <div class="seg"><span class="k">게임</span><span class="v">라그나로크 어비스</span></div>
+                <span class="div"></span>
+                <div class="seg"><span class="k">서버</span><span class="v">발할라</span></div>
+                <span class="div"></span>
+                <div class="seg"><span class="k">캐릭터</span><span class="v">프론테라기사</span></div>
+              </div>
+            </div>
+
+            <!-- ═ 2 · 상품 · 통화 · 금액 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>2</i> 상품 · 통화 · 금액</span>
+              <div class="bx" style="padding:11px 13px;display:flex;align-items:center;gap:12px;">
+                <div class="img" style="width:46px;height:46px;flex:none;"><span class="sp">상품<br>이미지</span></div>
+                <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+                  <span class="tag" style="align-self:flex-start;">소비</span>
+                  <span class="h-s" style="font-size:14px;">프리미엄 성장석</span>
+                </div>
+                <span class="btn-s" style="margin-left:auto;flex:none;">변경</span>
+              </div>
+              <div class="cur-row">
+                <span class="flag">KR</span>
+                <div class="cn"><b>KRW</b><span>Korean Won</span></div>
+                <span class="cv">4,900</span>
+              </div>
+              <div class="price-box">
+                <span class="price-cur">₩</span>
+                <span class="price-num">4,900</span>
+              </div>
+              <p class="price-note">최종 결제 금액이며 선택한 결제수단에 따라 카드사 해외이용 수수료가 별도로 붙을 수 있습니다.</p>
+            </div>
+
+            <!-- ═ 4 · 결제수단 depth1 — 카테고리 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>3</i> 결제수단 · depth 1 — 카테고리 <b>필수</b></span>
+              <div class="cat-grid" style="grid-template-columns:repeat(3,1fr);">
+                <div class="cat-tile on"><span class="badge">7종</span><span class="cn">신용 · 체크카드</span><span class="prev">Visa · Mastercard 외 5종</span></div>
+                <div class="cat-tile"><span class="badge">4종</span><span class="cn">디지털 지갑</span><span class="prev">Apple Pay · Google Pay 외 2종</span></div>
+                <div class="cat-tile"><span class="badge">2종</span><span class="cn">자동이체</span><span class="prev">ACH Direct Debit 외 1종</span></div>
+                <div class="cat-tile"><span class="badge">3종</span><span class="cn">후불결제</span><span class="prev">Klarna · Affirm 외 1종</span></div>
+                <div class="cat-tile"><span class="badge">1종</span><span class="cn">계좌이체 · 무통장입금</span><span class="prev">Wire Transfer</span></div>
+              </div>
+            </div>
+
+            <!-- ═ 5 · 결제수단 depth2 — 채널 칩 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>4</i> 결제수단 · depth 2 — 채널(신용 · 체크카드)</span>
+              <div class="chip-wrap">
+                <div class="chip-grid">
+                  <div class="chip on">Visa</div>
+                  <div class="chip">Mastercard</div>
+                  <div class="chip">American Express</div>
+                  <div class="chip">Discover</div>
+                  <div class="chip">JCB</div>
+                  <div class="chip">UnionPay</div>
+                  <div class="chip">Diners Club</div>
+                </div>
+                <div class="chip-fade"></div>
+              </div>
+              <div class="chip-more">↓ 스크롤하여 전체 7종 확인</div>
+            </div>
+
+            <!-- ═ 6 · 결제 동의 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>5</i> 결제 동의 <b>필수</b></span>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div class="agree must">
+                  <span class="cb"></span>
+                  <span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편 수령 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상 · 선택 통화를 확인했습니다.</span>
+                  <span class="lk">전문</span>
+                </div>
+                <div class="agree must">
+                  <span class="cb"></span>
+                  <span class="tt"><b>[필수]</b> 만 19세 미만은 법정대리인의 동의가 필요하며, 동의 없는 결제는 취소될 수 있습니다.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ═ 7 · 결제 버튼 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>6</i> 결제</span>
+              <div class="paybtn">
+                <span class="a">₩4,900</span>
+                <span class="b">결제하기</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+
+      <!-- ═══════════════ TABLET 768 — 같은 페이지 · 그룹 3열 ═══════════════ -->
+      <div class="pane pane-tb">
+      <div class="wstage">
+      <div class="pay-page" style="width:768px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="pay-topbar">
+          <span class="bk"></span>
+          <b>Gravity Payment</b>
+        </div>
+
+        <div class="pay-col">
+          <div class="pay-card">
+
+            <!-- ═ 1 · 게임 · 계정 정보 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>1</i> 게임 · 계정 정보</span>
+              <div class="acc-info">
+                <div class="seg"><span class="k">게임</span><span class="v">라그나로크 어비스</span></div>
+                <span class="div"></span>
+                <div class="seg"><span class="k">서버</span><span class="v">발할라</span></div>
+                <span class="div"></span>
+                <div class="seg"><span class="k">캐릭터</span><span class="v">프론테라기사</span></div>
+              </div>
+            </div>
+
+            <!-- ═ 2 · 상품 · 통화 · 금액 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>2</i> 상품 · 통화 · 금액</span>
+              <div class="bx" style="padding:11px 13px;display:flex;align-items:center;gap:12px;">
+                <div class="img" style="width:46px;height:46px;flex:none;"><span class="sp">상품<br>이미지</span></div>
+                <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+                  <span class="tag" style="align-self:flex-start;">소비</span>
+                  <span class="h-s" style="font-size:14px;">프리미엄 성장석</span>
+                </div>
+                <span class="btn-s" style="margin-left:auto;flex:none;">변경</span>
+              </div>
+              <div class="cur-row">
+                <span class="flag">KR</span>
+                <div class="cn"><b>KRW</b><span>Korean Won</span></div>
+                <span class="cv">4,900</span>
+              </div>
+              <div class="price-box">
+                <span class="price-cur">₩</span>
+                <span class="price-num">4,900</span>
+              </div>
+              <p class="price-note">최종 결제 금액이며 선택한 결제수단에 따라 카드사 해외이용 수수료가 별도로 붙을 수 있습니다.</p>
+            </div>
+
+            <!-- ═ 3 · 결제수단 depth1 — 카테고리 · 그룹 3열 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>3</i> 결제수단 · depth 1 — 카테고리 <b>필수</b></span>
+              <div class="cat-grid" style="grid-template-columns:repeat(3,1fr);">
+                <div class="cat-tile on"><span class="badge">7종</span><span class="cn">신용 · 체크카드</span><span class="prev">Visa · Mastercard 외 5종</span></div>
+                <div class="cat-tile"><span class="badge">4종</span><span class="cn">디지털 지갑</span><span class="prev">Apple Pay · Google Pay 외 2종</span></div>
+                <div class="cat-tile"><span class="badge">2종</span><span class="cn">자동이체</span><span class="prev">ACH Direct Debit 외 1종</span></div>
+                <div class="cat-tile"><span class="badge">3종</span><span class="cn">후불결제</span><span class="prev">Klarna · Affirm 외 1종</span></div>
+                <div class="cat-tile"><span class="badge">1종</span><span class="cn">계좌이체 · 무통장입금</span><span class="prev">Wire Transfer</span></div>
+              </div>
+            </div>
+
+            <!-- ═ 4 · 결제수단 depth2 — 채널 칩 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>4</i> 결제수단 · depth 2 — 채널(신용 · 체크카드)</span>
+              <div class="chip-wrap">
+                <div class="chip-grid" style="grid-template-columns:repeat(4,1fr);">
+                  <div class="chip on">Visa</div>
+                  <div class="chip">Mastercard</div>
+                  <div class="chip">American Express</div>
+                  <div class="chip">Discover</div>
+                  <div class="chip">JCB</div>
+                  <div class="chip">UnionPay</div>
+                  <div class="chip">Diners Club</div>
+                </div>
+                <div class="chip-fade"></div>
+              </div>
+              <div class="chip-more">↓ 스크롤하여 전체 7종 확인</div>
+            </div>
+
+            <!-- ═ 5 · 결제 동의 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>5</i> 결제 동의 <b>필수</b></span>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div class="agree must">
+                  <span class="cb"></span>
+                  <span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편 수령 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상 · 선택 통화를 확인했습니다.</span>
+                  <span class="lk">전문</span>
+                </div>
+                <div class="agree must">
+                  <span class="cb"></span>
+                  <span class="tt"><b>[필수]</b> 만 19세 미만은 법정대리인의 동의가 필요하며, 동의 없는 결제는 취소될 수 있습니다.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ═ 6 · 결제 버튼 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>6</i> 결제</span>
+              <div class="paybtn">
+                <span class="a">₩4,900</span>
+                <span class="b">결제하기</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+
+      <!-- ═══════════════ MO — 같은 페이지 · 1열 ═══════════════ -->
+      <div class="pane pane-mo">
+      <div class="wstage">
+      <div class="pay-page" style="width:390px;display:flex;flex-direction:column;position:relative;overflow:hidden;">
+
+        <div class="pay-topbar" style="height:50px;padding:0 16px;">
+          <span class="bk"></span>
+          <b style="font-size:12.5px;">Gravity Payment</b>
+        </div>
+
+        <div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:17px;">
+
+          <!-- 1 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>1</i> 게임 · 계정 정보</span>
+            <div class="acc-info stack">
+              <div class="rowl">
+                <div><span class="k">게임</span><span class="v">라그나로크 어비스</span></div>
+                <div><span class="k">서버</span><span class="v">발할라</span></div>
+                <div><span class="k">캐릭터</span><span class="v">프론테라기사</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>2</i> 상품 · 통화 · 금액</span>
+            <div class="bx" style="padding:10px 11px;display:flex;align-items:center;gap:10px;background:#fff;">
+              <div class="img" style="width:40px;height:40px;flex:none;"><span class="sp">상품</span></div>
+              <div style="display:flex;flex-direction:column;gap:4px;min-width:0;">
+                <span class="tag" style="align-self:flex-start;">소비</span>
+                <span class="h-s" style="font-size:12.5px;">프리미엄 성장석</span>
+              </div>
+            </div>
+            <div class="cur-row">
+              <span class="flag">KR</span>
+              <div class="cn"><b>KRW</b><span>Korean Won</span></div>
+              <span class="cv">4,900</span>
+            </div>
+            <div class="price-box">
+              <span class="price-cur" style="font-size:13px;">₩</span>
+              <span class="price-num" style="font-size:32px;">4,900</span>
+            </div>
+            <p class="price-note" style="font-size:10px;">카드사 해외이용 수수료 별도 발생 가능</p>
+          </div>
+
+          <!-- 3 — MO 2열 카테고리 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>3</i> 결제수단 · depth 1 <b>필수</b></span>
+            <div class="cat-grid">
+              <div class="cat-tile on"><span class="badge">7종</span><span class="cn">신용 · 체크카드</span><span class="prev">Visa 외 6종</span></div>
+              <div class="cat-tile"><span class="badge">4종</span><span class="cn">디지털 지갑</span><span class="prev">Apple Pay 외 3종</span></div>
+              <div class="cat-tile"><span class="badge">2종</span><span class="cn">자동이체</span><span class="prev">ACH 외 1종</span></div>
+              <div class="cat-tile"><span class="badge">3종</span><span class="cn">후불결제</span><span class="prev">Klarna 외 2종</span></div>
+              <div class="cat-tile" style="grid-column:1 / -1;"><span class="badge">1종</span><span class="cn">계좌이체 · 무통장입금</span><span class="prev">Wire Transfer</span></div>
+            </div>
+          </div>
+
+          <!-- 5 — MO 3열 채널 칩 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>4</i> 결제수단 · depth 2 — 채널</span>
+            <div class="chip-wrap">
+              <div class="chip-grid">
+                <div class="chip on">Visa</div>
+                <div class="chip">Mastercard</div>
+                <div class="chip">Amex</div>
+                <div class="chip">Discover</div>
+                <div class="chip">JCB</div>
+                <div class="chip">UnionPay</div>
+                <div class="chip">Diners</div>
+              </div>
+              <div class="chip-fade"></div>
+            </div>
+            <div class="chip-more">↓ 스크롤하여 전체 7종 확인</div>
+          </div>
+
+          <!-- 6 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>5</i> 결제 동의 <b>필수</b></span>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div class="agree must"><span class="cb"></span><span class="tt" style="font-size:11px;"><b>[필수]</b> 우편 수령 후 청약철회 제한 · 지급 대상 · 통화 확인</span><span class="lk">전문</span></div>
+              <div class="agree must"><span class="cb"></span><span class="tt" style="font-size:11px;"><b>[필수]</b> 만 19세 미만은 법정대리인 동의 필요</span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 7 — MO는 하단 고정 -->
+        <div class="paybar">
+          <div class="row">
+            <div class="paybtn"><span class="a">₩4,900</span><span class="b">결제하기</span></div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="dcol">
+      <h4>PAY-MC · 통합 결제창 — 통화 · 결제수단 2뎁스 구조</h4>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">게임 · 계정 정보</span><span class="src">전역 · 상단</span></div>
+        <p class="dr-b">상단바 서브텍스트로 흘려두던 정보를 <b>독립된 라벨+값 블록</b>으로 뺐다. 유저가 「어느 게임 · 어느 캐릭터로 결제되는가」를 한눈에 확인해야 하는 정보라 눈에 띄게 만든다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v"><b>게임 · 서버 · 캐릭터(또는 계정)</b> 3개 라벨+값 쌍. PC는 구분선으로 가로 배치, MO는 세로로 쌓고 각 행을 얇은 밑줄로 구분</span></div>
+          <div class="spec-r"><span class="spec-k">지급 대상 단위</span><span class="spec-v"><b>어드민에서 상품별로 설정</b>(ST-04) — 계정 지급이면 계정명(마스킹), 캐릭터 지급이면 캐릭터명이 세 번째 칸에 표시된다</span></div>
+          <div class="spec-r"><span class="spec-k">위치</span><span class="spec-v">상품 섹션(핀 2) <b>바로 위</b>에 둬 「무엇을 · 누구에게」 순서로 읽히게 한다</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">상품 · 통화 · 금액</span><span class="src">행 1</span></div>
+        <p class="dr-b">상품 정보는 앞단에서 전달받은 표시용 값이다. <b>통화 행은 선택 UI가 아니라 읽기 전용 표시</b>다 — 결제 진입 시점에 서버가 <b>지사 법인 · PG 설정 기준으로 이미 정한 통화</b>를 내려줄 뿐, 이 화면에서 사용자가 통화를 바꾸지 않는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">통화 행</span><span class="spec-v">국기 · 통화코드 · 통화명(예 <span class="mono">KRW — Korean Won</span>) · 우측에 확정 금액. <b>화살표 · hover · 클릭 유도 스타일 없음</b> — 누를 수 있는 요소가 아니다</span></div>
+          <div class="spec-r"><span class="spec-k">최종 금액</span><span class="spec-v"><b>PC 38px · MO 32px · weight 600 · tabular-nums</b>. 상품가 · 세액 분해는 노출하지 않고 <b>총액 한 줄만</b></span></div>
+          <div class="spec-r"><span class="spec-k">하단 문구</span><span class="spec-v">수수료 · 세금 포함 여부는 <b>결제수단마다 다를 수 있음</b>을 고지 — 정확한 세액은 전표 · 영수증에만 기록</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">결제수단 depth 1 — 카테고리</span><span class="src">행 2</span></div>
+        <p class="dr-b">평면 목록이 아니라 <b>2뎁스</b>다. depth 1은 <b>결제수단 대분류</b> 타일 — Adyen · Stripe · Checkout.com 등 글로벌 PG가 실제로 쓰는 <span class="mono">paymentMethod</span> 대분류 체계를 그대로 채택해 <b>나올 수 있는 모든 대분류</b>를 후보로 둔다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">타일 구성</span><span class="spec-v">카테고리명 · <b>채널 개수 배지</b>(「7종」) · <b>2개 미리보기</b>(「Visa · Mastercard 외 5종」)</span></div>
+          <div class="spec-r"><span class="spec-k">자동 미노출</span><span class="spec-v">선택 통화로 <b>채널이 하나도 없는 대분류는 화면에서 자동으로 빠진다</b> — 웹샵 기획서 §9-3과 동일 규칙. 화면 예시는 10개 중 <b>5개만</b> 노출</span></div>
+          <div class="spec-r"><span class="spec-k">기본 선택</span><span class="spec-v">노출된 카테고리 중 <b>우선순위 1순위</b>가 기본값(예시는 신용 · 체크카드)</span></div>
+          <div class="spec-r"><span class="spec-k">반응형 열 수</span><span class="spec-v">그룹 타일 — PC · TABLET 3열 / MO 2열. 채널 칩 — PC · MO 3열 / TABLET 4열(폭이 넉넉해 한 줄에 더 담는다). 디스크립션은 디바이스 공용이며 이 표만 예외로 기기별 값을 함께 적는다</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">결제수단 대분류 — 전체 정의(글로벌 PG 표준 기준)</div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">CARD</span></span><span class="imm-v">신용 · 체크카드</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">WALLET</span></span><span class="imm-v">디지털 지갑 — PayPal · Apple Pay · Google Pay · Alipay · WeChat Pay 등(Express 버튼을 별도로 두지 않고 <b>이 그룹의 채널로</b> 포함)</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">BANK_REDIRECT</span></span><span class="imm-v">실시간 계좌 인증 — iDEAL · giropay · Sofort · FPX · PayNow · PromptPay 등 즉시 온라인 뱅킹 리다이렉트형</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">BANK_TRANSFER</span></span><span class="imm-v">계좌이체 · 무통장입금 — SEPA · 가상계좌 등 사후 정산형(<span class="mono">BANK_REDIRECT</span>와 구분)</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">DIRECT_DEBIT</span></span><span class="imm-v">자동이체 — 정기결제 · 구독용, ACH Direct Debit 등</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">CARRIER</span></span><span class="imm-v">통신사 소액결제</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">PREPAID</span></span><span class="imm-v">선불 · 상품권 — Paysafecard · Razer Gold · MyCard · 문화상품권 등</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">BNPL</span></span><span class="imm-v">후불결제 — Klarna · Afterpay · Affirm 등</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">CASH</span></span><span class="imm-v">현금성 · 오프라인 결제 — OXXO · Boleto · 편의점 바코드결제 등</span></div>
+          <div class="imm-r"><span class="imm-k"><span class="mono">CRYPTO</span></span><span class="imm-v">가상자산 — <b>현재 미채용 · 확장 예정</b>으로만 표기</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">결제수단 depth 2 — 채널 칩</span><span class="src">행 2 하위</span></div>
+        <p class="dr-b">카테고리를 고르면 그 아래 <b>실제 채널</b>이 3열 칩으로 펼쳐진다. <b>채널 수는 카테고리마다 크게 다를 수 있다</b> — 화면이 그 사실을 항상 드러내야 한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">6종 이하</span><span class="spec-v">그리드가 전부 펼쳐진 채로 끝난다</span></div>
+          <div class="spec-r"><span class="spec-k">6종 초과</span><span class="spec-v">그리드 높이를 <b>약 2행으로 제한</b>하고 <span class="mono">overflow-y:auto</span> · 하단에 <b>페이드 오버레이</b> + 「↓ 스크롤」 힌트를 둔다 — 목록이 끝났다고 오인하지 않게</span></div>
+          <div class="spec-r"><span class="spec-k">전환</span><span class="spec-v">depth 1을 바꾸면 이 영역만 <b>즉시 다시 그린다</b></span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">결제 동의</span><span class="src">행 3</span></div>
+        <p class="dr-b">단일통화 결제 페이지(<span class="mono">PAY</span>)의 5행과 동일한 규칙 — <b>상품 유형별 어드민 입력</b>. 문구에 선택 통화 확인 문장을 더했다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">CTA 조건</span><span class="spec-v">필수 항목 <b>전부 체크</b>해야 핀 6이 활성화된다</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">결제 버튼</span><span class="src">행 4 · 하단 고정</span></div>
+        <p class="dr-b">현재 <b>통화 + 금액</b>을 그대로 라벨에 반영한다(「₩4,900 결제하기」). MO는 처음부터 하단 고정, PC는 뷰포트를 벗어나면 승격된다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">활성 조건</span><span class="spec-v"><b>필수 동의 체크</b> · <b>결제수단 1개 선택</b>(카테고리 채널) — 둘 다 충족해야 활성</span></div>
+          <div class="spec-r"><span class="spec-k">비활성 표기</span><span class="spec-v"><span class="mono">.paybtn.dis</span> — 배경을 옅게 낮춘다. 사유 문구는 두지 않는다(체크 · 선택 미완료 상태는 화면에서 이미 보인다)</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">7</span><span class="dr-t">상단 바 · 페이지 방식 · 진입 경로</span><span class="src">전역</span></div>
+        <p class="dr-b">단일통화 결제 페이지와 동일하게 <b>모달 · 팝업 · iframe이 아닌 독립 URL 페이지</b>다. PG 3DS · 리다이렉트 인증이 팝업 · iframe 안에서 깨지는 문제는 통화와 무관하게 동일하다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">상단 바</span><span class="spec-v"><b>Gravity Payment</b> 서비스명만 표시. 게임 · 서버 · 지급 대상은 핀 1 블록으로 분리했으므로 <b>중복 표기하지 않는다</b>. 지사명 · 법인 코드도 노출하지 않는다</span></div>
+          <div class="spec-r"><span class="spec-k">보안 배지</span><span class="spec-v">기존에 있던 <span class="mono">SSL · PCI-DSS</span> 배지는 <b>제거</b> — 유저에게 용도가 전달되지 않는 정보라 판단</span></div>
+          <div class="spec-r"><span class="spec-k">전달값</span><span class="spec-v">호출측(웹샵 · 인게임 · GNJOY)은 <b>머천트 · 프로젝트(게임) id · 상품(sku · 수량) · 지급 대상(캐릭터 또는 계정 + 서버)</b>만 넘긴다. <b>금액 · 결제수단은 넘기지 않는다</b> — 호출측은 결제수단을 알지 못한다</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">통합 결제창 이용 범위 — <span class="mono">webshop-ui.html</span> §7과 동일 원칙</div>
+          <div class="imm-r"><span class="imm-k">웹샵</span><span class="imm-v">D2C 웹샵의 [결제하기]</span></div>
+          <div class="imm-r"><span class="imm-k">인게임</span><span class="imm-v">게임 안 상점의 구매하기</span></div>
+          <div class="imm-r"><span class="imm-k">GNJOY</span><span class="imm-v">포털 내 상품 구매 — 포인트 등</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">8</span><span class="dr-t">결제 모듈 — 조직 · 자금 구조</span><span class="src">전역 · 개요 흡수</span></div>
+        <p class="dr-b">기존 <span class="mono">wiki/planning/payment-overview.html</span>(「결제 개요 — 1장」)의 결제 관련 내용을 이 핀으로 흡수했다. 개요 문서는 메뉴 · docnav에서 내렸다 — 상세는 각 원본 문서에 그대로 있고, 여기서는 <b>이 화면을 이해하는 데 필요한 만큼만</b> 요약한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">전제</span><span class="spec-v">지사마다 따로 만들던 결제를 <b>본사가 하나 만들어 지사가 가져다 쓴다</b> — 결제 페이지 하나 · PG 연동은 PG사마다 한 번만</span></div>
+          <div class="spec-r"><span class="spec-k">자금 경로</span><span class="spec-v">유저가 낸 돈은 <b>본사를 거치지 않고 PG사에서 각 지사 계좌로 직접</b> 들어간다 — 본사 수수료 없음. 도식은 <a href="../wiki/planning/global-payment.html#a1">global-payment.html §2 거버넌스 모델</a> 참조</span></div>
+          <div class="spec-r"><span class="spec-k">역할 분담</span><span class="spec-v">본사는 <b>PG 계약 조건 · 인증키 · 결제 페이지/웹샵 제공</b> · 지사는 <b>결제수단 · 가격 · 환불 · 정산 확인</b>. 11개 항목 전체 분담표는 <a href="../wiki/planning/payment.html#c2">payment.html §2 누가 뭘 하나</a> 참조</span></div>
+          <div class="spec-r"><span class="spec-k">유저 결제 흐름</span><span class="spec-v">상품 선택(웹샵 · 인게임) → 지급 대상 확인 → 결제수단 선택 · 결제(이 화면) → 게임 지급 요청 → 수령. 다섯 단계 도식과 게임 서버 API 소요는 <a href="../wiki/planning/payment.html#c3">payment.html §3 유저는 어떻게 결제하나</a> 참조 — 실제 웹샵 관점 API 소요 재산정은 <a href="webshop-ui.html">webshop-ui.html</a> 기타사항 핀 2</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">유저 · 관리자 화면 인벤토리</div>
+          <div class="imm-r"><span class="imm-k">유저</span><span class="imm-v">웹샵(<a href="webshop-ui.html">webshop-ui.html</a>) · 통합 결제창(이 문서) — 2개</span></div>
+          <div class="imm-r"><span class="imm-k">관리자</span><span class="imm-v">본사 · 지사 뷰로 갈리는 결제 모듈 관리 화면 — 상세는 <a href="payment-admin-screens.html">payment-admin-screens.html</a> 참조</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">미결 — 국가별 데이터 이전 법적 확인</div>
+          <p class="warn-b">각 지사 국가의 개인정보를 한국으로 보내도 되는지가 <b>다른 결정들의 전제</b>다. 막히는 나라가 있으면 그 나라만 분리해야 한다. 이 항목을 포함한 미결 사항 전체는 <a href="../wiki/planning/payment.html#review">payment.html 검토 필요사항</a>에 있다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+  </div>
+</div>
+
+<script>
+(function () {
+  var order = ["s09"];
+  var stage = document.querySelector('.stage');
+  var navBtns = Array.prototype.slice.call(document.querySelectorAll('.nv'));
+  var descBtn = document.getElementById('descBtn');
+
+  // PC 기준 폭과 좌우 여백을 함께 바꾼다.
+  // 설계 기준(1440)과 대응 상한(1920 · QHD 2560)을 확인한다.
+  var GUTTER = { 1440: 40, 1920: 40, 2560: 40 };
+  var pcw = 1440;
+  var WIDTHS = [1440, 1920, 2560];
+
+  // PC / MO 탭과 같은 줄에 폭 선택과 현재 배율을 붙인다
+  document.querySelectorAll('.screen .tabs').forEach(function (row) {
+    var box = document.createElement('span');
+    box.className = 'tabctl';
+    var seg = '<span class="pcw"><span class="pcw-lbl">PC 폭</span><span class="pcw-seg">';
+    WIDTHS.forEach(function (w) {
+      seg += '<button type="button" class="wbtn" data-w="' + w + '">' + w + '</button>';
+    });
+    seg += '</span></span><span class="zoom">—</span>';
+    box.innerHTML = seg;
+    row.appendChild(box);
+  });
+
+  var wBtns = Array.prototype.slice.call(document.querySelectorAll('.wbtn'));
+
+  // 1920은 디스크립션을 펴둔 채로는 볼 수 없다.
+  // 고르는 순간 접고, 1440으로 돌아오면 원래 상태로 되돌린다.
+  var descBefore = null;
+
+  function applyPcw() {
+    document.querySelectorAll('.pcframe').forEach(function (f) {
+      f.style.width = pcw + 'px';
+      f.style.paddingLeft = GUTTER[pcw] + 'px';
+      f.style.paddingRight = GUTTER[pcw] + 'px';
+      f.style.paddingTop = '26px';
+      f.style.paddingBottom = '30px';
+    });
+    wBtns.forEach(function (b) { b.classList.toggle('on', parseInt(b.dataset.w, 10) === pcw); });
+
+    if (pcw !== 1440) {
+      if (descBefore === null) descBefore = document.body.classList.contains('desc-off');
+      document.body.classList.add('desc-off');
+    } else if (descBefore !== null) {
+      document.body.classList.toggle('desc-off', descBefore);
+      descBefore = null;
+    }
+    fit();
+  }
+
+  // 보이는 폭에 맞춰 배율을 낮춘다
+  function fit() {
+    var sc = document.querySelector('.screen.on');
+    var out = sc && sc.querySelector('.pane.on .zoom') || (sc && sc.querySelector('.zoom'));
+    var pane = sc && sc.querySelector('.pane.on');
+    if (!pane) { if (out) out.textContent = '—'; return; }
+    var st = pane.querySelector('.wstage');
+    var frame = st && st.firstElementChild;
+    if (!frame) { if (out) out.textContent = '—'; return; }
+    frame.style.zoom = '1';
+    var natW = frame.offsetWidth || 1;
+    var availW = st.clientWidth - 44;
+    var z = Math.min(1, availW / natW);
+    if (!isFinite(z) || z <= 0) z = 1;
+    frame.style.zoom = z;
+    if (out) out.textContent = natW + 'px · ' + Math.round(z * 100) + '%';
+  }
+
+  function go(id) {
+    document.querySelectorAll('.screen').forEach(function (s) {
+      s.classList.toggle('on', s.id === id);
+    });
+    navBtns.forEach(function (b) { b.classList.toggle('on', b.dataset.go === id); });
+    if (stage) stage.scrollTop = 0;
+    var col = document.querySelector('.screen.on .dcol');
+    if (col) col.scrollTop = 0;
+    clearMarks();
+    fit();
+  }
+
+  navBtns.forEach(function (b) {
+    b.addEventListener('click', function () { go(b.dataset.go); });
+  });
+
+  document.querySelectorAll('.screen .tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var col = t.closest('.wcol');
+      if (!col) return;
+      var dev = t.dataset.dev;
+      col.querySelectorAll('.tab').forEach(function (o) {
+        o.classList.toggle('tab-on', o.dataset.dev === dev);
+      });
+      col.querySelectorAll('.pane').forEach(function (p) {
+        p.classList.toggle('on', p.classList.contains('pane-' + dev));
+      });
+      col.classList.toggle('is-pc', dev === 'pc');
+      fit();
+    });
+  });
+
+  // ---- 디스크립션 접기 / 펴기 ----
+  function clearMarks() {
+    document.querySelectorAll('.mk.act, .mk-s.act').forEach(function (n) {
+      n.classList.remove('act');
+    });
+    document.querySelectorAll('.hit').forEach(function (n) { n.classList.remove('hit'); });
+  }
+
+  function toggleDesc() {
+    document.body.classList.toggle('desc-off');
+    descBefore = null;   // 직접 여닫으면 그 선택이 우선한다
+    fit();
+  }
+  if (descBtn) descBtn.addEventListener('click', toggleDesc);
+
+  wBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      pcw = parseInt(b.dataset.w, 10);
+      applyPcw();
+    });
+  });
+
+  // 번호를 누르면 디스크립션이 펴지고 해당 항목으로 스크롤된다
+  document.querySelectorAll('.screen .wstage .mk, .screen .wstage .mk-s').forEach(function (m) {
+    m.setAttribute('role', 'button');
+    m.setAttribute('tabindex', '0');
+    m.addEventListener('click', function () {
+      var sc = m.closest('.screen');
+      var col = sc && sc.querySelector('.dcol');
+      if (!col) return;
+      var was = document.body.classList.contains('desc-off');
+      clearMarks();
+      if (was) { document.body.classList.remove('desc-off'); fit(); }
+      m.classList.add('act');
+      var num = m.textContent.trim();
+      Array.prototype.slice.call(col.children).forEach(function (row) {
+        var t = row.querySelector('.dr-h .mk');
+        if (t && t.textContent.trim() === num) {
+          row.classList.add('hit');
+          row.scrollIntoView({ block: 'center', behavior: was ? 'auto' : 'smooth' });
+        }
+      });
+    });
+    m.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); m.click(); }
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if (e.key === 'Escape') { clearMarks(); return; }
+    if (e.key === 'd' || e.key === 'D' || e.key === 'ㅇ') { toggleDesc(); return; }
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var cur = document.querySelector('.screen.on');
+    var i = order.indexOf(cur ? cur.id : order[0]);
+    if (i < 0) return;
+    var n = e.key === 'ArrowRight' ? i + 1 : i - 1;
+    if (n < 0 || n >= order.length) return;
+    go(order[n]);
+  });
+
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  setTimeout(fit, 60);
+
+  applyPcw();
+  go(order[0]);
+})();
+</script>
+
+<style>
+  #docnav { position: fixed; left: 14px; bottom: 14px; z-index: 2147483000;
+    font-family: "Pretendard", "Malgun Gothic", -apple-system, sans-serif; }
+  #docnav * { box-sizing: border-box; }
+  #docnav-b { display: inline-flex; align-items: center; gap: 7px; height: 32px;
+    padding: 0 13px; border: 1px solid #C9D1D9; border-radius: 16px; background: #fff;
+    color: #3B4654; font-size: 12px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(23,27,34,.14); }
+  #docnav-b:hover { border-color: #2F6490; color: #2F6490; }
+  #docnav-b i { font-style: normal; font-size: 9px; }
+  #docnav-m { display: none; position: absolute; left: 0; bottom: 38px; min-width: 236px;
+    padding: 6px; border: 1px solid #D5DBE2; border-radius: 8px; background: #fff;
+    box-shadow: 0 8px 26px rgba(23,27,34,.16); }
+  #docnav.on #docnav-m { display: block; }
+  #docnav-m .g { padding: 7px 10px 4px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .04em; color: #97A0AC; }
+  #docnav-m a { display: block; padding: 8px 10px; border-radius: 5px; font-size: 12.5px;
+    color: #2C333D; text-decoration: none; white-space: nowrap; }
+  #docnav-m a:hover { background: #F1F4F7; }
+  #docnav-m a.on { color: #2F6490; font-weight: 700; background: #EDF3F8; }
+  @media print { #docnav { display: none; } }
+</style>
+<div id="docnav">
+  <div id="docnav-m">
+    <div class="g">화면정의서</div>
+    <a href="portal-main-auth-screens.html">라그나로크 포털 화면정의서</a>
+    <a href="webshop-ui.html">웹샵 UI 구성</a>
+    <a href="payment-checkout-currency.html" class="on">통합 결제창 화면정의서</a>
+    <a href="payment-admin-screens.html">결제 관리자 화면정의서</a>
+    <div class="g">설계</div>
+    <a href="../wiki/planning/portal-main-structure.html">포털 메인 구조</a>
+    <a href="../wiki/planning/land-auth.html">랜드 회원·인증 설계</a>
+    <a href="../wiki/planning/payment.html">결제 설계 — 프로세스 · 구조</a>
+    <a href="../wiki/planning/payment-webshop-structure.html">통합결제 / 웹샵 구조</a>
+    <a href="../wiki/planning/global-payment.html">글로벌 결제 설계 (상세)</a>
+    <div class="g">벤치마킹</div>
+    <a href="../wiki/benchmark/ip-portal.html">IP 포털 벤치마킹</a>
+    <a href="../wiki/benchmark/nc-auth.html">NC 회원·인증 통합 벤치마킹</a>
+    <a href="../wiki/benchmark/pg-multi-entity.html">PG 다중법인 구조 벤치마킹</a>
+    <a href="../wiki/benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a>
+    <a href="../wiki/benchmark/webshop-payment.html">웹샵 결제 벤치마킹</a>
+    <div class="g">전체</div>
+    <a href="../index.html">문서 목록</a>
+  </div>
+  <span id="docnav-b">문서 <i>&#9650;</i></span>
+</div>
+<script>
+(function () {
+  var n = document.getElementById('docnav'), b = document.getElementById('docnav-b');
+  b.addEventListener('click', function (e) { e.stopPropagation(); n.classList.toggle('on'); });
+  document.addEventListener('click', function () { n.classList.remove('on'); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') n.classList.remove('on');
+  });
+})();
+</script>
+</body>
+</html>

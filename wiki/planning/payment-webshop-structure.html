@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>통합결제 / 웹샵 구조</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #EDEEF1; --surface: #FFFFFF; --surface-2: #F5F6F8;
+    --line: #D9DEE5; --hair: #E7EAEF;
+    --ink: #171B22; --ink-mid: #434A57; --ink-soft: #6C7480; --ink-faint: #949BA7;
+    --accent: #2F6490; --accent-soft: #EBF3F9; --accent-line: #AECAE0;
+    --warm: #8A6420; --warm-soft: #F8F2E6; --warm-line: #E2D5B9;
+    --bad: #8C3A3A; --bad-soft: #F9EEEE; --bad-line: #E0BEBE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #12151B; --surface: #191D25; --surface-2: #1F242D;
+      --line: #333A46; --hair: #272D37;
+      --ink: #E9ECF2; --ink-mid: #B6BDC9; --ink-soft: #8B93A1; --ink-faint: #6B7280;
+      --accent: #7BAAD2; --accent-soft: #1B2836; --accent-line: #2E4A66;
+      --warm: #D9B571; --warm-soft: #2A2418; --warm-line: #4A3E24;
+      --bad: #D89393; --bad-soft: #2C1C1C; --bad-line: #4E3030;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12151B; --surface: #191D25; --surface-2: #1F242D;
+    --line: #333A46; --hair: #272D37;
+    --ink: #E9ECF2; --ink-mid: #B6BDC9; --ink-soft: #8B93A1; --ink-faint: #6B7280;
+    --accent: #7BAAD2; --accent-soft: #1B2836; --accent-line: #2E4A66;
+    --warm: #D9B571; --warm-soft: #2A2418; --warm-line: #4A3E24;
+    --bad: #D89393; --bad-soft: #2C1C1C; --bad-line: #4E3030;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  /* 한글은 어절 중간에서 끊기면 읽기 어려우므로 keep-all 로 어절 단위 줄바꿈 */
+  body { background: var(--ground); color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.78; -webkit-font-smoothing: antialiased;
+    word-break: keep-all; overflow-wrap: break-word; }
+  p, li, td, th, figcaption, .lede, .stand, .cap, .row .d, .note p, .part p, dd {
+    text-wrap: pretty; }
+  h1, h2, h3, h4, h5, .row .t, .card h5 { text-wrap: balance; word-break: keep-all; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; word-break: normal; }
+
+  .shell { display: flex; align-items: flex-start; gap: 0; }
+  .tscroll, .flow, .cols, pre, .note, ul.rule { max-width: 1560px; }
+
+  /* ── LNB ───────────────────────────────────────── */
+  .lnb { position: sticky; top: 0; align-self: flex-start; flex: none; width: 262px;
+    height: 100vh; overflow-y: auto; padding: 26px 20px 28px 24px; overscroll-behavior: contain;
+    border-right: 1px solid var(--line); background: var(--surface); }
+  .lnb .bmark { display: block; font-size: 14px; font-weight: 600; letter-spacing: -.018em;
+    color: var(--ink); margin-bottom: 3px; }
+  .lnb .bsub { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9.5px;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 16px; }
+  .lnb .grp { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 15px 0 5px; }
+  .lnb .grp:first-of-type { margin-top: 0; }
+  .lnb a { display: block; text-decoration: none; color: var(--ink-soft); font-size: 13px;
+    padding: 5px 11px; border-radius: 4px; line-height: 1.4; }
+  .lnb a:hover { background: var(--surface-2); color: var(--ink); }
+  .lnb a.on { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+  .lnb a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .lnb .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 9px;
+    letter-spacing: .08em; color: var(--warm); border: 1px solid var(--warm-line);
+    background: var(--warm-soft); border-radius: 3px; padding: 1px 5px; margin-left: 6px;
+    vertical-align: 1px; }
+
+  /* ── 본문 ──────────────────────────────────────── */
+  main { flex-grow: 1; min-width: 0; padding: 40px 52px 110px; }
+  @media (max-width: 860px) {
+    .shell { display: block; }
+    .lnb { position: static; width: auto; height: auto; border-right: 0;
+      border-bottom: 1px solid var(--line); }
+    main { padding: 28px 22px 80px; }
+  }
+
+  header.mast { padding-bottom: 24px; border-bottom: 2px solid var(--ink); }
+  .kick { font-family: "IBM Plex Mono", monospace; font-size: .72rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+  h1 { font-size: clamp(1.7rem, 3.6vw, 2.25rem); font-weight: 600; line-height: 1.3;
+    letter-spacing: -.026em; margin: 0 0 12px; }
+  .stand { font-size: 1.02rem; color: var(--ink-mid); max-width: 76ch; margin: 0; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--hair); font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem; color: var(--ink-faint); }
+  .meta b { color: var(--ink-soft); font-weight: 500; }
+
+  .part { margin-top: 62px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .part .n { font-family: "IBM Plex Mono", monospace; font-size: .7rem; letter-spacing: .16em;
+    color: var(--accent); display: block; margin-bottom: 6px; }
+  .part h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -.026em; margin: 0 0 8px; }
+  .part p { margin: 0; color: var(--ink-mid); max-width: 76ch; font-size: .95rem; }
+
+  section { margin-top: 46px; scroll-margin-top: 24px; }
+  h3 { font-size: 1.18rem; font-weight: 600; letter-spacing: -.022em; line-height: 1.45;
+    margin: 0 0 8px; }
+  .lede { color: var(--ink-mid); max-width: 76ch; margin: 0 0 22px; }
+  h4 { font-size: .93rem; font-weight: 600; margin: 30px 0 12px; letter-spacing: -.012em; }
+  p { max-width: 76ch; margin: 0 0 14px; }
+  b { font-weight: 600; }
+
+  .tscroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 5px;
+    background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .86rem; }
+  thead th { text-align: left; font-size: .69rem; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-faint); background: var(--surface-2);
+    padding: 11px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--hair); vertical-align: top;
+    color: var(--ink-mid); line-height: 1.68; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+  .cap { font-size: .78rem; color: var(--ink-faint); margin: 10px 0 0; max-width: 80ch;
+    line-height: 1.7; }
+
+  ul.rule { list-style: none; padding: 0; margin: 0; counter-reset: r; }
+  ul.rule > li { counter-increment: r; position: relative; padding: 15px 0 15px 42px;
+    border-bottom: 1px solid var(--hair); color: var(--ink-mid); max-width: 80ch; }
+  ul.rule > li:last-child { border-bottom: 0; }
+  ul.rule > li::before { content: counter(r); position: absolute; left: 0; top: 15px;
+    width: 25px; height: 25px; border-radius: 50%; background: var(--accent); color: #fff;
+    font-family: "IBM Plex Mono", monospace; font-size: .7rem;
+    display: flex; align-items: center; justify-content: center; }
+  ul.rule b { color: var(--ink); }
+
+  .flow { display: flex; flex-direction: column; gap: 10px; margin: 0 0 12px; }
+  .row { display: flex; gap: 14px; align-items: flex-start; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 5px; padding: 15px 18px; }
+  .row.key { border-color: var(--accent-line); background: var(--accent-soft); }
+  .row .k { font-family: "IBM Plex Mono", monospace; font-size: .74rem; color: var(--accent);
+    flex: none; width: 20px; padding-top: 2px; }
+  .row .b { flex-grow: 1; min-width: 0; }
+  .row .t { font-weight: 600; font-size: .95rem; display: block; margin-bottom: 4px; }
+  .row .d { font-size: .87rem; color: var(--ink-mid); line-height: 1.72; max-width: 92ch; }
+
+  pre { font-family: "IBM Plex Mono", monospace; font-size: .8rem; line-height: 1.85;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 20px; overflow-x: auto; margin: 0 0 12px; color: var(--ink-mid);
+    word-break: normal; }
+  pre b { color: var(--ink); font-weight: 500; }
+  pre .a { color: var(--accent); }
+  pre .f { color: var(--ink-faint); }
+
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 20px 20px; }
+  .card h5 { margin: 0 0 10px; font-size: .72rem; font-family: "IBM Plex Mono", monospace;
+    letter-spacing: .1em; text-transform: uppercase; padding-bottom: 9px;
+    border-bottom: 1px solid var(--hair); font-weight: 600; }
+  .card.a h5 { color: var(--ink-faint); }
+  .card.b h5 { color: var(--accent); }
+  .card.warn h5 { color: var(--bad); }
+  .card ul { list-style: none; margin: 0; padding: 0; font-size: .87rem; }
+  .card li { padding: 7px 0; color: var(--ink-mid); border-bottom: 1px solid var(--hair); }
+  .card li:last-child { border-bottom: 0; }
+  .card li b { color: var(--ink); }
+
+  .note { background: var(--warm-soft); border: 1px solid var(--warm-line); border-radius: 5px;
+    padding: 16px 20px; margin: 0 0 14px; }
+  .note .lb { font-family: "IBM Plex Mono", monospace; font-size: .68rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--warm); display: block; margin-bottom: 7px; }
+  .note p { margin: 0; font-size: .89rem; color: var(--ink-mid); max-width: 80ch; }
+  .note.q { background: var(--accent-soft); border-color: var(--accent-line); }
+  .note.q .lb { color: var(--accent); }
+  .note.bad { background: var(--bad-soft); border-color: var(--bad-line); }
+  .note.bad .lb { color: var(--bad); }
+
+  /* 원문 인용 */
+  blockquote { margin: 0 0 14px; padding: 14px 20px; border-left: 3px solid var(--accent-line);
+    background: var(--surface); border-radius: 0 5px 5px 0; max-width: 92ch; }
+  blockquote p { margin: 0 0 6px; font-size: .89rem; color: var(--ink-mid); max-width: none; }
+  blockquote p:last-child { margin: 0; }
+  blockquote .src { font-family: "IBM Plex Mono", monospace; font-size: .68rem;
+    letter-spacing: .06em; color: var(--ink-faint); display: block; margin-top: 8px; }
+  blockquote em { font-style: normal; color: var(--ink); font-weight: 500; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--ink); }
+  .ext { display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font-family: "IBM Plex Mono", monospace; font-size: .72rem; letter-spacing: .02em;
+    color: var(--accent); border: 1px solid var(--accent-line); background: var(--accent-soft);
+    padding: 4px 10px; border-radius: 4px; white-space: nowrap; }
+  .ext::after { content: "↗"; font-size: .95em; opacity: .65; }
+  .ext:hover { border-color: var(--accent); color: var(--accent); filter: brightness(.97); }
+  .ext:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .sechead { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 0 0 8px; }
+  .sechead h3 { margin: 0; }
+  td a { word-break: break-all; }
+
+  .verdict { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: .66rem;
+    letter-spacing: .08em; text-transform: uppercase; border-radius: 3px; padding: 2px 7px;
+    vertical-align: 2px; white-space: nowrap; }
+  .verdict.yes { color: var(--accent); border: 1px solid var(--accent-line);
+    background: var(--accent-soft); }
+  .verdict.no { color: var(--bad); border: 1px solid var(--bad-line);
+    background: var(--bad-soft); }
+
+  footer.doc { margin-top: 62px; padding-top: 20px; border-top: 1px solid var(--line);
+    font-size: .78rem; color: var(--ink-faint); }
+  footer.doc p { max-width: 80ch; margin: 0 0 6px; line-height: 1.7; }
+  footer.doc h4 { font-size: .78rem; color: var(--ink-soft); margin: 18px 0 8px; }
+  footer.doc ul { margin: 0 0 6px; padding-left: 18px; }
+  footer.doc li { margin-bottom: 4px; line-height: 1.7; }
+
+  @media print {
+    .lnb { display: none; }
+    body { background: #fff; font-size: 11pt; }
+    main { padding: 0; }
+    .row, .card, pre, .tscroll, blockquote, .note { break-inside: avoid; }
+  }
+
+  /* ---- Part 4 : 대조 도식 ---- */
+  .dia { margin: 20px 0 10px; max-width: 1560px; }
+  .dia svg { width: 100%; height: auto; display: block;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px; }
+  .dia figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: 9px;
+    text-wrap: pretty; word-break: keep-all; }
+  .dia svg text { font-family: "IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;
+    fill: var(--ink-mid); }
+  .dia svg .dh { font-size: 12.5px; font-weight: 600; fill: var(--ink); }
+  .dia svg .dt { font-size: 12px; font-weight: 600; fill: var(--ink); }
+  .dia svg .ds { font-size: 10.5px; fill: var(--ink-mid); }
+  .dia svg .dx { font-size: 9.5px; fill: var(--ink-soft); }
+  .dia svg .dl { font-size: 9.5px; letter-spacing: .06em; }
+  .dia svg .a { fill: var(--accent); }
+  .dia svg .f { fill: var(--ink-faint); }
+  .dia svg .bad { fill: var(--bad); }
+  .dia svg .ln { stroke: var(--ink-faint); stroke-width: 1.1; fill: none; }
+  .dia svg .ln-hair { stroke: var(--hair); stroke-width: 1; fill: none; }
+  .dia svg .bx-key { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+  .dia svg .bx-pill { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+  .dia svg .bx-mute { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  .dia svg .bx-bad { fill: var(--bad-soft); stroke: var(--bad-line); stroke-width: 1;
+    stroke-dasharray: 4 3; }
+  .dia svg .chip rect { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  .dia svg .chip text { font-size: 10px; fill: var(--ink-soft); }
+  .grp2 { font-size: .78rem; font-weight: 600; color: var(--ink-soft);
+    margin: 26px 0 8px; padding-left: 10px; border-left: 2px solid var(--accent-line); }
+  .verdict.ko { font-family: inherit; letter-spacing: 0; text-transform: none;
+    font-size: .72rem; font-weight: 600; }
+  td.bad-cell { background: var(--bad-soft); }
+
+  /* LNB 스크롤바 — 평소 숨김 · 커서 올릴 때만 노출 (gutter 고정으로 레이아웃 이동 없음) */
+  .lnb { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+  .lnb:hover { scrollbar-color: var(--line) transparent; }
+  .lnb::-webkit-scrollbar { width: 6px; }
+  .lnb::-webkit-scrollbar-track { background: transparent; }
+  .lnb::-webkit-scrollbar-thumb { background: transparent; border-radius: 3px;
+    transition: background .15s ease; }
+  .lnb:hover::-webkit-scrollbar-thumb { background: var(--line); }
+  .lnb:hover::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+</style>
+<body>
+<div class="shell">
+
+<nav class="lnb">
+  <span class="bmark">통합결제 / 웹샵 구조</span>
+  <span class="bsub">Ragnarok Portal · 2026-09</span>
+
+  <p class="grp">시스템 구성</p>
+  <a href="#a1">본사 제공 범위</a>
+  <a href="#a2">지사 도입 절차</a>
+
+  <p class="grp">자금 · 매출</p>
+  <a href="#b1">자금 흐름 및 매출 귀속</a>
+  <a href="#b2">법인 간 거래 격리</a>
+
+  <p class="grp">운영 원칙</p>
+  <a href="#c1">거래 단위 원칙</a>
+  <a href="#c2">서버 검증 요건</a>
+
+  <p class="grp">확장성</p>
+  <a href="#d1">증설 시 소요 작업</a>
+  <a href="#d2">판매 채널별 적용 범위</a>
+
+</nav>
+
+<main>
+
+<header class="mast">
+  <p class="kick">Design · Payment &amp; Webshop</p>
+  <h1>통합결제 / 웹샵 구조</h1>
+  <p class="stand"><b>본사가 통합 결제 모듈과 웹샵 템플릿을 단일 구성으로 제공하고, 각 지사는 자사 PG 키를 연동해 사용한다.</b>
+  매출과 자금은 본사를 경유하지 않고 해당 지사에 직접 귀속된다.</p>
+  <div class="meta">
+    <span><b>대상</b> 웹샵 템플릿 · 통합 결제 페이지 · 지사 연동</span>
+    <span><b>연계 문서</b> 포털 메인 구조 · 랜드 회원·인증 설계</span>
+    <span><b>작성</b> 2026-09-08</span>
+  </div>
+</header>
+
+<div class="part">
+  <span class="n">Part 1</span>
+  <h2>시스템 구성</h2>
+  <p>본사 제공 구성요소와 지사 도입 절차. 법인 · 게임 수 증가에 따른 추가 개발이 발생하지 않는 구조.</p>
+</div>
+
+<section id="a1">
+  <h3>본사 제공 범위</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:180px;">구성요소</th><th>구성 내용</th><th style="width:170px;">지사 설정 범위</th></tr></thead>
+      <tbody>
+        <tr><td><b>웹샵 템플릿</b></td><td>상품 목록 · 상품 상세 · 지급 대상 확인 · 선택 상품 · 결제 요청. 호스트 페이지에 삽입하는 <b>SDK 형태</b></td><td>설정 없음 — 데이터 등록만</td></tr>
+        <tr><td><b>통합 결제 페이지</b></td><td>결제수단 선택 및 결제 진행. 웹샵 도메인의 <b>독립 페이지</b></td><td>설정 없음</td></tr>
+        <tr><td><b>관리자</b></td><td>지사 등록 · 키 발급 · 상품 · 가격 · 모니터링 · 환불 · 정산 대사</td><td><b>자사 법인 범위</b>로 제한</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">제공 구성요소는 <b>3종</b>이며, 법인 · 게임 수와 무관하게 재개발이 발생하지 않는다.</p>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 300" role="img" aria-label="본사 제공 구성요소와 지사별 사용 구조">
+      <defs>
+        <marker id="sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="480" y="26" class="dt a" text-anchor="middle">본사 제공</text>
+      <rect x="140" y="42" width="200" height="46" rx="5" class="bx-key"/>
+      <text x="240" y="70" class="ds a" text-anchor="middle">웹샵 템플릿 (SDK)</text>
+      <rect x="380" y="42" width="200" height="46" rx="5" class="bx-key"/>
+      <text x="480" y="70" class="ds a" text-anchor="middle">통합 결제 페이지</text>
+      <rect x="620" y="42" width="200" height="46" rx="5" class="bx-key"/>
+      <text x="720" y="70" class="ds a" text-anchor="middle">관리자</text>
+
+      <line x1="480" y1="90" x2="480" y2="112" class="ln"/>
+      <line x1="200" y1="112" x2="760" y2="112" class="ln"/>
+      <line x1="200" y1="112" x2="200" y2="134" class="ln" marker-end="url(#sa)"/>
+      <line x1="480" y1="112" x2="480" y2="134" class="ln" marker-end="url(#sa)"/>
+      <line x1="760" y1="112" x2="760" y2="134" class="ln" marker-end="url(#sa)"/>
+
+      <rect x="110" y="136" width="180" height="72" rx="5" class="bx-mute"/>
+      <text x="200" y="160" class="ds" text-anchor="middle">GV 한국</text>
+      <text x="200" y="180" class="dx f" text-anchor="middle">gnjoy.com</text>
+      <text x="200" y="197" class="dx f" text-anchor="middle">KRW</text>
+
+      <rect x="390" y="136" width="180" height="72" rx="5" class="bx-mute"/>
+      <text x="480" y="160" class="ds" text-anchor="middle">GVC 대만</text>
+      <text x="480" y="180" class="dx f" text-anchor="middle">ro-abyss.com.tw</text>
+      <text x="480" y="197" class="dx f" text-anchor="middle">TWD HKD MOP USD</text>
+
+      <rect x="670" y="136" width="180" height="72" rx="5" class="bx-mute"/>
+      <text x="760" y="160" class="ds" text-anchor="middle">GGL 인도네시아</text>
+      <text x="760" y="180" class="dx f" text-anchor="middle">ro-abyss.co.id</text>
+      <text x="760" y="197" class="dx f" text-anchor="middle">IDR USD</text>
+
+      <text x="480" y="232" class="ds f" text-anchor="middle">지사 등록 항목 — 도메인 · 키 · 통화 · 상품 / 추가 개발 없음</text>
+
+      <line x1="70" y1="252" x2="890" y2="252" class="ln-hair"/>
+      <text x="480" y="278" class="dt" text-anchor="middle">단일 구성 · 법인 × 게임 조합별 데이터 분리</text>
+    </svg>
+    <figcaption>구성요소는 단일이며, 운영 화면은 법인 × 게임 조합별로 별도 데이터를 참조한다.</figcaption>
+  </figure>
+</section>
+
+<section id="a2">
+  <h3>지사 도입 절차</h3>
+
+  <p>지사 도입 작업은 <b>관리자 등록 6개 항목</b>과 <b>호스트 페이지 스크립트 삽입</b>으로 완료된다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:150px;">등록 항목</th><th style="width:290px;">기재 예 — 대만 법인</th><th>등록 주체</th></tr></thead>
+      <tbody>
+        <tr><td><b>도메인</b></td><td><span class="mono">ro-abyss.com.tw</span></td><td>지사</td></tr>
+        <tr><td><b>PG 머천트 · 키</b></td><td>MyCard · GASH — 대만 법인 명의 계약</td><td><b>본사</b> — 지사 원문 조회 불가</td></tr>
+        <tr><td><b>정산 계좌</b></td><td>대만 법인 계좌</td><td>지사</td></tr>
+        <tr><td><b>허용 통화</b></td><td><span class="mono">TWD · HKD · MOP · USD</span></td><td>지사</td></tr>
+        <tr><td><b>게임</b></td><td><span class="mono">ro_abyss</span></td><td>지사</td></tr>
+        <tr><td><b>상품 · 가격</b></td><td>상품 목록 · 통화별 금액</td><td>지사</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+<pre>&lt;div id="ro-webshop"&gt;&lt;/div&gt;
+&lt;script src="<b>https://shop.gnjoy.com/embed/v1.js</b>"
+        data-target="ro-webshop"
+        data-game="<b>ro_abyss</b>"
+        data-lang="<b>zh-TW</b>"&gt;&lt;/script&gt;</pre>
+
+  <p class="cap">전달 파라미터는 <b>게임 코드와 언어</b>로 한정한다. <b>법인 코드는 전달하지 않는다</b> — 프론트엔드 지정을 허용하면 타 법인 가격 적용이 가능하다.</p>
+
+  <h3>연동 요건</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">항목</th><th>요건</th><th style="width:210px;">미적용 시</th></tr></thead>
+      <tbody>
+        <tr><td><b>본문 영역</b></td><td>컨테이너 내부에 <b>Shadow DOM</b>으로 격리 렌더</td><td>호스트 CSS와 상호 간섭</td></tr>
+        <tr><td><b>오버레이 영역</b></td><td>모바일 하단 시트 · 상품 상세 모달 · 알림 딤은 <b>최상위 별도 레이어</b>에 렌더</td><td class="bad-cell">임베드 영역 내부에서만 표시되어 잘림</td></tr>
+        <tr><td><b>로그인 상태</b></td><td>호스트가 <b>토큰</b>으로 전달</td><td class="bad-cell">도메인 상이로 쿠키 차단 가능</td></tr>
+        <tr><td><b>결제 전환</b></td><td>결제 페이지로 <b>화면 전체 전환</b></td><td class="bad-cell">PG 결제창의 프레임 내 로드 제한</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 2</span>
+  <h2>자금 · 매출</h2>
+  <p>자금 수취 및 매출 귀속 경로와, 법인 간 거래가 혼입되지 않는 근거.</p>
+</div>
+
+<section id="b1">
+  <h3>자금 흐름 및 매출 귀속</h3>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 268" role="img" aria-label="법인 판정에서 정산 계좌 입금까지의 자금 흐름">
+      <defs>
+        <marker id="sb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <rect x="24" y="44" width="150" height="52" rx="5" class="bx-mute"/>
+      <text x="99" y="66" class="ds" text-anchor="middle">결제 요청</text>
+      <text x="99" y="84" class="dx f" text-anchor="middle">[결제하기]</text>
+      <line x1="174" y1="70" x2="206" y2="70" class="ln" marker-end="url(#sb)"/>
+
+      <rect x="210" y="44" width="170" height="52" rx="5" class="bx-key"/>
+      <text x="295" y="66" class="ds a" text-anchor="middle">법인 판정</text>
+      <text x="295" y="84" class="dx f" text-anchor="middle">도메인(Origin) → GVC</text>
+      <line x1="380" y1="70" x2="412" y2="70" class="ln" marker-end="url(#sb)"/>
+
+      <rect x="416" y="44" width="180" height="52" rx="5" class="bx-key"/>
+      <text x="506" y="66" class="ds a" text-anchor="middle">해당 법인 머천트 키</text>
+      <text x="506" y="84" class="dx f" text-anchor="middle">대만 법인 명의 계약</text>
+      <line x1="596" y1="70" x2="628" y2="70" class="ln" marker-end="url(#sb)"/>
+
+      <rect x="632" y="44" width="130" height="52" rx="5" class="bx-mute"/>
+      <text x="697" y="66" class="ds" text-anchor="middle">PG</text>
+      <text x="697" y="84" class="dx f" text-anchor="middle">MyCard</text>
+      <line x1="762" y1="70" x2="794" y2="70" class="ln" marker-end="url(#sb)"/>
+
+      <rect x="798" y="44" width="138" height="52" rx="5" class="bx-key"/>
+      <text x="867" y="66" class="ds a" text-anchor="middle">대만 법인 계좌</text>
+      <text x="867" y="84" class="dx f" text-anchor="middle">대만 법인 매출</text>
+
+      <path d="M295 100 L295 128 L640 128 L640 100" class="ln-hair" stroke-dasharray="4 4"/>
+      <text x="467" y="146" class="ds f" text-anchor="middle">프론트엔드 법인 지정 불가 · 인증키 서버 보관</text>
+
+      <line x1="24" y1="176" x2="936" y2="176" class="ln-hair"/>
+      <rect x="330" y="196" width="300" height="44" rx="5" class="bx-mute"/>
+      <text x="480" y="223" class="ds" text-anchor="middle">본사 계좌 미경유 · 본사 수수료 미발생</text>
+    </svg>
+    <figcaption>매출 귀속의 근거는 인증키가 아니라 <b>인증키가 참조하는 PG 계약 명의</b>다.</figcaption>
+  </figure>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">구분</th><th>결정 방식</th></tr></thead>
+      <tbody>
+        <tr><td><b>법인</b></td><td>서버가 <b>등록 도메인</b> 기준으로 판정. 미등록 도메인은 로드 거부</td></tr>
+        <tr><td><b>결제 키</b></td><td>해당 법인 머천트의 인증키. <b>서버에만 보관하며 프론트엔드는 보유하지 않는다</b></td></tr>
+        <tr><td><b>입금 계좌</b></td><td>PG 계약 명의가 지사이므로 <b>대금이 해당 법인 계좌로 입금</b></td></tr>
+        <tr><td><b>매출</b></td><td>입금 계좌가 해당 법인이므로 <b>해당 법인 매출로 계상</b>. 본사 매출로 계상되지 않는다</td></tr>
+        <tr><td><b>세무</b></td><td>각 법인이 소재 국가에서 납부 — 현행 구조와 동일</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">본사가 대금을 일괄 수취해 배분하는 경우 해외 수익이 <b>본사 매출로 계상</b>되고, 각 국가로 재송금하는 과정에서 세무 이슈가 발생한다. 계약 명의를 지사가 보유하는 근거다.</p>
+</section>
+
+<section id="b2">
+  <h3>법인 간 거래 격리</h3>
+
+  <p>법인은 도메인으로 확정되며, <b>지급 대상 확정도 해당 법인 범위 내에서만 가능</b>하다.</p>
+
+  <div class="cols">
+    <div class="card a">
+      <h5>비회원 — 캐릭터 인증</h5>
+      <ul>
+        <li>서버 목록에 <b>해당 법인 서버만</b> 노출</li>
+        <li>타 법인 캐릭터 ID 입력 시 <b>인증 실패</b></li>
+        <li>인증 완료 전 <b>[결제하기] 비활성</b></li>
+      </ul>
+    </div>
+    <div class="card b">
+      <h5>회원 — 로그인</h5>
+      <ul>
+        <li><b>해당 법인 게임 캐릭터만</b> 조회</li>
+        <li>캐릭터 미보유 시 결제 불가 — 빈 상태 안내</li>
+        <li>랜드 계정에 <b>해당 법인 GNJOY 바인딩</b>이 있어야 조회 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="lb">캐릭터 기반 상품으로 한정한 근거</span>
+    <p>캐릭터 특정이 결제 선행 조건이므로 <b>법인이 자동 확정</b>된다.
+    로그인 없이도 매출 귀속이 유지되는 이유다.
+    회원 흐름에서는 회원·인증 설계의 <b>「GNJOY 미바인딩 시 해당 지사 게임 조회 불가」</b> 규칙이 동일한 역할을 수행한다.</p>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 3</span>
+  <h2>운영 원칙</h2>
+  <p>거래 단위 및 상품 범위 원칙과, 이를 보장하는 서버 검증 요건.</p>
+</div>
+
+<section id="c1">
+  <h3>거래 단위 원칙</h3>
+
+<pre>주문 1건 = 상품 1개 = 지급 1회 = 환불 1회      <b>수량 · 장바구니 미적용</b>
+상품 범위는 캐릭터 기반으로 한정                <b>로그인 없이 지급 대상 확정 가능</b></pre>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:200px;">원칙이 차단하는 사항</th><th>원칙 미적용 시</th></tr></thead>
+      <tbody>
+        <tr><td><b>부분 취소</b></td><td>복수 건 중 일부 환불 시 <b>부분취소 미지원 결제수단</b>에서 처리 불가 — 간편결제 · 통신사 결제</td></tr>
+        <tr><td><b>부분 지급 실패</b></td><td>3건 중 1건만 실패하는 상태가 발생하며 고객 안내가 불가능</td></tr>
+        <tr><td><b>지급 대상 혼재</b></td><td>캐릭터 지급 상품과 계정 지급 상품이 혼재되어 <b>지급 대상을 단일로 확정할 수 없음</b></td></tr>
+        <tr><td><b>쿠폰 분할 발급</b></td><td>비회원 쿠폰이 수량만큼 발급되어 <b>부분 사용 상태</b>가 발생</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">위 4개 항목은 사후 보완이 아닌 <b>구조적 차단</b>이 필요한 사항이다.</p>
+</section>
+
+<section id="c2">
+  <h3>서버 검증 요건</h3>
+
+  <p>매출 귀속을 보장하는 필수 검증 항목이다. <b>프론트엔드 전달값은 신뢰 대상으로 취급하지 않는다.</b></p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:60px;">No</th><th style="width:230px;">검증 항목</th><th>미검증 시</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td><b>도메인 등록 여부</b></td><td>미등록 사이트에서 웹샵 로드 가능</td></tr>
+        <tr><td class="mono">2</td><td><b>법인 × 게임 조합 등록 여부</b></td><td class="bad-cell">도메인이 유효한 상태에서 해당 법인 미서비스 게임으로 결제 가능</td></tr>
+        <tr><td class="mono">3</td><td><b>통화 허용 여부</b></td><td class="bad-cell">법인 미허용 통화로 결제 가능</td></tr>
+        <tr><td class="mono">4</td><td><b>금액 서버 산출</b></td><td class="bad-cell">프론트엔드 전달 금액으로 결제 — 11,000원 → 1,100원 변조 가능</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">2 · 3번은 <b>도메인 검증만으로 차단되지 않는다.</b> 도메인이 유효한 경우에도 조합과 통화는 별도 검증이 필요하다.</p>
+</section>
+
+<div class="part">
+  <span class="n">Part 4</span>
+  <h2>확장성</h2>
+  <p>법인 · 게임 · PG 증설 시 소요 작업과, 상품 유형별 판매 채널 구분.</p>
+</div>
+
+<section id="d1">
+  <h3>증설 시 소요 작업</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:150px;">증설 대상</th><th>소요 작업</th><th style="width:110px;">개발 여부</th></tr></thead>
+      <tbody>
+        <tr><td><b>신규 법인</b></td><td>도메인 등록 · PG 계약 · 키 세팅 · 통화 · 상품 · 가격 등록</td><td><b>없음</b></td></tr>
+        <tr><td><b>신규 게임</b></td><td>게임 등록 · 상품 · 가격 등록</td><td><b>없음</b></td></tr>
+        <tr><td><b>신규 국가</b></td><td>해당 법인에 <b>통화 추가</b> 및 해당 통화 가격 등록</td><td><b>없음</b></td></tr>
+        <tr><td><b>신규 PG</b></td><td>본사 어댑터 연동 — 연동 후 <b>전 법인 사용 가능</b></td><td>1회</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">통화 확장에 따른 가격 등록 부하</span>
+    <p>단일 법인이 복수 국가를 운영하므로 통화가 복수로 구성된다 — 대만 법인은 TWD · HKD · MOP · USD 4종이다.
+    상품 12종 기준 <b>48건</b>이며 9개 법인 합계 <b>200건 이상</b>이 된다.
+    통화별 개별 입력 대신 <b>가격 등급(Price Tier)</b>으로 묶어 등급당 통화별 금액을 일괄 정의하는 방식 검토가 필요하다.</p>
+  </div>
+</section>
+
+<section id="d2">
+  <h3>판매 채널별 적용 범위</h3>
+
+  <p>상품 유형에 따라 <b>판매 채널을 나눈다.</b> 캐릭터 기반 상품은 <b>회원 · 비회원 모두</b> 웹샵에서 구매하고,
+  계정 기반 상품과 정액제 · 구독은 <b>지사 포털 반영을 기본</b>으로 하며 웹샵은 <b>후속 과제</b>로 둔다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">상품 유형</th><th style="width:120px;">구매 주체</th><th style="width:96px;">웹샵</th><th style="width:106px;">지사 포털</th><th>채널 구분 근거</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>캐릭터 기반 상품</b><br><span class="mono">아이템 · 의상 · 소비 · 패키지</span></td>
+          <td><b>회원 · 비회원</b></td>
+          <td><span class="verdict yes">기본</span></td>
+          <td><span class="verdict yes">가능</span></td>
+          <td>캐릭터 특정으로 지급 대상이 확정된다. 회원은 캐릭터 목록에서 선택하고 비회원은 캐릭터 인증으로 확정한다 — <b>비회원까지 구매가 성립</b>하는 유일한 유형이다</td>
+        </tr>
+        <tr>
+          <td><b>계정 기반 상품</b><br><span class="mono">포인트 · 계정한정</span></td>
+          <td><b>회원</b></td>
+          <td><span class="verdict ko">후속</span></td>
+          <td><span class="verdict yes">기본</span></td>
+          <td>지급 대상이 계정이므로 <b>로그인이 전제</b>다. 지사 포털은 로그인 계정이 곧 해당 법인 GNJOY 계정이어서 <b>대상과 법인이 동시에 확정</b>된다</td>
+        </tr>
+        <tr>
+          <td><b>정액제 · 구독</b></td>
+          <td><b>회원</b></td>
+          <td><span class="verdict no">후속</span></td>
+          <td><span class="verdict yes">기본</span></td>
+          <td>갱신은 사용자 조작 없이 청구되므로 <b>도메인 기준 법인 판정이 불가</b>하다. 지사 포털은 계정이 법인을 확정해 <b>해당 문제가 발생하지 않는다</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">채널을 가르는 기준은 <b>로그인 필요 여부</b>다.
+  웹샵은 <b>비회원 구매를 지원</b>해야 하므로 캐릭터 기반 상품으로 한정하며 — <b>회원 구매도 동일하게 지원한다</b> —
+  로그인이 전제인 상품군은 <b>지사 포털에서 처리</b>한다.
+  통합 결제 페이지는 두 채널을 모두 지원하므로 <b>결제 모듈 변경은 발생하지 않는다.</b></p>
+
+  <h3>지사 포털 반영 시 확정 사항</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>지급 대상 확정</b></td><td>로그인 계정이 해당 법인 GNJOY 계정이므로 <b>추가 확인 절차 없이 확정</b>된다. <span class="mono">(지사코드, GNJOY계정ID) → 포털계정</span>이 <b>1:1</b>이다</td></tr>
+        <tr><td><b>상품 적용 범위</b></td><td>포인트는 계정 지갑에 귀속되어 게임과 무관하다. 정액제가 특정 게임 이용권이면 <b>상품 정의에 게임 범위</b>가 필요하다</td></tr>
+        <tr><td><b>구매내역 조회 기준</b></td><td>지사 포털은 <b>해당 법인 구매만</b> 조회된다. 랜드 포털에서 통합 조회하려면 <b>GNJOY 바인딩</b>이 선행된다</td></tr>
+        <tr><td><b>구독 구현 항목</b></td><td>빌링키 · 갱신 실패 · 해지 환불 · 가격 변경 · 통화 고정 · 법정 고지 · 정산 대사 — <b>구독 서비스 일반 요건 7건</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>웹샵 후속 과제</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">항목</th><th>대응 방식</th></tr></thead>
+      <tbody>
+        <tr><td><b>계정 기반 상품</b></td><td><b>지급 대상 축만 추가</b>한다. 도메인이 법인을 확정하고 해당 법인 GNJOY 바인딩이 대상을 확정 — <b>기존 구조 변경 없음</b>. 미바인딩 계정은 <b>연결 유도</b> 후 진행</td></tr>
+        <tr><td><b>정액제 · 구독</b></td><td>최초 결제의 <b>법인 · 통화 · 결제수단을 세션에 고정</b>해 갱신 시 재사용한다. 지사 포털 도입 이후 검토한다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lb">정액제 선행 도입 시 대안</span>
+    <p>30일 이용권을 <b>구독이 아닌 소비 아이템</b>으로 등록하면 반복 결제가 발생하지 않는다.
+    기간 만료 후 재구매 방식이므로 <b>현 구조로 판매 가능</b>하며, 웹샵 · 지사 포털 양쪽에서 동일하게 취급된다.</p>
+  </div>
+
+</section>
+
+<footer class="doc">
+  <h4>관련 문서</h4>
+  <ul>
+    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a></b> — 본 구조의 화면 정의. 임베드 처리 방식 9단계 · 기타사항 7건</li>
+    <li><b><a href="payment.html">결제 설계</a></b> — 본사 · 지사 역할 분담 및 관리자 구성</li>
+    <li><b><a href="land-auth.html">랜드 회원·인증 설계</a></b> — 계정 모델 · GNJOY 9종 바인딩 · 유일성 규칙</li>
+    <li><b><a href="global-payment.html">글로벌 결제 설계 (상세)</a></b> — 규격 · 필드 · 확인 필요 사항 19건</li>
+  </ul>
+
+  <p style="margin-top:18px">라그나로크 포털 · 통합결제 / 웹샵 구조 · 2026-09-08</p>
+</footer>
+</main>
+</div>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.lnb a'));
+  var map = {};
+  links.forEach(function (a) {
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) map[el.id] = a;
+  });
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove('on'); });
+      var a = map[e.target.id];
+      if (a) a.classList.add('on');
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  Object.keys(map).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
+</script>
+
+
+
+<style>
+  #docnav { position: fixed; left: 14px; bottom: 14px; z-index: 2147483000;
+    font-family: "Pretendard", "Malgun Gothic", -apple-system, sans-serif; }
+  #docnav * { box-sizing: border-box; }
+  #docnav-b { display: inline-flex; align-items: center; gap: 7px; height: 32px;
+    padding: 0 13px; border: 1px solid #C9D1D9; border-radius: 16px; background: #fff;
+    color: #3B4654; font-size: 12px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(23,27,34,.14); }
+  #docnav-b:hover { border-color: #2F6490; color: #2F6490; }
+  #docnav-b i { font-style: normal; font-size: 9px; }
+  #docnav-m { display: none; position: absolute; left: 0; bottom: 38px; min-width: 236px;
+    padding: 6px; border: 1px solid #D5DBE2; border-radius: 8px; background: #fff;
+    box-shadow: 0 8px 26px rgba(23,27,34,.16); }
+  #docnav.on #docnav-m { display: block; }
+  #docnav-m .g { padding: 7px 10px 4px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .04em; color: #97A0AC; }
+  #docnav-m a { display: block; padding: 8px 10px; border-radius: 5px; font-size: 12.5px;
+    color: #2C333D; text-decoration: none; white-space: nowrap; }
+  #docnav-m a:hover { background: #F1F4F7; }
+  #docnav-m a.on { color: #2F6490; font-weight: 700; background: #EDF3F8; }
+  @media print { #docnav { display: none; } }
+</style>
+<div id="docnav">
+  <div id="docnav-m">
+    <div class="g">화면정의서</div>
+    <a href="../../wireframe/portal-main-auth-screens.html">라그나로크 포털 화면정의서</a>
+    <a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a>
+    <a href="../../wireframe/payment-checkout-currency.html">통합 결제창 화면정의서</a>
+    <a href="../../wireframe/payment-admin-screens.html">결제 관리자 화면정의서</a>
+    <div class="g">설계</div>
+    <a href="portal-main-structure.html">포털 메인 구조</a>
+    <a href="land-auth.html">랜드 회원·인증 설계</a>
+    <a href="payment.html">결제 설계 — 프로세스 · 구조</a>
+    <a href="payment-webshop-structure.html" class="on">통합결제 / 웹샵 구조</a>
+    <a href="global-payment.html">글로벌 결제 설계 (상세)</a>
+    <div class="g">벤치마킹</div>
+    <a href="../benchmark/ip-portal.html">IP 포털 벤치마킹</a>
+    <a href="../benchmark/nc-auth.html">NC 회원·인증 통합 벤치마킹</a>
+    <a href="../benchmark/pg-multi-entity.html">PG 다중법인 구조 벤치마킹</a>
+    <a href="../benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a>
+    <a href="../benchmark/webshop-payment.html">웹샵 결제 벤치마킹</a>
+    <div class="g">전체</div>
+    <a href="../../index.html">문서 목록</a>
+  </div>
+  <span id="docnav-b">문서 <i>&#9650;</i></span>
+</div>
+<script>
+(function () {
+  var n = document.getElementById('docnav'), b = document.getElementById('docnav-b');
+  b.addEventListener('click', function (e) { e.stopPropagation(); n.classList.toggle('on'); });
+  document.addEventListener('click', function () { n.classList.remove('on'); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') n.classList.remove('on');
+  });
+})();
+</script>
+</body>
+</html>

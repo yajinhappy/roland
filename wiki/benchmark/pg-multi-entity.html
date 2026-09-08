@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PG 다중법인 구조 벤치마킹</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #EDEEF1; --surface: #FFFFFF; --surface-2: #F5F6F8;
+    --line: #D9DEE5; --hair: #E7EAEF;
+    --ink: #171B22; --ink-mid: #434A57; --ink-soft: #6C7480; --ink-faint: #949BA7;
+    --accent: #2F6490; --accent-soft: #EBF3F9; --accent-line: #AECAE0;
+    --warm: #8A6420; --warm-soft: #F8F2E6; --warm-line: #E2D5B9;
+    --bad: #8C3A3A; --bad-soft: #F9EEEE; --bad-line: #E0BEBE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #12151B; --surface: #191D25; --surface-2: #1F242D;
+      --line: #333A46; --hair: #272D37;
+      --ink: #E9ECF2; --ink-mid: #B6BDC9; --ink-soft: #8B93A1; --ink-faint: #6B7280;
+      --accent: #7BAAD2; --accent-soft: #1B2836; --accent-line: #2E4A66;
+      --warm: #D9B571; --warm-soft: #2A2418; --warm-line: #4A3E24;
+      --bad: #D89393; --bad-soft: #2C1C1C; --bad-line: #4E3030;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12151B; --surface: #191D25; --surface-2: #1F242D;
+    --line: #333A46; --hair: #272D37;
+    --ink: #E9ECF2; --ink-mid: #B6BDC9; --ink-soft: #8B93A1; --ink-faint: #6B7280;
+    --accent: #7BAAD2; --accent-soft: #1B2836; --accent-line: #2E4A66;
+    --warm: #D9B571; --warm-soft: #2A2418; --warm-line: #4A3E24;
+    --bad: #D89393; --bad-soft: #2C1C1C; --bad-line: #4E3030;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  /* 한글은 어절 중간에서 끊기면 읽기 어려우므로 keep-all 로 어절 단위 줄바꿈 */
+  body { background: var(--ground); color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.78; -webkit-font-smoothing: antialiased;
+    word-break: keep-all; overflow-wrap: break-word; }
+  p, li, td, th, figcaption, .lede, .stand, .cap, .row .d, .note p, .part p, dd {
+    text-wrap: pretty; }
+  h1, h2, h3, h4, h5, .row .t, .card h5 { text-wrap: balance; word-break: keep-all; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; word-break: normal; }
+
+  .shell { display: flex; align-items: flex-start; gap: 0; }
+  .tscroll, .flow, .cols, pre, .note, ul.rule { max-width: 1560px; }
+
+  /* ── LNB ───────────────────────────────────────── */
+  .lnb { position: sticky; top: 0; align-self: flex-start; flex: none; width: 262px;
+    height: 100vh; overflow-y: auto; padding: 26px 20px 28px 24px; overscroll-behavior: contain;
+    border-right: 1px solid var(--line); background: var(--surface); }
+  .lnb .bmark { display: block; font-size: 14px; font-weight: 600; letter-spacing: -.018em;
+    color: var(--ink); margin-bottom: 3px; }
+  .lnb .bsub { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9.5px;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 16px; }
+  .lnb .grp { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 15px 0 5px; }
+  .lnb .grp:first-of-type { margin-top: 0; }
+  .lnb a { display: block; text-decoration: none; color: var(--ink-soft); font-size: 13px;
+    padding: 5px 11px; border-radius: 4px; line-height: 1.4; }
+  .lnb a:hover { background: var(--surface-2); color: var(--ink); }
+  .lnb a.on { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+  .lnb a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .lnb .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 9px;
+    letter-spacing: .08em; color: var(--warm); border: 1px solid var(--warm-line);
+    background: var(--warm-soft); border-radius: 3px; padding: 1px 5px; margin-left: 6px;
+    vertical-align: 1px; }
+
+  /* ── 본문 ──────────────────────────────────────── */
+  main { flex-grow: 1; min-width: 0; padding: 40px 52px 110px; }
+  @media (max-width: 860px) {
+    .shell { display: block; }
+    .lnb { position: static; width: auto; height: auto; border-right: 0;
+      border-bottom: 1px solid var(--line); }
+    main { padding: 28px 22px 80px; }
+  }
+
+  header.mast { padding-bottom: 24px; border-bottom: 2px solid var(--ink); }
+  .kick { font-family: "IBM Plex Mono", monospace; font-size: .72rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+  h1 { font-size: clamp(1.7rem, 3.6vw, 2.25rem); font-weight: 600; line-height: 1.3;
+    letter-spacing: -.026em; margin: 0 0 12px; }
+  .stand { font-size: 1.02rem; color: var(--ink-mid); max-width: 76ch; margin: 0; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--hair); font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem; color: var(--ink-faint); }
+  .meta b { color: var(--ink-soft); font-weight: 500; }
+
+  .part { margin-top: 62px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .part .n { font-family: "IBM Plex Mono", monospace; font-size: .7rem; letter-spacing: .16em;
+    color: var(--accent); display: block; margin-bottom: 6px; }
+  .part h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -.026em; margin: 0 0 8px; }
+  .part p { margin: 0; color: var(--ink-mid); max-width: 76ch; font-size: .95rem; }
+
+  section { margin-top: 46px; scroll-margin-top: 24px; }
+  h3 { font-size: 1.18rem; font-weight: 600; letter-spacing: -.022em; line-height: 1.45;
+    margin: 0 0 8px; }
+  .lede { color: var(--ink-mid); max-width: 76ch; margin: 0 0 22px; }
+  h4 { font-size: .93rem; font-weight: 600; margin: 30px 0 12px; letter-spacing: -.012em; }
+  p { max-width: 76ch; margin: 0 0 14px; }
+  b { font-weight: 600; }
+
+  .tscroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 5px;
+    background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .86rem; }
+  thead th { text-align: left; font-size: .69rem; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-faint); background: var(--surface-2);
+    padding: 11px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--hair); vertical-align: top;
+    color: var(--ink-mid); line-height: 1.68; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+  .cap { font-size: .78rem; color: var(--ink-faint); margin: 10px 0 0; max-width: 80ch;
+    line-height: 1.7; }
+
+  ul.rule { list-style: none; padding: 0; margin: 0; counter-reset: r; }
+  ul.rule > li { counter-increment: r; position: relative; padding: 15px 0 15px 42px;
+    border-bottom: 1px solid var(--hair); color: var(--ink-mid); max-width: 80ch; }
+  ul.rule > li:last-child { border-bottom: 0; }
+  ul.rule > li::before { content: counter(r); position: absolute; left: 0; top: 15px;
+    width: 25px; height: 25px; border-radius: 50%; background: var(--accent); color: #fff;
+    font-family: "IBM Plex Mono", monospace; font-size: .7rem;
+    display: flex; align-items: center; justify-content: center; }
+  ul.rule b { color: var(--ink); }
+
+  .flow { display: flex; flex-direction: column; gap: 10px; margin: 0 0 12px; }
+  .row { display: flex; gap: 14px; align-items: flex-start; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 5px; padding: 15px 18px; }
+  .row.key { border-color: var(--accent-line); background: var(--accent-soft); }
+  .row .k { font-family: "IBM Plex Mono", monospace; font-size: .74rem; color: var(--accent);
+    flex: none; width: 20px; padding-top: 2px; }
+  .row .b { flex-grow: 1; min-width: 0; }
+  .row .t { font-weight: 600; font-size: .95rem; display: block; margin-bottom: 4px; }
+  .row .d { font-size: .87rem; color: var(--ink-mid); line-height: 1.72; max-width: 92ch; }
+
+  pre { font-family: "IBM Plex Mono", monospace; font-size: .8rem; line-height: 1.85;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 20px; overflow-x: auto; margin: 0 0 12px; color: var(--ink-mid);
+    word-break: normal; }
+  pre b { color: var(--ink); font-weight: 500; }
+  pre .a { color: var(--accent); }
+  pre .f { color: var(--ink-faint); }
+
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 20px 20px; }
+  .card h5 { margin: 0 0 10px; font-size: .72rem; font-family: "IBM Plex Mono", monospace;
+    letter-spacing: .1em; text-transform: uppercase; padding-bottom: 9px;
+    border-bottom: 1px solid var(--hair); font-weight: 600; }
+  .card.a h5 { color: var(--ink-faint); }
+  .card.b h5 { color: var(--accent); }
+  .card.warn h5 { color: var(--bad); }
+  .card ul { list-style: none; margin: 0; padding: 0; font-size: .87rem; }
+  .card li { padding: 7px 0; color: var(--ink-mid); border-bottom: 1px solid var(--hair); }
+  .card li:last-child { border-bottom: 0; }
+  .card li b { color: var(--ink); }
+
+  .note { background: var(--warm-soft); border: 1px solid var(--warm-line); border-radius: 5px;
+    padding: 16px 20px; margin: 0 0 14px; }
+  .note .lb { font-family: "IBM Plex Mono", monospace; font-size: .68rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--warm); display: block; margin-bottom: 7px; }
+  .note p { margin: 0; font-size: .89rem; color: var(--ink-mid); max-width: 80ch; }
+  .note.q { background: var(--accent-soft); border-color: var(--accent-line); }
+  .note.q .lb { color: var(--accent); }
+  .note.bad { background: var(--bad-soft); border-color: var(--bad-line); }
+  .note.bad .lb { color: var(--bad); }
+
+  /* 원문 인용 */
+  blockquote { margin: 0 0 14px; padding: 14px 20px; border-left: 3px solid var(--accent-line);
+    background: var(--surface); border-radius: 0 5px 5px 0; max-width: 92ch; }
+  blockquote p { margin: 0 0 6px; font-size: .89rem; color: var(--ink-mid); max-width: none; }
+  blockquote p:last-child { margin: 0; }
+  blockquote .src { font-family: "IBM Plex Mono", monospace; font-size: .68rem;
+    letter-spacing: .06em; color: var(--ink-faint); display: block; margin-top: 8px; }
+  blockquote em { font-style: normal; color: var(--ink); font-weight: 500; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--ink); }
+  .ext { display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font-family: "IBM Plex Mono", monospace; font-size: .72rem; letter-spacing: .02em;
+    color: var(--accent); border: 1px solid var(--accent-line); background: var(--accent-soft);
+    padding: 4px 10px; border-radius: 4px; white-space: nowrap; }
+  .ext::after { content: "↗"; font-size: .95em; opacity: .65; }
+  .ext:hover { border-color: var(--accent); color: var(--accent); filter: brightness(.97); }
+  .ext:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .sechead { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 0 0 8px; }
+  .sechead h3 { margin: 0; }
+  td a { word-break: break-all; }
+
+  .verdict { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: .66rem;
+    letter-spacing: .08em; text-transform: uppercase; border-radius: 3px; padding: 2px 7px;
+    vertical-align: 2px; white-space: nowrap; }
+  .verdict.yes { color: var(--accent); border: 1px solid var(--accent-line);
+    background: var(--accent-soft); }
+  .verdict.no { color: var(--bad); border: 1px solid var(--bad-line);
+    background: var(--bad-soft); }
+
+  footer.doc { margin-top: 62px; padding-top: 20px; border-top: 1px solid var(--line);
+    font-size: .78rem; color: var(--ink-faint); }
+  footer.doc p { max-width: 80ch; margin: 0 0 6px; line-height: 1.7; }
+  footer.doc h4 { font-size: .78rem; color: var(--ink-soft); margin: 18px 0 8px; }
+  footer.doc ul { margin: 0 0 6px; padding-left: 18px; }
+  footer.doc li { margin-bottom: 4px; line-height: 1.7; }
+
+  @media print {
+    .lnb { display: none; }
+    body { background: #fff; font-size: 11pt; }
+    main { padding: 0; }
+    .row, .card, pre, .tscroll, blockquote, .note { break-inside: avoid; }
+  }
+
+  /* ---- Part 4 : 대조 도식 ---- */
+  .dia { margin: 20px 0 10px; max-width: 1560px; }
+  .dia svg { width: 100%; height: auto; display: block;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px; }
+  .dia figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: 9px;
+    text-wrap: pretty; word-break: keep-all; }
+  .dia svg text { font-family: "IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;
+    fill: var(--ink-mid); }
+  .dia svg .dh { font-size: 12.5px; font-weight: 600; fill: var(--ink); }
+  .dia svg .dt { font-size: 12px; font-weight: 600; fill: var(--ink); }
+  .dia svg .ds { font-size: 10.5px; fill: var(--ink-mid); }
+  .dia svg .dx { font-size: 9.5px; fill: var(--ink-soft); }
+  .dia svg .dl { font-size: 9.5px; letter-spacing: .06em; }
+  .dia svg .a { fill: var(--accent); }
+  .dia svg .f { fill: var(--ink-faint); }
+  .dia svg .bad { fill: var(--bad); }
+  .dia svg .ln { stroke: var(--ink-faint); stroke-width: 1.1; fill: none; }
+  .dia svg .ln-hair { stroke: var(--hair); stroke-width: 1; fill: none; }
+  .dia svg .bx-key { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+  .dia svg .bx-pill { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+  .dia svg .bx-mute { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  .dia svg .bx-bad { fill: var(--bad-soft); stroke: var(--bad-line); stroke-width: 1;
+    stroke-dasharray: 4 3; }
+  .dia svg .chip rect { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  .dia svg .chip text { font-size: 10px; fill: var(--ink-soft); }
+  .grp2 { font-size: .78rem; font-weight: 600; color: var(--ink-soft);
+    margin: 26px 0 8px; padding-left: 10px; border-left: 2px solid var(--accent-line); }
+  .verdict.ko { font-family: inherit; letter-spacing: 0; text-transform: none;
+    font-size: .72rem; font-weight: 600; }
+  td.bad-cell { background: var(--bad-soft); }
+
+  /* LNB 스크롤바 — 평소 숨김 · 커서 올릴 때만 노출 (gutter 고정으로 레이아웃 이동 없음) */
+  .lnb { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+  .lnb:hover { scrollbar-color: var(--line) transparent; }
+  .lnb::-webkit-scrollbar { width: 6px; }
+  .lnb::-webkit-scrollbar-track { background: transparent; }
+  .lnb::-webkit-scrollbar-thumb { background: transparent; border-radius: 3px;
+    transition: background .15s ease; }
+  .lnb:hover::-webkit-scrollbar-thumb { background: var(--line); }
+  .lnb:hover::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+</style>
+<body>
+<div class="shell">
+
+<nav class="lnb">
+  <span class="bmark">PG 다중법인 구조 벤치마킹</span>
+  <span class="bsub">Ragnarok Portal · 2026-09</span>
+
+  <p class="grp">사실 확인</p>
+  <a href="#f0">결론</a>
+  <a href="#f1">분리 단위</a>
+  <a href="#f2">Adyen</a>
+  <a href="#f3">Stripe</a>
+  <a href="#f4">PayPal</a>
+  <a href="#f5">Xsolla</a>
+  <a href="#f6">Fiuu · Oneverse · GOC-PAY</a>
+  <a href="#f7">종합 비교</a>
+
+  <p class="grp">해석</p>
+  <a href="#i1">3개 유형</a>
+  <a href="#i2">MoR이라는 변수</a>
+
+  <p class="grp">시사점<span class="tag">설계 참고</span></p>
+  <a href="#p1">차용 항목</a>
+  <a href="#p2">회피 항목</a>
+  <a href="#p3">포털 적용안</a>
+</nav>
+
+<main>
+
+<header class="mast">
+  <p class="kick">Benchmark · Payment</p>
+  <h1>PG 다중법인 구조 벤치마킹</h1>
+  <p class="stand">본사 법인과 지사 법인의 회계 · 정산을 분리해야 하는 환경에서
+  주요 결제 플랫폼이 <b>계정 계층 · 정산 단위 · 콘솔 전환 · 중앙 관리</b>를 어떻게 제공하는지 정리.
+  각 플랫폼 공식 개발자 문서 기준.
+  PART 1은 확인 사실 · PART 2는 해석 · PART 3은 포털 결제 설계 시사점.</p>
+  <div class="meta">
+    <span><b>대상</b> Adyen · Stripe · PayPal · Xsolla(MoR · PSP) · Airwallex · Antom · PayerMax · EBANX · Fiuu · Oneverse · GOC-PAY</span>
+    <span><b>적용처</b> 그라비티 해외 법인 9 — 결제 적용 5 · 미착수 4</span>
+    <span><b>1차 자료</b> 각 플랫폼 공식 문서 · 계정 계층 · Payout 정책 · MoR 모델</span>
+    <span><b>정리</b> 2026-08-25 · <b>보강</b> 2026-09-07 (A방식 3분류 · Xsolla PSP)</span>
+  </div>
+</header>
+
+<div class="part">
+  <span class="n">Part 1</span>
+  <h2>사실 확인</h2>
+  <p>7개 플랫폼의 법인 분리 방식 · 정산 처리 단위 · 콘솔 상단 전환 지원 여부 · 중앙 관리 아키텍처.</p>
+</div>
+
+<section id="f0">
+  <h3>결론</h3>
+  <p>다중 법인을 <b>단일 콘솔 안에서</b> 분리 정산할 수 있는 플랫폼은 <b>Adyen · Stripe 둘뿐</b>.
+  나머지는 법인마다 별도 계정 · 별도 계약 · 별도 로그인이 원칙이며,
+  그중 셀프서비스 중앙 관리라도 제공하는 것은 PayPal · Xsolla, 아예 없는 것이 Fiuu · Oneverse · GOC-PAY.</p>
+
+  <div class="note q">
+    <span class="lb">단 하나의 판별 질문</span>
+    <p><b>「정산 수취 은행 계좌가 어느 단위에 붙는가」</b> — 이것만 확인하면 나머지가 따라온다.
+    Merchant Account 단위면 단일 콘솔 분리 가능(Adyen) · Account 단위면 조직으로 묶어 관리(Stripe) ·
+    Company 계약 단위면 법인마다 신규 계약(Xsolla) · MID 단위면 법인마다 신규 가맹(Fiuu · GOC-PAY).</p>
+  </div>
+</section>
+
+<section id="f1">
+  <h3>분리 단위</h3>
+  <p>플랫폼마다 「돈이 갈라지는 최소 단위」의 이름이 다르다. 명칭이 아니라 <b>그 단위에 계약 · 세무 프로필 · 은행 계좌가 1:1로 붙는가</b>가 기준.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>플랫폼</th><th>정산 단위</th><th>단위에 붙는 것</th><th>1 법인 : N 단위</th></tr></thead>
+      <tbody>
+        <tr><td><b>Adyen</b></td><td>Merchant Account</td><td>Legal Entity · Transfer Instrument(검증된 계좌) · Payout · 대사 리포트</td><td>가능</td></tr>
+        <tr><td><b>Stripe</b></td><td>Stripe Account</td><td>Legal Entity · Tax ID · Payout 계좌 · Payout 스케줄</td><td>가능</td></tr>
+        <tr><td><b>PayPal</b></td><td>Business Account</td><td>사업자 정보 · 고유 이메일 · Payout 계좌</td><td>가능</td></tr>
+        <tr><td><b>Xsolla</b></td><td>Publisher Account (Company)</td><td>Licensing Agreement · Tax Form · Banking Details</td><td class="bad-cell"><b>불가 — Project로 못 쪼갬</b></td></tr>
+        <tr><td><b>Fiuu</b></td><td>Merchant ID (MID)</td><td>가맹점 계약 · 정산 계좌</td><td>가능</td></tr>
+        <tr><td><b>Oneverse</b></td><td>Tenant · Merchant UUID</td><td>API Key · Secret · 정산 단위</td><td>가능</td></tr>
+        <tr><td><b>GOC-PAY</b></td><td>Merchant ID</td><td>Payment Key · 콜백 URL · 정산</td><td>가능</td></tr>
+        <tr><td><b>Airwallex</b></td><td>Connected Account</td><td><b>셀러 MoR 시 KYB 필수</b> · 자체 ledger · Payout 계좌</td><td>가능</td></tr>
+        <tr><td><b>Antom</b> · Alipay+</td><td>Sub-merchant</td><td>서브머천트 정산 은행계좌 — <b>마켓플레이스가 정산 개시</b></td><td>가능</td></tr>
+        <tr><td><b>PayerMax</b></td><td>Merchant (같은 entity 하위)</td><td class="bad-cell">미정산 · 정산 · 송금 <b>3계정 플랫폼 잔액</b></td><td class="bad-cell">확인 필요</td></tr>
+        <tr><td><b>EBANX</b></td><td>Sub-seller</td><td class="bad-cell">분할 지급 — <b>명의 분리 여부 미확인</b></td><td class="bad-cell">확인 필요</td></tr>
+        <tr><td><b>Razer Gold · JollyMax</b><br><b>PagSeguro</b></td><td>Merchant ID</td><td>법인별 계약 · MID 발급</td><td>가능</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="f2">
+  <h3>Adyen</h3>
+  <p>계층은 <span class="mono">Organization → Company Account → Merchant Account</span>.
+  <b>법인 분리와 콘솔 통합을 동시에 만족</b>하는 가장 완성된 형태.</p>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 250" role="img" aria-label="Adyen 계정 계층 구조도">
+      <defs>
+        <marker id="ba" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <rect x="330" y="20" width="300" height="42" rx="5" class="bx-mute"/>
+      <text x="480" y="38" class="dt" text-anchor="middle">Organization</text>
+      <text x="480" y="54" class="dx f" text-anchor="middle">전사 SSO · 권한</text>
+
+      <line x1="480" y1="62" x2="480" y2="82" class="ln" marker-end="url(#ba)"/>
+
+      <rect x="330" y="84" width="300" height="42" rx="5" class="bx-mute"/>
+      <text x="480" y="102" class="dt" text-anchor="middle">Company Account</text>
+      <text x="480" y="118" class="dx f" text-anchor="middle">전사 통합 리포팅</text>
+
+      <line x1="480" y1="126" x2="480" y2="140" class="ln"/>
+      <line x1="230" y1="140" x2="730" y2="140" class="ln"/>
+      <line x1="230" y1="140" x2="230" y2="156" class="ln" marker-end="url(#ba)"/>
+      <line x1="730" y1="140" x2="730" y2="156" class="ln" marker-end="url(#ba)"/>
+
+      <rect x="90" y="158" width="280" height="62" rx="5" class="bx-key"/>
+      <text x="230" y="180" class="dt a" text-anchor="middle">Merchant Account A</text>
+      <text x="230" y="198" class="ds" text-anchor="middle">본사 Legal Entity</text>
+      <text x="230" y="214" class="dx f" text-anchor="middle">본사 Transfer Instrument</text>
+
+      <rect x="590" y="158" width="280" height="62" rx="5" class="bx-key"/>
+      <text x="730" y="180" class="dt a" text-anchor="middle">Merchant Account B</text>
+      <text x="730" y="198" class="ds" text-anchor="middle">지사 Legal Entity</text>
+      <text x="730" y="214" class="dx f" text-anchor="middle">지사 Transfer Instrument</text>
+
+      <text x="480" y="196" class="ds f" text-anchor="middle">1 Merchant Account</text>
+      <text x="480" y="212" class="ds f" text-anchor="middle">= 1 Legal Entity (엄격)</text>
+    </svg>
+    <figcaption>Payout · Reconciliation 리포트가 Merchant Account 단위로 분리 발행되고, 좌측 상단 Switcher로 Company ↔ Merchant 전환.</figcaption>
+  </figure>
+
+  <ul class="rule">
+    <li><b>하나의 Legal Entity는 여러 Merchant Account를 소유할 수 있다.</b> 통화별 · 브랜드별 분리 운영 가능.</li>
+    <li><b>하나의 Merchant Account는 오직 1개 Legal Entity에만 귀속된다.</b> 엄격한 1:1 — 매출 귀속이 구조적으로 확정된다.</li>
+    <li><b>Payout은 Merchant Account에 매핑된 Transfer Instrument로 직접 이체된다.</b> Transfer Instrument는 <b>검증을 거친</b> 법인 은행 계좌.</li>
+    <li><b>콘솔 좌측 상단 Account Switcher</b>로 Company Level ↔ Merchant Level을 자유 전환.</li>
+    <li><b>운영 방식</b> — 단일 Adyen 계약 하에 법인별 Merchant Account를 추가 생성하고 지사 KYC와 지사 계좌를 매핑.</li>
+  </ul>
+</section>
+
+<section id="f3">
+  <h3>Stripe</h3>
+  <p>계층은 <span class="mono">Organization → Stripe Accounts</span>. Adyen보다 평평하지만 결과는 동일.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>Account가 보유하는 것</b></td><td>독립 Legal Entity · 사업자등록번호 · Tax ID · Payout 은행 계좌</td></tr>
+        <tr><td><b>Payout</b></td><td>지사별 계좌 · 지사별 스케줄 독립 지정 가능</td></tr>
+        <tr><td><b>세무 증빙</b></td><td>1099-K 등 Account별 독립 발행</td></tr>
+        <tr><td><b>콘솔 전환</b></td><td>대시보드 좌측 상단 Account Picker · <span class="mono">+ New account</span> 생성 지원</td></tr>
+        <tr><td><b>중앙 관리</b></td><td>Organizations — 통합 리포팅 · Team Role · SSO 중앙 제어</td></tr>
+        <tr><td><b>크로스 조회</b></td><td><b>Stripe Sigma로 전 계정 SQL 쿼리</b> — 법인 경계를 넘는 분석 가능</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lb">Sigma가 특별한 이유</span>
+    <p>법인을 분리하면 통상 <b>전사 관점의 분석이 죽는다</b>. 데이터가 계정마다 갈라지기 때문.
+    Stripe는 분리는 유지하면서 조회 계층만 위로 열어 이 문제를 푼다 —
+    포털의 Step 6 통합 모니터링이 겨냥하는 것과 같은 지점.</p>
+  </div>
+</section>
+
+<section id="f4">
+  <h3>PayPal</h3>
+  <p>법인마다 <b>고유 이메일로 별도 Business Account 개설이 필수</b>. 그 위에 Enterprise를 얹어 중앙 관리.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>레벨</th><th>구성</th><th>전환</th></tr></thead>
+      <tbody>
+        <tr><td><b>일반</b></td><td>개인 계정 1 + 비즈니스 계정 1 연결(Linked Accounts)</td><td>상단 Personal ↔ Business</td></tr>
+        <tr><td><b>엔터프라이즈</b></td><td><b>PayPal Enterprise</b> 포털에 독립 Business Account 다수를 링크</td><td>Enterprise Admin 자격증명 하나로 하위 계정 중앙 전환 · 관리</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>계정별로 해당 국가 · 법인의 사업자 정보와 은행 계좌가 등록되므로 정산 분리 자체는 명확하다.
+  다만 <b>법인 수만큼 이메일 계정이 늘어나고</b> 각 계정의 자격증명 관리 부담이 남는다.</p>
+</section>
+
+<section id="f5">
+  <h3>Xsolla</h3>
+  <p>가장 중요한 확인 대상이었던 항목. 결론부터 — <b>단일 계정 내 Project 단위로 법인별 정산 분리는 불가능</b>.</p>
+
+  <div class="note bad">
+    <span class="lb">핵심 질문과 답 — MoR 모델</span>
+    <p>Q. 단일 계정의 Project 단위로 법인별 정산 계좌를 분리할 수 있는가.<br>
+    A. <b>불가</b>. Licensing Agreement · Tax Form · Banking Details가 전부
+    <b>Project가 아닌 Publisher Account(Company) 레벨</b>에서 1:1로 체결 · 등록되기 때문.</p>
+  </div>
+
+  <div class="note q">
+    <span class="lb">2025-08 갱신 — Xsolla PSP 라는 제2의 경로가 생겼다</span>
+    <p>Adyen 파트너십과 함께 <b>Xsolla PSP</b> 가 발표되었다 —
+    <span class="mono">a powerful new solution for studios that want to operate as their own Merchant of Record</span>.
+    MoR 모델과 <b>병렬로 제공되는 별도 상품</b>이며, 위 MoR 제약이 여기에는 적용되지 않는다.</p>
+  </div>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th></th><th>Xsolla MoR</th><th>Xsolla PSP <span class="verdict yes">신규</span></th></tr></thead>
+      <tbody>
+        <tr><td><b>판매자 · MoR</b></td><td>Xsolla</td><td><b>스튜디오 자신</b></td></tr>
+        <tr><td><b>세금 · 컴플라이언스</b></td><td>Xsolla 일괄</td><td><b>스튜디오</b> — 간접세 계산(VAT · sales tax) 도구 제공</td></tr>
+        <tr><td><b>고객 관계 · 매출</b></td><td>Xsolla 경유</td><td><b>스튜디오 직접 보유</b></td></tr>
+        <tr><td><b>백엔드</b></td><td>Xsolla 자체 결제망</td><td><b>Adyen 글로벌 acquiring 네트워크</b></td></tr>
+        <tr><td><b>대상 지역</b></td><td>200+ 지역</td><td class="bad-cell"><b>홍콩 등록 가맹점 우선</b> → 유럽 · 싱가포르 · 미국 순차 확장</td></tr>
+        <tr><td><b>커버리지</b></td><td>1,000+ 결제수단</td><td>200+ 시장 · 160+ 통화 카드</td></tr>
+        <tr><td><b>전제 조건</b></td><td>없음</td><td><span class="mono">markets where game studios have their local presence</span> — <b>현지 법인 필요</b></td></tr>
+        <tr><td><b>직정산 원칙</b></td><td class="bad-cell"><span class="verdict no">충돌</span></td><td><span class="verdict yes">부합</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">확장 조건은 <span class="mono">as regional licenses are secured</span> — 지역 결제 라이선스 확보 진행 상황에 종속된다. 즉 홍콩 한정은 정책이 아니라 진행 단계다.</p>
+
+  <ul class="rule">
+    <li><b>Xsolla는 PG가 아니라 MoR(Merchant of Record)이다.</b> Xsolla가 전 세계 세금 신고와 판매자 책임을 진다.</li>
+    <li><b>1 Publisher Account 하위에 여러 Project를 둘 수 있다.</b> 게임 · 웹샵 단위 분리는 자유.</li>
+    <li><b>그러나 모든 Project의 매출은 단일 법인 계좌로 합산 정산된다.</b> Project별 은행 계좌 분리 불가.</li>
+    <li><b>따라서 지사 법인 명의로 정산금을 수취하려면 지사 명의 Publisher Account를 별도 개설</b>하고 계약을 각각 체결해야 한다.</li>
+    <li><b>관리는 Account Hub에서 흡수한다.</b> 동일 관리자 이메일을 양쪽 Publisher Account에 Admin으로 초대해 전환 관리.</li>
+    <li><b>단 PSP 모델에서는 위 제약이 사라진다.</b> 스튜디오가 자체 MoR이므로 Publisher Account 계약 단위 정산 문제가 발생하지 않는다 — 대신 <b>현지 법인 보유와 지역 라이선스</b>가 전제 조건이 된다.</li>
+  </ul>
+</section>
+
+<section id="f6">
+  <h3>Fiuu · Oneverse · GOC-PAY</h3>
+  <p>셋 다 <b>셀프서비스 조직 관리 UI가 없다</b>. 법인별 독립 식별자를 발급받고, 통합은 자사 백엔드에서 해결해야 한다.</p>
+
+  <div class="cols">
+    <div class="card a">
+      <h5>Fiuu — 구 Razer Merchant Services</h5>
+      <ul>
+        <li><b>단위</b> Merchant ID (MID)</li>
+        <li><b>분리</b> 법인 · 통화 · 국가별 독립 MID 및 가맹점 계약 필수</li>
+        <li><b>정산</b> MID별 계좌 1:1 매핑</li>
+        <li><b>콘솔</b> 상단 Switcher 미지원 · <b>1 로그인 = 1 MID</b></li>
+        <li><b>통합 조회</b> 운영팀 요청으로 Master · Sub MID 권한을 <b>백오피스에서 수동 매핑</b></li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h5>Oneverse (OneOne) · GOC-PAY</h5>
+      <ul>
+        <li><b>Oneverse</b> Merchant UUID · Tenant ID · API Secret 분리 발급</li>
+        <li><b>GOC-PAY</b> Merchant ID · Payment Key · 콜백 URL 분리</li>
+        <li><b>성격</b> B2B 파트너십 · 동남아 로컬 결제망 특화</li>
+        <li><b>콘솔</b> 계정 스위처 없음 · 테넌트별 개별 자격증명</li>
+        <li><b>통합</b> 중앙 콘솔 부재 — <b>API 레벨에서 라우팅</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="lb">이 유형이 오히려 우리 구조와 맞는다</span>
+    <p>MID 단위 분리 · 계정별 키 · 중앙 콘솔 부재는 <b>포털 결제 허브가 이미 하고 있는 일</b>과 정확히 겹친다.
+    Fiuu의 「Master MID 수동 매핑」이 우리 어드민 Step 2의 MID 마스터, 「1 로그인 = 1 MID」의 불편이
+    우리 헤더 리전 셀렉터가 흡수하는 대상.</p>
+  </div>
+</section>
+
+<section id="f7">
+  <h3>종합 비교</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>플랫폼</th><th>법인 분리 방식</th><th>정산 단위</th><th>콘솔 전환</th><th>중앙 관리</th></tr></thead>
+      <tbody>
+        <tr><td><b>Adyen</b></td><td><b>단일 콘솔 내 분리 가능</b> — 법인별 Merchant Account</td><td>Merchant Account</td><td><span class="verdict yes">지원</span> Company ↔ Merchant</td><td>Organization → Company → Merchant · 통합 리포팅 · SSO</td></tr>
+        <tr><td><b>Stripe</b></td><td><b>단일 콘솔 내 분리 가능</b> — 법인별 Account를 Org으로 통합</td><td>Stripe Account</td><td><span class="verdict yes">지원</span> Account Picker</td><td>Organization → 다중 Account · Sigma 크로스 쿼리</td></tr>
+        <tr><td><b>PayPal</b></td><td>법인별 Business Account 생성 필수 — Enterprise로 통합</td><td>Business Account</td><td><span class="verdict yes">지원</span> Personal ↔ Business · Enterprise</td><td>Enterprise Portal → 다중 Business Account</td></tr>
+        <tr><td><b>Xsolla</b></td><td class="bad-cell"><b>법인별 Publisher Account 필수</b> — Project 분리 불가</td><td>Publisher Account (Company)</td><td><span class="verdict yes">지원</span> Account Hub · Project 드롭다운</td><td>Account Hub → 다중 Publisher Account → Projects</td></tr>
+        <tr><td><b>Fiuu</b></td><td class="bad-cell">법인별 MID 분리 필수</td><td>Merchant ID</td><td><span class="verdict no">미지원</span></td><td>Master MID 수동 매핑 — 운영팀 요청</td></tr>
+        <tr><td><b>Oneverse</b></td><td class="bad-cell">법인별 Tenant · Merchant UUID 분리 필수</td><td>Tenant · UUID</td><td><span class="verdict no">미지원</span></td><td>독립 자격증명 · API 레벨 라우팅</td></tr>
+        <tr><td><b>GOC-PAY</b></td><td class="bad-cell">법인별 Merchant ID 분리 필수</td><td>Merchant ID</td><td><span class="verdict no">미지원</span></td><td>부재 — 백오피스 개별 관리</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 2</span>
+  <h2>해석</h2>
+  <p>7개를 3개 유형으로 압축하면 선택지가 명확해진다.</p>
+</div>
+
+<section id="i1">
+  <h3>3개 유형</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>유형</th><th>플랫폼</th><th>성격</th><th>우리가 감당할 몫</th></tr></thead>
+      <tbody>
+        <tr><td><b>Tier 1</b><br>글로벌 통합 거버넌스형</td><td>Adyen · Stripe</td><td>단일 콘솔 내 법인별 독립 정산 · 실시간 Switcher · 전사 통합 리포팅 · SSO</td><td><b>거의 없음</b> — 조직 계층을 플랫폼에 위임</td></tr>
+        <tr><td><b>Tier 2</b><br>하이브리드 · MoR 분리형</td><td>PayPal · Xsolla</td><td>법인별 계정 · 계약을 각각 만든 뒤 상위 포털로 링크</td><td>계정 개설 · 계약 체결 · 자격증명 관리</td></tr>
+        <tr><td><b>Tier 3</b><br>전통 MID · 파트너십형</td><td>Fiuu · Oneverse · GOC-PAY</td><td>셀프서비스 조직 UI 부재 · 법인별 독립 MID · Tenant 발급</td><td><b>전부</b> — 상점 · 지사 파라미터 기반 라우팅을 자사 백엔드가 구현</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">우리 포털의 현재 위치</span>
+    <p>대만 MyCard · GASH · 태국 2C2P · 일본 편의점은 전부 <b>Tier 3에 가까운 로컬 결제망</b>이고,
+    이들은 Adyen · Stripe 콘솔 안으로 들어오지 않는다.
+    <b>Tier 1을 채택해도 Tier 3가 남으므로 혼합은 불가피</b>하며,
+    결국 <b>조직 계층은 우리가 직접 가질 수밖에 없다</b> — 이것이 결제 허브가 존재하는 이유.</p>
+  </div>
+</section>
+
+<section id="i2">
+  <h3>MoR이라는 변수</h3>
+  <p>PG와 MoR은 이름만 다른 게 아니라 <b>돈의 소유자가 다르다</b>. 이 차이가 지사 직정산 원칙과 정면으로 부딪친다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th></th><th>PG — Adyen · Stripe · Fiuu 등</th><th>MoR — Xsolla</th></tr></thead>
+      <tbody>
+        <tr><td><b>판매자</b></td><td>우리 법인</td><td><b>Xsolla</b></td></tr>
+        <tr><td><b>세금 신고 주체</b></td><td>우리 법인 — 지사별 현지 신고</td><td>Xsolla — 전 세계 일괄</td></tr>
+        <tr><td><b>정산 성격</b></td><td>매출 대금 수취</td><td><b>로열티 · 라이선스 수익 수취</b></td></tr>
+        <tr><td><b>계좌 귀속</b></td><td>MID · Account 단위</td><td>Publisher Account 계약 단위</td></tr>
+        <tr><td><b>우리 원칙과</b></td><td>부합 — 지사 계좌 직입금</td><td class="bad-cell"><b>충돌</b> — 지사별 계약을 새로 맺어야 성립</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">EU 진입 시 재검토 대상</span>
+    <p>유럽은 법인 미설립 상태에서 VAT OSS 대응 부담이 커 MoR이 후보로 올라온다.
+    그때 <b>Xsolla Publisher Account를 어느 법인 명의로 개설하는가</b>가 곧 EU 매출의 귀속처가 된다.
+    Project 단위로는 못 쪼개므로 <b>「EU 매출을 어느 법인이 받을 것인가」를 먼저 결정</b>해야 계약이 진행된다.</p>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 3</span>
+  <h2>시사점</h2>
+  <p>포털 결제 설계에 차용할 것 · 회피할 것 · 이미 반영된 것.</p>
+</div>
+
+<section id="p1">
+  <h3>차용 항목</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>출처</th><th>차용</th><th>포털 적용 지점</th></tr></thead>
+      <tbody>
+        <tr><td><b>Adyen</b></td><td><b>1 Merchant Account : 1 Legal Entity 엄격 귀속</b></td><td>「1 MID : 1 법인」 규칙의 근거. 매출 귀속 오류를 구조로 차단</td></tr>
+        <tr><td><b>Adyen</b></td><td><b>Transfer Instrument</b> — 검증을 거친 계좌만 Payout 대상</td><td>Step 1 정산 계좌 변경 시 <b>본사 재무팀 2차 승인</b> 요건</td></tr>
+        <tr><td><b>Stripe</b></td><td><b>Sigma 크로스 어카운트 조회</b> — 분리는 유지 · 조회는 통합</td><td>Step 6 전 지사 통합 실시간 모니터링 그리드</td></tr>
+        <tr><td><b>Stripe</b></td><td>Account별 <b>독립 Payout 스케줄</b></td><td>MID별 정산 주기(T+1 ~ 월 2회) 분리 관리</td></tr>
+        <tr><td><b>PayPal</b></td><td><b>Enterprise Admin 단일 자격증명</b>으로 하위 계정 중앙 관리</td><td>본사 Super Admin 권한 모델 · 헤더 리전 셀렉터</td></tr>
+        <tr><td><b>Xsolla</b></td><td><b>Account Hub</b> — 동일 관리자 이메일을 복수 조직에 초대</td><td>운영자 1명이 여러 지사를 담당할 때의 권한 부여 모델</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="p2">
+  <h3>회피 항목</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>사례</th><th>문제</th><th>포털의 회피 방식</th></tr></thead>
+      <tbody>
+        <tr><td><b>Xsolla — 정산 단위가 계약에 묶임</b></td><td>Project를 아무리 나눠도 계좌가 하나. 조직 구조를 바꾸려면 계약을 다시 맺어야 함</td><td>정산 단위를 <b>런타임 마스터 데이터(MID)</b>로 두어 계약 재체결 없이 재구성 가능하게 유지</td></tr>
+        <tr><td><b>Fiuu — 1 로그인 = 1 MID</b></td><td>지사 수만큼 운영자가 로그인을 갈아타야 함. 통합 조회는 벤더 수동 작업 의존</td><td>단일 어드민 · <b>헤더 리전 셀렉터</b>로 전환. 통합 조회는 결제 허브 원장에서 직접</td></tr>
+        <tr><td><b>PayPal — 법인별 고유 이메일 계정</b></td><td>계정 · 자격증명이 법인 수만큼 증식. 퇴사 · 인수인계 시 관리 공백</td><td>운영자 계정과 법인을 분리 — <b>권한으로 법인 접근을 부여</b>하고 계정을 늘리지 않음</td></tr>
+        <tr><td><b>Tier 3 공통 — 조직 계층 부재</b></td><td>법인 간 통합 리포팅 · 권한 관리가 아예 없음</td><td>결제 허브가 <b>Organization 계층을 자체 구현</b> — Adyen의 3계층을 법인 · MID · 채널로 대응</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lb">우리 어드민은 Adyen 계층의 자체 구현체</span>
+    <p><span class="mono">Organization → Company → Merchant Account</span>가
+    <span class="mono">본사 어드민 → 지사 법인 → MID</span>에 그대로 대응하고,
+    Adyen의 Account Switcher가 헤더 리전 셀렉터에 대응한다.
+    <b>PG가 안 주는 계층을 우리가 만든 것</b>이므로, Tier 1 PG를 도입해도 이 계층은 유지된다 —
+    도입 효과는 「계층을 없앤다」가 아니라 「해당 PG 구간의 정산 신뢰도가 올라간다」.</p>
+  </div>
+</section>
+
+<section id="p3">
+  <h3>포털 적용안</h3>
+  <p>실제 해외 법인 9개 기준. 1차 결제 적용은 상위 5개이며, 나머지 4개는 법인 · GNJOY는 있으나 결제가 미착수 상태.
+  <b>부담의 크기는 법인 규모가 아니라 그 리전의 결제망이 어느 Tier에 속하는가</b>로 결정된다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>법인</th><th>주 결제망</th><th>Tier</th><th>우리 구현 부담</th></tr></thead>
+      <tbody>
+        <tr><td><b>GVI</b> 북미<br><span class="mono">Gravity Interactive</span></td><td>Stripe · PayPal</td><td>Tier 1 · 2</td><td><b>낮음</b> — 정산 · 세무 증빙을 플랫폼이 처리</td></tr>
+        <tr><td><b>GV</b> 한국<br><span class="mono">그라비티 본사</span></td><td>토스페이먼츠</td><td>국내 PG</td><td>낮음 — 현금영수증 API 연동만</td></tr>
+        <tr><td><b>GGA</b> 일본<br><span class="mono">Gravity Game Arise</span></td><td>SoftBank Payment · 편의점</td><td>Tier 3 성격</td><td><b>중간</b> — 편의점 비동기 입금 · 환불 불가 처리</td></tr>
+        <tr><td><b>GGT</b> 태국<br><span class="mono">Gravity Game Tech</span></td><td>2C2P · PromptPay</td><td>Tier 3</td><td><b>중간</b> — QR · 카운터서비스 · 부분 환불 제약</td></tr>
+        <tr><td><b>GVC</b> 대만<br><span class="mono">Gravity Communications</span></td><td>MyCard · GASH</td><td>Tier 3</td><td class="bad-cell"><b>높음</b> — 환불 불가 · T+7 정산 · 선불카드 핀 · 편의점 수납</td></tr>
+        <tr><td><b>GGL</b> 인도네시아<br><span class="mono">Gravity Game Link</span></td><td>GoPay · OVO · Dana · ShopeePay</td><td>Tier 3</td><td class="bad-cell"><b>높음 · 미착수</b> — e-Wallet 어댑터 4종 이상 신규</td></tr>
+        <tr><td><b>GGU</b> 말레이시아<br><span class="mono">Gravity Game Unite</span></td><td><b>Fiuu</b> 등 현지 게이트웨이</td><td>Tier 3</td><td class="bad-cell"><b>높음 · 미착수</b> — 1 로그인 = 1 MID · 통합 조회 벤더 의존</td></tr>
+        <tr><td><b>GGH</b> 싱가포르<br><span class="mono">Gravity Game Hub</span></td><td>카드 중심 — Stripe · Adyen 커버 가능</td><td>Tier 1</td><td><b>낮음 · 미착수</b> — 기존 Tier 1 계약 확장으로 처리 가능</td></tr>
+        <tr><td><b>GGV</b> 홍콩<br><span class="mono">Gravity Game Vision</span></td><td>카드 · AlipayHK · WeChat Pay HK</td><td>Tier 1 · 3 혼합</td><td><b>중간 · 미착수</b> — <b>GVC 관할 중복 정리 선행</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ul class="rule">
+    <li><b>Tier 1 도입 검토는 US · EU · 싱가포르 구간에 한정한다.</b> 아시아 로컬 결제망은 Adyen · Stripe 콘솔로 들어오지 않으므로 대체가 아니라 병행. <span class="mono">GGH</span>는 카드 중심이라 기존 Tier 1 계약 확장만으로 커버 가능.</li>
+    <li><b>말레이시아 착수 시 Fiuu 조사 결과가 그대로 적용된다.</b> <span class="mono">GGU</span>의 주 결제망이 Fiuu 계열이므로, Part 1의 「1 로그인 = 1 MID · Master MID 수동 매핑」 제약이 실제 운영 부담으로 들어온다.</li>
+    <li><b>MID 마스터는 계약이 아니라 데이터로 유지한다.</b> Xsolla식 계약 종속 구조를 피하는 것이 다지사 운영의 유연성을 결정한다.</li>
+    <li><b>운영자 계정과 법인 접근을 분리한다.</b> PayPal식 계정 증식을 피하고 권한 부여로 해결 — 회원·인증 설계의 권한 모델과 접점.</li>
+    <li><b>정산 계좌 변경에는 2차 승인을 건다.</b> Adyen Transfer Instrument의 검증 개념을 운영 절차로 대체.</li>
+    <li><b>EU 진입 전 MoR 사용 여부와 매출 귀속 법인을 먼저 결정한다.</b> 계약 단위가 계좌 단위이므로 나중에 못 쪼갠다.</li>
+  </ul>
+</section>
+
+<footer class="doc">
+  <h4>관련 문서</h4>
+  <ul>
+    <li>글로벌 결제 설계 — <span class="mono">wiki/planning/global-payment.html</span></li>
+    <li>원 조사 자료 — <span class="mono">payment_platform_multi_entity_analysis.md</span> (2026-08-25)</li>
+    <li>각 플랫폼 공식 개발자 문서 · 어카운트 계층 · Payout 정책 · MoR 모델 정책</li>
+  </ul>
+
+  <h4>1차 자료</h4>
+  <ul>
+    <li>Xsolla — <a href="https://xsolla.com/newsroom/xsolla-and-adyen-partner-to-power-global-game-payments-and-introduce-xsolla-payment-service-provider-to-give-developers-full-control-of-payments-checkout-and-revenue-strategy" target="_blank" rel="noopener">Xsolla PSP · Adyen 파트너십 (2025-08)</a> · <a href="https://xsolla.com/payment-service-provider" target="_blank" rel="noopener">Payment Service Provider</a> · <a href="https://xsolla.com/merchant-of-record" target="_blank" rel="noopener">Merchant of Record</a></li>
+    <li>Airwallex — <a href="https://www.airwallex.com/docs/connected-accounts/about/about-connected-accounts" target="_blank" rel="noopener">About connected accounts</a> · <a href="https://www.airwallex.com/docs/payments-for-platforms/connected-accounts/onboard-connected-accounts" target="_blank" rel="noopener">Onboard connected accounts</a> · <a href="https://www.airwallex.com/docs/payments-for-platforms/use-cases/payments-for-marketplaces/full-connected-account-model" target="_blank" rel="noopener">Full Connected Account model</a></li>
+    <li>Antom · Alipay+ — <a href="https://global.alipay.com/docs/ac/marketplace/overview" target="_blank" rel="noopener">Marketplace Overview</a> · <a href="https://docs.antom.com/ac/marketplace/merchant_register" target="_blank" rel="noopener">Sub-merchant Onboarding</a> · <a href="https://www.antom.com/flexible-settlement" target="_blank" rel="noopener">Flexible Multi-Currency Settlement</a></li>
+    <li>PayerMax — <a href="https://docs.payermax.com/en/202606-version/mmc/introduction.html" target="_blank" rel="noopener">Merchant Platform Introduction</a> · <a href="https://docs-v2.payermax.com/en/doc-center/mmc/settlement-service.html" target="_blank" rel="noopener">Settlement Service</a></li>
+    <li>EBANX — <a href="https://www.ebanx.com/en/industries/e-commerce/" target="_blank" rel="noopener">E-commerce Payment Processing</a></li>
+    <li>그 외 Adyen · Stripe · PayPal · Fiuu · Oneverse · GOC-PAY 는 각 사 공식 개발자 문서 · 계정 계층 · Payout 정책 기준</li>
+  </ul>
+
+  <h4>확인 필요 사항</h4>
+  <ul>
+    <li><b>Fiuu Master MID 매핑의 실제 가능 범위</b> — 운영팀 수동 설정이 어느 수준까지 지원되는지. 대만 다중 MID 통합 조회 가능 여부가 여기서 갈림</li>
+    <li><b>Adyen · Stripe 도입 시 기존 로컬 MID와의 병행 운영 방식</b> — 같은 지사에 Tier 1과 Tier 3 MID가 공존할 때의 라우팅 우선순위</li>
+    <li><b>Oneverse · GOC-PAY의 정산 리포트 제공 형태</b> — T+1 대사 엔진의 <span class="mono">fetchSettlementReport</span> 어댑터 구현 가능 여부</li>
+    <li><b>EU 매출 귀속 법인</b> — MoR 채택 시 Publisher Account 명의. 계약 전 결정 필요</li>
+    <li><b>각 플랫폼 MDR 실계약 조건</b> — 본 문서의 수수료 비교는 공개 기준가. 본사 협상 결과로 대체 필요</li>
+    <li><b>PayerMax 판매자 명의</b> — 「다중 사업 계정 · 통합 자금」이 A-1인지 A-2인지. 문서에 <span class="mono">another merchant under the same entity</span> 와 미정산 · 정산 · 송금 3계정 잔액 구조만 확인됨. <b>별도 legal entity 를 둘 수 있는지 미확인</b></li>
+    <li><b>EBANX 마켓플레이스 분할 지급의 명의 귀속</b> — 서브셀러가 판매자가 되는지, 플랫폼 명의로 수취 후 분배인지 공개 문서로 확인 불가</li>
+    <li><b>Xsolla PSP 적격 조건</b> — <span class="mono">eligible merchants registered in Hong Kong</span> 의 구체 요건(등록 형태 · 최소 거래량 · 심사)과 싱가포르 확장 시점</li>
+  </ul>
+
+  <p style="margin-top:18px">라그나로크 포털 · PG 다중법인 구조 벤치마킹 · 2026-09-07</p>
+</footer>
+</main>
+</div>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.lnb a'));
+  var map = {};
+  links.forEach(function (a) {
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) map[el.id] = a;
+  });
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove('on'); });
+      var a = map[e.target.id];
+      if (a) a.classList.add('on');
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  Object.keys(map).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
+</script>
+
+
+<style>
+  #docnav { position: fixed; left: 14px; bottom: 14px; z-index: 2147483000;
+    font-family: "Pretendard", "Malgun Gothic", -apple-system, sans-serif; }
+  #docnav * { box-sizing: border-box; }
+  #docnav-b { display: inline-flex; align-items: center; gap: 7px; height: 32px;
+    padding: 0 13px; border: 1px solid #C9D1D9; border-radius: 16px; background: #fff;
+    color: #3B4654; font-size: 12px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(23,27,34,.14); }
+  #docnav-b:hover { border-color: #2F6490; color: #2F6490; }
+  #docnav-b i { font-style: normal; font-size: 9px; }
+  #docnav-m { display: none; position: absolute; left: 0; bottom: 38px; min-width: 236px;
+    padding: 6px; border: 1px solid #D5DBE2; border-radius: 8px; background: #fff;
+    box-shadow: 0 8px 26px rgba(23,27,34,.16); }
+  #docnav.on #docnav-m { display: block; }
+  #docnav-m .g { padding: 7px 10px 4px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .04em; color: #97A0AC; }
+  #docnav-m a { display: block; padding: 8px 10px; border-radius: 5px; font-size: 12.5px;
+    color: #2C333D; text-decoration: none; white-space: nowrap; }
+  #docnav-m a:hover { background: #F1F4F7; }
+  #docnav-m a.on { color: #2F6490; font-weight: 700; background: #EDF3F8; }
+  @media print { #docnav { display: none; } }
+</style>
+<div id="docnav">
+  <div id="docnav-m">
+    <div class="g">화면정의서</div>
+    <a href="../../wireframe/portal-main-auth-screens.html">라그나로크 포털 화면정의서</a>
+    <a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a>
+    <a href="../../wireframe/payment-checkout-currency.html">통합 결제창 화면정의서</a>
+    <a href="../../wireframe/payment-admin-screens.html">결제 관리자 화면정의서</a>
+    <div class="g">설계</div>
+    <a href="../planning/portal-main-structure.html">포털 메인 구조</a>
+    <a href="../planning/land-auth.html">랜드 회원·인증 설계</a>
+    <a href="../planning/payment.html">결제 설계 — 프로세스 · 구조</a>
+    <a href="../planning/payment-webshop-structure.html">통합결제 / 웹샵 구조</a>
+    <a href="../planning/global-payment.html">글로벌 결제 설계 (상세)</a>
+    <div class="g">벤치마킹</div>
+    <a href="ip-portal.html">IP 포털 벤치마킹</a>
+    <a href="nc-auth.html">NC 회원·인증 통합 벤치마킹</a>
+    <a href="pg-multi-entity.html" class="on">PG 다중법인 구조 벤치마킹</a>
+    <a href="game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a>
+    <a href="webshop-payment.html">웹샵 결제 벤치마킹</a>
+    <div class="g">전체</div>
+    <a href="../../index.html">문서 목록</a>
+  </div>
+  <span id="docnav-b">문서 <i>&#9650;</i></span>
+</div>
+<script>
+(function () {
+  var n = document.getElementById('docnav'), b = document.getElementById('docnav-b');
+  b.addEventListener('click', function (e) { e.stopPropagation(); n.classList.toggle('on'); });
+  document.addEventListener('click', function () { n.classList.remove('on'); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') n.classList.remove('on');
+  });
+})();
+</script>
+</body>
+</html>

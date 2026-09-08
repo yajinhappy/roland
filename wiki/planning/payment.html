@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>결제 설계</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #EDEEF1; --surface: #FFFFFF; --surface-2: #F5F6F8;
+    --line: #D9DEE5; --hair: #E7EAEF;
+    --ink: #171B22; --ink-mid: #434A57; --ink-soft: #6C7480; --ink-faint: #949BA7;
+    --accent: #2F6490; --accent-soft: #EBF3F9; --accent-line: #AECAE0;
+    --warm: #8A6420; --warm-soft: #F8F2E6; --warm-line: #E2D5B9;
+    --bad: #8C3A3A; --bad-soft: #F9EEEE; --bad-line: #E0BEBE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #12151B; --surface: #191D25; --surface-2: #1F242D;
+      --line: #333A46; --hair: #272D37;
+      --ink: #E9ECF2; --ink-mid: #B6BDC9; --ink-soft: #8B93A1; --ink-faint: #6B7280;
+      --accent: #7BAAD2; --accent-soft: #1B2836; --accent-line: #2E4A66;
+      --warm: #D9B571; --warm-soft: #2A2418; --warm-line: #4A3E24;
+      --bad: #D89393; --bad-soft: #2C1C1C; --bad-line: #4E3030;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12151B; --surface: #191D25; --surface-2: #1F242D;
+    --line: #333A46; --hair: #272D37;
+    --ink: #E9ECF2; --ink-mid: #B6BDC9; --ink-soft: #8B93A1; --ink-faint: #6B7280;
+    --accent: #7BAAD2; --accent-soft: #1B2836; --accent-line: #2E4A66;
+    --warm: #D9B571; --warm-soft: #2A2418; --warm-line: #4A3E24;
+    --bad: #D89393; --bad-soft: #2C1C1C; --bad-line: #4E3030;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  /* 한글은 어절 중간에서 끊기면 읽기 어려우므로 keep-all 로 어절 단위 줄바꿈 */
+  body { background: var(--ground); color: var(--ink);
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.78; -webkit-font-smoothing: antialiased;
+    word-break: keep-all; overflow-wrap: break-word; }
+  p, li, td, th, figcaption, .lede, .stand, .cap, .row .d, .note p, .part p, dd {
+    text-wrap: pretty; }
+  h1, h2, h3, h4, h5, .row .t, .card h5 { text-wrap: balance; word-break: keep-all; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; word-break: normal; }
+
+  .shell { display: flex; align-items: flex-start; gap: 0; }
+  .tscroll, .flow, .cols, pre, .note, ul.rule { max-width: 1560px; }
+
+  /* ── LNB ───────────────────────────────────────── */
+  .lnb { position: sticky; top: 0; align-self: flex-start; flex: none; width: 262px;
+    height: 100vh; overflow-y: auto; padding: 26px 20px 28px 24px; overscroll-behavior: contain;
+    border-right: 1px solid var(--line); background: var(--surface); }
+  .lnb .bmark { display: block; font-size: 14px; font-weight: 600; letter-spacing: -.018em;
+    color: var(--ink); margin-bottom: 3px; }
+  .lnb .bsub { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9.5px;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 16px; }
+  .lnb .grp { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 15px 0 5px; }
+  .lnb .grp:first-of-type { margin-top: 0; }
+  .lnb a { display: block; text-decoration: none; color: var(--ink-soft); font-size: 13px;
+    padding: 5px 11px; border-radius: 4px; line-height: 1.4; }
+  .lnb a:hover { background: var(--surface-2); color: var(--ink); }
+  .lnb a.on { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+  .lnb a:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .lnb .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 9px;
+    letter-spacing: .08em; color: var(--warm); border: 1px solid var(--warm-line);
+    background: var(--warm-soft); border-radius: 3px; padding: 1px 5px; margin-left: 6px;
+    vertical-align: 1px; }
+
+  /* ── 본문 ──────────────────────────────────────── */
+  main { flex-grow: 1; min-width: 0; padding: 40px 52px 110px; }
+  @media (max-width: 860px) {
+    .shell { display: block; }
+    .lnb { position: static; width: auto; height: auto; border-right: 0;
+      border-bottom: 1px solid var(--line); }
+    main { padding: 28px 22px 80px; }
+  }
+
+  header.mast { padding-bottom: 24px; border-bottom: 2px solid var(--ink); }
+  .kick { font-family: "IBM Plex Mono", monospace; font-size: .72rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+  h1 { font-size: clamp(1.7rem, 3.6vw, 2.25rem); font-weight: 600; line-height: 1.3;
+    letter-spacing: -.026em; margin: 0 0 12px; }
+  .stand { font-size: 1.02rem; color: var(--ink-mid); max-width: 76ch; margin: 0; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--hair); font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem; color: var(--ink-faint); }
+  .meta b { color: var(--ink-soft); font-weight: 500; }
+
+  .part { margin-top: 62px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .part .n { font-family: "IBM Plex Mono", monospace; font-size: .7rem; letter-spacing: .16em;
+    color: var(--accent); display: block; margin-bottom: 6px; }
+  .part h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -.026em; margin: 0 0 8px; }
+  .part p { margin: 0; color: var(--ink-mid); max-width: 76ch; font-size: .95rem; }
+
+  section { margin-top: 46px; scroll-margin-top: 24px; }
+  h3 { font-size: 1.18rem; font-weight: 600; letter-spacing: -.022em; line-height: 1.45;
+    margin: 0 0 8px; }
+  .lede { color: var(--ink-mid); max-width: 76ch; margin: 0 0 22px; }
+  h4 { font-size: .93rem; font-weight: 600; margin: 30px 0 12px; letter-spacing: -.012em; }
+  p { max-width: 76ch; margin: 0 0 14px; }
+  b { font-weight: 600; }
+
+  .tscroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 5px;
+    background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .86rem; }
+  thead th { text-align: left; font-size: .69rem; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-faint); background: var(--surface-2);
+    padding: 11px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--hair); vertical-align: top;
+    color: var(--ink-mid); line-height: 1.68; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+  .cap { font-size: .78rem; color: var(--ink-faint); margin: 10px 0 0; max-width: 80ch;
+    line-height: 1.7; }
+
+  ul.rule { list-style: none; padding: 0; margin: 0; counter-reset: r; }
+  ul.rule > li { counter-increment: r; position: relative; padding: 15px 0 15px 42px;
+    border-bottom: 1px solid var(--hair); color: var(--ink-mid); max-width: 80ch; }
+  ul.rule > li:last-child { border-bottom: 0; }
+  ul.rule > li::before { content: counter(r); position: absolute; left: 0; top: 15px;
+    width: 25px; height: 25px; border-radius: 50%; background: var(--accent); color: #fff;
+    font-family: "IBM Plex Mono", monospace; font-size: .7rem;
+    display: flex; align-items: center; justify-content: center; }
+  ul.rule b { color: var(--ink); }
+
+  .flow { display: flex; flex-direction: column; gap: 10px; margin: 0 0 12px; }
+  .row { display: flex; gap: 14px; align-items: flex-start; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 5px; padding: 15px 18px; }
+  .row.key { border-color: var(--accent-line); background: var(--accent-soft); }
+  .row .k { font-family: "IBM Plex Mono", monospace; font-size: .74rem; color: var(--accent);
+    flex: none; width: 20px; padding-top: 2px; }
+  .row .b { flex-grow: 1; min-width: 0; }
+  .row .t { font-weight: 600; font-size: .95rem; display: block; margin-bottom: 4px; }
+  .row .d { font-size: .87rem; color: var(--ink-mid); line-height: 1.72; max-width: 92ch; }
+
+  pre { font-family: "IBM Plex Mono", monospace; font-size: .8rem; line-height: 1.85;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 20px; overflow-x: auto; margin: 0 0 12px; color: var(--ink-mid);
+    word-break: normal; }
+  pre b { color: var(--ink); font-weight: 500; }
+  pre .a { color: var(--accent); }
+  pre .f { color: var(--ink-faint); }
+
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 5px;
+    padding: 18px 20px 20px; }
+  .card h5 { margin: 0 0 10px; font-size: .72rem; font-family: "IBM Plex Mono", monospace;
+    letter-spacing: .1em; text-transform: uppercase; padding-bottom: 9px;
+    border-bottom: 1px solid var(--hair); font-weight: 600; }
+  .card.a h5 { color: var(--ink-faint); }
+  .card.b h5 { color: var(--accent); }
+  .card.warn h5 { color: var(--bad); }
+  .card ul { list-style: none; margin: 0; padding: 0; font-size: .87rem; }
+  .card li { padding: 7px 0; color: var(--ink-mid); border-bottom: 1px solid var(--hair); }
+  .card li:last-child { border-bottom: 0; }
+  .card li b { color: var(--ink); }
+
+  .note { background: var(--warm-soft); border: 1px solid var(--warm-line); border-radius: 5px;
+    padding: 16px 20px; margin: 0 0 14px; }
+  .note .lb { font-family: "IBM Plex Mono", monospace; font-size: .68rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--warm); display: block; margin-bottom: 7px; }
+  .note p { margin: 0; font-size: .89rem; color: var(--ink-mid); max-width: 80ch; }
+  .note.q { background: var(--accent-soft); border-color: var(--accent-line); }
+  .note.q .lb { color: var(--accent); }
+  .note.bad { background: var(--bad-soft); border-color: var(--bad-line); }
+  .note.bad .lb { color: var(--bad); }
+
+  /* 원문 인용 */
+  blockquote { margin: 0 0 14px; padding: 14px 20px; border-left: 3px solid var(--accent-line);
+    background: var(--surface); border-radius: 0 5px 5px 0; max-width: 92ch; }
+  blockquote p { margin: 0 0 6px; font-size: .89rem; color: var(--ink-mid); max-width: none; }
+  blockquote p:last-child { margin: 0; }
+  blockquote .src { font-family: "IBM Plex Mono", monospace; font-size: .68rem;
+    letter-spacing: .06em; color: var(--ink-faint); display: block; margin-top: 8px; }
+  blockquote em { font-style: normal; color: var(--ink); font-weight: 500; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--ink); }
+  .ext { display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font-family: "IBM Plex Mono", monospace; font-size: .72rem; letter-spacing: .02em;
+    color: var(--accent); border: 1px solid var(--accent-line); background: var(--accent-soft);
+    padding: 4px 10px; border-radius: 4px; white-space: nowrap; }
+  .ext::after { content: "↗"; font-size: .95em; opacity: .65; }
+  .ext:hover { border-color: var(--accent); color: var(--accent); filter: brightness(.97); }
+  .ext:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .sechead { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 0 0 8px; }
+  .sechead h3 { margin: 0; }
+  td a { word-break: break-all; }
+
+  .verdict { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: .66rem;
+    letter-spacing: .08em; text-transform: uppercase; border-radius: 3px; padding: 2px 7px;
+    vertical-align: 2px; white-space: nowrap; }
+  .verdict.yes { color: var(--accent); border: 1px solid var(--accent-line);
+    background: var(--accent-soft); }
+  .verdict.no { color: var(--bad); border: 1px solid var(--bad-line);
+    background: var(--bad-soft); }
+
+  footer.doc { margin-top: 62px; padding-top: 20px; border-top: 1px solid var(--line);
+    font-size: .78rem; color: var(--ink-faint); }
+  footer.doc p { max-width: 80ch; margin: 0 0 6px; line-height: 1.7; }
+  footer.doc h4 { font-size: .78rem; color: var(--ink-soft); margin: 18px 0 8px; }
+  footer.doc ul { margin: 0 0 6px; padding-left: 18px; }
+  footer.doc li { margin-bottom: 4px; line-height: 1.7; }
+
+  @media print {
+    .lnb { display: none; }
+    body { background: #fff; font-size: 11pt; }
+    main { padding: 0; }
+    .row, .card, pre, .tscroll, blockquote, .note { break-inside: avoid; }
+  }
+
+  /* ---- Part 4 : 대조 도식 ---- */
+  .dia { margin: 20px 0 10px; max-width: 1560px; }
+  .dia svg { width: 100%; height: auto; display: block;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 5px; }
+  .dia figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: 9px;
+    text-wrap: pretty; word-break: keep-all; }
+  .dia svg text { font-family: "IBM Plex Sans KR","Malgun Gothic",system-ui,sans-serif;
+    fill: var(--ink-mid); }
+  .dia svg .dh { font-size: 12.5px; font-weight: 600; fill: var(--ink); }
+  .dia svg .dt { font-size: 12px; font-weight: 600; fill: var(--ink); }
+  .dia svg .ds { font-size: 10.5px; fill: var(--ink-mid); }
+  .dia svg .dx { font-size: 9.5px; fill: var(--ink-soft); }
+  .dia svg .dl { font-size: 9.5px; letter-spacing: .06em; }
+  .dia svg .a { fill: var(--accent); }
+  .dia svg .f { fill: var(--ink-faint); }
+  .dia svg .bad { fill: var(--bad); }
+  .dia svg .ln { stroke: var(--ink-faint); stroke-width: 1.1; fill: none; }
+  .dia svg .ln-hair { stroke: var(--hair); stroke-width: 1; fill: none; }
+  .dia svg .bx-key { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+  .dia svg .bx-pill { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+  .dia svg .bx-mute { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  .dia svg .bx-bad { fill: var(--bad-soft); stroke: var(--bad-line); stroke-width: 1;
+    stroke-dasharray: 4 3; }
+  .dia svg .chip rect { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+  .dia svg .chip text { font-size: 10px; fill: var(--ink-soft); }
+  .grp2 { font-size: .78rem; font-weight: 600; color: var(--ink-soft);
+    margin: 26px 0 8px; padding-left: 10px; border-left: 2px solid var(--accent-line); }
+  .verdict.ko { font-family: inherit; letter-spacing: 0; text-transform: none;
+    font-size: .72rem; font-weight: 600; }
+  td.bad-cell { background: var(--bad-soft); }
+
+  /* LNB 스크롤바 — 평소 숨김 · 커서 올릴 때만 노출 (gutter 고정으로 레이아웃 이동 없음) */
+  .lnb { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+  .lnb:hover { scrollbar-color: var(--line) transparent; }
+  .lnb::-webkit-scrollbar { width: 6px; }
+  .lnb::-webkit-scrollbar-track { background: transparent; }
+  .lnb::-webkit-scrollbar-thumb { background: transparent; border-radius: 3px;
+    transition: background .15s ease; }
+  .lnb:hover::-webkit-scrollbar-thumb { background: var(--line); }
+  .lnb:hover::-webkit-scrollbar-thumb:hover { background: var(--ink-faint); }
+</style>
+<body>
+<div class="shell">
+
+<nav class="lnb">
+  <span class="bmark">결제 설계</span>
+  <span class="bsub">Ragnarok Portal · 2026-09</span>
+
+  <p class="grp">목차</p>
+  <a href="#c1">1 · 왜 만드나</a>
+  <a href="#c2">2 · 누가 뭘 하나</a>
+  <a href="#c3">3 · 유저는 어떻게 결제하나</a>
+  <a href="#c4">4 · 관리자는 뭘 세팅하나</a>
+  <a href="#review">검토 필요사항</a>
+
+</nav>
+
+<main>
+
+<header class="mast">
+  <p class="kick">Design · Payment</p>
+  <h1>결제 설계</h1>
+  <p class="stand"><b>지사마다 따로 만들던 결제를, 본사가 하나 만들어 지사들이 가져다 쓴다.</b>
+  결제 페이지도 하나, 웹샵도 하나, PG 연동도 PG사마다 한 번만 한다.
+  유저가 낸 돈은 본사를 거치지 않고 각 지사 계좌로 바로 들어간다.</p>
+  <div class="meta">
+    <span><b>범위</b> 통합 결제 페이지 · 웹샵 · 관리자</span>
+    <span><b>대상</b> 기획 · 개발 · 사업 담당</span>
+    <span><b>작성</b> 2026-09-08</span>
+  </div>
+</header>
+
+<div class="part">
+  <span class="n">1장</span>
+  <h2>왜 만드나</h2>
+  <p>지금 방식의 문제와 통합 결제로 달라지는 것.</p>
+</div>
+
+<section id="c1">
+  <h3>지금과 앞으로</h3>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 316" role="img" aria-label="지금 방식과 통합 결제 방식 비교도">
+      <defs>
+        <marker id="v1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <line x1="480" y1="18" x2="480" y2="298" class="ln-hair"/>
+
+      <text x="240" y="28" class="dt" text-anchor="middle">지금 — 지사마다 따로 만든다</text>
+
+      <rect x="24" y="52" width="86" height="34" rx="5" class="bx-mute"/>
+      <text x="67" y="73" class="ds" text-anchor="middle">대만 법인</text>
+      <line x1="110" y1="69" x2="140" y2="69" class="ln" marker-end="url(#v1a)"/>
+      <rect x="144" y="52" width="106" height="34" rx="5" class="bx-mute"/>
+      <text x="197" y="73" class="ds" text-anchor="middle">MyCard 연동</text>
+      <line x1="250" y1="69" x2="280" y2="69" class="ln" marker-end="url(#v1a)"/>
+      <rect x="284" y="52" width="86" height="34" rx="5" class="bx-mute"/>
+      <text x="327" y="73" class="ds" text-anchor="middle">결제창</text>
+      <line x1="370" y1="69" x2="400" y2="69" class="ln" marker-end="url(#v1a)"/>
+      <rect x="404" y="52" width="52" height="34" rx="5" class="bx-mute"/>
+      <text x="430" y="73" class="ds" text-anchor="middle">게임</text>
+
+      <rect x="24" y="102" width="86" height="34" rx="5" class="bx-mute"/>
+      <text x="67" y="123" class="ds" text-anchor="middle">일본 법인</text>
+      <line x1="110" y1="119" x2="140" y2="119" class="ln" marker-end="url(#v1a)"/>
+      <rect x="144" y="102" width="106" height="34" rx="5" class="bx-mute"/>
+      <text x="197" y="123" class="ds" text-anchor="middle">편의점 연동</text>
+      <line x1="250" y1="119" x2="280" y2="119" class="ln" marker-end="url(#v1a)"/>
+      <rect x="284" y="102" width="86" height="34" rx="5" class="bx-mute"/>
+      <text x="327" y="123" class="ds" text-anchor="middle">결제창</text>
+      <line x1="370" y1="119" x2="400" y2="119" class="ln" marker-end="url(#v1a)"/>
+      <rect x="404" y="102" width="52" height="34" rx="5" class="bx-mute"/>
+      <text x="430" y="123" class="ds" text-anchor="middle">게임</text>
+
+      <rect x="24" y="152" width="86" height="34" rx="5" class="bx-mute"/>
+      <text x="67" y="173" class="ds" text-anchor="middle">북미 법인</text>
+      <line x1="110" y1="169" x2="140" y2="169" class="ln" marker-end="url(#v1a)"/>
+      <rect x="144" y="152" width="106" height="34" rx="5" class="bx-mute"/>
+      <text x="197" y="173" class="ds" text-anchor="middle">카드 연동</text>
+      <line x1="250" y1="169" x2="280" y2="169" class="ln" marker-end="url(#v1a)"/>
+      <rect x="284" y="152" width="86" height="34" rx="5" class="bx-mute"/>
+      <text x="327" y="173" class="ds" text-anchor="middle">결제창</text>
+      <line x1="370" y1="169" x2="400" y2="169" class="ln" marker-end="url(#v1a)"/>
+      <rect x="404" y="152" width="52" height="34" rx="5" class="bx-mute"/>
+      <text x="430" y="173" class="ds" text-anchor="middle">게임</text>
+
+      <text x="240" y="216" class="ds f" text-anchor="middle">게임이 하나 늘면 이 줄이 하나 더 생긴다</text>
+
+      <text x="720" y="28" class="dt" text-anchor="middle">앞으로 — 하나를 나눠 쓴다</text>
+
+      <rect x="546" y="52" width="348" height="56" rx="5" class="bx-key"/>
+      <text x="720" y="75" class="dt a" text-anchor="middle">통합 결제 모듈</text>
+      <text x="720" y="94" class="ds" text-anchor="middle">결제창 · 웹샵 · PG 연동 — 본사가 만들어 제공</text>
+
+      <line x1="720" y1="108" x2="720" y2="126" class="ln"/>
+      <line x1="600" y1="126" x2="840" y2="126" class="ln"/>
+      <line x1="600" y1="126" x2="600" y2="146" class="ln" marker-end="url(#v1a)"/>
+      <line x1="720" y1="126" x2="720" y2="146" class="ln" marker-end="url(#v1a)"/>
+      <line x1="840" y1="126" x2="840" y2="146" class="ln" marker-end="url(#v1a)"/>
+
+      <rect x="552" y="148" width="96" height="34" rx="5" class="bx-mute"/>
+      <text x="600" y="169" class="ds" text-anchor="middle">대만 법인</text>
+      <rect x="672" y="148" width="96" height="34" rx="5" class="bx-mute"/>
+      <text x="720" y="169" class="ds" text-anchor="middle">일본 법인</text>
+      <rect x="792" y="148" width="96" height="34" rx="5" class="bx-mute"/>
+      <text x="840" y="169" class="ds" text-anchor="middle">북미 법인</text>
+
+      <text x="720" y="216" class="ds f" text-anchor="middle">게임이 늘면 상품만 등록하면 된다</text>
+
+      <line x1="24" y1="252" x2="936" y2="252" class="ln-hair"/>
+      <text x="480" y="278" class="dt" text-anchor="middle">그래도 돈은 예전처럼 각 지사로 바로 들어간다</text>
+      <text x="480" y="298" class="ds f" text-anchor="middle">본사는 결제 시스템만 제공할 뿐, 돈을 대신 받아 나눠주지 않는다</text>
+    </svg>
+    <figcaption>왼쪽은 같은 작업을 반복하는 구조, 오른쪽은 한 번 만들고 나눠 쓰는 구조다.</figcaption>
+  </figure>
+
+  <p>지금은 법인마다 · 게임마다 PG 계약부터 결제창과 게임 연동까지 한 세트를 새로 만든다.
+  그래서 같은 개발이 반복되고, 결제 기록이 흩어져 전체 매출을 한 번에 볼 수 없고, 게임팀이 나라마다 다른 PG 규격을 직접 공부해야 한다.
+  본사가 결제 모듈을 하나 만들어 지사들이 나눠 쓰면 이 셋이 해결된다.</p>
+
+  <h3>무엇이 달라지나</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>이런 일이 생기면</th><th>지금</th><th>앞으로</th></tr></thead>
+      <tbody>
+        <tr><td><b>게임을 새로 런칭한다</b></td><td>결제창 · PG 연동을 새로 만든다</td><td><b>상품만 등록한다</b></td></tr>
+        <tr><td><b>지사가 새로 결제를 붙인다</b></td><td>그 나라 PG를 찾아 처음부터 연동한다</td><td><b>계약을 한 번 맺고 등록한다</b></td></tr>
+        <tr><td><b>새로운 PG를 쓰고 싶다</b></td><td>쓰려는 지사가 직접 개발한다</td><td><b>본사가 한 번 연동하면 모든 지사가 쓴다</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>돈의 경로는 바뀌지 않는다</h3>
+
+  <p><b>유저가 낸 돈은 지금과 똑같이 각 지사 계좌로 바로 들어간다.</b>
+  PG사가 대만 유저에게 받은 돈은 대만 법인 계좌로, 일본 유저에게 받은 돈은 일본 법인 계좌로 간다.
+  본사가 전 세계 대금을 받아 나눠주면 해외에서 번 돈이 본사 매출로 잡히고 각 나라로 다시 보낼 때 세금 문제가 붙는다.</p>
+</section>
+
+<div class="part">
+  <span class="n">2장</span>
+  <h2>누가 뭘 하나</h2>
+  <p>본사가 만들어주는 것과 지사가 직접 하는 것.</p>
+</div>
+
+<section id="c2">
+  <h3>나누는 기준</h3>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 268" role="img" aria-label="본사와 지사의 분담 기준 축">
+      <defs>
+        <marker id="v2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="80" y="34" class="dt">바뀌면 안 되는 것</text>
+      <text x="80" y="53" class="ds f">본사가 쥔다</text>
+      <text x="880" y="34" class="dt" text-anchor="end">현지가 아는 것</text>
+      <text x="880" y="53" class="ds f" text-anchor="end">지사가 쥔다</text>
+
+      <line x1="70" y1="176" x2="890" y2="176" class="ln" marker-start="url(#v2a)" marker-end="url(#v2a)"/>
+      <path d="M480 92 L480 216" class="ln-hair" stroke-dasharray="4 4"/>
+
+      <rect x="76" y="112" width="122" height="36" rx="5" class="bx-key"/>
+      <text x="137" y="135" class="ds a" text-anchor="middle">PG 계약 조건</text>
+      <rect x="210" y="112" width="96" height="36" rx="5" class="bx-key"/>
+      <text x="258" y="135" class="ds a" text-anchor="middle">인증키</text>
+      <rect x="318" y="112" width="116" height="36" rx="5" class="bx-key"/>
+      <text x="376" y="135" class="ds a" text-anchor="middle">연동 규격</text>
+
+      <rect x="524" y="112" width="126" height="36" rx="5" class="bx-mute"/>
+      <text x="587" y="135" class="ds" text-anchor="middle">결제수단 선택</text>
+      <rect x="662" y="112" width="106" height="36" rx="5" class="bx-mute"/>
+      <text x="715" y="135" class="ds" text-anchor="middle">상품 · 가격</text>
+      <rect x="780" y="112" width="110" height="36" rx="5" class="bx-mute"/>
+      <text x="835" y="135" class="ds" text-anchor="middle">게임사 컨택</text>
+
+      <text x="255" y="208" class="ds f" text-anchor="middle">흔들리면 전체가 깨지는 것</text>
+      <text x="707" y="208" class="ds f" text-anchor="middle">그 나라에 있어야 알 수 있는 것</text>
+
+      <text x="480" y="252" class="ds f" text-anchor="middle">기준이 하나이므로 새 항목이 생겨도 어느 쪽인지 바로 정할 수 있다</text>
+    </svg>
+    <figcaption>왼쪽은 흔들리면 전체가 깨지는 것, 오른쪽은 현지 사정을 아는 사람만 정할 수 있는 것이다.</figcaption>
+  </figure>
+
+  <p>본사는 <b>흔들리면 전체가 깨지는 것</b>을 쥐고, 지사는 <b>현지에 있어야 알 수 있는 것</b>을 쥔다.
+  연동 규격을 지사마다 다르게 정하면 게임마다 붙이는 방식이 갈라져 「한 번만 만든다」는 전제가 무너진다.
+  반대로 대만 유저가 MyCard를 얼마나 쓰는지, 다이아몬드 1,000개를 대만에서 얼마에 팔아야 하는지는 서울에서 판단할 수 없다.</p>
+
+  <h3>분담</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>무엇</th><th>정하는 쪽</th><th>실행하는 쪽</th></tr></thead>
+      <tbody>
+        <tr><td>PG 수수료 조건</td><td><b>본사</b></td><td>본사</td></tr>
+        <tr><td>PG 계약 명의</td><td>본사 (조건)</td><td><b>지사</b> (계약)</td></tr>
+        <tr><td>인증키 발급</td><td><b>본사</b></td><td>본사</td></tr>
+        <tr><td>게임사 연동 규격</td><td><b>본사</b></td><td>지사 (전달 · 확인)</td></tr>
+        <tr><td>결제 페이지 · 웹샵</td><td><b>본사</b></td><td>본사 (제공)</td></tr>
+        <tr><td>쓸 결제수단</td><td><b>지사</b></td><td>지사</td></tr>
+        <tr><td>상품이 무엇인지</td><td><b>게임 주관 지사</b></td><td>—</td></tr>
+        <tr><td>상품 가격</td><td><b>지사</b></td><td>지사</td></tr>
+        <tr><td>게임사 컨택</td><td><b>지사</b></td><td>지사</td></tr>
+        <tr><td>환불 처리</td><td>본사 (기능)</td><td><b>지사</b></td></tr>
+        <tr><td>정산 대사</td><td>본사 (기능)</td><td><b>지사</b> (확인)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">「정하는 쪽」과 「실행하는 쪽」이 다른 줄은 둘이다 — PG 계약과 연동 규격.
+  <b>PG 계약은 조건은 본사가 협상하고 명의는 지사가 갖는다</b> — 협상은 몰아서 해야 조건이 좋고, 명의가 지사여야 대금이 지사 계좌로 들어온다.
+  본사 목록에 <b>「승인」은 없다</b> — 지사가 가격이나 정산 계좌를 바꿀 때 본사에 결재를 올리지 않고, 승인이 필요한 일은 지사 담당자와 지사 재무팀이 나눠 처리한다.</p>
+</section>
+
+<div class="part">
+  <span class="n">3장</span>
+  <h2>유저는 어떻게 결제하나</h2>
+  <p>상품을 고르고 아이템을 받기까지, 그리고 게임팀이 만들어야 할 것.</p>
+</div>
+
+<section id="c3">
+  <h3>다섯 걸음</h3>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 246" role="img" aria-label="유저가 결제하는 다섯 단계">
+      <defs>
+        <marker id="v3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <rect x="32" y="34" width="160" height="88" rx="5" class="bx-mute"/>
+      <text x="112" y="60" class="dl f" text-anchor="middle">1</text>
+      <text x="112" y="82" class="dt" text-anchor="middle">상품을 고른다</text>
+      <text x="112" y="102" class="ds" text-anchor="middle">웹샵 또는 게임 안 상점</text>
+      <line x1="192" y1="78" x2="212" y2="78" class="ln" marker-end="url(#v3a)"/>
+
+      <rect x="216" y="34" width="160" height="88" rx="5" class="bx-key"/>
+      <text x="296" y="60" class="dl a" text-anchor="middle">2</text>
+      <text x="296" y="82" class="dt a" text-anchor="middle">지급 대상 확인</text>
+      <text x="296" y="102" class="ds" text-anchor="middle">계정 또는 캐릭터</text>
+      <line x1="376" y1="78" x2="396" y2="78" class="ln" marker-end="url(#v3a)"/>
+
+      <rect x="400" y="34" width="160" height="88" rx="5" class="bx-mute"/>
+      <text x="480" y="60" class="dl f" text-anchor="middle">3</text>
+      <text x="480" y="82" class="dt" text-anchor="middle">결제수단 골라 결제</text>
+      <text x="480" y="102" class="ds" text-anchor="middle">카드 · 간편결제 · 편의점</text>
+      <line x1="560" y1="78" x2="580" y2="78" class="ln" marker-end="url(#v3a)"/>
+
+      <rect x="584" y="34" width="160" height="88" rx="5" class="bx-key"/>
+      <text x="664" y="60" class="dl a" text-anchor="middle">4</text>
+      <text x="664" y="82" class="dt a" text-anchor="middle">게임에 지급 요청</text>
+      <text x="664" y="102" class="ds" text-anchor="middle">결제 모듈 → 게임 서버</text>
+      <line x1="744" y1="78" x2="764" y2="78" class="ln" marker-end="url(#v3a)"/>
+
+      <rect x="768" y="34" width="160" height="88" rx="5" class="bx-mute"/>
+      <text x="848" y="60" class="dl f" text-anchor="middle">5</text>
+      <text x="848" y="82" class="dt" text-anchor="middle">게임에서 받는다</text>
+      <text x="848" y="102" class="ds" text-anchor="middle">우편함 · 계정 잔액</text>
+
+      <path d="M296 122 L296 152 L664 152 L664 122" class="ln" stroke-dasharray="4 4"/>
+      <rect x="352" y="162" width="256" height="34" rx="5" class="bx-key"/>
+      <text x="480" y="184" class="dt a" text-anchor="middle">게임팀이 만들 API는 이 둘뿐</text>
+
+      <text x="480" y="228" class="ds f" text-anchor="middle">1 · 3 · 5는 유저가 하는 일 · 2 · 4는 시스템이 게임 서버에 묻고 요청하는 일</text>
+    </svg>
+    <figcaption>다섯 걸음 중 게임팀 작업은 파란 두 칸에만 걸린다.</figcaption>
+  </figure>
+
+  <p>유저는 <b>웹샵</b>과 <b>게임 안 상점</b> 두 경로로 들어오지만 결제 페이지는 하나를 쓴다.
+  게임팀 작업은 <b>2걸음(대상 확인)과 4걸음(지급)</b>에만 걸리고, 환불 회수까지 합쳐 API 셋을 만든다.
+  PG사 규격 · 결제창 · 카드 정보 · 환율 · 세금 · PG 장애 대응은 전부 결제 모듈이 처리한다.</p>
+
+  <h3>지급 단위 — 계정이냐 캐릭터냐</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th></th><th>캐릭터에게 준다</th><th>계정에게 준다</th></tr></thead>
+      <tbody>
+        <tr><td><b>누가 쓸 수 있나</b></td><td>그 캐릭터만</td><td><b>계정의 모든 캐릭터</b></td></tr>
+        <tr><td><b>유저가 입력하는 것</b></td><td>게임 · 서버 · 캐릭터명</td><td>게임 · <b>계정 아이디</b></td></tr>
+        <tr><td><b>확인 화면에 뜨는 것</b></td><td>캐릭터명 · 레벨 · 직업</td><td>계정 아이디 (일부 가림)</td></tr>
+        <tr><td><b>주로 이런 상품</b></td><td>아이템 · 코스튬 · 패키지</td><td>게임 포인트 · 이용권 · 구독</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">지사 관리자가 상품을 등록할 때 정하고 <b>판매를 시작하면 바꿀 수 없다</b> — 이미 지급된 것의 사용 범위가 나중에 달라지면 유저 자산이 흔들린다.
+  2걸음에서 <b>남의 캐릭터명을 입력하면 그게 선물</b>이므로 별도 「선물하기」 기능을 만들지 않는다.</p>
+
+  <h3>로그인이 필요한 상품</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>상품</th><th>로그인</th><th>왜</th></tr></thead>
+      <tbody>
+        <tr><td>인게임 아이템 · 코스튬 · 패키지</td><td><b>필요 없음</b></td><td>캐릭터명 확인만으로 대상이 정해진다</td></tr>
+        <tr><td>게임 포인트</td><td>경우에 따라</td><td>계정 지갑에 들어가므로 계정을 특정해야 한다</td></tr>
+        <tr><td>이용권 · 구독</td><td><b>필요</b></td><td>계정 권한을 바꾸는 일이라 본인 확인이 필요하다</td></tr>
+        <tr><td>계정당 1회 한정 상품</td><td><b>필요</b></td><td>로그인 없이는 이미 샀는지 확인할 수 없다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">로그인 없는 결제에는 <b>금액 상한이 걸린다</b> — 누적 결제를 추적할 수 없어 법정 한도를 건 단위로만 통제할 수 있다.
+  상한을 넘기려는 유저는 로그인으로 유도된다.</p>
+
+  <h3>게임팀이 만드는 API</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>API</th><th>누가 부르나</th><th>무엇을 하나</th></tr></thead>
+      <tbody>
+        <tr><td><b>결제 시작</b></td><td>상점 → <b>결제 모듈</b></td><td>결제 페이지를 열어달라고 요청한다. 상품과 대상만 알려주고 <b>금액은 보내지 않는다</b></td></tr>
+        <tr><td><b>대상 확인</b></td><td>결제 모듈 → <b>게임 서버</b></td><td>이 계정 · 캐릭터가 있는지 답한다 (2걸음)</td></tr>
+        <tr><td><b>지급</b></td><td>결제 모듈 → <b>게임 서버</b></td><td>결제가 끝났으니 지급해달라 (4걸음)</td></tr>
+        <tr><td><b>회수</b></td><td>결제 모듈 → <b>게임 서버</b></td><td>환불이 됐으니 지급한 것을 되돌려달라</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">첫 줄만 방향이 반대다 — 상점이 결제 모듈을 부른다. 그래서 <b>게임 서버가 만들 것은 아래 셋</b>이다.
+  상점이 금액을 보내지 않는 이유는 <b>조작을 막기 위해서</b>다 — 11,000원짜리를 1,100원으로 바꿔 보낼 수 있으므로, 상점은 「어떤 상품」인지만 알려주고 금액은 결제 모듈이 등록된 가격표에서 계산한다.</p>
+
+  <h3>결제는 됐는데 아이템이 안 왔을 때</h3>
+
+  <p>4걸음에서 게임 서버가 점검 중이거나 네트워크가 끊기면 지급 요청이 실패한다.
+  <b>돈은 이미 빠져나갔고 아이템은 없는 상태</b>가 되고, 이걸 넷으로 막는다.</p>
+
+  <ul class="rule">
+    <li><b>실패한 건을 따로 모아둔다.</b> 「결제됐지만 아직 못 준 건」이라는 상태로 표시해 잃어버리지 않게 한다.</li>
+    <li><b>자동으로 다시 시도한다.</b> 1분 · 5분 · 15분 · 1시간 간격으로 재시도하고, 게임 서버가 살아나면 그때 지급된다.</li>
+    <li><b>같은 요청이 여러 번 가도 한 번만 지급된다.</b> 게임 서버가 주문번호를 기억해 중복을 걸러낸다 — 게임팀 구현에서 가장 중요한 부분이다.</li>
+    <li><b>유저에게는 「결제 완료 · 지급 처리 중」으로 안내한다.</b> 「결제 실패」로 표시하면 유저가 다시 결제해 이중 결제가 발생한다. 재시도가 계속 실패하면 고객센터로 넘어가 운영자가 수동 지급한다.</li>
+  </ul>
+</section>
+
+<div class="part">
+  <span class="n">4장</span>
+  <h2>관리자는 뭘 세팅하나</h2>
+  <p>어드민 하나에 본사 권한과 지사 권한이 함께 있다.</p>
+</div>
+
+<section id="c4">
+  <h3>어드민 구성</h3>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 400" role="img" aria-label="통합 어드민의 권한별 화면 구성">
+      <defs>
+        <marker id="v4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="60" y="30" class="dl a">통합 어드민 — 시스템 하나 · 접속 주소 하나</text>
+      <rect x="40" y="42" width="880" height="340" rx="6" fill="none" stroke="var(--line)" stroke-width="1"/>
+
+      <text x="64" y="70" class="dl a">본사 계정으로 들어오면 — 두 가지</text>
+
+      <rect x="300" y="80" width="180" height="46" rx="5" class="bx-key"/>
+      <text x="390" y="102" class="dt a" text-anchor="middle">결제 모듈 관리</text>
+      <text x="390" y="118" class="dx f" text-anchor="middle">쓸 수 있는 PG · 규격 · 결제창</text>
+
+      <rect x="500" y="80" width="180" height="46" rx="5" class="bx-key"/>
+      <text x="590" y="102" class="dt a" text-anchor="middle">키 발급 · 연동</text>
+      <text x="590" y="118" class="dx f" text-anchor="middle">지사별 PG 키 · 게임별 키</text>
+
+      <text x="480" y="144" class="dx f" text-anchor="middle">권한이 다르면 같은 시스템에서 보이는 화면이 다르다</text>
+      <line x1="64" y1="152" x2="896" y2="152" class="ln-hair"/>
+
+      <text x="64" y="182" class="dl f">지사 계정으로 들어오면 — 나머지 전부</text>
+
+      <rect x="64" y="192" width="180" height="34" rx="5" class="bx-key"/>
+      <text x="154" y="214" class="dt a" text-anchor="middle">00 · 결제 준비도</text>
+      <text x="258" y="208" class="ds f">지금 결제가 열리는지 · 안 열리면 무엇이 막고 있는지</text>
+      <text x="258" y="224" class="dx f">아래 항목들의 상태를 읽어와 요약만 한다</text>
+
+      <text x="64" y="252" class="dl f">준비 — 순서대로 채운다 · 처음 한 번</text>
+
+      <rect x="64" y="262" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="127" y="284" class="dt" text-anchor="middle">01 · 법인</text>
+      <line x1="190" y1="279" x2="198" y2="279" class="ln" marker-end="url(#v4a)"/>
+
+      <rect x="202" y="262" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="265" y="284" class="dt" text-anchor="middle">02 · 결제수단</text>
+      <text x="265" y="308" class="dx a" text-anchor="middle">본사가 열어둔 것만</text>
+      <line x1="328" y1="279" x2="336" y2="279" class="ln" marker-end="url(#v4a)"/>
+
+      <rect x="340" y="262" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="403" y="284" class="dt" text-anchor="middle">03 · 게임 연동</text>
+      <line x1="466" y1="279" x2="474" y2="279" class="ln" marker-end="url(#v4a)"/>
+
+      <rect x="478" y="262" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="541" y="284" class="dt" text-anchor="middle">04 · 상품 · 가격</text>
+      <text x="541" y="308" class="dx bad" text-anchor="middle">가장 자주 막히는 칸</text>
+
+      <text x="64" y="336" class="dl f">운영 — 매일 쓴다</text>
+
+      <rect x="64" y="344" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="127" y="366" class="dt" text-anchor="middle">05 · 모니터링</text>
+      <rect x="202" y="344" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="265" y="366" class="dt" text-anchor="middle">06 · 환불 · CS</text>
+      <rect x="340" y="344" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="403" y="366" class="dt" text-anchor="middle">07 · 정산 대사</text>
+
+      <text x="490" y="358" class="ds f">본사 쪽에 없는 것 —</text>
+      <text x="490" y="374" class="ds f">상품 · 가격 · 결제수단 선택 · 환불 · 정산 · 매출</text>
+    </svg>
+    <figcaption>파란 칸이 본사 권한, 회색 칸이 지사 권한이다. 본사는 모듈과 키만 다루고 결제 운영에는 들어오지 않는다.</figcaption>
+  </figure>
+
+  <p>본사용과 지사용을 따로 만들지 않는다. <b>시스템도 하나, 접속 주소도 하나</b>이고 로그인한 사람에 따라 보이는 화면이 다르다.
+  지사 계정으로 들어오면 자기 법인 것만 보이므로, 지사가 늘어도 새로 만들 것이 없다.
+  본사 권한은 <b>결제 모듈 관리와 키 발급 둘뿐</b>이고, 상품 · 가격 · 결제수단 선택 · 금액 한도 · 환불 · 정산 · 매출 조회는 본사 화면에 없으며 <b>본사 승인 절차도 없다.</b></p>
+
+  <h3>본사가 발급하는 키</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>키</th><th>무엇에 쓰나</th><th>누가 받아가나</th></tr></thead>
+      <tbody>
+        <tr><td><b>지사별 PG 인증키</b></td><td>결제 모듈이 PG사에 승인을 요청할 때 쓴다</td><td>아무도 — 모듈이 서버에서 직접 꺼내 쓴다</td></tr>
+        <tr><td><b>게임별 연동 키</b></td><td>결제 모듈과 게임 서버가 주고받는 요청이 위조되지 않았음을 확인할 때 쓴다</td><td><b>지사가 받아 게임사에 전달한다</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">지사는 <b>인증키 원문을 볼 수 없다</b> — 「우리 법인에 어떤 결제수단이 열려 있고 수수료가 얼마인지」만 조회한다.
+  본사가 키를 쥐는 이유는 조건을 협상한 쪽이 본사여서, 정산 대사에서 계약한 수수료율이 제대로 적용됐는지 확인해야 하기 때문이다.</p>
+
+  <h3>지사가 쓰는 화면 여덟</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>화면</th><th>하는 일</th><th>비어 있으면</th></tr></thead>
+      <tbody>
+        <tr><td><b>00 · 결제 준비도</b></td><td>아래 항목들의 상태를 모아 「결제가 열리는가」를 판정</td><td>무엇이 막혔는지 화면을 돌아다니며 찾아야 한다</td></tr>
+        <tr><td><b>01 · 법인</b></td><td>통화 · 세금 규격 · 대금 받을 계좌를 등록</td><td class="bad-cell"><b>아무것도 시작할 수 없다</b></td></tr>
+        <tr><td><b>02 · 결제수단</b></td><td>본사가 열어둔 것 중 쓸 것을 고르고 노출 순서 · 금액 범위를 정함</td><td class="bad-cell">결제수단이 안 보인다</td></tr>
+        <tr><td><b>03 · 게임 연동</b></td><td>게임과 서버를 등록하고, 본사에서 받은 키로 연결을 확인</td><td class="bad-cell">결제는 되지만 <b>지급이 안 된다</b></td></tr>
+        <tr><td><b>04 · 상품 · 가격</b></td><td>무엇을 팔지 정하고 자기 나라 통화로 가격을 매김</td><td class="bad-cell">결제 페이지에 <b>상품이 0개</b></td></tr>
+        <tr><td><b>05 · 결제 모니터링</b></td><td>결제가 들어오는 것을 실시간으로 보고, 지급 실패 건을 찾음</td><td>문제가 생긴 걸 모른다</td></tr>
+        <tr><td><b>06 · 환불 · CS</b></td><td>환불 접수와 처리, 계좌 송금이 필요한 건은 재무팀 승인</td><td>환불을 처리할 수 없다</td></tr>
+        <tr><td><b>07 · 정산 대사</b></td><td>PG가 보낸 정산 내역과 우리 기록을 매일 맞춰봄</td><td>돈이 제대로 들어왔는지 알 수 없다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">기능 메뉴가 아니라 <b>채워야 하는 순서</b>다. 01~04는 처음 한 번 채우고 바뀔 때만 만지고, <b>05~07은 매일 쓴다.</b>
+  「결제가 안 열린다」는 대부분 PG나 인증키 문제가 아니라 <b>04의 상품 가격 미입력</b>이므로, 00번 화면이 이를 차단 항목으로 표시한다.</p>
+</section>
+
+<div class="part">
+  <span class="n">검토</span>
+  <h2>검토 필요사항</h2>
+  <p>확정되지 않은 항목과 담당.</p>
+</div>
+
+<section id="review">
+  <h3>먼저 확인해야 하는 것</h3>
+
+  <p>아래 하나가 <b>다른 결정들의 전제</b>다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>항목</th><th>확인할 것</th><th>누가</th></tr></thead>
+      <tbody>
+        <tr><td><b>국가별 데이터 이전</b></td><td>각 지사 국가의 개인정보를 한국으로 보내도 되는지. 막히는 나라가 있으면 그 나라만 분리해야 한다</td><td><b>법무 · 개인정보 담당</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">어드민을 하나로 통합하는 전제가 여기 걸려 있다 — 막히는 나라가 있으면 그 나라만 분리해야 한다.</p>
+
+  <h3>규격 확정 — 게임사 · PG 배포 전</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:190px;">항목</th><th>정해야 할 것</th><th style="width:120px;">언제까지</th></tr></thead>
+      <tbody>
+        <tr><td><b>법인 코드 정본</b></td><td>설계서<span class="mono">(HQ · GTT · GTH · GTA · GVI)</span>와 프로토타입<span class="mono">(KR_HQ · TW_COMM)</span>이 실제 법인 코드와 다르다. 설계서는 <b>GVI를 인도네시아로 배정했으나 GVI는 북미이고 인도네시아는 GGL</b>이다</td><td><b>법인 등록 전</b></td></tr>
+        <tr><td><b>환불 회수 API 규격</b></td><td><span class="mono">/revoke</span>의 요청 · 응답이 정의되지 않았다. 부분 회수 · 잔여 부족 · 계정 동결의 반환 형태가 환불 승인 여부를 좌우한다 — <b>API는 둘이 아니라 셋</b>이다</td><td><b>게임사 배포 전</b></td></tr>
+        <tr><td><b>서명 헤더명</b></td><td>설계서는 <span class="mono">X-Gravity-HMAC-SHA256</span>, 프로토타입은 <span class="mono">X-Portal-Signature</span>. 하나로 고정해야 한다</td><td><b>게임사 배포 전</b></td></tr>
+        <tr><td><b>게임 주관 지사 지정</b></td><td>게임별로 어느 지사가 상품 정의를 소유하는지, 주관 지사가 서비스를 종료할 때 이관 절차</td><td>게임사 배포 전</td></tr>
+        <tr><td><b>상품 코드 체계</b></td><td>지원하는 PG들의 코드 규칙 교집합으로 정해야 한다</td><td>게임사 배포 전</td></tr>
+        <tr><td><b>Tier 3 PG 정산 리포트</b></td><td>Oneverse · GOC-PAY 등 파트너십형 게이트웨이가 정산 리포트를 어떤 형태로 주는지 미확인. <b>어댑터 구현 가능 여부가 여기서 갈린다</b></td><td>PG 계약 전</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>구조 결정</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>항목</th><th>정해야 할 것</th><th>관련</th></tr></thead>
+      <tbody>
+        <tr><td><b>전사 집계 범위</b></td><td>전 지사 매출을 어디까지 합쳐 볼 것인가. 개인을 식별하지 않는 통계만 모을지, 상세까지 볼지</td><td>4장</td></tr>
+        <tr><td><b>일부 국가 분리 시 처리</b></td><td>특정 국가를 분리해야 할 때 그 나라 데이터를 집계에서 뺄지, 통계만 올릴지</td><td>4장</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>운영 권한</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>항목</th><th>정해야 할 것</th><th>관련</th></tr></thead>
+      <tbody>
+        <tr><td><b>결제수단 긴급 차단</b></td><td>PG 장애 시 지사가 자기 법인 결제수단을 껐다 켤 수 있게 열어줄지. 키는 못 봐도 스위치는 만질 수 있게 할지</td><td>4장</td></tr>
+        <tr><td><b>선물 결제의 환불 청구권</b></td><td>남의 캐릭터에 결제한 건을 환불할 때 결제자와 수령자 중 누가 청구할 수 있는지</td><td>3장</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>운영 편의</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>항목</th><th>정해야 할 것</th><th>관련</th></tr></thead>
+      <tbody>
+        <tr><td><b>가격 등급 도입</b></td><td>통화별 가격을 하나하나 입력하는 대신 등급으로 묶을지. 상품 12종 × 통화 5개면 채울 칸이 60개, 법인 9개면 108개다</td><td>4장</td></tr>
+        <tr><td><b>결제 이탈 추적</b></td><td>결제 페이지까지 왔다가 나간 건은 PG에도 우리에도 기록이 없어 정산 대사에 걸리지 않는다. 별도 추적 장치를 둘지</td><td>4장</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<footer class="doc">
+  <h4>관련 문서</h4>
+  <ul>
+    <li><b><a href="../../wireframe/payment-checkout-currency.html">통합 결제창 화면정의서</a></b> — 핀 8 「결제 모듈 — 조직 · 자금 구조」에 처음 읽는 사람용 한 장 요약(구 「결제 개요 — 1장」)이 흡수됨</li>
+    <li><b><a href="payment-webshop-structure.html">통합결제 / 웹샵 구조</a></b> — 지사가 가져다 쓰는 방법과 자금 경로</li>
+    <li><b><a href="global-payment.html">글로벌 결제 설계 (상세)</a></b> — 규격 · 필드 · 확인 필요 19건</li>
+    <li><b>화면</b> — <a href="../../wireframe/payment-user-screens.html">통합 결제 페이지</a> ·
+      <a href="../../wireframe/payment-admin-screens.html">결제 관리자</a> ·
+      <a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a></li>
+  </ul>
+
+  <p style="margin-top:14px">라그나로크 포털 · 결제 설계 · 2026-09-08</p>
+</footer>
+</main>
+</div>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.lnb a'));
+  var map = {};
+  links.forEach(function (a) {
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) map[el.id] = a;
+  });
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove('on'); });
+      var a = map[e.target.id];
+      if (a) a.classList.add('on');
+    });
+  }, { rootMargin: '-10% 0px -75% 0px', threshold: 0 });
+  Object.keys(map).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+})();
+</script>
+
+
+
+<style>
+  #docnav { position: fixed; left: 14px; bottom: 14px; z-index: 2147483000;
+    font-family: "Pretendard", "Malgun Gothic", -apple-system, sans-serif; }
+  #docnav * { box-sizing: border-box; }
+  #docnav-b { display: inline-flex; align-items: center; gap: 7px; height: 32px;
+    padding: 0 13px; border: 1px solid #C9D1D9; border-radius: 16px; background: #fff;
+    color: #3B4654; font-size: 12px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(23,27,34,.14); }
+  #docnav-b:hover { border-color: #2F6490; color: #2F6490; }
+  #docnav-b i { font-style: normal; font-size: 9px; }
+  #docnav-m { display: none; position: absolute; left: 0; bottom: 38px; min-width: 236px;
+    padding: 6px; border: 1px solid #D5DBE2; border-radius: 8px; background: #fff;
+    box-shadow: 0 8px 26px rgba(23,27,34,.16); }
+  #docnav.on #docnav-m { display: block; }
+  #docnav-m .g { padding: 7px 10px 4px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .04em; color: #97A0AC; }
+  #docnav-m a { display: block; padding: 8px 10px; border-radius: 5px; font-size: 12.5px;
+    color: #2C333D; text-decoration: none; white-space: nowrap; }
+  #docnav-m a:hover { background: #F1F4F7; }
+  #docnav-m a.on { color: #2F6490; font-weight: 700; background: #EDF3F8; }
+  @media print { #docnav { display: none; } }
+</style>
+<div id="docnav">
+  <div id="docnav-m">
+    <div class="g">화면정의서</div>
+    <a href="../../wireframe/portal-main-auth-screens.html">라그나로크 포털 화면정의서</a>
+    <a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a>
+    <a href="../../wireframe/payment-checkout-currency.html">통합 결제창 화면정의서</a>
+    <a href="../../wireframe/payment-admin-screens.html">결제 관리자 화면정의서</a>
+    <div class="g">설계</div>
+    <a href="portal-main-structure.html">포털 메인 구조</a>
+    <a href="land-auth.html">랜드 회원·인증 설계</a>
+    <a href="payment.html" class="on">결제 설계 — 프로세스 · 구조</a>
+    <a href="payment-webshop-structure.html">통합결제 / 웹샵 구조</a>
+    <a href="global-payment.html">글로벌 결제 설계 (상세)</a>
+    <div class="g">벤치마킹</div>
+    <a href="../benchmark/ip-portal.html">IP 포털 벤치마킹</a>
+    <a href="../benchmark/nc-auth.html">NC 회원·인증 통합 벤치마킹</a>
+    <a href="../benchmark/pg-multi-entity.html">PG 다중법인 구조 벤치마킹</a>
+    <a href="../benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a>
+    <a href="../benchmark/webshop-payment.html">웹샵 결제 벤치마킹</a>
+    <div class="g">전체</div>
+    <a href="../../index.html">문서 목록</a>
+  </div>
+  <span id="docnav-b">문서 <i>&#9650;</i></span>
+</div>
+<script>
+(function () {
+  var n = document.getElementById('docnav'), b = document.getElementById('docnav-b');
+  b.addEventListener('click', function (e) { e.stopPropagation(); n.classList.toggle('on'); });
+  document.addEventListener('click', function () { n.classList.remove('on'); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') n.classList.remove('on');
+  });
+})();
+</script>
+</body>
+</html>
