@@ -679,7 +679,7 @@
   .ws-mrow b { font-size: 14.5px; font-weight: 600; color: #171B22;
     font-family: "IBM Plex Mono", monospace; }
 
-  /* ---- 임베드 조합 비교 ---- */
+  /* ---- 활용안 · 구성 비교 ---- */
   .ws-cases { display: flex; gap: 48px; align-items: flex-start; }
   .ws-case { flex: 1; min-width: 0; border: 1px solid #E1E6EC; border-radius: 5px;
     background: #fff; }
@@ -1001,6 +1001,73 @@
   /* 수령 정보 두 줄 — 좁은 화면에서 줄바꿈 */
   .cp-recv { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; }
   .ws-mo .cp-recv { font-size: 11.5px; gap: 5px 14px; }
+
+  /* ═══════════ 활용안 — UI 구성안 샘플 ═══════════ */
+  .ua-wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;
+    align-items: start; }
+  .ua-cell { position: relative; display: flex; flex-direction: column; gap: 9px; }
+  .ua-lbl { display: flex; align-items: baseline; gap: 8px; }
+  .ua-lbl b { font-size: 13px; font-weight: 600; color: #171B22; }
+  .ua-lbl span { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: #98A2AE; }
+
+  .ua-samp { border: 1px solid #C9D0D9; border-radius: 5px; background: #fff;
+    overflow: hidden; display: flex; flex-direction: column; }
+  .ua-url { height: 26px; background: #EDEEF1; border-bottom: 1px solid #D5DBE2;
+    display: flex; align-items: center; gap: 7px; padding: 0 10px; }
+  .ua-url i { font-style: normal; width: 7px; height: 7px; border-radius: 50%;
+    background: #C4CCD5; flex: none; }
+  .ua-url b { font-family: "IBM Plex Mono", monospace; font-size: 10px;
+    font-weight: 500; color: #6C7480; }
+
+  /* 호스트 GNB */
+  .ua-gnb { height: 38px; display: flex; align-items: center; gap: 13px;
+    padding: 0 12px; border-bottom: 1px solid #E4E8ED; }
+  .ua-gnb.hq { background: #fff; }
+  .ua-gnb.br { background: #1C2430; }
+  .ua-gnb.br span { color: #C7D0DA; }
+  .ua-gnb.br .bi { border-color: #4A5563; background: #2A3441; color: #8E9AA8; }
+  .ua-gnb span { font-size: 10.5px; color: #545C69; white-space: nowrap; }
+  .ua-gnb .bi { width: 52px; height: 18px; border: 1px dashed #A5B2BF; border-radius: 2px;
+    background: #F0F4F7; display: flex; align-items: center; justify-content: center;
+    font-size: 7.5px; color: #8A929E; flex: none; }
+  .ua-gnb .rt2 { margin-left: auto; display: flex; gap: 9px; }
+
+  /* 임베드 경계 */
+  .ua-cut { display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+    background: #EBF3F9; border-bottom: 1px solid #AECAE0; }
+  .ua-cut b { font-size: 9.5px; font-weight: 600; color: #2F6490; white-space: nowrap; }
+  .ua-cut i { flex: 1; height: 0; border-top: 1px dashed #AECAE0; }
+
+  /* 웹샵 본문 (공통) */
+  .ua-kv { height: 56px; background: #E7ECF1; border-bottom: 1px solid #E4E8ED;
+    display: flex; align-items: center; gap: 9px; padding: 0 12px; }
+  .ua-kv .lg { width: 26px; height: 26px; border: 1px dashed #8FA0B0; border-radius: 3px;
+    background: #F4F7FA; flex: none; }
+  .ua-kv b { font-size: 11.5px; font-weight: 600; color: #171B22; }
+  .ua-kv em { font-style: normal; font-size: 9px; color: #7A828E; display: block; }
+  .ua-menu { display: flex; gap: 0; padding: 0 12px; border-bottom: 1px solid #E4E8ED; }
+  .ua-menu span { padding: 7px 10px; font-size: 10px; color: #6C7480;
+    border-bottom: 2px solid transparent; }
+  .ua-menu span.on { color: #171B22; font-weight: 600; border-bottom-color: #2C333D; }
+  .ua-body { display: flex; gap: 10px; padding: 10px 12px; align-items: flex-start; }
+  .ua-grid { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .ua-pc2 { border: 1px solid #E1E6EC; border-radius: 3px; background: #fff; overflow: hidden; }
+  .ua-pc2 .im { height: 30px; background: #F0F4F7; border-bottom: 1px solid #EDF0F4; }
+  .ua-pc2 .tx2 { padding: 4px 5px; font-size: 8px; color: #7A828E; line-height: 1.5; }
+  .ua-side2 { width: 92px; flex: none; display: flex; flex-direction: column; gap: 5px; }
+  .ua-bx2 { border: 1px solid #D5DBE2; border-radius: 3px; background: #FAFBFC;
+    padding: 6px; font-size: 8px; color: #6C7480; line-height: 1.5; }
+  .ua-btn2 { border-radius: 3px; background: #2C333D; color: #fff; font-size: 8.5px;
+    text-align: center; padding: 6px 0; font-weight: 600; }
+  .ua-ft { height: 26px; background: #1C2430; display: flex; align-items: center;
+    padding: 0 12px; }
+  .ua-ft span { font-size: 8.5px; color: #7C8898; }
+  .ua-ft.hq { background: #F5F6F8; border-top: 1px solid #E4E8ED; }
+  .ua-ft.hq span { color: #98A2AE; }
+
+  /* 와이어프레임 내 캡션 */
+  .cap { font-size: 11px; line-height: 1.7; color: #7A828E; margin: 8px 0 0; }
+  .cap b { color: #545C69; font-weight: 600; }
 </style>
 
 </head>
@@ -1015,7 +1082,7 @@
     <button type="button" class="nv" data-go="w2"><b>03</b><span>상품 상세보기</span></button>
     <button type="button" class="nv" data-go="w6"><b>04</b><span>결제 완료</span></button>
     <button type="button" class="nv" data-go="w7"><b>05</b><span>구매내역</span></button>
-    <button type="button" class="nv" data-go="w3"><b>06</b><span>임베드 조합</span></button>
+    <button type="button" class="nv" data-go="w3"><b>06</b><span>활용안</span></button>
     <button type="button" class="nv" data-go="w5"><b>07</b><span>기타사항</span></button>
     <span class="ctl">
       <button type="button" class="desc-btn" id="descBtn" title="D">
@@ -1673,11 +1740,11 @@
       </div>
 
       <div class="dr">
-        <div class="dr-h"><span class="mk mk-w">H0</span><span class="dr-t">라그나로크 포털 유틸</span><span class="src">호스트</span></div>
-        <p class="dr-b">포털 유틸 영역을 그대로 쓴다. <b>웹샵이 그리지 않는다.</b></p>
+        <div class="dr-h"><span class="mk mk-w">H0</span><span class="dr-t">라그나로크 포털 GNB</span><span class="src">호스트</span></div>
+        <p class="dr-b"><b>라그나로크 포털 GNB</b>의 유틸 영역을 그대로 쓴다. 웹샵이 그리지 않는다.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v">포털 로고 · <b>언어 선택</b> · SEARCH · <b>로그인</b> — 넷만</span></div>
-          <div class="spec-r"><span class="spec-k">스타일</span><span class="spec-v"><b>라그나로크 포털 화면정의서</b>의 유틸 영역과 동일 (높이 64 · 좌우 40)</span></div>
+          <div class="spec-r"><span class="spec-k">스타일</span><span class="spec-v"><b>라그나로크 포털 화면정의서</b>의 GNB 유틸 영역과 동일 (높이 64 · 좌우 40)</span></div>
           <div class="spec-r"><span class="spec-k">지사명</span><span class="spec-v">노출하지 않는다 — 유저는 어느 법인인지 알 필요가 없다</span></div>
         </div>
       </div>
@@ -1686,7 +1753,7 @@
         <div class="imm-h">본 화면 제외 영역</div>
         <div class="imm-r"><span class="imm-k">포털 메뉴</span><span class="imm-v">RO IP · RO GAMES · NEWS · STORE 등 — <b>임베드에서 재정의</b></span></div>
         <div class="imm-r"><span class="imm-k">게임 GNB</span><span class="imm-v">게임 BI · 게임소개 · 뉴스 · 가이드 · 커뮤니티 — <b>임베드에서 재정의</b></span></div>
-        <div class="imm-r"><span class="imm-k">이유</span><span class="imm-v">호스트마다 다르므로 웹샵 화면이 전제하지 않는다 — 조합은 <b>「임베드 조합」</b> 탭 참조</span></div>
+        <div class="imm-r"><span class="imm-k">이유</span><span class="imm-v">호스트마다 다르므로 웹샵 화면이 전제하지 않는다 — 구성 형태는 <b>「활용안」</b> 탭 참조</span></div>
       </div>
 
       <div class="dr">
@@ -1784,6 +1851,7 @@
         <div class="imm-r"><span class="imm-k">웹샵</span><span class="imm-v">이 화면의 [결제하기]</span></div>
         <div class="imm-r"><span class="imm-k">인게임</span><span class="imm-v">게임 안 상점의 구매하기</span></div>
         <div class="imm-r"><span class="imm-k">GNJOY</span><span class="imm-v">포털 내 상품 구매 — 포인트 등</span></div>
+        <div class="imm-r"><span class="imm-k">결제창 화면</span><span class="imm-v"><b><a href="payment-checkout-currency.html" style="color:#2F6490;">통합 결제창 화면정의서</a></b> 참조 — 결제수단 · 통화 선택은 <b>핀 8</b></span></div>
       </div>
     </div>
   </div>
@@ -3698,232 +3766,218 @@
   <div class="wrap2">
     <div class="wcol">
       <div class="tabs">
-        <button type="button" class="tab tab-on" data-dev="pc">조합 · 공통</button>
+        <button type="button" class="tab tab-on" data-dev="pc">활용안</button>
       </div>
 
       <div class="pane pane-pc on">
       <div class="wstage">
       <div class="pcframe" style="width:1180px;display:flex;flex-direction:column;position:relative;">
 
-        <div class="ws-cases">
+        <div class="ua-wrap">
 
-          <!-- CASE A -->
-          <div class="ws-case" style="position:relative;">
-            <div class="mk" style="position:absolute;top:14px;left:-33px;">1</div>
-            <div class="ws-caseh">
-              <b>사례 A · 라그나로크 포털</b>
-              <span>gnjoy.com / 포털 내 상점</span>
+          <!-- 형태 1 · 게임 오피셜 임베드 -->
+          <div class="ua-cell">
+            <div class="mk" style="position:absolute;top:26px;left:-33px;">1</div>
+            <span class="ua-lbl"><b>형태 1 · 게임 오피셜 임베드</b><span>서브패스</span></span>
+            <div class="ua-samp">
+              <div class="ua-url"><i></i><b>ro.mygnjoy.com/shop</b></div>
+              <div class="ua-gnb br">
+                <span class="bi">게임 BI</span>
+                <span>게임소개</span><span>뉴스</span><span>커뮤니티</span><span>상점</span>
+                <span class="rt2"><span>로그인</span></span>
+              </div>
+              <div class="ua-cut"><b>/shop 서브패스 — 동일 출처</b><i></i></div>
+              <div class="ua-kv">
+                <span class="lg"></span>
+                <div><b>라그나로크 어비스</b><em>WEBSHOP</em></div>
+              </div>
+              <div class="ua-menu">
+                <span class="on">상품구매</span><span>구매내역</span><span>FAQ</span>
+              </div>
+              <div class="ua-body">
+                <div class="ua-grid">
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">프리미엄 성장석<br>₩ 4,900</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">모험가 스타터<br>₩ 9,900</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">축제 의상 세트<br>₩ 7,500</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">고급 스킬북<br>₩ 3,200</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">여름 소환석<br>₩ 12,000</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">경험치 부스터<br>₩ 5,500</div></div>
+                </div>
+                <div class="ua-side2">
+                  <div class="ua-bx2">받을 캐릭터<br>미지정</div>
+                  <div class="ua-bx2">선택 상품<br>₩ 4,900</div>
+                  <div class="ua-btn2">결제하기</div>
+                </div>
+              </div>
+              <div class="ua-ft"><span>지사 오피셜 푸터 — 지사가 제공</span></div>
             </div>
-            <div class="ws-caseb">
-              <div class="ws-slab">H0 · 포털 유틸 — 로고 · 언어 · SEARCH · 로그인</div>
-              <div class="ws-mod">웹샵 모듈<span>타이틀 · 메뉴바 · 리스트 · 인증 · 장바구니 · 결제</span></div>
+            <span class="cap" style="margin:0;">지사 오피셜 <b>GNB · 푸터 · 테마</b>가 그대로 감싼다. 로그인은 <b>지사 공식 로그인 창</b>.</span>
+          </div>
+          <!-- 형태 2 · 본사 호스팅 -->
+          <div class="ua-cell">
+            <div class="mk" style="position:absolute;top:26px;left:-33px;">2</div>
+            <span class="ua-lbl"><b>형태 2 · 본사 호스팅 웹샵</b><span>링크 진입</span></span>
+            <div class="ua-samp">
+              <div class="ua-url"><i></i><b>shop.gravity.com/kr/ro_abyss</b></div>
+              <div class="ua-gnb hq">
+                <span class="bi">RAGNAROK PORTAL</span>
+                <span class="rt2"><span>언어 &#9662;</span><span>로그인</span></span>
+              </div>
+              <div class="ua-kv">
+                <span class="lg"></span>
+                <div><b>라그나로크 어비스</b><em>WEBSHOP</em></div>
+              </div>
+              <div class="ua-menu">
+                <span class="on">상품구매</span><span>구매내역</span><span>FAQ</span>
+              </div>
+              <div class="ua-body">
+                <div class="ua-grid">
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">프리미엄 성장석<br>₩ 4,900</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">모험가 스타터<br>₩ 9,900</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">축제 의상 세트<br>₩ 7,500</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">고급 스킬북<br>₩ 3,200</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">여름 소환석<br>₩ 12,000</div></div>
+                  <div class="ua-pc2"><div class="im"></div><div class="tx2">경험치 부스터<br>₩ 5,500</div></div>
+                </div>
+                <div class="ua-side2">
+                  <div class="ua-bx2">받을 캐릭터<br>미지정</div>
+                  <div class="ua-bx2">선택 상품<br>₩ 4,900</div>
+                  <div class="ua-btn2">결제하기</div>
+                </div>
+              </div>
+              <div class="ua-ft hq"><span>본사 통합웹샵 푸터</span></div>
             </div>
+            <span class="cap" style="margin:0;"><b>라그나로크 포털 GNB</b>(유틸 영역)만 노출한다 — 게임 선택 셀렉터를 두지 않는다.
+            지사 · 게임은 <b>URL 경로</b>에 포함되며 로그인은 <b>전사 포털 SSO</b>다.</span>
           </div>
 
-          <!-- CASE B -->
-          <div class="ws-case" style="position:relative;">
-            <div class="mk" style="position:absolute;top:14px;left:-33px;">2</div>
-            <div class="ws-caseh">
-              <b>사례 B · 게임 공식 사이트 내 임베드</b>
-              <span>게임 공식 사이트의 상점 메뉴</span>
-            </div>
-            <div class="ws-caseb">
-              <div class="ws-slab">H0 · 포털 유틸 — 로고 · 언어 · SEARCH · 로그인</div>
-              <div class="ws-slab g">게임 GNB — 임베드에서 재정의</div>
-              <div class="ws-mod">웹샵 모듈<span>동일 — 수정 없음</span></div>
-            </div>
-          </div>
-
-          <!-- CASE C -->
-          <div class="ws-case" style="position:relative;">
-            <div class="mk" style="position:absolute;top:14px;left:-33px;">3</div>
-            <div class="ws-caseh">
-              <b>사례 C · 지사 자체 사이트 내 임베드</b>
-              <span>지사가 운영하는 별도 사이트</span>
-            </div>
-            <div class="ws-caseb">
-              <div class="ws-slab g">지사 GNB — 임베드에서 재정의</div>
-              <div class="ws-mod">웹샵 모듈<span>동일 — 수정 없음</span></div>
-            </div>
-          </div>
 
         </div>
 
-        <div class="ws-cut" style="margin:26px 0 14px;"><i></i><b>3개 사례 공통 — 경계 하단 동일</b><i></i></div>
+        <div class="ws-cut" style="margin:28px 0 16px;"><i></i><b>두 형태의 차이</b><i></i></div>
 
-        <div class="bx" style="padding:16px 18px;background:#FAFBFC;">
-          <div style="display:flex;gap:26px;align-items:flex-start;">
-            <div style="flex:1;display:flex;flex-direction:column;gap:7px;">
-              <span class="lbl-k">호스트가 넘겨주는 것</span>
-              <span style="font-size:12px;line-height:1.75;color:#545C69;">
-                게임 코드 · 언어 · 로그인 토큰 — 이 셋만 넘긴다</span>
-            </div>
-            <span style="width:1px;align-self:stretch;background:#E4E8ED;"></span>
-            <div style="flex:1;display:flex;flex-direction:column;gap:7px;">
-              <span class="lbl-k">웹샵이 스스로 아는 것</span>
-              <span style="font-size:12px;line-height:1.75;color:#545C69;">
-                상품 목록 · 가격 · 통화 · 결제수단 — <b>등록된 도메인으로 지사를 판정해</b> 불러온다</span>
-            </div>
+        <div class="bx">
+          <table class="tbl">
+            <thead><tr><th style="width:120px;">구분</th><th>형태 1 · 게임 오피셜 임베드</th><th>형태 2 · 본사 호스팅</th></tr></thead>
+            <tbody>
+              <tr><td><b>진입 URL</b></td>
+                <td><span class="mono">ro.mygnjoy.com/shop</span></td>
+                <td><span class="mono">shop.gravity.com/{branch}/{game}</span></td></tr>
+              <tr><td><b>진입 경로</b></td>
+                <td>지사 오피셜 사이트 <b>상점 메뉴</b></td>
+                <td><b>링크 전용</b> — 게임 클라이언트 · 지사 포털 · 공지 · 이벤트</td></tr>
+              <tr><td><b>법인 판정</b></td>
+                <td><b>도메인</b>(<span class="mono">Host</span> 헤더)</td>
+                <td><b>URL 경로의 지사 코드</b></td></tr>
+              <tr><td><b>상단 · 하단</b></td>
+                <td><b>지사 오피셜 GNB · 푸터</b>가 감싼다</td>
+                <td><b>라그나로크 포털 GNB</b> — 로고 · 언어 · 로그인 (유틸 영역)</td></tr>
+              <tr><td><b>테마</b></td>
+                <td><b>지사 톤앤매너</b> 스킨 적용</td>
+                <td>라그나로크 포털 기본 톤</td></tr>
+              <tr><td><b>로그인</b></td>
+                <td><b>지사 공식 로그인</b> 창</td>
+                <td>전사 포털 <b>SSO</b> 창</td></tr>
+              <tr><td><b>세션</b></td>
+                <td>동일 출처이므로 <b>지사 세션 쿠키 자동 전송</b></td>
+                <td>SSO 세션 쿠키 직접 사용</td></tr>
+              <tr><td><b>구축 방식</b></td>
+                <td><b>리버스 프록시 1회 설정</b> — <span class="mono">location /shop/</span></td>
+                <td>본사 서버 직접 서비스 — <b>지사 작업 없음</b></td></tr>
+              <tr><td><b>적용 대상</b></td>
+                <td>오피셜 사이트가 <b>있는 지사</b></td>
+                <td>오피셜 사이트가 <b>없는 지사</b> · <b>인게임 WebView</b> 호출</td></tr>
+              <tr><td><b>웹샵 본문</b></td>
+                <td colspan="2"><b>동일하다</b> — 경계 아래는 같은 엔진이 같은 화면을 그린다</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ws-cut" style="margin:28px 0 16px;"><i></i><b>통합 결제창 사용 방식 — 4채널</b><i></i></div>
+
+        <div class="em-sec">
+          <div class="mk" style="position:absolute;top:16px;left:-33px;">3</div>
+          <span class="em-h2">채널별 결제창 호출</span>
+          <span class="ds2">위 두 형태를 포함해 <b>네 갈래 접점</b>이 같은 결제창을 부른다.
+          접점이 달라도 결제 화면과 정산 경로는 하나다.</span>
+          <div class="bx">
+            <table class="tbl">
+              <thead><tr><th style="width:170px;">채널</th><th>호출 방식</th><th style="width:130px;">복귀 처리</th></tr></thead>
+              <tbody>
+                <tr><td><b>형태 1 · 오피셜 임베드</b></td>
+                  <td>웹샵 프론트엔드가 결제 세션을 생성하고 <b>결제 페이지로 전체 전환</b></td>
+                  <td>지사 도메인 복귀 URL</td></tr>
+                <tr><td><b>형태 2 · 본사 호스팅</b></td>
+                  <td>동일 — <span class="mono">window.top.location</span> 전환</td>
+                  <td>본사 도메인 복귀 URL</td></tr>
+                <tr><td><b>지사 포털 탑업</b></td>
+                  <td>경량 <b>JS SDK</b> 임베드 · 팝업 · 모달<br>
+                    <span class="mono">HQPayment.open({ sessionToken: "..." })</span></td>
+                  <td>SDK 콜백으로 모달 종료</td></tr>
+                <tr><td><b>인게임 상점</b></td>
+                  <td>클라이언트 내장 브라우저(WebView2 · CefSharp)로 <span class="mono">payment_url</span> 호출</td>
+                  <td class="bad-cell"><b>브릿지 · 딥링크</b> 이벤트 감지 후 창 종료 · 재화 갱신</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="em-warn">
+            <b>공통 규칙</b> — 어느 채널이든 결제창은 <b>임베드 영역 안에서 열지 않는다.</b>
+            대부분의 PG가 프레임 내 로드를 막고, 모바일은 팝업 차단 정책이 있어 <b>화면 전체 전환 또는 별도 창</b>이 표준이다.
           </div>
         </div>
 
-        <div class="ws-cut" style="margin:30px 0 18px;"><i></i><b>임베드 처리 방식 — SDK 삽입 · Shadow DOM</b><i></i></div>
 
-        <div class="em-list">
 
-          <!-- 4 · 스크립트 삽입 및 법인 판정 -->
-          <div class="em-sec">
-            <div class="mk" style="position:absolute;top:16px;left:-33px;">4</div>
-            <span class="em-h2">스크립트 삽입 및 법인 판정</span>
+        <div class="ws-cut" style="margin:28px 0 16px;"><i></i><b>현재 방식 채택 근거</b><i></i></div>
 
-            <div class="em-step">
-              <span class="n2">1</span>
-              <div class="bd">
-                <span class="tt2">호스트 삽입 항목 — 2행</span>
-                <div class="em-code">&lt;div id="ro-webshop"&gt;&lt;/div&gt;
-&lt;script src="<b>https://shop.gnjoy.com/embed/v1.js</b>"
-        data-target="ro-webshop"
-        data-game="<b>ro_abyss</b>"
-        data-lang="<b>ko</b>"&gt;&lt;/script&gt;</div>
-                <span class="ds2">게임 코드와 언어만 넘긴다. <b>지사 코드는 넘기지 않는다.</b></span>
-              </div>
-            </div>
-
-            <div class="em-step">
-              <span class="n2">2</span>
-              <div class="bd">
-                <span class="tt2">법인 판정 — 등록 도메인 기준</span>
-                <span class="ds2">지사가 어드민에 <b>자기 도메인을 사전 등록</b>하고, 서버는 요청의
-                <span class="mono">Origin</span>으로 <span class="mono">entity_id</span>를 정한다.
-                <b>프론트가 보낸 값은 신뢰하지 않는다</b> — 넘겨받으면 다른 지사 가격으로 결제할 수 있다.
-                미등록 도메인은 <b>로드를 거부</b>한다.</span>
-                <div class="em-code"><i>// 등록 예 — 도메인은 지사 하나로만 매핑된다</i>
-gnjoy.com          &rarr; <b>GV</b>   KR         &nbsp;KRW
-ro-abyss.com.tw    &rarr; <b>GVC</b>  TW HK MO   &nbsp;TWD HKD MOP USD
-ro-abyss.co.id     &rarr; <b>GGL</b>  ID         &nbsp;IDR USD
-ro-abyss.com       &rarr; <b>GGH</b>  <i>글로벌</i>     &nbsp;USD EUR</div>
-                <span class="ds2">같은 게임을 여러 지사가 서비스해도 <b>도메인이 다르므로 구분된다.</b>
-                반대로 <b>한 지사가 여러 국가를 운영하는 것은 정상</b>이다 — 대만 법인이 대만 · 홍콩 · 마카오를 함께 서비스한다.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5 · 렌더와 오버레이 -->
-          <div class="em-sec">
-            <div class="mk" style="position:absolute;top:16px;left:-33px;">5</div>
-            <span class="em-h2">렌더 위치 및 오버레이 처리</span>
-
-            <div class="em-step">
-              <span class="n2">3</span>
-              <div class="bd">
-                <span class="tt2">국가 · 통화 — 법인 하위 구분</span>
-                <span class="ds2">도메인으로 정해지는 것은 <b>지사까지</b>다.
-                한 지사가 여러 국가를 운영하므로 <b>통화는 지사당 여러 개</b>다.
-                접속 국가로 기본값을 정하고, 유저는 <b>지사가 허용한 통화 안에서</b> 바꿀 수 있다.</span>
-                <div class="em-code">도메인   &rarr; <b>지사</b>            <i>// 서버가 판정 · 조작 불가</i>
-접속 국가 &rarr; <b>표시 통화</b>       <i>// 웹샵은 표시만 · 매칭 없으면 지사 기본값</i>
-결제창   &rarr; <b>결제 통화</b>       <i>// 유저가 허용 목록에서 선택</i></div>
-                <span class="ds2">웹샵은 <b>표시만</b> 하고 통화 선택 UI를 두지 않는다.
-                <b>통합 결제창에서 고른다</b> — 결제수단이 통화에 따라 달라지므로 같은 화면에서 정한다.</span>
-              </div>
-            </div>
-
-            <div class="em-step">
-              <span class="n2">4</span>
-              <div class="bd">
-                <span class="tt2">본문 — 컨테이너 내 Shadow DOM 렌더</span>
-                <span class="ds2">배너 · 메뉴바 · 상품 리스트 · 우측 영역은
-                <span class="mono">#ro-webshop</span> 안에 <b>Shadow Root</b>로 그린다.
-                호스트 CSS가 침투하지 못하고 웹샵 CSS도 호스트를 오염시키지 않는다.</span>
-              </div>
-            </div>
-
-            <div class="em-step">
-              <span class="n2">5</span>
-              <div class="bd">
-                <span class="tt2">오버레이 — body 직속 별도 레이어 렌더</span>
-                <span class="ds2"><b>MO 바텀시트 · 상품 전면 모달 · 대상 변경 딤 알림</b>은
-                컨테이너 안에 두면 임베드 영역 안에서만 덮여 잘린다.
-                그래서 <span class="mono">document.body</span> 직속에 <b>별도 오버레이 레이어</b>를 만들어
-                거기에 그린다. 이 레이어도 Shadow DOM으로 격리한다.</span>
-                <div class="em-code">body
-├─ <i>호스트 GNB</i>
-├─ #ro-webshop  <i>&larr; 본문 (Shadow)</i>
-└─ #ro-webshop-layer  <i>&larr; 시트 · 모달 · 딤 (Shadow)</i></div>
-                <span class="ds2">z-index 기준값을 정해 <b>호스트 GNB보다 위</b>로 올린다.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 6 · 로그인 인계 -->
-          <div class="em-sec">
-            <div class="mk" style="position:absolute;top:16px;left:-33px;">6</div>
-            <span class="em-h2">로그인 상태 인계 방식</span>
-
-            <div class="em-step">
-              <span class="n2">6</span>
-              <div class="bd">
-                <span class="tt2">로그인 인계 — 토큰 방식</span>
-                <span class="ds2">호스트가 로그인 상태면 초기화 시 <b>토큰을 넘긴다.</b>
-                웹샵 서버가 검증하면 <b>회원 흐름(B)</b>, 토큰이 없으면 <b>비회원 흐름(A)</b>으로 시작한다.
-                호스트 도메인과 웹샵 도메인이 다르므로 <b>쿠키는 차단될 수 있다</b> — 그래서 쿠키를 쓰지 않는다.</span>
-                <div class="em-code">roWebshop.init({ token: "<b>eyJhbGci…</b>" })   <i>// 로그인 상태</i>
-roWebshop.init({})                        <i>// 비로그인</i></div>
-              </div>
-            </div>
-
-            <div class="em-step">
-              <span class="n2">7</span>
-              <div class="bd">
-                <span class="tt2">사후 로그인 — 호스트 통지</span>
-                <span class="ds2">A3(비회원 인증 완료) 상태에서 로그인하면 대상이 바뀐다.
-                호스트가 로그인 직후 <span class="mono">setToken()</span>을 호출하면
-                SDK가 <b>A4 딤 알림</b>을 띄운다.</span>
-                <div class="em-code">roWebshop.<b>setToken</b>("eyJhbGci…")   <i>// → A4 알림</i></div>
-                <span class="ds2">호스트가 호출하지 않으면 감지할 수 없다. 이때는
-                <b>결제 요청 시점에 서버가 대조</b>해 해당 시점에 동일 알림을 표시한다 — <b>무통보 대상 변경은 차단</b>한다.</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7 · 결제 이동 -->
-          <div class="em-sec">
-            <div class="mk" style="position:absolute;top:16px;left:-33px;">7</div>
-            <span class="em-h2">결제 페이지 전환 방식</span>
-
-            <div class="em-step">
-              <span class="n2">8</span>
-              <div class="bd">
-                <span class="tt2">결제창 — 임베드 내 로드 금지</span>
-                <span class="ds2">[결제하기]를 누르면 서버에 <b>결제 세션을 만들고</b>,
-                받은 주소로 <b>화면 전체를 전환</b>한다. 통합 결제 페이지는 웹샵 도메인의 독립 페이지다.
-                임베드 안에서 PG 결제창을 열면 좁은 영역에 갇히고, 대부분의 PG가 프레임 안 로드를 막는다.</span>
-                <div class="em-code">[결제하기]
-  → POST /checkout/sessions   <i>// 상품 · 수량 · 대상 (금액 없음)</i>
-  → <b>window.top.location = 결제 페이지</b>
-  → 결제 완료 → 호스트가 등록한 <b>복귀 URL</b>로 돌아온다</div>
-                <span class="ds2">인증키는 서버에만 있다. <b>SDK는 키를 갖지 않는다.</b></span>
-              </div>
-            </div>
-
-            <div class="em-step">
-              <span class="n2">9</span>
-              <div class="bd">
-                <span class="tt2">버전 관리 — 본사 고정</span>
-                <span class="ds2"><span class="mono">/embed/v1.js</span>는 v1 계열의 최신을 가리킨다.
-                지사가 특정 버전을 고정할 수 없게 해 <b>파편화를 막는다.</b>
-                호환이 깨지는 변경은 <span class="mono">v2</span>로만 낸다.</span>
-              </div>
-            </div>
+        <div class="em-sec">
+          <div class="mk" style="position:absolute;top:16px;left:-33px;">4</div>
+          <span class="em-h2">게임 선택 셀렉터를 두지 않는 이유</span>
+          <span class="ds2"><b>형태 2 · 본사 호스팅 웹샵</b>은 링크로만 진입하며 상단은 <b>라그나로크 포털 GNB</b>만 노출한다.
+          지사와 게임은 진입 URL에 포함된다.</span>
+          <div class="bx">
+            <table class="tbl">
+              <thead><tr><th style="width:150px;">근거</th><th>내용</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><b>법인 판정</b></td>
+                  <td>전체 설계는 <b>도메인 · 경로로 법인을 판정</b>한다. 게임 코드만으로는 판정되지 않는다 —
+                    동일 게임을 여러 지사가 서비스하면 <b>상품표 · 가격 · 통화 · 결제수단이 결정되지 않는다.</b>
+                    URL 경로에 지사 코드를 포함하면 기존 판정 구조가 그대로 적용된다</td>
+                </tr>
+                <tr>
+                  <td><b>가격 정책 보호</b></td>
+                  <td>지역 선택 UI가 없으므로 <b>가격이 낮은 지역으로 우회하는 경로가 차단</b>된다</td>
+                </tr>
+                <tr>
+                  <td><b>로그인 전 판정</b></td>
+                  <td>비회원 구매를 지원해야 하므로 <b>로그인 없이도 법인이 확정</b>되어야 한다.
+                    URL 경로는 로그인 여부와 무관하게 동작한다</td>
+                </tr>
+                <tr>
+                  <td><b>설계 단순화</b></td>
+                  <td>두 형태가 <b>「호스트가 컨텍스트를 전달하고 웹샵이 렌더링한다」</b>로 동일해진다.
+                    관문 화면 · 지역 선택 · 미서비스 지역 기본값 설계가 불필요하다</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="em-warn">
-            <b>스크립트를 넣을 수 없는 호스트</b> — 지사 보안정책상 외부 스크립트가 금지되면 iframe 모드를 제공한다.
-            단 이 경우 <b>바텀시트 · 전면 모달 · 딤 알림이 iframe 안에서만 덮이므로</b>
-            임베드 높이를 충분히 확보해야 하고, 로그인 인계는 <b>URL 파라미터 토큰</b>으로 받는다.
-            <b>기본은 SDK 모드</b>이고 iframe은 예외로만 쓴다.
+            <b>확정 필요 3건</b><br>
+            <b>1 · 링크 규격</b> — 배포된 링크가 서비스 경로이므로 규격 변경 시 전량이 무효화된다.
+            <span class="mono">/{branch}/{game}</span>으로 고정하고 <b>어드민에 링크 생성기</b>를 둔다.<br>
+            <b>2 · 루트 진입 처리</b> — <span class="mono">shop.gravity.com</span> 직접 접근 시
+            <b>안내 페이지</b>를 노출한다. 「게임 내 상점 또는 공식 사이트를 통해 접속해 주세요」 + 게임별 공식 사이트 링크.<br>
+            <b>3 · 캠페인 링크</b> — 글로벌 공용 링크가 필요하면 <b>리다이렉트 전용 경로</b>(<span class="mono">/go/{game}</span>)를 두고
+            IP 기준으로 지역을 판정해 정식 경로로 넘긴다. 웹샵 본체에는 판정 로직을 두지 않는다.
           </div>
 
+          <div class="em-warn" style="border-color:#AECAE0;background:#EBF3F9;color:#2F6490;">
+            <b>추후 고려</b> — 웹샵 대표 주소에서 <b>전 지사 게임을 리스트화해 게임을 선택</b>할 수 있게 하는 방안.
+            도입 시 <b>지역 판정 방식</b>(IP 자동 · 명시 선택)과 <b>지역 가격 노출 정책</b>을 함께 확정해야 한다.
+            현 단계에서는 링크 진입만 지원한다.
+          </div>
         </div>
 
       </div>
@@ -3935,95 +3989,64 @@ roWebshop.init({})                        <i>// 비로그인</i></div>
     <!-- ═══════════════ 디스크립션 ═══════════════ -->
     <div class="dcol">
       <div class="warn">
-        <div class="warn-h">임베드 방식 채택 근거</div>
-        <p class="warn-b">지사마다 유저가 들어오는 입구가 다르다.
-        어떤 지사는 포털에서, 어떤 지사는 게임 공식 사이트에서, 어떤 지사는 자체 사이트에서 상점으로 보낸다.
-        <b>웹샵을 입구마다 새로 만들면 「한 번만 만든다」는 전제가 무너진다.</b><br><br>
-        이 조합은 <b>PC · TABLET · MO 공통</b>이다 — 기기에 따라 달라지는 것은 경계 아래의 배치뿐이다.</p>
+        <div class="warn-h">두 형태가 필요한 이유</div>
+        <p class="warn-b">지사별로 유저 진입 경로가 다르다.
+        오피셜 사이트가 있는 지사는 해당 유입을 사용하고, 없는 지사는 본사 호스팅 웹샵을 사용한다.
+        <b>진입 경로마다 웹샵을 개별 구축하면 일원화 전제가 무너진다.</b><br><br>
+        <b>경계 위(호스트)만 분기하고 경계 아래(웹샵 본문)는 동일</b>하게 설계했다.
+        두 형태 모두 <b>호스트가 지사 · 게임 컨텍스트를 전달</b>하고 엔진이 렌더링한다.</p>
       </div>
 
       <div class="dr">
-        <div class="dr-h"><span class="mk">1</span><span class="dr-t">사례 A · 포털 내 임베드</span><span class="src">기본</span></div>
-        <p class="dr-b">포털 유틸 아래에 바로 붙는다. <b>게임 GNB가 없는 경우.</b></p>
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">형태 1 · 게임 오피셜 임베드</span><span class="src">서브패스</span></div>
+        <p class="dr-b">지사 공식 도메인 <b>하위 경로</b>로 서비스한다. 유저에게는 지사 사이트의 일부로 보인다.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">상단</span><span class="spec-v">H0 유틸만 — 로고 · 언어 · SEARCH · 로그인</span></div>
-          <div class="spec-r"><span class="spec-k">로그인</span><span class="spec-v">포털 로그인 상태를 이어받아 <b>회원 흐름</b>으로 시작</span></div>
+          <div class="spec-r"><span class="spec-k">도메인</span><span class="spec-v"><span class="mono">ro.mygnjoy.com/shop</span> — <b>동일 출처</b></span></div>
+          <div class="spec-r"><span class="spec-k">상단 · 하단</span><span class="spec-v">지사 오피셜 <b>GNB · 푸터 · 테마</b>가 그대로 감싼다</span></div>
+          <div class="spec-r"><span class="spec-k">로그인</span><span class="spec-v"><b>지사 공식 로그인 창</b> 호출 — 동일 출처라 세션 쿠키가 자동 전송된다</span></div>
+          <div class="spec-r"><span class="spec-k">적합</span><span class="spec-v">게임 오피셜 사이트가 있고 <b>기존 유입을 그대로 활용</b>할 때</span></div>
+          <div class="spec-r"><span class="spec-k">구축</span><span class="spec-v">지사가 <b>리버스 프록시 1회 설정</b> — 이후 개발 작업 없음</span></div>
+          <div class="spec-r"><span class="spec-k">주의</span><span class="spec-v">지사 GNB의 게임 BI와 웹샵 배너 로고가 <b>중복</b>돼 보일 수 있다 — 배너 숨김 옵션 검토</span></div>
         </div>
       </div>
 
       <div class="dr-alt">
-        <div class="dr-h"><span class="mk">2</span><span class="dr-t">사례 B · 게임 공식 사이트 내 임베드</span><span class="src">2단</span></div>
-        <p class="dr-b">GNB가 두 층이 된다. <b>웹샵 영역은 A와 완전히 같다.</b></p>
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">형태 2 · 본사 호스팅 웹샵</span><span class="src">링크 진입</span></div>
+        <p class="dr-b">본사 도메인에서 서비스하되 <b>링크로만 진입</b>한다. 지사 · 게임은 URL 경로에 포함된다.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">상단</span><span class="spec-v">H0 유틸 + <b>게임 GNB</b> — 게임 BI와 게임 메뉴가 한 층 더 붙는다</span></div>
-          <div class="spec-r"><span class="spec-k">주의</span><span class="spec-v">타이틀 영역(<b>1</b>)의 게임 로고와 <b>게임 GNB</b>의 게임 BI가 중복돼 보일 수 있다</span></div>
+          <div class="spec-r"><span class="spec-k">URL</span><span class="spec-v"><span class="mono">shop.gravity.com/{branch}/{game}</span></span></div>
+          <div class="spec-r"><span class="spec-k">진입 경로</span><span class="spec-v">게임 클라이언트 · 지사 포털 · 공지 · 이벤트 링크 — <b>직접 접근 불가</b></span></div>
+          <div class="spec-r"><span class="spec-k">상단</span><span class="spec-v"><b>라그나로크 포털 GNB</b>의 유틸 영역 — 로고 · 언어 · 로그인. <b>게임 선택 셀렉터 없음</b></span></div>
+          <div class="spec-r"><span class="spec-k">법인 판정</span><span class="spec-v"><b>URL 경로의 지사 코드</b> — 로그인 여부와 무관하게 확정된다</span></div>
+          <div class="spec-r"><span class="spec-k">적용 대상</span><span class="spec-v">오피셜 사이트가 <b>없는 지사</b> · <b>인게임 WebView</b> 호출</span></div>
+          <div class="spec-r"><span class="spec-k">구축</span><span class="spec-v">본사 서버가 직접 서비스 — <b>지사 작업 없음</b></span></div>
         </div>
       </div>
 
       <div class="dr">
-        <div class="dr-h"><span class="mk">3</span><span class="dr-t">사례 C · 지사 자체 사이트 내 임베드</span><span class="src">외부</span></div>
-        <p class="dr-b">포털 유틸 없이 <b>지사가 만든 GNB</b> 아래 붙는다.</p>
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">채널별 결제창 호출</span><span class="src">4채널</span></div>
+        <p class="dr-b">두 형태 외에 <b>지사 포털 탑업</b>과 <b>인게임 상점</b>이 같은 결제창을 부른다.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">상단</span><span class="spec-v">지사 GNB — 웹샵이 관여하지 않는다</span></div>
-          <div class="spec-r"><span class="spec-k">로그인</span><span class="spec-v">포털 계정을 쓰지 않으면 <b>비회원 흐름</b>으로만 동작한다</span></div>
-          <div class="spec-r"><span class="spec-k">언어 · 통화</span><span class="spec-v">호스트가 넘기지 않으면 <b>도메인으로 판정한 지사</b>의 기본값을 쓴다</span></div>
-        </div>
-      </div>
-
-      <div class="imm">
-        <div class="imm-h">임베드 방식 — SDK 채택</div>
-        <div class="imm-r"><span class="imm-k">기본</span><span class="imm-v"><b>SDK 삽입 + Shadow DOM</b> — 호스트 DOM에 직접 그린다</span></div>
-        <div class="imm-r"><span class="imm-k">이유</span><span class="imm-v">바텀시트 · 전면 모달 · 딤 알림이 <b>화면 전체를 덮어야</b> 하고, 쿠키 없이 로그인을 인계해야 한다</span></div>
-        <div class="imm-r"><span class="imm-k">예외</span><span class="imm-v">외부 스크립트가 금지된 호스트만 iframe 모드</span></div>
-      </div>
-
-      <div class="dr-alt">
-        <div class="dr-h"><span class="mk">4</span><span class="dr-t">스크립트 삽입 및 법인 판정</span><span class="src">보안</span></div>
-        <p class="dr-b">호스트는 <b>게임 코드 · 언어 · 토큰</b>만 넘긴다. 지사는 <b>서버가 도메인으로 판정</b>한다.</p>
-        <div class="spec">
-          <div class="spec-r"><span class="spec-k">사전 등록</span><span class="spec-v">지사가 어드민에 <b>자기 도메인을 등록</b> — 미등록 도메인은 로드 거부</span></div>
-          <div class="spec-r"><span class="spec-k">판정</span><span class="spec-v">요청의 <span class="mono">Origin</span> &rarr; <span class="mono">entity_id</span> — <b>프론트 값은 신뢰하지 않는다</b></span></div>
-          <div class="spec-r"><span class="spec-k">근거</span><span class="spec-v">프론트가 지사를 지정하면 <b>다른 지사 가격으로 결제</b>할 수 있다</span></div>
-          <div class="spec-r"><span class="spec-k">부수 효과</span><span class="spec-v">같은 게임을 여러 지사가 서비스해도 <b>도메인이 다르므로 구분된다</b></span></div>
-          <div class="spec-r"><span class="spec-k">지사 아래</span><span class="spec-v">도메인이 정하는 것은 <b>지사까지</b> — 국가 · 통화는 그 아래에서 다시 갈린다</span></div>
-          <div class="spec-r"><span class="spec-k">다국가</span><span class="spec-v">한 지사가 여러 국가를 운영하는 것은 <b>정상</b> — 대만 법인이 대만 · 홍콩 · 마카오</span></div>
-          <div class="spec-r"><span class="spec-k">통화</span><span class="spec-v">지사당 <b>여러 개</b> · 웹샵은 표시만 · <b>선택은 결제창</b>에서</span></div>
-        </div>
-      </div>
-
-      <div class="dr">
-        <div class="dr-h"><span class="mk">5</span><span class="dr-t">렌더 위치 및 오버레이 처리</span><span class="src">핵심</span></div>
-        <p class="dr-b">본문은 컨테이너 안, <b>덮는 것은 body 직속 레이어</b>에 따로 그린다.</p>
-        <div class="spec">
-          <div class="spec-r"><span class="spec-k">본문</span><span class="spec-v"><span class="mono">#ro-webshop</span> 안에 Shadow Root — 호스트 CSS와 서로 침투하지 않는다</span></div>
-          <div class="spec-r"><span class="spec-k">오버레이</span><span class="spec-v"><span class="mono">#ro-webshop-layer</span>를 <b>body 직속</b>에 만들어 시트 · 모달 · 딤을 그린다</span></div>
-          <div class="spec-r"><span class="spec-k">미적용 시</span><span class="spec-v">임베드 영역 안에서만 덮여 <b>시트가 잘린다</b> — MO에서 특히 문제</span></div>
-          <div class="spec-r"><span class="spec-k">z-index</span><span class="spec-v">기준값을 정해 <b>호스트 GNB보다 위</b>로 올린다</span></div>
+          <div class="spec-r"><span class="spec-k">웹 2종</span><span class="spec-v">결제 세션 생성 후 <b>화면 전체 전환</b> — 복귀 URL로 완료 화면</span></div>
+          <div class="spec-r"><span class="spec-k">지사 포털</span><span class="spec-v">경량 <b>JS SDK</b>로 팝업 · 모달 — <span class="mono">HQPayment.open()</span></span></div>
+          <div class="spec-r"><span class="spec-k">인게임</span><span class="spec-v">내장 브라우저로 <span class="mono">payment_url</span> 호출 · <b>브릿지 · 딥링크</b>로 종료 감지</span></div>
+          <div class="spec-r"><span class="spec-k">공통</span><span class="spec-v">임베드 영역 안에서 결제창을 열지 않는다 — <b>PG 프레임 로드 제한 · 모바일 팝업 차단</b></span></div>
+          <div class="spec-r"><span class="spec-k">정산</span><span class="spec-v">채널이 달라도 <b>법인 판정과 정산 경로는 동일</b>하다</span></div>
         </div>
       </div>
 
       <div class="dr-alt">
-        <div class="dr-h"><span class="mk">6</span><span class="dr-t">로그인 상태 인계 방식</span><span class="src">토큰</span></div>
-        <p class="dr-b"><b>쿠키를 쓰지 않는다.</b> 호스트가 토큰을 넘기고 웹샵 서버가 검증한다.</p>
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">현재 방식 채택 근거</span><span class="src">근거</span></div>
+        <p class="dr-b">게임 선택 셀렉터를 두지 않고 <b>링크 진입으로 한정한 이유</b>와 확정 필요 사항.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">초기</span><span class="spec-v">토큰 있음 &rarr; <b>회원 흐름(B)</b> · 없음 &rarr; <b>비회원 흐름(A)</b></span></div>
-          <div class="spec-r"><span class="spec-k">쿠키 미사용 근거</span><span class="spec-v">호스트와 웹샵 도메인이 달라 <b>차단될 수 있다</b></span></div>
-          <div class="spec-r"><span class="spec-k">나중 로그인</span><span class="spec-v">호스트가 <span class="mono">setToken()</span> 호출 &rarr; <b>A4 딤 알림</b></span></div>
-          <div class="spec-r"><span class="spec-k">미호출 시</span><span class="spec-v">감지 불가 — <b>결제 요청 시점에 서버가 대조</b>해 같은 알림을 띄운다</span></div>
+          <div class="spec-r"><span class="spec-k">핵심 근거</span><span class="spec-v">게임 코드만으로는 <b>법인이 결정되지 않는다</b> — 동일 게임을 여러 지사가 서비스한다</span></div>
+          <div class="spec-r"><span class="spec-k">부수 효과</span><span class="spec-v">지역 선택 UI가 없어 <b>가격 우회 경로가 차단</b>된다</span></div>
+          <div class="spec-r"><span class="spec-k">비회원</span><span class="spec-v">URL 경로는 <b>로그인 없이도 판정</b>되므로 비회원 구매가 성립한다</span></div>
+          <div class="spec-r"><span class="spec-k">확정 필요</span><span class="spec-v"><b>링크 규격 고정</b> · <b>루트 진입 안내 페이지</b> · <b>캠페인 리다이렉트 경로</b> 3건</span></div>
+          <div class="spec-r"><span class="spec-k">추후 고려</span><span class="spec-v">대표 주소에서 <b>전 지사 게임 리스트</b> 제공 — 지역 판정 방식과 가격 노출 정책 확정 후</span></div>
         </div>
       </div>
 
-      <div class="dr">
-        <div class="dr-h"><span class="mk">7</span><span class="dr-t">결제 페이지 전환 방식</span><span class="src">전환</span></div>
-        <p class="dr-b">임베드 안에서 <b>PG 결제창을 띄우지 않는다.</b> 화면 전체를 결제 페이지로 전환한다.</p>
-        <div class="spec">
-          <div class="spec-r"><span class="spec-k">순서</span><span class="spec-v">결제 세션 생성 &rarr; <span class="mono">window.top.location</span> 전환 &rarr; 복귀 URL로 돌아옴</span></div>
-          <div class="spec-r"><span class="spec-k">전달</span><span class="spec-v">상품 · 수량 · 대상만 — <b>금액은 보내지 않는다</b></span></div>
-          <div class="spec-r"><span class="spec-k">근거</span><span class="spec-v">대부분의 PG가 <b>프레임 안 로드를 막는다</b></span></div>
-          <div class="spec-r"><span class="spec-k">키</span><span class="spec-v"><b>SDK는 키를 갖지 않는다</b> — 서버에만 있다</span></div>
-          <div class="spec-r"><span class="spec-k">버전</span><span class="spec-v"><span class="mono">/embed/v1.js</span>는 v1 최신 고정 — 지사가 버전을 붙잡을 수 없다</span></div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -4592,19 +4615,17 @@ roWebshop.init({})                        <i>// 비로그인</i></div>
     <a href="portal-main-auth-screens.html">라그나로크 포털 화면정의서</a>
     <a href="webshop-ui.html" class="on">웹샵 UI 구성</a>
     <a href="payment-checkout-currency.html">통합 결제창 화면정의서</a>
-    <a href="payment-admin-screens.html">결제 관리자 화면정의서</a>
     <div class="g">설계</div>
     <a href="../wiki/planning/portal-main-structure.html">포털 메인 구조</a>
     <a href="../wiki/planning/land-auth.html">랜드 회원·인증 설계</a>
-    <a href="../wiki/planning/payment.html">결제 설계 — 프로세스 · 구조</a>
+    <a href="../wiki/planning/webshop-payment-prd.html">통합웹샵 / 통합결제 기획</a>
     <a href="../wiki/planning/payment-webshop-structure.html">통합결제 / 웹샵 구조</a>
-    <a href="../wiki/planning/global-payment.html">글로벌 결제 설계 (상세)</a>
     <div class="g">벤치마킹</div>
     <a href="../wiki/benchmark/ip-portal.html">IP 포털 벤치마킹</a>
     <a href="../wiki/benchmark/nc-auth.html">NC 회원·인증 통합 벤치마킹</a>
     <a href="../wiki/benchmark/pg-multi-entity.html">PG 다중법인 구조 벤치마킹</a>
-    <a href="../wiki/benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a>
-    <a href="../wiki/benchmark/webshop-payment.html">웹샵 결제 벤치마킹</a>
+    <a href="../wiki/benchmark/game-platform-payment.html">게임플랫폼 벤치마킹</a>
+    <a href="../wiki/benchmark/webshop-payment.html">웹샵 벤치마킹</a>
     <div class="g">전체</div>
     <a href="../index.html">문서 목록</a>
   </div>

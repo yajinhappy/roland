@@ -935,19 +935,19 @@
 
       <div class="dr">
         <div class="dr-h"><span class="mk">1</span><span class="dr-t">게임 · 계정 정보</span><span class="src">전역 · 상단</span></div>
-        <p class="dr-b">상단바 서브텍스트로 흘려두던 정보를 <b>독립된 라벨+값 블록</b>으로 뺐다. 유저가 「어느 게임 · 어느 캐릭터로 결제되는가」를 한눈에 확인해야 하는 정보라 눈에 띄게 만든다.</p>
+        <p class="dr-b">상단바 서브텍스트로 흘려두던 정보를 <b>독립된 라벨+값 블록</b>으로 분리 — 「어느 게임 · 어느 캐릭터로 결제되는가」는 한눈에 확인해야 하는 정보라 눈에 띄게 뺌.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v"><b>게임 · 서버 · 캐릭터(또는 계정)</b> 3개 라벨+값 쌍. PC는 구분선으로 가로 배치, MO는 세로로 쌓고 각 행을 얇은 밑줄로 구분</span></div>
-          <div class="spec-r"><span class="spec-k">지급 대상 단위</span><span class="spec-v"><b>어드민에서 상품별로 설정</b>(ST-04) — 계정 지급이면 계정명(마스킹), 캐릭터 지급이면 캐릭터명이 세 번째 칸에 표시된다</span></div>
-          <div class="spec-r"><span class="spec-k">위치</span><span class="spec-v">상품 섹션(핀 2) <b>바로 위</b>에 둬 「무엇을 · 누구에게」 순서로 읽히게 한다</span></div>
+          <div class="spec-r"><span class="spec-k">지급 대상 단위</span><span class="spec-v"><b>어드민에서 상품별로 설정</b>(ST-04) — 계정 지급이면 계정명(마스킹), 캐릭터 지급이면 캐릭터명이 세 번째 칸에 표시</span></div>
+          <div class="spec-r"><span class="spec-k">위치</span><span class="spec-v">상품 섹션(핀 2) <b>바로 위</b> — 「무엇을 · 누구에게」 순서로 읽히도록 배치</span></div>
         </div>
       </div>
 
       <div class="dr-alt">
         <div class="dr-h"><span class="mk">2</span><span class="dr-t">상품 · 통화 · 금액</span><span class="src">행 1</span></div>
-        <p class="dr-b">상품 정보는 앞단에서 전달받은 표시용 값이다. <b>통화 행은 선택 UI가 아니라 읽기 전용 표시</b>다 — 결제 진입 시점에 서버가 <b>지사 법인 · PG 설정 기준으로 이미 정한 통화</b>를 내려줄 뿐, 이 화면에서 사용자가 통화를 바꾸지 않는다.</p>
+        <p class="dr-b">상품 정보는 앞단에서 전달받은 표시용 값. <b>통화 행은 선택 UI가 아니라 읽기 전용 표시</b> — 결제 진입 시점에 서버가 <b>지사 법인 · PG 설정 기준으로 이미 정한 통화</b>를 내려줄 뿐, 사용자는 이 화면에서 통화를 바꾸지 않음.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">통화 행</span><span class="spec-v">국기 · 통화코드 · 통화명(예 <span class="mono">KRW — Korean Won</span>) · 우측에 확정 금액. <b>화살표 · hover · 클릭 유도 스타일 없음</b> — 누를 수 있는 요소가 아니다</span></div>
+          <div class="spec-r"><span class="spec-k">통화 행</span><span class="spec-v">국기 · 통화코드 · 통화명(예 <span class="mono">KRW — Korean Won</span>) · 우측에 확정 금액. <b>화살표 · hover · 클릭 유도 스타일 없음</b> — 누를 수 있는 요소가 아님</span></div>
           <div class="spec-r"><span class="spec-k">최종 금액</span><span class="spec-v"><b>PC 38px · MO 32px · weight 600 · tabular-nums</b>. 상품가 · 세액 분해는 노출하지 않고 <b>총액 한 줄만</b></span></div>
           <div class="spec-r"><span class="spec-k">하단 문구</span><span class="spec-v">수수료 · 세금 포함 여부는 <b>결제수단마다 다를 수 있음</b>을 고지 — 정확한 세액은 전표 · 영수증에만 기록</span></div>
         </div>
@@ -955,12 +955,12 @@
 
       <div class="dr">
         <div class="dr-h"><span class="mk">3</span><span class="dr-t">결제수단 depth 1 — 카테고리</span><span class="src">행 2</span></div>
-        <p class="dr-b">평면 목록이 아니라 <b>2뎁스</b>다. depth 1은 <b>결제수단 대분류</b> 타일 — Adyen · Stripe · Checkout.com 등 글로벌 PG가 실제로 쓰는 <span class="mono">paymentMethod</span> 대분류 체계를 그대로 채택해 <b>나올 수 있는 모든 대분류</b>를 후보로 둔다.</p>
+        <p class="dr-b">평면 목록이 아니라 <b>2뎁스</b>. depth 1은 <b>결제수단 대분류</b> 타일 — Adyen · Stripe · Checkout.com 등 글로벌 PG가 실제로 쓰는 <span class="mono">paymentMethod</span> 대분류 체계를 그대로 채택해 <b>나올 수 있는 모든 대분류</b>를 후보로 둠.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">타일 구성</span><span class="spec-v">카테고리명 · <b>채널 개수 배지</b>(「7종」) · <b>2개 미리보기</b>(「Visa · Mastercard 외 5종」)</span></div>
-          <div class="spec-r"><span class="spec-k">자동 미노출</span><span class="spec-v">선택 통화로 <b>채널이 하나도 없는 대분류는 화면에서 자동으로 빠진다</b> — 웹샵 기획서 §9-3과 동일 규칙. 화면 예시는 10개 중 <b>5개만</b> 노출</span></div>
+          <div class="spec-r"><span class="spec-k">자동 미노출</span><span class="spec-v">선택 통화로 <b>채널이 하나도 없는 대분류는 화면에서 자동으로 빠짐</b> — 웹샵 기획서 §9-3과 동일 규칙. 화면 예시는 10개 중 <b>5개만</b> 노출</span></div>
           <div class="spec-r"><span class="spec-k">기본 선택</span><span class="spec-v">노출된 카테고리 중 <b>우선순위 1순위</b>가 기본값(예시는 신용 · 체크카드)</span></div>
-          <div class="spec-r"><span class="spec-k">반응형 열 수</span><span class="spec-v">그룹 타일 — PC · TABLET 3열 / MO 2열. 채널 칩 — PC · MO 3열 / TABLET 4열(폭이 넉넉해 한 줄에 더 담는다). 디스크립션은 디바이스 공용이며 이 표만 예외로 기기별 값을 함께 적는다</span></div>
+          <div class="spec-r"><span class="spec-k">반응형 열 수</span><span class="spec-v">그룹 타일 — PC · TABLET 3열 / MO 2열. 채널 칩 — PC · MO 3열 / TABLET 4열(폭이 넉넉해 한 줄에 더 담음). 디스크립션은 디바이스 공용 — 이 표만 예외로 기기별 값을 함께 표기</span></div>
         </div>
         <div class="imm">
           <div class="imm-h">결제수단 대분류 — 전체 정의(글로벌 PG 표준 기준)</div>
@@ -979,38 +979,38 @@
 
       <div class="dr-alt">
         <div class="dr-h"><span class="mk">4</span><span class="dr-t">결제수단 depth 2 — 채널 칩</span><span class="src">행 2 하위</span></div>
-        <p class="dr-b">카테고리를 고르면 그 아래 <b>실제 채널</b>이 3열 칩으로 펼쳐진다. <b>채널 수는 카테고리마다 크게 다를 수 있다</b> — 화면이 그 사실을 항상 드러내야 한다.</p>
+        <p class="dr-b">카테고리를 고르면 그 아래 <b>실제 채널</b>이 3열 칩으로 펼쳐짐. <b>채널 수는 카테고리마다 크게 다를 수 있음</b> — 화면은 그 사실을 항상 드러내야 함.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">6종 이하</span><span class="spec-v">그리드가 전부 펼쳐진 채로 끝난다</span></div>
-          <div class="spec-r"><span class="spec-k">6종 초과</span><span class="spec-v">그리드 높이를 <b>약 2행으로 제한</b>하고 <span class="mono">overflow-y:auto</span> · 하단에 <b>페이드 오버레이</b> + 「↓ 스크롤」 힌트를 둔다 — 목록이 끝났다고 오인하지 않게</span></div>
-          <div class="spec-r"><span class="spec-k">전환</span><span class="spec-v">depth 1을 바꾸면 이 영역만 <b>즉시 다시 그린다</b></span></div>
+          <div class="spec-r"><span class="spec-k">6종 이하</span><span class="spec-v">그리드가 전부 펼쳐진 채로 끝남</span></div>
+          <div class="spec-r"><span class="spec-k">6종 초과</span><span class="spec-v">그리드 높이를 <b>약 2행으로 제한</b>하고 <span class="mono">overflow-y:auto</span> · 하단에 <b>페이드 오버레이</b> + 「↓ 스크롤」 힌트를 둠 — 목록이 끝났다고 오인하지 않도록</span></div>
+          <div class="spec-r"><span class="spec-k">전환</span><span class="spec-v">depth 1을 바꾸면 이 영역만 <b>즉시 다시 그림</b></span></div>
         </div>
       </div>
 
       <div class="dr">
         <div class="dr-h"><span class="mk">5</span><span class="dr-t">결제 동의</span><span class="src">행 3</span></div>
-        <p class="dr-b">단일통화 결제 페이지(<span class="mono">PAY</span>)의 5행과 동일한 규칙 — <b>상품 유형별 어드민 입력</b>. 문구에 선택 통화 확인 문장을 더했다.</p>
+        <p class="dr-b">단일통화 결제 페이지(<span class="mono">PAY</span>)의 5행과 동일한 규칙 — <b>상품 유형별 어드민 입력</b>. 문구에 선택 통화 확인 문장을 더함.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">CTA 조건</span><span class="spec-v">필수 항목 <b>전부 체크</b>해야 핀 6이 활성화된다</span></div>
+          <div class="spec-r"><span class="spec-k">CTA 조건</span><span class="spec-v">필수 항목 <b>전부 체크</b>해야 핀 6 활성화</span></div>
         </div>
       </div>
 
       <div class="dr-alt">
         <div class="dr-h"><span class="mk">6</span><span class="dr-t">결제 버튼</span><span class="src">행 4 · 하단 고정</span></div>
-        <p class="dr-b">현재 <b>통화 + 금액</b>을 그대로 라벨에 반영한다(「₩4,900 결제하기」). MO는 처음부터 하단 고정, PC는 뷰포트를 벗어나면 승격된다.</p>
+        <p class="dr-b">현재 <b>통화 + 금액</b>을 그대로 라벨에 반영(「₩4,900 결제하기」). MO는 처음부터 하단 고정, PC는 뷰포트를 벗어나면 승격.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">활성 조건</span><span class="spec-v"><b>필수 동의 체크</b> · <b>결제수단 1개 선택</b>(카테고리 채널) — 둘 다 충족해야 활성</span></div>
-          <div class="spec-r"><span class="spec-k">비활성 표기</span><span class="spec-v"><span class="mono">.paybtn.dis</span> — 배경을 옅게 낮춘다. 사유 문구는 두지 않는다(체크 · 선택 미완료 상태는 화면에서 이미 보인다)</span></div>
+          <div class="spec-r"><span class="spec-k">비활성 표기</span><span class="spec-v"><span class="mono">.paybtn.dis</span> — 배경을 옅게 낮춤. 사유 문구는 두지 않음(체크 · 선택 미완료 상태는 화면에서 이미 드러남)</span></div>
         </div>
       </div>
 
       <div class="dr">
         <div class="dr-h"><span class="mk">7</span><span class="dr-t">상단 바 · 페이지 방식 · 진입 경로</span><span class="src">전역</span></div>
-        <p class="dr-b">단일통화 결제 페이지와 동일하게 <b>모달 · 팝업 · iframe이 아닌 독립 URL 페이지</b>다. PG 3DS · 리다이렉트 인증이 팝업 · iframe 안에서 깨지는 문제는 통화와 무관하게 동일하다.</p>
+        <p class="dr-b">단일통화 결제 페이지와 동일하게 <b>모달 · 팝업 · iframe이 아닌 독립 URL 페이지</b>. PG 3DS · 리다이렉트 인증이 팝업 · iframe 안에서 깨지는 문제는 통화와 무관하게 동일.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">상단 바</span><span class="spec-v"><b>Gravity Payment</b> 서비스명만 표시. 게임 · 서버 · 지급 대상은 핀 1 블록으로 분리했으므로 <b>중복 표기하지 않는다</b>. 지사명 · 법인 코드도 노출하지 않는다</span></div>
+          <div class="spec-r"><span class="spec-k">상단 바</span><span class="spec-v"><b>Gravity Payment</b> 서비스명만 표시. 게임 · 서버 · 지급 대상은 핀 1 블록으로 분리했으므로 <b>중복 표기하지 않음</b>. 지사명 · 법인 코드도 비노출</span></div>
           <div class="spec-r"><span class="spec-k">보안 배지</span><span class="spec-v">기존에 있던 <span class="mono">SSL · PCI-DSS</span> 배지는 <b>제거</b> — 유저에게 용도가 전달되지 않는 정보라 판단</span></div>
-          <div class="spec-r"><span class="spec-k">전달값</span><span class="spec-v">호출측(웹샵 · 인게임 · GNJOY)은 <b>머천트 · 프로젝트(게임) id · 상품(sku · 수량) · 지급 대상(캐릭터 또는 계정 + 서버)</b>만 넘긴다. <b>금액 · 결제수단은 넘기지 않는다</b> — 호출측은 결제수단을 알지 못한다</span></div>
+          <div class="spec-r"><span class="spec-k">전달값</span><span class="spec-v">호출측(웹샵 · 인게임 · GNJOY)은 <b>머천트 · 프로젝트(게임) id · 상품(sku · 수량) · 지급 대상(캐릭터 또는 계정 + 서버)</b>만 넘김. <b>금액 · 결제수단은 넘기지 않음</b> — 호출측은 결제수단을 알지 못함</span></div>
         </div>
         <div class="imm">
           <div class="imm-h">통합 결제창 이용 범위 — <span class="mono">webshop-ui.html</span> §7과 동일 원칙</div>
@@ -1022,10 +1022,10 @@
 
       <div class="dr-alt">
         <div class="dr-h"><span class="mk">8</span><span class="dr-t">결제 모듈 — 조직 · 자금 구조</span><span class="src">전역 · 개요 흡수</span></div>
-        <p class="dr-b">기존 <span class="mono">wiki/planning/payment-overview.html</span>(「결제 개요 — 1장」)의 결제 관련 내용을 이 핀으로 흡수했다. 개요 문서는 메뉴 · docnav에서 내렸다 — 상세는 각 원본 문서에 그대로 있고, 여기서는 <b>이 화면을 이해하는 데 필요한 만큼만</b> 요약한다.</p>
+        <p class="dr-b">기존 <span class="mono">wiki/planning/payment-overview.html</span>(「결제 개요 — 1장」)의 결제 관련 내용을 이 핀으로 흡수. 개요 문서는 메뉴 · docnav에서 내림 — 상세는 각 원본 문서에 그대로 있고, 여기서는 <b>이 화면을 이해하는 데 필요한 만큼만</b> 요약.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">전제</span><span class="spec-v">지사마다 따로 만들던 결제를 <b>본사가 하나 만들어 지사가 가져다 쓴다</b> — 결제 페이지 하나 · PG 연동은 PG사마다 한 번만</span></div>
-          <div class="spec-r"><span class="spec-k">자금 경로</span><span class="spec-v">유저가 낸 돈은 <b>본사를 거치지 않고 PG사에서 각 지사 계좌로 직접</b> 들어간다 — 본사 수수료 없음. 도식은 <a href="../wiki/planning/global-payment.html#a1">global-payment.html §2 거버넌스 모델</a> 참조</span></div>
+          <div class="spec-r"><span class="spec-k">전제</span><span class="spec-v">지사마다 따로 만들던 결제를 <b>본사가 하나 만들어 지사가 가져다 씀</b> — 결제 페이지 하나 · PG 연동은 PG사마다 한 번만</span></div>
+          <div class="spec-r"><span class="spec-k">자금 경로</span><span class="spec-v">유저가 낸 돈은 <b>본사를 거치지 않고 PG사에서 각 지사 계좌로 직접</b> 들어감 — 본사 수수료 없음. 도식은 <a href="../wiki/planning/global-payment.html#a1">global-payment.html §2 거버넌스 모델</a> 참조</span></div>
           <div class="spec-r"><span class="spec-k">역할 분담</span><span class="spec-v">본사는 <b>PG 계약 조건 · 인증키 · 결제 페이지/웹샵 제공</b> · 지사는 <b>결제수단 · 가격 · 환불 · 정산 확인</b>. 11개 항목 전체 분담표는 <a href="../wiki/planning/payment.html#c2">payment.html §2 누가 뭘 하나</a> 참조</span></div>
           <div class="spec-r"><span class="spec-k">유저 결제 흐름</span><span class="spec-v">상품 선택(웹샵 · 인게임) → 지급 대상 확인 → 결제수단 선택 · 결제(이 화면) → 게임 지급 요청 → 수령. 다섯 단계 도식과 게임 서버 API 소요는 <a href="../wiki/planning/payment.html#c3">payment.html §3 유저는 어떻게 결제하나</a> 참조 — 실제 웹샵 관점 API 소요 재산정은 <a href="webshop-ui.html">webshop-ui.html</a> 기타사항 핀 2</span></div>
         </div>
@@ -1036,7 +1036,7 @@
         </div>
         <div class="warn">
           <div class="warn-h">미결 — 국가별 데이터 이전 법적 확인</div>
-          <p class="warn-b">각 지사 국가의 개인정보를 한국으로 보내도 되는지가 <b>다른 결정들의 전제</b>다. 막히는 나라가 있으면 그 나라만 분리해야 한다. 이 항목을 포함한 미결 사항 전체는 <a href="../wiki/planning/payment.html#review">payment.html 검토 필요사항</a>에 있다.</p>
+          <p class="warn-b">각 지사 국가의 개인정보를 한국으로 보내도 되는지가 <b>다른 결정들의 전제</b>. 막히는 나라가 있으면 그 나라만 분리 필요. 이 항목을 포함한 미결 사항 전체는 <a href="../wiki/planning/payment.html#review">payment.html 검토 필요사항</a>에 있음.</p>
         </div>
       </div>
 
@@ -1247,19 +1247,17 @@
     <a href="portal-main-auth-screens.html">라그나로크 포털 화면정의서</a>
     <a href="webshop-ui.html">웹샵 UI 구성</a>
     <a href="payment-checkout-currency.html" class="on">통합 결제창 화면정의서</a>
-    <a href="payment-admin-screens.html">결제 관리자 화면정의서</a>
     <div class="g">설계</div>
     <a href="../wiki/planning/portal-main-structure.html">포털 메인 구조</a>
     <a href="../wiki/planning/land-auth.html">랜드 회원·인증 설계</a>
-    <a href="../wiki/planning/payment.html">결제 설계 — 프로세스 · 구조</a>
+    <a href="../wiki/planning/webshop-payment-prd.html">통합웹샵 / 통합결제 기획</a>
     <a href="../wiki/planning/payment-webshop-structure.html">통합결제 / 웹샵 구조</a>
-    <a href="../wiki/planning/global-payment.html">글로벌 결제 설계 (상세)</a>
     <div class="g">벤치마킹</div>
     <a href="../wiki/benchmark/ip-portal.html">IP 포털 벤치마킹</a>
     <a href="../wiki/benchmark/nc-auth.html">NC 회원·인증 통합 벤치마킹</a>
     <a href="../wiki/benchmark/pg-multi-entity.html">PG 다중법인 구조 벤치마킹</a>
-    <a href="../wiki/benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a>
-    <a href="../wiki/benchmark/webshop-payment.html">웹샵 결제 벤치마킹</a>
+    <a href="../wiki/benchmark/game-platform-payment.html">게임플랫폼 벤치마킹</a>
+    <a href="../wiki/benchmark/webshop-payment.html">웹샵 벤치마킹</a>
     <div class="g">전체</div>
     <a href="../index.html">문서 목록</a>
   </div>
