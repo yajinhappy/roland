@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>통합 결제창 화면정의서</title>
+<title>통합결제 화면정의서</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -580,7 +580,7 @@
 
 <div class="app">
   <nav class="nav">
-    <span class="brand"><b>RAGNAROK PORTAL</b><span>통합 결제창 화면정의서</span></span>
+    <span class="brand"><b>RAGNAROK PORTAL</b><span>통합결제 화면정의서</span></span>
     <span class="nvg">통합 결제창</span>
     <button type="button" class="nv" data-go="s09"><b>PAY-MC</b><span>통합 결제창</span></button>
     <span class="ctl">
@@ -971,7 +971,7 @@
         <p class="dr-b">평면 목록이 아니라 <b>2뎁스</b>. depth 1은 <b>결제수단 대분류</b> 타일 — Adyen · Stripe · Checkout.com 등 글로벌 PG가 실제로 쓰는 <span class="mono">paymentMethod</span> 대분류 체계를 그대로 채택해 <b>나올 수 있는 모든 대분류</b>를 후보로 둠.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">타일 구성</span><span class="spec-v">카테고리명 · <b>채널 개수 배지</b>(「7종」) · <b>2개 미리보기</b>(「Visa · Mastercard 외 5종」)</span></div>
-          <div class="spec-r"><span class="spec-k">자동 미노출</span><span class="spec-v">선택한 통화로 <b>사용 가능한 채널이 없는 대분류는 자동으로 제외</b>한다 — <b><a href="../wiki/planning/webshop-payment-prd.html" style="color:#2F6490;">통합웹샵 / 통합결제 기획</a></b>의 결제수단 관리 규칙과 동일하다. 화면 예시는 10개 중 <b>5개</b>를 노출한다</span></div>
+          <div class="spec-r"><span class="spec-k">자동 미노출</span><span class="spec-v">선택한 통화로 <b>사용 가능한 채널이 없는 대분류는 자동으로 제외</b>한다 — <b><a href="../wiki/planning/webshop-payment-prd.html" style="color:#2F6490;">웹샵/통합결제 기획</a></b>의 결제수단 관리 규칙과 동일하다. 화면 예시는 10개 중 <b>5개</b>를 노출한다</span></div>
           <div class="spec-r"><span class="spec-k">기본 선택</span><span class="spec-v">노출된 카테고리 중 <b>우선순위 1순위</b>가 기본값(예시는 신용 · 체크카드)</span></div>
           <div class="spec-r"><span class="spec-k">반응형 열 수</span><span class="spec-v">그룹 타일 — PC · TABLET 3열 / MO 2열. 채널 칩 — PC · MO 3열 / TABLET 4열(폭이 넉넉해 한 줄에 더 담음). 디스크립션은 디바이스 공용 — 이 표만 예외로 기기별 값을 함께 표기</span></div>
         </div>
@@ -1039,7 +1039,7 @@
         <p class="dr-b">이 화면을 읽는 데 필요한 범위에서 <b>조직 · 자금 구조</b>를 정리한다. 상세는 각 설계 문서에 있다.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">전제</span><span class="spec-v">지사별로 개별 구축했던 결제를 <b>본사가 단일 구성으로 제공하고 지사가 연동해 사용</b>한다 — 결제창 1종 · PG 연동은 PG사당 1회</span></div>
-          <div class="spec-r"><span class="spec-k">자금 경로</span><span class="spec-v">결제 대금은 <b>본사를 경유하지 않고 PG사에서 각 지사 법인 계좌로 직접 입금</b>된다. 매출도 해당 법인에 귀속된다 — 구조는 <b><a href="../wiki/planning/payment-webshop-structure.html#b1" style="color:#2F6490;">통합결제 / 웹샵 구조</a></b> 참조</span></div>
+          <div class="spec-r"><span class="spec-k">자금 경로</span><span class="spec-v">결제 대금은 <b>본사를 경유하지 않고 PG사에서 각 지사 법인 계좌로 직접 입금</b>된다. 매출도 해당 법인에 귀속된다 — 구조는 <b><a href="../wiki/planning/payment-webshop-structure.html#b1" style="color:#2F6490;">웹샵/통합결제 구조</a></b> 참조</span></div>
           <div class="spec-r"><span class="spec-k">역할 분담</span><span class="spec-v">본사는 <b>결제창 · 웹샵 제공 · PG 어댑터 · 키 격리 보관</b>, 지사는 <b>PG 계약 · 결제수단 · 가격 · 환불 · 정산</b>을 담당한다. 전체 분담표는 <b><a href="../wiki/planning/payment.html#c2" style="color:#2F6490;">결제 설계</a></b> 참조</span></div>
           <div class="spec-r"><span class="spec-k">결제 흐름</span><span class="spec-v">상품 선택(웹샵 · 인게임) → 지급 대상 확정 → 통화 · 결제수단 선택 및 결제(이 화면) → 지급 웹훅 → <b>게임 내 계정 우편함 수령</b>. 웹샵 기준 게임 서버 API 소요는 <b><a href="webshop-ui.html" style="color:#2F6490;">웹샵 화면정의서</a></b> 기타사항 참조</span></div>
         </div>
@@ -1260,12 +1260,12 @@
     <div class="g">화면정의서</div>
     <a href="portal-main-auth-screens.html">라그나로크 포털 화면정의서</a>
     <a href="webshop-ui.html">웹샵 화면정의서</a>
-    <a href="payment-checkout-currency.html" class="on">통합 결제창 화면정의서</a>
+    <a href="payment-checkout-currency.html" class="on">통합결제 화면정의서</a>
     <div class="g">설계</div>
     <a href="../wiki/planning/portal-main-structure.html">포털 메인 구조</a>
     <a href="../wiki/planning/land-auth.html">랜드 회원·인증 설계</a>
-    <a href="../wiki/planning/webshop-payment-prd.html">통합웹샵 / 통합결제 기획</a>
-    <a href="../wiki/planning/payment-webshop-structure.html">통합결제 / 웹샵 구조</a>
+    <a href="../wiki/planning/webshop-payment-prd.html">웹샵/통합결제 기획</a>
+    <a href="../wiki/planning/payment-webshop-structure.html">웹샵/통합결제 구조</a>
     <div class="g">벤치마킹</div>
     <a href="../wiki/benchmark/ip-portal.html">IP 포털 벤치마킹</a>
     <a href="../wiki/benchmark/nc-auth.html">NC 회원·인증 통합 벤치마킹</a>

@@ -10,7 +10,7 @@
 |---|---|
 | `wireframe/portal-main-auth-screens.html` | 라그나로크 포털 화면정의서 |
 | `wireframe/webshop-ui.html` | **웹샵 화면정의서** — 7 탭 · 핀 42건 · PC · TABLET · MO |
-| `wireframe/payment-checkout-currency.html` | 통합 결제창 화면정의서 |
+| `wireframe/payment-checkout-currency.html` | 통합결제 화면정의서 |
 
 ### 설계
 
@@ -18,8 +18,8 @@
 |---|---|
 | `wiki/planning/portal-main-structure.html` | 포털 메인 구조 |
 | `wiki/planning/land-auth.html` | 랜드 회원·인증 설계 |
-| `wiki/planning/webshop-payment-prd.html` | **통합웹샵 / 통합결제 기획** |
-| `wiki/planning/payment-webshop-structure.html` | **통합결제 / 웹샵 구조** |
+| `wiki/planning/webshop-payment-prd.html` | **웹샵/통합결제 기획** |
+| `wiki/planning/payment-webshop-structure.html` | **웹샵/통합결제 구조** |
 
 ### 벤치마킹
 
