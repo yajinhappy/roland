@@ -593,7 +593,8 @@
     </table>
   </div>
 
-  <p class="cap">형태 1의 세션 승계가 리버스 프록시 채택의 근거다. iFrame 방식에서는 성립하지 않는다.<br>
+  <p class="cap">로그인 이후의 <b>포털 계정 연계 흐름</b>은 「계정 및 인증 체계」에서 다룬다.
+  형태 1의 세션 승계가 리버스 프록시 채택의 근거다. iFrame 방식에서는 성립하지 않는다.<br>
   형태 2는 단일 도메인이므로 <b>URL 경로에 지사 코드를 포함</b>해 법인을 판정한다. 게임 셀렉터를 두지 않는 이유다 —
   게임 코드만으로는 동일 게임을 서비스하는 복수 지사를 구분할 수 없다.</p>
 </section>
@@ -631,15 +632,15 @@
       <line x1="760" y1="106" x2="760" y2="130" class="ln" marker-end="url(#pc)"/>
 
       <rect x="110" y="134" width="180" height="56" rx="5" class="bx-mute"/>
-      <text x="200" y="156" class="ds" text-anchor="middle">KR 계정</text>
+      <text x="200" y="156" class="ds" text-anchor="middle">GV 한국</text>
       <text x="200" y="176" class="dx f" text-anchor="middle">branch_user_id</text>
 
       <rect x="390" y="134" width="180" height="56" rx="5" class="bx-mute"/>
-      <text x="480" y="156" class="ds" text-anchor="middle">US 계정</text>
+      <text x="480" y="156" class="ds" text-anchor="middle">GVI 북미</text>
       <text x="480" y="176" class="dx f" text-anchor="middle">branch_user_id</text>
 
       <rect x="670" y="134" width="180" height="56" rx="5" class="bx-mute"/>
-      <text x="760" y="156" class="ds" text-anchor="middle">SEA 계정</text>
+      <text x="760" y="156" class="ds" text-anchor="middle">GGH 싱가포르</text>
       <text x="760" y="176" class="dx f" text-anchor="middle">branch_user_id</text>
 
       <text x="480" y="216" class="ds f" text-anchor="middle">지사 DB의 불변 고유 식별자 — 지사별 별개 관리</text>
@@ -656,6 +657,109 @@
   <div class="note q">
     <span class="lb">바인딩 소유권 검증</span>
     <p>최초 연동 시 계정 도용 방지를 위해 <b>지사 OAuth 연합</b> 또는 <b>인게임 일회용 연동 코드(OTP · PIN)</b> 인증을 1회 수행한다.</p>
+  </div>
+
+  <div class="grp2">로그인 진입 및 계정 자동 연계 — 2가지 흐름</div>
+
+  <p>웹샵이 어디에 놓이는지에 따라 로그인 진입점이 다르다. <b>형태 2는 라그나로크 포털 로그인을 직접 호출</b>하고,
+  <b>형태 1은 지사 GNB의 지사 로그인만 존재</b>한다. 형태 1에서는 포털 로그인 창을 별도로 띄우지 않고,
+  승계한 지사 세션으로 <b>동의를 받아 백엔드에서 포털 계정에 자동 바인딩</b>한다.</p>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 330" role="img" aria-label="본사 호스팅과 지사 오피셜 임베드의 로그인 진입 및 자동 바인딩 흐름">
+      <defs>
+        <marker id="bd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="20" y="20" class="dt a">흐름 A · 본사 호스팅 웹샵 (형태 2)</text>
+      <text x="330" y="20" class="dx f">포털 로그인 창을 직접 호출한다</text>
+
+      <rect x="20" y="32" width="172" height="60" rx="5" class="bx-mute"/>
+      <text x="106" y="56" class="ds" text-anchor="middle">링크 진입</text>
+      <text x="106" y="76" class="dx f" text-anchor="middle">shop.gravity.com</text>
+      <line x1="196" y1="62" x2="212" y2="62" class="ln" marker-end="url(#bd)"/>
+
+      <rect x="216" y="32" width="172" height="60" rx="5" class="bx-mute"/>
+      <text x="302" y="56" class="ds" text-anchor="middle">[로그인]</text>
+      <text x="302" y="76" class="dx f" text-anchor="middle">포털 SSO 창 호출</text>
+      <line x1="392" y1="62" x2="408" y2="62" class="ln" marker-end="url(#bd)"/>
+
+      <rect x="412" y="32" width="172" height="60" rx="5" class="bx-mute"/>
+      <text x="498" y="56" class="ds" text-anchor="middle">포털 계정 인증</text>
+      <text x="498" y="76" class="dx f" text-anchor="middle">Master UID 확정</text>
+      <line x1="588" y1="62" x2="604" y2="62" class="ln" marker-end="url(#bd)"/>
+
+      <rect x="608" y="32" width="152" height="60" rx="5" class="bx-key"/>
+      <text x="684" y="56" class="ds a" text-anchor="middle">연계 동의</text>
+      <text x="684" y="76" class="dx f" text-anchor="middle">최초 1회</text>
+      <line x1="764" y1="62" x2="780" y2="62" class="ln" marker-end="url(#bd)"/>
+
+      <rect x="784" y="32" width="156" height="60" rx="5" class="bx-key"/>
+      <text x="862" y="56" class="ds a" text-anchor="middle">자동 바인딩</text>
+      <text x="862" y="76" class="dx f" text-anchor="middle">Master UID &#8596; 지사 ID</text>
+
+      <line x1="20" y1="122" x2="940" y2="122" class="ln-hair"/>
+
+      <text x="20" y="152" class="dt a">흐름 B · 지사 게임 오피셜 임베드 (형태 1)</text>
+      <text x="360" y="152" class="dx f">지사 로그인만 있고 포털 로그인 창이 없다</text>
+
+      <rect x="20" y="164" width="172" height="60" rx="5" class="bx-mute"/>
+      <text x="106" y="188" class="ds" text-anchor="middle">지사 로그인</text>
+      <text x="106" y="208" class="dx f" text-anchor="middle">지사 GNB — 기존 기능</text>
+      <line x1="196" y1="194" x2="212" y2="194" class="ln" marker-end="url(#bd)"/>
+
+      <rect x="216" y="164" width="172" height="60" rx="5" class="bx-mute"/>
+      <text x="302" y="188" class="ds" text-anchor="middle">/shop 진입</text>
+      <text x="302" y="208" class="dx f" text-anchor="middle">세션 쿠키 자동 전송</text>
+      <line x1="392" y1="194" x2="408" y2="194" class="ln" marker-end="url(#bd)"/>
+
+      <rect x="412" y="164" width="172" height="60" rx="5" class="bx-mute"/>
+      <text x="498" y="188" class="ds" text-anchor="middle">지사 세션 검증</text>
+      <text x="498" y="208" class="dx f" text-anchor="middle">지사코드 · GNJOY ID</text>
+      <line x1="588" y1="194" x2="604" y2="194" class="ln" marker-end="url(#bd)"/>
+
+      <rect x="608" y="164" width="152" height="60" rx="5" class="bx-key"/>
+      <text x="684" y="188" class="ds a" text-anchor="middle">연계 동의</text>
+      <text x="684" y="208" class="dx f" text-anchor="middle">화면 내 레이어 · 1회</text>
+      <line x1="764" y1="194" x2="780" y2="194" class="ln" marker-end="url(#bd)"/>
+
+      <rect x="784" y="164" width="156" height="60" rx="5" class="bx-key"/>
+      <text x="862" y="188" class="ds a" text-anchor="middle">자동 바인딩</text>
+      <text x="862" y="208" class="dx f" text-anchor="middle">없으면 계정 신규 생성</text>
+
+      <line x1="20" y1="256" x2="940" y2="256" class="ln-hair"/>
+      <text x="480" y="282" class="dt" text-anchor="middle">두 흐름 모두 5단계에서 동일한 상태에 도달한다</text>
+      <text x="480" y="306" class="ds f" text-anchor="middle">Master UID &#8596; branch_user_id 바인딩 완료 &#183; 서버 · 캐릭터 목록 렌더</text>
+    </svg>
+    <figcaption>차이는 로그인 진입점과 동의 화면의 위치다. 바인딩 결과와 이후 동작은 같다.</figcaption>
+  </figure>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:130px;">단계</th><th>흐름 A — 본사 호스팅</th><th>흐름 B — 지사 오피셜 임베드</th></tr></thead>
+      <tbody>
+        <tr><td><b>인증 주체</b></td><td>전사 포털 SSO — 웹샵 화면의 포털 GNB <b>[로그인]</b></td><td><b>지사 로그인 시스템</b> — 지사 오피셜 GNB의 기존 로그인. 웹샵은 로그인 버튼을 제공하지 않고 포털 로그인 창도 띄우지 않는다</td></tr>
+        <tr><td><b>식별자</b></td><td>Master UID를 먼저 확정하고 해당 법인의 <span class="mono">branch_user_id</span>를 조회</td><td><b>(지사 코드, GNJOY 계정 ID)</b>를 먼저 확보하고 포털 계정을 역조회</td></tr>
+        <tr><td><b>동의 화면</b></td><td>포털 로그인 직후 <b>지사 계정 연계 동의</b></td><td>웹샵 화면 내 <b>동의 레이어</b> — 별도 페이지로 이동하지 않는다</td></tr>
+        <tr><td><b>바인딩 처리</b></td><td>Master UID에 해당 법인 슬롯을 연결</td><td>매핑이 있으면 연결, <b>없으면 랜드 계정을 신규 생성</b>한 뒤 GNJOY 슬롯에 바인딩</td></tr>
+        <tr><td><b>재방문</b></td><td colspan="2">동의는 <b>최초 1회</b>만 받는다. 이후 진입 시 바인딩된 매핑으로 즉시 캐릭터 목록을 렌더링한다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ul class="rule">
+    <li><b>(지사 코드, GNJOY 계정 ID) &rarr; 포털 계정</b>은 <b>1 : 1</b>이다. 흐름 B의 역조회가 성립하는 근거이며, 한 지사 계정이 복수 포털 계정에 연결되지 않는다.</li>
+    <li>흐름 B의 신규 생성 계정은 <b>비밀번호를 보유하지 않는다.</b> 지사 계정이 인증 수단이며, 포털 직접 로그인은 소셜 또는 다른 GNJOY 슬롯을 추가 바인딩한 이후에 가능하다.</li>
+    <li>동의 범위는 <b>계정 연계와 구매 이력 통합 조회</b>로 한정한다. 지사 개인정보를 본사가 추가로 수집하지 않는다.</li>
+  </ul>
+
+  <div class="note bad">
+    <span class="lb">동의를 거부한 경우</span>
+    <p>구매 경로를 막지 않는다. <b>비회원 캐릭터 인증</b>으로 전환해 결제까지 진행한다.
+    단 주문이 계정에 귀속되지 않으므로 <b>포털 통합 구매내역 조회가 제공되지 않고</b>, 조회는 서버 · 캐릭터 인증으로만 가능하다.
+    동의는 이후 재방문 시 다시 요청한다.</p>
   </div>
 
   <div class="grp2">비회원 결제 — Guest Checkout</div>
@@ -1038,7 +1142,7 @@
   <h4>관련 문서</h4>
   <ul>
     <li><b><a href="payment-webshop-structure.html">통합결제 / 웹샵 구조</a></b> — 구조 요약 · 지사 도입 절차 · 자금 경로</li>
-    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a></b> — 화면 정의 7탭 · 받을 캐릭터 조건 9상태 · 활용안 2형태 · 기타사항 7건</li>
+    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 UI 구성</a></b> — 화면 정의 7탭 · 받을 캐릭터 조건 9상태 · 활용안 2형태 · 기타사항 6건</li>
     <li><b><a href="land-auth.html">랜드 회원·인증 설계</a></b> — 전사 포털 계정 모델 · 지사 바인딩 · 유일성 규칙</li>
     <li><b><a href="portal-main-structure.html">포털 메인 구조</a></b> — 포털 GNB · 메인 구성</li>
   </ul>
