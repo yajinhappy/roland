@@ -10,3 +10,5 @@ Thumbs.db
 
 # 목록·본문 어디서도 참조되지 않는 원본 사본
 wireframe/webshop-screens.html
+_*.py
+_*.txt
