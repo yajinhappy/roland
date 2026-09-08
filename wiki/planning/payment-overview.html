@@ -271,8 +271,8 @@
 <header class="mast">
   <p class="kick">Design · Payment</p>
   <h1>결제 개요</h1>
-  <p class="stand"><b>지사마다 따로 만들던 결제를, 본사가 하나 만들어 지사들이 가져다 쓴다.</b>
-  결제 페이지도 하나, 웹샵도 하나, PG 연동도 PG사마다 한 번만 한다.</p>
+  <p class="stand"><b>지사별로 개별 구축했던 결제를 본사가 단일 구성으로 제공하고 각 지사가 연동해 사용한다.</b>
+  통합 결제창 1종 · 웹샵 템플릿 1종이며, PG 연동은 PG사당 1회로 끝난다.</p>
 </header>
 
 <section id="o1">
@@ -292,7 +292,7 @@
 
       <rect x="240" y="74" width="480" height="56" rx="5" class="bx-key"/>
       <text x="480" y="98" class="dt a" text-anchor="middle">통합 결제 모듈 — 본사가 만들어 제공</text>
-      <text x="480" y="118" class="ds" text-anchor="middle">결제 페이지 · 웹샵 · PG 연동 · 어드민</text>
+      <text x="480" y="118" class="ds" text-anchor="middle">통합 결제창 · 웹샵 · PG 연동 · 어드민</text>
 
       <line x1="480" y1="130" x2="480" y2="148" class="ln"/>
       <line x1="330" y1="148" x2="630" y2="148" class="ln"/>
@@ -321,8 +321,8 @@
     </svg>
   </figure>
 
-  <p>유저가 낸 돈은 본사를 거치지 않고 <b>각 지사 계좌로 바로 들어간다.</b>
-  본사는 결제가 돌아가게 만들어주는 데까지고, <b>무엇을 얼마에 팔지는 지사가 정한다.</b></p>
+  <p>결제 대금은 본사를 경유하지 않고 <b>각 지사 법인 계좌로 직접 입금</b>된다.
+  본사는 인프라를 제공하고, <b>판매 상품과 가격은 지사가 결정한다.</b></p>
 
   <h3>역할</h3>
 
@@ -332,7 +332,7 @@
       <tbody>
         <tr><td>PG 계약 조건 협상</td><td>법인 · 통화 · 정산 계좌 등록</td></tr>
         <tr><td>인증키 발급 · 보관</td><td>쓸 결제수단 선택 · 금액 범위</td></tr>
-        <tr><td>결제 페이지 · 웹샵 · 어드민 제공</td><td>상품 등록 · 가격 책정</td></tr>
+        <tr><td>통합 결제창 · 웹샵 · 어드민 제공</td><td>상품 등록 · 가격 책정</td></tr>
         <tr><td>게임 연동 규격 정의</td><td>게임사 연동 · 확인</td></tr>
         <tr><td>—</td><td>환불 처리 · 정산 확인</td></tr>
       </tbody>
@@ -343,11 +343,11 @@
 
   <h3>유저 결제 흐름</h3>
 
-<pre>상품 선택  →  <b>지급 대상 확인</b>  →  결제수단 선택 · 결제  →  <b>게임에 지급 요청</b>  →  게임에서 받기
-                    ↑                                              ↑
-              <span class="f">게임팀이 만들 API는 이 둘 · 환불 회수까지 합쳐 셋</span></pre>
+<pre>상품 선택  →  <b>지급 대상 확정</b>  →  통화 · 결제수단 선택 · 결제  →  <b>지급 요청</b>  →  계정 우편함 수령
+                    ↑                                                   ↑
+              <span class="f">게임 서버가 제공할 API는 이 둘 · 재화 회수는 Phase 2</span></pre>
 
-  <p>게임팀은 <b>PG가 뭔지 몰라도 된다.</b> 결제 모듈이 PG를 상대하고, 게임 서버는 API 셋만 만든다.</p>
+  <p>게임팀은 <b>PG 규격을 알 필요가 없다.</b> 결제 모듈이 PG 연동을 담당하고, 게임 서버는 표준 API만 제공한다.</p>
 
   <h3>화면</h3>
 
@@ -355,7 +355,7 @@
     <table>
       <thead><tr><th style="width:120px;">누가 보나</th><th style="width:60px;">개수</th><th>화면</th></tr></thead>
       <tbody>
-        <tr><td><b>유저</b></td><td>2</td><td>웹샵 · 결제 페이지</td></tr>
+        <tr><td><b>유저</b></td><td>2</td><td>웹샵 · 통합 결제창</td></tr>
         <tr><td><b>관리자 · 본사</b></td><td>2</td><td>결제 모듈 관리 · 키 발급</td></tr>
         <tr><td><b>관리자 · 지사</b></td><td>8</td><td>결제 준비도 · 법인 · 결제수단 · 게임 연동 · 상품 가격 · 모니터링 · 환불 · 정산 대사</td></tr>
       </tbody>
@@ -375,8 +375,9 @@
 <footer class="doc">
   <h4>관련 문서</h4>
   <ul>
+    <li><b><a href="webshop-payment-prd.html">웹샵/통합결제 기획</a></b> — 상위 기준 문서. 아키텍처 · 프로비저닝 · 장애 대응 · 환불 정책</li>
     <li><b><a href="payment.html">결제 설계</a></b> — 프로세스와 구조. 검토 필요사항 13건</li>
-    <li><b><a href="payment-webshop-structure.html">웹샵/통합결제 구조</a></b> — 지사가 가져다 쓰는 방법과 자금 경로</li>
+    <li><b><a href="payment-webshop-structure.html">웹샵/통합결제 구조</a></b> — 지사 도입 절차 · 자금 경로 · 거래 단위 원칙</li>
     <li><b><a href="global-payment.html">글로벌 결제 설계 (상세)</a></b> — 규격 · 필드</li>
   </ul>
   <p style="margin-top:14px">라그나로크 포털 · 결제 개요 · 2026-09-08</p>
