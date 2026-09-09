@@ -414,44 +414,62 @@
   <div class="grp2">3 · 구축 요소</div>
 
   <figure class="dia">
-    <svg viewBox="0 0 960 292" role="img" aria-label="통합 결제는 공통이고 통합 웹샵은 선택인 구축 요소 구조">
-      <text x="480" y="26" class="dt" text-anchor="middle">통합 결제는 모든 경로가 공통 사용 · 통합 웹샵은 선택</text>
+    <svg viewBox="0 0 960 296" role="img" aria-label="진입 경로 4종에서 상점 화면 2택을 거쳐 통합 결제로 수렴하는 구조">
+      <text x="122" y="26" class="dt" text-anchor="middle">이용자 진입</text>
+      <text x="384" y="26" class="dt" text-anchor="middle">상점 화면</text>
+      <text x="636" y="26" class="dt a" text-anchor="middle">결제</text>
+      <text x="847" y="26" class="dt" text-anchor="middle">지급</text>
 
-      <rect x="20" y="42" width="250" height="52" rx="5" class="bx-key"/>
-      <text x="145" y="64" class="ds a" text-anchor="middle">통합 웹샵 &#183; 선택</text>
-      <text x="145" y="82" class="dx f" text-anchor="middle">상품 진열 · 상세 · 지급 대상 확인</text>
+      <rect x="20" y="44" width="204" height="42" rx="4" class="bx-mute"/>
+      <text x="122" y="70" class="dx" text-anchor="middle">지사 공식 사이트 상점 메뉴</text>
+      <rect x="20" y="96" width="204" height="42" rx="4" class="bx-mute"/>
+      <text x="122" y="122" class="dx" text-anchor="middle">공지 · 이벤트 · 배너 링크</text>
+      <rect x="20" y="148" width="204" height="42" rx="4" class="bx-mute"/>
+      <text x="122" y="174" class="dx" text-anchor="middle">인게임 상점</text>
+      <rect x="20" y="200" width="204" height="42" rx="4" class="bx-mute"/>
+      <text x="122" y="226" class="dx" text-anchor="middle">지사 포털 · 포인트 충전</text>
 
-      <rect x="20" y="106" width="250" height="52" rx="5" class="bx-mute"/>
-      <text x="145" y="128" class="ds" text-anchor="middle">지사 · 개발사 자체 상점</text>
-      <text x="145" y="146" class="dx f" text-anchor="middle">자체 결제 페이지에서 호출</text>
+      <line x1="228" y1="65" x2="248" y2="65" class="ln"/>
+      <line x1="228" y1="117" x2="248" y2="117" class="ln"/>
+      <line x1="228" y1="169" x2="248" y2="169" class="ln"/>
+      <line x1="228" y1="221" x2="248" y2="221" class="ln"/>
+      <line x1="248" y1="65" x2="248" y2="221" class="ln"/>
+      <line x1="248" y1="118" x2="274" y2="118" class="ln" marker-end="url(#gm)"/>
+      <line x1="248" y1="182" x2="274" y2="182" class="ln" marker-end="url(#gm)"/>
 
-      <rect x="20" y="170" width="250" height="52" rx="5" class="bx-mute"/>
-      <text x="145" y="192" class="ds" text-anchor="middle">인게임 상점</text>
-      <text x="145" y="210" class="dx f" text-anchor="middle">게임 안에서 결제창만 호출</text>
+      <rect x="278" y="92" width="212" height="52" rx="5" class="bx-key"/>
+      <text x="384" y="114" class="ds a" text-anchor="middle">통합 웹샵 &#183; 선택</text>
+      <text x="384" y="132" class="dx f" text-anchor="middle">본사 제공 · 상품만 등록</text>
 
-      <line x1="274" y1="68" x2="310" y2="68" class="ln"/>
-      <line x1="274" y1="132" x2="310" y2="132" class="ln"/>
-      <line x1="274" y1="196" x2="310" y2="196" class="ln"/>
-      <line x1="310" y1="68" x2="310" y2="196" class="ln"/>
-      <line x1="310" y1="132" x2="350" y2="132" class="ln" marker-end="url(#gm)"/>
+      <rect x="278" y="156" width="212" height="52" rx="5" class="bx-mute"/>
+      <text x="384" y="178" class="ds" text-anchor="middle">지사 · 개발사 자체 화면</text>
+      <text x="384" y="196" class="dx f" text-anchor="middle">결제창 호출만 연동</text>
 
-      <rect x="354" y="96" width="250" height="72" rx="5" class="bx-key"/>
-      <text x="479" y="120" class="ds a" text-anchor="middle">통합 결제 &#183; 공통</text>
-      <text x="479" y="140" class="dx f" text-anchor="middle">통화 · 결제수단 선택</text>
-      <text x="479" y="158" class="dx f" text-anchor="middle">결제 승인 · 지급 요청</text>
+      <line x1="494" y1="118" x2="514" y2="118" class="ln"/>
+      <line x1="494" y1="182" x2="514" y2="182" class="ln"/>
+      <line x1="514" y1="118" x2="514" y2="182" class="ln"/>
+      <line x1="514" y1="150" x2="542" y2="150" class="ln" marker-end="url(#gm)"/>
 
-      <line x1="608" y1="132" x2="640" y2="132" class="ln" marker-end="url(#gm)"/>
+      <rect x="546" y="112" width="180" height="76" rx="5" class="bx-key"/>
+      <text x="636" y="136" class="ds a" text-anchor="middle">통합 결제 &#183; 공통</text>
+      <text x="636" y="156" class="dx f" text-anchor="middle">통화 · 결제수단 선택</text>
+      <text x="636" y="174" class="dx f" text-anchor="middle">결제 승인 · 지급 요청</text>
 
-      <rect x="644" y="106" width="290" height="52" rx="5" class="bx-mute"/>
-      <text x="789" y="128" class="ds" text-anchor="middle">재화 지급</text>
-      <text x="789" y="146" class="dx f" text-anchor="middle">게임 계정 우편함</text>
+      <line x1="730" y1="150" x2="756" y2="150" class="ln" marker-end="url(#gm)"/>
 
-      <line x1="20" y1="244" x2="940" y2="244" class="ln-hair"/>
-      <text x="480" y="268" class="dt" text-anchor="middle">통합 웹샵을 채택하면 상품 · 가격만 등록하면 되고, 자체 페이지를 쓰면 결제창 호출만 연동한다</text>
-      <text x="480" y="288" class="ds f" text-anchor="middle">어느 경로로 들어와도 매출과 자금은 해당 지사 법인에 귀속된다</text>
+      <rect x="760" y="124" width="174" height="52" rx="5" class="bx-mute"/>
+      <text x="847" y="146" class="ds" text-anchor="middle">재화 지급</text>
+      <text x="847" y="164" class="dx f" text-anchor="middle">게임 계정 우편함</text>
+
+      <line x1="20" y1="258" x2="940" y2="258" class="ln-hair"/>
+      <text x="480" y="282" class="dt" text-anchor="middle">진입 경로는 넷이고 상점 화면은 둘 중 하나를 고르지만, 결제는 하나를 공통으로 쓴다</text>
     </svg>
     <figcaption>통합 결제는 필수 공통 요소이고, 통합 웹샵은 지사가 선택해 채택한다.</figcaption>
   </figure>
+
+  <p><b>이용자가 들어오는 경로는 네 가지다.</b>
+  지사 공식 사이트의 상점 메뉴, 공지 · 이벤트 · 게임 내 배너에 걸린 링크, 게임 안 상점, 지사 포털의 포인트 충전이다.
+  경로마다 화면을 따로 만들지 않고 <b>같은 웹샵 본문을 바깥 틀만 바꿔 노출</b>한다.</p>
 
   <p><b>통합 결제는 모든 경로가 공통으로 사용하고, 통합 웹샵은 선택 사항이다.</b>
   지사나 개발사가 자체 상점 화면을 이미 갖고 있으면 <b>결제창 호출만 연동</b>해 쓸 수 있고,
