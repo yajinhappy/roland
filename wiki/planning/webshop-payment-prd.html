@@ -361,6 +361,9 @@
   <a href="#e1">운영 및 환불 정책</a>
   <a href="#e2">본사 어드민 기능</a>
 
+  <p class="grp">부록</p>
+  <a href="#f1">두 가지 이용 방식 비교</a>
+
 </nav>
 
 <main>
@@ -519,7 +522,7 @@
     <div class="row key">
       <span class="mono">2</span>
       <div>
-        <b>지사 도메인 일체화 — Same-Origin 서브패스</b>
+        <b>지사 도메인 일체화 — 지사 사이트 하위 주소로 서비스</b>
         <p>iFrame을 배제하고 지사 공식 도메인 하위 경로(<span class="mono">ro.mygnjoy.com/shop</span>)로 서비스한다.
         브라우저 쿠키 차단 이슈를 원천 차단하고 SSO를 승계한다.</p>
       </div>
@@ -577,20 +580,20 @@
 
       <text x="140" y="34" class="dt" text-anchor="middle">사용자 접점</text>
       <rect x="20" y="48" width="242" height="44" rx="5" class="bx-mute"/>
-      <text x="141" y="68" class="ds" text-anchor="middle">지사 오피셜 연계 서브패스</text>
-      <text x="141" y="84" class="dx f" text-anchor="middle">ro.mygnjoy.com/shop · Reverse Proxy</text>
+      <text x="141" y="68" class="ds" text-anchor="middle">지사 사이트 내 웹샵</text>
+      <text x="141" y="84" class="dx f" text-anchor="middle">지사 공식 사이트 하위 주소</text>
 
       <rect x="20" y="100" width="242" height="44" rx="5" class="bx-mute"/>
-      <text x="141" y="120" class="ds" text-anchor="middle">본사 호스팅 웹샵</text>
-      <text x="141" y="136" class="dx f" text-anchor="middle">shop.gravity.com/{branch}/{game}</text>
+      <text x="141" y="120" class="ds" text-anchor="middle">통합 웹샵 전용 주소</text>
+      <text x="141" y="136" class="dx f" text-anchor="middle">링크로만 진입 · 주소에 지사 코드 포함</text>
 
       <rect x="20" y="152" width="242" height="44" rx="5" class="bx-mute"/>
-      <text x="141" y="172" class="ds" text-anchor="middle">지사 포털 상품 · 탑업 모달</text>
-      <text x="141" y="188" class="dx f" text-anchor="middle">경량 JS SDK 임베드</text>
+      <text x="141" y="172" class="ds" text-anchor="middle">지사 포털 상품 · 포인트 충전</text>
+      <text x="141" y="188" class="dx f" text-anchor="middle">지사 포털에 결제 호출 모듈 삽입</text>
 
       <rect x="20" y="204" width="242" height="44" rx="5" class="bx-mute"/>
-      <text x="141" y="224" class="ds" text-anchor="middle">인게임 상점 클라이언트</text>
-      <text x="141" y="240" class="dx f" text-anchor="middle">Game WebView</text>
+      <text x="141" y="224" class="ds" text-anchor="middle">인게임 상점</text>
+      <text x="141" y="240" class="dx f" text-anchor="middle">게임 클라이언트 내장 브라우저</text>
 
       <line x1="262" y1="70" x2="326" y2="122" class="ln" marker-end="url(#pa)"/>
       <line x1="262" y1="122" x2="326" y2="134" class="ln" marker-end="url(#pa)"/>
@@ -598,18 +601,18 @@
       <line x1="262" y1="226" x2="326" y2="158" class="ln" marker-end="url(#pa)"/>
 
       <rect x="330" y="80" width="450" height="118" rx="5" class="bx-key"/>
-      <text x="555" y="104" class="dt a" text-anchor="middle">본사 통합 결제창 — Hosted Payment Hub</text>
-      <text x="555" y="128" class="ds" text-anchor="middle">서킷 브레이커 · 점검 필터</text>
-      <text x="555" y="148" class="ds" text-anchor="middle">결제수단 · 채널 선택 레이어</text>
-      <text x="555" y="168" class="ds" text-anchor="middle">단일 최종가(내세 포함) 노출</text>
-      <text x="555" y="188" class="dx f" text-anchor="middle">금액 확인 및 결제수단 선택 화면</text>
+      <text x="555" y="104" class="dt a" text-anchor="middle">통합 결제창</text>
+      <text x="555" y="128" class="ds" text-anchor="middle">통화 · 결제수단 선택</text>
+      <text x="555" y="148" class="ds" text-anchor="middle">결제수단 장애 차단 · 점검 제어</text>
+      <text x="555" y="168" class="ds" text-anchor="middle">최종 결제 금액 확인</text>
+      <text x="555" y="188" class="dx f" text-anchor="middle">4개 접점이 공유하는 단일 결제 화면</text>
 
       <line x1="555" y1="198" x2="555" y2="234" class="ln" marker-end="url(#pa)"/>
 
       <rect x="330" y="238" width="450" height="86" rx="5" class="bx-key"/>
-      <text x="555" y="262" class="dt a" text-anchor="middle">본사 빌링 엔진 — HQ Engine</text>
-      <text x="555" y="284" class="ds" text-anchor="middle">branch_code 기준 지사 PG MID 라우팅</text>
-      <text x="555" y="304" class="ds" text-anchor="middle">트랜잭션 로깅 · 비동기 지급 큐</text>
+      <text x="555" y="262" class="dt a" text-anchor="middle">결제 처리 엔진</text>
+      <text x="555" y="284" class="ds" text-anchor="middle">법인 코드에 따라 해당 지사 결제사로 연결</text>
+      <text x="555" y="304" class="ds" text-anchor="middle">거래 기록 · 지급 대기열 관리</text>
 
       <line x1="555" y1="324" x2="555" y2="348" class="ln"/>
       <line x1="300" y1="348" x2="810" y2="348" class="ln"/>
@@ -617,12 +620,12 @@
       <line x1="810" y1="348" x2="810" y2="382" class="ln" marker-end="url(#pa)"/>
 
       <rect x="176" y="386" width="248" height="66" rx="5" class="bx-mute"/>
-      <text x="300" y="410" class="ds" text-anchor="middle">지사별 계약 글로벌 PG</text>
-      <text x="300" y="430" class="dx f" text-anchor="middle">Adyen · 로컬 e-Wallet</text>
+      <text x="300" y="410" class="ds" text-anchor="middle">지사 명의 계약 결제사</text>
+      <text x="300" y="430" class="dx f" text-anchor="middle">지사 법인이 현지 결제사와 직접 계약</text>
 
       <rect x="686" y="386" width="248" height="66" rx="5" class="bx-mute"/>
-      <text x="810" y="410" class="ds" text-anchor="middle">인게임 재화 지급 웹훅</text>
-      <text x="810" y="430" class="dx f" text-anchor="middle">지사 · 게임 개발사 API</text>
+      <text x="810" y="410" class="ds" text-anchor="middle">게임 서버 지급 요청</text>
+      <text x="810" y="430" class="dx f" text-anchor="middle">지사 · 게임 개발사가 제공하는 연동 규격</text>
 
       <line x1="300" y1="452" x2="300" y2="486" class="ln" marker-end="url(#pa)"/>
       <line x1="810" y1="452" x2="810" y2="486" class="ln" marker-end="url(#pa)"/>
@@ -631,7 +634,7 @@
       <text x="300" y="521" class="ds a" text-anchor="middle">지사 법인 계좌 정산</text>
 
       <rect x="686" y="490" width="248" height="52" rx="5" class="bx-mute"/>
-      <text x="810" y="521" class="ds" text-anchor="middle">유저 인벤토리 · 우편 배달</text>
+      <text x="810" y="521" class="ds" text-anchor="middle">계정 우편함 지급</text>
 
       <line x1="70" y1="566" x2="890" y2="566" class="ln-hair"/>
       <text x="480" y="594" class="dt" text-anchor="middle">본사는 결제 인프라만 제공하며 대금은 지사 법인 계좌로 직결된다</text>
@@ -726,7 +729,7 @@
 
   <div class="tscroll">
     <table>
-      <thead><tr><th style="width:130px;">구분</th><th>형태 1 — 지사 오피셜 연계 서브패스</th><th>형태 2 — 본사 호스팅 웹샵</th></tr></thead>
+      <thead><tr><th style="width:130px;">구분</th><th>형태 1 — 지사 사이트 내 웹샵</th><th>형태 2 — 통합 웹샵 전용 주소</th></tr></thead>
       <tbody>
         <tr>
           <td><b>진입 URL</b></td>
@@ -840,14 +843,14 @@
   승계한 지사 세션으로 <b>동의를 받아 백엔드에서 포털 계정에 자동 바인딩</b>한다.</p>
 
   <figure class="dia">
-    <svg viewBox="0 0 960 330" role="img" aria-label="본사 호스팅과 지사 오피셜 임베드의 로그인 진입 및 자동 바인딩 흐름">
+    <svg viewBox="0 0 960 330" role="img" aria-label="통합 웹샵 전용 주소와 지사 사이트 내 웹샵의 로그인 진입 및 자동 바인딩 흐름">
       <defs>
         <marker id="bd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
         </marker>
       </defs>
 
-      <text x="20" y="20" class="dt a">흐름 A · 본사 호스팅 웹샵 (형태 2)</text>
+      <text x="20" y="20" class="dt a">흐름 A · 통합 웹샵 전용 주소 (형태 2)</text>
       <text x="330" y="20" class="dx f">포털 로그인 창을 직접 호출한다</text>
 
       <rect x="20" y="32" width="172" height="60" rx="5" class="bx-mute"/>
@@ -876,7 +879,7 @@
 
       <line x1="20" y1="122" x2="940" y2="122" class="ln-hair"/>
 
-      <text x="20" y="152" class="dt a">흐름 B · 지사 게임 오피셜 임베드 (형태 1)</text>
+      <text x="20" y="152" class="dt a">흐름 B · 지사 사이트 내 웹샵 (형태 1)</text>
       <text x="360" y="152" class="dx f">지사 로그인만 있고 포털 로그인 창이 없다</text>
 
       <rect x="20" y="164" width="172" height="60" rx="5" class="bx-mute"/>
@@ -912,7 +915,7 @@
 
   <div class="tscroll">
     <table>
-      <thead><tr><th style="width:130px;">단계</th><th>흐름 A — 본사 호스팅</th><th>흐름 B — 지사 오피셜 임베드</th></tr></thead>
+      <thead><tr><th style="width:130px;">단계</th><th>흐름 A — 통합 웹샵 전용 주소</th><th>흐름 B — 지사 사이트 내 웹샵</th></tr></thead>
       <tbody>
         <tr><td><b>인증 주체</b></td><td>전사 포털 SSO — 웹샵 화면의 포털 GNB <b>[로그인]</b></td><td><b>지사 로그인 시스템</b> — 지사 오피셜 GNB의 기존 로그인. 웹샵은 로그인 버튼을 제공하지 않고 포털 로그인 창도 띄우지 않는다</td></tr>
         <tr><td><b>식별자</b></td><td>Master UID를 먼저 확정하고 해당 법인의 <span class="mono">branch_user_id</span>를 조회</td><td><b>(지사 코드, GNJOY 계정 ID)</b>를 먼저 확보하고 포털 계정을 역조회</td></tr>
@@ -1048,7 +1051,7 @@
   <ul class="rule">
     <li>결제 허브는 <b>국가별 외세 · 부가세 분리 계산을 수행하지 않는다.</b></li>
     <li>어드민에 설정된 <b>최종 판매 금액(내세 기준 세금포함가, Tax-inclusive)</b> 단일 가격만 노출한다 — <span class="mono">결제 금액: 10,000 KRW (부가세 포함)</span></li>
-    <li>외세 계산 · 청구지 주소(Zip Code) 검증 · 세금 분리 영수증 발송은 <b>최종 PG 승인 레이어(Adyen 등)에 위임</b>한다.</li>
+    <li>외세 계산 · 청구지 주소(Zip Code) 검증 · 세금 분리 영수증 발송은 <b>PG 승인 레이어에 위임</b>한다.</li>
   </ul>
 
   <p class="cap">단일 최종가 원칙에 따라 결제창 UI가 국가별로 분기하지 않는다.</p>
@@ -1124,7 +1127,7 @@
 
   <div class="grp2">1 · 장애 전파 방지 — 서킷 브레이커</div>
 
-  <p>특정 지사의 특정 PG(예: 동남아 e-Wallet망)에서 타임아웃 · 5xx 에러가 급증하면
+  <p>특정 지사의 특정 PG(예: 동남아 간편결제망)에서 타임아웃 · 5xx 에러가 급증하면
   <b>해당 PG에만 서킷 브레이커가 작동(<span class="mono">OPEN</span>)</b>한다.</p>
 
   <p>해당 결제수단만 <b>자동 비활성화</b>(회색 블러 · 「일시 점검 중」 표기)되고,
@@ -1318,6 +1321,117 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">부록</span>
+  <h2>두 가지 이용 방식 비교</h2>
+  <p>웹샵은 어디에 놓느냐에 따라 두 가지 형태로 서비스한다. 실무 협의에서 자주 나오는 질문을 기준으로 정리한다.</p>
+</div>
+
+<section id="f1">
+  <h3>같은 웹샵이고, 놓이는 자리가 다르다</h3>
+
+  <p><b>두 형태는 같은 웹샵이다.</b> 본사가 만든 하나의 웹샵을 <b>지사 공식 사이트 안에 넣느냐</b>,
+  <b>웹샵 전용 주소로 따로 여느냐</b>의 차이다. 상품 · 가격 · 화면 · 결제 · 수령은 모두 동일하다.</p>
+
+  <div class="cols">
+    <div class="card a">
+      <h4>형태 1 · 지사 사이트 내 웹샵</h4>
+      <p>지사 공식 사이트의 <b>[상점] 메뉴를 누르면</b> 그 사이트 안에서 웹샵이 열린다.
+      이용자는 지사 사이트를 벗어났다고 느끼지 않는다. 주소도 지사 사이트 주소 그대로다.</p>
+      <p class="mono">ro.mygnjoy.com/shop</p>
+    </div>
+    <div class="card b">
+      <h4>형태 2 · 통합 웹샵 전용 주소</h4>
+      <p>게임 안 · 공지 · 이벤트에 걸린 <b>링크를 눌러</b> 웹샵 전용 주소로 이동한다.
+      공식 사이트가 없는 지사가 사용하며, 주소에 어느 지사인지가 들어 있다.</p>
+      <p class="mono">shop.gravity.com/{지사}/{게임}</p>
+    </div>
+  </div>
+
+  <div class="grp2">같은 점 — 이용자가 체감하는 대부분</div>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">항목</th><th>두 형태 공통</th></tr></thead>
+      <tbody>
+        <tr><td><b>판매 상품 · 가격</b></td><td>지사가 등록한 상품과 가격을 그대로 노출한다. 형태에 따라 달라지지 않는다</td></tr>
+        <tr><td><b>화면 구성</b></td><td>배너 · 상품 목록 · 상품 상세 · 받을 캐릭터 확인 · 결제 · 구매내역까지 동일하다</td></tr>
+        <tr><td><b>구매 흐름</b></td><td>상품 선택 &rarr; 받을 캐릭터 확정 &rarr; 결제 &rarr; <b>게임 내 계정 우편함 수령</b></td></tr>
+        <tr><td><b>결제 화면</b></td><td><b>통합 결제창 하나</b>를 함께 쓴다. 통화와 결제수단도 같은 화면에서 고른다</td></tr>
+        <tr><td><b>비회원 구매</b></td><td>로그인 없이 서버 · 캐릭터 인증만으로 구매할 수 있다</td></tr>
+        <tr><td><b>매출 · 대금</b></td><td>해당 지사 법인 매출로 잡히고 대금도 지사 계좌로 입금된다</td></tr>
+        <tr><td><b>구매내역 · 영수증</b></td><td>조회 방식과 발급 규격이 같다</td></tr>
+        <tr><td><b>운영 · 관리</b></td><td>같은 관리 도구에서 상품 · 가격 · 점검 · 환불을 처리한다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grp2">다른 점 — 이용 방식과 로그인 처리</div>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:140px;">항목</th><th>형태 1 · 지사 사이트 내 웹샵</th><th>형태 2 · 통합 웹샵 전용 주소</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>어떻게 들어가나</b></td>
+          <td>지사 공식 사이트의 <b>[상점] 메뉴</b></td>
+          <td>게임 안 · 공지 · 이벤트에 걸린 <b>링크</b>. 주소를 직접 입력해 들어갈 수 없다</td>
+        </tr>
+        <tr>
+          <td><b>주소</b></td>
+          <td>지사 사이트 주소 그대로 — 하위에 <span class="mono">/shop</span>이 붙는다</td>
+          <td>웹샵 전용 주소 — 주소 안에 <b>지사와 게임</b>이 들어 있다</td>
+        </tr>
+        <tr>
+          <td><b>화면 위아래</b></td>
+          <td>지사 사이트의 <b>상단 메뉴와 하단 정보가 그대로</b> 감싼다</td>
+          <td><b>라그나로크 포털 상단 영역</b>만 붙는다 — 로고 · 언어 · 로그인</td>
+        </tr>
+        <tr>
+          <td><b>로그인 버튼</b></td>
+          <td>지사 사이트가 이미 갖고 있는 <b>지사 로그인</b>을 그대로 쓴다. 웹샵은 별도 로그인 버튼을 두지 않는다</td>
+          <td>웹샵 상단의 <b>라그나로크 포털 로그인</b></td>
+        </tr>
+        <tr>
+          <td><b>로그인 이어받기</b></td>
+          <td>지사 사이트에서 <b>이미 로그인했다면 그대로 이어진다</b>. 다시 로그인하지 않는다</td>
+          <td>포털에 로그인한 상태면 그대로 이어진다</td>
+        </tr>
+        <tr>
+          <td><b>계정 연결 순서</b></td>
+          <td>지사 계정으로 시작해 <b>동의를 받아 포털 계정에 연결</b>한다 — 최초 1회</td>
+          <td>포털 계정으로 시작해 <b>동의를 받아 지사 계정에 연결</b>한다 — 최초 1회</td>
+        </tr>
+        <tr>
+          <td><b>어느 지사인지 판단</b></td>
+          <td>접속한 <b>주소</b>로 판단한다</td>
+          <td>주소에 포함된 <b>지사 코드</b>로 판단한다</td>
+        </tr>
+        <tr>
+          <td><b>적합한 경우</b></td>
+          <td>게임 공식 사이트가 있고 <b>기존 방문자를 그대로 활용</b>하려는 지사</td>
+          <td>공식 사이트가 없는 지사 · <b>게임 안에서 바로 여는 경우</b></td>
+        </tr>
+        <tr>
+          <td><b>지사 준비 작업</b></td>
+          <td><b>서버 설정 1회</b> — 이후 개발 작업 없음</td>
+          <td><b>없음</b> — 본사가 직접 서비스한다</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">차이는 <b>이용자가 들어오는 경로</b>와 <b>어느 로그인을 쓰는가</b> 두 가지다.
+  로그인 이후에는 두 형태 모두 <b>포털 계정과 지사 계정이 연결된 같은 상태</b>가 되고, 이후 동작이 같아진다.</p>
+
+  <div class="note">
+    <span class="lb">왜 두 형태를 모두 두는가</span>
+    <p>지사마다 이용자가 들어오는 길이 다르다. 공식 사이트를 운영하는 지사는 그 방문자를 그대로 쓰는 편이 유리하고,
+    공식 사이트가 없는 지사는 전용 주소가 필요하다. <b>경로마다 웹샵을 따로 만들면 일원화의 의미가 없어지므로</b>,
+    바깥 틀만 지사에 맞추고 웹샵 본문은 하나로 유지한다.</p>
   </div>
 </section>
 
