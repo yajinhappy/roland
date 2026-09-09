@@ -357,7 +357,7 @@
 
 <section class="exec" id="exec">
   <div class="exec-h">
-    <b>경영진 보고 요약</b>
+    <b>요약</b>
     <span>글로벌 통합웹샵 및 전사 결제 허브 구축 계획(안)</span>
   </div>
 
@@ -372,9 +372,6 @@
 
   <p><b>지사별 운영 파편화 및 통제력 부재.</b> 결제 데이터와 상점 운영이 지사별로 흩어져 있어
   본사 차원의 전사 매출 트래킹, 부정결제 감사, 글로벌 프로모션 통합 실행이 불가능하다.</p>
-
-  <p><b>법적 · 재무적 리스크 상존.</b> 글로벌 결제 대행사 계약, 현지 세무(부가세 · 외환 송금),
-  개인정보 국외 이전에 대한 일관된 전사 기준이 없다.</p>
 
   <div class="grp2">2 · 핵심 전략 — 역할 분담</div>
 
@@ -398,7 +395,7 @@
       <text x="480" y="60" class="ds a" text-anchor="middle">단일 통합 시스템 제공</text>
       <text x="354" y="102" class="dx">· 승인 기반 자동 오픈</text>
       <text x="354" y="122" class="dx">· 통합 로그인 및 비회원 구매 지원</text>
-      <text x="354" y="142" class="dx">· 지사 사이트 이탈 · 재로그인 없이 구매</text>
+      <text x="354" y="142" class="dx">· 다른 사이트로 넘어가지 않고 결제</text>
 
       <line x1="624" y1="55" x2="656" y2="55" class="ln" marker-end="url(#gm)"/>
 
@@ -417,40 +414,49 @@
   <div class="grp2">3 · 구축 요소</div>
 
   <figure class="dia">
-    <svg viewBox="0 0 960 238" role="img" aria-label="통합 웹샵과 통합 결제 두 구축 요소의 이용자 흐름">
-      <text x="480" y="26" class="dt" text-anchor="middle">구축 요소 2종 · 이용자 흐름 순서</text>
+    <svg viewBox="0 0 960 292" role="img" aria-label="통합 결제는 공통이고 통합 웹샵은 선택인 구축 요소 구조">
+      <text x="480" y="26" class="dt" text-anchor="middle">통합 결제는 모든 경로가 공통 사용 · 통합 웹샵은 선택</text>
 
-      <rect x="20" y="44" width="130" height="62" rx="5" class="bx-mute"/>
-      <text x="85" y="70" class="ds" text-anchor="middle">이용자 진입</text>
-      <text x="85" y="90" class="dx f" text-anchor="middle">지사 사이트 · 링크</text>
-      <line x1="154" y1="75" x2="176" y2="75" class="ln" marker-end="url(#gm)"/>
+      <rect x="20" y="42" width="250" height="52" rx="5" class="bx-key"/>
+      <text x="145" y="64" class="ds a" text-anchor="middle">통합 웹샵 &#183; 선택</text>
+      <text x="145" y="82" class="dx f" text-anchor="middle">상품 진열 · 상세 · 지급 대상 확인</text>
 
-      <rect x="180" y="44" width="248" height="62" rx="5" class="bx-key"/>
-      <text x="304" y="70" class="ds a" text-anchor="middle">통합 웹샵</text>
-      <text x="304" y="90" class="dx f" text-anchor="middle">상품 진열 · 상세 · 지급 대상 확인</text>
-      <line x1="432" y1="75" x2="454" y2="75" class="ln" marker-end="url(#gm)"/>
+      <rect x="20" y="106" width="250" height="52" rx="5" class="bx-mute"/>
+      <text x="145" y="128" class="ds" text-anchor="middle">지사 · 개발사 자체 상점</text>
+      <text x="145" y="146" class="dx f" text-anchor="middle">자체 결제 페이지에서 호출</text>
 
-      <rect x="458" y="44" width="248" height="62" rx="5" class="bx-key"/>
-      <text x="582" y="70" class="ds a" text-anchor="middle">통합 결제</text>
-      <text x="582" y="90" class="dx f" text-anchor="middle">통화 · 결제수단 선택 · 결제 승인</text>
-      <line x1="710" y1="75" x2="732" y2="75" class="ln" marker-end="url(#gm)"/>
+      <rect x="20" y="170" width="250" height="52" rx="5" class="bx-mute"/>
+      <text x="145" y="192" class="ds" text-anchor="middle">인게임 상점</text>
+      <text x="145" y="210" class="dx f" text-anchor="middle">게임 안에서 결제창만 호출</text>
 
-      <rect x="736" y="44" width="204" height="62" rx="5" class="bx-mute"/>
-      <text x="838" y="70" class="ds" text-anchor="middle">재화 지급</text>
-      <text x="838" y="90" class="dx f" text-anchor="middle">게임 계정 우편함</text>
+      <line x1="274" y1="68" x2="310" y2="68" class="ln"/>
+      <line x1="274" y1="132" x2="310" y2="132" class="ln"/>
+      <line x1="274" y1="196" x2="310" y2="196" class="ln"/>
+      <line x1="310" y1="68" x2="310" y2="196" class="ln"/>
+      <line x1="310" y1="132" x2="350" y2="132" class="ln" marker-end="url(#gm)"/>
 
-      <line x1="20" y1="132" x2="940" y2="132" class="ln-hair"/>
+      <rect x="354" y="96" width="250" height="72" rx="5" class="bx-key"/>
+      <text x="479" y="120" class="ds a" text-anchor="middle">통합 결제 &#183; 공통</text>
+      <text x="479" y="140" class="dx f" text-anchor="middle">통화 · 결제수단 선택</text>
+      <text x="479" y="158" class="dx f" text-anchor="middle">결제 승인 · 지급 요청</text>
 
-      <text x="20" y="160" class="ds">지사 등록 항목</text>
-      <text x="304" y="160" class="dx f" text-anchor="middle">상품 · 가격 · 배너 · 테마</text>
-      <text x="582" y="160" class="dx f" text-anchor="middle">결제 계약 · 허용 통화 · 노출 결제수단</text>
+      <line x1="608" y1="132" x2="640" y2="132" class="ln" marker-end="url(#gm)"/>
 
-      <line x1="20" y1="182" x2="940" y2="182" class="ln-hair"/>
-      <text x="480" y="210" class="dt" text-anchor="middle">두 요소는 본사가 구축하고, 지사는 데이터만 등록한다</text>
-      <text x="480" y="230" class="ds f" text-anchor="middle">게임 안 상점과 지사 포털 결제도 같은 결제 화면을 경유한다</text>
+      <rect x="644" y="106" width="290" height="52" rx="5" class="bx-mute"/>
+      <text x="789" y="128" class="ds" text-anchor="middle">재화 지급</text>
+      <text x="789" y="146" class="dx f" text-anchor="middle">게임 계정 우편함</text>
+
+      <line x1="20" y1="244" x2="940" y2="244" class="ln-hair"/>
+      <text x="480" y="268" class="dt" text-anchor="middle">통합 웹샵을 채택하면 상품 · 가격만 등록하면 되고, 자체 페이지를 쓰면 결제창 호출만 연동한다</text>
+      <text x="480" y="288" class="ds f" text-anchor="middle">어느 경로로 들어와도 매출과 자금은 해당 지사 법인에 귀속된다</text>
     </svg>
-    <figcaption>웹샵과 결제는 이용자 흐름 순서대로 이어지며, 지사 작업은 데이터 등록에 한정된다.</figcaption>
+    <figcaption>통합 결제는 필수 공통 요소이고, 통합 웹샵은 지사가 선택해 채택한다.</figcaption>
   </figure>
+
+  <p><b>통합 결제는 모든 경로가 공통으로 사용하고, 통합 웹샵은 선택 사항이다.</b>
+  지사나 개발사가 자체 상점 화면을 이미 갖고 있으면 <b>결제창 호출만 연동</b>해 쓸 수 있고,
+  게임 안 상점에서도 웹샵을 거치지 않고 결제창만 부를 수 있다.
+  통합 웹샵을 채택하면 화면 개발 없이 상품 · 가격 · 배너만 등록하면 되고, 자체 화면을 유지하면 결제 연동만 하면 된다.</p>
 
   <div class="grp2">4 · 기대 효과</div>
 
@@ -983,8 +989,19 @@
 
   <p class="lead1">통합 결제창은 통화 · 결제수단 선택과 금액 확인을 담당하고, 세무 · 정산은 지사 법인으로 직결된다.</p>
 
-  <p>결제창은 4개 접점이 공유하는 단일 화면이다.
-  세무 · 정산은 각 지사 법인 계정으로 직결된다.</p>
+  <p>결제창은 4개 접점이 공유하는 단일 화면이며, 세무 · 정산은 각 지사 법인 계정으로 직결된다.</p>
+
+  <div class="grp2">채택 구조 — 결제는 공통, 웹샵은 선택</div>
+
+  <p><b>통합 결제창은 모든 채널이 공통으로 사용하고, 통합 웹샵은 선택 사항이다.</b>
+  지사나 개발사가 자체 상점 화면을 이미 갖고 있으면 웹샵을 채택하지 않고 <b>결제창 호출만 연동</b>할 수 있으며,
+  인게임 상점도 웹샵을 거치지 않고 결제창을 직접 부른다.</p>
+
+  <div class="dl2">
+    <div><b>통합 웹샵 채택</b><span>화면 개발이 없다. <b>상품 · 가격 · 배너만 등록</b>하면 판매가 시작된다. 지급 대상 확인과 비회원 인증 화면도 함께 제공된다</span></div>
+    <div><b>자체 화면 유지</b><span>기존 상점 · 결제 페이지를 그대로 쓰고 <b>결제 세션 생성과 지급 수신만 연동</b>한다. 지급 대상 확인은 자체 화면에서 처리해야 한다</span></div>
+    <div><b>공통 사항</b><span>어느 방식이든 <b>법인 판정 · 금액 산출 · 통화 허용 검증은 결제창 서버가 수행</b>한다. 매출과 자금 귀속도 동일하다</span></div>
+  </div>
 
   <div class="grp2">채널별 연동 방식</div>
 
