@@ -10,7 +10,7 @@
 |---|---|
 | `wireframe/portal-main-auth-screens.html` | 라그나로크 포털 화면정의서 |
 | `wireframe/webshop-ui.html` | **웹샵 화면정의서** — 7 탭 · 핀 42건 · PC · TABLET · MO |
-| `wireframe/payment-checkout-channels.html` | **통합결제 화면정의서** — 결제수단 채널 선택 · 핀 6건 |
+| `wireframe/payment-checkout-channels.html` | **라그나로크원페이 화면정의서** — 결제수단 선택 및 결제 · 핀 6건 |
 
 ### 설계
 
@@ -70,7 +70,7 @@
 | `_build/gen_nav.py` | 문서 목록 단일 소스. NAV 수정 후 아래 빌드를 다시 실행 |
 | `_build/build_v2.py` | 결제 개요 · 결제 설계 · 통합결제/웹샵 구조 · 통합웹샵/통합결제 기획 |
 | `_build/build_ws.py` | 웹샵 화면정의서 |
-| `_build/build_pay2.py` | 통합결제 화면정의서 — 결제수단 채널 선택 |
+| `_build/build_pay2.py` | 라그나로크원페이 화면정의서 |
 
 ### 검증
 
