@@ -280,8 +280,16 @@
   .kpi span { font-size: 10.5px; color: var(--ink-soft); line-height: 1.5; word-break: keep-all; }
 
   .exec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .exec-sub { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 10px;
+    flex-wrap: wrap; padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: -2px; }
+  .exec-sub + .ec, .exec-sub ~ .ec { margin-top: 0; }
+  .exec-grid > .exec-sub:not(:first-child) { margin-top: 14px; }
+  .exec-sub b { font-size: 12px; font-weight: 600; color: var(--ink); letter-spacing: -.1px; }
+  .exec-sub span { font-size: 10.5px; color: var(--ink-faint); word-break: keep-all; }
   .ec { background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
     padding: 17px 18px 16px; display: flex; flex-direction: column; gap: 11px; }
+  .ec.rk { background: #F6F7F9; }
+  .ec.rk .ec-n i { background: var(--ink-mid); }
   .ec-n { display: flex; align-items: center; gap: 8px; }
   .ec-n i { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 9.5px;
     color: #fff; background: var(--ink); padding: 3px 7px; border-radius: 3px; letter-spacing: .3px; }
@@ -298,6 +306,7 @@
     font-weight: 500; letter-spacing: .4px; padding: 2px 0 0; }
   .ab-r.as .ab-k { color: var(--bad); }
   .ab-r.to .ab-k { color: var(--accent); }
+  .ab-k.ko { font-family: inherit; font-size: 9.5px; font-weight: 600; letter-spacing: 0; }
   .ab-v { font-size: 10.5px; line-height: 1.7; color: var(--ink-soft); word-break: keep-all; }
   .ab-v b { font-weight: 500; color: var(--ink-mid); }
 
@@ -388,6 +397,8 @@
 
   <div class="exec-grid">
 
+    <div class="exec-sub"><b>추진 효과</b><span>일원화로 새로 얻는 것</span></div>
+
     <div class="ec">
       <div class="ec-n"><i>PART 1</i><u>사업 구조</u></div>
       <p class="ec-t">반복 개발을 없애고, 결제 구축을 신규 타이틀 출시 일정에서 분리한다.</p>
@@ -398,7 +409,7 @@
       <div class="ec-eff">
         <em>기대효과</em>
         <span><i>직접</i>동일 기능 <b>중복 개발 비용 제거</b> — 신규 타이틀 결제 개발 공수가 발생하지 않는다</span>
-        <span><i>직접</i>결제가 출시 일정의 제약 요인에서 빠진다 — <b>어드민 설정만으로 즉시 판매 개시</b></span>
+        <span><i>직접</i>결제가 출시 일정의 제약 요인에서 빠진다 — <b>항목 등록만으로 즉시 판매 개시</b></span>
         <span><i>간접</i>개발 인력을 게임 콘텐츠에 재배치할 수 있다</span>
       </div>
     </div>
@@ -421,44 +432,46 @@
       <div class="ec-n"><i>PART 3</i><u>매출 귀속 · 결제 전환</u></div>
       <p class="ec-t">판매 주체와 자금은 지사 법인에 두고, 결제 진입 장벽은 낮춘다.</p>
       <div class="ab">
-        <div class="ab-r as"><span class="ab-k">AS-IS</span><span class="ab-v">본사가 대금을 일괄 수취하면 해외 수익이 <b>본사 매출로 계상</b>되고, 각 국가로 재송금하는 과정에서 <b>이중 과세 · 외환 규제</b> 문제가 생긴다</span></div>
-        <div class="ab-r to"><span class="ab-k">TO-BE</span><span class="ab-v">지사 법인이 현지 결제사와 <b>직접 계약</b>하고 대금은 <b>지사 계좌로 바로 입금</b>된다. 본사가 남기는 기록은 회계 장부가 아닌 <b>거래 확인용 내역</b>이다</span></div>
+        <div class="ab-r as"><span class="ab-k">AS-IS</span><span class="ab-v">지사가 각자 결제를 운영해 <b>매출과 자금은 이미 각 법인에 귀속</b>돼 있다. 다만 결제하려면 지사 계정 가입이 필요해 <b>진입 단계에서 이탈</b>이 발생한다</span></div>
+        <div class="ab-r to"><span class="ab-k">TO-BE</span><span class="ab-v">일원화 이후에도 지사 법인이 현지 결제사와 <b>직접 계약</b>하고 대금은 <b>지사 계좌로 바로 입금</b>된다. 여기에 <b>회원 가입 없는 결제 경로</b>를 더한다. 본사가 남기는 기록은 회계 장부가 아닌 거래 확인용 내역이다</span></div>
       </div>
       <div class="ec-eff">
         <em>기대효과</em>
-        <span><i>직접</i><b>법인세 이중 과세 · 외환 송금 규제 리스크를 차단</b>한다 — 현행 회계 구조를 유지한다</span>
+        <span><i>직접</i><b>현행 회계 구조를 그대로 유지</b>한다 — 본사 일괄 수취 시 생기는 이중 과세 · 외환 송금 문제를 만들지 않는다</span>
         <span><i>직접</i>회원 가입 없이 결제할 수 있어 <b>결제 전환 허들이 낮아진다</b></span>
         <span><i>간접</i>지사 계정과 포털 계정이 연결되어 <b>이용자 단위 구매 이력</b>을 확보할 수 있다</span>
       </div>
     </div>
 
-    <div class="ec">
+    <div class="exec-sub"><b>통합에 따른 리스크와 대응</b><span>일원화로 새로 생기는 위험과 설계에 반영한 방어 장치 — 효과가 아니라 지켜야 할 것이다</span></div>
+
+    <div class="ec rk">
       <div class="ec-n"><i>PART 4</i><u>사업 연속성</u></div>
       <p class="ec-t">중앙 집중에서 생기는 위험을 격리해 전 지사 동반 중단을 막는다.</p>
       <div class="ab">
-        <div class="ab-r as"><span class="ab-k">AS-IS</span><span class="ab-v">결제를 한곳에 모으면 <b>한 곳의 장애가 전 지사 매출 중단</b>으로 번질 수 있다. 게임 점검 중 결제가 들어오면 지급 사고가 된다</span></div>
-        <div class="ab-r to"><span class="ab-k">TO-BE</span><span class="ab-v">문제가 생긴 <b>결제수단만 자동으로 닫고</b> 나머지는 정상 판매를 유지한다. 이미 승인된 결제는 <b>버리지 않고 자동 재처리</b>하며, 게임 점검 시에는 사전 고지부터 재개까지 <b>4단계로 결제를 통제</b>한다</span></div>
+        <div class="ab-r as"><span class="ab-k ko">리스크</span><span class="ab-v">결제를 한곳에 모으면 <b>한 곳의 장애가 전 지사 매출 중단</b>으로 번질 수 있다. 게임 점검 중 결제가 들어오면 지급 사고가 된다</span></div>
+        <div class="ab-r to"><span class="ab-k ko">대응</span><span class="ab-v">문제가 생긴 <b>결제수단만 자동으로 닫고</b> 나머지는 정상 판매를 유지한다. 이미 승인된 결제는 <b>버리지 않고 자동 재처리</b>하며, 게임 점검 시에는 사전 고지부터 재개까지 <b>4단계로 결제를 통제</b>한다</span></div>
       </div>
       <div class="ec-eff">
-        <em>기대효과</em>
-        <span><i>직접</i>특정 국가 · 특정 PG 장애가 <b>타 국가 매출로 전이되지 않는다</b></span>
-        <span><i>직접</i>결제는 됐는데 아이템이 오지 않는 <b>문의와 환불 요청이 줄어든다</b></span>
-        <span><i>간접</i>데이터 국외 이전 근거를 계약으로 확보해 <b>규제 대응 리스크를 낮춘다</b></span>
+        <em>리스크 저감</em>
+        <span><i>방어</i>장애 영향을 해당 결제수단으로 한정 — <b>타 국가 매출은 중단되지 않는다</b></span>
+        <span><i>방어</i>승인된 결제의 지급 누락 방지 — <b>대량 문의 · 환불 사태를 차단</b>한다</span>
+        <span><i>사전</i>데이터 국외 이전 근거를 계약으로 확보 — <b>규제 조치 가능성을 해소</b>한다</span>
       </div>
     </div>
 
-    <div class="ec">
+    <div class="ec rk">
       <div class="ec-n"><i>PART 5</i><u>운영 부담</u></div>
       <p class="ec-t">초기 오픈은 검증된 방식으로 시작하고, 전 지사를 한 화면에서 관리한다.</p>
       <div class="ab">
-        <div class="ab-r as"><span class="ab-k">AS-IS</span><span class="ab-v">해외 현지 결제수단 상당수가 <b>시스템 취소 기능을 제공하지 않는다</b>. 환불 자동화를 전제하면 오픈 직후 처리 불가 건이 발생한다</span></div>
-        <div class="ab-r to"><span class="ab-k">TO-BE</span><span class="ab-v">1단계는 <b>결제 전 고지와 고객센터 접수</b> 방식으로 확정하고, 처리자와 사유를 <b>기록으로 남긴다</b>. 자동화는 2단계 과제로 둔다</span></div>
+        <div class="ab-r as"><span class="ab-k ko">리스크</span><span class="ab-v">해외 현지 결제수단 상당수가 <b>시스템 취소 기능을 제공하지 않는다</b>. 환불 자동화를 전제하면 <b>오픈 직후 처리 불가 건</b>이 발생한다</span></div>
+        <div class="ab-r to"><span class="ab-k ko">대응</span><span class="ab-v">1단계는 <b>결제 전 고지와 고객센터 접수</b> 방식으로 확정하고, 처리자와 사유를 <b>기록으로 남긴다</b>. 자동화는 2단계 과제로 둔다</span></div>
       </div>
       <div class="ec-eff">
-        <em>기대효과</em>
-        <span><i>직접</i>구현하지 못할 정책을 약속하지 않아 <b>오픈 리스크를 최소화</b>한다</span>
-        <span><i>직접</i>환불 건이 정상 승인 건과 분리 집계되어 <b>정산 · 감사 대응이 가능</b>하다</span>
-        <span><i>간접</i>전 지사 결제 현황을 한 화면에서 확인해 <b>이상 징후를 조기에 파악</b>할 수 있다</span>
+        <em>리스크 저감</em>
+        <span><i>방어</i>이행할 수 없는 환불 정책을 고지하지 않아 <b>이용자 분쟁을 예방</b>한다</span>
+        <span><i>방어</i>환불 건이 정상 승인 건과 분리 집계되어 <b>정산 차이 · 감사 지적을 방지</b>한다</span>
+        <span><i>효과</i>전 지사 결제 현황을 한 화면에서 확인해 <b>이상 징후를 조기에 파악</b>할 수 있다</span>
       </div>
     </div>
 
