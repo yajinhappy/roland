@@ -357,94 +357,172 @@
 
 <section class="exec" id="exec">
   <div class="exec-h">
-    <b>경영 요약</b>
-    <span>추진 내용 · 현행 문제 · 기대효과</span>
+    <b>경영진 보고 요약</b>
+    <span>글로벌 통합웹샵 및 전사 결제 허브 구축 계획(안)</span>
   </div>
 
-  <p class="exec-lead">지사와 게임 타이틀마다 따로 만들어 온 <b>웹샵과 결제를 본사가 하나로 만들어 각 지사가 가져다 쓰는 구조</b>로 바꾼다.
-  본사는 시스템만 제공하고, <b>판매 주체와 매출 · 자금은 지금처럼 각 지사 법인에 그대로 남는다.</b></p>
+  <p class="exec-lead">본사가 <b>단일 마스터 엔진(웹샵 + 결제 허브)</b>을 구축해 전사 인프라로 제공하고,
+  지사는 <b>현지 마케팅과 결제 계약에만 집중</b>하는 중앙 집중형 거버넌스 모델을 도입한다.
+  매출과 자금은 지금처럼 각 지사 법인에 그대로 귀속되므로 회계 · 세무 구조는 바뀌지 않는다.</p>
+
+  <div class="grp2">1 · 추진 배경 및 당면 과제</div>
+
+  <p><b>중복 투자 및 개발 비효율.</b> 신규 게임 런칭마다 각 지사와 개발사가 웹 상점과 결제 모듈을 개별 구축해
+  타이틀당 평균 2~3개월의 개발 비용과 시간이 반복 소모되고 있다.</p>
+
+  <p><b>지사별 운영 파편화 및 통제력 부재.</b> 결제 데이터와 상점 운영이 지사별로 흩어져 있어
+  본사 차원의 전사 매출 트래킹, 부정결제 감사, 글로벌 프로모션 통합 실행이 불가능하다.</p>
+
+  <p><b>법적 · 재무적 리스크 상존.</b> 글로벌 결제 대행사 계약, 현지 세무(부가세 · 외환 송금),
+  개인정보 국외 이전에 대한 일관된 전사 기준이 없다.</p>
+
+  <div class="grp2">2 · 핵심 전략 — 역할 분담</div>
 
   <figure class="dia">
-    <svg viewBox="0 0 960 292" role="img" aria-label="지사 게임별 개별 구축에서 본사 단일 세트 공유 구조로의 전환">
+    <svg viewBox="0 0 960 216" role="img" aria-label="본사와 지사의 역할 분담 구조">
       <defs>
-        <marker id="xm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <marker id="gm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
         </marker>
       </defs>
 
-      <text x="188" y="30" class="dt" text-anchor="middle">현행</text>
+      <rect x="20" y="34" width="280" height="42" rx="5" class="bx-mute"/>
+      <text x="160" y="60" class="ds" text-anchor="middle">본사</text>
+      <text x="34" y="102" class="dx">· 전사 결제 · 웹샵 인프라 총괄</text>
+      <text x="34" y="122" class="dx">· 전사 결제 내역 감사 · 모니터링</text>
+      <text x="34" y="142" class="dx">· 장애 격리 및 점검 통제</text>
 
-      <rect x="20" y="52" width="104" height="40" rx="4" class="bx-mute"/>
-      <text x="72" y="77" class="dx" text-anchor="middle">웹샵 + 결제</text>
-      <rect x="136" y="52" width="104" height="40" rx="4" class="bx-mute"/>
-      <text x="188" y="77" class="dx" text-anchor="middle">웹샵 + 결제</text>
-      <rect x="252" y="52" width="104" height="40" rx="4" class="bx-mute"/>
-      <text x="304" y="77" class="dx" text-anchor="middle">웹샵 + 결제</text>
+      <line x1="304" y1="55" x2="336" y2="55" class="ln" marker-end="url(#gm)"/>
 
-      <rect x="20" y="104" width="104" height="40" rx="4" class="bx-mute"/>
-      <text x="72" y="129" class="dx" text-anchor="middle">웹샵 + 결제</text>
-      <rect x="136" y="104" width="104" height="40" rx="4" class="bx-mute"/>
-      <text x="188" y="129" class="dx" text-anchor="middle">웹샵 + 결제</text>
-      <rect x="252" y="104" width="104" height="40" rx="4" class="bx-mute"/>
-      <text x="304" y="129" class="dx" text-anchor="middle">웹샵 + 결제</text>
+      <rect x="340" y="34" width="280" height="42" rx="5" class="bx-key"/>
+      <text x="480" y="60" class="ds a" text-anchor="middle">단일 통합 시스템 제공</text>
+      <text x="354" y="102" class="dx">· 승인 기반 자동 오픈</text>
+      <text x="354" y="122" class="dx">· 통합 로그인 및 비회원 구매 지원</text>
+      <text x="354" y="142" class="dx">· 지사 도메인 일체화로 이탈 방지</text>
 
-      <text x="188" y="174" class="ds f" text-anchor="middle">지사 &times; 게임마다 개별 구축</text>
-      <text x="188" y="192" class="dx f" text-anchor="middle">같은 기능을 반복해서 만든다</text>
+      <line x1="624" y1="55" x2="656" y2="55" class="ln" marker-end="url(#gm)"/>
 
-      <line x1="400" y1="98" x2="520" y2="98" class="ln" marker-end="url(#xm)"/>
-      <text x="460" y="88" class="dx f" text-anchor="middle">일원화</text>
+      <rect x="660" y="34" width="280" height="42" rx="5" class="bx-mute"/>
+      <text x="800" y="60" class="ds" text-anchor="middle">지사 및 게임 타이틀</text>
+      <text x="674" y="102" class="dx">· 현지 결제 계약 및 매출 입금</text>
+      <text x="674" y="122" class="dx">· 현지 이용자 응대 및 환불 처리</text>
+      <text x="674" y="142" class="dx">· 게임별 정산 및 수익 배분</text>
 
-      <text x="720" y="30" class="dt a" text-anchor="middle">일원화 이후</text>
-
-      <rect x="560" y="52" width="320" height="48" rx="5" class="bx-key"/>
-      <text x="720" y="72" class="ds a" text-anchor="middle">본사 단일 세트</text>
-      <text x="720" y="90" class="dx f" text-anchor="middle">웹샵 화면 · 결제 화면 · 관리 도구</text>
-
-      <line x1="720" y1="100" x2="720" y2="114" class="ln"/>
-      <line x1="608" y1="114" x2="832" y2="114" class="ln"/>
-      <line x1="608" y1="114" x2="608" y2="128" class="ln" marker-end="url(#xm)"/>
-      <line x1="720" y1="114" x2="720" y2="128" class="ln" marker-end="url(#xm)"/>
-      <line x1="832" y1="114" x2="832" y2="128" class="ln" marker-end="url(#xm)"/>
-
-      <rect x="560" y="130" width="96" height="38" rx="4" class="bx-mute"/>
-      <text x="608" y="154" class="dx" text-anchor="middle">지사 · 게임</text>
-      <rect x="672" y="130" width="96" height="38" rx="4" class="bx-mute"/>
-      <text x="720" y="154" class="dx" text-anchor="middle">지사 · 게임</text>
-      <rect x="784" y="130" width="96" height="38" rx="4" class="bx-mute"/>
-      <text x="832" y="154" class="dx" text-anchor="middle">지사 · 게임</text>
-
-      <text x="720" y="192" class="ds f" text-anchor="middle">하나를 만들어 9개 법인이 함께 사용</text>
-
-      <line x1="20" y1="222" x2="940" y2="222" class="ln-hair"/>
-      <text x="480" y="250" class="dt" text-anchor="middle">매출과 자금은 변경 없이 각 지사 법인에 귀속된다</text>
-      <text x="480" y="274" class="ds f" text-anchor="middle">본사는 시스템을 제공하고, 판매 상품과 가격은 지사가 직접 정한다</text>
+      <line x1="20" y1="170" x2="940" y2="170" class="ln-hair"/>
+      <text x="480" y="196" class="dt" text-anchor="middle">본사는 인프라와 감사 권한을 갖고, 계약 · 자금 · 현지 운영은 지사가 갖는다</text>
     </svg>
-    <figcaption>바뀌는 것은 시스템의 제작 주체이고, 매출과 자금 경로는 그대로다.</figcaption>
+    <figcaption>본사가 시스템을 제공하고 지사가 계약과 자금을 보유하는 구조다.</figcaption>
   </figure>
 
-  <div class="grp2">추진 내용</div>
+  <div class="grp2">3 · 구축 요소</div>
 
-  <p><b>본사가 웹샵 화면과 결제 화면, 관리 도구를 하나로 만들어 전 지사에 제공한다.</b>
-  지사는 자사 사이트와 자사 명의 결제 계약을 연결해 사용하며, 판매 상품과 가격은 지사가 직접 등록한다.
-  9개 법인이 게임 수와 무관하게 같은 시스템을 쓰고, 게임 안 상점과 지사 포털 결제도 같은 결제 화면을 경유한다.</p>
+  <figure class="dia">
+    <svg viewBox="0 0 960 238" role="img" aria-label="통합 웹샵과 통합 결제 두 구축 요소의 이용자 흐름">
+      <text x="480" y="26" class="dt" text-anchor="middle">구축 요소 2종 · 이용자 흐름 순서</text>
 
-  <div class="grp2">현행 문제</div>
+      <rect x="20" y="44" width="130" height="62" rx="5" class="bx-mute"/>
+      <text x="85" y="70" class="ds" text-anchor="middle">이용자 진입</text>
+      <text x="85" y="90" class="dx f" text-anchor="middle">지사 사이트 · 링크</text>
+      <line x1="154" y1="75" x2="176" y2="75" class="ln" marker-end="url(#gm)"/>
 
-  <p><b>같은 기능을 지사와 게임마다 다시 만들고 있다.</b>
-  신규 타이틀은 결제 구축이 끝나야 판매를 시작할 수 있어 결제가 출시 일정을 잡고, 지사나 게임을 추가할 때마다 개발과 배포 일정을 따로 확보해야 한다.
-  결제 현황이 지사별로 흩어져 전사 파악도 어렵다. 이용자 쪽에서는 결제 전에 지사 계정 가입을 요구해 진입 단계에서 이탈이 발생한다.</p>
+      <rect x="180" y="44" width="248" height="62" rx="5" class="bx-key"/>
+      <text x="304" y="70" class="ds a" text-anchor="middle">통합 웹샵</text>
+      <text x="304" y="90" class="dx f" text-anchor="middle">상품 진열 · 상세 · 지급 대상 확인</text>
+      <line x1="432" y1="75" x2="454" y2="75" class="ln" marker-end="url(#gm)"/>
 
-  <div class="grp2">기대효과</div>
+      <rect x="458" y="44" width="248" height="62" rx="5" class="bx-key"/>
+      <text x="582" y="70" class="ds a" text-anchor="middle">통합 결제</text>
+      <text x="582" y="90" class="dx f" text-anchor="middle">통화 · 결제수단 선택 · 결제 승인</text>
+      <line x1="710" y1="75" x2="732" y2="75" class="ln" marker-end="url(#gm)"/>
 
-  <p><b>신규 타이틀이나 지사를 추가할 때 결제 개발 공수가 발생하지 않는다.</b>
-  결제가 일정의 제약 요인에서 빠져 오픈 시점을 사업 일정에 맞출 수 있고, 확보된 개발 인력은 게임 콘텐츠로 돌릴 수 있다.
-  회원 가입 없이 결제할 수 있어 진입 이탈이 줄고, 매출과 대금은 현행대로 각 지사 법인에 귀속되므로 회계 · 세무 구조를 바꾸지 않는다.
-  전 지사 결제와 지급 현황을 한 화면에서 확인해 이상 징후를 조기에 파악한다.</p>
+      <rect x="736" y="44" width="204" height="62" rx="5" class="bx-mute"/>
+      <text x="838" y="70" class="ds" text-anchor="middle">재화 지급</text>
+      <text x="838" y="90" class="dx f" text-anchor="middle">게임 계정 우편함</text>
 
-  <p class="exec-note"><b>중앙 집중에 따르는 위험은 설계에 반영했다.</b>
-  한 결제사의 장애가 전 지사로 번지지 않도록 결제수단 단위로만 차단하고, 승인된 결제는 버리지 않고 자동 재처리한다.
-  해외 현지 결제수단 상당수가 취소 기능을 제공하지 않으므로 초기 환불은 고객센터 접수 방식으로 확정했다.
-  상세는 <a href="#d2">4.2 중앙 장애 대응</a> · <a href="#e1">5.1 운영 및 환불 정책</a>.</p>
+      <line x1="20" y1="132" x2="940" y2="132" class="ln-hair"/>
+
+      <text x="20" y="160" class="ds">지사 등록 항목</text>
+      <text x="304" y="160" class="dx f" text-anchor="middle">상품 · 가격 · 배너 · 테마</text>
+      <text x="582" y="160" class="dx f" text-anchor="middle">결제 계약 · 허용 통화 · 노출 결제수단</text>
+
+      <line x1="20" y1="182" x2="940" y2="182" class="ln-hair"/>
+      <text x="480" y="210" class="dt" text-anchor="middle">두 요소는 본사가 구축하고, 지사는 데이터만 등록한다</text>
+      <text x="480" y="230" class="ds f" text-anchor="middle">게임 안 상점과 지사 포털 결제도 같은 결제 화면을 경유한다</text>
+    </svg>
+    <figcaption>웹샵과 결제는 이용자 흐름 순서대로 이어지며, 지사 작업은 데이터 등록에 한정된다.</figcaption>
+  </figure>
+
+  <div class="grp2">4 · 기대 효과</div>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:120px;">구분</th><th>도입 전</th><th>도입 후</th><th style="width:200px;">개선 효과</th></tr></thead>
+      <tbody>
+        <tr><td><b>런칭 리드타임</b></td><td>타이틀당 2~3개월 개별 개발</td><td><b>설정 등록 후 수일 내 오픈</b></td><td><b>출시 기간 대폭 단축</b></td></tr>
+        <tr><td><b>개발 · 유지보수</b></td><td>지사 · 개발사별 중복 외주 및 리소스 소모</td><td><b>본사 단일 시스템 유지보수</b></td><td><b>연간 개발 공수 및 비용 절감</b></td></tr>
+        <tr><td><b>매출 전환율</b></td><td>외부 결제창 이동과 낯선 화면으로 이탈 발생</td><td><b>공식 사이트 일체형 화면 + 비회원 결제</b></td><td><b>결제 이탈 감소 · 구매 전환 개선</b></td></tr>
+        <tr><td><b>재무 · 법적 리스크</b></td><td>지사별 임의 처리로 세무 · 감사 분쟁 위험</td><td><b>지사 직결 정산 + 위탁 계약 표준화</b></td><td><b>이중과세 · 외환규제 · 개인정보 리스크 구조적 차단</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grp2">5 · 주요 정책 및 의사결정 사항</div>
+
+  <p><b>① 이용자 경험 — 지사 공식 사이트 일체화.</b>
+  이용자가 낯선 본사 사이트로 이동하지 않고 평소 이용하던 각 지사 공식 홈페이지 메뉴 안에서 그대로 구매하도록 해
+  결제 신뢰도를 유지한다. 회원 로그인과 함께 <b>가입 없이 결제하는 경로</b>를 지원해 첫 구매 장벽을 낮춘다.</p>
+
+  <p><b>② 재무 · 정산 거버넌스 — 법적 판매자는 지사가 유지.</b>
+  본사가 통합 계약을 맺지 않고 <b>각 지사 법인이 현지 결제사와 직접 계약</b>하며, 결제 대금은 <b>각 지사 법인 계좌로 직결 입금</b>된다.
+  본사 장부에 타 지사 매출이 계상되지 않아 <b>법인세 이중 과세 · 현지 디지털세 · 국가 간 외환 송금 규제를 구조적으로 차단</b>한다.
+  본사는 거래 내역을 조회하고 감사하는 권한만 갖는다.</p>
+
+  <p><b>③ 결제 계약 관리 — 2단 정책으로 정산 분쟁 방지.</b>
+  <b>글로벌 대형 결제사</b>는 지사당 1개 계약으로 여러 게임을 설정만으로 묶어 빠르게 오픈한다.
+  <b>현지 결제수단</b>은 게임별로 독립 계약 키를 발급받아 결제사 단계에서 매출을 분리한다.
+  외부 개발사 <b>수익 배분 정산 시 회계 조작 의혹과 정산 분쟁</b>이 발생할 여지를 없애는 조치다.</p>
+
+  <p><b>④ 법적 준수 및 리스크 관리.</b>
+  개인정보 국외 이전은 본사와 지사 간 <b>표준 개인정보 처리위탁 계약을 1회 체결</b>하고 결제 화면에 법적 고지를 추가해 해소한다.
+  특정 결제사 장애가 타 국가와 타 결제수단으로 번지지 않도록 자동 차단하고, <b>게임 점검 시 결제 인입을 사전 차단</b>해
+  대금은 나갔는데 아이템이 들어오지 않는 대형 응대 사고를 예방한다.
+  환불은 현지 결제수단의 취소 불가 특성을 고려해 1단계에서 <b>최종 판매 원칙</b>을 적용하고,
+  예외 건은 지사가 인게임 회수를 확인한 뒤 수동 처리한다.</p>
+
+  <div class="grp2">6 · 추진 로드맵</div>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 178" role="img" aria-label="3단계 추진 로드맵">
+      <rect x="20" y="30" width="290" height="40" rx="5" class="bx-key"/>
+      <text x="165" y="55" class="ds a" text-anchor="middle">Phase 1 · 기반 구축 및 파일럿</text>
+      <text x="34" y="96" class="dx">· 마스터 웹샵 · 결제 허브 구축</text>
+      <text x="34" y="116" class="dx">· 주요 글로벌 결제사 연동</text>
+      <text x="34" y="136" class="dx">· 대표 1개 타이틀 시범 오픈</text>
+
+      <line x1="314" y1="50" x2="332" y2="50" class="ln" marker-end="url(#gm)"/>
+
+      <rect x="335" y="30" width="290" height="40" rx="5" class="bx-mute"/>
+      <text x="480" y="55" class="ds" text-anchor="middle">Phase 2 · 지사 표준화 확대</text>
+      <text x="349" y="96" class="dx">· 전 지사 · 전 타이틀 순차 전환</text>
+      <text x="349" y="116" class="dx">· 현지 결제수단 라인업 확장</text>
+      <text x="349" y="136" class="dx">· 전사 매출 · 통계 화면 구축</text>
+
+      <line x1="629" y1="50" x2="647" y2="50" class="ln" marker-end="url(#gm)"/>
+
+      <rect x="650" y="30" width="290" height="40" rx="5" class="bx-mute"/>
+      <text x="795" y="55" class="ds" text-anchor="middle">Phase 3 · 자동화 고도화</text>
+      <text x="664" y="96" class="dx">· 재화 자동 회수 연동</text>
+      <text x="664" y="116" class="dx">· 온라인 환불 자동화</text>
+      <text x="664" y="136" class="dx">· 적용 결제사 범위 확대</text>
+
+      <line x1="20" y1="158" x2="940" y2="158" class="ln-hair"/>
+    </svg>
+    <figcaption>1단계에서 구조를 확정하고, 2단계에서 전 지사로 넓히고, 3단계에서 운영을 자동화한다.</figcaption>
+  </figure>
+
+  <p class="exec-note"><b>이하 본문은 위 계획의 상세 설계다.</b>
+  시스템 구성은 <a href="#b1">2장</a>, 계정과 결제 처리는 <a href="#c1">3장</a>,
+  장애 대응과 법적 준수는 <a href="#d1">4장</a>, 운영과 관리 기능은 <a href="#e1">5장</a>에 있다.</p>
 </section>
 
 <div class="part">
@@ -953,6 +1031,17 @@
     </table>
   </div>
 
+  <div class="grp2">결제 계약 키 관리 — 2단 정책</div>
+
+  <p>결제사 유형에 따라 계약 키의 발급 단위를 다르게 둔다. <b>정산 분리 필요성과 오픈 속도가 상충</b>하기 때문이다.</p>
+
+  <div class="dl2">
+    <div><b>글로벌 대형 결제사</b><span><b>지사당 1개 계약</b>으로 여러 게임을 관리 도구에서 묶어 사용한다. 신규 타이틀은 설정만으로 오픈되며 계약 절차가 반복되지 않는다</span></div>
+    <div><b>현지 결제수단</b><span><b>게임별 독립 계약 키</b>를 발급받아 결제사 단계에서 매출을 분리한다. 편의점 수납 · 선불 · 지역 전자지갑 등이 해당한다</span></div>
+    <div><b>분리 근거</b><span>외부 개발사와 <b>수익 배분 정산</b>을 하는 타이틀은 매출이 결제사 명세 단계에서 갈려 있어야 한다. 본사 집계만으로 배분하면 <b>회계 조작 의혹과 정산 분쟁</b>의 여지가 남는다</span></div>
+    <div><b>선택 기준</b><span>수익 배분 대상 타이틀 · 현지 결제수단 비중이 높은 법인은 독립 키를 우선한다. 자체 개발 타이틀은 통합 계약으로 오픈 속도를 취한다</span></div>
+  </div>
+
   <div class="grp2">거래 단위 및 지급 원칙</div>
 
   <p>웹샵 판매는 <b>주문 1건 = 상품 1개 = 지급 1회 = 환불 1회</b>로 고정한다. 수량 조절과 장바구니를 제공하지 않는다.</p>
@@ -1180,11 +1269,11 @@
 <div class="part">
   <span class="n">Part 5</span>
   <h2>운영</h2>
-  <p>Phase 1 환불 정책과 본사 어드민 기능 구성.</p>
+  <p>초기 단계 환불 정책과 본사 관리 기능 구성.</p>
 </div>
 
 <section id="e1">
-  <h3><span class="sn">5.1</span>운영 및 환불 정책 — Phase 1</h3>
+  <h3><span class="sn">5.1</span>운영 및 환불 정책 — 초기 단계</h3>
 
   <p class="lead1">해외 현지 결제수단 상당수가 취소 기능을 제공하지 않는다.
   초기 런칭은 자동화 대신 <b>운영 안정성</b> 기준으로 정책을 확정한다.</p>
@@ -1207,8 +1296,8 @@
   </div>
 
   <div class="note q">
-    <span class="lb">Phase 2 범위</span>
-    <p>게임사 <b>재화 자동 회수 API</b> 연동 및 지원 PG사 대상 <b>온라인 취소 자동화</b>.</p>
+    <span class="lb">후속 단계 — 로드맵 3단계</span>
+    <p>게임사 <b>재화 자동 회수 연동</b>과 지원 결제사 대상 <b>온라인 취소 자동화</b>는 로드맵 3단계 과제다.</p>
   </div>
 </section>
 
@@ -1221,7 +1310,7 @@
     <div><b>지사 · 게임 프로비저닝</b><span>공식 사이트 URL 및 컨텍스트 매핑 등록 · 웹샵 테마 · 스킨 관리</span></div>
     <div><b>점검 및 킬스위치 콘솔</b><span>게임 · 서버 단위 결제 점검 모드 전환 · 긴급 점검 공지 문구 편집</span></div>
     <div><b>상품 · 가격 마스터</b><span>단일 상품 코드 기준 <b>지사별 노출 상품명 · 판매 통화 · 최종 판매 가격(내세 포함)</b> 설정</span></div>
-    <div><b>PG MID 및 결제수단 관리</b><span>지사별 PG 계약 계정 키 <b>암호화 관리</b> · 국가별 노출 결제수단 온 · 오프 토글</span></div>
+    <div><b>결제 계약 키 관리</b><span>지사별 계약 키 <b>암호화 보관</b> · 국가별 노출 결제수단 온 · 오프 · <b>지사 통합 계약과 게임별 독립 키를 함께 관리</b></span></div>
     <div><b>장애 및 트랜잭션 모니터링</b><span>실시간 주문 · 승인 · 웹훅 로그 조회 · <b>지급 실패 큐(DLQ) 일괄 재발송</b> ·
             수동 환불 마킹 및 감사 로그 관리</span></div>
   </div>
