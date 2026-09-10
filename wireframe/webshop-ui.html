@@ -7663,7 +7663,7 @@
 
     .kc-card .nm {
       display: block;
-      padding: 11px 12px 13px;
+      padding: 11px 12px 0;
       font-size: 12.5px;
       font-weight: 500;
       color: #232B35;
@@ -7680,6 +7680,120 @@
 
     .kc-card.off .nm s {
       color: #8C3A3A;
+    }
+
+    /* 타이틀 카드 안의 서비스 지역 칩 — 지역 × 타이틀 매트릭스를 라벨로 드러낸다 */
+    .kc-rgs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 8px 0 12px;
+      padding: 0 12px;
+    }
+
+    .kc-rgs>span {
+      border: 1px solid #DCE2E8;
+      border-radius: 3px;
+      background: #F7F9FB;
+      font-size: 9.5px;
+      color: #6C7480;
+      padding: 2px 6px;
+      white-space: nowrap;
+    }
+
+    .kc-card .one {
+      display: block;
+      margin: -6px 0 12px;
+      padding: 0 12px;
+      font-size: 9.5px;
+      color: #2F6490;
+      font-weight: 600;
+    }
+
+    /* 공식 스토어 구역의 지역 탭 — 여기서만 지역을 묻는다 */
+    .kc-strg {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .kc-strg>b {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      color: #98A2AE;
+      margin-right: 3px;
+    }
+
+    .kc-strg>span {
+      padding: 5px 11px;
+      border: 1px solid #DCE2E8;
+      border-radius: 14px;
+      background: #fff;
+      font-size: 11px;
+      color: #545C69;
+      cursor: pointer;
+    }
+
+    .kc-strg>span.on {
+      border-color: #2F6490;
+      background: #2F6490;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* 지역 선택 모달 — 여러 지역에서 서비스되는 타이틀만 */
+    .kc-pick {
+      width: 420px;
+      background: #fff;
+      border-radius: 7px;
+      box-shadow: 0 18px 46px rgba(23, 27, 34, .26);
+      overflow: hidden;
+    }
+
+    .kc-pick .rows {
+      padding: 8px;
+    }
+
+    .kc-pick .rows>span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 5px;
+      font-size: 12.5px;
+      color: #232B35;
+      cursor: pointer;
+    }
+
+    .kc-pick .rows>span:hover {
+      background: #F1F4F7;
+    }
+
+    .kc-pick .rows>span em {
+      font-style: normal;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 9px;
+      letter-spacing: .04em;
+      color: #7A828E;
+      background: #F0F3F6;
+      border-radius: 2px;
+      padding: 2px 6px;
+      min-width: 52px;
+      text-align: center;
+      flex: none;
+    }
+
+    .kc-pick .rows>span s {
+      margin-left: auto;
+      text-decoration: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: #171B22;
     }
 
     /* 굿즈 · 외부 스토어 카드 */
@@ -8626,7 +8740,7 @@
                 <div class="wstage">
                   <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
                     <div class="v2-win full">
-                      <span class="v2-winlbl">카프라 센터 — 1F 아이템샵 · 2F 굿즈샵</span>
+                      <span class="v2-winlbl">카프라 센터 — 안 D · 타이틀 먼저 · 지역은 필요한 곳에서</span>
 
                       <div class="v2-urlbar">
                         <i></i><i></i><i></i>
@@ -8674,18 +8788,7 @@
                         <b>카프라 센터</b>
                         <span>라그나로크의 모든 상점. 1층은 아이템, 2층은 굿즈.</span>
                         <div style="position:relative;">
-                          <div class="mk" style="position:absolute;top:26px;left:-33px;">3</div>
-                          <div class="kc-rg">
-                            <b>지역</b>
-                            <span>글로벌</span>
-                            <span class="on">한국</span>
-                            <span>일본</span>
-                            <span>대만</span>
-                            <span>라탐</span>
-                          </div>
-                        </div>
-                        <div style="position:relative;">
-                          <div class="mk" style="position:absolute;top:24px;left:-33px;">4</div>
+                          <div class="mk" style="position:absolute;top:24px;left:-33px;">3</div>
                           <div class="kc-dir">
                             <div class="kc-dirh">층별 안내 &#183; FLOOR GUIDE</div>
                             <div class="kc-dirrow">
@@ -8705,42 +8808,50 @@
                       </div>
 
                       <div class="kc-sec">
-                        <div class="mk" style="position:absolute;top:26px;left:-33px;">5</div>
+                        <div class="mk" style="position:absolute;top:26px;left:-33px;">4</div>
                         <div class="kc-fl">
                           <span class="fl">1F</span>
                           <b>아이템샵</b>
-                          <em>게임을 고르면 그 게임 &#215; 선택 지역의 웹샵으로 들어간다</em>
+                          <em>타이틀을 고르면 그 게임의 웹샵으로 — 지역이 둘 이상이면 한 번 더 묻는다</em>
                           <span class="paid">유료 &#183; 원페이</span>
                         </div>
                         <div class="kc-grid">
-                          <div class="kc-card">
+                          <div class="kc-card" data-role="pick">
                             <span class="kv">게임 키비주얼</span>
-                            <span class="nm">라그나로크 온라인<s>한국 서비스 중</s></span>
+                            <span class="nm">라그나로크 온라인</span>
+                            <span class="kc-rgs"><span>한국</span><span>일본</span><span>대만</span><span>라탐</span></span>
+                          </div>
+                          <div class="kc-card" data-role="pick">
+                            <span class="kv">게임 키비주얼</span>
+                            <span class="nm">라그나로크 제로</span>
+                            <span class="kc-rgs"><span>한국</span><span>대만</span></span>
+                          </div>
+                          <div class="kc-card" data-role="pick">
+                            <span class="kv">게임 키비주얼</span>
+                            <span class="nm">라그나로크 M</span>
+                            <span class="kc-rgs"><span>대만</span><span>일본</span></span>
                           </div>
                           <div class="kc-card">
                             <span class="kv">게임 키비주얼</span>
-                            <span class="nm">라그나로크 제로<s>한국 서비스 중</s></span>
+                            <span class="nm">라그나로크 X : 오리진</span>
+                            <span class="kc-rgs"><span>한국</span></span>
+                            <span class="one">바로 가기 &#8594;</span>
                           </div>
-                          <div class="kc-card off">
+                          <div class="kc-card" data-role="pick">
                             <span class="kv">게임 키비주얼</span>
-                            <span class="nm">라그나로크 M<s>한국 미서비스</s></span>
+                            <span class="nm">라그나로크 오리진</span>
+                            <span class="kc-rgs"><span>한국</span><span>글로벌</span></span>
                           </div>
                           <div class="kc-card">
                             <span class="kv">게임 키비주얼</span>
-                            <span class="nm">라그나로크 X : 오리진<s>한국 서비스 중</s></span>
-                          </div>
-                          <div class="kc-card">
-                            <span class="kv">게임 키비주얼</span>
-                            <span class="nm">라그나로크 오리진<s>한국 서비스 중</s></span>
-                          </div>
-                          <div class="kc-card off">
-                            <span class="kv">게임 키비주얼</span>
-                            <span class="nm">라그나로크 비긴즈<s>한국 미서비스</s></span>
+                            <span class="nm">라그나로크 비긴즈</span>
+                            <span class="kc-rgs"><span>대만</span></span>
+                            <span class="one">바로 가기 &#8594;</span>
                           </div>
                         </div>
                       </div>
                       <div class="kc-sec" style="padding-bottom:34px;">
-                        <div class="mk" style="position:absolute;top:26px;left:-33px;">6</div>
+                        <div class="mk" style="position:absolute;top:26px;left:-33px;">5</div>
                         <div class="kc-fl f2">
                           <span class="fl f2">2F</span>
                           <b>굿즈샵</b>
@@ -8752,7 +8863,7 @@
                           <div class="kc-sech">
                             <b>웹 굿즈</b>
                             <span class="free">무료 · 회원 전용</span>
-                            <em>게임 구분 없이 라그나로크 공통</em>
+                            <em>게임 구분 없이 라그나로크 공통 — 지역을 묻지 않는다</em>
                           </div>
                           <div class="kc-grid g2">
                             <div class="kc-tile">
@@ -8768,16 +8879,25 @@
                           </div>
                         </div>
 
-                        <div class="kc-sub">
+                        <div class="kc-sub" style="position:relative;">
+                          <div class="mk" style="position:absolute;top:44px;left:-33px;">6</div>
                           <div class="kc-sech">
                             <b>공식 스토어</b>
                             <span class="out">실물 굿즈 · 외부</span>
-                            <em>우리가 결제를 받지 않는다 — 지역에 맞는 스토어로 보낸다</em>
+                            <em>우리가 결제를 받지 않는다 — 지역은 이 구역에서만 묻는다</em>
+                          </div>
+                          <div class="kc-strg">
+                            <b>지역</b>
+                            <span>글로벌</span>
+                            <span class="on">한국</span>
+                            <span>일본</span>
+                            <span>대만</span>
+                            <span>라탐</span>
                           </div>
                           <div class="kc-grid g3">
-                            <div class="kc-tile">
+                            <div class="kc-tile" style="border-color:#2F6490;">
                               <span class="th">스토어<br>로고</span>
-                              <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
+                              <span class="tx"><b>라그나로크 스토어</b><span>한국 · 선택한 지역</span></span>
                               <span class="go">이동 &#8599;</span>
                             </div>
                             <div class="kc-tile">
@@ -8785,9 +8905,9 @@
                               <span class="tx"><b>GNJOY 스토어</b><span>대만</span></span>
                               <span class="go">이동 &#8599;</span>
                             </div>
-                            <div class="kc-tile" style="border-color:#2F6490;">
+                            <div class="kc-tile">
                               <span class="th">스토어<br>로고</span>
-                              <span class="tx"><b>라그나로크 스토어</b><span>한국 · 현재 지역</span></span>
+                              <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
                               <span class="go">이동 &#8599;</span>
                             </div>
                           </div>
@@ -8797,6 +8917,25 @@
                       <div class="v2-ft" style="position:relative;">
                         <div class="mk" style="position:absolute;top:20px;left:-33px;">7</div>
                         &copy; Gravity Co., Ltd. All Rights Reserved.
+                      </div>
+
+                      <!-- 4 · 지역 선택 모달 — 지역이 둘 이상인 타이틀만 -->
+                      <div class="v2-mdim" data-role="pickmodal" hidden>
+                        <div class="kc-pick">
+                          <div class="v2-pmdh">
+                            <b>라그나로크 온라인 &#8212; 지역 선택</b>
+                            <span class="v2-dwx" style="margin-left:auto;">&#10005;</span>
+                          </div>
+                          <div class="rows">
+                            <span><em>KR</em>한국 <s>KRW</s></span>
+                            <span><em>JP</em>일본 <s>JPY</s></span>
+                            <span><em>TW</em>대만 <s>TWD</s></span>
+                            <span><em>LATAM</em>라탐 <s>USD &#183; BRL &#183; MXN &#8230;</s></span>
+                          </div>
+                          <div class="v2-dwf" style="padding:12px 18px 14px;">
+                            <span class="hint">지역이 통화 · 결제수단을 정합니다 &#8212; 고르면 그 지역의 웹샵으로 갑니다</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -8831,14 +8970,6 @@
                           <div class="kc-head" style="padding:22px 24px 0;">
                             <b style="font-size:20px;">카프라 센터</b>
                             <span>라그나로크의 모든 상점. 1층은 아이템, 2층은 굿즈.</span>
-                            <div class="kc-rg">
-                              <b>지역</b>
-                              <span>글로벌</span>
-                              <span class="on">한국</span>
-                              <span>일본</span>
-                              <span>대만</span>
-                              <span>라탐</span>
-                            </div>
                             <div class="kc-dir">
                               <div class="kc-dirh">층별 안내 &#183; FLOOR GUIDE</div>
                               <div class="kc-dirrow">
@@ -8859,33 +8990,41 @@
                             <div class="kc-fl">
                               <span class="fl">1F</span>
                               <b>아이템샵</b>
-                              <em>게임을 고르면 그 게임 &#215; 선택 지역의 웹샵으로 들어간다</em>
+                              <em>타이틀을 고르면 그 게임의 웹샵으로 — 지역이 둘 이상이면 한 번 더 묻는다</em>
                               <span class="paid">유료 &#183; 원페이</span>
                             </div>
                             <div class="kc-grid g3">
-                              <div class="kc-card">
+                              <div class="kc-card" data-role="pick">
                                 <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 온라인<s>한국 서비스 중</s></span>
+                                <span class="nm">라그나로크 온라인</span>
+                                <span class="kc-rgs"><span>한국</span><span>일본</span><span>대만</span><span>라탐</span></span>
+                              </div>
+                              <div class="kc-card" data-role="pick">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 제로</span>
+                                <span class="kc-rgs"><span>한국</span><span>대만</span></span>
+                              </div>
+                              <div class="kc-card" data-role="pick">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 M</span>
+                                <span class="kc-rgs"><span>대만</span><span>일본</span></span>
                               </div>
                               <div class="kc-card">
                                 <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 제로<s>한국 서비스 중</s></span>
+                                <span class="nm">라그나로크 X : 오리진</span>
+                                <span class="kc-rgs"><span>한국</span></span>
+                                <span class="one">바로 가기 &#8594;</span>
                               </div>
-                              <div class="kc-card off">
+                              <div class="kc-card" data-role="pick">
                                 <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 M<s>한국 미서비스</s></span>
+                                <span class="nm">라그나로크 오리진</span>
+                                <span class="kc-rgs"><span>한국</span><span>글로벌</span></span>
                               </div>
                               <div class="kc-card">
                                 <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 X : 오리진<s>한국 서비스 중</s></span>
-                              </div>
-                              <div class="kc-card">
-                                <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 오리진<s>한국 서비스 중</s></span>
-                              </div>
-                              <div class="kc-card off">
-                                <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 비긴즈<s>한국 미서비스</s></span>
+                                <span class="nm">라그나로크 비긴즈</span>
+                                <span class="kc-rgs"><span>대만</span></span>
+                                <span class="one">바로 가기 &#8594;</span>
                               </div>
                             </div>
                           </div>
@@ -8901,7 +9040,7 @@
                               <div class="kc-sech">
                                 <b>웹 굿즈</b>
                                 <span class="free">무료 · 회원 전용</span>
-                                <em>게임 구분 없이 라그나로크 공통</em>
+                                <em>게임 구분 없이 라그나로크 공통 — 지역을 묻지 않는다</em>
                               </div>
                               <div class="kc-grid g2">
                                 <div class="kc-tile">
@@ -8917,16 +9056,24 @@
                               </div>
                             </div>
 
-                            <div class="kc-sub">
+                            <div class="kc-sub" style="position:relative;">
                               <div class="kc-sech">
                                 <b>공식 스토어</b>
                                 <span class="out">실물 굿즈 · 외부</span>
-                                <em>우리가 결제를 받지 않는다 — 지역에 맞는 스토어로 보낸다</em>
+                                <em>우리가 결제를 받지 않는다 — 지역은 이 구역에서만 묻는다</em>
+                              </div>
+                              <div class="kc-strg">
+                                <b>지역</b>
+                                <span>글로벌</span>
+                                <span class="on">한국</span>
+                                <span>일본</span>
+                                <span>대만</span>
+                                <span>라탐</span>
                               </div>
                               <div class="kc-grid g3">
-                                <div class="kc-tile">
+                                <div class="kc-tile" style="border-color:#2F6490;">
                                   <span class="th">스토어<br>로고</span>
-                                  <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
+                                  <span class="tx"><b>라그나로크 스토어</b><span>한국 · 선택한 지역</span></span>
                                   <span class="go">이동 &#8599;</span>
                                 </div>
                                 <div class="kc-tile">
@@ -8934,9 +9081,9 @@
                                   <span class="tx"><b>GNJOY 스토어</b><span>대만</span></span>
                                   <span class="go">이동 &#8599;</span>
                                 </div>
-                                <div class="kc-tile" style="border-color:#2F6490;">
+                                <div class="kc-tile">
                                   <span class="th">스토어<br>로고</span>
-                                  <span class="tx"><b>라그나로크 스토어</b><span>한국 · 현재 지역</span></span>
+                                  <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
                                   <span class="go">이동 &#8599;</span>
                                 </div>
                               </div>
@@ -8979,14 +9126,6 @@
                           <div class="kc-head" style="padding:18px 16px 0;">
                             <b style="font-size:18px;">카프라 센터</b>
                             <span style="font-size:11.5px;">1층은 아이템, 2층은 굿즈.</span>
-                            <div class="kc-rg">
-                              <b>지역</b>
-                              <span>글로벌</span>
-                              <span class="on">한국</span>
-                              <span>일본</span>
-                              <span>대만</span>
-                              <span>라탐</span>
-                            </div>
                             <div class="kc-dir">
                               <div class="kc-dirh">층별 안내 &#183; FLOOR GUIDE</div>
                               <div class="kc-dirrow">
@@ -9007,25 +9146,30 @@
                             <div class="kc-fl">
                               <span class="fl">1F</span>
                               <b>아이템샵</b>
-                              <em>게임을 고르면 그 게임 &#215; 선택 지역의 웹샵으로 들어간다</em>
+                              <em>타이틀을 고르면 그 게임의 웹샵으로 — 지역이 둘 이상이면 한 번 더 묻는다</em>
                               <span class="paid">유료 &#183; 원페이</span>
                             </div>
                             <div class="kc-grid g2">
-                              <div class="kc-card">
+                              <div class="kc-card" data-role="pick">
                                 <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 온라인<s>한국 서비스 중</s></span>
+                                <span class="nm">라그나로크 온라인</span>
+                                <span class="kc-rgs"><span>한국</span><span>일본</span><span>대만</span><span>라탐</span></span>
+                              </div>
+                              <div class="kc-card" data-role="pick">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 제로</span>
+                                <span class="kc-rgs"><span>한국</span><span>대만</span></span>
+                              </div>
+                              <div class="kc-card" data-role="pick">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 M</span>
+                                <span class="kc-rgs"><span>대만</span><span>일본</span></span>
                               </div>
                               <div class="kc-card">
                                 <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 제로<s>한국 서비스 중</s></span>
-                              </div>
-                              <div class="kc-card off">
-                                <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 M<s>한국 미서비스</s></span>
-                              </div>
-                              <div class="kc-card">
-                                <span class="kv">게임 키비주얼</span>
-                                <span class="nm">라그나로크 X : 오리진<s>한국 서비스 중</s></span>
+                                <span class="nm">라그나로크 X : 오리진</span>
+                                <span class="kc-rgs"><span>한국</span></span>
+                                <span class="one">바로 가기 &#8594;</span>
                               </div>
                             </div>
                           </div>
@@ -9041,7 +9185,7 @@
                               <div class="kc-sech">
                                 <b>웹 굿즈</b>
                                 <span class="free">무료 · 회원 전용</span>
-                                <em>게임 구분 없이 라그나로크 공통</em>
+                                <em>게임 구분 없이 라그나로크 공통 — 지역을 묻지 않는다</em>
                               </div>
                               <div class="kc-grid">
                                 <div class="kc-tile">
@@ -9057,16 +9201,24 @@
                               </div>
                             </div>
 
-                            <div class="kc-sub">
+                            <div class="kc-sub" style="position:relative;">
                               <div class="kc-sech">
                                 <b>공식 스토어</b>
                                 <span class="out">실물 굿즈 · 외부</span>
-                                <em>우리가 결제를 받지 않는다 — 지역에 맞는 스토어로 보낸다</em>
+                                <em>우리가 결제를 받지 않는다 — 지역은 이 구역에서만 묻는다</em>
+                              </div>
+                              <div class="kc-strg">
+                                <b>지역</b>
+                                <span>글로벌</span>
+                                <span class="on">한국</span>
+                                <span>일본</span>
+                                <span>대만</span>
+                                <span>라탐</span>
                               </div>
                               <div class="kc-grid">
-                                <div class="kc-tile">
+                                <div class="kc-tile" style="border-color:#2F6490;">
                                   <span class="th">스토어<br>로고</span>
-                                  <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
+                                  <span class="tx"><b>라그나로크 스토어</b><span>한국 · 선택한 지역</span></span>
                                   <span class="go">이동 &#8599;</span>
                                 </div>
                                 <div class="kc-tile">
@@ -9074,9 +9226,9 @@
                                   <span class="tx"><b>GNJOY 스토어</b><span>대만</span></span>
                                   <span class="go">이동 &#8599;</span>
                                 </div>
-                                <div class="kc-tile" style="border-color:#2F6490;">
+                                <div class="kc-tile">
                                   <span class="th">스토어<br>로고</span>
-                                  <span class="tx"><b>라그나로크 스토어</b><span>한국 · 현재 지역</span></span>
+                                  <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
                                   <span class="go">이동 &#8599;</span>
                                 </div>
                               </div>
@@ -9096,29 +9248,27 @@
             <div class="dcol">
 
               <div class="warn">
-                <div class="warn-h">간판은 하나, 층은 둘 — 브랜드는 합치고 동선은 나눈다</div>
-                <p class="warn-b"><b>카프라 센터</b>라는 간판 하나를 걸고, 문을 열면 <b>1F 아이템샵 · 2F 굿즈샵</b>으로 나뉜다.
-                  「소유」라는 감성은 합치고, <b>캐시카우인 아이템 결제의 속도는 희생하지 않는다.</b></p>
+                <div class="warn-h">타이틀 먼저 — 지역은 필요한 구역에서만 묻는다</div>
+                <p class="warn-b">유저는 자기 게임을 안다. <b>「라그나로크 온라인」은 명확하지만 「한국」을 고르면 뭐가 달라지는지는 불투명하다.</b>
+                  그리고 지역은 거의 바꾸지 않는 값이므로 최상단 첫 컨트롤이 될 이유가 없다.
+                  축 비교는 <b>「카프라 센터 정보구조」</b> 문서에 있다.</p>
               </div>
 
               <div class="imm">
-                <div class="imm-h">층을 나누는 근거 — 결제 유무 하나다</div>
-                <div class="imm-r"><span class="imm-k">1F</span><span class="imm-v"><b>유료 · 원페이</b> — 인게임 재화 · 버프 ·
-                    소모품 · 웹 한정 패키지. 계정으로 <b>즉시 지급</b></span></div>
-                <div class="imm-r"><span class="imm-k">2F</span><span class="imm-v"><b>무료 또는 외부</b> — 웹 굿즈는 무료 다운로드,
-                    실물은 외부 스토어가 판다. <b>우리 결제 동선이 아예 없다</b></span></div>
-                <div class="imm-r"><span class="imm-k">왜 이 근거인가</span><span class="imm-v">「구매 멘탈 모델 충돌」은 근거가 못 된다 —
-                    <b>실물을 우리가 팔지 않으므로</b> 장바구니 · 배송지 · 환불 규정 충돌이 애초에 없다</span></div>
-                <div class="imm-r"><span class="imm-k">전환율</span><span class="imm-v">2F 에 결제가 없으니 <b>1F 전환율을 갉아먹을 수
-                      없다</b> — 층을 나눠도 손해가 없는 구조다</span></div>
-                <div class="imm-r"><span class="imm-k">동선</span><span class="imm-v">랜드 입장 → <b>패스포트</b> 제시 → 카프라 센터
-                    → 1F 에서 <b>원페이로 빠르게</b> → 2F 에서 여유롭게 구경</span></div>
+                <div class="imm-h">이 화면의 기준</div>
+                <div class="imm-r"><span class="imm-k">1차 분류</span><span class="imm-v"><b>타이틀</b>. 지역은 1F 안에서 · 공식
+                    스토어 안에서 각각 묻는다</span></div>
+                <div class="imm-r"><span class="imm-k">전역 지역 칩</span><span class="imm-v"><b>두지 않는다</b> — 세 구역이 요구하는
+                    축이 다르다. 웹 굿즈는 지역이 아예 필요 없다</span></div>
+                <div class="imm-r"><span class="imm-k">매트릭스</span><span class="imm-v">타이틀 카드에 <b>서비스 지역을 라벨로</b> 적는다
+                    — 별도 안내도 · 미서비스 처리가 필요 없어진다</span></div>
                 <div class="imm-r"><span class="imm-k">위치</span><span class="imm-v"><b>포털 페이지</b> — <span
                       class="mono">ragnarokland.com/store</span>. 포털 GNB 가 그대로 있고 <span
                       class="mono">STORE</span>가 활성이다</span></div>
-                <div class="imm-r"><span class="imm-k">이름</span><span class="imm-v">GNB 라벨은 <span
-                      class="mono">STORE</span>(영문 통일) · <b>「카프라 센터」는 이 페이지 안</b>. 「엠포리움」은 게임 내 미사용 단어라
-                    쓰지 않는다</span></div>
+                <div class="imm-r"><span class="imm-k">층</span><span class="imm-v"><b>1F 유료 · 2F 무료/외부</b>. 층은 <b>결제
+                      유무</b>로 갈리며 축 순서와 무관하다</span></div>
+                <div class="imm-r"><span class="imm-k">실물 굿즈</span><span class="imm-v"><b>우리가 결제를 받지 않는다</b> — 배송 · 재고
+                    · CS 는 우리 몫이 아니다</span></div>
               </div>
 
               <div class="dr">
@@ -9128,10 +9278,11 @@
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">STORE</span><span class="spec-v">하단 언더바로 <b>활성 표기</b>. 드롭다운은
                       <b>카프라 센터 · 1F 아이템샵 · 2F 굿즈샵</b> 셋</span></div>
-                  <div class="spec-r"><span class="spec-k">왜 영문</span><span class="spec-v">나머지 7개(RO IP · RO GAMES ·
-                      LIBRARY · NEWS · MEDIA · RO FESTA)가 <b>전부 영문</b>이다. 여기만 한글이면 층위가 깨진다</span></div>
-                  <div class="spec-r"><span class="spec-k">웹샵과 차이</span><span class="spec-v">웹샵은 <b>별도 도메인</b>이라 GNB 를
-                      들고 가지 않는다 — 거기서는 <b>[&#8249; 카프라 센터]</b> 앵커가 이 자리를 대신한다</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 영문</span><span class="spec-v">나머지 7개가 <b>전부 영문</b>이다. 여기만
+                      한글이면 층위가 깨진다 — 「카프라 센터」는 페이지 안에서 쓴다</span></div>
+                  <div class="spec-r"><span class="spec-k">RO GAMES 와</span><span class="spec-v">둘 다 타이틀 목록이 된다.
+                      <b>행선지로 가른다</b> — RO GAMES 는 게임을 <b>하러</b>(지사 사이트로 나감), 1F 는 아이템을 <b>사러</b>(포털 내부
+                      웹샵)</span></div>
                 </div>
               </div>
 
@@ -9141,41 +9292,21 @@
                 <p class="dr-b">「카프라 센터」 + 층 구조를 한 줄로 예고한다.</p>
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">문구</span><span class="spec-v">「라그나로크의 모든 상점. <b>1층은 아이템,
-                        2층은 굿즈.</b>」 — 들어온 순간 구조가 전달돼야 한다</span></div>
+                        2층은 굿즈.</b>」</span></div>
                   <div class="spec-r"><span class="spec-k">이름</span><span class="spec-v"><b>카프라</b>는 게임 내 상점 · 창고 NPC
-                      명칭이다 — IP 앵커로 쓴다</span></div>
+                      명칭이다. 「엠포리움」은 게임 내 미사용 단어라 쓰지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">키비주얼</span><span class="spec-v">두지 않는다 — 아래 <b>타이틀 카드가 이미
-                        이미지</b>다. 배너를 얹으면 1F 가 스크롤 밖으로 밀린다</span></div>
+                        이미지</b>다</span></div>
                 </div>
               </div>
 
               <div class="dr">
-                <div class="dr-h"><span class="mk">3</span><span class="dr-t">지역</span><span class="src">핵심</span>
-                </div>
-                <p class="dr-b">글로벌 · 한국 · 일본 · 대만 · 라탐. <b>이 값이 두 층의 행선지를 정한다.</b></p>
-                <div class="spec">
-                  <div class="spec-r"><span class="spec-k">1F</span><span class="spec-v">어느 <b>지사 서비스</b>인지 → <b>통화 ·
-                        결제수단</b>이 따라 결정된다</span></div>
-                  <div class="spec-r"><span class="spec-k">2F 웹 굿즈</span><span class="spec-v"><b>언어만</b> 바뀐다 — 콘텐츠는
-                      공통이다</span></div>
-                  <div class="spec-r"><span class="spec-k">2F 공식 스토어</span><span class="spec-v">한국 → 라그나로크 스토어 · 대만 →
-                      GNJOY · 그 외 → 아마존</span></div>
-                  <div class="spec-r"><span class="spec-k">기본값</span><span class="spec-v">접속 지역 추정이 아니라 <b>계정에 기억된
-                        값</b>. 처음이면 <b>글로벌</b></span></div>
-                  <div class="spec-r"><span class="spec-k">유지 범위</span><span class="spec-v">이 페이지와 <b>웹샵까지만</b>. RO
-                      GAMES 는 지사 사이트로 나가버려 돌아올 일이 없으므로 <b>공유하지 않는다</b></span></div>
-                </div>
-              </div>
-
-              <div class="dr-alt">
-                <div class="dr-h"><span class="mk">4</span><span class="dr-t">층별 안내</span><span
+                <div class="dr-h"><span class="mk">3</span><span class="dr-t">층별 안내</span><span
                     class="src">로비</span></div>
                 <p class="dr-b">백화점 <b>층 안내판</b>. 스크롤하지 않고도 이 상점이 뭘 파는지 전달한다.</p>
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v">층 번호 + 층 이름 + 취급 품목 + <b>결제
                         성격</b> — 2행</span></div>
-                  <div class="spec-r"><span class="spec-k">왜 필요</span><span class="spec-v">「이게 뭐 하는 곳인가」를 <b>첫 화면에서</b>
-                      끝낸다. 층 구조가 브랜딩이라 접히면 의미가 없다</span></div>
                   <div class="spec-r"><span class="spec-k">동작</span><span class="spec-v">행을 누르면 해당 <b>층 구역으로
                         스크롤</b>한다 — 별도 페이지로 나누지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">층 표기</span><span class="spec-v"><span class="mono">1F</span> ·
@@ -9183,53 +9314,87 @@
                 </div>
               </div>
 
-              <div class="dr">
-                <div class="dr-h"><span class="mk">5</span><span class="dr-t">1F 아이템샵</span><span class="src">메인
-                    트래픽</span></div>
-                <p class="dr-b">타이틀 카드. 클릭하면 <b>그 게임 &#215; 선택 지역의 웹샵</b>으로 간다.</p>
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">4</span><span class="dr-t">1F 아이템샵</span><span class="src">타이틀
+                    먼저</span></div>
+                <p class="dr-b">타이틀 카드 + <b>서비스 지역 라벨</b>. 지역이 둘 이상이면 <b>지역 선택 모달</b>이 한 번 열린다.</p>
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">품목</span><span class="spec-v">인게임 재화 · 버프 · 소모품 · <b>웹 한정
                         패키지</b> — 계정으로 즉시 지급</span></div>
-                  <div class="spec-r"><span class="spec-k">축</span><span class="spec-v"><b>1단계 타이틀 · 2단계 지역</b>. 지역이
-                      위에 있으니 카드는 타이틀만 고르면 된다</span></div>
-                  <div class="spec-r"><span class="spec-k">타이틀</span><span class="spec-v">라그나로크 온라인 · 제로 · M · X :
-                      오리진 · 오리진 · 비긴즈 — <b>IP 전체</b>를 모은다</span></div>
-                  <div class="spec-r"><span class="spec-k">지역 서비스</span><span class="spec-v">라그나로크 온라인처럼 <b>한 타이틀이 여러
-                        지역</b>에서 서비스되는 경우가 있다 — 타이틀은 하나로 두고 지역으로 가른다</span></div>
-                  <div class="spec-r"><span class="spec-k">미서비스</span><span class="spec-v">그 지역에 없으면 <b>흐리게 + 클릭
-                        불가</b>하고 사유를 카드에 적는다. <b>숨기지 않는다</b> — 없다는 사실도 정보다</span></div>
+                  <div class="spec-r"><span class="spec-k">카드 구성</span><span class="spec-v">키비주얼 · 타이틀명 · <b>서비스 지역
+                        칩</b></span></div>
+                  <div class="spec-r"><span class="spec-k">지역 1개</span><span class="spec-v">「바로 가기 &#8594;」를 붙이고
+                      <b>바로 웹샵</b>으로 보낸다 — 물을 게 없다</span></div>
+                  <div class="spec-r"><span class="spec-k">지역 2개 이상</span><span class="spec-v"><b>지역 선택 모달</b>을 띄운다.
+                      그 타이틀이 서비스되는 지역만 나열한다</span></div>
+                  <div class="spec-r"><span class="spec-k">미서비스</span><span class="spec-v"><b>표기하지 않는다.</b> 카드에 있는 지역이
+                      곧 서비스 지역이다 — 없는 것을 흐리게 보여줄 필요가 없다</span></div>
                   <div class="spec-r"><span class="spec-k">열 수</span><span class="spec-v">PC <b>6열</b> · TABLET
                       <b>3열</b> · MO <b>2열</b></span></div>
-                  <div class="spec-r"><span class="spec-k">웹샵에서</span><span class="spec-v">이 구역을 <b>모달로 축소해 재사용</b>한다 —
-                      헤더 <b>[게임 &#183; 지역]</b>을 누르면 열린다</span></div>
+                  <div class="spec-r"><span class="spec-k">정렬</span><span class="spec-v"><b>서비스 지역 수가 많은 순</b> — 라그나로크
+                      온라인이 앞에 온다. 어드민에서 조정한다</span></div>
                   <div class="spec-r"><span class="spec-k">웹샵과 이름</span><span class="spec-v"><b>같은 것이다.</b> 「아이템샵」은 이
                       브릿지의 <b>구역 라벨</b>, 「웹샵」은 들어가서 보는 <b>화면 · 시스템 이름</b>이다</span></div>
                 </div>
               </div>
 
-              <div class="dr-alt">
-                <div class="dr-h"><span class="mk">6</span><span class="dr-t">2F 굿즈샵</span><span class="src">브랜드
-                    쇼룸</span></div>
-                <p class="dr-b">소구역 <b>둘</b> — 웹 굿즈(무료 · 우리) · 공식 스토어(실물 · 외부).</p>
+              <div class="dr">
+                <div class="dr-h"><span class="mk">4&#8242;</span><span class="dr-t">지역 선택 모달</span><span
+                    class="src">조건부</span></div>
+                <p class="dr-b">지역이 <b>둘 이상</b>인 타이틀에만 열린다.</p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">웹 굿즈</span><span class="spec-v">배경화면 · 컬러링북. <b>무료 · 회원
-                        전용</b> · 게임 구분 없이 라그나로크 공통이다</span></div>
-                  <div class="spec-r"><span class="spec-k">회원 전용의 뜻</span><span class="spec-v">받으려면 로그인이 필요하다 —
-                      <b>패스포트 발급 유도 지점</b>이다. 돈 안 드는 것으로 계정을 받고 1F 결제까지 이어진다</span></div>
+                  <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v">지역 코드 · 지역명 · <b>통화</b> — 무엇이
+                      달라지는지 같은 줄에서 보인다</span></div>
+                  <div class="spec-r"><span class="spec-k">라탐</span><span class="spec-v">통화가 여럿이므로 <span
+                        class="mono">USD &#183; BRL &#183; MXN &#8230;</span>로 적는다. 통화 확정은 웹샵에서</span></div>
+                  <div class="spec-r"><span class="spec-k">고르면</span><span class="spec-v">모달이 닫히고 <b>그 지역의 웹샵</b>으로
+                      간다</span></div>
+                  <div class="spec-r"><span class="spec-k">기억</span><span class="spec-v">고른 값을 <b>타이틀별로</b> 기억한다 — 다음에
+                      같은 타이틀을 누르면 모달을 <b>건너뛴다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">닫기</span><span class="spec-v">딤 클릭 · [✕] · <span
+                        class="mono">ESC</span> — 닫으면 브릿지에 남는다</span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">5</span><span class="dr-t">2F 웹 굿즈</span><span
+                    class="src">무료</span></div>
+                <p class="dr-b">디바이스 배경화면 · 컬러링북. <b>무료 · 회원 전용</b> · <b>지역을 묻지 않는다</b>.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">게임 구분</span><span class="spec-v"><b>없다</b> — 라그나로크 공통이다.
+                      타이틀 아래에 두면 같은 콘텐츠가 <b>타이틀 &#215; 지역만큼 중복</b>된다</span></div>
+                  <div class="spec-r"><span class="spec-k">지역</span><span class="spec-v"><b>안 묻는다.</b> 언어만 따라가고 콘텐츠는
+                      같다</span></div>
+                  <div class="spec-r"><span class="spec-k">결제</span><span class="spec-v"><b>없다.</b> 장바구니 · 배송지 · 환불이
+                      전부 없다 — 1F 결제 동선을 방해하지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">회원 전용</span><span class="spec-v">받으려면 로그인이 필요하다 — <b>패스포트
+                        발급 유도 지점</b>이다</span></div>
                   <div class="spec-r"><span class="spec-k">비로그인</span><span class="spec-v">목록은 보이고 [받기]에서 <b>로그인 확인
                         알럿</b></span></div>
-                  <div class="spec-r"><span class="spec-k">공식 스토어</span><span class="spec-v">아마존(글로벌) · GNJOY(대만) ·
-                      라그나로크 스토어(한국) — <b>새 탭</b> 이동. 선택 지역 스토어를 <b>강조</b>하고 나머지도 함께 둔다</span></div>
-                  <div class="spec-r"><span class="spec-k">우리가 안 하는 것</span><span class="spec-v">재고 · 배송 · 교환 · 파손
-                      CS. <b>결제를 받지 않으므로 규정 충돌이 애초에 없다</b></span></div>
-                  <div class="spec-r"><span class="spec-k">용도 고지</span><span class="spec-v">웹 굿즈는 「개인 소장 · 비상업적 용도로만」 —
+                  <div class="spec-r"><span class="spec-k">용도 고지</span><span class="spec-v">「개인 소장 · 비상업적 용도로만」 —
                       <b>구역 하단</b>에 고정</span></div>
-                  <div class="spec-r"><span class="spec-k">이름 대안</span><span class="spec-v">「굿즈 갤러리」도 가능하나 1F <b>아이템샵</b>과
-                      대구를 맞춰 <b>굿즈샵</b>으로 둔다</span></div>
                 </div>
               </div>
 
               <div class="dr">
+                <div class="dr-h"><span class="mk">6</span><span class="dr-t">2F 공식 스토어</span><span
+                    class="src">외부</span></div>
+                <p class="dr-b">실물 굿즈. <b>지역은 여기서만 묻는다.</b></p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">지역 탭</span><span class="spec-v">이 구역 <b>안</b>에 둔다 — 이 구역만
+                      지역을 요구하므로 전역으로 올릴 이유가 없다</span></div>
+                  <div class="spec-r"><span class="spec-k">대상</span><span class="spec-v">한국 → 라그나로크 스토어 · 대만 → GNJOY ·
+                      그 외 → 아마존. <b>새 탭</b> 이동</span></div>
+                  <div class="spec-r"><span class="spec-k">노출</span><span class="spec-v">선택 지역 스토어를 <b>먼저 · 강조</b>하고
+                      나머지도 함께 둔다 — 지역 밖 구매를 막지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">우리가 안 하는 것</span><span class="spec-v">재고 · 배송 · 교환 · 파손
+                      CS. <b>결제를 받지 않으므로 규정 충돌이 애초에 없다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v">「외부」 배지 + <b>&#8599;</b> 로 이탈을
+                      미리 알린다</span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
                 <div class="dr-h"><span class="mk">7</span><span class="dr-t">푸터</span><span class="src">포털</span>
                 </div>
                 <p class="dr-b">포털 공통 푸터를 쓴다.</p>
@@ -9240,11 +9405,12 @@
               </div>
 
               <div class="warn">
-                <div class="warn-h">확정 필요 3건</div>
-                <p class="warn-b"><b>① 타이틀 목록.</b> 웹샵을 여는 타이틀이 어디까지인지 — 지금은 6종을 예시로 그렸다.<br>
-                  <b>② 지역 &#215; 타이틀 매트릭스.</b> 어느 지역에 어느 타이틀이 있는지 표가 있어야 미서비스 처리를 확정한다.<br>
-                  <b>③ 2F 품목 범위.</b> 전략안의 「디지털 아트워크 · OST」를 웹 굿즈에 넣을지 — 넣으면 무료인지 유료인지가 갈린다.
-                  <b>유료면 2F 에 결제가 생기고 층 분리 근거가 흔들린다.</b></p>
+                <div class="warn-h">확정 필요 4건</div>
+                <p class="warn-b"><b>① 타이틀 목록.</b> 웹샵을 여는 타이틀 범위 — 지금은 6종을 예시로 그렸다.<br>
+                  <b>② 지역 &#215; 타이틀 매트릭스.</b> 카드 라벨이 곧 이 표다. 표가 확정되면 화면이 확정된다.<br>
+                  <b>③ 2F 품목 범위.</b> 「디지털 아트워크 · OST」를 넣을지 — <b>유료면 2F 에 결제가 생겨 층 분리 근거가 흔들린다.</b><br>
+                  <b>④ 지역 명칭.</b> 라탐은 국가가 아니라 <b>6개국 묶음</b>이다. 「국가」면 라탐이 안 맞고 「지역」이면 글로벌이 안 맞는다 —
+                  <b>「서비스 지역」</b>이 둘을 덮는다.</p>
               </div>
 
             </div>
@@ -14534,7 +14700,33 @@
 
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
 
-      // 헤더 [게임 · 지역] → 변경 모달. 브릿지 웹샵 구역의 축소판이다
+      // 1F 타이틀 카드 → 지역이 둘 이상이면 지역 선택 모달
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-role="pick"]');
+      if (t) {
+        var win = t.closest('.v2-win');
+        var m = win && win.querySelector('[data-role="pickmodal"]');
+        if (m) { m.hidden = false; return; }
+      }
+      var open = document.querySelector('[data-role="pickmodal"]:not([hidden])');
+      if (!open) return;
+      if (!e.target.closest('.kc-pick') || e.target.closest('.v2-dwx')
+        || e.target.closest('.kc-pick .rows > span')) open.hidden = true;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      each(document.querySelectorAll('[data-role="pickmodal"]:not([hidden])'), function (m) { m.hidden = true; });
+    });
+
+    // 공식 스토어 지역 탭
+    document.addEventListener('click', function (e) {
+      var c = e.target.closest('.kc-strg > span');
+      if (!c) return;
+      each(c.parentNode.querySelectorAll('span'), function (x) { x.classList.remove('on'); });
+      c.classList.add('on');
+    });
+
+    // 헤더 [게임 · 지역] → 변경 모달. 브릿지 웹샵 구역의 축소판이다
     document.addEventListener('click', function (e) {
       var ctx = e.target.closest('[data-role="ctx"]');
       if (ctx) {
