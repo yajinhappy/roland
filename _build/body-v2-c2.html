@@ -1,0 +1,77 @@
+
+<div class="part">
+  <span class="n">2장</span>
+  <h2>누가 뭘 하나</h2>
+  <p>본사가 만들어주는 것과 지사가 직접 하는 것.</p>
+</div>
+
+<section id="c2">
+  <h3>나누는 기준</h3>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 268" role="img" aria-label="본사와 지사의 분담 기준 축">
+      <defs>
+        <marker id="v2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="80" y="34" class="dt">바뀌면 안 되는 것</text>
+      <text x="80" y="53" class="ds f">본사가 쥔다</text>
+      <text x="880" y="34" class="dt" text-anchor="end">현지가 아는 것</text>
+      <text x="880" y="53" class="ds f" text-anchor="end">지사가 쥔다</text>
+
+      <line x1="70" y1="176" x2="890" y2="176" class="ln" marker-start="url(#v2a)" marker-end="url(#v2a)"/>
+      <path d="M480 92 L480 216" class="ln-hair" stroke-dasharray="4 4"/>
+
+      <rect x="76" y="112" width="122" height="36" rx="5" class="bx-key"/>
+      <text x="137" y="135" class="ds a" text-anchor="middle">PG 계약 조건</text>
+      <rect x="210" y="112" width="96" height="36" rx="5" class="bx-key"/>
+      <text x="258" y="135" class="ds a" text-anchor="middle">인증키</text>
+      <rect x="318" y="112" width="116" height="36" rx="5" class="bx-key"/>
+      <text x="376" y="135" class="ds a" text-anchor="middle">연동 규격</text>
+
+      <rect x="524" y="112" width="126" height="36" rx="5" class="bx-mute"/>
+      <text x="587" y="135" class="ds" text-anchor="middle">결제수단 선택</text>
+      <rect x="662" y="112" width="106" height="36" rx="5" class="bx-mute"/>
+      <text x="715" y="135" class="ds" text-anchor="middle">상품 · 가격</text>
+      <rect x="780" y="112" width="110" height="36" rx="5" class="bx-mute"/>
+      <text x="835" y="135" class="ds" text-anchor="middle">게임사 컨택</text>
+
+      <text x="255" y="208" class="ds f" text-anchor="middle">흔들리면 전체가 깨지는 것</text>
+      <text x="707" y="208" class="ds f" text-anchor="middle">그 나라에 있어야 알 수 있는 것</text>
+
+      <text x="480" y="252" class="ds f" text-anchor="middle">기준이 하나이므로 새 항목이 생겨도 어느 쪽인지 바로 정할 수 있다</text>
+    </svg>
+    <figcaption>왼쪽은 흔들리면 전체가 깨지는 것, 오른쪽은 현지 사정을 아는 사람만 정할 수 있는 것이다.</figcaption>
+  </figure>
+
+  <p>본사는 <b>흔들리면 전체가 깨지는 것</b>을 쥐고, 지사는 <b>현지에 있어야 알 수 있는 것</b>을 쥔다.
+  연동 규격을 지사마다 다르게 정하면 게임마다 붙이는 방식이 갈라져 「한 번만 만든다」는 전제가 무너진다.
+  반대로 대만 유저가 MyCard를 얼마나 쓰는지, 다이아몬드 1,000개를 대만에서 얼마에 팔아야 하는지는 서울에서 판단할 수 없다.</p>
+
+  <h3>분담</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>무엇</th><th>정하는 쪽</th><th>실행하는 쪽</th></tr></thead>
+      <tbody>
+        <tr><td>PG 수수료 조건</td><td><b>본사</b></td><td>본사</td></tr>
+        <tr><td>PG 계약 명의</td><td>본사 (조건)</td><td><b>지사</b> (계약)</td></tr>
+        <tr><td>인증키 발급</td><td><b>본사</b></td><td>본사</td></tr>
+        <tr><td>게임사 연동 규격</td><td><b>본사</b></td><td>지사 (전달 · 확인)</td></tr>
+        <tr><td>통합 결제창 · 웹샵</td><td><b>본사</b></td><td>본사 (제공)</td></tr>
+        <tr><td>쓸 결제수단</td><td><b>지사</b></td><td>지사</td></tr>
+        <tr><td>상품이 무엇인지</td><td><b>게임 주관 지사</b></td><td>—</td></tr>
+        <tr><td>상품 가격</td><td><b>지사</b></td><td>지사</td></tr>
+        <tr><td>게임사 컨택</td><td><b>지사</b></td><td>지사</td></tr>
+        <tr><td>환불 처리</td><td>본사 (기능)</td><td><b>지사</b></td></tr>
+        <tr><td>정산 대사</td><td>본사 (기능)</td><td><b>지사</b> (확인)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">「정하는 쪽」과 「실행하는 쪽」이 다른 줄은 둘이다 — PG 계약과 연동 규격.
+  <b>PG 계약은 조건은 본사가 협상하고 명의는 지사가 갖는다</b> — 협상은 몰아서 해야 조건이 좋고, 명의가 지사여야 대금이 지사 계좌로 들어온다.
+  본사 목록에 <b>「승인」은 없다</b> — 지사가 가격이나 정산 계좌를 바꿀 때 본사에 결재를 올리지 않고, 승인이 필요한 일은 지사 담당자와 지사 재무팀이 나눠 처리한다.</p>
+</section>

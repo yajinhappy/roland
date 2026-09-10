@@ -1,0 +1,926 @@
+<section class="screen" id="w4">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs">
+        <button type="button" class="tab tab-on" data-dev="pc">PC</button>
+        <button type="button" class="tab" data-dev="tb">TABLET</button>
+        <button type="button" class="tab" data-dev="mo">MO</button>
+      </div>
+
+      <!-- ═══════════════ PC — 상태 매트릭스 ═══════════════ -->
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
+
+        <div class="tg-wrap">
+
+          <!-- ── A1 · 비로그인 진입 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">1</div>
+            <span class="tg-lbl"><em>A1</em>비로그인 진입</span>
+            <div class="ws-card">
+              <div class="ws-ch"><b>받을 캐릭터</b><span class="tag" style="margin-left:auto;">비회원</span></div>
+              <div class="ws-cb">
+
+                <div class="tg-login">
+                  <p>로그인하면 <b>내 캐릭터를 목록에서 바로 선택</b>할 수 있습니다</p>
+                  <span class="tg-btn">로그인</span>
+                </div>
+
+                <div class="tg-or"><i></i><b>또는 캐릭터 인증으로 구매</b><i></i></div>
+
+                <div class="fld">
+                  <span class="lbl-k">서버</span>
+                  <div class="inp"><span style="font-size:12px;color:#98A2AE;">서버 선택</span>
+                    <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                </div>
+
+                <div class="fld">
+                  <span class="lbl-k">캐릭터 ID</span>
+                  <div style="display:flex;gap:6px;">
+                    <div class="inp" style="flex:1;"><span style="font-size:12px;color:#98A2AE;">캐릭터 ID 입력</span></div>
+                    <span class="btn-s" style="flex:none;white-space:nowrap;">인증번호 발송</span>
+                  </div>
+                  <span class="tg-hint q"><em>?</em>캐릭터 ID 확인 방법</span>
+                </div>
+
+                <div class="fld">
+                  <span class="lbl-k">인증번호</span>
+                  <div style="display:flex;gap:6px;">
+                    <div class="inp dis" style="flex:1;"><span style="font-size:12px;">6자리 숫자</span></div>
+                    <span class="btn-s" style="flex:none;">확인</span>
+                  </div>
+                  <span class="tg-hint"><em>i</em>인증번호는 <b>인게임 우편함</b>으로 전송됩니다</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ── A2 · 인증번호 발송 완료 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">2</div>
+            <span class="tg-lbl"><em>A2</em>인증번호 발송 완료</span>
+            <div class="ws-card">
+              <div class="ws-ch"><b>받을 캐릭터</b><span class="tag" style="margin-left:auto;">비회원</span></div>
+              <div class="ws-cb">
+
+                <div class="fld">
+                  <span class="lbl-k">서버</span>
+                  <div class="inp dis"><span style="font-size:12px;">발할라</span></div>
+                </div>
+
+                <div class="fld">
+                  <span class="lbl-k">캐릭터 ID</span>
+                  <div style="display:flex;gap:6px;">
+                    <div class="inp dis" style="flex:1;"><span style="font-size:12px;">frontera_knight</span></div>
+                    <span class="btn-s" style="flex:none;">변경</span>
+                  </div>
+                </div>
+
+                <div class="fld">
+                  <span class="rowk"><span class="lbl-k">인증번호</span>
+                    <span class="tg-timer">04:32</span>
+                    <span class="tg-hint" style="margin-left:auto;font-size:10px;">유효 5분</span></span>
+                  <div style="display:flex;gap:6px;">
+                    <div class="inp" style="flex:1;"><span style="font-size:12px;color:#171B22;font-family:'IBM Plex Mono',monospace;">3 8 4 1 _ _</span></div>
+                    <span class="btn-s" style="flex:none;">확인</span>
+                  </div>
+                  <span class="tg-hint"><em>i</em>인게임 우편함에서 확인 · <b style="color:#2F6490;">재발송</b></span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ── A3 · 비회원 인증 완료 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">3</div>
+            <span class="tg-lbl"><em>A3</em>비회원 인증 완료</span>
+            <div class="ws-card">
+              <div class="ws-ch"><b>받을 캐릭터</b><span class="tag" style="margin-left:auto;">비회원</span></div>
+              <div class="ws-cb">
+                <div class="tg-done">
+                  <span class="ck">&#10003;</span>
+                  <span class="nmv">발할라 / <b>프론테라기사</b></span>
+                  <span class="tg-x">&#10005;</span>
+                </div>
+                <span class="tg-hint"><em>i</em>구매한 아이템은 <b>이 캐릭터</b>로 지급됩니다</span>
+                <div class="fld" style="margin-top:10px;">
+                  <span class="lbl-k">이메일</span>
+                  <div class="inp"><span style="font-size:12px;color:#98A2AE;">영수증 수신용 이메일</span></div>
+                  <span class="tg-hint"><em>i</em>주문 · 영수증 안내를 받을 주소입니다</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── A4 · 인증 완료 후 로그인 → 대상 변경 알림 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">4</div>
+            <span class="tg-lbl"><em>A4</em>인증 완료 후 로그인 · 대상 변경 알림</span>
+            <div class="ws-card" style="min-height:200px;">
+              <div class="ws-ch"><b>받을 캐릭터</b><span class="tag" style="margin-left:auto;">회원</span></div>
+              <div class="ws-cb">
+                <div class="fld">
+                  <span class="lbl-k">서버</span>
+                  <div class="inp"><span style="font-size:12px;color:#171B22;">발할라</span>
+                    <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                </div>
+                <div class="fld">
+                  <span class="lbl-k">캐릭터</span>
+                  <div class="inp"><span style="font-size:12px;color:#98A2AE;">캐릭터 선택</span>
+                    <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                </div>
+              </div>
+              <div class="tg-dim">
+                <div class="tg-note">
+                  <span class="ic">&#33;</span>
+                  <b>로그인으로 받을 캐릭터<br>정보가 변경되었습니다</b>
+                  <span>기존에 입력한 인증 정보는 삭제됩니다</span>
+                  <span class="tg-btn">확인</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── B1 · 로그인 · 다중 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">5</div>
+            <span class="tg-lbl"><em>B1</em>로그인 · 서버 · 캐릭터 복수</span>
+            <div class="ws-card">
+              <div class="ws-ch"><b>받을 캐릭터</b><span class="tag" style="margin-left:auto;">회원</span></div>
+              <div class="ws-cb">
+                <div class="fld">
+                  <span class="lbl-k">서버</span>
+                  <div class="inp"><span style="font-size:12px;color:#171B22;">발할라</span>
+                    <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                </div>
+                <div class="fld">
+                  <span class="lbl-k">캐릭터</span>
+                  <div class="inp"><span style="font-size:12px;color:#171B22;">프론테라기사</span>
+                    <span style="font-size:11px;color:#6C7480;margin-left:6px;">Lv.87 · 나이트</span>
+                    <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                </div>
+                <span class="tg-hint"><em>i</em>인증 절차 없음 — 계정에 연결된 캐릭터만 보입니다</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── B2 · 로그인 · 각 1개 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">6</div>
+            <span class="tg-lbl"><em>B2</em>로그인 · 단일 보유 · 자동 선택</span>
+            <div class="ws-card">
+              <div class="ws-ch"><b>받을 캐릭터</b><span class="tag" style="margin-left:auto;">회원</span></div>
+              <div class="ws-cb">
+                <div class="fld">
+                  <span class="rowk"><span class="lbl-k">서버</span><span class="tg-auto">1개 · 자동 선택</span></span>
+                  <div class="inp dis"><span style="font-size:12px;">발할라</span></div>
+                </div>
+                <div class="fld">
+                  <span class="rowk"><span class="lbl-k">캐릭터</span><span class="tg-auto">1개 · 자동 선택</span></span>
+                  <div class="inp dis"><span style="font-size:12px;">프론테라기사</span>
+                    <span style="font-size:11px;margin-left:6px;">Lv.87 · 나이트</span></div>
+                </div>
+                <span class="tg-hint"><em>i</em>선택 대상이 단일이면 드롭다운 없이 <b>값만 표시</b>합니다</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── B3 · 로그인 · 캐릭터 없음 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">7</div>
+            <span class="tg-lbl"><em>B3</em>로그인 · 캐릭터 미보유</span>
+            <div class="ws-card">
+              <div class="ws-ch"><b>받을 캐릭터</b><span class="tag" style="margin-left:auto;">회원</span></div>
+              <div class="ws-cb">
+                <div class="tg-empty">
+                  <span><b style="color:#171B22;">연결된 캐릭터가 없습니다</b><br>
+                    게임에 접속해 캐릭터를 만든 뒤 구매해 주세요</span>
+                  <span class="btn-s">게임 시작하기</span>
+                </div>
+                <span class="tg-hint"><em>i</em>[결제하기] 비활성 — 지급 대상을 정할 수 없습니다</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── E · 오류 3종 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">8</div>
+            <span class="tg-lbl"><em>E</em>오류 상태</span>
+            <div class="ws-card">
+              <div class="ws-ch"><b>받을 캐릭터</b><span class="tag" style="margin-left:auto;">비회원</span></div>
+              <div class="ws-cb">
+                <div class="fld">
+                  <span class="lbl-k">캐릭터 ID</span>
+                  <div class="inp err"><span style="font-size:12px;color:#171B22;">frontera_knigt</span></div>
+                  <div class="tg-err"><em>!</em>해당 서버에 없는 캐릭터 ID입니다</div>
+                </div>
+                <div class="fld">
+                  <span class="lbl-k">인증번호</span>
+                  <div class="inp err"><span style="font-size:12px;color:#171B22;font-family:'IBM Plex Mono',monospace;">3 8 4 2 1 9</span></div>
+                  <div class="tg-err"><em>!</em>인증번호가 일치하지 않습니다 <b>(2 / 5)</b></div>
+                </div>
+                <div class="tg-err"><em>!</em>인증번호가 만료되었습니다. <b>재발송</b>해 주세요</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── T · 캐릭터 ID 확인 툴팁 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:24px;left:-33px;">9</div>
+            <span class="tg-lbl"><em>T</em>캐릭터 ID 확인 · 팝오버</span>
+            <div class="ws-card">
+              <div class="ws-cb">
+                <div class="fld">
+                  <span class="lbl-k">캐릭터 ID</span>
+                  <div class="inp"><span style="font-size:12px;color:#98A2AE;">캐릭터 ID 입력</span></div>
+                  <span class="tg-hint q"><em>?</em>캐릭터 ID 확인 방법</span>
+                </div>
+                <div class="tg-tipbox" style="position:static;width:auto;">
+                  <b>캐릭터 ID는 어디서 보나요</b>
+                  <ol>
+                    <li>게임에 접속합니다</li>
+                    <li>캐릭터 정보 창을 엽니다</li>
+                    <li>캐릭터명 아래 <b>영문 ID</b>가 캐릭터 ID입니다</li>
+                  </ol>
+                  <div class="img" style="height:64px;"><span class="sp">확인 위치 이미지</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      </div>
+      </div>
+
+      <!-- ═══════════════ TABLET 768 ═══════════════ -->
+      <div class="pane pane-tb">
+      <div class="wstage">
+      <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
+
+        <div class="tg-tbwrap">
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>A1 · 비로그인 진입 · 필드 2열</em></span>
+            <div class="ws-tb" style="height:600px;">
+              <div class="ws-util tb">
+                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span style="width:1px;height:14px;background:#DCE2E8;"></span>
+                <span class="ts">SEARCH</span>
+                <span class="ts">로그인</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="tb-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h" style="font-size:13.5px;">받을 캐릭터</span>
+                    <div class="tg-login">
+                      <p>로그인하면 <b>내 캐릭터를 바로 선택</b>할 수 있습니다</p>
+                      <span class="tg-btn" style="width:260px;">로그인</span>
+                    </div>
+                    <div class="tg-or"><i></i><b>또는 캐릭터 인증으로 구매</b><i></i></div>
+                    <div class="tb-2col">
+                      <div class="fld">
+                        <span class="lbl-k">서버</span>
+                        <div class="inp mo"><span style="font-size:12.5px;color:#98A2AE;">서버 선택</span>
+                          <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                      </div>
+                      <div class="fld">
+                        <span class="rowk"><span class="lbl-k">캐릭터 ID</span>
+                          <span class="tg-hint q" style="margin-left:auto;"><em>?</em>확인 방법</span></span>
+                        <div style="display:flex;gap:7px;">
+                          <div class="inp mo" style="flex:1;"><span style="font-size:12.5px;color:#98A2AE;">캐릭터 ID 입력</span></div>
+                          <span class="btn-s" style="flex:none;white-space:nowrap;">인증번호 발송</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="fld" style="max-width:360px;">
+                      <span class="lbl-k">인증번호</span>
+                      <div style="display:flex;gap:7px;">
+                        <div class="inp mo dis" style="flex:1;"><span style="font-size:12.5px;">6자리 숫자</span></div>
+                        <span class="btn-s" style="flex:none;">확인</span>
+                      </div>
+                      <span class="tg-hint"><em>i</em>인증번호는 <b>인게임 우편함</b>으로 전송됩니다</span>
+                    </div>
+                    <div class="ws-pay off" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>A3 · 비회원 인증 완료</em></span>
+            <div class="ws-tb" style="height:470px;">
+              <div class="ws-util tb">
+                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span style="width:1px;height:14px;background:#DCE2E8;"></span>
+                <span class="ts">SEARCH</span>
+                <span class="ts">로그인</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="tb-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h" style="font-size:13.5px;">받을 캐릭터</span>
+                    <div class="tg-done">
+                      <span class="ck">&#10003;</span>
+                      <span class="nmv">발할라 / <b>프론테라기사</b></span>
+                      <span class="tg-x">&#10005;</span>
+                    </div>
+                    <span class="tg-hint"><em>i</em>구매한 아이템은 <b>이 캐릭터</b>로 지급됩니다</span>
+                    <div class="fld" style="margin-top:10px;">
+                      <span class="lbl-k">이메일</span>
+                      <div class="inp"><span style="font-size:12px;color:#98A2AE;">영수증 수신용 이메일</span></div>
+                      <span class="tg-hint"><em>i</em>주문 · 영수증 안내를 받을 주소입니다</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:18px;padding-top:10px;border-top:1px solid #E4E8ED;">
+                      <span style="font-size:11.5px;color:#6C7480;">총 결제 금액</span>
+                      <span style="font-size:18px;font-weight:600;color:#171B22;font-family:'IBM Plex Mono',monospace;margin-left:auto;">₩ 4,900</span>
+                      <div class="ws-pay" style="width:240px;flex:none;padding:12px 0;">결제하기</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>B1 · 로그인 · 복수 보유</em></span>
+            <div class="ws-tb" style="height:470px;">
+              <div class="ws-util tb">
+                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span style="width:1px;height:14px;background:#DCE2E8;"></span>
+                <span class="ts">SEARCH</span>
+                <span class="ts">내 정보</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="tb-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h" style="font-size:13.5px;">받을 캐릭터</span>
+                    <div class="tb-2col">
+                      <div class="fld">
+                        <span class="lbl-k">서버</span>
+                        <div class="inp mo"><span style="font-size:12.5px;color:#171B22;">발할라</span>
+                          <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                      </div>
+                      <div class="fld">
+                        <span class="lbl-k">캐릭터</span>
+                        <div class="inp mo"><span style="font-size:12.5px;color:#171B22;">프론테라기사</span>
+                          <span style="font-size:11px;color:#6C7480;margin-left:6px;">Lv.87 · 나이트</span>
+                          <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                      </div>
+                    </div>
+                    <span class="tg-hint"><em>i</em>인증 절차 없음 — 내 캐릭터만 보입니다</span>
+                    <div class="ws-pay" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>T · 캐릭터 ID 확인 · 팝오버</em></span>
+            <div class="ws-tb" style="height:520px;">
+              <div class="ws-util tb">
+                <div class="img" style="width:150px;height:28px;"><span class="sp" style="font-size:8.5px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span style="width:1px;height:14px;background:#DCE2E8;"></span>
+                <span class="ts">SEARCH</span>
+                <span class="ts">로그인</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="tb-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h" style="font-size:13.5px;">받을 캐릭터</span>
+                    <div class="tb-2col">
+                      <div class="fld">
+                        <span class="rowk"><span class="lbl-k">캐릭터 ID</span>
+                          <span class="tg-hint q" style="margin-left:auto;"><em>?</em>확인 방법</span></span>
+                        <div class="inp mo"><span style="font-size:12.5px;color:#98A2AE;">캐릭터 ID 입력</span></div>
+                      </div>
+                      <div class="tg-tipbox" style="position:static;width:auto;">
+                        <b>캐릭터 ID는 어디서 보나요</b>
+                        <ol>
+                          <li>게임에 접속합니다</li>
+                          <li>캐릭터 정보 창을 엽니다</li>
+                          <li>캐릭터명 아래 <b>영문 ID</b>가 캐릭터 ID입니다</li>
+                        </ol>
+                        <div class="img" style="height:74px;"><span class="sp">확인 위치 이미지</span></div>
+                      </div>
+                    </div>
+                    <span class="tg-hint"><em>i</em>태블릿은 <b>팝오버</b>로 띄운다 — MO만 바텀시트</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+
+      <!-- ═══════════════ MO — 상태 매트릭스 ═══════════════ -->
+      <div class="pane pane-mo">
+      <div class="wstage">
+      <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
+
+        <div class="tg-mowrap">
+
+          <!-- ── A1 · 최초 진입 ── -->
+          <div class="tg-cell">
+            <div class="mk" style="position:absolute;top:26px;left:-33px;">10</div>
+            <span class="tg-lbl"><em>A1</em>최초 진입 · 비로그인</span>
+            <div class="ws-mo" style="height:560px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">로그인</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h">받을 캐릭터</span>
+
+                    <div class="tg-login">
+                      <p>로그인하면 <b>내 캐릭터를 바로 선택</b>할 수 있습니다</p>
+                      <span class="tg-btn">로그인</span>
+                    </div>
+
+                    <div class="tg-or"><i></i><b>또는 캐릭터 인증으로 구매</b><i></i></div>
+
+                    <div class="fld">
+                      <span class="lbl-k">서버</span>
+                      <div class="inp mo"><span style="font-size:12.5px;color:#98A2AE;">서버 선택</span>
+                        <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                    </div>
+
+                    <div class="fld">
+                      <span class="rowk"><span class="lbl-k">캐릭터 ID</span>
+                        <span class="tg-hint q" style="margin-left:auto;"><em>?</em>확인 방법</span></span>
+                      <div class="inp mo"><span style="font-size:12.5px;color:#98A2AE;">캐릭터 ID 입력</span></div>
+                      <span class="btn-w">인증번호 발송</span>
+                    </div>
+
+                    <div class="fld">
+                      <span class="lbl-k">인증번호</span>
+                      <div class="inp mo dis"><span style="font-size:12.5px;">6자리 숫자</span></div>
+                      <span class="tg-hint"><em>i</em>인증번호는 <b>인게임 우편함</b>으로 전송됩니다</span>
+                    </div>
+
+                    <div class="ws-pay off" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── A2 · 인증번호 발송 완료 ── -->
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>A2</em>인증번호 발송 완료</span>
+            <div class="ws-mo" style="height:560px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">로그인</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h">받을 캐릭터</span>
+
+                    <div class="fld">
+                      <span class="lbl-k">서버</span>
+                      <div class="inp mo dis"><span style="font-size:12.5px;">발할라</span></div>
+                    </div>
+
+                    <div class="fld">
+                      <span class="rowk"><span class="lbl-k">캐릭터 ID</span>
+                        <span class="btn-s" style="margin-left:auto;">변경</span></span>
+                      <div class="inp mo dis"><span style="font-size:12.5px;">frontera_knight</span></div>
+                    </div>
+
+                    <div class="fld">
+                      <span class="rowk"><span class="lbl-k">인증번호</span>
+                        <span class="tg-timer">04:32</span></span>
+                      <div class="inp mo"><span style="font-size:13px;color:#171B22;font-family:'IBM Plex Mono',monospace;letter-spacing:.2em;">3841__</span></div>
+                      <span class="btn-w">확인</span>
+                      <span class="tg-hint"><em>i</em>인게임 우편함에서 확인 · <b style="color:#2F6490;">재발송</b></span>
+                    </div>
+
+                    <div class="ws-pay off" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── A3 · 인증 완료 ── -->
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>A3</em>비회원 인증 완료</span>
+            <div class="ws-mo" style="height:620px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">로그인</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h">받을 캐릭터</span>
+
+                    <div class="tg-done">
+                      <span class="ck">&#10003;</span>
+                      <span class="nmv">발할라 / <b>프론테라기사</b></span>
+                      <span class="tg-x">&#10005;</span>
+                    </div>
+                    <span class="tg-hint"><em>i</em>구매한 아이템은 <b>이 캐릭터</b>로 지급됩니다</span>
+                    <div class="fld" style="margin-top:10px;">
+                      <span class="lbl-k">이메일</span>
+                      <div class="inp"><span style="font-size:12px;color:#98A2AE;">영수증 수신용 이메일</span></div>
+                      <span class="tg-hint"><em>i</em>주문 · 영수증 안내를 받을 주소입니다</span>
+                    </div>
+
+                    <div class="tg-or"><i></i><b>선택 상품 · 프리미엄 성장석</b><i></i></div>
+                    <div class="ws-tot" style="border:1px solid #E4E8ED;border-radius:3px;">
+                      <em>총 결제 금액</em><b>₩ 4,900</b></div>
+
+                    <div class="ws-pay" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── A4 · 대상 변경 알림 ── -->
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>A4</em>인증 완료 후 로그인 · 대상 변경 알림</span>
+            <div class="ws-mo" style="height:520px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">내 정보</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h">받을 캐릭터</span>
+                    <div class="ws-card" style="min-height:172px;border:0;">
+                      <div class="ws-cb" style="padding:0;">
+                        <div class="fld">
+                          <span class="lbl-k">서버</span>
+                          <div class="inp mo"><span style="font-size:12.5px;color:#171B22;">발할라</span>
+                            <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                        </div>
+                        <div class="fld">
+                          <span class="lbl-k">캐릭터</span>
+                          <div class="inp mo"><span style="font-size:12.5px;color:#98A2AE;">캐릭터 선택</span>
+                            <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                        </div>
+                      </div>
+                      <div class="tg-dim">
+                        <div class="tg-note">
+                          <span class="ic">&#33;</span>
+                          <b>로그인으로 받을 캐릭터<br>정보가 변경되었습니다</b>
+                          <span>기존에 입력한 인증 정보는 삭제됩니다</span>
+                          <span class="tg-btn">확인</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ws-pay off" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── B1 · 로그인 · 복수 보유 ── -->
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>B1</em>로그인 · 복수 보유</span>
+            <div class="ws-mo" style="height:520px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">내 정보</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h">받을 캐릭터</span>
+
+                    <div class="fld">
+                      <span class="lbl-k">서버</span>
+                      <div class="inp mo"><span style="font-size:12.5px;color:#171B22;">발할라</span>
+                        <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                    </div>
+                    <div class="fld">
+                      <span class="lbl-k">캐릭터</span>
+                      <div class="inp mo"><span style="font-size:12.5px;color:#171B22;">프론테라기사</span>
+                        <span style="font-size:11px;color:#6C7480;margin-left:6px;">Lv.87</span>
+                        <span style="margin-left:auto;font-size:9px;color:#6C7480;">&#9662;</span></div>
+                    </div>
+                    <span class="tg-hint"><em>i</em>인증 절차 없음 — 내 캐릭터만 보입니다</span>
+
+                    <div class="ws-pay" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── B2 · 로그인 · 자동 선택 ── -->
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>B2</em>로그인 · 단일 보유 · 자동 선택</span>
+            <div class="ws-mo" style="height:520px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">내 정보</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h">받을 캐릭터</span>
+
+                    <div class="fld">
+                      <span class="rowk"><span class="lbl-k">서버</span><span class="tg-auto">1개 · 자동 선택</span></span>
+                      <div class="inp mo dis"><span style="font-size:12.5px;">발할라</span></div>
+                    </div>
+                    <div class="fld">
+                      <span class="rowk"><span class="lbl-k">캐릭터</span><span class="tg-auto">1개 · 자동 선택</span></span>
+                      <div class="inp mo dis"><span style="font-size:12.5px;">프론테라기사</span>
+                        <span style="font-size:11px;margin-left:6px;">Lv.87</span></div>
+                    </div>
+                    <span class="tg-hint"><em>i</em>선택 대상이 단일이면 값만 표시합니다</span>
+
+                    <div class="ws-pay" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── B3 · 캐릭터 미보유 ── -->
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>B3</em>로그인 · 캐릭터 미보유</span>
+            <div class="ws-mo" style="height:520px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">내 정보</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h">받을 캐릭터</span>
+
+                    <div class="tg-empty">
+                      <span><b style="color:#171B22;">연결된 캐릭터가 없습니다</b><br>
+                        게임에 접속해 캐릭터를 만든 뒤<br>구매해 주세요</span>
+                      <span class="btn-s">게임 시작하기</span>
+                    </div>
+                    <span class="tg-hint"><em>i</em>지급 대상을 정할 수 없어 결제가 불가합니다</span>
+
+                    <div class="ws-pay off" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── E · 오류 ── -->
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>E</em>오류 상태</span>
+            <div class="ws-mo" style="height:520px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">로그인</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <span class="mo-h">받을 캐릭터</span>
+
+                    <div class="fld">
+                      <span class="lbl-k">캐릭터 ID</span>
+                      <div class="inp mo err"><span style="font-size:12.5px;color:#171B22;">frontera_knigt</span></div>
+                      <div class="tg-err"><em>!</em>해당 서버에 없는 캐릭터 ID입니다</div>
+                    </div>
+
+                    <div class="fld">
+                      <span class="lbl-k">인증번호</span>
+                      <div class="inp mo err"><span style="font-size:13px;color:#171B22;font-family:'IBM Plex Mono',monospace;letter-spacing:.2em;">384219</span></div>
+                      <div class="tg-err"><em>!</em>인증번호가 일치하지 않습니다 <b>(2 / 5)</b></div>
+                    </div>
+
+                    <div class="tg-err"><em>!</em>인증번호가 만료되었습니다. <b>재발송</b>해 주세요</div>
+
+                    <div class="ws-pay off" style="padding:12px 0;font-size:13px;">결제하기</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── T · 캐릭터 ID 확인 바텀시트 ── -->
+          <div class="tg-cell">
+            <span class="tg-lbl"><em>T</em>캐릭터 ID 확인 · 바텀시트</span>
+            <div class="ws-mo" style="height:520px;">
+              <div class="ws-util mo">
+                <div class="img" style="width:110px;height:22px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span></div>
+                <span class="lang" style="margin-left:auto;">KO <span style="font-size:9px;">&#9662;</span></span>
+                <span class="ts">로그인</span>
+              </div>
+              <div class="mo-body">
+                <div class="scrim" style="align-items:flex-end;justify-content:center;">
+                  <div class="mo-sheet">
+                    <span class="mo-grip"></span>
+                    <div class="rowk">
+                      <span class="mo-h">캐릭터 ID는 어디서 보나요</span>
+                      <span style="margin-left:auto;font-size:14px;color:#98A2AE;">&#10005;</span>
+                    </div>
+                    <ol style="margin:0;padding-left:16px;display:flex;flex-direction:column;gap:6px;">
+                      <li style="font-size:12px;line-height:1.6;color:#545C69;">게임에 접속합니다</li>
+                      <li style="font-size:12px;line-height:1.6;color:#545C69;">캐릭터 정보 창을 엽니다</li>
+                      <li style="font-size:12px;line-height:1.6;color:#545C69;">캐릭터명 아래 <b>영문 ID</b>가 캐릭터 ID입니다</li>
+                    </ol>
+                    <div class="img" style="height:110px;"><span class="sp">확인 위치 이미지</span></div>
+                    <span class="btn-w">확인했습니다</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════ 디스크립션 ═══════════════ -->
+    <div class="dcol">
+      <div class="imm">
+        <div class="imm-h">회원 · 비회원 흐름 구분</div>
+        <div class="imm-r"><span class="imm-k">비회원</span><span class="imm-v"><b>서버 + 캐릭터 ID + 인증번호</b>로 대상을 특정하고 <b>영수증 이메일</b>을 받는다 — A1 → A2 → A3</span></div>
+        <div class="imm-r"><span class="imm-k">회원</span><span class="imm-v">계정에 연결된 <b>목록에서 선택</b>한다 — 인증 절차 없음 · 이메일은 계정 등록 주소를 사용한다</span></div>
+        <div class="imm-r"><span class="imm-k">공통</span><span class="imm-v">대상이 확정되기 전에는 <b>[결제하기] 비활성</b></span></div>
+      </div>
+
+      <div class="imm">
+        <div class="imm-h">상태별 노출 기준</div>
+        <div class="imm-r"><span class="imm-k">A1</span><span class="imm-v"><b>로그인 유도 O</b> · 입력 3칸 · 확정 표시 X</span></div>
+        <div class="imm-r"><span class="imm-k">A2</span><span class="imm-v"><b>로그인 유도 X</b> · 입력 잠금 + 인증번호만 활성</span></div>
+        <div class="imm-r"><span class="imm-k">A3</span><span class="imm-v"><b>로그인 유도 X</b> · 인증 입력이 <b>확정 한 줄 + [✕]</b>로 바뀌고 <b>이메일 입력</b>이 남는다</span></div>
+        <div class="imm-r"><span class="imm-k">A4</span><span class="imm-v">A3에서 로그인 시 — <b>딤 + 알림</b> · [확인] 전까지 조작 불가</span></div>
+        <div class="imm-r"><span class="imm-k">복귀 경로</span><span class="imm-v">A3의 [✕] → A1 · A2의 [변경] → A1 · A4의 [확인] → B</span></div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">A1 · 비로그인 진입</span><span class="src">기본</span></div>
+        <p class="dr-b">로그인 유도를 <b>맨 위</b>에 두고, 그 아래에 인증 경로를 둔다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">순서</span><span class="spec-v"><b>로그인</b> → 구분선 → 서버 → 캐릭터 ID → 인증번호</span></div>
+          <div class="spec-r"><span class="spec-k">인증번호</span><span class="spec-v">발송 전에는 <b>비활성</b> — 순서를 강제한다</span></div>
+          <div class="spec-r"><span class="spec-k">안내</span><span class="spec-v">인증번호는 <b>인게임 우편함</b>으로 전송된다고 하단에 표기</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">A2 · 인증번호 발송 완료</span><span class="src">타이머</span></div>
+        <p class="dr-b">서버 · 캐릭터 ID를 <b>잠그고</b> 인증번호에 집중시킨다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">잠금</span><span class="spec-v">서버 · 캐릭터 ID 비활성 + <b>[변경]</b> 버튼으로만 되돌린다</span></div>
+          <div class="spec-r"><span class="spec-k">유효시간</span><span class="spec-v"><b>5분</b> 카운트다운 — 만료 시 재발송만 가능</span></div>
+          <div class="spec-r"><span class="spec-k">재발송</span><span class="spec-v">일정 시간 경과 후 활성 · <b>발송 횟수 제한</b></span></div>
+          <div class="spec-r"><span class="spec-k">로그인 유도</span><span class="spec-v"><b>숨긴다</b> — 유저가 인증 경로를 이미 선택했다</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">A3 · 비회원 인증 완료</span><span class="src">확정</span></div>
+        <p class="dr-b">입력 영역을 <b>한 줄 결과로 대체</b>하고 초기화 버튼을 남긴다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v"><b>서버 / 캐릭터명</b> — 입력은 캐릭터 ID로 받고 확정 이후 화면은 캐릭터명으로 표기한다. 결제창 · 결제 완료 · 영수증까지 동일하다</span></div>
+          <div class="spec-r"><span class="spec-k">로그인 유도</span><span class="spec-v"><b>[✕]를 누를 때까지 보이지 않는다</b> — 대상이 확정된 뒤에는 필요 없는 선택지다</span></div>
+          <div class="spec-r"><span class="spec-k">[✕]</span><span class="spec-v">초기화 → <b>A1로 되돌아가고 로그인 유도가 다시 나타난다.</b> 선택 상품은 유지</span></div>
+          <div class="spec-r"><span class="spec-k">이메일</span><span class="spec-v">확정 아래에 <b>영수증 수신용 이메일</b> 입력 — 비회원은 계정이 없어 주문 · 영수증 안내를 보낼 곳이 필요하다. 미입력 시 [결제하기] 비활성</span></div>
+          <div class="spec-r"><span class="spec-k">유지</span><span class="spec-v">결제 완료까지 이 상태를 유지 — 결제창에도 같은 값이 전달된다</span></div>
+          <div class="spec-r"><span class="spec-k">해당 영역 외</span><span class="spec-v">로그인이 필요하면 <b>상단 포털 유틸(H0)의 로그인</b>을 쓴다</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">A4 · 인증 완료 후 로그인</span><span class="src">결정</span></div>
+        <p class="dr-b">인증을 마친 뒤 로그인하면 <b>대상이 바뀐다.</b> 무통보 변경 없이 알림 후 확인을 받는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">알림</span><span class="spec-v">받을 캐릭터 영역만 <b>딤 처리</b>하고 「로그인으로 받을 캐릭터 정보가 변경되었습니다」</span></div>
+          <div class="spec-r"><span class="spec-k">확인</span><span class="spec-v"><b>[확인]을 눌러야</b> 딤이 걷힌다 — 닫기 · 바깥 탭으로는 닫히지 않는다</span></div>
+          <div class="spec-r"><span class="spec-k">삭제</span><span class="spec-v">인증했던 <b>서버 · 캐릭터 ID · 인증번호를 모두 버린다</b></span></div>
+          <div class="spec-r"><span class="spec-k">이후</span><span class="spec-v">회원 흐름(B)으로 전환 — <b>캐릭터는 미선택</b> 상태로 시작</span></div>
+          <div class="spec-r"><span class="spec-k">선택 상품</span><span class="spec-v">유지 — 고른 상품은 지우지 않는다</span></div>
+          <div class="spec-r"><span class="spec-k">전제</span><span class="spec-v">로그인 발생을 <b>웹샵이 감지할 수 있어야</b> 성립한다 — 아래 참조</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">B1 · 로그인 · 복수 보유</span><span class="src">선택</span></div>
+        <p class="dr-b">서버와 캐릭터를 <b>드롭다운 두 개</b>로 고른다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">종속</span><span class="spec-v">서버를 바꾸면 캐릭터 목록이 <b>그 서버 것으로 갱신</b>되고 선택은 초기화</span></div>
+          <div class="spec-r"><span class="spec-k">부가 정보</span><span class="spec-v">캐릭터명 옆에 <b>Lv · 직업</b>을 붙여 동명이인을 구분</span></div>
+          <div class="spec-r"><span class="spec-k">다수인 경우</span><span class="spec-v">캐릭터가 많으면 드롭다운 내 <b>검색 입력</b>을 둔다</span></div>
+          <div class="spec-r"><span class="spec-k">선물</span><span class="spec-v">본 화면에서는 제공하지 않는다 — <b>비회원 경로</b>로 받는 사람 캐릭터를 인증한다</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">B2 · 단일 보유 — 자동 선택</span><span class="src">생략</span></div>
+        <p class="dr-b">선택 대상이 단일이면 <b>기본 선택</b>하고 드롭다운을 제공하지 않는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">서버 1개</span><span class="spec-v">그 서버로 고정 표기 — 화살표 없음</span></div>
+          <div class="spec-r"><span class="spec-k">캐릭터 1개</span><span class="spec-v">그 캐릭터로 고정 표기</span></div>
+          <div class="spec-r"><span class="spec-k">표시</span><span class="spec-v"><b>「1개 · 자동 선택」</b> 배지로 변경 불가 사유를 표기한다</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">7</span><span class="dr-t">B3 · 캐릭터 미보유</span><span class="src">보완</span></div>
+        <p class="dr-b">로그인은 됐지만 <b>캐릭터가 0개</b>인 경우. 원안에 없던 상태다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">발생 조건</span><span class="spec-v">계정만 만들고 <b>게임을 한 번도 접속하지 않은</b> 유저</span></div>
+          <div class="spec-r"><span class="spec-k">처리</span><span class="spec-v">빈 상태 안내 + <b>[게임 시작하기]</b> — 결제 경로를 막지 않고 안내한다</span></div>
+          <div class="spec-r"><span class="spec-k">결제</span><span class="spec-v">[결제하기] 비활성 — 캐릭터 기반 상품만 팔기 때문</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">8</span><span class="dr-t">E · 오류 상태</span><span class="src">보완</span></div>
+        <p class="dr-b">원안에 없던 부분. <b>세 가지를 구분</b>해야 유저가 다음 행동을 안다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">ID 없음</span><span class="spec-v">「해당 서버에 없는 캐릭터 ID」 — <b>서버를 잘못 골랐을 가능성</b>도 있다</span></div>
+          <div class="spec-r"><span class="spec-k">불일치</span><span class="spec-v">남은 시도 횟수를 <b>(2 / 5)</b>로 명시 — 초과 시 일정 시간 차단</span></div>
+          <div class="spec-r"><span class="spec-k">만료</span><span class="spec-v">불일치와 다르게 처리 — <b>재발송</b>만 안내한다</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">9</span><span class="dr-t">T · 캐릭터 ID 확인 방법</span><span class="src">툴팁</span></div>
+        <p class="dr-b">캐릭터 ID를 모르는 유저가 <b>주요 이탈 지점</b>이다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">위치</span><span class="spec-v">캐릭터 ID 입력란 <b>바로 아래</b> — [?] 아이콘 + 링크 문구</span></div>
+          <div class="spec-r"><span class="spec-k">내용</span><span class="spec-v">확인 절차 3단계 + <b>확인 위치 이미지</b></span></div>
+          <div class="spec-r"><span class="spec-k">PC · MO</span><span class="spec-v">PC 팝오버 / MO <b>바텀시트</b> — 좁은 화면에서 팝오버가 가려진다</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">10</span><span class="dr-t">MO · 주문 정보 시트 구성</span><span class="src">반응형</span></div>
+        <p class="dr-b">우측 고정 영역이 없으므로 <b>하단 시트 안</b>에 들어간다.
+        PC와 <b>같은 8개 상태</b>를 MO 탭에서 각각 볼 수 있다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">입력 높이</span><span class="spec-v">PC 34px → MO <b>40px</b> · 터치 영역 확보</span></div>
+          <div class="spec-r"><span class="spec-k">버튼</span><span class="spec-v">[인증번호 발송] · [확인]을 <b>입력란 아래 전체 폭</b>으로 — 좌우 배치는 좁다</span></div>
+          <div class="spec-r"><span class="spec-k">툴팁</span><span class="spec-v">[?] 탭 → <b>바텀시트</b>로 대체 (T) — 팝오버는 좁은 화면에서 가려진다</span></div>
+          <div class="spec-r"><span class="spec-k">상단 바</span><span class="spec-v">비회원은 <b>로그인</b> · 회원은 <b>내 정보</b> — 상태를 구분할 수 있게 한다</span></div>
+          <div class="spec-r"><span class="spec-k">A3</span><span class="spec-v">대상이 한 줄로 줄어 <b>금액과 [결제하기]</b>가 함께 보인다</span></div>
+        </div>
+      </div>
+
+      <div class="imm">
+        <div class="imm-h">선물 처리 — 비회원 경로 적용</div>
+        <div class="imm-r"><span class="imm-k">방법</span><span class="imm-v">로그인하지 않고 <b>받는 사람의 캐릭터 ID로 인증</b>하면 그게 선물이다</span></div>
+        <div class="imm-r"><span class="imm-k">회원 화면</span><span class="imm-v">「다른 캐릭터에게 보내기」 전환을 <b>두지 않는다</b> — 내 캐릭터만 고른다</span></div>
+        <div class="imm-r"><span class="imm-k">이유</span><span class="imm-v">인증으로 대상을 특정하는 경로가 이미 있어 별도 기능이 필요 없다</span></div>
+      </div>
+
+      <div class="warn">
+        <div class="warn-h">A4 전제 조건 — 로그인 발생 감지</div>
+        <p class="warn-b">A4는 <b>웹샵이 로그인 발생을 알 수 있을 때</b> 성립한다.
+        같은 탭에서 로그인하고 돌아오면 감지되지만,
+        <b>다른 탭에서 로그인한 경우</b>에는 웹샵이 모른 채로 있을 수 있다.<br><br>
+        확인이 필요한 것 — 포털 로그인 상태를 <b>웹샵이 실시간으로 알 수 있는가</b>.
+        불가능하면 결제 요청 시점에 서버가 대조해 <b>같은 알림을 그때 띄우는</b> 방식으로 대체한다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

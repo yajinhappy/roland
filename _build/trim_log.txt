@@ -1,0 +1,8 @@
+wireframe/payment-admin-screens.html
+  deleted 14  moved-out 6  kept 11  spec-rows-trimmed 19
+  230005 -> 217994 bytes
+  kept blocks: 역할 5종 / 구성 3종 / GVI만 다르다 / 빠지면 라이브에서 바로 사고 나는 2개 / Tier 마다 법인별 통과 여부를 표기한다 / 구독이 GVC에서 팔리지 않는다 / 자동화 / 혼재 상품은 성립하지 않는다 / 막지 않으면 법령 위반이 난다 / Failover는 환불 가능성을 바꾼다 / 웹훅 순서 역전
+wireframe/payment-user-screens.html
+  deleted 6  moved-out 0  kept 2  spec-rows-trimmed 25
+  96544 -> 88788 bytes
+  kept blocks: 레이아웃 · 반응형 3단 / 문구 버전을 남겨야 한다

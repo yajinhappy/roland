@@ -1,16 +1,3 @@
-# 문서 조립용 소스 — 배포 대상 아님
-_build/
-
-# 편입 완료된 원본 (사이트에서 wiki/benchmark · wireframe 으로 편입)
-wiki/webshop/
-
 # OS
 Thumbs.db
 .DS_Store
-
-# 목록·본문 어디서도 참조되지 않는 원본 사본
-wireframe/webshop-screens.html
-_*.py
-_*.txt
-_test-*.html
-_bak/

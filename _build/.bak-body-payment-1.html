@@ -1,0 +1,266 @@
+<body>
+<!-- ▽▽▽ 사내 열람용 접근 게이트 ▽▽▽ -->
+<style>
+  html.ro-locked, html.ro-locked body { overflow: hidden !important; }
+  #ro-gate { position: fixed; inset: 0; z-index: 2147483000; background: #EEF1F5;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif; }
+  #ro-gate .box { width: 100%; max-width: 380px; background: #fff; border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(23,27,34,.12); padding: 32px 34px 30px; box-sizing: border-box; }
+  #ro-gate h1 { margin: 0 0 8px; font-size: 16px; font-weight: 600; color: #171B22; letter-spacing: -.01em; }
+  #ro-gate p { margin: 0 0 18px; font-size: 12px; color: #8A929E; line-height: 1.6; }
+  #ro-gate input[type=password] { width: 100%; height: 44px; padding: 0 13px; box-sizing: border-box;
+    border: 1.5px solid #2F6490; border-radius: 6px; font-size: 14px; color: #171B22; outline: none;
+    font-family: inherit; }
+  #ro-gate .rm { display: flex; align-items: center; gap: 8px; margin: 14px 0 16px;
+    font-size: 12px; color: #545C69; cursor: pointer; user-select: none; }
+  #ro-gate .rm input { width: 15px; height: 15px; accent-color: #2F6490; margin: 0; }
+  #ro-gate button { width: 100%; height: 46px; border: 0; border-radius: 6px; background: #2F6490;
+    color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  #ro-gate button:hover { background: #28577E; }
+  #ro-gate .err { margin-top: 12px; font-size: 11.5px; color: #C0392B; display: none; }
+  #ro-gate.bad .err { display: block; }
+  #ro-gate.bad input[type=password] { border-color: #C0392B; }
+</style>
+<div id="ro-gate">
+  <form class="box" autocomplete="off">
+    <h1>사내 열람용 문서</h1>
+    <p>사내 열람용 문서. 접근 암호를 입력하세요.</p>
+    <input type="password" aria-label="접근 암호">
+    <label class="rm"><input type="checkbox" checked>이 브라우저에서 기억</label>
+    <button type="submit">열기</button>
+    <div class="err">암호가 맞지 않습니다.</div>
+  </form>
+</div>
+<script>
+(function () {
+  var KEY = 'ro-doc-2026', H = '0a22bb45';
+  function fnv(s) {
+    var x = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) {
+      x ^= s.charCodeAt(i);
+      x = (x + ((x << 1) + (x << 4) + (x << 7) + (x << 8) + (x << 24))) >>> 0;
+    }
+    return ('0000000' + x.toString(16)).slice(-8);
+  }
+  var root = document.documentElement, g = document.getElementById('ro-gate');
+  root.classList.add('ro-locked');
+  function unlock() { if (g) g.parentNode.removeChild(g); root.classList.remove('ro-locked'); }
+  try {
+    if (localStorage.getItem(KEY) === H || sessionStorage.getItem(KEY) === H) { unlock(); return; }
+  } catch (e) {}
+  var f = g.querySelector('form'),
+      pw = g.querySelector('input[type=password]'),
+      rm = g.querySelector('input[type=checkbox]');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (fnv(pw.value + '::roland') !== H) { g.classList.add('bad'); pw.select(); return; }
+    try { (rm.checked ? localStorage : sessionStorage).setItem(KEY, H); } catch (e) {}
+    unlock();
+  });
+  pw.addEventListener('input', function () { g.classList.remove('bad'); });
+  setTimeout(function () { pw.focus(); }, 0);
+})();
+</script>
+<!-- △△△ 접근 게이트 △△△ -->
+
+<div class="shell">
+
+<nav class="lnb">
+  <span class="bmark">글로벌 결제 설계</span>
+  <span class="bsub">Ragnarok Portal · 2026-09</span>
+
+  <p class="grp">구조</p>
+  <a href="#a1">거버넌스 모델</a>
+  <a href="#a2">법인 · MID · 채널</a>
+  <a href="#a3">격리 규칙</a>
+  <a href="#a4">7대 기준 데이터</a>
+
+  <p class="grp">지사</p>
+  <a href="#b1">지사 코드</a>
+  <a href="#b2">지사별 편차</a>
+
+  <p class="grp">결제</p>
+  <a href="#c1">진입 경로</a>
+  <a href="#c2">과금 모델</a>
+  <a href="#c3">결제 플로우</a>
+  <a href="#c4">게임 연동 2대 API</a>
+  <a href="#c5">어댑터와 라우팅</a>
+
+  <p class="grp">정산</p>
+  <a href="#d1">직정산 구조</a>
+  <a href="#d2">세무 분리</a>
+  <a href="#d3">원장과 T+1 대사</a>
+
+  <p class="grp">환불</p>
+  <a href="#e1">Capability 제약</a>
+  <a href="#e2">환불 분기</a>
+  <a href="#e3">모델별 환불 규칙</a>
+
+  <p class="grp">운영<span class="tag">라이프사이클</span></p>
+  <a href="#f1">8단계 어드민</a>
+  <a href="#f2">엣지케이스 10</a>
+  <a href="#f3">문서 간 불일치</a>
+</nav>
+
+<main>
+
+<header class="mast">
+  <p class="kick">Design · Payment</p>
+  <h1>글로벌 결제 설계</h1>
+  <p class="stand">라그나로크 포털의 결제 · 정산 · 세무 구조 정리.
+  <b>본사가 계약과 키를 쥐고 · 지사가 대금과 세무를 쥐는</b> 분리선이 이 문서의 축이며,
+  회원·인증 설계가 정의한 랜드 계정 위에 결제 계층이 얹히는 관계.
+  모든 항목은 마스터 아키텍처 v1.0 및 프로토타입 마스터 데이터와 대조해 근거를 표기.</p>
+  <div class="meta">
+    <span><b>대상</b> 해외 법인 9 — 결제 적용 5 · PG 8 · 결제 채널 24+</span>
+    <span><b>대조 기준</b> 통합 결제 플랫폼 상세 설계 v1.0 · 프로토타입 <span class="mono">mock_data.js</span> · 공식 Global Network</span>
+    <span><b>정리</b> 2026-09-07</span>
+  </div>
+</header>
+
+<div class="part">
+  <span class="n">Part 1</span>
+  <h2>구조</h2>
+  <p>제어 흐름과 자금 흐름의 분리 · 법인에서 채널까지의 3계층 · 전 트랜잭션을 가르는 격리 키.</p>
+</div>
+
+<section id="a1">
+  <h3>거버넌스 모델</h3>
+  <p>본사는 <b>계약 · 키 · 정책</b>만 중앙에서 쥔다. 유저가 낸 돈은 본사를 거치지 않고
+  PG사에서 해당 지사 법인의 현지 계좌로 직접 입금된다.
+  두 흐름이 같은 방향으로 흐르지 않는다는 점이 이 설계의 핵심.</p>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 396" role="img" aria-label="본사 중앙 계약과 지사 직정산의 분리 구조도">
+      <defs>
+        <marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="480" y="15" class="dl f" text-anchor="middle">제어 흐름 — 계약 · 인증키 · 정책은 본사에서 아래로만 내려간다</text>
+
+      <rect x="250" y="26" width="460" height="52" rx="5" class="bx-mute"/>
+      <text x="480" y="47" class="dt" text-anchor="middle">본사 (HQ) 중앙 어드민</text>
+      <text x="480" y="66" class="ds" text-anchor="middle">PG 가맹점 계약 · MID 발급 · Secret Key(KMS Vault) · 라우팅 · 세무 정책</text>
+
+      <line x1="480" y1="78" x2="480" y2="104" class="ln" marker-end="url(#pa)"/>
+      <text x="492" y="96" class="dx f">키 · 정책 주입</text>
+
+      <rect x="250" y="106" width="460" height="58" rx="5" class="bx-key"/>
+      <text x="480" y="129" class="dt a" text-anchor="middle">포털 결제 허브</text>
+      <text x="480" y="149" class="ds" text-anchor="middle">세션 발급 · 스마트 라우팅 · Tax Engine · 배송 웹훅 · 복식부기 원장</text>
+
+      <rect x="30" y="110" width="184" height="50" rx="5" class="bx-mute"/>
+      <text x="122" y="131" class="dt" text-anchor="middle">유저</text>
+      <text x="122" y="150" class="ds" text-anchor="middle">회원 결제창 · D2C 웹샵</text>
+      <line x1="214" y1="135" x2="246" y2="135" class="ln" marker-end="url(#pa)"/>
+
+      <rect x="746" y="110" width="184" height="50" rx="5" class="bx-mute"/>
+      <text x="838" y="131" class="dt" text-anchor="middle">PG사 8종</text>
+      <text x="838" y="150" class="ds" text-anchor="middle">MID 단위 승인</text>
+      <line x1="714" y1="135" x2="742" y2="135" class="ln" marker-end="url(#pa)"/>
+
+      <line x1="480" y1="164" x2="480" y2="192" class="ln" marker-end="url(#pa)"/>
+      <rect x="250" y="194" width="460" height="48" rx="5" class="bx-mute"/>
+      <text x="480" y="215" class="dt" text-anchor="middle">지사 게임 서버</text>
+      <text x="480" y="233" class="ds" text-anchor="middle">POST /deliver — HMAC 서명 · 멱등키</text>
+
+      <line x1="30" y1="272" x2="930" y2="272" class="ln-hair"/>
+      <text x="480" y="292" class="dl f" text-anchor="middle">자금 흐름 — PG에서 지사 계좌로 직접 · 본사 미경유</text>
+
+      <path d="M838 160 L838 328 L716 328" class="ln" stroke-dasharray="5 4" marker-end="url(#pa)"/>
+      <rect x="250" y="302" width="460" height="52" rx="5" class="bx-key"/>
+      <text x="480" y="323" class="dt a" text-anchor="middle">지사 법인 현지 은행 계좌</text>
+      <text x="480" y="342" class="ds" text-anchor="middle">GV · GVI · GVC · GGA · GGT — 법인별 1:1 · 결제 적용 5개 법인</text>
+
+      <text x="480" y="380" class="ds f" text-anchor="middle">본사 장부에 해외 매출이 계상되지 않으므로 이전가격 · 외국환 송금 이슈가 발생하지 않는다</text>
+    </svg>
+    <figcaption>제어는 본사에서 단방향 · 자금은 PG에서 지사로 단방향. 두 흐름이 만나는 지점은 결제 허브의 원장뿐.</figcaption>
+  </figure>
+
+  <div class="note q">
+    <span class="lb">이 구조가 성립하는 이유</span>
+    <p>본사 대규모 거래량으로 <b>MDR을 한 번에 협상</b>하되 대금은 지사가 직접 수취하므로,
+    본사가 해외 매출을 계상하고 다시 송금하는 경로가 사라진다.
+    수수료 협상력과 세무 분리를 동시에 얻는 조합.</p>
+  </div>
+</section>
+
+<section id="a2">
+  <h3>법인 · MID · 채널</h3>
+  <p>결제 마스터는 <b>지사 법인 → MID → 결제 채널</b> 3계층.
+  계약과 정산 계좌는 MID에 붙고 · 결제창에 보이는 것은 채널.
+  같은 지사에 복수 MID가 붙을 수 있으나 <b>1 MID는 1 법인에만 귀속</b>.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th></th><th>지사 법인 (Entity)</th><th>MID</th><th>결제 채널 (Channel)</th></tr></thead>
+      <tbody>
+        <tr><td><b>무엇</b></td><td>매출 귀속 주체</td><td>PG 가맹점 계약 단위</td><td>결제창 UI 단위</td></tr>
+        <tr><td><b>키</b></td><td><span class="mono">entity_id</span></td><td><span class="mono">mid_code</span></td><td><span class="mono">channel_id</span></td></tr>
+        <tr><td><b>수량 관계</b></td><td>—</td><td>1 법인 : N MID</td><td>1 MID : N 채널</td></tr>
+        <tr><td><b>귀속 제약</b></td><td>—</td><td><b>1 MID : 1 법인 — 엄격</b></td><td>MID 종속</td></tr>
+        <tr><td><b>붙는 정보</b></td><td>사업자번호 · 세무 규격 · 정산 계좌</td><td>Secret Key · 수수료율 · 정산 주기 · 환불 가능 여부</td><td>결제 폼 · 아이콘 · 노출 순서 · 고지 문구</td></tr>
+        <tr><td><b>변경 시점</b></td><td>법인 설립 · 폐쇄</td><td>계약 체결 · 종료</td><td><b>런타임 실시간 토글</b></td></tr>
+        <tr><td><b>예</b></td><td>GVC</td><td><span class="mono">GRAVITY_TW_MYCARD_LIVE</span></td><td>선불카드 핀 · 편의점 바코드 · 통신사 소액</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">채널만 실시간 토글 대상인 이유 — 법인과 MID는 계약의 산출물이라 런타임에 바뀔 수 없고, PG 장애는 채널 단위로 발생한다.</p>
+
+  <p class="grp2">현재 등록된 MID 8건</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>MID</th><th>법인</th><th>PG</th><th>MDR</th><th>정산 주기</th><th>온라인 환불</th><th>정기결제</th></tr></thead>
+      <tbody>
+        <tr><td><b>MID_KR_TOSS_01</b></td><td>GV</td><td>토스페이먼츠</td><td>2.1%</td><td>T+2</td><td><span class="verdict yes">가능</span></td><td><span class="verdict yes">가능</span></td></tr>
+        <tr><td><b>MID_TW_MYCARD_01</b></td><td>GVC</td><td>MyCard</td><td>5.5%</td><td>T+7</td><td><span class="verdict no">불가</span></td><td><span class="verdict no">불가</span></td></tr>
+        <tr><td><b>MID_TW_GASH_01</b></td><td>GVC</td><td>GASH</td><td>4.8%</td><td>T+7</td><td><span class="verdict no">불가</span></td><td><span class="verdict no">불가</span></td></tr>
+        <tr><td><b>MID_US_STRIPE_01</b></td><td>GVI</td><td>Stripe</td><td>2.9% + $0.30</td><td>T+2</td><td><span class="verdict yes">가능</span></td><td><span class="verdict yes">가능</span></td></tr>
+        <tr><td><b>MID_US_PAYPAL_01</b></td><td>GVI</td><td>PayPal</td><td>3.49% + $0.49</td><td>T+1</td><td><span class="verdict yes">가능</span></td><td><span class="verdict yes">가능</span></td></tr>
+        <tr><td><b>MID_JP_SBPS_01</b></td><td>GGA</td><td>SoftBank Payment</td><td>3.2%</td><td>월 2회</td><td><span class="verdict yes">가능</span></td><td><span class="verdict yes">가능</span></td></tr>
+        <tr><td><b>MID_JP_KONBINI_01</b></td><td>GGA</td><td>편의점 현금 수납</td><td>4.0%</td><td>월 2회</td><td><span class="verdict no">불가</span></td><td><span class="verdict no">불가</span></td></tr>
+        <tr><td><b>MID_TH_2C2P_01</b></td><td>GGT</td><td>2C2P · PromptPay</td><td>3.6%</td><td>T+3</td><td><span class="verdict yes">가능</span></td><td><span class="verdict no">불가</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">수치는 프로토타입 <span class="mono">mock_data.js</span> 기준. 실계약 체결 시 계약서 값으로 대체 필요 — 대사 엔진의 기준 수수료율이 이 값이므로 오차가 그대로 불일치 건으로 잡힌다.</p>
+</section>
+
+<section id="a3">
+  <h3>격리 규칙</h3>
+  <p>결제 플랫폼은 단일 코어에서 동작하지만 데이터는 <span class="mono">entity_id</span>로 완전 분리.
+  이 키가 없으면 어느 법인의 매출인지 결정되지 않으므로 <b>전표 생성 자체가 불가</b>.</p>
+
+  <ul class="rule">
+    <li><b>모든 결제 전표는 <span class="mono">entity_id</span>를 필수 컬럼으로 가진다.</b> DB 파티션 키이자 인덱스 선두 컬럼. 조회 · 정산 · 리포트 전 경로에서 강제 필터로 걸린다.</li>
+    <li><b>귀속 법인은 유저가 아니라 서버가 결정한다.</b> 유저의 국적 · 접속 IP가 아니라 <b>구매 대상 게임 서버가 속한 지사</b>가 매출 귀속처. 대만 서버 캐릭터에 충전하면 한국 유저라도 GVC 매출.</li>
+    <li><b>세션 발급 시점에 법인이 확정되고 이후 변경 불가.</b> 결제창 토큰에 <span class="mono">entity_id</span>가 봉인되므로 세션 도중 지사 전환은 새 세션 발급으로만 가능.</li>
+    <li><b>MID 선택은 확정된 법인의 MID 풀 안에서만 이루어진다.</b> 라우팅 엔진이 타 법인 MID를 고를 경로가 존재하지 않는다 — 매출 귀속 오류의 구조적 차단.</li>
+    <li><b>원장 · 인보이스 · ERP 전송이 모두 <span class="mono">entity_id</span>로 분기한다.</b> 대사 결과와 회계 전표가 법인별로 독립 생성되어 각 지사 ERP로 나뉘어 전송.</li>
+  </ul>
+</section>
+
+<section id="a4">
+  <h3>7대 기준 데이터</h3>
+  <p>결제 1건을 성립시키는 데 필요한 마스터. 하나라도 미등록이면 결제창이 열리지 않는다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>기준 데이터</th><th>결정하는 것</th><th>등록 단계</th></tr></thead>
+      <tbody>
+        <tr><td><b>지사 법인</b></td><td>매출 귀속처 · 입금 계좌 · 세무 규격</td><td>Step 1</td></tr>
+        <tr><td><b>게임 · 서버</b></td><td>캐릭터 검증 대상 · 인게임 DB 네임스페이스</td><td>Step 3</td></tr>
+        <tr><td><b>결제 통화</b></td><td>결제창 표시가 · PG 전송 통화 코드</td><td>Step 1 — 법인 종속</td></tr>
+        <tr><td><b>PG · 결제수단</b></td><td>노출 UI · 호출 API · 환불 가능 여부</td><td>Step 2</td></tr>
+        <tr><td><b>상품 카탈로그</b></td><td>과금 유형 · 통화별 가격 · 계정당 한도</td><td>Step 4</td></tr>
+        <tr><td><b>지급 엔드포인트</b></td><td>게임 서버 Webhook URL · HMAC Secret</td><td>Step 3</td></tr>
+        <tr><td><b>세무 · 영수증 정책</b></td><td>부가세 포함가 여부 · 법정 증빙 연동</td><td>Step 1</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">Step 번호는 Part 6의 8단계 어드민 라이프사이클과 대응. 등록 순서가 곧 의존 순서다.</p>
+</section>

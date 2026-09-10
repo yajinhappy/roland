@@ -1,0 +1,193 @@
+<body>
+<!-- ▽▽▽ 사내 열람용 접근 게이트 ▽▽▽ -->
+<style>
+  html.ro-locked, html.ro-locked body { overflow: hidden !important; }
+  #ro-gate { position: fixed; inset: 0; z-index: 2147483000; background: #EEF1F5;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif; }
+  #ro-gate .box { width: 100%; max-width: 380px; background: #fff; border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(23,27,34,.12); padding: 32px 34px 30px; box-sizing: border-box; }
+  #ro-gate h1 { margin: 0 0 8px; font-size: 16px; font-weight: 600; color: #171B22; letter-spacing: -.01em; }
+  #ro-gate p { margin: 0 0 18px; font-size: 12px; color: #8A929E; line-height: 1.6; }
+  #ro-gate input[type=password] { width: 100%; height: 44px; padding: 0 13px; box-sizing: border-box;
+    border: 1.5px solid #2F6490; border-radius: 6px; font-size: 14px; color: #171B22; outline: none;
+    font-family: inherit; }
+  #ro-gate .rm { display: flex; align-items: center; gap: 8px; margin: 14px 0 16px;
+    font-size: 12px; color: #545C69; cursor: pointer; user-select: none; }
+  #ro-gate .rm input { width: 15px; height: 15px; accent-color: #2F6490; margin: 0; }
+  #ro-gate button { width: 100%; height: 46px; border: 0; border-radius: 6px; background: #2F6490;
+    color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  #ro-gate button:hover { background: #28577E; }
+  #ro-gate .err { margin-top: 12px; font-size: 11.5px; color: #C0392B; display: none; }
+  #ro-gate.bad .err { display: block; }
+  #ro-gate.bad input[type=password] { border-color: #C0392B; }
+</style>
+<div id="ro-gate">
+  <form class="box" autocomplete="off">
+    <h1>사내 열람용 문서</h1>
+    <p>사내 열람용 문서. 접근 암호를 입력하세요.</p>
+    <input type="password" aria-label="접근 암호">
+    <label class="rm"><input type="checkbox" checked>이 브라우저에서 기억</label>
+    <button type="submit">열기</button>
+    <div class="err">암호가 맞지 않습니다.</div>
+  </form>
+</div>
+<script>
+(function () {
+  var KEY = 'ro-doc-2026', H = '0a22bb45';
+  function fnv(s) {
+    var x = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) {
+      x ^= s.charCodeAt(i);
+      x = (x + ((x << 1) + (x << 4) + (x << 7) + (x << 8) + (x << 24))) >>> 0;
+    }
+    return ('0000000' + x.toString(16)).slice(-8);
+  }
+  var root = document.documentElement, g = document.getElementById('ro-gate');
+  root.classList.add('ro-locked');
+  function unlock() { if (g) g.parentNode.removeChild(g); root.classList.remove('ro-locked'); }
+  try {
+    if (localStorage.getItem(KEY) === H || sessionStorage.getItem(KEY) === H) { unlock(); return; }
+  } catch (e) {}
+  var f = g.querySelector('form'),
+      pw = g.querySelector('input[type=password]'),
+      rm = g.querySelector('input[type=checkbox]');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (fnv(pw.value + '::roland') !== H) { g.classList.add('bad'); pw.select(); return; }
+    try { (rm.checked ? localStorage : sessionStorage).setItem(KEY, H); } catch (e) {}
+    unlock();
+  });
+  pw.addEventListener('input', function () { g.classList.remove('bad'); });
+  setTimeout(function () { pw.focus(); }, 0);
+})();
+</script>
+<!-- △△△ 접근 게이트 △△△ -->
+
+<div class="shell">
+
+<nav class="lnb">
+  <span class="bmark">결제 개요</span>
+  <span class="bsub">Ragnarok Portal · 2026-09</span>
+
+</nav>
+
+<main>
+
+<header class="mast">
+  <p class="kick">Design · Payment</p>
+  <h1>결제 개요</h1>
+  <p class="stand"><b>지사별로 개별 구축했던 결제를 본사가 단일 구성으로 제공하고 각 지사가 연동해 사용한다.</b>
+  통합 결제창 1종 · 웹샵 템플릿 1종이며, PG 연동은 PG사당 1회로 끝난다.</p>
+</header>
+
+<section id="o1">
+  <h3>구조</h3>
+
+  <figure class="dia" style="margin-top:14px;">
+    <svg viewBox="0 0 960 306" role="img" aria-label="통합 결제 구조와 자금 경로">
+      <defs>
+        <marker id="oa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <rect x="410" y="20" width="140" height="32" rx="5" class="bx-mute"/>
+      <text x="480" y="41" class="ds" text-anchor="middle">유저</text>
+      <line x1="480" y1="52" x2="480" y2="70" class="ln" marker-end="url(#oa)"/>
+
+      <rect x="240" y="74" width="480" height="56" rx="5" class="bx-key"/>
+      <text x="480" y="98" class="dt a" text-anchor="middle">통합 결제 모듈 — 본사가 만들어 제공</text>
+      <text x="480" y="118" class="ds" text-anchor="middle">통합 결제창 · 웹샵 · PG 연동 · 어드민</text>
+
+      <line x1="480" y1="130" x2="480" y2="148" class="ln"/>
+      <line x1="330" y1="148" x2="630" y2="148" class="ln"/>
+      <line x1="330" y1="148" x2="330" y2="166" class="ln" marker-end="url(#oa)"/>
+      <line x1="480" y1="148" x2="480" y2="166" class="ln" marker-end="url(#oa)"/>
+      <line x1="630" y1="148" x2="630" y2="166" class="ln" marker-end="url(#oa)"/>
+
+      <rect x="260" y="168" width="140" height="38" rx="5" class="bx-mute"/>
+      <text x="330" y="192" class="ds" text-anchor="middle">지사 A</text>
+      <rect x="410" y="168" width="140" height="38" rx="5" class="bx-mute"/>
+      <text x="480" y="192" class="ds" text-anchor="middle">지사 B</text>
+      <rect x="560" y="168" width="140" height="38" rx="5" class="bx-mute"/>
+      <text x="630" y="192" class="ds" text-anchor="middle">지사 C</text>
+
+      <text x="480" y="228" class="ds f" text-anchor="middle">상품 · 가격 · 결제수단은 각 지사가 정한다</text>
+
+      <line x1="70" y1="248" x2="890" y2="248" class="ln-hair"/>
+
+      <text x="70" y="282" class="dl a">돈</text>
+      <rect x="250" y="262" width="110" height="32" rx="5" class="bx-mute"/>
+      <text x="305" y="283" class="ds" text-anchor="middle">PG사</text>
+      <line x1="360" y1="278" x2="398" y2="278" class="ln" marker-end="url(#oa)"/>
+      <rect x="402" y="262" width="160" height="32" rx="5" class="bx-key"/>
+      <text x="482" y="283" class="ds a" text-anchor="middle">각 지사 계좌</text>
+      <text x="582" y="283" class="ds f">본사를 거치지 않는다 · 본사 수수료 없음</text>
+    </svg>
+  </figure>
+
+  <p>결제 대금은 본사를 경유하지 않고 <b>각 지사 법인 계좌로 직접 입금</b>된다.
+  본사는 인프라를 제공하고, <b>판매 상품과 가격은 지사가 결정한다.</b></p>
+
+  <h3>역할</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:50%;">본사가 하는 것</th><th>지사가 하는 것</th></tr></thead>
+      <tbody>
+        <tr><td>PG 계약 조건 협상</td><td>법인 · 통화 · 정산 계좌 등록</td></tr>
+        <tr><td>인증키 발급 · 보관</td><td>쓸 결제수단 선택 · 금액 범위</td></tr>
+        <tr><td>통합 결제창 · 웹샵 · 어드민 제공</td><td>상품 등록 · 가격 책정</td></tr>
+        <tr><td>게임 연동 규격 정의</td><td>게임사 연동 · 확인</td></tr>
+        <tr><td>—</td><td>환불 처리 · 정산 확인</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">PG 계약은 <b>조건은 본사가 협상하고 명의는 지사가 갖는다.</b> 대금이 지사 계좌로 들어와야 하기 때문이다.</p>
+
+  <h3>유저 결제 흐름</h3>
+
+<pre>상품 선택  →  <b>지급 대상 확정</b>  →  통화 · 결제수단 선택 · 결제  →  <b>지급 요청</b>  →  계정 우편함 수령
+                    ↑                                                   ↑
+              <span class="f">게임 서버가 제공할 API는 이 둘 · 재화 회수는 Phase 2</span></pre>
+
+  <p>게임팀은 <b>PG 규격을 알 필요가 없다.</b> 결제 모듈이 PG 연동을 담당하고, 게임 서버는 표준 API만 제공한다.</p>
+
+  <h3>화면</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:120px;">누가 보나</th><th style="width:60px;">개수</th><th>화면</th></tr></thead>
+      <tbody>
+        <tr><td><b>유저</b></td><td>2</td><td>웹샵 · 통합 결제창</td></tr>
+        <tr><td><b>관리자 · 본사</b></td><td>2</td><td>결제 모듈 관리 · 키 발급</td></tr>
+        <tr><td><b>관리자 · 지사</b></td><td>8</td><td>결제 준비도 · 법인 · 결제수단 · 게임 연동 · 상품 가격 · 모니터링 · 환불 · 정산 대사</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>어드민은 <b>시스템 하나</b>고 로그인한 사람에 따라 보이는 화면이 다르다.
+  지사 계정으로 들어오면 자기 법인 화면만 보인다.</p>
+
+  <h3>정해야 할 것</h3>
+
+  <p><b>국가별 데이터 이전 법적 확인</b>이 다른 결정의 전제다.
+  어드민을 하나로 통합하는 전제가 여기 걸려 있고, 막히는 나라가 있으면 그 나라만 분리해야 한다.
+  이 항목을 포함한 미결 15건은 <a href="payment.html#review">결제 설계 — 검토 필요사항</a>에 있다.</p>
+</section>
+
+<footer class="doc">
+  <h4>관련 문서</h4>
+  <ul>
+    <li><b><a href="webshop-payment-prd.html">웹샵/통합결제 기획</a></b> — 상위 기준 문서. 아키텍처 · 프로비저닝 · 장애 대응 · 환불 정책</li>
+    <li><b><a href="payment.html">결제 설계</a></b> — 프로세스와 구조. 검토 필요사항 15건</li>
+    <li><b><a href="payment-webshop-structure.html">웹샵/통합결제 구조</a></b> — 지사 도입 절차 · 자금 경로 · 거래 단위 원칙</li>
+    <li><b><a href="global-payment.html">글로벌 결제 설계 (상세)</a></b> — 규격 · 필드</li>
+  </ul>
+  <p style="margin-top:14px">라그나로크 포털 · 결제 개요 · 2026-09-08</p>
+</footer>
+
+</main>
+</div>

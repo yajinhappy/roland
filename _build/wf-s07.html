@@ -1,0 +1,183 @@
+<section class="screen" id="s07">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="shd"><span class="id">ST-07</span><span class="nm">환불 · CS</span></div>
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs"><button type="button" class="tab tab-on" data-dev="pc">PC</button></div>
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="ahd">
+          <span class="alogo">RAGNAROK PORTAL <span style="color:#2F6490;">PAY</span></span>
+          <span style="width:1px;height:16px;background:#DCE2E8;"></span><span class="ts">본사 통합 어드민</span>
+          <span class="ent" style="margin-left:auto;"><span class="dot dot-g"></span><span class="mono">전체</span> 전 법인 통합 <span style="font-size:9px;color:#98A2AE;">▾</span></span>
+          <span class="fltr" style="gap:6px;">운영자 <b style="color:#2C333D;">cs.kim</b> · CS Manager</span>
+        </div>
+
+        <div class="abody">
+          <div class="snb">
+            <div class="snb-g">온보딩</div>
+            <div class="snb-i"><span class="mono">00</span> 결제 준비도</div>
+            <div class="snb-g">기반 구축</div>
+            <div class="snb-i"><span class="mono">01</span> 지사 법인 · 세무</div>
+            <div class="snb-i" style="color:#98A2AE;"><span class="mono">02</span> PG 계약 · 머천트 <span class="tx" style="margin-left:auto;">본사</span></div>
+            <div class="snb-i"><span class="mono">03</span> 게임 · Webhook</div>
+            <div class="snb-i"><span class="mono">04</span> 상품 SKU · 가격</div>
+            <div class="snb-i"><span class="mono">05</span> 라우팅 · 한도</div>
+            <div class="snb-g">운영 · 정산</div>
+            <div class="snb-i"><span class="mono">06</span> 결제 모니터링</div>
+            <div class="snb-i on"><span class="mono">07</span> 환불 · CS 분쟁</div>
+            <div class="snb-i"><span class="mono">08</span> T+1 정산 대사</div>
+          </div>
+
+          <div class="amain">
+            <div class="atitle"><span class="ttl-s">환불 · CS 분쟁 처리</span><span class="ts">Step 07</span></div>
+            <span class="tm">환불 가능 여부를 결정하는 것은 정책이 아니라 PG의 물리적 제약이다. 접수 즉시 두 갈래로 분기한다.</span>
+
+            <!-- 분기 엔진 -->
+            <div class="sec" style="margin-top:18px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">2</div>
+              <div class="card">
+                <div class="card-h"><span class="h-s">지능형 환불 분기 엔진</span><span class="ts" style="margin-left:auto;">Step 2 MID Capability 마스터 참조</span></div>
+                <div style="padding:16px;display:flex;align-items:stretch;gap:14px;">
+                  <div class="bx" style="flex:none;width:186px;padding:12px 14px;display:flex;flex-direction:column;gap:5px;">
+                    <span class="lbl-k">접수</span><span class="t">환불 요청</span>
+                    <span class="tx">사유 코드 입력 의무</span>
+                  </div>
+                  <div style="display:flex;align-items:center;color:#A0A8B4;">→</div>
+                  <div class="bx key" style="flex-grow:1;padding:12px 14px;display:flex;flex-direction:column;gap:7px;">
+                    <span class="lbl-k">판정 1 · 운영 모드</span>
+                    <div style="display:flex;gap:8px;"><span class="chip-on">자동 환불</span><span class="tm">미수령 · 미사용 · 7일 이내</span></div>
+                    <div style="display:flex;gap:8px;"><span class="chip">CS 검토</span><span class="tm">조건 미충족 또는 법인 정책상 수동</span></div>
+                  </div>
+                  <div style="display:flex;align-items:center;color:#A0A8B4;">→</div>
+                  <div class="bx key" style="flex-grow:1;padding:12px 14px;display:flex;flex-direction:column;gap:7px;">
+                    <span class="lbl-k">판정 2 · PG Capability</span>
+                    <div style="display:flex;gap:8px;"><span class="tag-g">API 지원</span><span class="tm">원클릭 취소 → <span class="mono">/revoke</span> 회수</span></div>
+                    <div style="display:flex;gap:8px;"><span class="tag-r">API 불가</span><span class="tm">수기 계좌 송금 워크플로우로 <b style="color:#2C333D;">자동 전환</b></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sec abar">
+              <div class="mk" style="position:absolute;top:-4px;right:-10px;">5</div>
+              <span class="fltr" style="width:200px;color:#98A2AE;">주문번호 · 캐릭터명 검색</span>
+              <span class="fltr">처리 유형 <span style="font-size:9px;">▾</span></span>
+              <span class="fltr">사유 코드 <span style="font-size:9px;">▾</span></span>
+              <span style="margin-left:auto;"></span>
+              <span class="fltr"><span class="dot dot-a"></span> 승인 대기 <b style="color:#2C333D;">6</b></span>
+              <span class="btn-s">지사 재무팀 송금 목록</span>
+            </div>
+
+            <div class="card">
+              <div class="card-h"><span class="h-s">환불 접수 목록</span><span class="tag-n">진행 12</span><span class="tag-a">수기 송금 6</span><span class="tag-r">보류 2</span></div>
+              <div class="sec">
+                <div class="mk" style="position:absolute;top:26px;left:-10px;">1</div>
+                <div class="mk" style="position:absolute;top:26px;left:700px;">3</div>
+                <div class="mk" style="position:absolute;top:26px;left:906px;">4</div>
+                <div class="mk" style="position:absolute;top:26px;right:-10px;">6</div>
+                <table class="tbl tbl-z">
+                  <thead><tr>
+                    <th style="width:72px;">법인</th><th style="width:150px;">주문번호</th>
+                    <th style="width:158px;">상품 · 금액</th><th style="width:130px;">사유 코드</th>
+                    <th style="width:182px;">결제 채널 · 판정</th><th style="width:196px;">재화 상태</th>
+                    <th style="width:150px;">처리</th><th>담당</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b class="mono">GV</b></td><td class="mono tx">tx_..._001799</td><td>스타터 패키지<div class="tx num">₩ 33,000</div></td><td>오결제<div class="tx mono">R-102</div></td><td>토스 · 신한카드<div class="tx" style="color:#3E9A63;">API 취소 가능</div></td><td><span class="tag-g">미수령</span><div class="tx">우편함 대기 중</div></td><td><span class="btn-ps">원클릭 취소</span></td><td class="tx">자동</td></tr>
+                    <tr><td><b class="mono">GVI</b></td><td class="mono tx">tx_..._001815</td><td>VIP 멤버십<div class="tx num">$ 7.57</div></td><td>구독 해지<div class="tx mono">R-301</div></td><td>Stripe · Visa<div class="tx" style="color:#3E9A63;">부분 환불 가능</div></td><td><span class="tag-n">기간 진행 중</span><div class="tx">잔여 18일 · 일할 계산</div></td><td><span class="btn-ps">부분 환불</span></td><td class="tx">cs.kim</td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">GVC</b></td><td class="mono tx">tx_..._001928</td><td>다이아몬드 1,000<div class="tx num">NT$ 270</div></td><td>서비스 장애<div class="tx mono">R-205</div></td><td>MyCard 선불카드 핀<div class="tx" style="color:#8C3A3A;">API 취소 원천 불가</div></td><td><span class="tag-a">일부 소모</span><div class="tx">잔여 640 / 1,100</div></td><td><span class="btn-s">수기 송금 접수</span></td><td class="tx">GVC 재무팀</td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">GGA</b></td><td class="mono tx">tx_..._001721</td><td>10,000 KP<div class="tx num">¥ 1,000</div></td><td>미성년 결제<div class="tx mono">R-401</div></td><td>편의점 현금 수납<div class="tx" style="color:#8C3A3A;">API 취소 원천 불가</div></td><td><span class="tag-g">미사용</span><div class="tx">포털 원장 잔액 100%</div></td><td><span class="btn-s">수기 송금 접수</span></td><td class="tx">GGA 재무팀</td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">GVC</b></td><td class="mono tx">tx_..._001655</td><td>다이아몬드 5,000<div class="tx num">NT$ 1,350</div></td><td>차지백<div class="tx mono">R-901</div></td><td>MyCard 포인트<div class="tx" style="color:#8C3A3A;">분쟁 접수됨</div></td><td><span class="tag-r">전량 소모</span><div class="tx" style="color:#8C3A3A;">가챠 소진 · 회수 불가</div></td><td><span class="tag-r">계정 정지</span><div class="tx">증빙 자동 제출됨</div></td><td class="tx">보류</td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">GGT</b></td><td class="mono tx">tx_..._001803</td><td>10,000 KP<div class="tx num">฿ 260</div></td><td>미배송<div class="tx mono">R-501</div></td><td>TrueMoney Wallet<div class="tx" style="color:#3E9A63;">API 취소 가능</div></td><td><span class="tag-r">미지급</span><div class="tx" style="color:#8C3A3A;">PENDING_DELIVERY 3/10</div></td><td><span class="btn-s">수동 지급</span> <span class="btn-s">취소</span></td><td class="tx">cs.kim</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="bx" style="margin-top:14px;padding:12px 15px;display:flex;gap:11px;align-items:flex-start;background:#FDF7F7;border-color:#E0BEBE;">
+              <span class="dot dot-r" style="margin-top:5px;"></span>
+              <span class="tm"><b style="color:#8C3A3A;">「일부 소모」 건의 판단 기준이 없다</b> — 잔여 640/1,100 인 건을 전액 환불할지 · 잔여분만 환불할지 · 거부할지를 결정할 임계값과 회수 우선순위가 정의되어 있지 않다. <span class="mono">/revoke</span> 규격과 함께 확정 필요.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="dcol">
+      <h4>ST-07 · 환불 &amp; CS 분쟁 처리</h4>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">환불 관리 마스터</span><span class="src">CS 데스크</span></div>
+        <p class="dr-b">오결제 · 서비스 장애 · 미지급 · 차지백을 한 목록에서 처리한다. 행마다 <b>결제 채널의 Capability가 이미 판정되어</b> 있어 담당자가 판단할 것은 사실관계뿐이다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">사유 코드</span><span class="spec-v">입력 의무 — 자유 서술 금지. 통계와 정책 개선의 입력값</span></div>
+          <div class="spec-r"><span class="spec-k">담당</span><span class="spec-v">API 취소는 CS · <b>수기 송금은 해당 법인 재무팀</b>으로 이관</span></div>
+          <div class="spec-r"><span class="spec-k">색 구분</span><span class="spec-v">붉은 행 = 자동 처리 불가 · 사람 손이 필요한 건</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">지능형 분기 엔진</span><span class="src">엔진</span></div>
+        <p class="dr-b">두 번 갈린다. 첫 번째는 <b>운영 모드</b>(자동 · CS 검토), 두 번째는 <b>PG Capability</b>(API · 수기). 두 번째 판정은 사람이 바꿀 수 없다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">자동 조건</span><span class="spec-v">미수령 · 미사용 · 7일 이내 — 3개 모두 충족</span></div>
+          <div class="spec-r"><span class="spec-k">자동 절차</span><span class="spec-v">게임 서버 실시간 검증 → PG 환불 API → 재화 회수 → 원장 역분개</span></div>
+          <div class="spec-r"><span class="spec-k">우선순위</span><span class="spec-v"><b>Capability가 정책보다 상위</b> — 조건을 충족해도 채널이 불가면 수기로 간다</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">원클릭 API 취소</span><span class="src">API 호출</span></div>
+        <p class="dr-b">PG 취소 API 호출에 성공하면 즉시 게임 서버로 <span class="mono">POST /revoke</span> 를 호출해 재화를 회수하고 원장을 역분개한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">순서</span><span class="spec-v">PG 취소 <b>성공 후에</b> 회수 — 순서가 바뀌면 재화만 사라진다</span></div>
+          <div class="spec-r"><span class="spec-k">회수 실패</span><span class="spec-v">재화 소모 시 계정 임시 동결 또는 잔여분 부분 환불</span></div>
+          <div class="spec-r"><span class="spec-k">원장</span><span class="spec-v">역분개로만 수정 · 원 전표는 불변 유지</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">/revoke 규격 미정</div>
+          <p class="warn-b">이 버튼이 호출할 API의 <b>요청 · 응답 규격이 문서화되어 있지 않다</b>. 부분 회수 · 잔여 부족 · 계정 동결의 반환 형태가 환불 승인 여부를 좌우하므로 Step 3에 등록 항목과 함께 확정 필요.</p>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">재화 상태</span><span class="src">게임 서버 조회</span></div>
+        <p class="dr-b">환불 판단의 사실관계. 게임 서버에 실시간 조회해 <b>미수령 · 미사용 · 일부 소모 · 전량 소모</b> 4단계로 표기한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">미수령</span><span class="spec-v">우편함 대기 중 — 전액 환불 · 회수 불필요</span></div>
+          <div class="spec-r"><span class="spec-k">미사용</span><span class="spec-v">인벤토리 · 원장에 전량 존재 — 전액 환불 · 회수</span></div>
+          <div class="spec-r"><span class="spec-k">일부 소모</span><span class="spec-v"><b>판단 기준 미정</b> — 잔여 수량을 표기하되 결정은 담당자에게 남는다</span></div>
+          <div class="spec-r"><span class="spec-k">전량 소모</span><span class="spec-v">가챠 소진 등 — 차지백 시 계정 정지 및 증빙 자동 제출</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">수기 계좌 송금 워크플로우</span><span class="src">수동 데스크</span></div>
+        <p class="dr-b">API 취소가 원천 불가한 채널(MyCard · GASH · 편의점 현금)의 환불 경로. 유저 서류를 접수하고 <b>해당 법인 재무팀 송금 목록으로 이관</b>한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">접수 서류</span><span class="spec-v">통장 사본 · 신분증 — 전용 모달로 업로드</span></div>
+          <div class="spec-r"><span class="spec-k">승인</span><span class="spec-v">지사 재무팀 <b>2차 검수</b> 후 송금 완료 처리</span></div>
+          <div class="spec-r"><span class="spec-k">사전 고지</span><span class="spec-v">결제창에서 이미 「자동 환불 불가 · 수기 환불 시 수수료 발생」 동의를 받았다</span></div>
+          <div class="spec-r"><span class="spec-k">개인정보</span><span class="spec-v">송금 완료 후 보관 기간 만료 시 자동 파기 — 익명화 시점 별도 정의 필요</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">미배송 건의 처리</span><span class="src">행 액션</span></div>
+        <p class="dr-b">배송 실패 격리 건은 환불이 아니라 <b>수동 지급이 우선</b>이다. 유저가 원한 것은 환불이 아니라 상품이기 때문.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">1순위</span><span class="spec-v">수동 지급 — 재시도 큐를 건너뛰고 즉시 웹훅 재발송</span></div>
+          <div class="spec-r"><span class="spec-k">2순위</span><span class="spec-v">게임 서버 복구 불가 시에만 취소 · 환불</span></div>
+          <div class="spec-r"><span class="spec-k">대체 지급</span><span class="spec-v">상품 만료 시 <b>해당 법인 게임 포인트로 자동 대체 충전</b></span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>

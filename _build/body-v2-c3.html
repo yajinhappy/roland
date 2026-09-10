@@ -1,0 +1,123 @@
+
+<div class="part">
+  <span class="n">3장</span>
+  <h2>유저는 어떻게 결제하나</h2>
+  <p>상품을 고르고 아이템을 받기까지, 그리고 게임팀이 만들어야 할 것.</p>
+</div>
+
+<section id="c3">
+  <h3>다섯 걸음</h3>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 246" role="img" aria-label="유저가 결제하는 다섯 단계">
+      <defs>
+        <marker id="v3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <rect x="32" y="34" width="160" height="88" rx="5" class="bx-mute"/>
+      <text x="112" y="60" class="dl f" text-anchor="middle">1</text>
+      <text x="112" y="82" class="dt" text-anchor="middle">상품을 고른다</text>
+      <text x="112" y="102" class="ds" text-anchor="middle">웹샵 또는 게임 안 상점</text>
+      <line x1="192" y1="78" x2="212" y2="78" class="ln" marker-end="url(#v3a)"/>
+
+      <rect x="216" y="34" width="160" height="88" rx="5" class="bx-key"/>
+      <text x="296" y="60" class="dl a" text-anchor="middle">2</text>
+      <text x="296" y="82" class="dt a" text-anchor="middle">지급 대상 확인</text>
+      <text x="296" y="102" class="ds" text-anchor="middle">계정 또는 캐릭터</text>
+      <line x1="376" y1="78" x2="396" y2="78" class="ln" marker-end="url(#v3a)"/>
+
+      <rect x="400" y="34" width="160" height="88" rx="5" class="bx-mute"/>
+      <text x="480" y="60" class="dl f" text-anchor="middle">3</text>
+      <text x="480" y="82" class="dt" text-anchor="middle">결제수단 골라 결제</text>
+      <text x="480" y="102" class="ds" text-anchor="middle">카드 · 간편결제 · 편의점</text>
+      <line x1="560" y1="78" x2="580" y2="78" class="ln" marker-end="url(#v3a)"/>
+
+      <rect x="584" y="34" width="160" height="88" rx="5" class="bx-key"/>
+      <text x="664" y="60" class="dl a" text-anchor="middle">4</text>
+      <text x="664" y="82" class="dt a" text-anchor="middle">게임에 지급 요청</text>
+      <text x="664" y="102" class="ds" text-anchor="middle">결제 모듈 → 게임 서버</text>
+      <line x1="744" y1="78" x2="764" y2="78" class="ln" marker-end="url(#v3a)"/>
+
+      <rect x="768" y="34" width="160" height="88" rx="5" class="bx-mute"/>
+      <text x="848" y="60" class="dl f" text-anchor="middle">5</text>
+      <text x="848" y="82" class="dt" text-anchor="middle">게임에서 받는다</text>
+      <text x="848" y="102" class="ds" text-anchor="middle">우편함 · 계정 잔액</text>
+
+      <path d="M296 122 L296 152 L664 152 L664 122" class="ln" stroke-dasharray="4 4"/>
+      <rect x="352" y="162" width="256" height="34" rx="5" class="bx-key"/>
+      <text x="480" y="184" class="dt a" text-anchor="middle">게임팀이 만들 API는 이 둘뿐</text>
+
+      <text x="480" y="228" class="ds f" text-anchor="middle">1 · 3 · 5는 유저가 하는 일 · 2 · 4는 시스템이 게임 서버에 묻고 요청하는 일</text>
+    </svg>
+    <figcaption>다섯 걸음 중 게임팀 작업은 파란 두 칸에만 걸린다.</figcaption>
+  </figure>
+
+  <p>유저는 <b>웹샵</b>과 <b>게임 안 상점</b> 두 경로로 들어오지만 결제 페이지는 하나를 쓴다.
+  게임팀 작업은 <b>2걸음(대상 확인)과 4걸음(지급)</b>에만 걸리고, 환불 회수까지 합쳐 API 셋을 만든다.
+  PG사 규격 · 결제창 · 카드 정보 · 환율 · 세금 · PG 장애 대응은 전부 결제 모듈이 처리한다.</p>
+
+  <h3>지급 단위 — 계정이냐 캐릭터냐</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th></th><th>캐릭터에게 준다</th><th>계정에게 준다</th></tr></thead>
+      <tbody>
+        <tr><td><b>누가 쓸 수 있나</b></td><td>그 캐릭터만</td><td><b>계정의 모든 캐릭터</b></td></tr>
+        <tr><td><b>유저가 입력하는 것</b></td><td>게임 · 서버 · 캐릭터명</td><td>게임 · <b>계정 아이디</b></td></tr>
+        <tr><td><b>확인 화면에 뜨는 것</b></td><td>캐릭터명 · 레벨 · 직업</td><td>계정 아이디 (일부 가림)</td></tr>
+        <tr><td><b>주로 이런 상품</b></td><td>아이템 · 코스튬 · 패키지</td><td>게임 포인트 · 이용권 · 구독</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">지사 관리자가 상품을 등록할 때 정하고 <b>판매를 시작하면 바꿀 수 없다</b> — 이미 지급된 것의 사용 범위가 나중에 달라지면 유저 자산이 흔들린다.
+  2걸음에서 <b>남의 캐릭터명을 입력하면 그게 선물</b>이므로 별도 「선물하기」 기능을 만들지 않는다.</p>
+
+  <h3>로그인이 필요한 상품</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>상품</th><th>로그인</th><th>왜</th></tr></thead>
+      <tbody>
+        <tr><td>인게임 아이템 · 코스튬 · 패키지</td><td><b>필요 없음</b></td><td>캐릭터명 확인만으로 대상이 정해진다</td></tr>
+        <tr><td>게임 포인트</td><td>경우에 따라</td><td>계정 지갑에 들어가므로 계정을 특정해야 한다</td></tr>
+        <tr><td>이용권 · 구독</td><td><b>필요</b></td><td>계정 권한을 바꾸는 일이라 본인 확인이 필요하다</td></tr>
+        <tr><td>계정당 1회 한정 상품</td><td><b>필요</b></td><td>로그인 없이는 이미 샀는지 확인할 수 없다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">로그인 없는 결제에는 <b>금액 상한이 걸린다</b> — 누적 결제를 추적할 수 없어 법정 한도를 건 단위로만 통제할 수 있다.
+  상한을 넘기려는 유저는 로그인으로 유도된다.</p>
+
+  <h3>게임팀이 만드는 API</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>API</th><th>누가 부르나</th><th>무엇을 하나</th></tr></thead>
+      <tbody>
+        <tr><td><b>결제 시작</b></td><td>상점 → <b>결제 모듈</b></td><td>결제 페이지를 열어달라고 요청한다. 상품과 대상만 알려주고 <b>금액은 보내지 않는다</b></td></tr>
+        <tr><td><b>대상 확인</b></td><td>결제 모듈 → <b>게임 서버</b></td><td>이 계정 · 캐릭터가 있는지 답한다 (2걸음)</td></tr>
+        <tr><td><b>지급</b></td><td>결제 모듈 → <b>게임 서버</b></td><td>결제가 끝났으니 지급해달라 (4걸음)</td></tr>
+        <tr><td><b>회수</b></td><td>결제 모듈 → <b>게임 서버</b></td><td>환불이 됐으니 지급한 것을 되돌려달라</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">첫 줄만 방향이 반대다 — 상점이 결제 모듈을 부른다. 그래서 <b>게임 서버가 만들 것은 아래 셋</b>이다.
+  상점이 금액을 보내지 않는 이유는 <b>조작을 막기 위해서</b>다 — 11,000원짜리를 1,100원으로 바꿔 보낼 수 있으므로, 상점은 「어떤 상품」인지만 알려주고 금액은 결제 모듈이 등록된 가격표에서 계산한다.</p>
+
+  <h3>결제는 됐는데 아이템이 안 왔을 때</h3>
+
+  <p>4걸음에서 게임 서버가 점검 중이거나 네트워크가 끊기면 지급 요청이 실패한다.
+  <b>돈은 이미 빠져나갔고 아이템은 없는 상태</b>가 되고, 이걸 넷으로 막는다.</p>
+
+  <ul class="rule">
+    <li><b>실패한 건을 따로 모아둔다.</b> 「결제됐지만 아직 못 준 건」이라는 상태로 표시해 잃어버리지 않게 한다.</li>
+    <li><b>자동으로 다시 시도한다.</b> 1분 · 5분 · 15분 · 1시간 간격으로 재시도하고, 게임 서버가 살아나면 그때 지급된다.</li>
+    <li><b>같은 요청이 여러 번 가도 한 번만 지급된다.</b> 게임 서버가 주문번호를 기억해 중복을 걸러낸다 — 게임팀 구현에서 가장 중요한 부분이다.</li>
+    <li><b>유저에게는 「결제 완료 · 지급 처리 중」으로 안내한다.</b> 「결제 실패」로 표시하면 유저가 다시 결제해 이중 결제가 발생한다. 재시도가 계속 실패하면 고객센터로 넘어가 운영자가 수동 지급한다.</li>
+  </ul>
+</section>

@@ -1,0 +1,189 @@
+<style>
+  /* ═══════════ 결제 완료 ═══════════ */
+  .cp-wrap { max-width: 1600px; margin: 0 auto; padding: 36px 24px 40px;
+    display: flex; flex-direction: column; gap: 16px; align-items: center; }
+  .cp-ico { width: 50px; height: 50px; border-radius: 50%; background: #EDF7F1;
+    border: 1px solid #B4D6C2; color: #2E6B45; font-size: 22px;
+    display: flex; align-items: center; justify-content: center; flex: none; }
+  .cp-msg { font-size: 19px; font-weight: 600; color: #171B22; text-align: center;
+    letter-spacing: -.022em; line-height: 1.4; }
+  .cp-sub { font-size: 12.5px; color: #545C69; text-align: center; line-height: 1.75; }
+  .cp-card { width: 100%; max-width: 660px; border: 1px solid #D5DBE2;
+    border-radius: 5px; background: #fff; position: relative; }
+  .cp-ch { padding: 11px 14px; border-bottom: 1px solid #EDF0F4; background: #FAFBFC;
+    font-size: 12px; font-weight: 600; color: #171B22;
+    display: flex; align-items: center; gap: 8px; }
+  .cp-cb { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .cp-mail { display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+    border: 1px solid #BFD9C7; background: #F1F8F3; border-radius: 4px;
+    font-size: 12px; color: #2E6B45; }
+  .cp-dr { display: flex; padding: 9px 0; border-bottom: 1px solid #F1F3F6; font-size: 12px; }
+  .cp-dr:last-child { border-bottom: 0; padding-bottom: 0; }
+  .cp-dr .k2 { flex: none; width: 118px; color: #7A828E; }
+  .cp-dr .v2 { flex: 1; color: #232B35; }
+  .cp-act { display: flex; gap: 9px; width: 100%; max-width: 660px; }
+  .cp-act > span { flex: 1; text-align: center; padding: 12px 0; border-radius: 4px;
+    font-size: 13px; font-weight: 600; }
+  .cp-act .p { background: #2C333D; color: #fff; }
+  .cp-act .s { border: 1px solid #C4CCD5; background: #fff; color: #434A57; }
+  .cp-wait { display: flex; align-items: center; gap: 9px; padding: 11px 13px;
+    border: 1px dashed #C4CCD5; background: #FAFBFC; border-radius: 4px;
+    font-size: 11.5px; color: #6C7480; }
+
+  /* ═══════════ 구매내역 ═══════════ */
+  .hs-wrap { max-width: 1600px; margin: 0 auto; padding: 20px 24px 28px;
+    display: flex; gap: 20px; align-items: flex-start; }
+  .hs-main { flex: 1; min-width: 0; display: flex; flex-direction: column;
+    gap: 12px; position: relative; }
+  .hs-side { width: 300px; flex: none; display: flex; flex-direction: column;
+    gap: 11px; position: relative; }
+  .hs-per { display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+    position: relative; }
+  .hs-per .pk { display: inline-flex; align-items: center; gap: 9px; height: 32px;
+    padding: 0 12px; border: 1px solid #C9D0D9; border-radius: 4px; background: #fff;
+    font-size: 12px; color: #434A57; }
+  .hs-per .pk b { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: #171B22; }
+
+  .hs-tbl { width: 100%; border-collapse: collapse; border: 1px solid #E1E6EC;
+    background: #fff; }
+  .hs-tbl th { padding: 10px; text-align: left; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .04em; color: #7A828E; background: #FAFBFC;
+    border-bottom: 1px solid #E4E8ED; white-space: nowrap; }
+  .hs-tbl td { padding: 11px 10px; border-bottom: 1px solid #F1F3F6;
+    font-size: 12px; color: #545C69; }
+  .hs-tbl tr:last-child td { border-bottom: 0; }
+  .hs-tbl td.n { font-family: "IBM Plex Mono", monospace; color: #7A828E; }
+  .hs-tbl td.pr { font-family: "IBM Plex Mono", monospace; color: #171B22; font-weight: 500; }
+  .hs-rc { display: inline-flex; width: 23px; height: 23px; border: 1px solid #C4CCD5;
+    border-radius: 3px; align-items: center; justify-content: center;
+    font-size: 11px; color: #6C7480; background: #fff; }
+  .hs-rc.off { border-color: #EDF0F4; color: #CBD2DA; background: #FAFBFC; }
+
+  .hs-pg { display: flex; align-items: center; justify-content: center; gap: 4px;
+    padding-top: 4px; }
+  .hs-pg span { min-width: 26px; height: 26px; display: inline-flex; align-items: center;
+    justify-content: center; border: 1px solid #D5DBE2; border-radius: 3px;
+    background: #fff; font-size: 11.5px; color: #545C69;
+    font-family: "IBM Plex Mono", monospace; }
+  .hs-pg span.on { background: #2F6490; border-color: #2F6490; color: #fff; font-weight: 600; }
+  .hs-pg span.dis { color: #CBD2DA; }
+  .hs-empty { padding: 56px 12px; text-align: center; font-size: 12.5px; color: #98A2AE;
+    border: 1px solid #E1E6EC; background: #fff; }
+
+  /* MO 카드형 */
+  .hs-mc { border: 1px solid #E1E6EC; border-radius: 5px; background: #fff;
+    padding: 11px 12px; display: flex; flex-direction: column; gap: 7px; }
+  .hs-mc .t1 { display: flex; align-items: center; gap: 8px; }
+  .hs-mc .t1 .no { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: #98A2AE; }
+  .hs-mc .t1 .od { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: #545C69; }
+  .hs-mc .t2 { font-size: 12.5px; color: #232B35; }
+  .hs-mc .t2 span { display: block; font-size: 11px; color: #7A828E; margin-top: 3px; }
+  .hs-mc .t3 { display: flex; align-items: center; justify-content: space-between;
+    padding-top: 8px; border-top: 1px solid #F1F3F6; }
+  .hs-mc .t3 b { font-family: "IBM Plex Mono", monospace; font-size: 13px;
+    font-weight: 600; color: #171B22; }
+  .hs-bar { display: flex; align-items: center; gap: 9px; padding: 10px 12px;
+    border: 1px solid #BFD9C7; background: #F1F8F3; border-radius: 4px;
+    font-size: 11.5px; color: #2E6B45; }
+
+  /* 영수증 팝업 */
+  .hs-rcpt { width: 430px; background: #fff; border-radius: 6px;
+    box-shadow: 0 20px 60px rgba(23,27,34,.34); position: relative; }
+  .hs-rcpt-h { padding: 14px 18px; border-bottom: 1px solid #E4E8ED;
+    display: flex; align-items: center; gap: 10px; }
+  .hs-rcpt-b { padding: 16px 18px; display: flex; flex-direction: column; gap: 0; }
+  .hs-seal { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 9.5px;
+    letter-spacing: .06em; color: #98A2AE; }
+
+  /* ── 결제 완료 · TABLET 축소 ── */
+  .ws-tb .cp-wrap { gap: 13px; }
+  .ws-tb .cp-ico { width: 46px; height: 46px; font-size: 20px; }
+  .ws-tb .cp-msg { font-size: 17px; }
+  .ws-tb .cp-sub { font-size: 12px; }
+  .ws-tb .cp-ch { padding: 10px 13px; }
+  .ws-tb .cp-cb { padding: 12px 13px; }
+  .ws-tb .cp-dr { padding: 8px 0; }
+
+  /* ── 결제 완료 · MO 축소 ── */
+  .ws-mo .cp-wrap { gap: 10px; }
+  .ws-mo .cp-ico { width: 40px; height: 40px; font-size: 18px; }
+  .ws-mo .cp-msg { font-size: 15px; letter-spacing: -.015em; }
+  .ws-mo .cp-sub { font-size: 11.5px; }
+  .ws-mo .cp-ch { padding: 9px 11px; font-size: 11.5px; }
+  .ws-mo .cp-cb { padding: 11px; gap: 8px; }
+  .ws-mo .cp-mail { padding: 9px 11px; font-size: 11.5px; }
+  .ws-mo .cp-dr { padding: 7px 0; font-size: 11.5px; }
+  .ws-mo .cp-dr .k2 { width: 88px; }
+  .ws-mo .cp-act > span { padding: 11px 0; font-size: 12.5px; }
+
+  /* 수령 정보 두 줄 — 좁은 화면에서 줄바꿈 */
+  .cp-recv { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; }
+  .ws-mo .cp-recv { font-size: 11.5px; gap: 5px 14px; }
+
+  /* ═══════════ 활용안 — UI 구성안 샘플 ═══════════ */
+  .ua-wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;
+    align-items: start; }
+  .ua-cell { position: relative; display: flex; flex-direction: column; gap: 9px; }
+  .ua-lbl { display: flex; align-items: baseline; gap: 8px; }
+  .ua-lbl b { font-size: 13px; font-weight: 600; color: #171B22; }
+  .ua-lbl span { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: #98A2AE; }
+
+  .ua-samp { border: 1px solid #C9D0D9; border-radius: 5px; background: #fff;
+    overflow: hidden; display: flex; flex-direction: column; }
+  .ua-url { height: 26px; background: #EDEEF1; border-bottom: 1px solid #D5DBE2;
+    display: flex; align-items: center; gap: 7px; padding: 0 10px; }
+  .ua-url i { font-style: normal; width: 7px; height: 7px; border-radius: 50%;
+    background: #C4CCD5; flex: none; }
+  .ua-url b { font-family: "IBM Plex Mono", monospace; font-size: 10px;
+    font-weight: 500; color: #6C7480; }
+
+  /* 호스트 GNB */
+  .ua-gnb { height: 38px; display: flex; align-items: center; gap: 13px;
+    padding: 0 12px; border-bottom: 1px solid #E4E8ED; }
+  .ua-gnb.hq { background: #fff; }
+  .ua-gnb.br { background: #1C2430; }
+  .ua-gnb.br span { color: #C7D0DA; }
+  .ua-gnb.br .bi { border-color: #4A5563; background: #2A3441; color: #8E9AA8; }
+  .ua-gnb span { font-size: 10.5px; color: #545C69; white-space: nowrap; }
+  .ua-gnb .bi { width: 52px; height: 18px; border: 1px dashed #A5B2BF; border-radius: 2px;
+    background: #F0F4F7; display: flex; align-items: center; justify-content: center;
+    font-size: 7.5px; color: #8A929E; flex: none; }
+  .ua-gnb .rt2 { margin-left: auto; display: flex; gap: 9px; }
+
+  /* 임베드 경계 */
+  .ua-cut { display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+    background: #EBF3F9; border-bottom: 1px solid #AECAE0; }
+  .ua-cut b { font-size: 9.5px; font-weight: 600; color: #2F6490; white-space: nowrap; }
+  .ua-cut i { flex: 1; height: 0; border-top: 1px dashed #AECAE0; }
+
+  /* 웹샵 본문 (공통) */
+  .ua-kv { height: 56px; background: #E7ECF1; border-bottom: 1px solid #E4E8ED;
+    display: flex; align-items: center; gap: 9px; padding: 0 12px; }
+  .ua-kv .lg { width: 26px; height: 26px; border: 1px dashed #8FA0B0; border-radius: 3px;
+    background: #F4F7FA; flex: none; }
+  .ua-kv b { font-size: 11.5px; font-weight: 600; color: #171B22; }
+  .ua-kv em { font-style: normal; font-size: 9px; color: #7A828E; display: block; }
+  .ua-menu { display: flex; gap: 0; padding: 0 12px; border-bottom: 1px solid #E4E8ED; }
+  .ua-menu span { padding: 7px 10px; font-size: 10px; color: #6C7480;
+    border-bottom: 2px solid transparent; }
+  .ua-menu span.on { color: #171B22; font-weight: 600; border-bottom-color: #2C333D; }
+  .ua-body { display: flex; gap: 10px; padding: 10px 12px; align-items: flex-start; }
+  .ua-grid { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .ua-pc2 { border: 1px solid #E1E6EC; border-radius: 3px; background: #fff; overflow: hidden; }
+  .ua-pc2 .im { height: 30px; background: #F0F4F7; border-bottom: 1px solid #EDF0F4; }
+  .ua-pc2 .tx2 { padding: 4px 5px; font-size: 8px; color: #7A828E; line-height: 1.5; }
+  .ua-side2 { width: 92px; flex: none; display: flex; flex-direction: column; gap: 5px; }
+  .ua-bx2 { border: 1px solid #D5DBE2; border-radius: 3px; background: #FAFBFC;
+    padding: 6px; font-size: 8px; color: #6C7480; line-height: 1.5; }
+  .ua-btn2 { border-radius: 3px; background: #2C333D; color: #fff; font-size: 8.5px;
+    text-align: center; padding: 6px 0; font-weight: 600; }
+  .ua-ft { height: 26px; background: #1C2430; display: flex; align-items: center;
+    padding: 0 12px; }
+  .ua-ft span { font-size: 8.5px; color: #7C8898; }
+  .ua-ft.hq { background: #F5F6F8; border-top: 1px solid #E4E8ED; }
+  .ua-ft.hq span { color: #98A2AE; }
+
+  /* 와이어프레임 내 캡션 */
+  .cap { font-size: 11px; line-height: 1.7; color: #7A828E; margin: 8px 0 0; }
+  .cap b { color: #545C69; font-weight: 600; }
+</style>

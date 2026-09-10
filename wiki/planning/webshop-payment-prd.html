@@ -304,6 +304,71 @@
     word-break: keep-all; margin: 0 0 13px; letter-spacing: -.2px; }
 </style>
 <body>
+<!-- ▽▽▽ 사내 열람용 접근 게이트 ▽▽▽ -->
+<style>
+  html.ro-locked, html.ro-locked body { overflow: hidden !important; }
+  #ro-gate { position: fixed; inset: 0; z-index: 2147483000; background: #EEF1F5;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif; }
+  #ro-gate .box { width: 100%; max-width: 380px; background: #fff; border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(23,27,34,.12); padding: 32px 34px 30px; box-sizing: border-box; }
+  #ro-gate h1 { margin: 0 0 8px; font-size: 16px; font-weight: 600; color: #171B22; letter-spacing: -.01em; }
+  #ro-gate p { margin: 0 0 18px; font-size: 12px; color: #8A929E; line-height: 1.6; }
+  #ro-gate input[type=password] { width: 100%; height: 44px; padding: 0 13px; box-sizing: border-box;
+    border: 1.5px solid #2F6490; border-radius: 6px; font-size: 14px; color: #171B22; outline: none;
+    font-family: inherit; }
+  #ro-gate .rm { display: flex; align-items: center; gap: 8px; margin: 14px 0 16px;
+    font-size: 12px; color: #545C69; cursor: pointer; user-select: none; }
+  #ro-gate .rm input { width: 15px; height: 15px; accent-color: #2F6490; margin: 0; }
+  #ro-gate button { width: 100%; height: 46px; border: 0; border-radius: 6px; background: #2F6490;
+    color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  #ro-gate button:hover { background: #28577E; }
+  #ro-gate .err { margin-top: 12px; font-size: 11.5px; color: #C0392B; display: none; }
+  #ro-gate.bad .err { display: block; }
+  #ro-gate.bad input[type=password] { border-color: #C0392B; }
+</style>
+<div id="ro-gate">
+  <form class="box" autocomplete="off">
+    <h1>사내 열람용 문서</h1>
+    <p>사내 열람용 문서. 접근 암호를 입력하세요.</p>
+    <input type="password" aria-label="접근 암호">
+    <label class="rm"><input type="checkbox" checked>이 브라우저에서 기억</label>
+    <button type="submit">열기</button>
+    <div class="err">암호가 맞지 않습니다.</div>
+  </form>
+</div>
+<script>
+(function () {
+  var KEY = 'ro-doc-2026', H = '0a22bb45';
+  function fnv(s) {
+    var x = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) {
+      x ^= s.charCodeAt(i);
+      x = (x + ((x << 1) + (x << 4) + (x << 7) + (x << 8) + (x << 24))) >>> 0;
+    }
+    return ('0000000' + x.toString(16)).slice(-8);
+  }
+  var root = document.documentElement, g = document.getElementById('ro-gate');
+  root.classList.add('ro-locked');
+  function unlock() { if (g) g.parentNode.removeChild(g); root.classList.remove('ro-locked'); }
+  try {
+    if (localStorage.getItem(KEY) === H || sessionStorage.getItem(KEY) === H) { unlock(); return; }
+  } catch (e) {}
+  var f = g.querySelector('form'),
+      pw = g.querySelector('input[type=password]'),
+      rm = g.querySelector('input[type=checkbox]');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (fnv(pw.value + '::roland') !== H) { g.classList.add('bad'); pw.select(); return; }
+    try { (rm.checked ? localStorage : sessionStorage).setItem(KEY, H); } catch (e) {}
+    unlock();
+  });
+  pw.addEventListener('input', function () { g.classList.remove('bad'); });
+  setTimeout(function () { pw.focus(); }, 0);
+})();
+</script>
+<!-- △△△ 접근 게이트 △△△ -->
+
 <div class="shell">
 
 <nav class="lnb">

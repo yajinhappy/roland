@@ -1,0 +1,212 @@
+<section class="screen" id="s06">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="shd"><span class="id">ST-06</span><span class="nm">결제 모니터링</span></div>
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs"><button type="button" class="tab tab-on" data-dev="pc">PC</button></div>
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="ahd">
+          <span class="alogo">RAGNAROK PORTAL <span style="color:#2F6490;">PAY</span></span>
+          <span style="width:1px;height:16px;background:#DCE2E8;"></span><span class="ts">본사 통합 어드민</span>
+          <span class="ent" style="margin-left:auto;"><span class="dot dot-g"></span><span class="mono">전체</span> 전 법인 통합 <span style="font-size:9px;color:#98A2AE;">▾</span></span>
+          <span class="fltr" style="gap:6px;">운영자 <b style="color:#2C333D;">an.jaeyoung</b> · Super Admin</span>
+        </div>
+
+        <div class="abody">
+          <div class="snb">
+            <div class="snb-g">온보딩</div>
+            <div class="snb-i"><span class="mono">00</span> 결제 준비도</div>
+            <div class="snb-g">기반 구축</div>
+            <div class="snb-i"><span class="mono">01</span> 지사 법인 · 세무</div>
+            <div class="snb-i" style="color:#98A2AE;"><span class="mono">02</span> PG 계약 · 머천트 <span class="tx" style="margin-left:auto;">본사</span></div>
+            <div class="snb-i"><span class="mono">03</span> 게임 · Webhook</div>
+            <div class="snb-i"><span class="mono">04</span> 상품 SKU · 가격</div>
+            <div class="snb-i"><span class="mono">05</span> 라우팅 · 한도</div>
+            <div class="snb-g">운영 · 정산</div>
+            <div class="snb-i on"><span class="mono">06</span> 결제 모니터링</div>
+            <div class="snb-i"><span class="mono">07</span> 환불 · CS 분쟁</div>
+            <div class="snb-i"><span class="mono">08</span> T+1 정산 대사</div>
+          </div>
+
+          <div class="amain">
+            <div class="atitle"><span class="ttl-s">실시간 결제 모니터링</span><span class="ts">Step 06</span></div>
+            <span class="tm">전 법인에서 발생하는 결제 전표를 실시간 스트리밍한다. 법인은 분리하되 조회는 통합 — 전사 관점 분석을 잃지 않기 위한 유일한 화면.</span>
+
+            <!-- KPI -->
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px;">
+              <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;"><span class="tx">오늘 승인 건수</span><span class="ttl-s num">7,412</span><span class="tx" style="color:#3E9A63;">＋8.2% 전일</span></div>
+              <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;"><span class="tx">승인 금액 · USD 환산</span><span class="ttl-s num">184,203</span><span class="tx">환율 스냅샷 09:00</span></div>
+              <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;"><span class="tx">승인 실패율</span><span class="ttl-s num">2.1%</span><span class="tx">PG 원문 코드 별도 집계</span></div>
+              <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;border-color:#E0BEBE;background:#FDF7F7;"><span class="tx" style="color:#8C3A3A;">배송 대기 격리</span><span class="ttl-s num" style="color:#8C3A3A;">14</span><span class="tx">PAID_PENDING_DELIVERY</span></div>
+              <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;"><span class="tx">미정산</span><span class="ttl-s num">6,918</span><span class="tx">T+1 대사 대기</span></div>
+            </div>
+
+            <div class="sec abar">
+              <div class="mk" style="position:absolute;top:-4px;right:-10px;">6</div>
+              <span class="fltr" style="width:200px;color:#98A2AE;">주문번호 · 캐릭터명 검색</span>
+              <span class="fltr">법인 <span style="font-size:9px;">▾</span></span>
+              <span class="fltr">상태 <span style="font-size:9px;">▾</span></span>
+              <span class="fltr">기간 <b style="color:#2C333D;">오늘</b> <span style="font-size:9px;">▾</span></span>
+              <span style="margin-left:auto;"></span>
+              <span class="fltr"><span class="dot dot-g"></span> 실시간 1초</span>
+              <span class="btn-s">CSV 내보내기</span>
+            </div>
+
+            <div class="card">
+              <div class="card-h"><span class="h-s">결제 전표</span><span class="tag-n">최근 200건</span><span class="ts" style="margin-left:auto;">FDS 이상 징후 없음</span></div>
+              <div class="sec">
+                <div class="mk" style="position:absolute;top:26px;left:-10px;">1</div>
+                <div class="mk" style="position:absolute;top:26px;left:340px;">2</div>
+                <div class="mk" style="position:absolute;top:26px;left:766px;">3</div>
+                <div class="mk" style="position:absolute;top:26px;left:948px;">4</div>
+                <table class="tbl tbl-z">
+                  <thead><tr>
+                    <th style="width:76px;">법인</th><th style="width:158px;">주문번호 · 시각</th>
+                    <th style="width:186px;">캐릭터 · 서버</th><th style="width:172px;">상품</th>
+                    <th style="width:110px;">금액</th><th style="width:170px;">PG 승인</th>
+                    <th style="width:168px;">배송</th><th style="width:74px;">전표</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b class="mono">GVC</b></td><td class="mono tx">tx_..._001928<div>18:32:10</div></td><td><b>艾莉絲_法師</b><div class="tx">TW_BAPHOMET · GUID 2001</div></td><td>다이아몬드 1,000<div class="tx mono">RO_DIAMOND_1000</div></td><td><b class="num">NT$ 270</b><div class="tx">VAT 13 포함</div></td><td><span class="tag-g">승인</span><div class="tx mono">MyCard 선불카드 핀</div></td><td><span class="tag-g">DELIVERED</span><div class="tx mono">mail_99281</div></td><td><span class="btn-s">보기</span></td></tr>
+                    <tr><td><b class="mono">GVI</b></td><td class="mono tx">tx_..._001815<div>17:15:02</div></td><td><b>Alice_Priest_NA</b><div class="tx">NA_CHAOS · GUID 3001</div></td><td>VIP 멤버십 패스<div class="tx mono">RO_SUB_MONTHLY</div></td><td><b class="num">$ 7.57</b><div class="tx">6.99 + Tax 0.58</div></td><td><span class="tag-g">승인</span><div class="tx mono">Stripe · Visa</div></td><td><span class="tag-g">DELIVERED</span><div class="tx mono">sub_na_88112</div></td><td><span class="btn-s">보기</span></td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">GGT</b></td><td class="mono tx">tx_..._001803<div>17:02:44</div></td><td><b>Siam_Warrior</b><div class="tx">TH_SARAH · GUID 5001</div></td><td>10,000 KP<div class="tx mono">RO_KP_10000</div></td><td><b class="num">฿ 260</b><div class="tx">VAT 17 포함</div></td><td><span class="tag-g">승인</span><div class="tx mono">TrueMoney Wallet</div></td><td><span class="tag-r">PENDING</span><div class="tx" style="color:#8C3A3A;">재시도 3/10 · 다음 15분</div></td><td><span class="btn-s">보기</span></td></tr>
+                    <tr><td><b class="mono">GV</b></td><td class="mono tx">tx_..._001799<div>16:58:31</div></td><td><b>한국바포_고인물</b><div class="tx">KR_BAPHOMET · GUID 1001</div></td><td>스타터 패키지<div class="tx mono">RO_PACKAGE_NEWBIE</div></td><td><b class="num">₩ 33,000</b><div class="tx">VAT 3,000 포함</div></td><td><span class="tag-g">승인</span><div class="tx mono">토스 · 신한카드</div></td><td><span class="tag-g">DELIVERED</span><div class="tx mono">mail_77192</div></td><td><span class="btn-s">보기</span></td></tr>
+                    <tr><td><b class="mono">GGA</b></td><td class="mono tx">tx_..._001784<div>16:40:09</div></td><td><b>東京アーチャー</b><div class="tx">JP_RADGAMES · GUID 4001</div></td><td>클래식 30일 이용권<div class="tx mono">RO_PERIOD_30D</div></td><td><b class="num">¥ 980</b><div class="tx">소비세 89 포함</div></td><td><span class="tag-a">입금 대기</span><div class="tx mono">편의점 · Lawson</div></td><td><span class="tag-n">대기</span><div class="tx">TTL 24시간</div></td><td><span class="btn-s">보기</span></td></tr>
+                    <tr><td><b class="mono">GVC</b></td><td class="mono tx">tx_..._001770<div>16:22:55</div></td><td><b>台灣刺客</b><div class="tx">TW_PORING · GUID 2002</div></td><td>다이아몬드 5,000<div class="tx mono">RO_DIAMOND_5000</div></td><td><b class="num">NT$ 1,350</b><div class="tx">VAT 64 포함</div></td><td><span class="tag-r">승인 거절</span><div class="tx mono">GASH · E4021 잔액부족</div></td><td><span class="tag-n">—</span></td><td><span class="btn-s">보기</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 전표 상세 모달 -->
+        <div class="scrim">
+          <div class="sec modal" style="width:720px;">
+            <div class="mk" style="position:absolute;top:-10px;left:-10px;">5</div>
+            <div class="modal-h">
+              <span class="h-s">결제 전표 상세 · 복식부기 원장</span>
+              <span class="tag-n mono">tx_gravity_20260904_001928</span>
+              <span style="margin-left:auto;color:#98A2AE;font-size:16px;">×</span>
+            </div>
+            <div class="modal-b">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;">
+                <div style="display:flex;gap:10px;"><span class="ts" style="width:88px;flex:none;">귀속 법인</span><span class="t"><b class="mono">GVC</b> 그라비티 커뮤니케이션즈</span></div>
+                <div style="display:flex;gap:10px;"><span class="ts" style="width:88px;flex:none;">결제 수단</span><span class="t">MyCard · 선불카드 핀번호</span></div>
+                <div style="display:flex;gap:10px;"><span class="ts" style="width:88px;flex:none;">캐릭터</span><span class="t">艾莉絲_法師 · TW_BAPHOMET</span></div>
+                <div style="display:flex;gap:10px;"><span class="ts" style="width:88px;flex:none;">PG 승인 TID</span><span class="t mono">MC-2026090418321044</span></div>
+                <div style="display:flex;gap:10px;"><span class="ts" style="width:88px;flex:none;">법정 증빙</span><span class="t">e-GUI 자동 교부 완료</span></div>
+                <div style="display:flex;gap:10px;"><span class="ts" style="width:88px;flex:none;">환불 가능</span><span class="t" style="color:#8C3A3A;">온라인 취소 불가 · 수기 송금</span></div>
+              </div>
+
+              <div>
+                <span class="lbl-k">복식부기 자동 분개 · 1,000 TWD 기준</span>
+                <div class="bx" style="margin-top:8px;overflow:hidden;">
+                  <table class="tbl">
+                    <thead><tr><th style="width:64px;">구분</th><th>계정과목</th><th style="width:110px;">금액</th></tr></thead>
+                    <tbody>
+                      <tr><td><b>차변</b></td><td>PG 미수금 <span class="tx">MyCard Clearing Account</span></td><td class="num"><b>945</b> TWD</td></tr>
+                      <tr><td></td><td>지급 수수료 <span class="tx">MDR 5.5%</span></td><td class="num"><b>55</b> TWD</td></tr>
+                      <tr><td><b>대변</b></td><td>게임 매출 <span class="tx">Gravity TW Game Revenue</span></td><td class="num"><b>952</b> TWD</td></tr>
+                      <tr><td></td><td>부가가치세 예수금 <span class="tx">TW e-GUI VAT 5%</span></td><td class="num"><b>48</b> TWD</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <span class="lbl-k">배송 웹훅 로그</span>
+                <div class="con" style="margin-top:8px;">POST https://api-tw.roo.gravity.com<b>/v1/portal/items/deliver</b>
+<i>X-Gravity-HMAC-SHA256: sha256=d3b07384d113edec49eaa6238ad5ff00…</i>
+{ "order_id": "ORD-20260904-01928", "entity_id": <b>"GVC"</b>,
+  "character_guid": "CHA_9928174", "sku_id": "RO_DIAMOND_1000",
+  "quantity": 1100, "bonus_quantity": 100, "paid_amount": 270, "currency": "TWD" }
+➔ <u>200 OK</u> { "result": "DELIVERED", "in_game_mail_id": "mail_99281" }  <i>41ms · 멱등키 저장됨</i></div>
+              </div>
+            </div>
+            <div class="modal-f"><span class="btn-s">감사 로그</span><span class="btn-s">전표 인쇄</span><span class="btn-ps">닫기</span></div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="dcol">
+      <h4>ST-06 · 실시간 결제 모니터링 &amp; 원장</h4>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">실시간 모니터링 그리드</span><span class="src">라이브 그리드</span></div>
+        <p class="dr-b">전 법인의 결제 트랜잭션을 1초 주기로 스트리밍한다. <b>법인은 분리하되 조회는 통합</b> — 분리 설계에서 전사 관점 분석이 죽는 문제를 이 화면이 막는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">기본 범위</span><span class="spec-v">전 법인 통합. 헤더 스위처로 단일 법인 좁히기 가능</span></div>
+          <div class="spec-r"><span class="spec-k">FDS</span><span class="spec-v">이상 급증(Abnormal Spike) 감지 시 경보 발령</span></div>
+          <div class="spec-r"><span class="spec-k">환산</span><span class="spec-v">KPI는 USD 환산 · 전표는 <b>원 통화 그대로</b> 표기</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">벤치마킹 대응</div>
+          <div class="imm-r"><span class="imm-k">Stripe</span><span class="imm-v">Sigma 크로스 어카운트 SQL 쿼리 — 이 화면이 겨냥하는 지점</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">캐릭터 · 서버 정보</span><span class="src">식별 키</span></div>
+        <p class="dr-b">결제 대상 캐릭터 GUID와 서버를 명시한다. <b>서버가 곧 귀속 법인</b>이므로 이 열이 법인 열의 근거다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">CS 인입</span><span class="spec-v">캐릭터명 즉시 검색 지원 — 유저는 주문번호를 모른다</span></div>
+          <div class="spec-r"><span class="spec-k">D2C 건</span><span class="spec-v">계정 없이 GUID만 존재 — 계정 열이 비어도 정상</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">PG 승인 결과</span><span class="src">상태</span></div>
+        <p class="dr-b">원천 PG가 반환한 거래 고유 승인 TID를 기록한다. T+1 대사에서 PG 정산 리포트와 맞추는 키가 이 값이다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">실패 시</span><span class="spec-v">PG사 <b>원문 에러 코드를 그대로 저장</b> — 번역하면 원인 추적이 끊긴다</span></div>
+          <div class="spec-r"><span class="spec-k">입금 대기</span><span class="spec-v">편의점 · 가상계좌는 승인과 입금이 분리 — TTL 24시간</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">배송 상태</span><span class="src">상태</span></div>
+        <p class="dr-b">게임 서버 웹훅 호출 결과와 인게임 우편 ID를 기록한다. <b>결제 성공과 배송 성공은 별개의 상태</b>다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">실패 격리</span><span class="spec-v"><span class="mono">PAID_PENDING_DELIVERY</span> 로 자동 격리 · KPI에 별도 집계</span></div>
+          <div class="spec-r"><span class="spec-k">재시도</span><span class="spec-v">1 · 5 · 15 · 60분 Backoff, 최대 10회. 현재 회차를 행에 표기</span></div>
+          <div class="spec-r"><span class="spec-k">24시간 초과</span><span class="spec-v">CS 알림 발송 및 <b>관리자 수동 배송</b> 버튼 활성</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">전표 상세 · 복식부기 원장</span><span class="src">모달</span></div>
+        <p class="dr-b">차변 · 대변 분개표와 법정 증빙 교부 내역, 배송 웹훅 원문 로그를 한 화면에서 확인한다. 재무 감사와 CS 대응이 같은 화면을 본다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">분개</span><span class="spec-v">PG 미수금 + 지급수수료 = 게임매출 + 부가세 예수금</span></div>
+          <div class="spec-r"><span class="spec-k">MDR 출처</span><span class="spec-v">Step 2 MID 마스터의 계약 수수료율 — <b>대사 기준값과 동일</b></span></div>
+          <div class="spec-r"><span class="spec-k">감사 로그</span><span class="spec-v">불변 보관 · 수정은 역분개로만</span></div>
+          <div class="spec-r"><span class="spec-k">환불 가능 표기</span><span class="spec-v">채널 Capability를 상단에 노출 — CS가 유저에게 바로 안내할 수 있게</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">필터 · 상태 축</span><span class="src">툴바</span></div>
+        <p class="dr-b">상태는 자유 문자열이 아니라 <b>상태 머신의 노드</b>다. 필터 목록이 곧 허용된 상태의 전부다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">전이</span><span class="spec-v">SESSION_OPEN → AUTHORIZED → PAID → DELIVERED → SETTLED</span></div>
+          <div class="spec-r"><span class="spec-k">분기</span><span class="spec-v">PAID → <b>PAID_PENDING_DELIVERY</b> (재시도 성공 시 DELIVERED 복귀)</span></div>
+          <div class="spec-r"><span class="spec-k">환불</span><span class="spec-v">PAID · DELIVERED 에서만 REFUNDED 진입 가능</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">웹훅 순서 역전</div>
+          <p class="warn-b">환불 웹훅이 승인 웹훅보다 먼저 도착해도 <b>SUCCESS를 거치지 않은 전이는 거부</b>되고 보류 큐로 이동한다. 화면에는 「보류」로 표기.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>

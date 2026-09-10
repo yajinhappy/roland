@@ -1,0 +1,483 @@
+<body>
+<!-- ▽▽▽ 사내 열람용 접근 게이트 ▽▽▽ -->
+<style>
+  html.ro-locked, html.ro-locked body { overflow: hidden !important; }
+  #ro-gate { position: fixed; inset: 0; z-index: 2147483000; background: #EEF1F5;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    font-family: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif; }
+  #ro-gate .box { width: 100%; max-width: 380px; background: #fff; border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(23,27,34,.12); padding: 32px 34px 30px; box-sizing: border-box; }
+  #ro-gate h1 { margin: 0 0 8px; font-size: 16px; font-weight: 600; color: #171B22; letter-spacing: -.01em; }
+  #ro-gate p { margin: 0 0 18px; font-size: 12px; color: #8A929E; line-height: 1.6; }
+  #ro-gate input[type=password] { width: 100%; height: 44px; padding: 0 13px; box-sizing: border-box;
+    border: 1.5px solid #2F6490; border-radius: 6px; font-size: 14px; color: #171B22; outline: none;
+    font-family: inherit; }
+  #ro-gate .rm { display: flex; align-items: center; gap: 8px; margin: 14px 0 16px;
+    font-size: 12px; color: #545C69; cursor: pointer; user-select: none; }
+  #ro-gate .rm input { width: 15px; height: 15px; accent-color: #2F6490; margin: 0; }
+  #ro-gate button { width: 100%; height: 46px; border: 0; border-radius: 6px; background: #2F6490;
+    color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  #ro-gate button:hover { background: #28577E; }
+  #ro-gate .err { margin-top: 12px; font-size: 11.5px; color: #C0392B; display: none; }
+  #ro-gate.bad .err { display: block; }
+  #ro-gate.bad input[type=password] { border-color: #C0392B; }
+</style>
+<div id="ro-gate">
+  <form class="box" autocomplete="off">
+    <h1>사내 열람용 문서</h1>
+    <p>사내 열람용 문서. 접근 암호를 입력하세요.</p>
+    <input type="password" aria-label="접근 암호">
+    <label class="rm"><input type="checkbox" checked>이 브라우저에서 기억</label>
+    <button type="submit">열기</button>
+    <div class="err">암호가 맞지 않습니다.</div>
+  </form>
+</div>
+<script>
+(function () {
+  var KEY = 'ro-doc-2026', H = '0a22bb45';
+  function fnv(s) {
+    var x = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) {
+      x ^= s.charCodeAt(i);
+      x = (x + ((x << 1) + (x << 4) + (x << 7) + (x << 8) + (x << 24))) >>> 0;
+    }
+    return ('0000000' + x.toString(16)).slice(-8);
+  }
+  var root = document.documentElement, g = document.getElementById('ro-gate');
+  root.classList.add('ro-locked');
+  function unlock() { if (g) g.parentNode.removeChild(g); root.classList.remove('ro-locked'); }
+  try {
+    if (localStorage.getItem(KEY) === H || sessionStorage.getItem(KEY) === H) { unlock(); return; }
+  } catch (e) {}
+  var f = g.querySelector('form'),
+      pw = g.querySelector('input[type=password]'),
+      rm = g.querySelector('input[type=checkbox]');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (fnv(pw.value + '::roland') !== H) { g.classList.add('bad'); pw.select(); return; }
+    try { (rm.checked ? localStorage : sessionStorage).setItem(KEY, H); } catch (e) {}
+    unlock();
+  });
+  pw.addEventListener('input', function () { g.classList.remove('bad'); });
+  setTimeout(function () { pw.focus(); }, 0);
+})();
+</script>
+<!-- △△△ 접근 게이트 △△△ -->
+
+<div class="shell">
+
+<nav class="lnb">
+  <span class="bmark">웹샵/통합결제 구조</span>
+  <span class="bsub">Ragnarok Portal · 2026-09</span>
+
+  <p class="grp">시스템 구성</p>
+  <a href="#a1">본사 제공 범위</a>
+  <a href="#a2">지사 도입 절차</a>
+
+  <p class="grp">자금 · 매출</p>
+  <a href="#b1">자금 흐름 및 매출 귀속</a>
+  <a href="#b2">법인 간 거래 격리</a>
+
+  <p class="grp">운영 원칙</p>
+  <a href="#c1">거래 단위 원칙</a>
+  <a href="#c2">서버 검증 요건</a>
+
+  <p class="grp">확장성</p>
+  <a href="#d1">증설 시 소요 작업</a>
+  <a href="#d2">판매 채널별 적용 범위</a>
+
+</nav>
+
+<main>
+
+<header class="mast">
+  <p class="kick">Design · Payment &amp; Webshop</p>
+  <h1>웹샵/통합결제 구조</h1>
+  <p class="stand"><b>본사가 통합 결제 모듈과 웹샵 템플릿을 단일 구성으로 제공하고, 각 지사는 자사 PG 키를 연동해 사용한다.</b>
+  매출과 자금은 본사를 경유하지 않고 해당 지사에 직접 귀속된다.</p>
+  <div class="meta">
+    <span><b>대상</b> 웹샵 템플릿 · 통합 결제창 · 지사 연동</span>
+    <span><b>기준 문서</b> 웹샵/통합결제 기획</span>
+    <span><b>연계 문서</b> 포털 메인 구조 · 랜드 회원·인증 설계</span>
+    <span><b>작성</b> 2026-09-08</span>
+  </div>
+</header>
+
+<div class="part">
+  <span class="n">Part 1</span>
+  <h2>시스템 구성</h2>
+  <p>본사 제공 구성요소와 지사 도입 절차. 법인 · 게임 수 증가에 따른 추가 개발이 발생하지 않는 구조.</p>
+</div>
+
+<section id="a1">
+  <h3>본사 제공 범위</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:180px;">구성요소</th><th>구성 내용</th><th style="width:170px;">지사 설정 범위</th></tr></thead>
+      <tbody>
+        <tr><td><b>웹샵 템플릿</b></td><td>상품 목록 · 상품 상세 · 지급 대상 확인 · 선택 상품 · 결제 요청. 본사 서버에서 구동하고 <b>리버스 프록시</b>로 지사 도메인 하위 경로에 연결한다</td><td>설정 없음 — 데이터 등록만</td></tr>
+        <tr><td><b>통합 결제창</b></td><td>통화 · 결제수단 선택 및 결제 진행. <b>독립 URL 페이지</b> — 모달 · 팝업 · iFrame을 사용하지 않는다</td><td>설정 없음</td></tr>
+        <tr><td><b>관리자</b></td><td>지사 · 게임 등록 · 키 발급 · 상품 · 가격 · <b>점검 및 킬스위치</b> · 모니터링 · 환불 · 정산 대사</td><td><b>자사 법인 범위</b>로 제한</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">제공 구성요소는 <b>3종</b>이며, 법인 · 게임 수와 무관하게 재개발이 발생하지 않는다.</p>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 300" role="img" aria-label="본사 제공 구성요소와 지사별 사용 구조">
+      <defs>
+        <marker id="sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="480" y="26" class="dt a" text-anchor="middle">본사 제공</text>
+      <rect x="140" y="42" width="200" height="46" rx="5" class="bx-key"/>
+      <text x="240" y="70" class="ds a" text-anchor="middle">웹샵 템플릿 (프록시)</text>
+      <rect x="380" y="42" width="200" height="46" rx="5" class="bx-key"/>
+      <text x="480" y="70" class="ds a" text-anchor="middle">통합 결제창</text>
+      <rect x="620" y="42" width="200" height="46" rx="5" class="bx-key"/>
+      <text x="720" y="70" class="ds a" text-anchor="middle">관리자</text>
+
+      <line x1="480" y1="90" x2="480" y2="112" class="ln"/>
+      <line x1="200" y1="112" x2="760" y2="112" class="ln"/>
+      <line x1="200" y1="112" x2="200" y2="134" class="ln" marker-end="url(#sa)"/>
+      <line x1="480" y1="112" x2="480" y2="134" class="ln" marker-end="url(#sa)"/>
+      <line x1="760" y1="112" x2="760" y2="134" class="ln" marker-end="url(#sa)"/>
+
+      <rect x="110" y="136" width="180" height="72" rx="5" class="bx-mute"/>
+      <text x="200" y="160" class="ds" text-anchor="middle">GV 한국</text>
+      <text x="200" y="180" class="dx f" text-anchor="middle">gnjoy.com</text>
+      <text x="200" y="197" class="dx f" text-anchor="middle">KRW</text>
+
+      <rect x="390" y="136" width="180" height="72" rx="5" class="bx-mute"/>
+      <text x="480" y="160" class="ds" text-anchor="middle">GVC 대만</text>
+      <text x="480" y="180" class="dx f" text-anchor="middle">ro-abyss.com.tw</text>
+      <text x="480" y="197" class="dx f" text-anchor="middle">TWD HKD MOP USD</text>
+
+      <rect x="670" y="136" width="180" height="72" rx="5" class="bx-mute"/>
+      <text x="760" y="160" class="ds" text-anchor="middle">GGL 인도네시아</text>
+      <text x="760" y="180" class="dx f" text-anchor="middle">ro-abyss.co.id</text>
+      <text x="760" y="197" class="dx f" text-anchor="middle">IDR USD</text>
+
+      <text x="480" y="232" class="ds f" text-anchor="middle">지사 등록 항목 — 도메인 · 키 · 통화 · 상품 / 추가 개발 없음</text>
+
+      <line x1="70" y1="252" x2="890" y2="252" class="ln-hair"/>
+      <text x="480" y="278" class="dt" text-anchor="middle">단일 구성 · 법인 × 게임 조합별 데이터 분리</text>
+    </svg>
+    <figcaption>구성요소는 단일이며, 운영 화면은 법인 × 게임 조합별로 별도 데이터를 참조한다.</figcaption>
+  </figure>
+</section>
+
+<section id="a2">
+  <h3>지사 도입 절차</h3>
+
+  <p>지사 도입 작업은 <b>관리자 등록 7개 항목</b>과 <b>리버스 프록시 1회 설정</b>으로 완료된다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:150px;">등록 항목</th><th style="width:290px;">기재 예 — 대만 법인</th><th>등록 주체</th></tr></thead>
+      <tbody>
+        <tr><td><b>도메인</b></td><td><span class="mono">ro-abyss.com.tw</span></td><td>지사</td></tr>
+        <tr><td><b>웹샵 경로</b></td><td><span class="mono">/shop</span></td><td>지사</td></tr>
+        <tr><td><b>PG 머천트 · 키</b></td><td>MyCard · GASH — 대만 법인 명의 계약</td><td><b>지사</b>가 등록 — 등록 후에는 지사도 원문 조회 불가</td></tr>
+        <tr><td><b>정산 계좌</b></td><td>대만 법인 계좌</td><td>지사</td></tr>
+        <tr><td><b>허용 통화</b></td><td><span class="mono">TWD · HKD · MOP · USD</span></td><td>지사</td></tr>
+        <tr><td><b>게임</b></td><td><span class="mono">ro_abyss</span></td><td>지사</td></tr>
+        <tr><td><b>상품 · 가격</b></td><td>상품 목록 · 통화별 금액</td><td>지사</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+<pre>location /shop/ {
+    proxy_pass https://core-shop.gravity.com/shop/;
+    proxy_set_header Host $host;                      <i># 지사 도메인 유지 전송</i>
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}</pre>
+
+  <p class="cap"><b>iFrame을 사용하지 않는다.</b> 지사 공식 도메인 하위 경로로 서비스해 브라우저 기준 <b>동일 출처(Same-Origin)</b>를 확보하고,
+  지사 로그인 세션 쿠키가 <span class="mono">/shop</span>으로 자동 전송되도록 한다.
+  <span class="mono">proxy_set_header Host $host</span> 누락 시 <b>법인 판정이 성립하지 않는다.</b></p>
+
+  <h3>연동 요건</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">항목</th><th>요건</th><th style="width:210px;">미적용 시</th></tr></thead>
+      <tbody>
+        <tr><td><b>Host 헤더</b></td><td><span class="mono">proxy_set_header Host $host</span>로 <b>지사 도메인을 유지</b>해 전달</td><td class="bad-cell">법인 판정 불가 — 전체 라우팅 미성립</td></tr>
+        <tr><td><b>경로</b></td><td>어드민 등록 경로와 프록시 <span class="mono">location</span>을 <b>동일하게</b> 설정</td><td class="bad-cell">웹샵 미노출</td></tr>
+        <tr><td><b>로그인 세션</b></td><td>동일 출처이므로 <b>지사 세션 쿠키가 자동 전송</b>된다. 별도 연동이 없다</td><td>iFrame 사용 시 <b>3rd-Party Cookie 차단</b></td></tr>
+        <tr><td><b>결제 전환</b></td><td>통합 결제창으로 <b>화면 전체 전환</b></td><td class="bad-cell">PG 결제창의 프레임 내 로드 제한</td></tr>
+        <tr><td><b>본사 호스팅 형태</b></td><td>프록시 없이 본사 도메인에서 서비스하며 <b>URL 경로에 지사 코드를 포함</b>한다 — <span class="mono">/{branch}/{game}</span></td><td class="bad-cell">단일 도메인으로는 법인 판정 불가</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 2</span>
+  <h2>자금 · 매출</h2>
+  <p>자금 수취 및 매출 귀속 경로와, 법인 간 거래가 혼입되지 않는 근거.</p>
+</div>
+
+<section id="b1">
+  <h3>자금 흐름 및 매출 귀속</h3>
+
+  <figure class="dia">
+    <svg viewBox="0 0 960 268" role="img" aria-label="법인 판정에서 정산 계좌 입금까지의 자금 흐름">
+      <defs>
+        <marker id="sb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <rect x="24" y="44" width="150" height="52" rx="5" class="bx-mute"/>
+      <text x="99" y="66" class="ds" text-anchor="middle">결제 요청</text>
+      <text x="99" y="84" class="dx f" text-anchor="middle">[결제하기]</text>
+      <line x1="174" y1="70" x2="206" y2="70" class="ln" marker-end="url(#sb)"/>
+
+      <rect x="210" y="44" width="170" height="52" rx="5" class="bx-key"/>
+      <text x="295" y="66" class="ds a" text-anchor="middle">법인 판정</text>
+      <text x="295" y="84" class="dx f" text-anchor="middle">도메인(Origin) → GVC</text>
+      <line x1="380" y1="70" x2="412" y2="70" class="ln" marker-end="url(#sb)"/>
+
+      <rect x="416" y="44" width="180" height="52" rx="5" class="bx-key"/>
+      <text x="506" y="66" class="ds a" text-anchor="middle">해당 법인 머천트 키</text>
+      <text x="506" y="84" class="dx f" text-anchor="middle">대만 법인 명의 계약</text>
+      <line x1="596" y1="70" x2="628" y2="70" class="ln" marker-end="url(#sb)"/>
+
+      <rect x="632" y="44" width="130" height="52" rx="5" class="bx-mute"/>
+      <text x="697" y="66" class="ds" text-anchor="middle">PG</text>
+      <text x="697" y="84" class="dx f" text-anchor="middle">MyCard</text>
+      <line x1="762" y1="70" x2="794" y2="70" class="ln" marker-end="url(#sb)"/>
+
+      <rect x="798" y="44" width="138" height="52" rx="5" class="bx-key"/>
+      <text x="867" y="66" class="ds a" text-anchor="middle">대만 법인 계좌</text>
+      <text x="867" y="84" class="dx f" text-anchor="middle">대만 법인 매출</text>
+
+      <path d="M295 100 L295 128 L640 128 L640 100" class="ln-hair" stroke-dasharray="4 4"/>
+      <text x="467" y="146" class="ds f" text-anchor="middle">프론트엔드 법인 지정 불가 · 인증키 서버 보관</text>
+
+      <line x1="24" y1="176" x2="936" y2="176" class="ln-hair"/>
+      <rect x="330" y="196" width="300" height="44" rx="5" class="bx-mute"/>
+      <text x="480" y="223" class="ds" text-anchor="middle">본사 계좌 미경유 · 본사 수수료 미발생</text>
+    </svg>
+    <figcaption>매출 귀속의 근거는 인증키가 아니라 <b>인증키가 참조하는 PG 계약 명의</b>다.</figcaption>
+  </figure>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">구분</th><th>결정 방식</th></tr></thead>
+      <tbody>
+        <tr><td><b>법인</b></td><td>서버가 판정한다 — 형태 1은 <b>Host 헤더</b>, 형태 2는 <b>URL 경로의 지사 코드</b>. 미등록 도메인 · 미등록 경로는 로드 거부</td></tr>
+        <tr><td><b>결제 키</b></td><td>해당 법인 머천트의 인증키. <b>서버에만 보관하며 프론트엔드는 보유하지 않는다</b></td></tr>
+        <tr><td><b>입금 계좌</b></td><td>PG 계약 명의가 지사이므로 <b>대금이 해당 법인 계좌로 입금</b></td></tr>
+        <tr><td><b>매출</b></td><td>입금 계좌가 해당 법인이므로 <b>해당 법인 매출로 계상</b>. 본사 매출로 계상되지 않는다</td></tr>
+        <tr><td><b>세무</b></td><td>각 법인이 소재 국가에서 납부 — 현행 구조와 동일</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">본사가 대금을 일괄 수취해 배분하는 경우 해외 수익이 <b>본사 매출로 계상</b>되고, 각 국가로 재송금하는 과정에서 세무 이슈가 발생한다. 계약 명의를 지사가 보유하는 근거다.</p>
+</section>
+
+<section id="b2">
+  <h3>법인 간 거래 격리</h3>
+
+  <p>법인은 도메인으로 확정되며, <b>지급 대상 확정도 해당 법인 범위 내에서만 가능</b>하다.</p>
+
+  <div class="cols">
+    <div class="card a">
+      <h5>비회원 — 캐릭터 인증</h5>
+      <ul>
+        <li>서버 목록에 <b>해당 법인 서버만</b> 노출</li>
+        <li>타 법인 캐릭터 ID 입력 시 <b>인증 실패</b></li>
+        <li>인증 완료 전 <b>[결제하기] 비활성</b></li>
+      </ul>
+    </div>
+    <div class="card b">
+      <h5>회원 — 로그인</h5>
+      <ul>
+        <li><b>해당 법인 게임 캐릭터만</b> 조회</li>
+        <li>캐릭터 미보유 시 결제 불가 — 빈 상태 안내</li>
+        <li>랜드 계정에 <b>해당 법인 GNJOY 바인딩</b>이 있어야 조회 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="lb">캐릭터 기반 상품으로 한정한 근거</span>
+    <p>캐릭터 특정이 결제 선행 조건이므로 <b>법인이 자동 확정</b>된다.
+    로그인 없이도 매출 귀속이 유지되는 이유다.
+    회원 흐름에서는 회원·인증 설계의 <b>「GNJOY 미바인딩 시 해당 지사 게임 조회 불가」</b> 규칙이 동일한 역할을 수행한다.</p>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">Part 3</span>
+  <h2>운영 원칙</h2>
+  <p>거래 단위 및 상품 범위 원칙과, 이를 보장하는 서버 검증 요건.</p>
+</div>
+
+<section id="c1">
+  <h3>거래 단위 원칙</h3>
+
+<pre>주문 1건 = 상품 1개 = 지급 1회 = 환불 1회      <b>수량 · 장바구니 미적용</b>
+상품 범위는 캐릭터 기반으로 한정                <b>로그인 없이 지급 대상 확정 가능</b></pre>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:200px;">원칙이 차단하는 사항</th><th>원칙 미적용 시</th></tr></thead>
+      <tbody>
+        <tr><td><b>부분 취소</b></td><td>복수 건 중 일부 환불 시 <b>부분취소 미지원 결제수단</b>에서 처리 불가 — 간편결제 · 통신사 결제</td></tr>
+        <tr><td><b>부분 지급 실패</b></td><td>3건 중 1건만 실패하는 상태가 발생하며 고객 안내가 불가능</td></tr>
+        <tr><td><b>지급 대상 혼재</b></td><td>캐릭터 지급 상품과 계정 지급 상품이 혼재되어 <b>지급 대상을 단일로 확정할 수 없음</b></td></tr>
+        <tr><td><b>부분 지급 상태</b></td><td>수량이 있으면 일부만 수령한 상태가 발생해 <b>환불 · 회수 단위가 주문과 불일치</b>한다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">위 4개 항목은 사후 보완이 아닌 <b>구조적 차단</b>이 필요한 사항이다.</p>
+</section>
+
+<section id="c2">
+  <h3>서버 검증 요건</h3>
+
+  <p>매출 귀속을 보장하는 필수 검증 항목이다. <b>프론트엔드 전달값은 신뢰 대상으로 취급하지 않는다.</b></p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:60px;">No</th><th style="width:230px;">검증 항목</th><th>미검증 시</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td><b>도메인 등록 여부</b></td><td>미등록 사이트에서 웹샵 로드 가능</td></tr>
+        <tr><td class="mono">2</td><td><b>법인 × 게임 조합 등록 여부</b></td><td class="bad-cell">도메인이 유효한 상태에서 해당 법인 미서비스 게임으로 결제 가능</td></tr>
+        <tr><td class="mono">3</td><td><b>통화 허용 여부</b></td><td class="bad-cell">법인 미허용 통화로 결제 가능</td></tr>
+        <tr><td class="mono">4</td><td><b>금액 서버 산출</b></td><td class="bad-cell">프론트엔드 전달 금액으로 결제 — 11,000원 → 1,100원 변조 가능</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">2 · 3번은 <b>도메인 검증만으로 차단되지 않는다.</b> 도메인이 유효한 경우에도 조합과 통화는 별도 검증이 필요하다.</p>
+</section>
+
+<div class="part">
+  <span class="n">Part 4</span>
+  <h2>확장성</h2>
+  <p>법인 · 게임 · PG 증설 시 소요 작업과, 상품 유형별 판매 채널 구분.</p>
+</div>
+
+<section id="d1">
+  <h3>증설 시 소요 작업</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:150px;">증설 대상</th><th>소요 작업</th><th style="width:110px;">개발 여부</th></tr></thead>
+      <tbody>
+        <tr><td><b>신규 법인</b></td><td>도메인 등록 · PG 계약 · 키 세팅 · 통화 · 상품 · 가격 등록</td><td><b>없음</b></td></tr>
+        <tr><td><b>신규 게임</b></td><td>게임 등록 · 상품 · 가격 등록</td><td><b>없음</b></td></tr>
+        <tr><td><b>신규 국가</b></td><td>해당 법인에 <b>통화 추가</b> 및 해당 통화 가격 등록</td><td><b>없음</b></td></tr>
+        <tr><td><b>신규 PG</b></td><td>본사 어댑터 연동 — 연동 후 <b>전 법인 사용 가능</b></td><td>1회</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">통화 확장에 따른 가격 등록 부하</span>
+    <p>단일 법인이 복수 국가를 운영하므로 통화가 복수로 구성된다 — 대만 법인은 TWD · HKD · MOP · USD 4종이다.
+    상품 12종 기준 <b>48건</b>이며 9개 법인 합계 <b>200건 이상</b>이 된다.
+    통화별 개별 입력 대신 <b>가격 등급(Price Tier)</b>으로 묶어 등급당 통화별 금액을 일괄 정의하는 방식 검토가 필요하다.</p>
+  </div>
+</section>
+
+<section id="d2">
+  <h3>판매 채널별 적용 범위</h3>
+
+  <p>상품 유형에 따라 <b>판매 채널을 나눈다.</b> 캐릭터 기반 상품은 <b>회원 · 비회원 모두</b> 웹샵에서 구매하고,
+  계정 기반 상품과 정액제 · 구독은 <b>지사 포털 반영을 기본</b>으로 하며 웹샵은 <b>후속 과제</b>로 둔다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">상품 유형</th><th style="width:120px;">구매 주체</th><th style="width:96px;">웹샵</th><th style="width:106px;">지사 포털</th><th>채널 구분 근거</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>캐릭터 기반 상품</b><br><span class="mono">아이템 · 의상 · 소비 · 패키지</span></td>
+          <td><b>회원 · 비회원</b></td>
+          <td><span class="verdict yes">기본</span></td>
+          <td><span class="verdict yes">가능</span></td>
+          <td>캐릭터 특정으로 지급 대상이 확정된다. 회원은 캐릭터 목록에서 선택하고 비회원은 캐릭터 인증으로 확정한다 — <b>비회원까지 구매가 성립</b>하는 유일한 유형이다</td>
+        </tr>
+        <tr>
+          <td><b>계정 기반 상품</b><br><span class="mono">포인트 · 계정한정</span></td>
+          <td><b>회원</b></td>
+          <td><span class="verdict ko">후속</span></td>
+          <td><span class="verdict yes">기본</span></td>
+          <td>지급 대상이 계정이므로 <b>로그인이 전제</b>다. 지사 포털은 로그인 계정이 곧 해당 법인 GNJOY 계정이어서 <b>대상과 법인이 동시에 확정</b>된다</td>
+        </tr>
+        <tr>
+          <td><b>정액제 · 구독</b></td>
+          <td><b>회원</b></td>
+          <td><span class="verdict no">후속</span></td>
+          <td><span class="verdict yes">기본</span></td>
+          <td>갱신은 사용자 조작 없이 청구되므로 <b>도메인 기준 법인 판정이 불가</b>하다. 지사 포털은 계정이 법인을 확정해 <b>해당 문제가 발생하지 않는다</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="cap">채널을 가르는 기준은 <b>로그인 필요 여부</b>다.
+  웹샵은 <b>비회원 구매를 지원</b>해야 하므로 캐릭터 기반 상품으로 한정하며 — <b>회원 구매도 동일하게 지원한다</b> —
+  로그인이 전제인 상품군은 <b>지사 포털에서 처리</b>한다.
+  통합 결제창은 두 채널을 모두 지원하므로 <b>결제 모듈 변경은 발생하지 않는다.</b></p>
+
+  <h3>지사 포털 반영 시 확정 사항</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>지급 대상 확정</b></td><td>로그인 계정이 해당 법인 GNJOY 계정이므로 <b>추가 확인 절차 없이 확정</b>된다. <span class="mono">(지사코드, GNJOY계정ID) → 포털계정</span>이 <b>1:1</b>이다</td></tr>
+        <tr><td><b>상품 적용 범위</b></td><td>포인트는 계정 지갑에 귀속되어 게임과 무관하다. 정액제가 특정 게임 이용권이면 <b>상품 정의에 게임 범위</b>가 필요하다</td></tr>
+        <tr><td><b>구매내역 조회 기준</b></td><td>지사 포털은 <b>해당 법인 구매만</b> 조회된다. 랜드 포털에서 통합 조회하려면 <b>GNJOY 바인딩</b>이 선행된다</td></tr>
+        <tr><td><b>구독 구현 항목</b></td><td>빌링키 · 갱신 실패 · 해지 환불 · 가격 변경 · 통화 고정 · 법정 고지 · 정산 대사 — <b>구독 서비스 일반 요건 7건</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>웹샵 후속 과제</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:170px;">항목</th><th>대응 방식</th></tr></thead>
+      <tbody>
+        <tr><td><b>계정 기반 상품</b></td><td><b>지급 대상 축만 추가</b>한다. 도메인이 법인을 확정하고 해당 법인 GNJOY 바인딩이 대상을 확정 — <b>기존 구조 변경 없음</b>. 미바인딩 계정은 <b>연결 유도</b> 후 진행</td></tr>
+        <tr><td><b>정액제 · 구독</b></td><td>최초 결제의 <b>법인 · 통화 · 결제수단을 세션에 고정</b>해 갱신 시 재사용한다. 지사 포털 도입 이후 검토한다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lb">정액제 선행 도입 시 대안</span>
+    <p>30일 이용권을 <b>구독이 아닌 소비 아이템</b>으로 등록하면 반복 결제가 발생하지 않는다.
+    기간 만료 후 재구매 방식이므로 <b>현 구조로 판매 가능</b>하며, 웹샵 · 지사 포털 양쪽에서 동일하게 취급된다.</p>
+  </div>
+
+</section>
+
+<footer class="doc">
+  <h4>관련 문서</h4>
+  <ul>
+    <li><b><a href="webshop-payment-prd.html">웹샵/통합결제 기획</a></b> — 상위 기준 문서. 아키텍처 · 프로비저닝 · 장애 대응 · 환불 정책</li>
+    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 화면정의서</a></b> — 본 구조의 화면 정의. 웹샵 메인 · 받을 캐릭터 조건 처리 · 상품 상세 · 결제 완료 · 구매내역 · 활용안 2형태 · 기타사항 6건</li>
+    <li><b><a href="../../wireframe/payment-checkout-channels.html">라그나로크원페이 화면정의서</a></b> — 결제수단 선택 및 결제 화면</li>
+    <li><b><a href="payment.html">결제 설계</a></b> — 본사 · 지사 역할 분담 및 관리자 구성</li>
+    <li><b><a href="land-auth.html">랜드 회원·인증 설계</a></b> — 계정 모델 · GNJOY 9종 바인딩 · 유일성 규칙</li>
+    <li><b><a href="global-payment.html">글로벌 결제 설계 (상세)</a></b> — 규격 · 필드 · 확인 필요 사항 19건</li>
+  </ul>
+
+  <p style="margin-top:18px">라그나로크 포털 · 웹샵/통합결제 구조 · 2026-09-08</p>
+</footer>

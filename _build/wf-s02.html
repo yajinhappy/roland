@@ -1,0 +1,248 @@
+<section class="screen" id="s02">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="shd"><span class="id">ST-02</span><span class="nm">PG · 머천트</span></div>
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs"><button type="button" class="tab tab-on" data-dev="pc">PC</button></div>
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="sec ahd">
+          <div class="mk" style="position:absolute;top:18px;left:-10px;">1</div>
+          <span class="alogo">RAGNAROK PORTAL <span style="color:#2F6490;">PAY</span></span>
+          <span style="width:1px;height:16px;background:#DCE2E8;"></span>
+          <span class="ts">본사 통합 어드민</span>
+          <span class="tag-a">본사 전용 · 지사는 조회만</span>
+          <span class="ent" style="margin-left:auto;"><span class="dot dot-g"></span><span class="mono">전체</span> 전 법인 <span style="font-size:9px;color:#98A2AE;">▾</span></span>
+          <span class="fltr" style="gap:6px;">운영자 <b style="color:#2C333D;">an.jaeyoung</b> · Super Admin</span>
+        </div>
+
+        <div class="abody">
+          <div class="snb">
+            <div class="snb-g">온보딩</div>
+            <div class="snb-i"><span class="mono">00</span> 결제 준비도</div>
+            <div class="snb-g">기반 구축</div>
+            <div class="snb-i"><span class="mono">01</span> 지사 법인 · 세무</div>
+            <div class="snb-i on"><span class="mono">02</span> PG 계약 · 머천트</div>
+            <div class="snb-i"><span class="mono">03</span> 게임 · Webhook</div>
+            <div class="snb-i"><span class="mono">04</span> 상품 SKU · 가격</div>
+            <div class="snb-i"><span class="mono">05</span> 라우팅 · 한도</div>
+            <div class="snb-g">운영 · 정산</div>
+            <div class="snb-i"><span class="mono">06</span> 결제 모니터링</div>
+            <div class="snb-i"><span class="mono">07</span> 환불 · CS 분쟁</div>
+            <div class="snb-i"><span class="mono">08</span> T+1 정산 대사</div>
+          </div>
+
+          <div class="amain">
+            <div class="atitle"><span class="ttl-s">PG 계약 · 머천트 관리</span><span class="ts">Step 02</span></div>
+            <span class="tm">본사가 마스터 협상한 조건으로 발급된 지사 명의 머천트를 등록한다. 지원 PG 목록 = 어댑터 구현 목록이며, Secret Key는 KMS Vault에 저장되어 복원되지 않는다.</span>
+
+            <div class="abar">
+              <span class="fltr" style="width:200px;color:#98A2AE;">머천트 · PG명 검색</span>
+              <span class="fltr">법인 <b style="color:#2C333D;">전체</b> <span style="font-size:9px;">▾</span></span>
+              <span class="fltr">Capability <span style="font-size:9px;">▾</span></span>
+              <span style="margin-left:auto;"></span>
+              <span class="btn-s">지원 PG 목록 관리</span>
+              <span class="btn-ps" style="padding:7px 14px;">+ 신규 머천트 등록</span>
+            </div>
+
+            <div class="card">
+              <div class="card-h">
+                <span class="h-s">머천트 마스터</span><span class="tag-n">8건</span>
+                <span class="tag-g">활성 7</span><span class="tag-r">차단 1</span>
+                <span class="ts" style="margin-left:auto;">Vault 동기화 2026-09-07 03:12</span>
+              </div>
+              <div class="sec">
+                <div class="mk" style="position:absolute;top:26px;left:390px;">3</div>
+                <div class="mk" style="position:absolute;top:26px;left:790px;">4</div>
+                <div class="mk" style="position:absolute;top:26px;left:1042px;">5</div>
+                <div class="mk" style="position:absolute;top:26px;right:-10px;">6</div>
+                <table class="tbl tbl-z">
+                  <thead><tr>
+                    <th style="width:70px;">법인</th><th style="width:150px;">머천트 · PG</th><th style="width:62px;">방식</th>
+                    <th style="width:140px;">Secret Key</th><th style="width:112px;">MDR · 정산</th>
+                    <th style="width:172px;">Capability</th><th style="width:204px;">PG 물리 제약</th>
+                    <th style="width:140px;">상품 사전등록</th><th>상태</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b class="mono">GV</b></td><td><b>토스페이먼츠</b><div class="tx mono">gravity_kr_toss_live</div></td><td>B</td><td class="mono" style="color:#98A2AE;">live_ak_kr_99a8••••<div class="tx">Vault · HSM</div></td><td><b class="num">2.1%</b><div class="tx">T+2</div></td><td><span class="tag-g">환불</span> <span class="tag-g">부분</span> <span class="tag-g">정기</span></td><td class="tx">최소 <b style="color:#2C333D;">100</b> · 최대 <b style="color:#2C333D;">2,000,000</b> KRW<div>소수점 <b style="color:#2C333D;">0</b>자리 · 주문번호 6~64 영숫자</div></td><td><span class="tag-n">불필요</span></td><td><span class="sw on"></span></td></tr>
+                    <tr><td><b class="mono">GVC</b></td><td><b>MyCard 智冠</b><div class="tx mono">GRAVITY_TW_MYCARD_LIVE</div></td><td>B</td><td class="mono" style="color:#98A2AE;">tw_mycard_live_••••<div class="tx">Vault · Hash IV 별도</div></td><td><b class="num">5.5%</b><div class="tx">T+7</div></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx">최소 <b style="color:#2C333D;">30</b> · 최대 <b style="color:#2C333D;">30,000</b> TWD<div>소수점 <b style="color:#2C333D;">0</b>자리 · 주문번호 <b style="color:#8C3A3A;">≤ 30</b> 영대문자</div></td><td><span class="tag-a">요구</span><div class="tx">코드 ≤ 20 · 영대문자</div></td><td><span class="sw on"></span></td></tr>
+                    <tr><td><b class="mono">GVC</b></td><td><b>GASH 樂點</b><div class="tx mono">GRAVITY_TW_GASH_LIVE</div></td><td>B</td><td class="mono" style="color:#98A2AE;">gash_sec_live_••••<div class="tx">Vault · Hash Key 별도</div></td><td><b class="num">4.8%</b><div class="tx">T+7</div></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx">최소 <b style="color:#2C333D;">30</b> · 최대 <b style="color:#2C333D;">20,000</b> TWD<div>소수점 <b style="color:#2C333D;">0</b>자리</div></td><td><span class="tag-a">요구</span><div class="tx">코드 ≤ 16 · 영숫자</div></td><td><span class="sw on"></span></td></tr>
+                    <tr><td><b class="mono">GVI</b></td><td><b>Stripe Global</b><div class="tx mono">acct_1H99GravityLiveUS</div></td><td><b>A-1</b></td><td class="mono" style="color:#98A2AE;">pk_live_51H99••••<div class="tx">Vault · <b style="color:#8C3A3A;">웹훅 시크릿 별도</b></div></td><td><b class="num">2.9%</b>+$0.30<div class="tx">T+2</div></td><td><span class="tag-g">환불</span> <span class="tag-g">부분</span> <span class="tag-g">정기</span></td><td class="tx">최소 <b style="color:#2C333D;">0.50</b> · 최대 <b style="color:#2C333D;">999,999</b> USD<div>소수점 <b style="color:#2C333D;">2</b>자리</div></td><td><span class="tag-n">불필요</span></td><td><span class="sw on"></span></td></tr>
+                    <tr><td><b class="mono">GVI</b></td><td><b>PayPal Commerce</b><div class="tx mono">gravity_na_paypal</div></td><td>B</td><td class="mono" style="color:#98A2AE;">AXd9_live_••••<div class="tx">OAuth · <b style="color:#8C3A3A;">Webhook ID 별도</b></div></td><td><b class="num">3.49%</b>+$0.49<div class="tx">T+1</div></td><td><span class="tag-g">환불</span> <span class="tag-g">부분</span> <span class="tag-g">정기</span></td><td class="tx">최소 <b style="color:#2C333D;">1.00</b> · 최대 <b style="color:#2C333D;">10,000</b> USD<div>소수점 <b style="color:#2C333D;">2</b>자리</div></td><td><span class="tag-n">불필요</span></td><td><span class="sw on"></span></td></tr>
+                    <tr><td><b class="mono">GGA</b></td><td><b>SoftBank Payment</b><div class="tx mono">sbps_gravity_jp</div></td><td>B</td><td class="mono" style="color:#98A2AE;">sbps_hash_••••<div class="tx">Vault · 인증서 만료 2027-04</div></td><td><b class="num">3.2%</b><div class="tx">월 2회</div></td><td><span class="tag-g">환불</span> <span class="tag-g">부분</span> <span class="tag-g">정기</span></td><td class="tx">최소 <b style="color:#2C333D;">100</b> · 최대 <b style="color:#2C333D;">300,000</b> JPY<div>소수점 <b style="color:#2C333D;">0</b>자리</div></td><td><span class="tag-n">불필요</span></td><td><span class="sw on"></span></td></tr>
+                    <tr><td><b class="mono">GGA</b></td><td><b>편의점 현금 수납</b><div class="tx mono">konbini_gravity_jp</div></td><td>B</td><td class="mono" style="color:#98A2AE;">kb_live_••••<div class="tx">Vault · HSM</div></td><td><b class="num">4.0%</b><div class="tx">월 2회</div></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx">최소 <b style="color:#2C333D;">120</b> · 최대 <b style="color:#8C3A3A;">30,000</b> JPY<div>소수점 <b style="color:#2C333D;">0</b>자리 · TTL 24h</div></td><td><span class="tag-a">요구</span><div class="tx">코드 ≤ 24</div></td><td><span class="sw on"></span></td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">GGT</b></td><td><b>2C2P · PromptPay</b><div class="tx mono">2c2p_gravity_th</div></td><td>B</td><td class="mono" style="color:#98A2AE;">2c2p_sec_••••<div class="tx">Vault · RSA 인증서</div></td><td><b class="num">3.6%</b><div class="tx">T+3</div></td><td><span class="tag-g">환불</span> <span class="tag-a">부분</span> <span class="tag-r">정기</span></td><td class="tx">최소 <b style="color:#2C333D;">20</b> · 최대 <b style="color:#2C333D;">150,000</b> THB<div>소수점 <b style="color:#2C333D;">2</b>자리</div></td><td><span class="tag-n">불필요</span></td><td><span class="sw"></span><div class="tx" style="color:#8C3A3A;">자동 차단</div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="bx" style="margin-top:14px;padding:12px 15px;display:flex;gap:11px;align-items:center;background:#FDF7F7;border-color:#E0BEBE;">
+              <span class="dot dot-r"></span>
+              <span class="tm"><b style="color:#8C3A3A;">2C2P 채널 자동 차단됨</b> — 헬스체크 연속 3회 타임아웃. 2026-09-07 09:14 · GGT 결제창에서 PromptPay QR 미노출 중. 복구는 수동 재개만 가능.</span>
+              <span class="btn-s" style="margin-left:auto;">이력 보기</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 신규 MID 등록 모달 -->
+        <div class="scrim" style="padding-top:30px;">
+          <div class="sec modal" style="width:780px;">
+            <div class="mk" style="position:absolute;top:-10px;left:-10px;">2</div>
+            <div class="modal-h">
+              <span class="h-s">신규 머천트 등록</span>
+              <span class="tag-n">GVC · MyCard</span>
+              <span class="ts" style="margin-left:auto;">모든 항목 PG사 제공 자료 기준</span>
+              <span style="color:#98A2AE;font-size:16px;">×</span>
+            </div>
+            <div class="modal-b" style="gap:14px;">
+              <div>
+                <span class="lbl-k">① 자격증명 — 환경별 2세트</span>
+                <div class="fgrid" style="margin-top:8px;">
+                  <div class="fld"><label>머천트 ID · Store ID<i>*</i></label><div class="inp fill">GRAVITY_TW_MYCARD_LIVE</div></div>
+                  <div class="fld"><label>환경<i>*</i></label><div class="inp sel fill">live <span style="font-size:9px;">▾</span></div></div>
+                  <div class="fld"><label>API Key (Client)<i>*</i></label><div class="inp">프론트 노출 가능</div></div>
+                  <div class="fld"><label>API Secret<i>*</i></label><div class="inp">저장 후 복원 불가</div></div>
+                  <div class="fld"><label>웹훅 서명 시크릿</label><div class="inp">API Secret과 별개</div><span class="hint">Stripe · PayPal 등은 별도 값이다. 같은 값을 넣으면 웹훅 검증이 전부 실패한다.</span></div>
+                  <div class="fld"><label>Hash Key · Hash IV</label><div class="inp">대만 · 태국 · 일본 계열</div><span class="hint">서명용 키쌍이 따로인 PG.</span></div>
+                </div>
+              </div>
+
+              <div>
+                <span class="lbl-k">② 엔드포인트 · 서명 규격</span>
+                <div class="fgrid" style="margin-top:8px;">
+                  <div class="fld"><label>API Base URL<i>*</i></label><div class="inp">환경별</div></div>
+                  <div class="fld"><label>서명 알고리즘<i>*</i></label><div class="inp sel">HMAC-SHA256 <span style="font-size:9px;">▾</span></div></div>
+                  <div class="fld"><label>서명 문자열 조립 규칙<i>*</i></label><div class="inp">파라미터 정렬 순서</div><span class="hint">연동에서 가장 자주 틀리는 항목.</span></div>
+                  <div class="fld"><label>웹훅 발신 IP 대역<i>*</i></label><div class="inp">방화벽 allowlist</div><span class="hint">없으면 위조 웹훅 방어가 서명 하나뿐이 된다.</span></div>
+                </div>
+              </div>
+
+              <div>
+                <span class="lbl-k">③ 상거래 제약 — 상품 등록 검증의 기준값</span>
+                <div class="fgrid" style="margin-top:8px;">
+                  <div class="fld"><label>지원 통화<i>*</i></label><div class="inp fill">TWD</div></div>
+                  <div class="fld"><label>소수점 자릿수<i>*</i></label><div class="inp fill">0</div><span class="hint">틀리면 100배 결제가 발생한다.</span></div>
+                  <div class="fld"><label>최소 · 최대 결제금액<i>*</i></label><div class="inp fill">30 ~ 30,000</div></div>
+                  <div class="fld"><label>주문번호 포맷 제약<i>*</i></label><div class="inp fill">≤ 30자 · 영대문자 + 숫자</div></div>
+                  <div class="fld"><label>상품 사전등록 요구<i>*</i></label><div class="inp sel fill">요구 <span style="font-size:9px;">▾</span></div></div>
+                  <div class="fld"><label>상품코드 규칙</label><div class="inp fill">≤ 20자 · 영대문자</div><span class="hint">전 지원 PG 교집합으로 SKU 코드 체계를 제한하는 근거.</span></div>
+                </div>
+              </div>
+
+              <div>
+                <span class="lbl-k">④ 정산 · 환불</span>
+                <div class="fgrid" style="margin-top:8px;">
+                  <div class="fld"><label>MDR · 정산 주기<i>*</i></label><div class="inp fill">5.5% · T+7</div></div>
+                  <div class="fld"><label>정산 리포트 수령 방식<i>*</i></label><div class="inp sel fill">SFTP <span style="font-size:9px;">▾</span></div><span class="hint">미지원이면 T+1 대사가 돌지 않는다.</span></div>
+                  <div class="fld"><label>취소 API · 부분취소</label><div class="inp fill">미지원 · 미지원</div></div>
+                  <div class="fld"><label>취소 가능 기간</label><div class="inp lock">해당 없음</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-f"><span class="btn-s">연결 테스트</span><span class="btn-s">취소</span><span class="btn-ps">등록</span></div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="dcol">
+      <h4>ST-02 · PG 계약 &amp; MID 관리 <span class="tag-a" style="margin-left:6px;">본사 전용</span></h4>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">본사 전용 화면</span><span class="src">권한</span></div>
+        <p class="dr-b">마스터 계약 주체가 본사이므로 <b>키 세팅도 본사</b>가 한다. 지사는 이 화면을 <b>조회 전용</b>으로만 열 수 있다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">본사</span><span class="spec-v">머천트 등록 · 키 세팅 · PG 물리 제약 등재 · 지원 PG 목록 관리</span></div>
+          <div class="spec-r"><span class="spec-k">지사</span><span class="spec-v">마스킹 조회 · Capability · MDR · 정산 주기 확인 · <b>채널 토글</b>(개방 시)</span></div>
+          <div class="spec-r"><span class="spec-k">지사 불가</span><span class="spec-v"><b>키 원문 조회</b> · 머천트 추가 · 물리 제약 변경</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">계약은 지사 명의 · 협상과 키는 본사</div>
+          <div class="imm-r"><span class="imm-k">이유</span><span class="imm-v">지사가 PG 포털에서 직접 키를 받으면 본사가 <b>발급 조건을 모르게</b> 되고 MDR 기준값을 검증할 수 없다</span></div>
+          <div class="imm-r"><span class="imm-k">효과</span><span class="imm-v">협상력(그룹 물량)과 세무 분리(지사 명의)를 동시에 유지</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">머천트 등록 폼</span><span class="src">모달</span></div>
+        <p class="dr-b">API Key · Secret · 웹훅 URL 3종으로는 라이브 운영이 안 된다. <b>4개 그룹 · 20개 항목</b>을 PG 제공 자료에서 받아 등재한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">① 자격증명</span><span class="spec-v">머천트 ID · API Key · Secret · <b>웹훅 서명 시크릿</b> · Hash Key/IV · 인증서 · <b>sandbox/live 2세트</b></span></div>
+          <div class="spec-r"><span class="spec-k">② 엔드포인트</span><span class="spec-v">Base URL · 서명 알고리즘 · <b>조립 규칙</b> · <b>웹훅 발신 IP 대역</b></span></div>
+          <div class="spec-r"><span class="spec-k">③ 상거래</span><span class="spec-v">통화 · <b>소수점 자릿수</b> · 최소/최대 · <b>주문번호 포맷</b> · <b>사전등록 요구</b> · 상품코드 규칙</span></div>
+          <div class="spec-r"><span class="spec-k">④ 정산 · 환불</span><span class="spec-v">MDR · 주기 · <b>리포트 수령 방식</b> · 취소 지원 · 취소 가능 기간</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">빠지면 라이브에서 바로 사고 나는 2개</div>
+          <p class="warn-b"><b>소수점 자릿수</b> — KRW · JPY는 0자리인데 2자리로 처리하면 100배 결제가 된다.<br>
+          <b>웹훅 서명 시크릿</b> — API Secret과 같은 값을 넣으면 웹훅 검증이 전부 실패해 배송이 멈춘다.</p>
+        </div>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">등록 조건</span><span class="spec-v"><b>연결 테스트 통과</b> 후에만 저장. 실패 상태로는 등록되지 않는다</span></div>
+          <div class="spec-r"><span class="spec-k">세트 수</span><span class="spec-v">법인 × PG × 환경 — 머천트 8건이면 <b>16세트</b></span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">Secret Key 보관</span><span class="src">보안</span></div>
+        <p class="dr-b">인증키는 <b>KMS Vault(HSM)에 암호화 저장</b>되고 화면에는 앞 일부만 마스킹 노출된다. 등록 후 원문을 되읽는 경로는 없다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">복원</span><span class="spec-v">불가 — 분실 시 PG사 재발급 후 교체 등록</span></div>
+          <div class="spec-r"><span class="spec-k">주입</span><span class="spec-v">세션 생성 시 백엔드가 <b>메모리 상에서만</b> 주입 — 프론트로 내려가지 않는다</span></div>
+          <div class="spec-r"><span class="spec-k">인증서 만료</span><span class="spec-v">만료일을 그리드에 노출 — SoftBank 등 인증서 기반 PG의 갱신 누락 방지</span></div>
+          <div class="spec-r"><span class="spec-k">감사</span><span class="spec-v">키 조회 · 교체 이력 불변 기록</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">PG 물리 제약</span><span class="src">기준값</span></div>
+        <p class="dr-b">한도 4계층의 <b>1계층</b>. 지사가 어떤 설정을 해도 <b>이 범위를 넘을 수 없다</b>.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">최소 · 최대</span><span class="spec-v">머천트 × 채널 × 통화 단위. Step 4 상품 가격 검증과 Step 5 채널 한도의 상한</span></div>
+          <div class="spec-r"><span class="spec-k">소수점</span><span class="spec-v">통화별 자릿수 — 결제 금액 전송 포맷을 결정</span></div>
+          <div class="spec-r"><span class="spec-k">주문번호 포맷</span><span class="spec-v">MyCard는 <b>30자 · 영대문자</b> — 현재 <span class="mono">tx_gravity_…</span> 형식이 통과하지 못한다</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">Hive 대비 개선점</div>
+          <div class="imm-r"><span class="imm-k">Hive</span><span class="imm-v">「통화별 최저 · 최고 결제 금액이 지정되어 있으므로 <b>상품 가격 설정 시 주의</b>」 — 안내로 끝난다</span></div>
+          <div class="imm-r"><span class="imm-k">결과</span><span class="imm-v">범위 이탈 상품이 <b>유저의 결제 시도 시점</b>에 에러로 드러난다</span></div>
+          <div class="imm-r"><span class="imm-k">포털</span><span class="imm-v">이 값을 등재해 <b>상품 등록 검증 + 결제창 필터</b>로 시스템이 차단</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">상품 사전등록 요구</span><span class="src">플래그</span></div>
+        <p class="dr-b">「모든 PG 콘솔에 상품을 등록한다」는 전제는 틀렸다. <b>요구하는 PG만</b> 대상이며, 이 플래그가 그 판별 기준이다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">불필요</span><span class="spec-v">토스 · Stripe · PayPal · SoftBank · 2C2P — 금액만 보낸다</span></div>
+          <div class="spec-r"><span class="spec-k">요구</span><span class="spec-v"><b>MyCard · GASH · 편의점 현금</b> — 상품 코드를 사전 등록해야 결제가 성립</span></div>
+          <div class="spec-r"><span class="spec-k">상품코드 규칙</span><span class="spec-v">길이 · 문자셋. <b>전 지원 PG의 교집합</b>이 SKU 코드 체계를 제한한다</span></div>
+          <div class="spec-r"><span class="spec-k">연동</span><span class="spec-v">이 플래그가 ST-00 워크리스트와 결제창 필터 7번의 입력값</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">채널 토글</span><span class="src">라이브 토글</span></div>
+        <p class="dr-b">3계층(법인 · MID · 채널) 중 <b>런타임에 바뀌는 유일한 값</b>. 끄면 결제창에서 즉시 사라진다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">반영</span><span class="spec-v"><b>1초 내</b> — Circuit Breaker</span></div>
+          <div class="spec-r"><span class="spec-k">자동 차단</span><span class="spec-v">헬스체크 연속 3회 타임아웃 시 시스템이 스스로 끈다</span></div>
+          <div class="spec-r"><span class="spec-k">복구</span><span class="spec-v"><b>수동 재개만</b> — 자동 복구는 장애 중 트래픽을 되돌려 보낸다</span></div>
+          <div class="spec-r"><span class="spec-k">진행 중 세션</span><span class="spec-v">발급된 세션은 만료까지 유효 — 차단은 신규 세션에만 적용</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">확정 필요 — 지사 개방 여부</div>
+          <p class="warn-b">키는 못 봐도 <b>자기 법인 채널 ON/OFF는 지사에 열어주는 것이 현실적</b>이다. PG 장애 시 본사를 기다릴 수 없다. 다만 이 화면 자체가 본사 전용이므로, 지사용 토글은 ST-05(라우팅 · 한도)에 두는 것이 맞다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>

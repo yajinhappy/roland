@@ -1,0 +1,174 @@
+  </div>
+</div>
+
+<script>
+(function () {
+  var order = ["s00","s01","s02","s03","s04","s05","s06","s07","s08"];
+  var stage = document.querySelector('.stage');
+  var navBtns = Array.prototype.slice.call(document.querySelectorAll('.nv'));
+  var descBtn = document.getElementById('descBtn');
+
+  // PC 기준 폭과 좌우 여백을 함께 바꾼다.
+  // 설계 기준(1440)과 대응 상한(1920 · QHD 2560)을 확인한다.
+  var GUTTER = { 1440: 40, 1920: 40, 2560: 40 };
+  var pcw = 1440;
+  var WIDTHS = [1440, 1920, 2560];
+
+  // PC / MO 탭과 같은 줄에 폭 선택과 현재 배율을 붙인다
+  document.querySelectorAll('.screen .tabs').forEach(function (row) {
+    var box = document.createElement('span');
+    box.className = 'tabctl';
+    var seg = '<span class="pcw"><span class="pcw-lbl">PC 폭</span><span class="pcw-seg">';
+    WIDTHS.forEach(function (w) {
+      seg += '<button type="button" class="wbtn" data-w="' + w + '">' + w + '</button>';
+    });
+    seg += '</span></span><span class="zoom">—</span>';
+    box.innerHTML = seg;
+    row.appendChild(box);
+  });
+
+  var wBtns = Array.prototype.slice.call(document.querySelectorAll('.wbtn'));
+
+  // 1920은 디스크립션을 펴둔 채로는 볼 수 없다.
+  // 고르는 순간 접고, 1440으로 돌아오면 원래 상태로 되돌린다.
+  var descBefore = null;
+
+  function applyPcw() {
+    document.querySelectorAll('.pcframe').forEach(function (f) {
+      f.style.width = pcw + 'px';
+      f.style.paddingLeft = GUTTER[pcw] + 'px';
+      f.style.paddingRight = GUTTER[pcw] + 'px';
+      f.style.paddingTop = '26px';
+      f.style.paddingBottom = '30px';
+    });
+    wBtns.forEach(function (b) { b.classList.toggle('on', parseInt(b.dataset.w, 10) === pcw); });
+
+    if (pcw !== 1440) {
+      if (descBefore === null) descBefore = document.body.classList.contains('desc-off');
+      document.body.classList.add('desc-off');
+    } else if (descBefore !== null) {
+      document.body.classList.toggle('desc-off', descBefore);
+      descBefore = null;
+    }
+    fit();
+  }
+
+  // 보이는 폭에 맞춰 배율을 낮춘다
+  function fit() {
+    var sc = document.querySelector('.screen.on');
+    var out = sc && sc.querySelector('.pane.on .zoom') || (sc && sc.querySelector('.zoom'));
+    var pane = sc && sc.querySelector('.pane.on');
+    if (!pane) { if (out) out.textContent = '—'; return; }
+    var st = pane.querySelector('.wstage');
+    var frame = st && st.firstElementChild;
+    if (!frame) { if (out) out.textContent = '—'; return; }
+    frame.style.zoom = '1';
+    var natW = frame.offsetWidth || 1;
+    var availW = st.clientWidth - 44;
+    var z = Math.min(1, availW / natW);
+    if (!isFinite(z) || z <= 0) z = 1;
+    frame.style.zoom = z;
+    if (out) out.textContent = natW + 'px · ' + Math.round(z * 100) + '%';
+  }
+
+  function go(id) {
+    document.querySelectorAll('.screen').forEach(function (s) {
+      s.classList.toggle('on', s.id === id);
+    });
+    navBtns.forEach(function (b) { b.classList.toggle('on', b.dataset.go === id); });
+    if (stage) stage.scrollTop = 0;
+    var col = document.querySelector('.screen.on .dcol');
+    if (col) col.scrollTop = 0;
+    clearMarks();
+    fit();
+  }
+
+  navBtns.forEach(function (b) {
+    b.addEventListener('click', function () { go(b.dataset.go); });
+  });
+
+  document.querySelectorAll('.screen .tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var col = t.closest('.wcol');
+      if (!col) return;
+      var dev = t.dataset.dev;
+      col.querySelectorAll('.tab').forEach(function (o) {
+        o.classList.toggle('tab-on', o.dataset.dev === dev);
+      });
+      col.querySelectorAll('.pane').forEach(function (p) {
+        p.classList.toggle('on', p.classList.contains('pane-' + dev));
+      });
+      col.classList.toggle('is-pc', dev === 'pc');
+      fit();
+    });
+  });
+
+  // ---- 디스크립션 접기 / 펴기 ----
+  function clearMarks() {
+    document.querySelectorAll('.mk.act, .mk-s.act').forEach(function (n) {
+      n.classList.remove('act');
+    });
+    document.querySelectorAll('.hit').forEach(function (n) { n.classList.remove('hit'); });
+  }
+
+  function toggleDesc() {
+    document.body.classList.toggle('desc-off');
+    descBefore = null;   // 직접 여닫으면 그 선택이 우선한다
+    fit();
+  }
+  if (descBtn) descBtn.addEventListener('click', toggleDesc);
+
+  wBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      pcw = parseInt(b.dataset.w, 10);
+      applyPcw();
+    });
+  });
+
+  // 번호를 누르면 디스크립션이 펴지고 해당 항목으로 스크롤된다
+  document.querySelectorAll('.screen .wstage .mk, .screen .wstage .mk-s').forEach(function (m) {
+    m.setAttribute('role', 'button');
+    m.setAttribute('tabindex', '0');
+    m.addEventListener('click', function () {
+      var sc = m.closest('.screen');
+      var col = sc && sc.querySelector('.dcol');
+      if (!col) return;
+      var was = document.body.classList.contains('desc-off');
+      clearMarks();
+      if (was) { document.body.classList.remove('desc-off'); fit(); }
+      m.classList.add('act');
+      var num = m.textContent.trim();
+      Array.prototype.slice.call(col.children).forEach(function (row) {
+        var t = row.querySelector('.dr-h .mk');
+        if (t && t.textContent.trim() === num) {
+          row.classList.add('hit');
+          row.scrollIntoView({ block: 'center', behavior: was ? 'auto' : 'smooth' });
+        }
+      });
+    });
+    m.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); m.click(); }
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+    if (e.key === 'Escape') { clearMarks(); return; }
+    if (e.key === 'd' || e.key === 'D' || e.key === 'ㅇ') { toggleDesc(); return; }
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var cur = document.querySelector('.screen.on');
+    var i = order.indexOf(cur ? cur.id : order[0]);
+    if (i < 0) return;
+    var n = e.key === 'ArrowRight' ? i + 1 : i - 1;
+    if (n < 0 || n >= order.length) return;
+    go(order[n]);
+  });
+
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  setTimeout(fit, 60);
+
+  applyPcw();
+  go(order[0]);
+})();
+</script>

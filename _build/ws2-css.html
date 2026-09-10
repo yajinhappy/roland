@@ -1,0 +1,364 @@
+<style>
+  /* ═══════════ 웹샵 구성요소 ═══════════ */
+
+  /* 핀 — 두 글자 이상(H0) */
+  .mk.mk-w { width: auto; min-width: 20px; padding: 0 5px; border-radius: 10px; }
+  .ws-host .mk, .ws-embed .mk, .ws-case .mk, .ws-mo .mk { z-index: 5; }
+
+  /* ---- 호스트 영역 : 웹샵 모듈이 제공하지 않는 부분 ---- */
+  .ws-host { border: 1px dashed #B9C2CC; border-radius: 4px; background: #F2F4F7;
+    position: relative; }
+  .ws-hostlbl, .ws-emblbl { position: absolute; top: -8px; left: 13px; padding: 0 7px;
+    font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .06em; }
+  .ws-hostlbl { background: #F2F4F7; color: #8A929E; }
+  .ws-emblbl { background: #fff; color: #2F6490; font-weight: 600; }
+
+  /* 포털 유틸 — 라그나로크 포털 화면정의서와 동일 스타일 */
+  .wrapc { width: 100%; max-width: 1600px; margin: 0 auto; }
+  .ws-util { height: 64px; display: flex; align-items: center; gap: 15px;
+    padding: 0 40px; background: #fff; }
+  .lang { position: relative; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; color: #868E9A; white-space: nowrap; cursor: default; }
+  .dd { position: absolute; top: calc(100% + 12px); left: -16px; min-width: 210px;
+    background: #fff; border: 1px solid #D5DBE2; border-radius: 5px; padding: 8px 0;
+    box-shadow: 0 8px 24px rgba(23,27,34,.10); display: none; z-index: 30; }
+  .lang:hover .dd { display: block; }
+  .dd-r { left: auto; right: -14px; min-width: 168px; }
+  .dd a { display: block; padding: 8px 18px; font-size: 12.5px; color: #434A57;
+    text-decoration: none; }
+  .dd a:hover { background: #F2F5F8; color: #171B22; }
+  .dd-r a.on { color: #171B22; font-weight: 600; background: #F2F5F8; }
+  .srch { cursor: pointer; }
+
+  /* MO 유틸 */
+  .ws-util.mo { height: 50px; gap: 10px; padding: 0 14px;
+    border-bottom: 1px solid #E4E8ED; }
+
+  /* ---- 임베드 경계 ---- */
+  .ws-cut { display: flex; align-items: center; gap: 11px; margin: 15px 0; }
+  .ws-cut b { font-size: 10px; letter-spacing: .04em; color: #2F6490; font-weight: 600;
+    white-space: nowrap; background: #EBF3F9; border: 1px solid #AECAE0;
+    border-radius: 20px; padding: 3px 12px; }
+  .ws-cut i { flex: 1; height: 0; border-top: 1px dashed #AECAE0; }
+
+  /* ---- 임베드 영역 : 웹샵 모듈 ---- */
+  .ws-embed { border: 1px solid #2F6490; border-radius: 4px; background: #fff;
+    position: relative; }
+  /* 콘텐츠 최대폭 1600 가이드 — 프레임이 1600을 넘을 때만 보인다 */
+  .ws-band { position: absolute; top: 0; bottom: 0; left: 50%;
+    transform: translateX(-50%); width: 1600px; pointer-events: none; z-index: 6;
+    border-left: 1px dashed #C4A6A6; border-right: 1px dashed #C4A6A6; }
+  .ws-band b { position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .06em;
+    color: #A96F6F; background: #fff; padding: 0 6px; }
+
+  /* 1 · 상단 타이틀 = 메인 키비주얼 배너 */
+  .ws-title { position: relative; height: 280px; background: #E7ECF1;
+    border-bottom: 1px solid #E4E8ED; display: flex; align-items: flex-end;
+    border-radius: 3px 3px 0 0; }
+  .ws-title::before { content: ""; position: absolute; inset: 9px;
+    border: 1px dashed #A5B2BF; border-radius: 3px; pointer-events: none; }
+  .ws-kvnote { position: absolute; top: 20px; right: 24px;
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .04em;
+    color: #98A2AE; }
+  .ws-kvsafe { position: absolute; top: 9px; bottom: 9px; left: 50%;
+    transform: translateX(-50%); width: 1400px; max-width: calc(100% - 18px);
+    border-left: 1px dashed #C4CCD5; border-right: 1px dashed #C4CCD5;
+    pointer-events: none; }
+  .ws-kvin { position: relative; z-index: 1; display: flex; align-items: center;
+    gap: 20px; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 20px 36px; }
+  .ws-glogo { width: 76px; height: 76px; border: 1px dashed #8FA0B0; border-radius: 5px;
+    background: #F4F7FA; display: flex; align-items: center; justify-content: center;
+    font-size: 9.5px; color: #7A858F; text-align: center; line-height: 1.35; flex: none; }
+  .ws-kvh { font-size: 27px; font-weight: 600; letter-spacing: -.032em; color: #171B22;
+    line-height: 1.2; }
+  .ws-kvs { font-size: 13px; color: #545C69; margin-top: 5px; display: block; }
+
+  /* MO 배너 */
+  .ws-title.mo { height: 150px; }
+  .ws-title.mo .ws-kvin { gap: 13px; padding: 0 16px 18px; }
+  .ws-title.mo .ws-glogo { width: 48px; height: 48px; font-size: 8.5px; }
+  .ws-title.mo .ws-kvh { font-size: 17px; letter-spacing: -.02em; }
+  .ws-title.mo .ws-kvs { font-size: 11px; margin-top: 3px; }
+  .ws-title.mo .ws-kvnote { top: 15px; right: 16px; font-size: 9px; }
+
+  .ws-menu { display: flex; padding: 0 24px; border-bottom: 1px solid #E4E8ED;
+    position: relative; max-width: 1600px; margin: 0 auto; width: 100%;
+    box-sizing: border-box; }
+  .ws-mi { padding: 12px 17px; font-size: 12.5px; color: #6C7480;
+    border-bottom: 2px solid transparent; white-space: nowrap; }
+  .ws-mi.on { color: #171B22; font-weight: 600; border-bottom-color: #2C333D; }
+
+  .ws-body { display: flex; gap: 20px; padding: 18px 24px 24px; align-items: flex-start;
+    max-width: 1600px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .ws-left { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 13px;
+    position: relative; }
+  .ws-cats { display: flex; gap: 6px; flex-wrap: wrap; }
+  .ws-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+  .ws-side { width: 300px; flex: none; display: flex; flex-direction: column; gap: 11px; }
+
+  /* ---- 상품 카드 ---- */
+  .ws-pc { border: 1px solid #E1E6EC; border-radius: 5px; background: #fff;
+    overflow: hidden; display: flex; flex-direction: column; position: relative; }
+  .ws-pi { height: 96px; border-bottom: 1px solid #EDF0F4; background: #F0F4F7;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9.5px; color: #98A2AE; }
+  .ws-pb { padding: 10px 11px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .ws-pn { font-size: 12px; font-weight: 500; color: #232B35; line-height: 1.4; }
+  .ws-pp { font-size: 13.5px; font-weight: 600; color: #171B22;
+    font-family: "IBM Plex Mono", monospace; }
+  .ws-pact { display: flex; gap: 6px; margin-top: 2px; }
+  .ws-pact span { flex: 1; text-align: center; font-size: 10.5px; padding: 6px 0;
+    border-radius: 3px; border: 1px solid #C4CCD5; color: #545C69; background: #fff; }
+  .ws-pact span.p { border-color: #2C333D; background: #2C333D; color: #fff; }
+
+  /* ---- 우측 : 인증 · 선택 상품 · 결제 ---- */
+  .ws-card { border: 1px solid #D5DBE2; border-radius: 4px; background: #fff;
+    position: relative; }
+  .ws-ch { padding: 11px 13px; border-bottom: 1px solid #EDF0F4; display: flex;
+    align-items: center; gap: 8px; background: #FAFBFC; }
+  .ws-ch b { font-size: 12px; font-weight: 600; color: #171B22; }
+  .ws-cb { padding: 12px 13px; display: flex; flex-direction: column; gap: 9px; }
+
+  .ws-ok { display: flex; align-items: center; gap: 8px; padding: 9px 11px;
+    border: 1px solid #BFD9C7; background: #F1F8F3; border-radius: 3px;
+    font-size: 11.5px; color: #2E6B45; }
+
+  .ws-ci { display: flex; align-items: center; gap: 9px; padding: 9px 0;
+    border-bottom: 1px solid #F1F3F6; }
+  .ws-ci:last-of-type { border-bottom: 0; }
+  .ws-ct { width: 34px; height: 34px; border: 1px dashed #A5B2BF; border-radius: 3px;
+    background: #F0F4F7; flex: none; }
+  .ws-empty { padding: 22px 12px; text-align: center; font-size: 11.5px; color: #98A2AE;
+    border: 1px dashed #D5DBE2; border-radius: 3px; background: #FAFBFC; }
+
+  .ws-tot { display: flex; align-items: baseline; justify-content: space-between;
+    padding: 11px 13px; border-top: 1px solid #E4E8ED; background: #FAFBFC; }
+  .ws-tot em { font-style: normal; font-size: 11.5px; color: #6C7480; }
+  .ws-tot b { font-size: 17px; font-weight: 600; color: #171B22;
+    font-family: "IBM Plex Mono", monospace; letter-spacing: -.01em; }
+
+  .ws-pay { padding: 13px 0; text-align: center; border-radius: 4px;
+    background: #2C333D; color: #fff; font-size: 13.5px; font-weight: 600;
+    position: relative; }
+  .ws-pay.off { background: #C9D0D9; color: #FAFBFC; }
+
+  /* ---- MO ---- */
+  .ws-mo { width: 375px; background: #fff; display: flex; flex-direction: column;
+    position: relative; margin-left: 46px; }
+  .ws-mmenu { display: flex; border-bottom: 1px solid #E4E8ED; }
+  .ws-mmenu span { flex: 1; text-align: center; padding: 11px 0; font-size: 12px;
+    color: #6C7480; border-bottom: 2px solid transparent; }
+  .ws-mmenu span.on { color: #171B22; font-weight: 600; border-bottom-color: #2C333D; }
+  .ws-mgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+    padding: 12px 14px 78px; }
+  .ws-mfix { position: absolute; left: 0; right: 0; bottom: 0; background: #fff;
+    border-top: 1px solid #D5DBE2; padding: 9px 14px 11px;
+    box-shadow: 0 -3px 12px rgba(23,27,34,.07); }
+  .ws-mrow { display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px; }
+  .ws-mrow em { font-style: normal; font-size: 11px; color: #6C7480; }
+  .ws-mrow b { font-size: 14.5px; font-weight: 600; color: #171B22;
+    font-family: "IBM Plex Mono", monospace; }
+
+  /* ---- 활용안 · 구성 비교 ---- */
+  .ws-cases { display: flex; gap: 48px; align-items: flex-start; }
+  .ws-case { flex: 1; min-width: 0; border: 1px solid #E1E6EC; border-radius: 5px;
+    background: #fff; }
+  .ws-caseh { padding: 10px 13px; border-bottom: 1px solid #E4E8ED; background: #FAFBFC; }
+  .ws-caseh b { font-size: 12px; font-weight: 600; color: #171B22; }
+  .ws-caseh span { display: block; font-size: 10.5px; color: #98A2AE; margin-top: 2px; }
+  .ws-caseb { padding: 13px; display: flex; flex-direction: column; gap: 0; }
+  .ws-slab { border: 1px dashed #B9C2CC; background: #F2F4F7; border-radius: 3px;
+    padding: 7px 9px; font-size: 10.5px; color: #6C7480; text-align: center; }
+  .ws-slab.g { background: #E9ECF0; }
+  .ws-slab + .ws-slab { margin-top: 4px; }
+  .ws-mod { border: 1px solid #2F6490; background: #EBF3F9; border-radius: 3px;
+    padding: 13px 9px; font-size: 11px; color: #2F6490; font-weight: 600;
+    text-align: center; margin-top: 7px; }
+  .ws-mod span { display: block; font-size: 10px; font-weight: 400; color: #5E7E99;
+    margin-top: 3px; }
+
+  /* ═══════════ 받을 캐릭터 — 조건별 상태 ═══════════ */
+  .tg-wrap { display: grid; grid-template-columns: repeat(3, 322px); gap: 44px 34px;
+    justify-content: center; align-items: start; }
+  .tg-cell { position: relative; }
+  .tg-lbl { display: block; margin-bottom: 8px; font-size: 11px; font-weight: 600;
+    letter-spacing: -.005em; color: #171B22; }
+  .tg-lbl em { font-style: normal; font-family: "IBM Plex Mono", monospace;
+    font-size: 9.5px; letter-spacing: .08em; color: #98A2AE; margin-right: 6px; }
+
+  .tg-login { border: 1px solid #AECAE0; background: #EBF3F9; border-radius: 4px;
+    padding: 11px 12px; display: flex; flex-direction: column; gap: 9px; }
+  .tg-login p { margin: 0; font-size: 11.5px; line-height: 1.6; color: #2F6490; }
+  .tg-btn { display: block; text-align: center; padding: 9px 0; border-radius: 3px;
+    background: #2F6490; color: #fff; font-size: 12px; font-weight: 600; }
+
+  .tg-or { display: flex; align-items: center; gap: 9px; margin: 3px 0 1px; }
+  .tg-or i { flex: 1; height: 0; border-top: 1px solid #E4E8ED; }
+  .tg-or b { font-size: 10.5px; font-weight: 500; color: #98A2AE; white-space: nowrap; }
+
+  .tg-hint { display: flex; align-items: flex-start; gap: 6px; font-size: 10.5px;
+    line-height: 1.6; color: #6C7480; }
+  .tg-hint em { font-style: normal; flex: none; width: 13px; height: 13px; margin-top: 1px;
+    border: 1px solid #A9B4C0; border-radius: 50%; color: #6C7480; font-size: 8.5px;
+    display: flex; align-items: center; justify-content: center; }
+  .tg-hint.q em { border-color: #2F6490; color: #2F6490; cursor: pointer; }
+  .tg-hint.q { color: #2F6490; }
+
+  .tg-tipbox { position: absolute; z-index: 8; width: 250px; border: 1px solid #C9D0D9;
+    background: #fff; border-radius: 4px; padding: 11px 12px;
+    box-shadow: 0 8px 22px rgba(23,27,34,.14); display: flex; flex-direction: column; gap: 8px; }
+  .tg-tipbox b { font-size: 11.5px; color: #171B22; }
+  .tg-tipbox ol { margin: 0; padding-left: 15px; display: flex; flex-direction: column; gap: 4px; }
+  .tg-tipbox li { font-size: 11px; line-height: 1.6; color: #545C69; }
+
+  .tg-done { display: flex; align-items: center; gap: 9px; padding: 11px 12px;
+    border: 1px solid #BFD9C7; background: #F1F8F3; border-radius: 3px; }
+  .tg-done .ck { flex: none; width: 17px; height: 17px; border-radius: 50%;
+    background: #4A8A63; color: #fff; font-size: 10px; display: flex;
+    align-items: center; justify-content: center; }
+  .tg-done .nmv { flex: 1; min-width: 0; font-size: 12px; color: #2E6B45; }
+  .tg-done .nmv b { color: #21593C; font-weight: 600; }
+  .tg-x { flex: none; width: 20px; height: 20px; border: 1px solid #BFD9C7;
+    border-radius: 3px; background: #fff; color: #6C7480; font-size: 11px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+  .tg-err { display: flex; align-items: flex-start; gap: 6px; padding: 8px 10px;
+    border: 1px solid #E0BEBE; background: #F9EEEE; border-radius: 3px;
+    font-size: 11px; line-height: 1.55; color: #8C3A3A; }
+  .tg-err em { font-style: normal; flex: none; font-weight: 700; }
+  .inp.err { border-color: #C58585; }
+
+  .tg-timer { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: #8A6420;
+    background: #F8F2E6; border: 1px solid #E2D5B9; border-radius: 3px; padding: 1px 6px; }
+
+  .tg-empty { padding: 18px 12px; text-align: center; border: 1px dashed #D5DBE2;
+    border-radius: 3px; background: #FAFBFC; display: flex; flex-direction: column;
+    gap: 10px; align-items: center; }
+  .tg-empty span { font-size: 11.5px; line-height: 1.6; color: #6C7480; }
+  .tg-auto { font-size: 9.5px; color: #2E6B45; background: #F1F8F3;
+    border: 1px solid #BFD9C7; border-radius: 3px; padding: 1px 6px; white-space: nowrap; }
+  .inp.dis { background: #F5F6F8; color: #98A2AE; }
+  .rowk { display: flex; align-items: center; gap: 7px; }
+
+  /* ── MO 상태 매트릭스 ── */
+  .tg-mowrap { display: grid; grid-template-columns: repeat(2, 375px);
+    gap: 46px 56px; justify-content: center; align-items: start; }
+  .tg-mowrap .ws-mo { margin-left: 0; border: 1px solid #C9D0D9; border-radius: 6px; }
+  .mo-sheet { width: 100%; background: #fff; border-radius: 10px 10px 0 0;
+    padding: 11px 14px 14px; display: flex; flex-direction: column; gap: 10px;
+    position: relative; }
+  .mo-grip { width: 38px; height: 4px; border-radius: 2px; background: #D5DBE2;
+    align-self: center; flex: none; }
+  .mo-h { font-size: 12.5px; font-weight: 600; color: #171B22; }
+  .mo-body { flex: 1; min-height: 0; background: #F5F6F8; position: relative; }
+  .inp.mo { height: 40px; }
+  .btn-w { display: block; text-align: center; padding: 9px 0; border: 1px solid #C4CCD5;
+    border-radius: 3px; background: #fff; color: #545C69; font-size: 11.5px; }
+
+  /* ── A4 · 로그인으로 대상이 바뀔 때 알림 ── */
+  .tg-dim { position: absolute; inset: 0; z-index: 9; border-radius: 4px;
+    background: rgba(23,27,34,.46); display: flex; align-items: center;
+    justify-content: center; padding: 16px; }
+  .tg-note { background: #fff; border-radius: 5px; padding: 15px 14px;
+    box-shadow: 0 10px 28px rgba(23,27,34,.24); display: flex;
+    flex-direction: column; gap: 11px; align-items: center; text-align: center; }
+  .tg-note .ic { width: 26px; height: 26px; border-radius: 50%; background: #EBF3F9;
+    border: 1px solid #AECAE0; color: #2F6490; font-size: 13px; display: flex;
+    align-items: center; justify-content: center; }
+  .tg-note b { font-size: 12px; font-weight: 600; line-height: 1.55; color: #171B22; }
+  .tg-note span { font-size: 11px; line-height: 1.6; color: #6C7480; }
+  .tg-note .tg-btn { width: 100%; }
+
+  /* ── MO 액션 버튼 2개 나란히 ── */
+  .mo-acts { display: flex; gap: 7px; }
+  .mo-acts > span { flex: 1; text-align: center; padding: 10px 0; border-radius: 3px;
+    font-size: 12px; font-weight: 600; }
+  .mo-acts .p { background: #2F6490; color: #fff; }
+  .mo-acts .s { border: 1px solid #C4CCD5; background: #fff; color: #434A57; font-weight: 500; }
+
+  /* ── MO 선택 상품 행 ── */
+  .mo-ci { display: flex; align-items: center; gap: 9px; padding: 9px 0;
+    border-bottom: 1px solid #F1F3F6; }
+  .mo-ci:last-child { border-bottom: 0; }
+  .mo-ci .th { flex: none; width: 40px; height: 40px; border: 1px dashed #A5B2BF;
+    border-radius: 3px; background: #F0F4F7; }
+  .mo-ci .in { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .mo-ci .nm2 { font-size: 12px; color: #232B35; }
+  .mo-ci .pr2 { font-size: 11.5px; color: #6C7480; font-family: "IBM Plex Mono", monospace; }
+  .mo-sec { padding-top: 10px; border-top: 1px solid #E4E8ED; display: flex;
+    flex-direction: column; gap: 9px; }
+  .mo-sec > .lbl-k { margin-bottom: 1px; }
+
+  /* ═══════════ TABLET 768 ═══════════ */
+  .ws-tb { width: 768px; background: #fff; display: flex; flex-direction: column;
+    position: relative; margin-left: 46px; }
+  .tg-tbwrap { display: grid; grid-template-columns: 768px;
+    gap: 52px; justify-content: center; align-items: start; }
+  .tg-tbwrap .ws-tb { margin-left: 0; border: 1px solid #C9D0D9; border-radius: 6px; }
+
+  .ws-util.tb { height: 56px; gap: 13px; padding: 0 24px;
+    border-bottom: 1px solid #E4E8ED; }
+
+  .ws-title.tb { height: 200px; }
+  .ws-title.tb .ws-kvin { gap: 16px; padding: 0 24px 24px; }
+  .ws-title.tb .ws-glogo { width: 60px; height: 60px; font-size: 9px; }
+  .ws-title.tb .ws-kvh { font-size: 21px; letter-spacing: -.025em; }
+  .ws-title.tb .ws-kvs { font-size: 12px; margin-top: 4px; }
+  .ws-title.tb .ws-kvnote { top: 17px; right: 20px; }
+
+  .ws-tbmenu { display: flex; padding: 0 24px; border-bottom: 1px solid #E4E8ED;
+    position: relative; }
+  .ws-tbmenu span { padding: 12px 20px; font-size: 12.5px; color: #6C7480;
+    border-bottom: 2px solid transparent; }
+  .ws-tbmenu span.on { color: #171B22; font-weight: 600; border-bottom-color: #2C333D; }
+
+  .ws-tbgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    padding: 13px 20px 88px; }
+
+  /* 태블릿 하단 주문 바 — MO와 달리 한 줄에 나란히 */
+  .tb-bar { position: absolute; left: 0; right: 0; bottom: 0; background: #fff;
+    border-top: 1px solid #D5DBE2; padding: 12px 20px; display: flex;
+    align-items: center; gap: 18px; box-shadow: 0 -3px 12px rgba(23,27,34,.07); }
+  .tb-bar .up { font-size: 11.5px; color: #6C7480; white-space: nowrap; }
+  .tb-bar .amt { font-size: 16px; font-weight: 600; color: #171B22;
+    font-family: "IBM Plex Mono", monospace; margin-left: auto; }
+  .tb-bar .ws-pay { width: 220px; flex: none; padding: 11px 0; }
+
+  /* 태블릿 시트 — 필드 2열 */
+  .tb-sheet { width: 100%; background: #fff; border-radius: 12px 12px 0 0;
+    padding: 13px 22px 18px; display: flex; flex-direction: column; gap: 12px;
+    position: relative; }
+  .tb-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+  .tb-2col.wide { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* ── 임베드 처리방식 ── */
+  .em-code { border: 1px solid #D5DBE2; background: #FAFBFC; border-radius: 4px;
+    padding: 13px 15px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+    line-height: 1.85; color: #434A57; white-space: pre; overflow-x: auto; }
+  .em-code b { color: #2F6490; font-weight: 500; }
+  .em-code i { font-style: normal; color: #98A2AE; }
+  .em-step { display: flex; gap: 13px; align-items: flex-start; }
+  .em-step > .n2 { flex: none; width: 21px; height: 21px; border-radius: 50%;
+    background: #2F6490; color: #fff; font-family: "IBM Plex Mono", monospace;
+    font-size: 10px; display: flex; align-items: center; justify-content: center;
+    margin-top: 1px; }
+  .em-step > .bd { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .em-step .tt2 { font-size: 12.5px; font-weight: 600; color: #171B22; }
+  .em-step .ds2 { font-size: 12px; line-height: 1.75; color: #545C69; }
+  .em-step .ds2 b { color: #171B22; font-weight: 600; }
+  .em-list { display: flex; flex-direction: column; gap: 16px; }
+  .em-sec { border: 1px solid #E1E6EC; border-radius: 5px; background: #fff;
+    padding: 18px 20px; display: flex; flex-direction: column; gap: 15px;
+    position: relative; }
+  .em-h2 { font-size: 13px; font-weight: 600; color: #171B22; letter-spacing: -.01em; }
+  .em-warn { border: 1px solid #E2D5B9; background: #F8F2E6; border-radius: 4px;
+    padding: 12px 14px; font-size: 11.5px; line-height: 1.7; color: #6B5320; }
+  .em-warn b { color: #4A3712; font-weight: 600; }
+
+  /* ── 표 내 경고 셀 ── */
+  td.bad-cell { background: #FBF3F3; color: #8C3A3A; }
+  td.bad-cell b { color: #7A2F2F; font-weight: 600; }
+  .tbl thead th { position: sticky; top: 0; }
+</style>

@@ -1,0 +1,188 @@
+<section class="screen" id="s08">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="shd"><span class="id">ST-08</span><span class="nm">정산 대사</span></div>
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs"><button type="button" class="tab tab-on" data-dev="pc">PC</button></div>
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="ahd">
+          <span class="alogo">RAGNAROK PORTAL <span style="color:#2F6490;">PAY</span></span>
+          <span style="width:1px;height:16px;background:#DCE2E8;"></span><span class="ts">본사 통합 어드민</span>
+          <span class="ent" style="margin-left:auto;"><span class="dot dot-g"></span><span class="mono">전체</span> 전 법인 통합 <span style="font-size:9px;color:#98A2AE;">▾</span></span>
+          <span class="fltr" style="gap:6px;">운영자 <b style="color:#2C333D;">fin.lee</b> · Finance</span>
+        </div>
+
+        <div class="abody">
+          <div class="snb">
+            <div class="snb-g">온보딩</div>
+            <div class="snb-i"><span class="mono">00</span> 결제 준비도</div>
+            <div class="snb-g">기반 구축</div>
+            <div class="snb-i"><span class="mono">01</span> 지사 법인 · 세무</div>
+            <div class="snb-i" style="color:#98A2AE;"><span class="mono">02</span> PG 계약 · 머천트 <span class="tx" style="margin-left:auto;">본사</span></div>
+            <div class="snb-i"><span class="mono">03</span> 게임 · Webhook</div>
+            <div class="snb-i"><span class="mono">04</span> 상품 SKU · 가격</div>
+            <div class="snb-i"><span class="mono">05</span> 라우팅 · 한도</div>
+            <div class="snb-g">운영 · 정산</div>
+            <div class="snb-i"><span class="mono">06</span> 결제 모니터링</div>
+            <div class="snb-i"><span class="mono">07</span> 환불 · CS 분쟁</div>
+            <div class="snb-i on"><span class="mono">08</span> T+1 정산 대사</div>
+          </div>
+
+          <div class="amain">
+            <div class="atitle"><span class="ttl-s">T+1 정산 대사 · ERP 전표</span><span class="ts">Step 08</span></div>
+            <span class="tm">PG 정산 리포트와 내부 승인 원장을 전수 대조한다. 대사는 결제일이 아니라 <b>PG 정산일 기준</b>으로 돈다 — MID마다 주기가 다르기 때문.</span>
+
+            <!-- 배치 상태 -->
+            <div class="sec card" style="margin-top:18px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">1</div>
+              <div class="mk" style="position:absolute;top:-9px;right:-10px;">2</div>
+              <div style="padding:15px 18px;display:flex;align-items:center;gap:24px;">
+                <div style="display:flex;flex-direction:column;gap:3px;"><span class="tx">대사 기준일</span><span class="h-s mono">2026-09-06</span></div>
+                <span style="width:1px;height:32px;background:#E4E8ED;"></span>
+                <div class="rail">
+                  <span class="rail-i done"><span class="n">1</span>리포트 수집</span><span class="rail-l"></span>
+                  <span class="rail-i done"><span class="n">2</span>1:1 대조</span><span class="rail-l"></span>
+                  <span class="rail-i on"><span class="n">3</span>불일치 분류</span><span class="rail-l"></span>
+                  <span class="rail-i"><span class="n">4</span>ERP 전송</span><span class="rail-l"></span>
+                  <span class="rail-i"><span class="n">5</span>원장 잠금</span>
+                </div>
+                <span style="margin-left:auto;"></span>
+                <span class="ts">자동 실행 03:00 KST · 소요 4분 12초</span>
+                <span class="btn-s">대사 즉시 재실행</span>
+              </div>
+            </div>
+
+            <!-- 집계 -->
+            <div class="sec" style="margin-top:16px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">3</div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+                <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;"><span class="tx">내부 승인 원장</span><span class="ttl-s num">6,918건</span><span class="tx num">USD 171,442 환산</span></div>
+                <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;"><span class="tx">PG 정산 리포트</span><span class="ttl-s num">6,914건</span><span class="tx num">USD 171,388 환산</span></div>
+                <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;border-color:#B4D6C2;background:#F7FCF9;"><span class="tx" style="color:#2E6B45;">일치율</span><span class="ttl-s num" style="color:#2E6B45;">99.87%</span><span class="tx">6,909건 Matched</span></div>
+                <div class="card" style="padding:13px 15px;display:flex;flex-direction:column;gap:5px;border-color:#E0BEBE;background:#FDF7F7;"><span class="tx" style="color:#8C3A3A;">불일치</span><span class="ttl-s num" style="color:#8C3A3A;">9건</span><span class="tx">Fee 5 · Missing 4</span></div>
+              </div>
+            </div>
+
+            <div class="sec abar">
+              <div class="mk" style="position:absolute;top:-4px;right:-10px;">5</div>
+              <span class="fltr">법인 <span style="font-size:9px;">▾</span></span>
+              <span class="fltr">MID <span style="font-size:9px;">▾</span></span>
+              <span class="fltr">결과 <b style="color:#8C3A3A;">불일치만</b> <span style="font-size:9px;">▾</span></span>
+              <span style="margin-left:auto;"></span>
+              <span class="btn-s">전표 CSV</span>
+              <span class="btn-ps" style="padding:7px 14px;">ERP 전송 · 5개 법인</span>
+            </div>
+
+            <div class="card">
+              <div class="card-h"><span class="h-s">MID별 대사 결과</span><span class="ts" style="margin-left:auto;">1원 · 1센트 단위까지 대조</span></div>
+              <div class="sec">
+                <div class="mk" style="position:absolute;top:26px;left:-10px;">4</div>
+                <div class="mk" style="position:absolute;top:26px;right:-10px;">6</div>
+                <table class="tbl tbl-z">
+                  <thead><tr>
+                    <th style="width:72px;">법인</th><th style="width:186px;">MID</th><th style="width:88px;">정산 주기</th>
+                    <th style="width:104px;">승인 건수</th><th style="width:132px;">승인 금액</th>
+                    <th style="width:132px;">정산 입금액</th><th style="width:112px;">MDR 검증</th>
+                    <th style="width:132px;">대사 결과</th><th>ERP</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b class="mono">GV</b></td><td>토스페이먼츠<div class="tx mono">gravity_kr_toss_live</div></td><td>T+2</td><td class="num">2,104</td><td class="num">₩ 41,208,000</td><td class="num">₩ 40,342,632</td><td><span class="tag-g">2.1% 일치</span></td><td><span class="tag-g">Matched</span></td><td><span class="tag-n">대기</span></td></tr>
+                    <tr><td><b class="mono">GVI</b></td><td>Stripe Global<div class="tx mono">acct_1H99GravityLiveUS</div></td><td>T+2</td><td class="num">1,388</td><td class="num">$ 31,904.12</td><td class="num">$ 30,554.94</td><td><span class="tag-g">2.9%+0.3 일치</span></td><td><span class="tag-g">Matched</span></td><td><span class="tag-n">대기</span></td></tr>
+                    <tr><td><b class="mono">GVI</b></td><td>PayPal Commerce<div class="tx mono">gravity_na_paypal</div></td><td>T+1</td><td class="num">502</td><td class="num">$ 9,842.00</td><td class="num">$ 9,254.87</td><td><span class="tag-g">3.49%+0.49 일치</span></td><td><span class="tag-g">Matched</span></td><td><span class="tag-n">대기</span></td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">GVC</b></td><td>MyCard 智冠<div class="tx mono">GRAVITY_TW_MYCARD_LIVE</div></td><td>T+7</td><td class="num">2,150</td><td class="num">NT$ 1,480,000</td><td class="num">NT$ 1,391,200</td><td><span class="tag-r">6.0% 차감</span><div class="tx" style="color:#8C3A3A;">계약 5.5%</div></td><td><span class="tag-r">Fee Discrepancy</span><div class="tx">5건 · NT$ 7,400</div></td><td><span class="tag-r">보류</span></td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">GGA</b></td><td>편의점 현금 수납<div class="tx mono">konbini_gravity_jp</div></td><td>월 2회</td><td class="num">318</td><td class="num">¥ 402,600</td><td class="num">¥ 381,504</td><td><span class="tag-g">4.0% 일치</span></td><td><span class="tag-a">Missing</span><div class="tx">4건 · 미입금 확인 중</div></td><td><span class="tag-r">보류</span></td></tr>
+                    <tr><td><b class="mono">GGT</b></td><td>2C2P · PromptPay<div class="tx mono">2c2p_gravity_th</div></td><td>T+3</td><td class="num">456</td><td class="num">฿ 128,440</td><td class="num">฿ 123,816</td><td><span class="tag-g">3.6% 일치</span></td><td><span class="tag-g">Matched</span></td><td><span class="tag-n">대기</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="bx" style="margin-top:14px;padding:12px 15px;display:flex;gap:11px;align-items:flex-start;background:#F8F2E6;border-color:#E2D5B9;">
+              <span class="dot dot-a" style="margin-top:5px;"></span>
+              <span class="tm"><b style="color:#8A6420;">대사가 잡아내지 못하는 구멍</b> — 이 대사는 「PG가 보고한 것」과 「우리가 아는 것」을 비교한다. <b style="color:#2C333D;">양쪽에 모두 없는 거래</b>(결제창은 열렸으나 세션 만료로 원장에도 PG에도 남지 않은 건)는 대사 대상이 아니다. 세션 발급 로그와 승인 원장의 대조가 별도로 필요하며 현재 설계에 없다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="dcol">
+      <h4>ST-08 · T+1 정산 대사 &amp; ERP 전표</h4>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">일일 대사 콘솔</span><span class="src">Reconciliation</span></div>
+        <p class="dr-b">매일 새벽 각 PG의 Settlement Report를 수집해 내부 승인 원장과 전수 대조한다. 어댑터의 <span class="mono">fetchSettlementReport</span> 가 수집 창구다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">기준</span><span class="spec-v">결제일이 아니라 <b>PG 정산일</b> — T+1 · T+2 · T+3 · T+7 · 월 2회가 섞여 있다</span></div>
+          <div class="spec-r"><span class="spec-k">수집 형태</span><span class="spec-v">CSV 파일 또는 API — PG마다 다름</span></div>
+          <div class="spec-r"><span class="spec-k">진행 표시</span><span class="spec-v">5단계 레일로 현재 어디까지 왔는지 노출 — 실패 시 멈춘 단계가 보인다</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">Tier 3 PG의 리포트 형태 미확인</div>
+          <p class="warn-b">Oneverse · GOC-PAY 등 파트너십형 게이트웨이가 정산 리포트를 어떤 형태로 주는지 확인되지 않았다. 어댑터 구현 가능 여부가 여기서 갈린다.</p>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">대사 배치 즉시 실행</span><span class="src">배치 트리거</span></div>
+        <p class="dr-b">자동 스케줄과 별개로 운영자가 수동 구동한다. 리포트 재수신 · 불일치 재검증 시 사용.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">자동</span><span class="spec-v">매일 03:00 KST</span></div>
+          <div class="spec-r"><span class="spec-k">재실행 제약</span><span class="spec-v"><b>잠금된 구간은 재실행 불가</b> — 역분개로만 수정</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">승인 vs 정산 집계</span><span class="src">지표</span></div>
+        <p class="dr-b">양쪽 건수와 금액을 나란히 보여 차이의 크기를 먼저 파악하게 한다. 일치율이 아니라 <b>차이의 절대값</b>이 조치 우선순위를 정한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">3개 축</span><span class="spec-v">트랜잭션 ID 일치 · 승인 금액 vs 정산 금액 · <b>MDR 검증</b></span></div>
+          <div class="spec-r"><span class="spec-k">환산</span><span class="spec-v">집계는 USD 환산 · 상세는 원 통화 유지</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">대사 결과 상태</span><span class="src">상태</span></div>
+        <p class="dr-b">3가지로만 분류한다. 애매한 중간 상태를 두면 아무도 처리하지 않는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">Matched</span><span class="spec-v">3개 축 모두 일치 — ERP 전송 대상</span></div>
+          <div class="spec-r"><span class="spec-k">Fee Discrepancy</span><span class="spec-v">거래는 있으나 <b>차감 수수료가 계약 MDR과 다름</b> — PG 협의 대상</span></div>
+          <div class="spec-r"><span class="spec-k">Missing</span><span class="spec-v">한쪽에만 존재 — 미입금 · 리포트 누락 · 지연 입금 구분 필요</span></div>
+          <div class="spec-r"><span class="spec-k">알림</span><span class="spec-v">불일치 발생 시 해당 법인 재무팀으로 발송</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">MDR 기준값의 출처</div>
+          <div class="imm-r"><span class="imm-k">참조</span><span class="imm-v">Step 2 MID 마스터의 계약 수수료율</span></div>
+          <div class="imm-r"><span class="imm-k">주의</span><span class="imm-v">기준값이 틀리면 <b>정상 건이 전부 불일치로 잡힌다</b>. 현재 값은 프로토타입 기준이라 계약서 확정치로 대체 필요</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">ERP 전표 전송</span><span class="src">내보내기</span></div>
+        <p class="dr-b">일치 건만 <span class="mono">entity_id</span> 별 회계 전표로 변환해 각 법인 ERP(SAP · NetSuite)로 전송한다. <b>불일치 건은 전송하지 않는다</b>.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">분기</span><span class="spec-v">법인별 독립 파일 — 한 배치가 5개 법인으로 나뉘어 나간다</span></div>
+          <div class="spec-r"><span class="spec-k">매핑</span><span class="spec-v">복식부기 계정과목 코드 자동 매핑</span></div>
+          <div class="spec-r"><span class="spec-k">보류 처리</span><span class="spec-v">불일치가 있는 MID는 해당 법인 전송 전체를 보류할지 · 일치 건만 보낼지 <b>법인 정책으로 선택</b></span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">원장 잠금</span><span class="src">마감</span></div>
+        <p class="dr-b">대사가 끝난 구간은 불변 잠금한다. 이후 수정은 역분개로만 가능하며, 감사 로그가 남는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">잠금 단위</span><span class="spec-v">법인 × 정산일</span></div>
+          <div class="spec-r"><span class="spec-k">해제</span><span class="spec-v">불가 — 정정은 신규 역분개 전표 생성</span></div>
+          <div class="spec-r"><span class="spec-k">감사</span><span class="spec-v">잠금 시각 · 실행자 · 대사 결과 스냅샷 보존</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>

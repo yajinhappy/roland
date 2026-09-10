@@ -1,0 +1,27 @@
+index.html                                   OK             cls:0   nav_on:-1
+wiki/benchmark/game-platform-payment.html    OK             cls:0   nav_on:0
+wiki/benchmark/ip-portal.html                OK             cls:0   nav_on:0
+wiki/benchmark/nc-auth.html                  OK             cls:1   nav_on:0
+      미정의: ko
+wiki/benchmark/pg-multi-entity.html          OK             cls:0   nav_on:0
+wiki/benchmark/webshop-payment.html          OK             cls:0   nav_on:0
+wiki/planning/global-payment.html            OK             cls:0   nav_on:0
+wiki/planning/land-auth.html                 OK             cls:0   nav_on:0
+wiki/planning/payment-overview.html          OK             cls:0   nav_on:0
+wiki/planning/payment-webshop-structure.html OK             cls:0   nav_on:0
+wiki/planning/payment.html                   OK             cls:0   nav_on:0
+wiki/planning/portal-main-structure.html     OK             cls:1   nav_on:0
+      미정의: rules
+wiki/planning/webshop-payment-prd.html       OK             cls:0   nav_on:0
+wireframe/payment-admin-screens.html         OK             cls:2   nav_on:0
+      미정의: pane-pc, pcframe
+wireframe/payment-checkout-currency.html     OK             cls:3   nav_on:0
+      미정의: pane-pc, pane-tb, pcframe
+wireframe/payment-user-screens.html          OK             cls:2   nav_on:-1
+      미정의: pane-pc, pcframe
+wireframe/portal-main-auth-screens.html      OK             cls:5   nav_on:0
+      미정의: id, nm, pane-pc, pane-tb, pcframe
+wireframe/webshop-screens.html               OK             cls:1   nav_on:0
+      미정의: wfs-toolbar
+wireframe/webshop-ui.html                    OK             cls:3   nav_on:0
+      미정의: pane-pc, pane-tb, pcframe

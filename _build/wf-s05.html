@@ -1,0 +1,283 @@
+<section class="screen" id="s05">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="shd"><span class="id">ST-05</span><span class="nm">라우팅 · 한도</span></div>
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs"><button type="button" class="tab tab-on" data-dev="pc">PC</button></div>
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="ahd">
+          <span class="alogo">RAGNAROK PORTAL <span style="color:#2F6490;">PAY</span></span>
+          <span style="width:1px;height:16px;background:#DCE2E8;"></span><span class="ts">지사 어드민</span>
+          <span class="ent" style="margin-left:auto;border-color:#B4D6C2;background:#F7FCF9;"><span class="dot dot-g"></span><span class="mono">GVC</span> 그라비티 커뮤니케이션즈 · 대만 <span class="tag-n" style="margin-left:4px;">스코프 고정</span></span>
+          <span class="fltr" style="gap:6px;">운영자 <b style="color:#2C333D;">tw.chen</b> · 지사 운영</span>
+        </div>
+
+        <div class="abody">
+          <div class="snb">
+            <div class="snb-g">온보딩</div>
+            <div class="snb-i"><span class="mono">00</span> 결제 준비도</div>
+            <div class="snb-g">기반 구축</div>
+            <div class="snb-i"><span class="mono">01</span> 지사 법인 · 세무</div>
+            <div class="snb-i" style="color:#98A2AE;"><span class="mono">02</span> PG 계약 · 머천트 <span class="tx" style="margin-left:auto;">본사</span></div>
+            <div class="snb-i"><span class="mono">03</span> 게임 · Webhook</div>
+            <div class="snb-i"><span class="mono">04</span> 상품 SKU · 가격</div>
+            <div class="snb-i on"><span class="mono">05</span> 라우팅 · 한도</div>
+            <div class="snb-g">운영 · 정산</div>
+            <div class="snb-i"><span class="mono">06</span> 결제 모니터링</div>
+            <div class="snb-i"><span class="mono">07</span> 환불 · CS 분쟁</div>
+            <div class="snb-i"><span class="mono">08</span> T+1 정산 대사</div>
+          </div>
+
+          <div class="amain">
+            <div class="atitle"><span class="ttl-s">라우팅 · 한도</span><span class="ts">Step 05</span></div>
+            <span class="tm">본사가 등재한 채널 중 쓸 것을 고르고 금액 범위와 순서를 정한다. 한도는 4계층 상속이며 아래로 내려갈수록 좁아지기만 한다.</span>
+
+            <!-- 계층 안내 -->
+            <div class="bx key" style="margin-top:18px;padding:13px 16px;display:flex;align-items:center;gap:18px;">
+              <span class="lbl-k" style="flex:none;">한도 4계층</span>
+              <div class="rail">
+                <span class="rail-i done"><span class="n">1</span>PG 물리 제약 <span class="tx">본사</span></span><span class="rail-l"></span>
+                <span class="rail-i done"><span class="n">2</span>법정 한도 <span class="tx">지사</span></span><span class="rail-l"></span>
+                <span class="rail-i on"><span class="n">3</span>법인 기본 <span class="tx">지사</span></span><span class="rail-l"></span>
+                <span class="rail-i on"><span class="n">4</span>게임별 재정의 <span class="tx">지사</span></span>
+              </div>
+              <span class="tm" style="margin-left:auto;">실효 한도 = <b style="color:#2C333D;">min(전부)</b> · 재정의는 <b style="color:#2C333D;">좁게만</b></span>
+            </div>
+
+            <!-- 법인 기본 -->
+            <div class="sec" style="margin-top:16px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">1</div>
+              <div class="card">
+                <div class="card-h">
+                  <span class="h-s">법인 기본 — 채널 선택 · 금액 범위 · 순서</span>
+                  <span class="chip-on">법인 기본</span><span class="chip">게임별 재정의 1</span>
+                  <span class="ts" style="margin-left:auto;">드래그로 순서 변경 · 저장 즉시 신규 세션부터 반영</span>
+                </div>
+                <div class="sec">
+                  <div class="mk" style="position:absolute;top:26px;left:490px;">2</div>
+                  <table class="tbl tbl-z">
+                    <thead><tr>
+                      <th style="width:62px;">사용</th><th style="width:66px;">순서</th>
+                      <th style="width:230px;">채널 · 머천트</th><th style="width:220px;">PG 물리 제약 <span class="tx" style="font-weight:400;">본사</span></th>
+                      <th style="width:230px;">지사 설정 최소 · 최대</th><th style="width:168px;">Capability</th><th>비고</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr><td><span class="sw on"></span></td><td><b class="num">1</b></td><td><b>MyCard 회원 포인트</b><div class="tx mono">MID_TW_MYCARD_01</div></td><td class="tx">30 ~ 30,000 TWD</td><td><div class="inp fill" style="height:28px;font-size:11px;">30 ~ 30,000</div></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx">MDR 5.5%</td></tr>
+                      <tr><td><span class="sw on"></span></td><td><b class="num">2</b></td><td><b>MyCard 선불카드 핀</b><div class="tx mono">MID_TW_MYCARD_01</div></td><td class="tx">30 ~ 30,000 TWD</td><td><div class="inp fill" style="height:28px;font-size:11px;">30 ~ <b>3,000</b></div><span class="hint">선불카드 권종 상한</span></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx">MDR 5.5%</td></tr>
+                      <tr><td><span class="sw on"></span></td><td><b class="num">3</b></td><td><b>편의점 바코드 수납</b><div class="tx mono">MID_TW_MYCARD_01</div></td><td class="tx">30 ~ 30,000 TWD</td><td><div class="inp fill" style="height:28px;font-size:11px;">100 ~ 20,000</div></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx">TTL 24h · 비동기</td></tr>
+                      <tr><td><span class="sw on"></span></td><td><b class="num">4</b></td><td><b>대만 ATM 가상계좌</b><div class="tx mono">MID_TW_MYCARD_01</div></td><td class="tx">30 ~ 30,000 TWD</td><td><div class="inp fill" style="height:28px;font-size:11px;"><b>500</b> ~ 30,000</div><span class="hint">소액 이체 수수료 역전</span></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx">TTL 24h · 비동기</td></tr>
+                      <tr style="background:#FDFBF6 !important;"><td><span class="sw"></span></td><td class="tx">—</td><td><b>GASH 앱 지갑 beanfun!</b><div class="tx mono">MID_TW_GASH_01</div></td><td class="tx">30 ~ 20,000 TWD</td><td><div class="inp lock" style="height:28px;font-size:11px;">미선택</div></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx" style="color:#8A6420;">선택 시 즉시 노출</td></tr>
+                      <tr style="background:#FDFBF6 !important;"><td><span class="sw"></span></td><td class="tx">—</td><td><b>GASH 선불카드 핀</b><div class="tx mono">MID_TW_GASH_01</div></td><td class="tx">30 ~ 20,000 TWD</td><td><div class="inp lock" style="height:28px;font-size:11px;">미선택</div></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx" style="color:#8A6420;">선택 시 즉시 노출</td></tr>
+                      <tr style="background:#FDF7F7 !important;"><td><span class="sw on"></span></td><td class="tx">—</td><td><b>통신사 소액결제</b><div class="tx mono">MID_TW_MYCARD_01</div></td><td class="tx">30 ~ 3,000 TWD</td><td><div class="inp fill" style="height:28px;font-size:11px;">30 ~ 3,000</div></td><td><span class="tag-r">환불</span> <span class="tag-r">부분</span> <span class="tag-r">정기</span></td><td class="tx" style="color:#8C3A3A;">PG 점검 중 · 자동 제외</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- 게임별 재정의 -->
+            <div class="sec" style="margin-top:16px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">3</div>
+              <div class="card">
+                <div class="card-h">
+                  <span class="h-s">게임별 재정의</span><span class="tag-n">1건</span>
+                  <span class="ts" style="margin-left:auto;">재정의하지 않은 게임은 법인 기본을 상속</span>
+                  <span class="btn-s">+ 재정의 추가</span>
+                </div>
+                <table class="tbl">
+                  <thead><tr>
+                    <th style="width:180px;">게임</th><th style="width:230px;">채널</th>
+                    <th style="width:150px;">법인 기본</th><th style="width:170px;">게임 재정의</th>
+                    <th style="width:150px;">실효</th><th>사유</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b>라그나로크X</b><div class="tx mono">ROX</div></td><td>MyCard 회원 포인트</td><td class="tx">30 ~ 30,000</td><td><div class="inp fill" style="height:28px;font-size:11px;">30 ~ <b>5,000</b></div></td><td><b class="num">30 ~ 5,000</b></td><td class="tx">캐주얼 유저층 · 객단가 낮음 · 과소비 방지</td></tr>
+                    <tr><td><b>라그나로크X</b><div class="tx mono">ROX</div></td><td>편의점 바코드 수납</td><td class="tx">100 ~ 20,000</td><td><div class="inp lock" style="height:28px;font-size:11px;">사용 안 함</div></td><td><span class="tag-r">미노출</span></td><td class="tx">비동기 입금 CS 부담 · 신규 게임 초기 제외</td></tr>
+                  </tbody>
+                </table>
+                <div style="padding:11px 15px;border-top:1px solid #EDF0F4;background:#FAFBFC;display:flex;gap:9px;align-items:center;">
+                  <span class="dot dot-n"></span>
+                  <span class="tx">재정의는 <b style="color:#2C333D;">좁게만</b> 가능하다 — 법인 기본이 30~30,000 인 채널을 게임에서 30~50,000 으로 넓힐 수 없고, 법인에서 끈 채널을 게임에서 켤 수도 없다.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 실효 한도 미리보기 + 법정 한도 -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;">
+              <div class="sec card">
+                <div class="mk" style="position:absolute;top:-9px;left:-10px;">4</div>
+                <div class="card-h"><span class="h-s">실효 한도 미리보기</span><span class="tag">계산 결과</span></div>
+                <div style="padding:15px 16px;display:flex;flex-direction:column;gap:12px;">
+                  <div style="display:flex;gap:9px;">
+                    <div class="fld" style="flex-grow:1;"><label>게임</label><div class="inp sel fill" style="height:30px;font-size:11.5px;">라그나로크X <span style="font-size:9px;">▾</span></div></div>
+                    <div class="fld" style="flex-grow:1.4;"><label>채널</label><div class="inp sel fill" style="height:30px;font-size:11.5px;">MyCard 회원 포인트 <span style="font-size:9px;">▾</span></div></div>
+                    <div class="fld" style="width:96px;"><label>연령</label><div class="inp sel fill" style="height:30px;font-size:11.5px;">성인 <span style="font-size:9px;">▾</span></div></div>
+                  </div>
+                  <div class="bx" style="overflow:hidden;">
+                    <table class="tbl">
+                      <thead><tr><th>계층</th><th style="width:76px;">소유</th><th style="width:118px;">범위 TWD</th><th style="width:62px;">적용</th></tr></thead>
+                      <tbody>
+                        <tr><td>1 PG 물리 제약</td><td>본사</td><td class="num">30 ~ 30,000</td><td class="tx">—</td></tr>
+                        <tr><td>2 법정 한도 · 성인</td><td>지사</td><td class="num">1 ~ 30,000</td><td class="tx">—</td></tr>
+                        <tr><td>3 법인 기본</td><td>지사</td><td class="num">30 ~ 30,000</td><td><b>하한</b></td></tr>
+                        <tr style="background:#EBF3F9;"><td><b>4 게임 재정의 · ROX</b></td><td>지사</td><td class="num"><b>30 ~ 5,000</b></td><td><b>상한</b></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="bx key" style="padding:11px 13px;display:flex;align-items:center;gap:10px;">
+                    <span class="lbl-k">실효 한도</span>
+                    <span class="h-s num">30 ~ 5,000 TWD</span>
+                    <span class="tx" style="margin-left:auto;">상한은 게임 재정의 · 하한은 법인 기본에서 결정</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sec card">
+                <div class="mk" style="position:absolute;top:-9px;left:-10px;">5</div>
+                <div class="card-h"><span class="h-s">법정 한도 · 진입 경로</span><span class="tag-a">지사 소유</span></div>
+                <div style="padding:15px 16px;display:flex;flex-direction:column;gap:13px;">
+                  <div class="bx" style="overflow:hidden;">
+                    <table class="tbl">
+                      <thead><tr><th>대상</th><th style="width:110px;">1회</th><th style="width:110px;">월 누적</th></tr></thead>
+                      <tbody>
+                        <tr><td>성인 · 회원</td><td class="num">30,000</td><td class="num">제한 없음</td></tr>
+                        <tr><td>청소년 · 회원</td><td class="num">3,000</td><td class="num">15,000</td></tr>
+                        <tr><td>통신사 소액결제</td><td class="num">3,000</td><td class="num">30,000</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <span class="lbl-k">D2C 비로그인 — 별도 축</span>
+                  <div class="fgrid">
+                    <div class="fld"><label>1회 상한</label><div class="inp fill" style="height:30px;font-size:11.5px;">1,500 TWD</div></div>
+                    <div class="fld"><label>동일 캐릭터 일 한도</label><div class="inp fill" style="height:30px;font-size:11.5px;">4,500 TWD</div></div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px;"><span class="sw on"></span><span class="tm">1회 한정 · 구독 · 정액제 상품 D2C 미노출</span></div>
+                  <div style="display:flex;align-items:center;gap:10px;"><span class="sw on"></span><span class="tm">IP 국가 · 카드 발행국 불일치 시 USD 기준가 강제</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 예상 노출 미리보기 -->
+            <div class="sec" style="margin-top:16px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">6</div>
+              <div class="card">
+                <div class="card-h">
+                  <span class="h-s">예상 노출 미리보기</span>
+                  <span class="fltr" style="height:28px;font-size:11px;">ROX <span style="font-size:9px;">▾</span></span>
+                  <span class="fltr" style="height:28px;font-size:11px;">ROX_DIAMOND_1000 · NT$ 270 <span style="font-size:9px;">▾</span></span>
+                  <span class="ts" style="margin-left:auto;">유저가 실제로 볼 목록과 동일</span>
+                </div>
+                <table class="tbl tbl-z">
+                  <thead><tr>
+                    <th style="width:230px;">채널</th><th style="width:110px;">결과</th>
+                    <th style="width:120px;">걸린 필터</th><th>사유</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b>MyCard 회원 포인트</b></td><td><span class="tag-g">노출 · 1순위</span></td><td class="tx">—</td><td class="tx">8단계 전부 통과</td></tr>
+                    <tr><td><b>MyCard 선불카드 핀</b></td><td><span class="tag-g">노출 · 2순위</span></td><td class="tx">—</td><td class="tx">8단계 전부 통과</td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td>편의점 바코드 수납</td><td><span class="tag-r">제외</span></td><td><b class="mono">3</b></td><td class="tx">ROX 게임별 재정의에서 사용 안 함</td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td>대만 ATM 가상계좌</td><td><span class="tag-r">제외</span></td><td><b class="mono">5</b></td><td class="tx">결제 금액 270 &lt; 지사 설정 최소 500</td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td>GASH 앱 지갑</td><td><span class="tag-r">제외</span></td><td><b class="mono">2</b></td><td class="tx">법인 활성화 미선택</td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td>통신사 소액결제</td><td><span class="tag-r">제외</span></td><td><b class="mono">8</b></td><td class="tx">헬스체크 실패 · PG 점검 중</td></tr>
+                  </tbody>
+                </table>
+                <div style="padding:11px 15px;border-top:1px solid #EDF0F4;background:#F7FCF9;display:flex;gap:9px;align-items:center;">
+                  <span class="dot dot-g"></span>
+                  <span class="tx"><b style="color:#2E6B45;">노출 2채널</b> — 6개 후보 중 4개가 필터에서 제외됨. 「켰는데 왜 안 보이냐」를 이 화면에서 답한다.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="dcol">
+      <h4>ST-05 · 라우팅 &amp; 한도 정책</h4>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">채널 선택</span><span class="src">법인 활성화</span></div>
+        <p class="dr-b">본사가 등재한 MID의 채널 중 <b>쓸 것만 지사가 켠다</b>. MID를 등록하면 채널이 통째로 딸려오는 게 아니다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">상속</span><span class="spec-v">MID 채널 목록(본사) → <b>법인 활성화</b>(지사) → <b>게임별 활성화</b>(지사)</span></div>
+          <div class="spec-r"><span class="spec-k">방향</span><span class="spec-v">아래로 갈수록 <b>좁아지기만</b> 한다 — 법인에서 끈 채널을 게임에서 켤 수 없다</span></div>
+          <div class="spec-r"><span class="spec-k">순서</span><span class="spec-v">드래그로 변경 · 1순위가 결제창 기본 선택</span></div>
+          <div class="spec-r"><span class="spec-k">긴급 차단</span><span class="spec-v">지사가 자기 법인 채널을 끌 수 있어야 한다 — PG 장애 시 본사를 기다릴 수 없다</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">Hive 대응</div>
+          <div class="imm-r"><span class="imm-k">동일</span><span class="imm-v">「설정된 PG사는 삭제할 수 없고 비활성화만 가능」 — 삭제 없이 토글</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">채널별 최소 · 최대</span><span class="src">지사 설정</span></div>
+        <p class="dr-b">PG 물리 제약 안에서 지사가 <b>더 좁게</b> 정한다. 좁히는 이유는 채널마다 다르다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">선불카드</span><span class="spec-v">권종 상한 — 30,000 → <b>3,000</b>. 유통되는 카드 권종을 넘는 금액은 결제가 안 된다</span></div>
+          <div class="spec-r"><span class="spec-k">가상계좌</span><span class="spec-v">하한 상향 — 30 → <b>500</b>. 소액에서 이체 수수료가 결제액을 역전한다</span></div>
+          <div class="spec-r"><span class="spec-k">편의점</span><span class="spec-v">하한 상향 — 비동기 입금 CS 비용이 소액에서 수익을 넘는다</span></div>
+          <div class="spec-r"><span class="spec-k">검증</span><span class="spec-v">PG 물리 제약을 <b>넘어서 넓힐 수 없다</b> — 입력 단계에서 거부</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">게임별 재정의</span><span class="src">4계층</span></div>
+        <p class="dr-b">같은 채널이라도 게임마다 금액 범위가 달라야 할 수 있다 — <b>유저 연령대 · 객단가 · 상품 가격대가 다르기 때문</b>. 재정의하지 않은 게임은 법인 기본을 상속한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">범위</span><span class="spec-v">법인 × <b>게임</b> × 채널</span></div>
+          <div class="spec-r"><span class="spec-k">허용 방향</span><span class="spec-v"><b>좁게만</b> — 넓히거나 법인에서 끈 채널을 켜는 것은 불가</span></div>
+          <div class="spec-r"><span class="spec-k">3가지 재정의</span><span class="spec-v">금액 범위 축소 · <b>채널 사용 안 함</b> · 우선순위 변경</span></div>
+          <div class="spec-r"><span class="spec-k">사유 기록</span><span class="spec-v">필수 — 왜 좁혔는지가 없으면 인수인계 시 아무도 못 건드린다</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">막지 않으면 법령 위반이 난다</div>
+          <p class="warn-b">게임별 설정이 <b>법정 한도나 PG 제약을 넘어 넓혀지면</b> 지사 운영자 실수 하나로 위반이 발생한다. 시스템이 입력 단계에서 거부해야 한다.</p>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">실효 한도 미리보기</span><span class="src">계산</span></div>
+        <p class="dr-b">4계층을 겹쳐 <b>최종 얼마인지</b>와 <b>어느 계층이 걸렸는지</b>를 보여준다. 계층이 4개면 사람이 머릿속으로 계산할 수 없다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">계산</span><span class="spec-v">실효 하한 = <b>max(하한들)</b> · 실효 상한 = <b>min(상한들)</b></span></div>
+          <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v">각 계층의 범위와 <b>어느 계층이 하한 · 상한을 결정했는지</b> 명시</span></div>
+          <div class="spec-r"><span class="spec-k">입력</span><span class="spec-v">게임 × 채널 × 연령 3개 축</span></div>
+          <div class="spec-r"><span class="spec-k">D2C</span><span class="spec-v">진입 경로 한도는 별도 축이라 결과에 하나 더 겹친다</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">법정 한도 · 진입 경로</span><span class="src">지사 소유</span></div>
+        <p class="dr-b">현지 법령은 지사가 안다. 본사는 한도 룰 <b>기능만 제공</b>하고 값은 지사가 넣는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">판정 시점</span><span class="spec-v">결제창 진입 전 — 초과 시 사유 코드 반환</span></div>
+          <div class="spec-r"><span class="spec-k">누적 기준</span><span class="spec-v"><b>계정 단위</b> — 여러 게임 합산</span></div>
+          <div class="spec-r"><span class="spec-k">연령</span><span class="spec-v">회원·인증의 본인확인 결과 참조. 미확인 계정은 <b>청소년 기준</b> 적용</span></div>
+          <div class="spec-r"><span class="spec-k">D2C</span><span class="spec-v">누적 추적 불가 → 건 단위 통제만. <b>고액 경로가 아니다</b></span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">예상 노출 미리보기</span><span class="src">진단</span></div>
+        <p class="dr-b">이 화면의 핵심 도구. 게임 × 상품 × 금액을 넣으면 <b>유저가 실제로 볼 목록</b>과 제외된 채널이 <b>몇 번 필터에서 걸렸는지</b>를 표시한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">목적</span><span class="spec-v">「켰는데 왜 안 보이냐」 문의를 이 화면에서 차단</span></div>
+          <div class="spec-r"><span class="spec-k">8단계 필터</span><span class="spec-v">MID 풀 → 법인 활성화 → 게임 활성화 → Capability → <b>금액 범위</b> → 한도 → <b>PG 상품 등록</b> → 헬스체크</span></div>
+          <div class="spec-r"><span class="spec-k">결과 0건</span><span class="spec-v"><b>「결제수단 없음」</b>도 정상 상태다 — 사유와 대안을 함께 표시</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">Failover는 환불 가능성을 바꾼다</div>
+          <p class="warn-b">1순위가 죽어 우회할 때 <b>두 채널의 Capability가 다를 수 있다</b>. GVC는 전 채널이 환불 불가라 문제가 없지만, GGA는 3순위(편의점 현금)만 불가라 우회 시 <b>자동 환불 가능 상품이 환불 불가로 바뀐다</b>. 후보는 동일 등급 안에서만 선정하고, 불가피하면 고지 팝업을 다시 띄워 동의를 새로 받는다. 동의 거부 시 처리는 미확정.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>

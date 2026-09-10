@@ -1,0 +1,175 @@
+
+<div class="part">
+  <span class="n">Part 5</span>
+  <h2>상품과 가격</h2>
+  <p>무엇을 파는가와 어디서 얼마에 파는가를 분리한다 · 가격 관리 부담 · PG 콘솔 이중 등록.</p>
+</div>
+
+<section id="h1">
+  <h3>상품 2계층</h3>
+  <p>「상품 관리는 지사」를 그대로 적용하면 문제가 생긴다 —
+  <b>하나의 게임을 여러 지사가 서비스</b>하기 때문이다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>게임</th><th>서비스 법인</th><th>서버</th></tr></thead>
+      <tbody>
+        <tr><td><b>라그나로크 오리진</b></td><td>GV · GVI · GVC</td><td>KR_HERA · NA_CHAOS · TW_BAPHOMET · TW_PORING</td></tr>
+        <tr><td><b>라그나로크 온라인</b></td><td>GV · GGA · GGT</td><td>KR_BAPHOMET · JP_RADGAMES · TH_SARAH</td></tr>
+        <tr><td><b>라그나로크X</b></td><td>GVC · GGT</td><td>TW_ROX_01 · SEA_ROX_01</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">같은 「다이아몬드 1,000개」를 3개 지사가 각자 SKU로 만들면 <b>전 세계 판매량을 집계할 수 없다</b> — Part 8의 통합 모니터링이 의미를 잃는다.</p>
+
+  <p class="grp2">소유를 두 계층으로 나눈다</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>계층</th><th>무엇</th><th>소유</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td><b>상품 정의</b><br>무엇을 파는가</td><td><span class="mono">sku_id</span> · 과금 유형 · 구성 · <span class="mono">item_code</span> 매핑 · 기본 지급 수량</td><td><b>게임 주관 지사</b></td><td><span class="mono">ROO_DIAMOND_1000</span></td></tr>
+        <tr><td><b>판매 설정</b><br>어디서 얼마에 파는가</td><td>판매 여부 · 통화별 가격 · 웹샵 보너스 · 계정 한도 · 노출 기간</td><td><b>각 지사</b></td><td>GVC NT$ 270 · GVI $8.99 · GGT 미판매</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">이 분리가 얻는 것</span>
+    <p>지사 자율성은 그대로다 — 가격 · 프로모션 · 판매 여부를 전부 지사가 결정한다.
+    동시에 <span class="mono">sku_id</span>가 하나로 유지되어 <b>통합 집계가 성립</b>한다.
+    다른 지사가 그 게임을 새로 런칭하면 SKU를 새로 만드는 게 아니라 <b>자기 통화 열만 채운다</b>.</p>
+  </div>
+
+  <p class="grp2">게임 마스터도 같은 2계층</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>계층</th><th>무엇</th><th>소유</th></tr></thead>
+      <tbody>
+        <tr><td><b>게임 정의</b></td><td>게임 코드 · 연동 규격 버전 · SKU 정의</td><td>게임 주관 지사</td></tr>
+        <tr><td><b>서버 등록</b></td><td><span class="mono">server_id</span> · 4대 API URL · HMAC 키 · 헬스체크</td><td>각 지사</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">Part 8 Step 3의 그리드가 이미 <b>행 단위를 게임 × 서버</b>로 두고 있어 스코프를 서버에 걸면 그대로 맞는다.</p>
+
+  <div class="note bad">
+    <span class="lb">확정 필요 — 게임 주관 지사 지정 규칙</span>
+    <p>게임마다 1개 법인이 SKU 정의를 소유해야 하는데 그 지정 규칙이 없다.
+    라그나로크X는 GVC · 라그나로크 온라인은 GV 같은 식으로 게임별로 정하면 되지만,
+    <b>주관 지사가 서비스를 종료하는 경우</b>의 이관 절차도 함께 정의해야 한다.</p>
+  </div>
+</section>
+
+<section id="h2">
+  <h3>Price Tier</h3>
+  <p>현재 구조는 SKU 12종 × 5통화 = <b>60셀을 지사가 직접 관리</b>한다. 법인이 9개로 늘면 108셀이다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>SKU</th><th>유형</th><th>GV<br><span class="mono">KRW</span></th><th>GVC<br><span class="mono">TWD</span></th><th>GVI<br><span class="mono">USD 세전</span></th><th>GGA<br><span class="mono">JPY</span></th><th>GGT<br><span class="mono">THB</span></th></tr></thead>
+      <tbody>
+        <tr><td><b>다이아몬드 1,000</b></td><td>아이템</td><td>11,000</td><td>270</td><td>8.99</td><td>1,200</td><td>320</td></tr>
+        <tr><td><b>다이아몬드 5,000</b></td><td>아이템</td><td>55,000</td><td>1,350</td><td>44.99</td><td>6,000</td><td>1,590</td></tr>
+        <tr><td><b>스타터 패키지</b></td><td>아이템 묶음</td><td>33,000</td><td>810</td><td>24.99</td><td>3,500</td><td>890</td></tr>
+        <tr><td><b>10,000 KP</b></td><td>포인트</td><td>10,000</td><td>250</td><td>7.99</td><td>1,000</td><td>260</td></tr>
+        <tr><td><b>클래식 30일 이용권</b></td><td>정액제</td><td>9,900</td><td>240</td><td>7.99</td><td>980</td><td>250</td></tr>
+        <tr><td><b>VIP 멤버십</b></td><td>구독</td><td>8,900</td><td class="bad-cell">미판매</td><td>6.99</td><td>900</td><td class="bad-cell">미판매</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">VIP 멤버십의 GVC · GGT 열이 비어 있는 것은 가격 미정이 아니라 <b>빌링키 지원 채널이 없어 판매 불가</b>하기 때문이다. 빈칸과 「미판매」를 구분해야 한다.</p>
+
+  <p class="grp2">Tier 방식 — Hive 차용</p>
+  <p>본사가 Tier별 통화 금액표를 정의하고, 지사는 상품에 <b>Tier만 붙인다</b>.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>Tier</th><th>KRW</th><th>TWD</th><th>USD</th><th>JPY</th><th>THB</th><th>정의</th></tr></thead>
+      <tbody>
+        <tr><td><b>T1</b></td><td>1,100</td><td>30</td><td>0.99</td><td>120</td><td>35</td><td>본사</td></tr>
+        <tr><td><b>T5</b></td><td>11,000</td><td>270</td><td>8.99</td><td>1,200</td><td>320</td><td>본사</td></tr>
+        <tr><td><b>T9</b></td><td>55,000</td><td>1,350</td><td>44.99</td><td>6,000</td><td>1,590</td><td>본사</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">Tier 가 한 번에 해결하는 것 3개</span>
+    <p><b>① 관리 부담</b> — 108셀 → 상품별 Tier 지정 1회.
+    <b>② PG 최소 · 최대 검증</b> — Tier 단위로 한 번만 검증하면 그 Tier를 쓰는 모든 상품에 적용된다.
+    <b>③ 가격 일관성</b> — 같은 Tier 상품의 가격이 지사별로 어긋나는 일이 없다.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">확정 필요 3건</span>
+    <p><b>① 채택 여부</b> — Tier 방식인지 통화별 개별 입력 유지인지.
+    <b>② Tier 개수와 간격</b> — 현지 심리적 가격대를 몇 단계로 커버할지.
+    <b>③ 환율 변동 시 갱신</b> — Tier 금액표를 언제 · 누가 갱신하며, 진행 중 세션의 동결가는 어떻게 되는지.
+    Hive 도 Tier를 쓰지만 갱신 주기 · 환율 대응은 공개 문서에서 확인되지 않았다.</p>
+  </div>
+
+  <div class="note">
+    <span class="lb">Tier를 쓰더라도 예외는 남는다</span>
+    <p><b>GVI는 세전가</b>라 결제창 총액이 Tier 금액과 다르다.
+    또 현지 프로모션 가격(한정 할인)은 Tier를 벗어날 수 있으므로 <b>Tier 지정 + 개별 오버라이드</b>를 함께 허용해야 한다.</p>
+  </div>
+</section>
+
+<section id="h3">
+  <h3>SKU × PG 동기화</h3>
+  <p>「각 PG 콘솔에 동일 상품ID로 등록」은 세 가지가 겹친 실무 리스크다.</p>
+
+  <ul class="rule">
+    <li><b>PG마다 요구 여부가 다르다.</b> 카드 PG(토스 · Stripe · PayPal)는 상품 등록 개념이 없고 금액만 보낸다. 게임 특화 PG(MyCard · GASH · 통신사 소액)는 상품 코드 <b>사전 등록이 필수</b>다. 「모든 PG 콘솔에 등록」은 전제가 틀렸다.</li>
+    <li><b>「동일 상품ID」는 코드 규칙의 교집합을 요구한다.</b> PG마다 길이 · 문자셋 제약이 다르므로 하나라도 안 맞으면 그 PG만 다른 ID를 써야 하고, 그 순간 「동일 ID」 전제가 깨진다.</li>
+    <li><b>이중 등록이 곧 장애 원인이다.</b> 포털에 만들고 PG 콘솔에 또 만드는데 누락되거나 가격이 어긋나면 결제 실패다. <b>동기화 상태를 포털이 추적하지 않으면</b> 지사 운영자가 엑셀로 관리하게 된다.</li>
+  </ul>
+
+  <p class="grp2">6단계 해결책</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>#</th><th>내용</th><th>주체</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td>PG 마스터에 2개 필드 등재 — <b>상품 사전등록 요구 여부</b> · <b>상품코드 규칙</b>(길이 · 문자셋)</td><td>본사</td></tr>
+        <tr><td><b>2</b></td><td>SKU 코드 체계를 <b>전 지원 PG의 교집합</b>으로 제한 · 등록 시 검증 · 위반 시 저장 거부</td><td>본사</td></tr>
+        <tr><td><b>3</b></td><td>SKU × 머천트 <b>동기화 상태</b> 관리</td><td>시스템</td></tr>
+        <tr><td><b>4</b></td><td>미등록 상태면 <b>결제창에서 해당 채널 자동 제외</b> — Part 4 필터 7번</td><td>시스템</td></tr>
+        <tr><td><b>5</b></td><td><b>「PG 등록 필요 목록」 워크리스트</b> + PG 콘솔 업로드용 CSV 내보내기</td><td>지사</td></tr>
+        <tr><td><b>6</b></td><td>가능한 PG는 어댑터 <span class="mono">registerProduct()</span> 로 <b>API 자동 등록</b> — 이중 작업 제거</td><td>본사</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="grp2">동기화 상태 4종</p>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th>상태</th><th>의미</th><th>결제창 노출</th><th>조치</th></tr></thead>
+      <tbody>
+        <tr><td>등록 불필요</td><td>사전등록을 요구하지 않는 PG</td><td><span class="verdict yes">노출</span></td><td>없음</td></tr>
+        <tr><td><span class="verdict yes">등록됨</span></td><td>PG 콘솔에 등록 완료 · 가격 일치</td><td><span class="verdict yes">노출</span></td><td>없음</td></tr>
+        <tr><td class="bad-cell"><b>미등록</b></td><td>사전등록 요구 PG인데 등록 안 됨</td><td class="bad-cell"><b>자동 제외</b></td><td>워크리스트 표시</td></tr>
+        <tr><td class="bad-cell"><b>불일치</b></td><td>등록됐으나 <b>가격이 다름</b></td><td class="bad-cell"><b>자동 제외</b></td><td>워크리스트 표시 · 우선 처리</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">「불일치」를 미등록과 분리한 이유 — 등록은 됐는데 가격이 어긋난 건이 <b>가장 늦게 발견되고 정산 차액으로 이어진다</b>. 결제는 성공하는데 금액이 달라 대사에서 잡힌다.</p>
+
+  <div class="note q">
+    <span class="lb">이 접근이 과하지 않다는 근거</span>
+    <p>Hive 도 <span class="mono">marketPid ↔ gamePid</span> 2계층 매핑으로 이중 등록을 <b>제거하지 않고 관리</b>한다.
+    STOVE 는 상품 마스터를 플랫폼이 단독 보유해 문제를 없애지만 게임사 자율성을 포기한다.
+    Steam · Epic 은 플랫폼이 MoR이라 외부 PG 등록 자체가 없다.
+    <b>동기화 상태 관리는 우리 조건에서 유일하게 성립하는 해법</b>이며,
+    여기에 「미등록 채널 자동 제외」를 더해 장애를 사전 차단한다 —
+    <a href="../benchmark/game-platform-payment.html">게임 플랫폼 결제 구조 벤치마킹</a> 참조.</p>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">확정 필요 — SKU 코드 체계</span>
+    <p>교집합 규칙을 먼저 정해야 상품을 하나도 등록할 수 없다.
+    <b>게임사에 규격서를 배포하기 전에 확정</b>되어야 하며, 배포 후 바꾸면 전 게임 재연동이다.
+    현재 프로토타입 코드(<span class="mono">RO_DIAMOND_1000</span>)는 게임 구분이 없어
+    Part 5의 상품 2계층과도 맞지 않는다 — <span class="mono">ROO_DIAMOND_1000</span> 형태로의 전환이 필요하다.</p>
+  </div>
+</section>

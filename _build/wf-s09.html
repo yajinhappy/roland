@@ -1,0 +1,423 @@
+<section class="screen" id="s09">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="shd"><span class="id">PAY</span><span class="nm">통합 결제 페이지</span></div>
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs">
+        <button type="button" class="tab tab-on" data-dev="pc">PC</button>
+        <button type="button" class="tab" data-dev="mo">MO</button>
+      </div>
+
+      <!-- ═══════════════ PC — 페이지 방식 ═══════════════ -->
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe pay-page" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="sec pay-topbar">
+          <div class="mk" style="position:absolute;top:18px;left:-10px;">8</div>
+          <span class="bk"></span>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <b>Gravity Payment</b>
+            <span class="sub">라그나로크 오리진 · <b style="color:#6C7480;">한국바포_고인물</b></span>
+          </div>
+          <span class="sec-badge"><span class="lock"></span> pay.gravity.com · <span class="mono">SSL</span> · PCI-DSS SAQ A</span>
+        </div>
+
+        <div class="pay-col" style="position:relative;">
+          <div class="mk" style="position:absolute;top:16px;left:-34px;">1</div>
+          <div class="mk" style="position:absolute;top:120px;left:-34px;">2</div>
+          <div class="mk" style="position:absolute;top:212px;left:-34px;">3</div>
+          <div class="mk" style="position:absolute;top:326px;left:-34px;">4</div>
+          <div class="mk" style="position:absolute;top:634px;left:-34px;">5</div>
+          <div class="mk" style="position:absolute;top:790px;left:-34px;">6</div>
+          <div class="mk" style="position:absolute;top:876px;left:-34px;">7</div>
+
+          <div class="pay-card">
+
+            <!-- ═ 1행 · 주문 상품 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>1</i> 주문 상품</span>
+              <div class="bx" style="padding:11px 13px;display:flex;align-items:center;gap:12px;">
+                <div class="img" style="width:46px;height:46px;flex:none;"><span class="sp">상품<br>이미지</span></div>
+                <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+                  <span class="tag" style="align-self:flex-start;">인게임 아이템</span>
+                  <span class="h-s" style="font-size:14px;">다이아몬드 1,000 <span style="color:#2E6B45;">+ 보너스 100</span></span>
+                </div>
+                <span class="btn-s" style="margin-left:auto;flex:none;">변경</span>
+              </div>
+            </div>
+
+            <!-- ═ 2행 · 가격 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>2</i> 결제 금액</span>
+              <div class="price-box">
+                <span class="price-cur">₩</span>
+                <span class="price-num">11,000</span>
+              </div>
+            </div>
+
+            <!-- ═ 3행 · 결제수단 그룹 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>3</i> 결제수단 <b>필수</b></span>
+              <div class="grp-grid">
+                <div class="grp-tile on"><span class="gi"></span><span class="gn">신용 · 체크카드</span></div>
+                <div class="grp-tile"><span class="gi"></span><span class="gn">간편결제</span></div>
+                <div class="grp-tile"><span class="gi"></span><span class="gn">계좌이체 · 가상계좌</span></div>
+                <div class="grp-tile"><span class="gi"></span><span class="gn">휴대폰 소액</span></div>
+                <div class="grp-tile off"><span class="gi"></span><span class="gn">상품권 · PIN</span><span class="gc">금액 초과</span></div>
+              </div>
+            </div>
+
+            <!-- ═ 4행 · PG + 채널 (로고 박스) ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>4</i> PG · 결제 채널</span>
+              <div class="ch-wrap">
+                <div class="ch-head">
+                  <span class="t">토스페이먼츠</span>
+                  <span class="tx">전액 · 부분 환불 가능 · 무이자 할부 제공</span>
+                </div>
+                <div class="ch-list" style="max-height:222px;">
+                  <div class="ch-grid">
+                    <div class="ch-box on"><span class="lg">신한카드<br>LOGO</span><span class="nm">신한카드</span><span class="sub">무이자 6</span></div>
+                    <div class="ch-box"><span class="lg">현대카드<br>LOGO</span><span class="nm">현대카드</span><span class="sub">무이자 3</span></div>
+                    <div class="ch-box"><span class="lg">삼성카드<br>LOGO</span><span class="nm">삼성카드</span><span class="sub">무이자 6</span></div>
+                    <div class="ch-box"><span class="lg">KB국민<br>LOGO</span><span class="nm">KB국민카드</span><span class="sub">무이자 3</span></div>
+                    <div class="ch-box"><span class="lg">롯데카드<br>LOGO</span><span class="nm">롯데카드</span><span class="sub">—</span></div>
+                    <div class="ch-box"><span class="lg">BC카드<br>LOGO</span><span class="nm">BC카드</span><span class="sub">—</span></div>
+                    <div class="ch-box"><span class="lg">하나카드<br>LOGO</span><span class="nm">하나카드</span><span class="sub">무이자 3</span></div>
+                    <div class="ch-box"><span class="lg">우리카드<br>LOGO</span><span class="nm">우리카드</span><span class="sub">—</span></div>
+                    <div class="ch-box"><span class="lg">NH농협<br>LOGO</span><span class="nm">NH농협카드</span><span class="sub">—</span></div>
+                    <div class="ch-box dis"><span class="lg">해외카드<br>LOGO</span><span class="nm">해외 발행 카드</span><span class="sub">이용 불가</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="bx" style="padding:11px 12px;display:flex;flex-direction:column;gap:8px;">
+                <span class="lbl-k">신한카드</span>
+                <div class="fgrid">
+                  <div class="fld" style="grid-column:1 / -1;"><label>카드번호<i>*</i></label><div class="inp" style="height:30px;font-size:11.5px;">0000 - 0000 - 0000 - 0000</div></div>
+                  <div class="fld"><label>유효기간<i>*</i></label><div class="inp" style="height:30px;font-size:11.5px;">MM / YY</div></div>
+                  <div class="fld"><label>할부<i>*</i></label><div class="inp sel fill" style="height:30px;font-size:11.5px;">일시불 <span style="font-size:9px;">▾</span></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ═ 5행 · 동의 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>5</i> 결제 동의 <span class="adm-tag" style="margin-left:2px;">상품 유형별 · 어드민 입력</span></span>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div class="agree must">
+                  <span class="cb"></span>
+                  <span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편 수령 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상을 확인했습니다.</span>
+                  <span class="lk">전문</span>
+                </div>
+                <div class="agree must">
+                  <span class="cb"></span>
+                  <span class="tt"><b>[필수]</b> 만 19세 미만은 법정대리인의 동의가 필요하며, 동의 없는 결제는 취소될 수 있습니다.</span>
+                </div>
+                <div class="agree">
+                  <span class="cb"></span>
+                  <span class="tt">[선택] 프로모션 · 혜택 알림 수신에 동의합니다.</span>
+                </div>
+                <div class="agree hid">
+                  <span class="cb"></span>
+                  <span class="tt">[필수] 본 결제수단은 자동 환불이 불가하며 고객센터 계좌 송금으로 처리됩니다. — <b>채널 조건 미충족 · 미노출</b></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ═ 6행 · 결제 버튼 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>6</i> 결제</span>
+              <div class="paybtn">
+                <span class="a">₩ 11,000</span>
+                <span class="b">결제하기</span>
+              </div>
+            </div>
+
+            <!-- ═ 7행 · 구매 유의사항 ═ -->
+            <div class="pay-sec">
+              <span class="pay-lbl"><i>7</i> 구매 유의사항 <span class="adm-tag" style="margin-left:2px;">선택 · 상품 유형별 어드민 입력</span></span>
+              <div class="notice">
+                <ul>
+                  <li>결제 완료 후 인게임 우편함으로 즉시 발송되며, 우편 보관 기간은 30일입니다.</li>
+                  <li>보너스 재화는 공식 웹상점 결제에만 지급되며 인앱결제에는 적용되지 않습니다.</li>
+                  <li>부가가치세 10%가 포함된 금액이며 결제 완료 후 현금영수증 발급이 가능합니다.</li>
+                  <li>결제 관련 문의는 고객센터 또는 마이페이지 &gt; 결제 내역에서 접수해 주세요.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+
+      <!-- ═══════════════ MO — 같은 페이지 · 1열 ═══════════════ -->
+      <div class="pane pane-mo">
+      <div class="wstage">
+      <div class="pay-page" style="width:390px;display:flex;flex-direction:column;position:relative;overflow:hidden;">
+
+        <div class="pay-topbar" style="height:50px;padding:0 16px;">
+          <span class="bk"></span>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <b style="font-size:12.5px;">Gravity Payment</b>
+            <span class="sub">라그나로크 오리진 · <b style="color:#6C7480;">한국바포_고인물</b></span>
+          </div>
+          <span class="sec-badge" style="font-size:9.5px;"><span class="lock"></span> SSL</span>
+        </div>
+
+        <div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:17px;">
+
+          <!-- 1행 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>1</i> 주문 상품</span>
+            <div class="bx" style="padding:10px 11px;display:flex;align-items:center;gap:10px;background:#fff;">
+              <div class="img" style="width:40px;height:40px;flex:none;"><span class="sp">상품</span></div>
+              <div style="display:flex;flex-direction:column;gap:4px;min-width:0;">
+                <span class="tag" style="align-self:flex-start;">인게임 아이템</span>
+                <span class="h-s" style="font-size:12.5px;">다이아몬드 1,000 <span style="color:#2E6B45;">+100</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2행 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>2</i> 결제 금액</span>
+            <div class="price-box">
+              <span class="price-cur" style="font-size:13px;">₩</span>
+              <span class="price-num" style="font-size:32px;">11,000</span>
+            </div>
+          </div>
+
+          <!-- 3행 — MO 2열 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>3</i> 결제수단 <b>필수</b></span>
+            <div class="grp-grid" style="grid-template-columns:repeat(2,1fr);">
+              <div class="grp-tile on"><span class="gi"></span><span class="gn">신용 · 체크카드</span></div>
+              <div class="grp-tile"><span class="gi"></span><span class="gn">간편결제</span></div>
+              <div class="grp-tile"><span class="gi"></span><span class="gn">계좌이체 · 가상계좌</span></div>
+              <div class="grp-tile"><span class="gi"></span><span class="gn">휴대폰 소액</span></div>
+              <div class="grp-tile off" style="grid-column:1 / -1;"><span class="gi"></span><span class="gn">상품권 · PIN</span><span class="gc">금액 초과</span></div>
+            </div>
+          </div>
+
+          <!-- 4행 — MO 3열 로고 박스 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>4</i> PG · 결제 채널</span>
+            <div class="ch-wrap">
+              <div class="ch-head"><span class="t">토스페이먼츠</span><span class="tx">환불 가능 · 무이자 할부</span></div>
+              <div class="ch-list" style="max-height:176px;">
+                <div class="ch-grid" style="grid-template-columns:repeat(3,1fr);padding:10px;">
+                  <div class="ch-box on"><span class="lg">신한<br>LOGO</span><span class="nm">신한카드</span></div>
+                  <div class="ch-box"><span class="lg">현대<br>LOGO</span><span class="nm">현대카드</span></div>
+                  <div class="ch-box"><span class="lg">삼성<br>LOGO</span><span class="nm">삼성카드</span></div>
+                  <div class="ch-box"><span class="lg">KB<br>LOGO</span><span class="nm">KB국민</span></div>
+                  <div class="ch-box"><span class="lg">롯데<br>LOGO</span><span class="nm">롯데카드</span></div>
+                  <div class="ch-box"><span class="lg">BC<br>LOGO</span><span class="nm">BC카드</span></div>
+                  <div class="ch-box"><span class="lg">하나<br>LOGO</span><span class="nm">하나카드</span></div>
+                  <div class="ch-box"><span class="lg">우리<br>LOGO</span><span class="nm">우리카드</span></div>
+                  <div class="ch-box"><span class="lg">NH<br>LOGO</span><span class="nm">NH농협</span></div>
+                  <div class="ch-box dis"><span class="lg">해외<br>LOGO</span><span class="nm">해외 카드</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="bx" style="padding:11px 12px;display:flex;flex-direction:column;gap:8px;background:#fff;">
+              <span class="lbl-k">신한카드</span>
+              <div class="fld"><label>카드번호<i>*</i></label><div class="inp" style="height:30px;font-size:11.5px;">0000 - 0000 - 0000 - 0000</div></div>
+              <div style="display:flex;gap:8px;">
+                <div class="fld" style="flex:1;"><label>유효기간<i>*</i></label><div class="inp" style="height:30px;font-size:11.5px;">MM / YY</div></div>
+                <div class="fld" style="flex:1;"><label>할부<i>*</i></label><div class="inp sel fill" style="height:30px;font-size:11.5px;">일시불 <span style="font-size:9px;">▾</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5행 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>5</i> 결제 동의</span>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div class="agree must"><span class="cb"></span><span class="tt" style="font-size:11px;"><b>[필수]</b> 우편 수령 후 청약철회 제한 · 지급 대상 확인</span><span class="lk">전문</span></div>
+              <div class="agree must"><span class="cb"></span><span class="tt" style="font-size:11px;"><b>[필수]</b> 만 19세 미만은 법정대리인 동의 필요</span></div>
+              <div class="agree"><span class="cb"></span><span class="tt" style="font-size:11px;">[선택] 프로모션 알림 수신 동의</span></div>
+            </div>
+          </div>
+
+          <!-- 7행 -->
+          <div class="pay-sec">
+            <span class="pay-lbl"><i>7</i> 구매 유의사항</span>
+            <div class="notice">
+              <ul>
+                <li>결제 후 인게임 우편함 즉시 발송 · 보관 30일</li>
+                <li>보너스 재화는 공식 웹상점 결제에만 지급</li>
+                <li>부가세 10% 포함 · 현금영수증 발급 가능</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 6행 — MO는 하단 고정 -->
+        <div class="paybar">
+          <div class="row">
+            <div class="paybtn"><span class="a">₩ 11,000</span><span class="b">결제하기</span></div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="dcol">
+      <h4>PAY · 통합 결제 페이지 — 7행 구조 · 페이지 방식</h4>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">주문 상품</span><span class="src">1행</span></div>
+        <p class="dr-b">앞단 웹샵에서 선택한 항목을 그대로 받아 표시한다. <b>상품명 · 유형까지만</b> — 주문은 상품 1개로 고정되므로 구매 수량 표기를 두지 않는다. 지급 대상은 상단 바에 고정되므로 여기서 반복하지 않는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">표시</span><span class="spec-v">유형 배지 · 상품명 · 보너스 수량 · 썸네일</span></div>
+          <div class="spec-r"><span class="spec-k">「변경」</span><span class="spec-v">웹샵으로 되돌아간다 — 결제 페이지에서 상품을 바꾸지 않는다(세션 재발급 필요)</span></div>
+          <div class="spec-r"><span class="spec-k">유형별 추가</span><span class="spec-v">정액제는 <b>기간 · 만료일</b> · 구독은 <b>결제 주기 · 다음 결제일 · 해지 방법</b>이 여기에 붙는다</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">무게 — 중간</div>
+          <div class="imm-r"><span class="imm-k">크기</span><span class="imm-v">PC 14px · MO 12.5px 상품명. 확인용이지 강조 대상은 아니다</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">결제 금액</span><span class="src">2행</span></div>
+        <p class="dr-b">앞단에서 확정된 통화의 <b>최종 결제 금액만</b> 표시한다. 결제 버튼과 함께 화면에서 가장 무거운 두 요소다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">무게</span><span class="spec-v"><b>PC 38px · MO 32px · weight 600 · tabular-nums</b>. 통화 기호는 낮춰 숫자를 세운다</span></div>
+          <div class="spec-r"><span class="spec-k">노출 범위</span><span class="spec-v"><b>총액 한 줄만.</b> 상품가 · 세액 분해 · 동결 잔여 시간은 노출하지 않는다 — 유저가 확인할 숫자는 하나다</span></div>
+          <div class="spec-r"><span class="spec-k">세액 처리</span><span class="spec-v">계산은 그대로 수행하되 <b>전표 · 법정 영수증에만 기록</b>. 필요 시 7행 유의사항에 「부가세 포함」 문구로 갈음</span></div>
+          <div class="spec-r"><span class="spec-k">세션 만료</span><span class="spec-v">잔여 시간을 보여주지 않고, 만료되면 <b>안내 페이지로 전환</b>해 재시도를 유도한다</span></div>
+          <div class="spec-r"><span class="spec-k">통화 결정</span><span class="spec-v">유저 선택이 아니라 <b>서버 → 법인 → 통화</b> 연쇄로 확정. 결제 페이지에서 변경 불가</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">결제수단 그룹</span><span class="src">3행</span></div>
+        <p class="dr-b">해당 통화로 결제 가능한 <b>그룹만</b> 노출한다. PG나 채널이 아니라 <b>유저가 아는 언어</b>(신용카드 · 간편결제 · 계좌이체 · 휴대폰)로 묶는다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">기본 선택</span><span class="spec-v"><b>신용 · 체크카드</b>. 존재하면 무조건 기본값 — 가장 보편적이고 환불 · 부분환불 · 정기결제를 모두 지원하는 유일한 그룹이다</span></div>
+          <div class="spec-r"><span class="spec-k">카드 부재 시</span><span class="spec-v">Step 5 <b>우선순위 1순위</b> 그룹이 기본값. 카드 머천트가 없는 리전에서는 선불카드 · 지갑이 기본이 된다</span></div>
+          <div class="spec-r"><span class="spec-k">그룹 정의</span><span class="spec-v">채널 <span class="mono">type</span> 으로 자동 묶음 — CARD · EASY_PAY · VBANK · MOBILE · PIN · CVS · WALLET</span></div>
+          <div class="spec-r"><span class="spec-k">노출 조건</span><span class="spec-v">그룹 안에 <b>선택 가능한 채널이 1개 이상</b> 있을 때만. 8단계 필터 통과 기준</span></div>
+          <div class="spec-r"><span class="spec-k">비활성</span><span class="spec-v">금액 초과 · 점검 중 그룹은 <b>숨기지 않고 사유만 짧게</b> 붙여 회색 처리</span></div>
+          <div class="spec-r"><span class="spec-k">반응형</span><span class="spec-v"><span class="mono">auto-fit minmax(112px)</span> — PC 5열 · 태블릿 3열 · <b>MO 2열</b></span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">PG · 결제 채널 — 로고 박스</span><span class="src">4행</span></div>
+        <p class="dr-b">그룹 선택에 따라 하위가 펼쳐진다. <b>로고 박스 그리드</b>로 그린다 — 카드사 · 간편결제는 <b>브랜드를 글자보다 로고로 먼저 알아본다</b>.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">박스 구성</span><span class="spec-v">로고 · 채널명 · 부가 정보(무이자 개월 · 이용 불가 사유)</span></div>
+          <div class="spec-r"><span class="spec-k">개수 대응</span><span class="spec-v">그리드가 접히고 <b>컨테이너에 <span class="mono">max-height</span> + 내부 스크롤</b>. PC 222px · MO 176px</span></div>
+          <div class="spec-r"><span class="spec-k">PG 헤더</span><span class="spec-v">박스 그리드 위에 <b>PG명 · 환불 가능 여부 · 혜택</b>. 유저에게 필요한 것은 「환불되는가」와 「할부되는가」뿐</span></div>
+          <div class="spec-r"><span class="spec-k">PG 복수</span><span class="spec-v">한 그룹에 PG가 여럿이면 헤더가 반복된다. 예 — 대만 선불카드 그룹은 <b>MyCard · GASH 2개 헤더</b></span></div>
+          <div class="spec-r"><span class="spec-k">반응형</span><span class="spec-v">PC · 태블릿 <b>4열</b> · <b>MO 3열</b>. 로고 박스는 좁아도 형태를 유지한다</span></div>
+          <div class="spec-r"><span class="spec-k">선택 불가</span><span class="spec-v">금액 미달 · 초과 · 해외 발행 카드 등은 <b>점선 회색 + 짧은 사유</b>로 남긴다</span></div>
+          <div class="spec-r"><span class="spec-k">선택 후</span><span class="spec-v">박스 아래에 채널별 입력 폼이 이어 붙는다 — 카드번호 · PIN · QR · 바코드 · 계정</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">목록형이 아니라 박스형인 이유</div>
+          <div class="imm-r"><span class="imm-k">인지</span><span class="imm-v">카드사 · 간편결제는 <b>로고 인지가 텍스트보다 빠르다</b></span></div>
+          <div class="imm-r"><span class="imm-k">개수</span><span class="imm-v">박스는 4열로 접히므로 <b>10개가 3행</b>. 목록형이면 10행이 되어 오히려 길다</span></div>
+          <div class="imm-r"><span class="imm-k">방어</span><span class="imm-v">개수가 늘어도 <span class="mono">max-height</span> + 스크롤로 <b>결제 버튼 위치가 고정</b>된다</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">숨기지 않고 회색 처리하는 이유</div>
+          <p class="warn-b">금액 · 발행국 조건으로 빠진 채널을 <b>아예 안 보여주면</b> 유저는 「내가 쓰던 수단이 사라졌다」로 받아들이고 CS로 온다. 사유를 붙여 남기면 <b>조건을 바꾸면 된다</b>는 것을 스스로 안다.</p>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">결제 동의</span><span class="src">5행 · 어드민 입력</span></div>
+        <p class="dr-b"><b>상품 유형별로 다르게 구성</b>되며 문구는 어드민에서 입력한다. 하드코딩하면 법령 변경마다 배포가 필요해진다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">입력 위치</span><span class="spec-v"><b>Step 4 상품 등록</b> — 상품 유형별 동의 세트. 법인별 오버라이드 허용</span></div>
+          <div class="spec-r"><span class="spec-k">항목 구성</span><span class="spec-v">필수 / 선택 · 문구 · 전문 링크 · <b>노출 조건</b></span></div>
+          <div class="spec-r"><span class="spec-k">채널 종속 항목</span><span class="spec-v">「자동 환불 불가」는 <b>선택한 채널이 환불 불가일 때만</b> 자동 추가 — 상품이 아니라 채널이 조건. 화면의 점선 항목이 <b>조건 미충족으로 빠진 상태</b></span></div>
+          <div class="spec-r"><span class="spec-k">구독</span><span class="spec-v">정기결제 약관 · 자동 갱신 · 해지 방법 동의가 <b>필수로 추가</b></span></div>
+          <div class="spec-r"><span class="spec-k">버튼 연동</span><span class="spec-v"><b>필수 항목 전부 체크 전에는 6행 버튼이 비활성</b></span></div>
+          <div class="spec-r"><span class="spec-k">기록</span><span class="spec-v">동의 시각 · IP · <b>문구 버전 ID</b>를 전표에 저장</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">문구 버전을 남겨야 한다</div>
+          <p class="warn-b">어드민에서 문구를 바꿀 수 있게 만들면 <b>「유저가 동의한 그 시점의 문구」</b>를 특정할 수 없게 된다. 동의 이력에 <b>문구 버전 ID</b>를 함께 저장해야 분쟁에서 증빙이 된다.</p>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">결제 버튼</span><span class="src">6행</span></div>
+        <p class="dr-b">2행 구조 — <b>1행에 통화 + 금액, 2행에 「결제하기」</b>. 금액을 버튼에 다시 넣는 이유는 스크롤로 2행이 화면을 벗어나기 때문이다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">무게</span><span class="spec-v"><b>화면에서 가장 무거운 요소</b> — 17px 금액 + 12.5px 라벨 · 전체 폭 · 진한 배경</span></div>
+          <div class="spec-r"><span class="spec-k">고정 규칙</span><span class="spec-v">흐름상 6행 위치에 두되, <b>뷰포트를 벗어나면 하단 고정 바로 승격</b></span></div>
+          <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v">화면이 짧아 <b>처음부터 하단 고정</b>. 7행 유의사항은 그 위로 흐른다</span></div>
+          <div class="spec-r"><span class="spec-k">비활성 조건</span><span class="spec-v">채널 미선택 · 필수 동의 미체크 · 필수 입력 미완 · 세션 만료</span></div>
+          <div class="spec-r"><span class="spec-k">중복 제출</span><span class="spec-v">즉시 비활성 + <b>Redis 분산 락</b></span></div>
+          <div class="spec-r"><span class="spec-k">비동기 채널</span><span class="spec-v">가상계좌 · 편의점은 라벨을 <b>「입금 정보 받기」</b>로 교체</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">7</span><span class="dr-t">구매 유의사항</span><span class="src">7행 · 선택 · 어드민 입력</span></div>
+        <p class="dr-b">선택 항목이며 상품 유형별로 다르게 구성한다. <b>동의(5행)와 성격이 다르다</b> — 체크를 받지 않고 읽히기만 하면 되는 안내다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">5행과의 차이</span><span class="spec-v">동의는 <b>법적 효력 · 체크 필수</b> · 유의사항은 <b>안내 · 체크 없음</b></span></div>
+          <div class="spec-r"><span class="spec-k">입력 위치</span><span class="spec-v">Step 4 상품 등록 — 상품 유형별 문구 세트 · 법인별 오버라이드</span></div>
+          <div class="spec-r"><span class="spec-k">미입력 시</span><span class="spec-v"><b>행 자체가 사라진다</b> — 빈 영역을 남기지 않는다</span></div>
+          <div class="spec-r"><span class="spec-k">자동 삽입</span><span class="spec-v">법인 세무 문구(부가세 포함 · 영수증 발급)는 <b>Step 1 법인 설정에서 자동</b>. 2행에서 뺀 세액 정보가 여기서 문장으로 갈음된다</span></div>
+          <div class="spec-r"><span class="spec-k">무게</span><span class="spec-v"><b>가장 가볍다</b> — 10.5px 회색</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">7행 무게 배분</div>
+          <div class="imm-r"><span class="imm-k">최상</span><span class="imm-v"><b>2행 금액</b> 38px · <b>6행 버튼</b> 17px + 전체 폭</span></div>
+          <div class="imm-r"><span class="imm-k">중</span><span class="imm-v">3행 그룹 타일 · 1행 상품 14px</span></div>
+          <div class="imm-r"><span class="imm-k">하</span><span class="imm-v">4행 채널 10.5px · 5행 동의 11.5px</span></div>
+          <div class="imm-r"><span class="imm-k">최하</span><span class="imm-v">7행 유의사항 10.5px 회색</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">8</span><span class="dr-t">상단 바 · 페이지 방식 · 반응형</span><span class="src">전역</span></div>
+        <p class="dr-b">모달 · 팝업을 쓰지 않고 <b>독립 URL 페이지</b>로 만든다. PC에서 팝업을 띄울 이유가 없고, 오히려 팝업이 깨지는 경우가 많다.</p>
+
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">상단 바 1행</span><span class="spec-v"><b>Gravity Payment</b> — 서비스명만. 「통합 결제창」 같은 내부 용어를 쓰지 않는다</span></div>
+          <div class="spec-r"><span class="spec-k">상단 바 2행</span><span class="spec-v"><b>게임명 · 지급 대상</b>(계정명 또는 캐릭터명). <b>지사명 · 법인 코드는 노출하지 않는다</b> — 유저가 모르는 개념이다</span></div>
+          <div class="spec-r"><span class="spec-k">지급 대상 단위</span><span class="spec-v"><b>어드민에서 상품별로 설정</b>(ST-04) — 계정 지급이면 계정명, 캐릭터 지급이면 캐릭터명이 여기 표시된다</span></div>
+          <div class="spec-r"><span class="spec-k">상단 바 우측</span><span class="spec-v">결제 도메인 · SSL · PCI-DSS 표기 <b>고정 노출</b></span></div>
+        </div>
+
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">이유 1 · 리다이렉트</span><span class="spec-v">MyCard · PayPal · 카드 3DS 인증은 <b>외부 페이지로 이동 후 복귀</b>한다. 팝업 안에서 또 리다이렉트되면 세션 · 복귀 경로가 깨진다</span></div>
+          <div class="spec-r"><span class="spec-k">이유 2 · 팝업 차단</span><span class="spec-v">브라우저 · 확장 차단으로 결제 진입 자체가 실패할 수 있다</span></div>
+          <div class="spec-r"><span class="spec-k">이유 3 · 일관성</span><span class="spec-v">MO는 애초에 전체 화면이다. 페이지로 통일하면 <b>PC · MO가 같은 레이아웃 규칙</b>을 쓴다</span></div>
+          <div class="spec-r"><span class="spec-k">이유 4 · 복구</span><span class="spec-v">URL이 있으므로 <b>새로고침 · 뒤로가기에 안전</b>. 세션이 유효하면 그대로 복원된다</span></div>
+          <div class="spec-r"><span class="spec-k">예외 · iframe</span><span class="spec-v"><b>인게임 클라이언트 웹뷰</b>만 iframe 임베드 모드를 유지 — 게임을 벗어날 수 없는 환경</span></div>
+        </div>
+
+        <div class="imm">
+          <div class="imm-h">레이아웃 · 반응형 3단</div>
+          <div class="imm-r"><span class="imm-k">≥ 1024</span><span class="imm-v">단일 컬럼 <b>max-width 680px 중앙</b> · 그룹 5열 · 채널 4열. 좌우는 비운다 — 결제는 집중 화면이다</span></div>
+          <div class="imm-r"><span class="imm-k">768~1023</span><span class="imm-v">컬럼 <span class="mono">100% - 48px</span> · 그룹 3열 · 채널 4열</span></div>
+          <div class="imm-r"><span class="imm-k">&lt; 768</span><span class="imm-v">컬럼 <span class="mono">100% - 32px</span> · 그룹 <b>2열</b> · 채널 <b>3열</b> · <b>결제 버튼 하단 고정</b></span></div>
+          <div class="imm-r"><span class="imm-k">순서</span><span class="imm-v">전 폭에서 <b>1~7행 순서 불변</b>. 2단 분할을 쓰지 않는 이유 — 순서가 흐트러지면 확인 흐름이 깨진다</span></div>
+        </div>
+
+        <div class="warn">
+          <div class="warn-h">도메인을 노출하는 이유</div>
+          <p class="warn-b">페이지 방식은 유저가 <b>주소창을 보고 피싱을 의심</b>할 수 있어야 한다. 상단 바에 <span class="mono">pay.gravity.com</span> · SSL · PCI-DSS 표기를 고정하고, 결제 도메인은 <b>웹샵과 분리된 고정 도메인</b>을 쓴다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>

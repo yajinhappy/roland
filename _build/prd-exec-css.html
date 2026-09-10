@@ -1,0 +1,46 @@
+<style>
+  /* ═══ 경영 요약 카드 ═══ */
+  .exec { margin: 0 0 46px; }
+  .exec-h { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    padding-bottom: 11px; border-bottom: 2px solid var(--ink); margin-bottom: 20px; }
+  .exec-h b { font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -.2px; }
+  .exec-h span { font-size: 11px; color: var(--ink-faint); }
+
+  .exec-lead { font-size: 14.5px; line-height: 1.85; color: var(--ink); word-break: keep-all;
+    padding: 17px 20px; background: var(--accent-soft); border: 1px solid var(--accent-line);
+    border-radius: 6px; margin-bottom: 18px; }
+  .exec-lead b { font-weight: 600; color: var(--accent); }
+
+  .exec-note { font-size: 12.5px; line-height: 1.9; color: var(--ink-mid); word-break: keep-all;
+    margin: 22px 0 0; padding: 15px 18px; background: var(--ground);
+    border-left: 2px solid var(--accent-line); border-radius: 0 4px 4px 0; }
+  .exec-note b { font-weight: 600; color: var(--ink); }
+
+
+  /* ═══ 절 번호 ═══ */
+  h3 .sn { display: inline-block; min-width: 44px; font-family: "IBM Plex Mono", monospace;
+    font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: -.2px; }
+  .lnb a > i { display: inline-block; min-width: 26px; font-style: normal;
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink-faint); }
+  .lnb a.on > i, .lnb a:hover > i { color: var(--accent); }
+
+  /* ═══ 라벨-설명 목록 — 열거는 표가 아니라 목록으로 ═══ */
+  .dl2 { display: flex; flex-direction: column; margin: 14px 0 22px;
+    border-top: 1px solid var(--line); }
+  .dl2 > div { display: flex; gap: 18px; padding: 11px 2px;
+    border-bottom: 1px solid var(--hair); align-items: baseline; }
+  .dl2 > div > b { flex: none; width: 150px; font-size: 12.5px; font-weight: 600;
+    color: var(--ink); word-break: keep-all; line-height: 1.6; letter-spacing: -.1px; }
+  .dl2 > div > span { font-size: 13px; line-height: 1.85; color: var(--ink-mid);
+    word-break: keep-all; }
+  .dl2 > div > span b { font-weight: 600; color: var(--ink); }
+  .dl2.w2 > div > b { width: 118px; }
+  @media (max-width: 720px) {
+    .dl2 > div { flex-direction: column; gap: 3px; }
+    .dl2 > div > b { width: auto; }
+  }
+
+  /* 절 리드 — 한 줄 결론 */
+  .lead1 { font-size: 14px; line-height: 1.85; color: var(--ink); font-weight: 600;
+    word-break: keep-all; margin: 0 0 13px; letter-spacing: -.2px; }
+</style>

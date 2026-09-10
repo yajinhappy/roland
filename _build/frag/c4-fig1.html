@@ -1,0 +1,64 @@
+  <figure class="dia">
+    <svg viewBox="0 0 960 400" role="img" aria-label="통합 어드민의 권한별 화면 구성">
+      <defs>
+        <marker id="v4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <text x="60" y="30" class="dl a">통합 어드민 — 시스템 하나 · 접속 주소 하나</text>
+      <rect x="40" y="42" width="880" height="340" rx="6" fill="none" stroke="var(--line)" stroke-width="1"/>
+
+      <text x="64" y="70" class="dl a">본사 계정으로 들어오면 — 두 가지</text>
+
+      <rect x="300" y="80" width="180" height="46" rx="5" class="bx-key"/>
+      <text x="390" y="102" class="dt a" text-anchor="middle">결제 모듈 관리</text>
+      <text x="390" y="118" class="dx f" text-anchor="middle">쓸 수 있는 PG · 규격 · 결제창</text>
+
+      <rect x="500" y="80" width="180" height="46" rx="5" class="bx-key"/>
+      <text x="590" y="102" class="dt a" text-anchor="middle">키 발급 · 연동</text>
+      <text x="590" y="118" class="dx f" text-anchor="middle">지사별 PG 키 · 게임별 키</text>
+
+      <text x="480" y="144" class="dx f" text-anchor="middle">권한이 다르면 같은 시스템에서 보이는 화면이 다르다</text>
+      <line x1="64" y1="152" x2="896" y2="152" class="ln-hair"/>
+
+      <text x="64" y="182" class="dl f">지사 계정으로 들어오면 — 나머지 전부</text>
+
+      <rect x="64" y="192" width="180" height="34" rx="5" class="bx-key"/>
+      <text x="154" y="214" class="dt a" text-anchor="middle">00 · 결제 준비도</text>
+      <text x="258" y="208" class="ds f">지금 결제가 열리는지 · 안 열리면 무엇이 막고 있는지</text>
+      <text x="258" y="224" class="dx f">아래 항목들의 상태를 읽어와 요약만 한다</text>
+
+      <text x="64" y="252" class="dl f">준비 — 순서대로 채운다 · 처음 한 번</text>
+
+      <rect x="64" y="262" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="127" y="284" class="dt" text-anchor="middle">01 · 법인</text>
+      <line x1="190" y1="279" x2="198" y2="279" class="ln" marker-end="url(#v4a)"/>
+
+      <rect x="202" y="262" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="265" y="284" class="dt" text-anchor="middle">02 · 결제수단</text>
+      <text x="265" y="308" class="dx a" text-anchor="middle">본사가 열어둔 것만</text>
+      <line x1="328" y1="279" x2="336" y2="279" class="ln" marker-end="url(#v4a)"/>
+
+      <rect x="340" y="262" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="403" y="284" class="dt" text-anchor="middle">03 · 게임 연동</text>
+      <line x1="466" y1="279" x2="474" y2="279" class="ln" marker-end="url(#v4a)"/>
+
+      <rect x="478" y="262" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="541" y="284" class="dt" text-anchor="middle">04 · 상품 · 가격</text>
+      <text x="541" y="308" class="dx bad" text-anchor="middle">가장 자주 막히는 칸</text>
+
+      <text x="64" y="336" class="dl f">운영 — 매일 쓴다</text>
+
+      <rect x="64" y="344" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="127" y="366" class="dt" text-anchor="middle">05 · 모니터링</text>
+      <rect x="202" y="344" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="265" y="366" class="dt" text-anchor="middle">06 · 환불 · CS</text>
+      <rect x="340" y="344" width="126" height="34" rx="5" class="bx-mute"/>
+      <text x="403" y="366" class="dt" text-anchor="middle">07 · 정산 대사</text>
+
+      <text x="490" y="358" class="ds f">본사 쪽에 없는 것 —</text>
+      <text x="490" y="374" class="ds f">상품 · 가격 · 결제수단 선택 · 환불 · 정산 · 매출</text>
+    </svg>
+    <figcaption>파란 칸이 본사 권한, 회색 칸이 지사 권한이다. 본사는 모듈과 키만 다루고 결제 운영에는 들어오지 않는다.</figcaption>
+  </figure>

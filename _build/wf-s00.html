@@ -1,0 +1,227 @@
+<section class="screen" id="s00">
+<div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+  <div class="shd"><span class="id">ST-00</span><span class="nm">온보딩 준비도</span></div>
+  <div class="wrap2">
+    <div class="wcol is-pc">
+      <div class="tabs"><button type="button" class="tab tab-on" data-dev="pc">PC</button></div>
+      <div class="pane pane-pc on">
+      <div class="wstage">
+      <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+
+        <div class="sec ahd">
+          <div class="mk" style="position:absolute;top:18px;left:-10px;">1</div>
+          <span class="alogo">RAGNAROK PORTAL <span style="color:#2F6490;">PAY</span></span>
+          <span style="width:1px;height:16px;background:#DCE2E8;"></span>
+          <span class="ts">지사 어드민</span>
+          <span class="ent" style="margin-left:auto;border-color:#B4D6C2;background:#F7FCF9;">
+            <span class="dot dot-g"></span><span class="mono">GVC</span> 그라비티 커뮤니케이션즈 · 대만
+            <span class="tag-n" style="margin-left:4px;">스코프 고정</span>
+          </span>
+          <span class="fltr" style="gap:6px;">운영자 <b style="color:#2C333D;">tw.chen</b> · 지사 운영</span>
+        </div>
+
+        <div class="abody">
+          <div class="snb">
+            <div class="snb-g">온보딩</div>
+            <div class="snb-i on"><span class="mono">00</span> 결제 준비도</div>
+            <div class="snb-g">기반 구축</div>
+            <div class="snb-i"><span class="mono">01</span> 지사 법인 · 세무</div>
+            <div class="snb-i" style="color:#98A2AE;"><span class="mono">02</span> PG 계약 · 머천트 <span class="tx" style="margin-left:auto;">본사</span></div>
+            <div class="snb-i"><span class="mono">03</span> 게임 · Webhook</div>
+            <div class="snb-i"><span class="mono">04</span> 상품 SKU · 가격</div>
+            <div class="snb-i"><span class="mono">05</span> 라우팅 · 한도</div>
+            <div class="snb-g">운영 · 정산</div>
+            <div class="snb-i"><span class="mono">06</span> 결제 모니터링</div>
+            <div class="snb-i"><span class="mono">07</span> 환불 · CS 분쟁</div>
+            <div class="snb-i"><span class="mono">08</span> T+1 정산 대사</div>
+          </div>
+
+          <div class="amain">
+            <div class="atitle"><span class="ttl-s">결제 준비도</span><span class="ts">Step 00</span></div>
+            <span class="tm">이 화면은 「우리 법인 결제창이 지금 열리는가 · 안 열리면 무엇이 막고 있는가」만 답한다. 지사 운영자가 본사에 묻지 않고 스스로 확인하는 것이 목적.</span>
+
+            <!-- 준비도 요약 -->
+            <div class="sec" style="margin-top:18px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">2</div>
+              <div class="card" style="border-color:#E2D5B9;background:#FDFBF6;">
+                <div style="padding:18px 20px;display:flex;align-items:center;gap:22px;">
+                  <div style="display:flex;flex-direction:column;gap:4px;">
+                    <span class="tx">현재 상태</span>
+                    <span class="ttl-s" style="color:#8A6420;">부분 오픈</span>
+                    <span class="tm" style="font-size:11.5px;">2개 게임 중 1개만 결제 가능</span>
+                  </div>
+                  <span style="width:1px;height:52px;background:#E4E8ED;"></span>
+                  <div style="display:flex;flex-direction:column;gap:6px;flex-grow:1;">
+                    <span class="tx">결제창을 막고 있는 항목 3건</span>
+                    <div style="display:flex;flex-direction:column;gap:4px;">
+                      <span class="tm"><span class="tag-r">차단</span> 라그나로크X — <b style="color:#2C333D;">SKU 가격 미입력</b> · TWD 열이 비어 결제창에 상품이 없다</span>
+                      <span class="tm"><span class="tag-r">차단</span> MyCard 선불카드 — <b style="color:#2C333D;">SKU 3건 PG 콘솔 미등록</b></span>
+                      <span class="tm"><span class="tag-a">경고</span> GASH 앱 지갑 — 채널 미선택 상태 (선택 시 즉시 노출)</span>
+                    </div>
+                  </div>
+                  <span class="btn-ps" style="padding:9px 16px;">차단 항목으로 이동</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 체크리스트 -->
+            <div class="sec" style="margin-top:16px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">3</div>
+              <div class="mk" style="position:absolute;top:-9px;right:-10px;">4</div>
+              <div class="card">
+                <div class="card-h"><span class="h-s">Step별 준비 상태</span><span class="ts" style="margin-left:auto;">앞 단계가 비면 뒤 단계가 동작하지 않는다</span></div>
+                <table class="tbl tbl-z">
+                  <thead><tr>
+                    <th style="width:58px;">Step</th><th style="width:186px;">단계</th>
+                    <th style="width:88px;">담당</th><th>필요한 것</th>
+                    <th style="width:150px;">상태</th><th style="width:104px;">조치</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b class="mono">01</b></td><td>법인 · 세무</td><td>지사</td><td>통화 TWD · 영업세 5% · e-GUI 연동 · 정산 계좌</td><td><span class="tag-g">완료</span></td><td><span class="btn-s">보기</span></td></tr>
+                    <tr><td><b class="mono">02</b></td><td>PG 계약 · 머천트</td><td><b>본사</b></td><td>MyCard · GASH 머천트 2건 · Secret Key 세팅</td><td><span class="tag-g">완료</span><div class="tx">2026-08-28 세팅</div></td><td><span class="btn-s">조회</span></td></tr>
+                    <tr><td><b class="mono">03</b></td><td>게임 · Webhook</td><td>지사</td><td>게임 2종 · 서버 3개 엔드포인트 · HMAC 키</td><td><span class="tag-a">부분</span><div class="tx" style="color:#8A6420;">ROX 규격 경로 상이</div></td><td><span class="btn-ps">이동</span></td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b class="mono">04</b></td><td>상품 SKU · 가격</td><td>지사</td><td>SKU 정의 · <b>TWD 가격</b> · 웹샵 보너스</td><td><span class="tag-r">차단</span><div class="tx" style="color:#8C3A3A;">ROX 가격 0/6 입력</div></td><td><span class="btn-ps">이동</span></td></tr>
+                    <tr><td><b class="mono">05</b></td><td>라우팅 · 한도</td><td>지사</td><td>채널 선택 · 최소/최대 · 우선순위 · 법정 한도</td><td><span class="tag-a">부분</span><div class="tx" style="color:#8A6420;">GASH 채널 미선택</div></td><td><span class="btn-ps">이동</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- 게임별 준비도 -->
+            <div class="sec" style="margin-top:16px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">5</div>
+              <div class="card">
+                <div class="card-h"><span class="h-s">게임별 준비도</span><span class="ts" style="margin-left:auto;">Step 4 · 5는 게임 단위로 갈린다</span></div>
+                <table class="tbl">
+                  <thead><tr>
+                    <th style="width:230px;">게임 · 서버</th><th style="width:110px;">엔드포인트</th>
+                    <th style="width:110px;">SKU 정의</th><th style="width:124px;">TWD 가격</th>
+                    <th style="width:130px;">채널 선택</th><th style="width:130px;">PG 상품 등록</th><th>결제창</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b>라그나로크 오리진</b><div class="tx mono">ROO · TW_BAPHOMET · TW_PORING</div></td><td><span class="tag-g">정상</span></td><td><span class="tag-g">8건</span></td><td><span class="tag-g">8/8</span></td><td><span class="tag-g">4채널</span></td><td><span class="tag-a">5/8</span><div class="tx">MyCard 3건 미등록</div></td><td><span class="tag-a">부분 오픈</span><div class="tx">5개 상품만 노출</div></td></tr>
+                    <tr style="background:#FDF7F7 !important;"><td><b>라그나로크X</b><div class="tx mono">ROX · TW_ROX_01</div></td><td><span class="tag-a">경로 상이</span></td><td><span class="tag-g">6건</span></td><td><span class="tag-r">0/6</span></td><td><span class="tag-g">4채널</span></td><td><span class="tag-n">—</span></td><td><span class="tag-r">닫힘</span><div class="tx" style="color:#8C3A3A;">노출 상품 0</div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- PG 등록 워크리스트 -->
+            <div class="sec" style="margin-top:16px;">
+              <div class="mk" style="position:absolute;top:-9px;left:-10px;">6</div>
+              <div class="card">
+                <div class="card-h">
+                  <span class="h-s">PG 상품 등록 필요 목록</span>
+                  <span class="tag-r">3건</span>
+                  <span class="ts" style="margin-left:auto;">사전등록 요구 PG만 표시 · 카드 PG는 대상 아님</span>
+                  <span class="btn-s">CSV 내보내기</span>
+                </div>
+                <table class="tbl tbl-z">
+                  <thead><tr>
+                    <th style="width:230px;">SKU</th><th style="width:150px;">PG · MID</th>
+                    <th style="width:120px;">포털 가격</th><th style="width:120px;">PG 등록 가격</th>
+                    <th style="width:130px;">동기화 상태</th><th>영향</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr><td><b class="mono">ROO_COSTUME_VALKYRIE</b><div class="tx">발키리의 날개 의상</div></td><td>MyCard<div class="tx mono">GRAVITY_TW_MYCARD_LIVE</div></td><td class="num">NT$ 1,080</td><td class="tx">—</td><td><span class="tag-r">미등록</span></td><td class="tx">MyCard 전 채널에서 이 상품 미노출</td></tr>
+                    <tr><td><b class="mono">ROO_PACKAGE_NEWBIE</b><div class="tx">신규 모험가 패키지</div></td><td>MyCard<div class="tx mono">GRAVITY_TW_MYCARD_LIVE</div></td><td class="num">NT$ 810</td><td class="tx">—</td><td><span class="tag-r">미등록</span></td><td class="tx">MyCard 전 채널에서 이 상품 미노출</td></tr>
+                    <tr><td><b class="mono">ROO_DIAMOND_5000</b><div class="tx">다이아몬드 5,000</div></td><td>MyCard<div class="tx mono">GRAVITY_TW_MYCARD_LIVE</div></td><td class="num">NT$ 1,350</td><td class="num" style="color:#8C3A3A;">NT$ 1,300</td><td><span class="tag-a">불일치</span></td><td class="tx" style="color:#8C3A3A;">결제는 되나 정산 차액 발생</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="dcol">
+      <h4>ST-00 · 지사 온보딩 준비도</h4>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">1</span><span class="dr-t">스코프 고정 헤더</span><span class="src">권한</span></div>
+        <p class="dr-b">지사 운영자는 <b>자기 법인만</b> 본다. 본사 어드민의 법인 스위처와 달리 <b>전환 드롭다운이 없다</b>.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">스코프</span><span class="spec-v"><b>entity_id</b> 고정 — 권한에 걸린 값이 그대로 강제 필터</span></div>
+          <div class="spec-r"><span class="spec-k">격리</span><span class="spec-v">타 법인 MID · 전표 · 상품이 <b>쿼리 단계에서</b> 배제된다. UI 숨김이 아니다</span></div>
+          <div class="spec-r"><span class="spec-k">Step 02</span><span class="spec-v">사이드바에 회색 + 「본사」 배지 — 클릭하면 <b>조회 전용</b> 화면</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">역할 5종</div>
+          <div class="imm-r"><span class="imm-k">본사</span><span class="imm-v">Super Admin · 재무(읽기)</span></div>
+          <div class="imm-r"><span class="imm-k">지사</span><span class="imm-v">운영 · 재무 — 이 화면은 <b>지사 운영</b> 뷰</span></div>
+          <div class="imm-r"><span class="imm-k">게임팀</span><span class="imm-v">자기 게임 · 서버 스코프</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">2</span><span class="dr-t">준비도 요약</span><span class="src">판정</span></div>
+        <p class="dr-b">이 화면의 존재 이유. <b>「결제창이 열리는가」를 한 줄로 답하고, 안 열리면 막는 항목을 나열</b>한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">판정 3종</span><span class="spec-v"><b>오픈</b> · <b>부분 오픈</b>(일부 게임 · 일부 상품만) · <b>닫힘</b></span></div>
+          <div class="spec-r"><span class="spec-k">차단 vs 경고</span><span class="spec-v"><b>차단</b> = 결제창에 상품이 안 뜬다 · <b>경고</b> = 뜨지만 채널이 적다</span></div>
+          <div class="spec-r"><span class="spec-k">이동</span><span class="spec-v">각 항목에서 해당 Step 화면의 <b>그 행으로</b> 직접 이동</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">가장 흔한 차단 원인</div>
+          <p class="warn-b">PG 키가 아니라 <b>SKU 가격 미입력</b>이다. MID가 세팅돼도 통화 열이 비면 결제창에 상품이 하나도 없다. 자동 구성의 실제 병목은 Step 4다.</p>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">3</span><span class="dr-t">Step별 준비 상태</span><span class="src">체크리스트</span></div>
+        <p class="dr-b">Step 1~5의 충족 여부와 <b>담당이 본사인지 지사인지</b>를 같은 표에 둔다. 지사가 기다려야 하는 것과 직접 해야 하는 것이 구분된다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">담당 열</span><span class="spec-v">Step 02만 <b>본사</b> — 나머지는 전부 지사</span></div>
+          <div class="spec-r"><span class="spec-k">의존</span><span class="spec-v">앞 단계가 비면 뒤 단계가 동작하지 않는다. 순서대로 해소해야 한다</span></div>
+          <div class="spec-r"><span class="spec-k">상태 3종</span><span class="spec-v">완료 · 부분 · 차단</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">본사 대기 항목</span><span class="src">조회</span></div>
+        <p class="dr-b">Step 02는 본사가 마스터 계약 주체이므로 <b>지사가 입력하지 않는다</b>. 세팅 완료 여부와 시각만 확인한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">지사가 보는 것</span><span class="spec-v">머천트 존재 · 채널 목록 · MDR · 정산 주기 · Capability · <b>Secret Key 마스킹</b></span></div>
+          <div class="spec-r"><span class="spec-k">지사가 못 보는 것</span><span class="spec-v"><b>키 원문</b> — 복원 경로 자체가 없다</span></div>
+          <div class="spec-r"><span class="spec-k">미세팅 시</span><span class="spec-v">본사 요청 상태와 처리 예정일 표시 — 지사가 기다릴 대상을 알게 한다</span></div>
+        </div>
+        <div class="imm">
+          <div class="imm-h">키를 본사가 쥐는 근거</div>
+          <div class="imm-r"><span class="imm-k">계약</span><span class="imm-v">마스터 협상 주체가 본사 — 어떤 조건으로 발급됐는지 본사만 안다</span></div>
+          <div class="imm-r"><span class="imm-k">대사</span><span class="imm-v">MDR 기준값 검증이 본사 몫</span></div>
+          <div class="imm-r"><span class="imm-k">보안</span><span class="imm-v">지사가 자기 Secret Key 원문을 볼 이유가 없다</span></div>
+        </div>
+      </div>
+
+      <div class="dr">
+        <div class="dr-h"><span class="mk">5</span><span class="dr-t">게임별 준비도 매트릭스</span><span class="src">그리드</span></div>
+        <p class="dr-b">Step 4 · 5는 <b>게임 단위로 갈린다</b>. 법인 전체는 오픈인데 특정 게임만 닫혀 있는 상태가 정상적으로 존재한다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">행 단위</span><span class="spec-v">게임 — 서버는 부속 표기</span></div>
+          <div class="spec-r"><span class="spec-k">결제창 열</span><span class="spec-v">앞 5개 열의 <b>AND 결과</b>. 하나라도 비면 닫힘 또는 부분 오픈</span></div>
+          <div class="spec-r"><span class="spec-k">부분 오픈</span><span class="spec-v">노출 가능 상품 수를 명시 — 「5개 상품만 노출」</span></div>
+        </div>
+      </div>
+
+      <div class="dr-alt">
+        <div class="dr-h"><span class="mk">6</span><span class="dr-t">PG 상품 등록 워크리스트</span><span class="src">동기화</span></div>
+        <p class="dr-b">사전등록을 요구하는 PG에 대해 <b>포털과 PG 콘솔의 상품 등록 상태를 대조</b>한다. 카드 PG는 상품 등록 개념이 없어 대상이 아니다.</p>
+        <div class="spec">
+          <div class="spec-r"><span class="spec-k">요구 PG</span><span class="spec-v">MyCard · GASH · 통신사 소액 — Step 02 머천트 마스터에 <b>본사가 등재</b>한 플래그로 판별</span></div>
+          <div class="spec-r"><span class="spec-k">미등록</span><span class="spec-v">해당 PG 채널에서 그 상품이 <b>결제창에 노출되지 않는다</b>(필터 7번)</span></div>
+          <div class="spec-r"><span class="spec-k">CSV</span><span class="spec-v">PG 콘솔 업로드용 파일 생성 — 수기 입력 최소화</span></div>
+          <div class="spec-r"><span class="spec-k">자동화</span><span class="spec-v">어댑터가 <span class="mono">registerProduct()</span> 를 지원하는 PG는 버튼 1회로 등록</span></div>
+        </div>
+        <div class="warn">
+          <div class="warn-h">「불일치」가 가장 늦게 발견된다</div>
+          <p class="warn-b">등록은 됐는데 <b>가격이 다른</b> 건은 결제가 성공한다. 유저도 운영자도 모르고 <b>T+1 대사에서 차액으로 잡힌다</b>. 미등록보다 우선 처리해야 한다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
