@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>결제 개요</title>
+<title>카프라 센터 정보구조</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -326,127 +326,389 @@
 <div class="shell">
 
 <nav class="lnb">
-  <span class="bmark">결제 개요</span>
-  <span class="bsub">Ragnarok Portal · 2026-09</span>
+  <span class="bmark">카프라 센터 정보구조</span>
+  <span class="bsub">Ragnarok Portal &#183; 2026-09</span>
 
+  <div class="grp">문제</div>
+  <a href="#a1">세 구역이 요구하는 축이 다르다</a>
+  <a href="#a2">그래서 축 순서가 결과를 바꾼다</a>
+
+  <div class="grp">비교</div>
+  <a href="#b1">안 A · 지역 먼저</a>
+  <a href="#b2">안 B · 타이틀 먼저</a>
+  <a href="#b3">안 C · 구역 먼저</a>
+  <a href="#b5">안 D · 타이틀 먼저 · 지역은 뒤</a>
+  <a href="#b4">중복 경로 계산</a>
+
+  <div class="grp">판단</div>
+  <a href="#c1">진입 경로 분포</a>
+  <a href="#c2">추천</a>
+  <a href="#c3">웹샵 안의 선택기</a>
+  <a href="#c4">확정 필요</a>
 </nav>
 
 <main>
 
 <header class="mast">
-  <p class="kick">Design · Payment</p>
-  <h1>결제 개요</h1>
-  <p class="stand"><b>지사별로 개별 구축했던 결제를 본사가 단일 구성으로 제공하고 각 지사가 연동해 사용한다.</b>
-  통합 결제창 1종 · 웹샵 템플릿 1종이며, PG 연동은 PG사당 1회로 끝난다.</p>
+  <p class="kick">Design &#183; Store IA</p>
+  <h1>카프라 센터 정보구조</h1>
+  <p class="stand"><b>지역 · 타이틀 · 구역 세 축을 어떤 순서로 쌓을지의 문제다.</b>
+  세 구역(웹샵 · 웹 굿즈 · 공식 스토어)이 요구하는 축이 서로 달라서, 순서를 잘못 잡으면 같은 콘텐츠가 수십 개 경로로 중복된다.</p>
 </header>
 
-<section id="o1">
-  <h3>구조</h3>
+<section id="a1">
+  <h3>세 구역이 요구하는 축이 다르다</h3>
+
+  <p class="lede">이 표가 이 문서의 전부다. 나머지는 여기서 따라 나온다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:140px;">구역</th><th style="width:90px;">타이틀</th><th style="width:90px;">지역</th><th>왜</th></tr></thead>
+      <tbody>
+        <tr><td><b>웹샵</b></td><td><b>필요</b></td><td><b>필요</b></td><td>아이템은 게임별이고, 통화 · 결제사는 지역별이다. <b>두 축이 다 있어야</b> 상품이 특정된다</td></tr>
+        <tr><td><b>웹 굿즈</b></td><td>불필요</td><td>언어만</td><td>배경화면 · 컬러링북은 <b>라그나로크 공통</b>이다. 게임별로 다르지 않다</td></tr>
+        <tr><td><b>공식 스토어</b></td><td>불필요</td><td><b>필요</b></td><td>한국 &#8594; 라그나로크 스토어 · 대만 &#8594; GNJOY · 그 외 &#8594; 아마존. 게임과 무관하다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note q">
+    <span class="lb">핵심</span>
+    <p><b>타이틀 축을 요구하는 건 웹샵 하나뿐이다.</b> 웹 굿즈와 공식 스토어는 타이틀을 몰라도 되고, 알아도 쓸 데가 없다.</p>
+  </div>
+</section>
+
+<section id="a2">
+  <h3>그래서 축 순서가 결과를 바꾼다</h3>
+
+  <p class="lede">타이틀을 상위 축으로 올리면, 타이틀이 필요 없는 두 구역이 타이틀 아래로 끌려 들어간다.
+  콘텐츠는 하나인데 경로가 여러 개 생긴다.</p>
 
   <figure class="dia" style="margin-top:14px;">
-    <svg viewBox="0 0 960 306" role="img" aria-label="통합 결제 구조와 자금 경로">
+    <svg viewBox="0 0 960 250" role="img" aria-label="축 순서에 따른 구조 차이">
+      <g font-family="IBM Plex Sans KR, sans-serif" font-size="12">
+        <text x="10" y="20" font-size="10.5" font-family="IBM Plex Mono, monospace"
+          letter-spacing="1.4" fill="#949BA7">타이틀 먼저</text>
+        <rect x="10" y="32" width="150" height="34" rx="4" fill="#FFF" stroke="#D9DEE5"/>
+        <text x="85" y="54" text-anchor="middle" fill="#171B22">라그나로크 온라인</text>
+        <path d="M85,66 L85,84" stroke="#949BA7" stroke-width="1.3"/>
+        <rect x="10" y="84" width="150" height="30" rx="4" fill="#F5F6F8" stroke="#E7EAEF"/>
+        <text x="85" y="104" text-anchor="middle" font-size="11.5" fill="#434A57">한국</text>
+        <path d="M85,114 L85,132" stroke="#949BA7" stroke-width="1.3"/>
+        <rect x="10" y="132" width="46" height="28" rx="4" fill="#EBF3F9" stroke="#AECAE0"/>
+        <text x="33" y="150" text-anchor="middle" font-size="10.5" fill="#2F6490">웹샵</text>
+        <rect x="62" y="132" width="46" height="28" rx="4" fill="#F9EEEE" stroke="#E0BEBE"/>
+        <text x="85" y="150" text-anchor="middle" font-size="10.5" fill="#8C3A3A">굿즈</text>
+        <rect x="114" y="132" width="46" height="28" rx="4" fill="#F9EEEE" stroke="#E0BEBE"/>
+        <text x="137" y="150" text-anchor="middle" font-size="10.5" fill="#8C3A3A">스토어</text>
+        <text x="10" y="184" font-size="10.5" fill="#8C3A3A">붉은 두 칸이 타이틀 &#215; 지역마다 반복된다</text>
+        <text x="10" y="202" font-size="10.5" fill="#8C3A3A">&#8594; 6 타이틀 &#215; 5 지역 = <tspan font-weight="600">30곳 중복</tspan></text>
+
+        <path d="M300,120 L340,120" stroke="#949BA7" stroke-width="1.3" marker-end="url(#ia-a)"/>
+
+        <text x="380" y="20" font-size="10.5" font-family="IBM Plex Mono, monospace"
+          letter-spacing="1.4" fill="#2F6490">지역 먼저</text>
+        <rect x="380" y="32" width="150" height="30" rx="4" fill="#F5F6F8" stroke="#E7EAEF"/>
+        <text x="455" y="52" text-anchor="middle" font-size="11.5" fill="#434A57">한국</text>
+        <path d="M455,62 L455,80" stroke="#949BA7" stroke-width="1.3"/>
+        <rect x="380" y="80" width="72" height="30" rx="4" fill="#EBF3F9" stroke="#AECAE0"/>
+        <text x="416" y="100" text-anchor="middle" font-size="10.5" fill="#2F6490">1F 웹샵</text>
+        <rect x="458" y="80" width="72" height="30" rx="4" fill="#EBF3F9" stroke="#AECAE0"/>
+        <text x="494" y="100" text-anchor="middle" font-size="10.5" fill="#2F6490">2F 굿즈</text>
+        <path d="M416,110 L416,128" stroke="#949BA7" stroke-width="1.3"/>
+        <rect x="366" y="128" width="100" height="28" rx="4" fill="#FFF" stroke="#D9DEE5"/>
+        <text x="416" y="146" text-anchor="middle" font-size="10.5" fill="#171B22">타이틀 6장</text>
+        <text x="380" y="184" font-size="10.5" fill="#2F6490">굿즈 · 스토어가 <tspan font-weight="600">한 번만</tspan> 존재한다</text>
+        <text x="380" y="202" font-size="10.5" fill="#2F6490">타이틀은 웹샵 안에서만 갈린다</text>
+      </g>
       <defs>
-        <marker id="oa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
-        </marker>
+        <marker id="ia-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+          orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#949BA7"/></marker>
       </defs>
-
-      <rect x="410" y="20" width="140" height="32" rx="5" class="bx-mute"/>
-      <text x="480" y="41" class="ds" text-anchor="middle">유저</text>
-      <line x1="480" y1="52" x2="480" y2="70" class="ln" marker-end="url(#oa)"/>
-
-      <rect x="240" y="74" width="480" height="56" rx="5" class="bx-key"/>
-      <text x="480" y="98" class="dt a" text-anchor="middle">통합 결제 모듈 — 본사가 만들어 제공</text>
-      <text x="480" y="118" class="ds" text-anchor="middle">통합 결제창 · 웹샵 · PG 연동 · 어드민</text>
-
-      <line x1="480" y1="130" x2="480" y2="148" class="ln"/>
-      <line x1="330" y1="148" x2="630" y2="148" class="ln"/>
-      <line x1="330" y1="148" x2="330" y2="166" class="ln" marker-end="url(#oa)"/>
-      <line x1="480" y1="148" x2="480" y2="166" class="ln" marker-end="url(#oa)"/>
-      <line x1="630" y1="148" x2="630" y2="166" class="ln" marker-end="url(#oa)"/>
-
-      <rect x="260" y="168" width="140" height="38" rx="5" class="bx-mute"/>
-      <text x="330" y="192" class="ds" text-anchor="middle">지사 A</text>
-      <rect x="410" y="168" width="140" height="38" rx="5" class="bx-mute"/>
-      <text x="480" y="192" class="ds" text-anchor="middle">지사 B</text>
-      <rect x="560" y="168" width="140" height="38" rx="5" class="bx-mute"/>
-      <text x="630" y="192" class="ds" text-anchor="middle">지사 C</text>
-
-      <text x="480" y="228" class="ds f" text-anchor="middle">상품 · 가격 · 결제수단은 각 지사가 정한다</text>
-
-      <line x1="70" y1="248" x2="890" y2="248" class="ln-hair"/>
-
-      <text x="70" y="282" class="dl a">돈</text>
-      <rect x="250" y="262" width="110" height="32" rx="5" class="bx-mute"/>
-      <text x="305" y="283" class="ds" text-anchor="middle">PG사</text>
-      <line x1="360" y1="278" x2="398" y2="278" class="ln" marker-end="url(#oa)"/>
-      <rect x="402" y="262" width="160" height="32" rx="5" class="bx-key"/>
-      <text x="482" y="283" class="ds a" text-anchor="middle">각 지사 계좌</text>
-      <text x="582" y="283" class="ds f">본사를 거치지 않는다 · 본사 수수료 없음</text>
     </svg>
+    <figcaption class="cap">같은 세 구역을 축 순서만 바꿔 쌓은 결과</figcaption>
   </figure>
+</section>
 
-  <p>결제 대금은 본사를 경유하지 않고 <b>각 지사 법인 계좌로 직접 입금</b>된다.
-  본사는 인프라를 제공하고, <b>판매 상품과 가격은 지사가 결정한다.</b></p>
+<section id="b1">
+  <h3>안 A &#183; 지역 먼저</h3>
 
-  <h3>역할</h3>
+  <pre>카프라 센터
+  지역  [글로벌] 한국  일본  대만  라탐        &#8592; 페이지에 하나
+  ├ 1F 아이템샵   타이틀 카드 6장 &#8594; 웹샵
+  └ 2F 굿즈샵     웹 굿즈 / 공식 스토어</pre>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>좋은 점</h5>
+      <ul>
+        <li><b>굿즈 · 스토어가 한 번만</b> 존재한다</li>
+        <li>지역 하나가 <b>세 구역의 행선지를 다 정한다</b> — 이 페이지가 있어야 하는 이유가 된다</li>
+        <li>브릿지가 <b>1뎁스</b>로 얕다</li>
+        <li>공식 스토어가 지역과 바로 붙는다</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h5>걸리는 점</h5>
+      <ul>
+        <li>「라그나로크 온라인」을 찾으러 온 사람이 <b>지역을 먼저</b> 골라야 한다</li>
+        <li>타이틀이 지역에 <b>종속돼 보인다</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="b2">
+  <h3>안 B &#183; 타이틀 먼저</h3>
+
+  <pre>카프라 센터
+  타이틀  [RO 온라인] [제로] [M] [X] [오리진] [비긴즈]
+    └ 지역  한국  일본  대만  라탐
+        └ 웹샵 / 웹 굿즈 / 공식 스토어      &#8592; 여기가 문제</pre>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>좋은 점</h5>
+      <ul>
+        <li>유저 멘탈 모델에 가깝다 — <b>내 게임을 먼저 찾는다</b></li>
+        <li>타이틀이 주인공이라 IP 전개가 드러난다</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h5>걸리는 점</h5>
+      <ul>
+        <li><b>웹 굿즈가 30곳에 중복된다</b> — 콘텐츠 1개, 경로 30개</li>
+        <li>공식 스토어도 같다. 아마존 스토어는 <b>게임별로 다르지 않다</b></li>
+        <li>브릿지가 <b>2뎁스</b>로 깊어져 아이템까지 클릭이 늘어난다</li>
+        <li><b>RO GAMES 와 구조가 겹친다</b> — 포털 GNB 에 이미 타이틀 인덱스가 있다</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note bad">
+    <span class="lb">중복이 진짜 문제인 이유</span>
+    <p>경로가 30개면 <b>운영이 30번 갱신</b>해야 한다는 뜻이 아니다. 더 나쁘다 —
+    유저가 「내가 본 그 배경화면이 어느 경로였지」를 못 찾는다. <b>같은 것이 여러 곳에 있으면 아무 곳에도 없는 것과 같다.</b></p>
+  </div>
+</section>
+
+<section id="b3">
+  <h3>안 C &#183; 구역 먼저</h3>
+
+  <pre>카프라 센터
+  ├ 웹샵      &#8594; 타이틀 &#8594; 지역 &#8594; 상품 목록
+  ├ 웹 굿즈    &#8594; 목록
+  └ 공식 스토어 &#8594; 지역 &#8594; 외부</pre>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>좋은 점</h5>
+      <ul>
+        <li>구역마다 <b>필요한 축만</b> 물어본다 — 논리적으로 가장 깔끔하다</li>
+        <li>중복이 없다</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h5>걸리는 점</h5>
+      <ul>
+        <li><b>지역을 두 번 묻는다</b> — 웹샵에서 한 번, 공식 스토어에서 또 한 번</li>
+        <li>브릿지가 <b>메뉴 목록</b>이 된다. 「이게 뭐 하는 곳인가」가 전달되지 않는다</li>
+        <li>층 구조(브랜딩)가 사라진다</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="b5">
+  <h3>안 D &#183; 타이틀 먼저 &#183; 지역은 필요한 곳에서</h3>
+
+  <p class="lede">안 B 의 중복은 <b>굿즈를 타이틀 아래에 넣을 때만</b> 생긴다. 형제로 두면 생기지 않는다.
+  그리고 지역은 <b>전역 값이 아니라 구역별 값</b>으로 내린다.</p>
+
+  <pre>카프라 센터
+├ 1F 아이템샵
+│    [RO 온라인]      [RO 제로]     [RO M]
+│     한국·일본·대만·라탐  한국·대만    대만·일본     &#8592; 카드에 서비스 지역을 적는다
+│       └ 타이틀 클릭 &#8594; 지역 고르기(2개 이상일 때만) &#8594; 웹샵
+└ 2F 굿즈샵
+     ├ 웹 굿즈      지역을 묻지 않는다
+     └ 공식 스토어   자기 구역에서 지역 탭</pre>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>좋은 점</h5>
+      <ul>
+        <li><b>타이틀이 1차 분류</b>다 &#8212; 유저는 자기 게임을 먼저 찾는다</li>
+        <li><b>중복이 없다.</b> 굿즈 · 스토어가 1F 밖 형제이므로 타이틀 수와 무관하다</li>
+        <li><b>미서비스 카드가 필요 없다.</b> 카드에 서비스 지역을 적어 두니 흐리게 처리할 게 없다</li>
+        <li>거의 아무도 안 바꾸는 지역 칩이 <b>최상단을 차지하지 않는다</b></li>
+        <li>지역 &#215; 타이틀 매트릭스가 <b>카드 라벨로 그대로 드러난다</b></li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h5>걸리는 점</h5>
+      <ul>
+        <li>여러 지역에서 서비스되는 타이틀은 <b>클릭이 한 번 늘어난다</b>(타이틀 &#8594; 지역)</li>
+        <li>지역이 <b>구역별 값</b>이라 「지역 하나가 세 구역을 정한다」는 논리가 약해진다</li>
+        <li>공식 스토어에서 지역을 <b>또 묻는다</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="lb">클릭이 늘어나는 문제</span>
+    <p>한 지역에서만 서비스되는 타이틀은 <b>지역 단계를 건너뛴다</b>(RO X 오리진 &#8594; 한국뿐). 여러 지역인 타이틀만 한 번 더 묻는다.
+    그리고 게임 안에서 들어오는 딥링크는 <b>애초에 두 값이 다 확정</b>이라 이 경로를 지나지 않는다.</p>
+  </div>
+</section>
+
+<section id="b4">
+  <h3>중복 경로 계산</h3>
 
   <div class="tscroll">
     <table>
-      <thead><tr><th style="width:50%;">본사가 하는 것</th><th>지사가 하는 것</th></tr></thead>
+      <thead><tr><th style="width:110px;">안</th><th style="width:150px;">웹샵 경로</th><th style="width:150px;">웹 굿즈 경로</th><th style="width:150px;">공식 스토어 경로</th><th>지역 질문 횟수</th></tr></thead>
       <tbody>
-        <tr><td>PG 계약 조건 협상</td><td>법인 · 통화 · 정산 계좌 등록</td></tr>
-        <tr><td>인증키 발급 · 보관</td><td>쓸 결제수단 선택 · 금액 범위</td></tr>
-        <tr><td>통합 결제창 · 웹샵 · 어드민 제공</td><td>상품 등록 · 가격 책정</td></tr>
-        <tr><td>게임 연동 규격 정의</td><td>게임사 연동 · 확인</td></tr>
-        <tr><td>—</td><td>환불 처리 · 정산 확인</td></tr>
+        <tr><td><b>A</b> 지역 먼저</td><td>5 &#215; 6 = 30</td><td><b>1</b></td><td><b>1</b></td><td><b>1회</b></td></tr>
+        <tr><td><b>B</b> 타이틀 먼저</td><td>6 &#215; 5 = 30</td><td><b>30</b></td><td><b>30</b></td><td>타이틀마다</td></tr>
+        <tr><td><b>C</b> 구역 먼저</td><td>6 &#215; 5 = 30</td><td><b>1</b></td><td>5</td><td><b>2회</b></td></tr>
+        <tr><td><b>D</b> 타이틀 먼저</td><td>6 &#215; 5 = 30</td><td><b>1</b></td><td><b>1</b></td><td>구역별</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p class="cap">PG 계약은 <b>조건은 본사가 협상하고 명의는 지사가 갖는다.</b> 대금이 지사 계좌로 들어와야 하기 때문이다.</p>
+  <p class="lede">웹샵 경로 30개는 세 안이 같다 — 상품이 게임 &#215; 지역으로 특정되니 <b>피할 수 없는 수</b>다.
+  차이는 <b>나머지 두 구역</b>에서 난다.</p>
+</section>
 
-  <h3>유저 결제 흐름</h3>
+<section id="c1">
+  <h3>진입 경로 분포</h3>
 
-<pre>상품 선택  →  <b>지급 대상 확정</b>  →  통화 · 결제수단 선택 · 결제  →  <b>지급 요청</b>  →  계정 우편함 수령
-                    ↑                                                   ↑
-              <span class="f">게임 서버가 제공할 API는 이 둘 · 재화 회수는 Phase 2</span></pre>
-
-  <p>게임팀은 <b>PG 규격을 알 필요가 없다.</b> 결제 모듈이 PG 연동을 담당하고, 게임 서버는 표준 API만 제공한다.</p>
-
-  <h3>화면</h3>
+  <p class="lede">브릿지를 얼마나 깊게 만들지는 <b>실제로 몇 명이 브릿지를 거치는지</b>에 달려 있다.</p>
 
   <div class="tscroll">
     <table>
-      <thead><tr><th style="width:120px;">누가 보나</th><th style="width:60px;">개수</th><th>화면</th></tr></thead>
+      <thead><tr><th style="width:220px;">경로</th><th style="width:120px;">브릿지 경유</th><th>상태</th></tr></thead>
       <tbody>
-        <tr><td><b>유저</b></td><td>2</td><td>웹샵 · 통합 결제창</td></tr>
-        <tr><td><b>관리자 · 본사</b></td><td>2</td><td>결제 모듈 관리 · 키 발급</td></tr>
-        <tr><td><b>관리자 · 지사</b></td><td>8</td><td>결제 준비도 · 법인 · 결제수단 · 게임 연동 · 상품 가격 · 모니터링 · 환불 · 정산 대사</td></tr>
+        <tr><td>게임 안에서 상점 링크</td><td><b>안 거침</b></td><td>게임 &#215; 지역이 <b>이미 확정</b>된 딥링크로 들어온다</td></tr>
+        <tr><td>포털 GNB <span class="mono">STORE</span></td><td>거침</td><td>탐색 목적</td></tr>
+        <tr><td>포털 히어로 배너 「웹샵」</td><td>거침</td><td>탐색 목적</td></tr>
+        <tr><td>구매내역 &#8594; 재구매</td><td><b>안 거침</b></td><td>그 웹샵으로 직행</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>어드민은 <b>시스템 하나</b>고 로그인한 사람에 따라 보이는 화면이 다르다.
-  지사 계정으로 들어오면 자기 법인 화면만 보인다.</p>
+  <div class="note">
+    <span class="lb">그래서</span>
+    <p>아이템을 사려는 유저 대다수는 <b>게임 안에서 바로 들어온다.</b> 브릿지는 <b>탐색용</b>이고 결제 트래픽의 주 경로가 아니다.
+    그리고 <b>탐색하는 사람은 타이틀로 탐색한다</b> &#8212; 지역으로 탐색하지 않는다.</p>
+  </div>
+</section>
 
-  <h3>정해야 할 것</h3>
+<section id="c2">
+  <h3>추천 &#183; 안 D</h3>
 
-  <p><b>국가별 데이터 이전 법적 확인</b>이 다른 결정의 전제다.
-  어드민을 하나로 통합하는 전제가 여기 걸려 있고, 막히는 나라가 있으면 그 나라만 분리해야 한다.
-  이 항목을 포함한 미결 15건은 <a href="payment.html#review">결제 설계 — 검토 필요사항</a>에 있다.</p>
+  <div class="note q">
+    <span class="lb">결론</span>
+    <p><b>타이틀 먼저.</b> 지역은 전역 칩으로 앞에 두지 않고, <b>필요한 구역에서만</b> 묻는다.
+    타이틀 카드에는 <b>서비스 지역을 라벨로 적어</b> 클릭 전에 알 수 있게 한다.</p>
+  </div>
+
+  <ul class="rule">
+    <li><b>유저는 자기 게임을 안다.</b> 「라그나로크 온라인」은 명확하지만 「한국」을 고르면 뭐가 달라지는지는 불투명하다</li>
+    <li><b>지역은 거의 안 바꾸는 값이다.</b> 한국 유저는 평생 한국이다 &#8212; 그 값이 최상단 첫 컨트롤을 차지할 이유가 없다</li>
+    <li><b>중복이 없다.</b> 굿즈 · 스토어를 1F 밖 형제로 두면 타이틀 수와 무관해진다</li>
+    <li><b>미서비스 UI 가 사라진다.</b> 카드에 서비스 지역을 적으니 흐리게 처리할 대상이 없다</li>
+    <li><b>지역 &#215; 타이틀 매트릭스가 화면에 그대로 드러난다.</b> 별도 안내가 필요 없다</li>
+    <li>층 구조(1F 유료 · 2F 무료/외부)는 <b>그대로 유지</b>된다 &#8212; 층은 결제 유무로 갈리고 축 순서와 무관하다</li>
+  </ul>
+
+  <div class="note bad">
+    <span class="lb">이전 판단을 정정한다</span>
+    <p>처음에는 <b>안 A(지역 먼저)</b>를 추천했다. 근거는 안 B 의 중복 문제였다.
+    그러나 <b>중복은 굿즈를 타이틀 아래에 넣을 때만</b> 발생한다 &#8212; 형제로 두면 타이틀을 앞에 둬도 중복이 없다.
+    그 전제를 놓쳤으므로 추천을 <b>안 D</b> 로 바꾼다.</p>
+  </div>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:150px;">항목</th><th style="width:220px;">안 A · 지역 먼저</th><th>안 D · 타이틀 먼저</th></tr></thead>
+      <tbody>
+        <tr><td>1차 분류</td><td>지역</td><td><b>타이틀</b></td></tr>
+        <tr><td>굿즈 중복</td><td>없음</td><td><b>없음</b></td></tr>
+        <tr><td>미서비스 처리</td><td>카드를 흐리게 + 사유 표기</td><td><b>불필요</b> &#8212; 카드에 서비스 지역을 적는다</td></tr>
+        <tr><td>지역 질문</td><td>1회 (전역)</td><td>구역별 · 단일 지역 타이틀은 <b>건너뜀</b></td></tr>
+        <tr><td>웹샵까지 클릭</td><td><b>1회</b></td><td>1~2회</td></tr>
+        <tr><td>RO GAMES 와 성격</td><td>확실히 갈림</td><td>겹칠 소지 &#8212; <b>행선지로 가른다</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lb">RO GAMES 와 겹치는 문제</span>
+    <p>둘 다 타이틀 목록이 된다. <b>행선지로 가른다</b> &#8212; RO GAMES 는 게임을 <b>하러</b>(지사 게임 사이트로 나감),
+    카프라 센터 1F 는 아이템을 <b>사러</b>(포털 내부 웹샵). 카드 라벨과 이동 대상을 다르게 두면 혼동되지 않는다.</p>
+  </div>
+</section>
+
+<section id="c3">
+  <h3>웹샵 안의 선택기</h3>
+
+  <p class="lede">웹샵 헤더에 <b>[라그나로크 온라인 &#183; 한국 &#9662;]</b>을 두고, 누르면 1F 구역을 축소한 모달이 열린다.
+  브릿지로 나갔다 돌아오면 보던 목록을 잃기 때문이다.</p>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>둬야 하는 이유</h5>
+      <ul>
+        <li>잘못 들어왔을 때 <b>되돌아가지 않아도</b> 된다</li>
+        <li>라그나로크 계열을 <b>여러 개 하는 유저</b>가 많다</li>
+        <li>현재 게임 · 지역이 <b>항상 보인다</b> &#8212; 통화 확인의 근거가 된다</li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h5>무게가 다르다</h5>
+      <ul>
+        <li><b>지역 변경</b> &#8212; 통화 · 가격 · 결제수단이 바뀐다. 확인이 필요하다</li>
+        <li><b>게임 변경</b> &#8212; 사실상 <b>다른 상점</b>이다. 페이지가 갈아탄다</li>
+        <li>담은 상품은 <b>게임 &#215; 지역마다 따로</b> 보관한다. 통화가 달라 합칠 수 없다</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="c4">
+  <h3>확정 필요</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:60px;">#</th><th style="width:220px;">항목</th><th>왜 필요한가</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><b>타이틀 목록</b></td><td>웹샵을 여는 타이틀이 어디까지인지. 지금은 6종을 예시로 그렸다</td></tr>
+        <tr><td>2</td><td><b>지역 &#215; 타이틀 매트릭스</b></td><td>어느 지역에 어느 타이틀이 있는지 표가 있어야 <b>미서비스 카드</b> 처리를 확정한다</td></tr>
+        <tr><td>3</td><td><b>2F 품목 범위</b></td><td>「디지털 아트워크 · OST」를 넣을지. <b>유료면 2F 에 결제가 생겨 층 분리 근거가 흔들린다</b></td></tr>
+        <tr><td>4</td><td><b>단일 지역 타이틀의 지역 단계</b></td><td>한 지역에만 있는 타이틀은 지역 선택을 <b>건너뛸지</b> 아니면 한 칸이라도 보여줄지</td></tr>
+        <tr><td>5</td><td><b>지역 명칭</b></td><td>「지역」인지 「국가」인지 「서비스」인지. 라탐은 국가가 아니라 <b>지사 묶음</b>이다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="lb">4번을 짚는 이유</span>
+    <p>글로벌 · 한국 · 일본 · 대만은 국가에 가깝지만 <b>라탐은 6개국 묶음</b>이다.
+    「국가」로 쓰면 라탐이 안 맞고, 「지역」으로 쓰면 글로벌이 안 맞는다. <b>「서비스 지역」</b>이 둘을 다 덮는다.</p>
+  </div>
 </section>
 
 <footer class="doc">
   <h4>관련 문서</h4>
   <ul>
+    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 화면정의서</a></b> &#8212; 01 카프라 센터 · 02 웹샵 메인 · 헤더 [게임 &#183; 지역] 모달</li>
     <li><b><a href="store-ia.html">카프라 센터 정보구조</a>
-<a href="webshop-payment-prd.html">웹샵/통합결제 기획</a></b> — 상위 기준 문서. 아키텍처 · 프로비저닝 · 장애 대응 · 환불 정책</li>
-    <li><b><a href="payment.html">결제 설계</a></b> — 프로세스와 구조. 검토 필요사항 15건</li>
-    <li><b><a href="payment-webshop-structure.html">웹샵/통합결제 구조</a></b> — 지사 도입 절차 · 자금 경로 · 거래 단위 원칙</li>
-    <li><b><a href="global-payment.html">글로벌 결제 설계 (상세)</a></b> — 규격 · 필드</li>
+<a href="webshop-payment-prd.html">웹샵/통합결제 기획</a></b> &#8212; 상위 기준 문서</li>
+    <li><b><a href="payment-webshop-structure.html">웹샵/통합결제 구조</a></b> &#8212; 지사 도입 절차 · 거래 단위 원칙</li>
   </ul>
-  <p style="margin-top:14px">라그나로크 포털 · 결제 개요 · 2026-09-08</p>
+  <p style="margin-top:14px">라그나로크 포털 &#183; 카프라 센터 정보구조 &#183; 2026-09-10</p>
 </footer>
 
 </main>
