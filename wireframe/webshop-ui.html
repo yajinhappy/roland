@@ -4962,6 +4962,12 @@
       gap: 14px;
     }
 
+    /* 메뉴바 담기 아이콘 — 웹샵 스코프라 포털 GNB 가 아니라 여기 둔다 */
+    .v2-cart {
+      margin-left: auto;
+      flex: none;
+    }
+
     .v2-ic {
       width: 30px;
       height: 30px;
@@ -6124,6 +6130,124 @@
     .v2-drow>.lbl-k {
       width: 76px;
       flex: none;
+    }
+
+    /* 결제 그룹 — 조건이 다른 상품은 한 세션에 못 담는다 */
+    .v2-dgrp {
+      border: 1px solid #E1E6EC;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .v2-dgrp.solo {
+      border-color: #E0BEBE;
+    }
+
+    .v2-dgrph {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 12px;
+      background: #F5F8FA;
+      border-bottom: 1px solid #E9EDF1;
+      font-size: 11px;
+      color: #545C69;
+    }
+
+    .v2-dgrp.solo .v2-dgrph {
+      background: #FBF3F3;
+      border-bottom-color: #F0DEDE;
+      color: #8C3A3A;
+    }
+
+    .v2-dgrph b {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #232B35;
+    }
+
+    .v2-dgrp.solo .v2-dgrph b {
+      color: #8C3A3A;
+    }
+
+    .v2-dgrph .why {
+      margin-left: auto;
+      font-size: 10px;
+      color: #98A2AE;
+    }
+
+    .v2-dgrpb {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .v2-dgrpf {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px 12px;
+      border-top: 1px dashed #E4E8ED;
+    }
+
+    .v2-dgrpf .sum {
+      font-size: 11.5px;
+      color: #545C69;
+    }
+
+    .v2-dgrpf .sum b {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: #171B22;
+      margin-left: 5px;
+    }
+
+    .v2-dgrpf .ws-pay {
+      margin-left: auto;
+      flex: none;
+      padding: 9px 16px;
+      font-size: 12px;
+    }
+
+    .v2-dchk {
+      width: 17px;
+      height: 17px;
+      border-radius: 3px;
+      border: 1px solid #2F6490;
+      background: #2F6490;
+      color: #fff;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      margin-top: 2px;
+    }
+
+    .v2-del {
+      margin-left: auto;
+      font-size: 10.5px;
+      color: #98A2AE;
+      border-bottom: 1px solid #E1E6EC;
+      cursor: pointer;
+    }
+
+    .v2-fix {
+      font-size: 10.5px;
+      color: #8C3A3A;
+    }
+
+    .tag-q {
+      border: 1px solid #D8CDB4;
+      background: #F6F1E4;
+      color: #7A5A18;
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      white-space: nowrap;
     }
 
     .v2-dtot {
@@ -7309,6 +7433,13 @@
       width: auto;
     }
 
+    .v2-pmdadd.s {
+      flex: 0 0 96px;
+      background: #fff;
+      border: 1px solid #C4CCD5;
+      color: #434A57;
+    }
+
     .v2-pmdadd {
       flex: 1;
       text-align: center;
@@ -7898,11 +8029,12 @@
       <span class="nvg">웹샵</span>
       <button type="button" class="nv on" data-go="v2"><b>01</b><span>웹샵 메인</span></button>
       <button type="button" class="nv" data-go="v8"><b>02</b><span>상품 상세 모달</span></button>
-      <button type="button" class="nv" data-go="v6"><b>03</b><span>통합 결제창</span></button>
-      <button type="button" class="nv" data-go="v9"><b>04</b><span>결제 완료</span></button>
-      <button type="button" class="nv" data-go="v10"><b>05</b><span>구매내역</span></button>
-      <button type="button" class="nv" data-go="v7"><b>06</b><span>관심상품 · 최근 본</span></button>
-      <button type="button" class="nv" data-go="v11"><b>07</b><span>기타사항</span></button>
+      <button type="button" class="nv" data-go="v12"><b>03</b><span>담기 · 주문 드로어</span></button>
+      <button type="button" class="nv" data-go="v6"><b>04</b><span>통합 결제창</span></button>
+      <button type="button" class="nv" data-go="v9"><b>05</b><span>결제 완료</span></button>
+      <button type="button" class="nv" data-go="v10"><b>06</b><span>구매내역</span></button>
+      <button type="button" class="nv" data-go="v7"><b>07</b><span>관심상품 · 최근 본</span></button>
+      <button type="button" class="nv" data-go="v11"><b>08</b><span>기타사항</span></button>
       <span class="ctl">
         <button type="button" class="desc-btn" id="descBtn" title="D">
           <i>&#9776;</i><span class="lbl-on">디스크립션 접기</span><span class="lbl-off">디스크립션 펴기</span>
@@ -7995,6 +8127,7 @@
                           <span class="ws-mi">관심상품</span>
                           <span class="ws-mi">FAQ</span>
                         </div>
+                        <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
                       </div>
 
                       <div class="v2-body" style="padding-top:16px;padding-bottom:34px;position:relative;">
@@ -8080,7 +8213,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-a">확률형</span></span><span
                                 class="v2-like on">&#9829;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">스피드 부스터 패키지 10세트</span><span class="v2-pp">₩ 25,000</span>
@@ -8090,7 +8224,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-r">D-3</span></span><span
                                 class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                               <span class="v2-pn">존다 서포트 패키지 30일</span><span class="v2-pp">₩ 15,000</span>
@@ -8098,7 +8233,8 @@
                           </div>
                           <div class="v2-pc hov">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">카츄아의 비밀상자</span><span class="v2-pp">₩ 2,500</span>
@@ -8106,7 +8242,8 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">포스 부스터</span><span class="v2-pp">₩ 25,000</span>
@@ -8114,7 +8251,8 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">의상</span>
                               <span class="v2-pn">축제 의상 세트</span><span class="v2-pp">₩ 7,500</span>
@@ -8122,7 +8260,8 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">고급 스킬북</span><span class="v2-pp">₩ 3,200</span>
@@ -8132,7 +8271,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-r">D-1</span></span><span
                                 class="v2-like on">&#9829;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                               <span class="v2-pn">여름 한정 소환석</span><span class="v2-pp">₩ 12,000</span>
@@ -8140,7 +8280,8 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">경험치 부스터 7일</span><span class="v2-pp">₩ 5,500</span>
@@ -8148,7 +8289,8 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">모험가 스타터 패키지</span><span class="v2-pp">₩ 9,900</span>
@@ -8158,7 +8300,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-a">확률형</span></span><span
                                 class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">신비한 열매 상자</span><span class="v2-pp">₩ 4,900</span>
@@ -8225,6 +8368,7 @@
                                 class="v2-cb">&#10003;</span>[필수] 구매 내용과 확률 정보를 확인했으며 결제에 동의합니다</span>
                             <div class="v2-pmdfr">
                               <span class="v2-pmdlike">&#9825;</span>
+                              <span class="v2-pmdadd s">담기</span>
                               <span class="v2-pmdadd">₩ 25,000 · 구매하기</span>
                             </div>
                           </div>
@@ -8288,6 +8432,7 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">3</div>
                             <div class="ws-tbmenu" style="flex:1;"><span
                                 class="on">상품구매</span><span>구매내역</span><span>관심상품</span><span>FAQ</span></div>
+                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
                           </div>
                           <div class="v2-body tb" style="padding:14px 20px 24px;">
                             <div class="v2-strip" style="margin-top:0;">
@@ -8341,7 +8486,8 @@
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span><span class="v2-like on"
                                     style="width:21px;height:21px;font-size:10px;">&#9829;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">스피드 부스터 패키지 10세트</span><span class="v2-pp"
@@ -8351,7 +8497,8 @@
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-r">D-3</span></span><span class="v2-like"
                                     style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">존다 서포트 패키지 30일</span><span class="v2-pp"
@@ -8360,7 +8507,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">카츄아의 비밀상자</span><span class="v2-pp"
@@ -8369,7 +8517,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">포스 부스터</span><span class="v2-pp" style="font-size:13px;">₩
@@ -8378,7 +8527,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">축제 의상 세트</span><span class="v2-pp"
@@ -8387,7 +8537,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">고급 스킬북</span><span class="v2-pp" style="font-size:13px;">₩
@@ -8467,6 +8618,7 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">3</div>
                             <div class="ws-mmenu" style="flex:1;border-bottom:0;"><span
                                 class="on">상품구매</span><span>구매내역</span><span>관심상품</span><span>FAQ</span></div>
+                            <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>4</em></span>
                           </div>
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
                             <div class="v2-strip" style="margin-top:0;padding:10px 11px 12px;">
@@ -8533,7 +8685,8 @@
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span><span class="v2-like on"
                                     style="width:20px;height:20px;font-size:9px;">&#9829;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">스피드 부스터 패키지 10세트</span><span class="v2-pp"
@@ -8543,7 +8696,8 @@
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-r">D-3</span></span><span class="v2-like"
                                     style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">존다 서포트 패키지 30일</span><span class="v2-pp"
@@ -8552,7 +8706,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">카츄아의 비밀상자</span><span class="v2-pp"
@@ -8561,7 +8716,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">포스 부스터</span><span class="v2-pp" style="font-size:12.5px;">₩
@@ -8570,7 +8726,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">축제 의상 세트</span><span class="v2-pp"
@@ -8579,7 +8736,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">고급 스킬북</span><span class="v2-pp" style="font-size:12.5px;">₩
@@ -8589,7 +8747,8 @@
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-r">D-1</span></span><span class="v2-like on"
                                     style="width:20px;height:20px;font-size:9px;">&#9829;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">여름 한정 소환석</span><span class="v2-pp"
@@ -8598,7 +8757,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">경험치 부스터 7일</span><span class="v2-pp"
@@ -8926,6 +9086,7 @@
                       <div class="v2-menurow">
                         <div class="ws-menu"><span class="ws-mi on">상품구매</span><span class="ws-mi">구매내역</span><span
                             class="ws-mi">관심상품</span><span class="ws-mi">FAQ</span></div>
+                        <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
                         <span class="v2-cursel v2-menucur" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
                           <span class="v2-curdd">
                             <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
@@ -8947,35 +9108,40 @@
                         <div class="v2-grid">
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span><span
                                 class="v2-pn">스피드 부스터 패키지 10세트</span><span class="v2-pp">₩ 25,000</span></div>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span><span
                                 class="v2-pn">존다 서포트 패키지 30일</span><span class="v2-pp">₩ 15,000</span></div>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span><span
                                 class="v2-pn">카츄아의 비밀상자</span><span class="v2-pp">₩ 2,500</span></div>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span><span
                                 class="v2-pn">포스 부스터</span><span class="v2-pp">₩ 25,000</span></div>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">의상</span><span
                                 class="v2-pn">축제 의상 세트</span><span class="v2-pp">₩ 7,500</span></div>
@@ -9034,6 +9200,7 @@
                                 class="v2-cb">&#10003;</span>[필수] 구매 내용과 확률 정보를 확인했으며 결제에 동의합니다</span>
                             <div class="v2-pmdfr">
                               <span class="v2-pmdlike">&#9825;</span>
+                              <span class="v2-pmdadd s">담기</span>
                               <span class="v2-pmdadd">₩ 25,000 · 구매하기</span>
                             </div>
                           </div>
@@ -9077,6 +9244,7 @@
                             <div class="v2-pmdf">
                               <div class="v2-pmdfr">
                                 <span class="v2-pmdlike">&#9825;</span>
+                                <span class="v2-pmdadd s">담기</span>
                                 <span class="v2-pmdadd">₩ 9,900 · 구매하기</span>
                               </div>
                             </div>
@@ -9126,6 +9294,7 @@
                           <div style="display:flex;align-items:center;border-bottom:1px solid #E4E8ED;padding:0 20px;">
                             <div class="ws-tbmenu" style="flex:1;"><span
                                 class="on">상품구매</span><span>구매내역</span><span>관심상품</span><span>FAQ</span></div>
+                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
                             <span class="v2-cursel" style="height:27px;font-size:11px;flex:none;" data-role="cur">통화
                               <b>KRW</b><i>&#9662;</i>
                               <span class="v2-curdd">
@@ -9149,7 +9318,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">스피드 부스터 패키지 10세트</span><span class="v2-pp"
@@ -9158,7 +9328,8 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-r">D-3</span></span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">존다 서포트 패키지 30일</span><span class="v2-pp"
@@ -9166,7 +9337,8 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">카츄아의 비밀상자</span><span class="v2-pp"
@@ -9174,7 +9346,8 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">포스 부스터</span><span class="v2-pp" style="font-size:13px;">₩
@@ -9182,7 +9355,8 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">축제 의상 세트</span><span class="v2-pp"
@@ -9190,7 +9364,8 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">고급 스킬북</span><span class="v2-pp" style="font-size:13px;">₩
@@ -9239,6 +9414,7 @@
                                     class="v2-cb">&#10003;</span>[필수] 구매 내용과 확률 정보를 확인했으며 결제에 동의합니다</span>
                                 <div class="v2-pmdfr">
                                   <span class="v2-pmdlike" style="width:46px;padding:11px 0;">&#9825;</span>
+                                  <span class="v2-pmdadd s" style="padding:11px 0;font-size:12.5px;">담기</span>
                                   <span class="v2-pmdadd" style="padding:11px 0;font-size:13px;">₩ 25,000 ·
                                     구매하기</span>
                                 </div>
@@ -9290,7 +9466,8 @@
                             <div class="v2-grid mo">
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">스피드 부스터 패키지</span><span class="v2-pp"
@@ -9298,7 +9475,8 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">존다 서포트 패키지</span><span class="v2-pp"
@@ -9352,6 +9530,7 @@
                                     class="v2-cb">&#10003;</span>[필수] 구매 내용과 확률 정보를 확인했으며 결제에 동의합니다</span>
                                 <div class="v2-pmdfr">
                                   <span class="v2-pmdlike" style="width:44px;padding:11px 0;">&#9825;</span>
+                                  <span class="v2-pmdadd s" style="padding:11px 0;font-size:12.5px;">담기</span>
                                   <span class="v2-pmdadd" style="padding:11px 0;font-size:13px;">₩ 25,000 ·
                                     구매하기</span>
                                 </div>
@@ -9486,6 +9665,596 @@
                 <div class="warn-h">상품 단위 URL이 없다</div>
                 <p class="warn-b">캠페인 링크는 <b>웹샵 목록까지만</b> 보낼 수 있다.
                   상품 단위 링크가 필요해지면 <span class="mono">/ro?p=code</span>로 모달을 여는 방식을 <b>후속</b>으로 얹는다.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="screen" id="v12">
+        <div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+          <div class="wrap2">
+            <div class="wcol is-pc">
+              <div class="tabs">
+                <button type="button" class="tab tab-on" data-dev="pc">PC</button>
+                <button type="button" class="tab" data-dev="tb">TABLET</button>
+                <button type="button" class="tab" data-dev="mo">MO</button>
+              </div>
+
+              <!-- ═══════════════ PC ═══════════════ -->
+              <div class="pane pane-pc on">
+                <div class="wstage">
+                  <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+                    <div class="v2-win" style="height:900px;display:flex;flex-direction:column;overflow:hidden;position:relative;">
+                      <span class="v2-winlbl">담기 &#8594; 우측 드로어 — 결제 조건별로 나뉜다</span>
+
+                      <div class="v2-urlbar">
+                        <i></i><i></i><i></i>
+                        <div class="v2-url">https://<b>shop.ragnarokland.com</b><em>/ro</em></div>
+                      </div>
+
+                      <div style="position:relative;">
+                        <div class="mk" style="position:absolute;top:20px;left:-33px;">1</div>
+                        <div class="v2-hd">
+                          <div class="img" style="width:186px;height:30px;"><span class="sp"
+                              style="font-size:8px;">RAGNAROK
+                              PORTAL 로고 SVG</span></div>
+                          <span class="v2-lgdiv"></span>
+                          <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
+                          <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
+                          <span class="svc"><span class="svc-m"></span>RO UGC<span class="svc-x">&#8599;</span></span>
+                          <div class="v2-hdu">
+                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
+                                aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="10" cy="10" r="7.2" />
+                                <path d="M2.8 10h14.4" />
+                                <path
+                                  d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
+                              </svg> KO <span style="font-size:9px;">&#9662;</span></span>
+                            <span class="v2-lgdiv" style="height:16px;"></span>
+                            <span class="srch" style="display:flex;align-items:center;gap:6px;"><svg class="ico"
+                                viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+                                <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
+                                  stroke-width="1.7" />
+                                <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
+                                  stroke-linecap="round" />
+                              </svg><span class="ts">SEARCH</span></span>
+                            <span class="v2-av"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="v2-menurow">
+                        <div class="ws-menu">
+                          <span class="ws-mi on">상품구매</span>
+                          <span class="ws-mi">구매내역</span>
+                          <span class="ws-mi">관심상품</span>
+                          <span class="ws-mi">FAQ</span>
+                        </div>
+                        <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
+                      </div>
+
+                      <div class="v2-body" style="padding-top:16px;flex:1;overflow:hidden;">
+                        <div class="v2-grid">
+                          <div class="v2-pc">
+                            <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
+                            </div>
+                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
+                              <span class="v2-pn">스피드 부스터 패키지 10세트</span><span class="v2-pp">₩ 25,000</span>
+                            </div>
+                          </div>
+                          <div class="v2-pc">
+                            <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
+                            </div>
+                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
+                              <span class="v2-pn">여름 한정 소환석</span><span class="v2-pp">₩ 12,000</span>
+                            </div>
+                          </div>
+                          <div class="v2-pc">
+                            <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
+                            </div>
+                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
+                              <span class="v2-pn">카츄아의 비밀상자</span><span class="v2-pp">₩ 2,500</span>
+                            </div>
+                          </div>
+                          <div class="v2-pc">
+                            <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
+                            </div>
+                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
+                              <span class="v2-pn">포스 부스터 30일</span><span class="v2-pp">₩ 9,900</span>
+                            </div>
+                          </div>
+                          <div class="v2-pc">
+                            <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
+                            </div>
+                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">의상</span>
+                              <span class="v2-pn">축제 의상 세트</span><span class="v2-pp">₩ 7,500</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="v2-dim"></div>
+                      <div class="v2-dw">
+                        <div class="v2-dwh">
+                          <div class="mk" style="position:absolute;top:16px;left:-33px;">2</div>
+                          <b>담은 상품</b><em>4</em>
+                          <span class="v2-dwx">&#10005;</span>
+                        </div>
+                        <div class="v2-dwb" style="position:relative;overflow-y:auto;">
+                          <div class="mk" style="position:absolute;top:0;left:-33px;">3</div>
+
+                          <div class="v2-dgrp">
+                            <div class="v2-dgrph">
+                              <b>함께 결제</b>
+                              <span class="why">일반 상품 2건</span>
+                            </div>
+                            <div class="v2-dgrpb">
+                              <div class="v2-dr2">
+                                <span class="v2-dchk">&#10003;</span>
+                                <span class="v2-ii s"></span>
+                                <div style="flex:1;min-width:0;">
+                                  <div class="v2-dr2n">포스 부스터 30일</div>
+                                  <div class="v2-dr2p">₩ 9,900</div>
+                                  <div class="v2-dr2m">
+                                    <span class="v2-qty" style="height:30px;"><span style="line-height:28px;">&#8722;</span><b
+                                            style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                    <span class="v2-del">삭제</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="v2-dr2">
+                                <span class="v2-dchk">&#10003;</span>
+                                <span class="v2-ii s"></span>
+                                <div style="flex:1;min-width:0;">
+                                  <div class="v2-dr2n">축제 의상 세트</div>
+                                  <div class="v2-dr2p">₩ 7,500</div>
+                                  <div class="v2-dr2m">
+                                    <span class="v2-qty" style="height:30px;"><span style="line-height:28px;">&#8722;</span><b
+                                            style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                    <span class="v2-del">삭제</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="v2-dgrpf">
+                              <span class="sum">합계<b>₩ 17,400</b></span>
+                              <span class="ws-pay">결제하기</span>
+                            </div>
+                          </div>
+                          <div class="v2-dgrp solo">
+                            <div class="v2-dgrph">
+                              <b>따로 결제 · 기간 한정</b>
+                              <span class="why">묶을 수 없음</span>
+                            </div>
+                            <div class="v2-dgrpb">
+                              <div class="v2-dr2">
+                                <span class="v2-dchk">&#10003;</span>
+                                <span class="v2-ii s"></span>
+                                <div style="flex:1;min-width:0;">
+                                  <span class="tag-r" style="margin-bottom:5px;display:inline-block;">D-1</span>
+                                      <div class="v2-dr2n">여름 한정 소환석</div>
+                                  <div class="v2-dr2p">₩ 12,000</div>
+                                  <div class="v2-dr2m">
+                                    <span class="v2-qty" style="height:30px;opacity:.5;"><span style="line-height:28px;">&#8722;</span><b
+                                            style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                        <span class="v2-fix">수량 1 고정</span>
+                                    <span class="v2-del">삭제</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="v2-dgrpf">
+                              <span class="sum">합계<b>₩ 12,000</b></span>
+                              <span class="ws-pay">결제하기</span>
+                            </div>
+                          </div>
+                          <div class="v2-dgrp solo">
+                            <div class="v2-dgrph">
+                              <b>따로 결제 · 수량 한정</b>
+                              <span class="why">묶을 수 없음</span>
+                            </div>
+                            <div class="v2-dgrpb">
+                              <div class="v2-dr2">
+                                <span class="v2-dchk">&#10003;</span>
+                                <span class="v2-ii s"></span>
+                                <div style="flex:1;min-width:0;">
+                                  <span class="tag-q" style="margin-bottom:5px;display:inline-block;">12개 남음</span>
+                                      <div class="v2-dr2n">카츄아의 비밀상자</div>
+                                  <div class="v2-dr2p">₩ 2,500</div>
+                                  <div class="v2-dr2m">
+                                    <span class="v2-qty" style="height:30px;opacity:.5;"><span style="line-height:28px;">&#8722;</span><b
+                                            style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                        <span class="v2-fix">수량 1 고정</span>
+                                    <span class="v2-del">삭제</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="v2-dgrpf">
+                              <span class="sum">합계<b>₩ 2,500</b></span>
+                              <span class="ws-pay">결제하기</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="v2-dwf" style="position:relative;">
+                          <div class="mk" style="position:absolute;top:14px;left:-33px;">4</div>
+                          <span class="hint">그룹마다 <b>주문번호가 따로</b> 생깁니다 · 환불도 그룹 단위입니다</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══════════════ TABLET ═══════════════ -->
+              <div class="pane pane-tb">
+                <div class="wstage">
+                  <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
+                    <div class="tg-tbwrap">
+                      <div class="tg-cell">
+                        <span class="tg-lbl"><em>TB</em>주문 드로어 — 화면 절반</span>
+                        <div class="ws-tb vp" style="margin-left:0;border:1px solid #C9D0D9;border-radius:6px;height:820px;position:relative;overflow:hidden;">
+                          <div class="v2-urlbar" style="height:34px;border-radius:5px 5px 0 0;"><i></i><i></i><i></i>
+                            <div class="v2-url">https://<b>shop.ragnarokland.com</b><em>/ro</em></div>
+                          </div>
+                          <div class="v2-hd tb" style="position:relative;">
+                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="21" height="15"
+                                aria-hidden="true">
+                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
+                                  stroke-linecap="round" />
+                              </svg></span>
+                            <div class="img" style="width:150px;height:26px;"><span class="sp"
+                                style="font-size:7.5px;">RAGNAROK PORTAL 로고</span></div>
+                            <div class="v2-hdu" style="gap:12px;">
+                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="17"
+                                  height="17" aria-hidden="true">
+                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
+                                    stroke-width="1.7" />
+                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
+                                    stroke-linecap="round" />
+                                </svg></span>
+                              <span class="v2-av"></span>
+                            </div>
+                          </div>
+                          <div style="display:flex;align-items:center;border-bottom:1px solid #E4E8ED;padding:0 20px;">
+
+                            <div class="ws-tbmenu" style="flex:1;"><span
+                                class="on">상품구매</span><span>구매내역</span><span>관심상품</span><span>FAQ</span></div>
+                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
+                          </div>
+                          <div class="v2-dim"></div>
+                          <div class="v2-dw half">
+                            <div class="v2-dwh">
+                              <b>담은 상품</b><em>4</em>
+                              <span class="v2-dwx">&#10005;</span>
+                            </div>
+                            <div class="v2-dwb" style="position:relative;overflow-y:auto;">
+    
+                              <div class="v2-dgrp">
+                                <div class="v2-dgrph">
+                                  <b>함께 결제</b>
+                                  <span class="why">일반 상품 2건</span>
+                                </div>
+                                <div class="v2-dgrpb">
+                                  <div class="v2-dr2">
+                                    <span class="v2-dchk">&#10003;</span>
+                                    <span class="v2-ii s"></span>
+                                    <div style="flex:1;min-width:0;">
+                                      <div class="v2-dr2n">포스 부스터 30일</div>
+                                      <div class="v2-dr2p">₩ 9,900</div>
+                                      <div class="v2-dr2m">
+                                        <span class="v2-qty" style="height:30px;"><span style="line-height:28px;">&#8722;</span><b
+                                                style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                        <span class="v2-del">삭제</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="v2-dr2">
+                                    <span class="v2-dchk">&#10003;</span>
+                                    <span class="v2-ii s"></span>
+                                    <div style="flex:1;min-width:0;">
+                                      <div class="v2-dr2n">축제 의상 세트</div>
+                                      <div class="v2-dr2p">₩ 7,500</div>
+                                      <div class="v2-dr2m">
+                                        <span class="v2-qty" style="height:30px;"><span style="line-height:28px;">&#8722;</span><b
+                                                style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                        <span class="v2-del">삭제</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="v2-dgrpf">
+                                  <span class="sum">합계<b>₩ 17,400</b></span>
+                                  <span class="ws-pay">결제하기</span>
+                                </div>
+                              </div>
+                              <div class="v2-dgrp solo">
+                                <div class="v2-dgrph">
+                                  <b>따로 결제 · 기간 한정</b>
+                                  <span class="why">묶을 수 없음</span>
+                                </div>
+                                <div class="v2-dgrpb">
+                                  <div class="v2-dr2">
+                                    <span class="v2-dchk">&#10003;</span>
+                                    <span class="v2-ii s"></span>
+                                    <div style="flex:1;min-width:0;">
+                                      <span class="tag-r" style="margin-bottom:5px;display:inline-block;">D-1</span>
+                                          <div class="v2-dr2n">여름 한정 소환석</div>
+                                      <div class="v2-dr2p">₩ 12,000</div>
+                                      <div class="v2-dr2m">
+                                        <span class="v2-qty" style="height:30px;opacity:.5;"><span style="line-height:28px;">&#8722;</span><b
+                                                style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                            <span class="v2-fix">수량 1 고정</span>
+                                        <span class="v2-del">삭제</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="v2-dgrpf">
+                                  <span class="sum">합계<b>₩ 12,000</b></span>
+                                  <span class="ws-pay">결제하기</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="v2-dwf" style="position:relative;">
+                              <span class="hint">그룹마다 <b>주문번호가 따로</b> 생깁니다 · 환불도 그룹 단위입니다</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══════════════ MO ═══════════════ -->
+              <div class="pane pane-mo">
+                <div class="wstage">
+                  <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
+                    <div class="tg-grid">
+                      <div class="tg-cell">
+                        <span class="tg-lbl"><em>MO</em>주문 — <b>전체 화면</b> 전환</span>
+                        <div class="ws-mo vp" style="margin-left:0;border:1px solid #C9D0D9;border-radius:6px;position:relative;overflow:hidden;">
+                          <div class="v2-urlbar" style="height:30px;padding:0 10px;gap:7px;border-radius:5px 5px 0 0;">
+                            <i style="width:7px;height:7px;"></i>
+                            <div class="v2-url" style="height:20px;font-size:9.5px;"><b>shop.ragnarokland.com</b><em>/ro</em></div>
+                          </div>
+                          <div class="v2-hd mo" style="position:relative;">
+                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14"
+                                aria-hidden="true">
+                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
+                                  stroke-linecap="round" />
+                              </svg></span>
+                            <div class="img" style="width:112px;height:20px;"><span class="sp"
+                                style="font-size:6.5px;">RAGNAROK PORTAL 로고</span></div>
+                            <div class="v2-hdu" style="gap:10px;">
+                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16"
+                                  height="16" aria-hidden="true">
+                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
+                                    stroke-width="1.7" />
+                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
+                                    stroke-linecap="round" />
+                                </svg></span>
+                              <span class="v2-av" style="width:21px;height:21px;"></span>
+                            </div>
+                          </div>
+                          <div class="v2-dw mo fullw">
+                            <div class="v2-dwh" style="padding:13px 14px;">
+                              <b>담은 상품</b><em>4</em>
+                              <span class="v2-dwx">&#10005;</span>
+                            </div>
+                            <div class="v2-dwb" style="padding:14px;" style="position:relative;overflow-y:auto;">
+    
+                              <div class="v2-dgrp">
+                                <div class="v2-dgrph">
+                                  <b>함께 결제</b>
+                                  <span class="why">일반 상품 2건</span>
+                                </div>
+                                <div class="v2-dgrpb">
+                                  <div class="v2-dr2">
+                                    <span class="v2-dchk">&#10003;</span>
+                                    <span class="v2-ii s"></span>
+                                    <div style="flex:1;min-width:0;">
+                                      <div class="v2-dr2n">포스 부스터 30일</div>
+                                      <div class="v2-dr2p">₩ 9,900</div>
+                                      <div class="v2-dr2m">
+                                        <span class="v2-qty" style="height:30px;"><span style="line-height:28px;">&#8722;</span><b
+                                                style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                        <span class="v2-del">삭제</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="v2-dr2">
+                                    <span class="v2-dchk">&#10003;</span>
+                                    <span class="v2-ii s"></span>
+                                    <div style="flex:1;min-width:0;">
+                                      <div class="v2-dr2n">축제 의상 세트</div>
+                                      <div class="v2-dr2p">₩ 7,500</div>
+                                      <div class="v2-dr2m">
+                                        <span class="v2-qty" style="height:30px;"><span style="line-height:28px;">&#8722;</span><b
+                                                style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                        <span class="v2-del">삭제</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="v2-dgrpf">
+                                  <span class="sum">합계<b>₩ 17,400</b></span>
+                                  <span class="ws-pay">결제하기</span>
+                                </div>
+                              </div>
+                              <div class="v2-dgrp solo">
+                                <div class="v2-dgrph">
+                                  <b>따로 결제 · 기간 한정</b>
+                                  <span class="why">묶을 수 없음</span>
+                                </div>
+                                <div class="v2-dgrpb">
+                                  <div class="v2-dr2">
+                                    <span class="v2-dchk">&#10003;</span>
+                                    <span class="v2-ii s"></span>
+                                    <div style="flex:1;min-width:0;">
+                                      <span class="tag-r" style="margin-bottom:5px;display:inline-block;">D-1</span>
+                                          <div class="v2-dr2n">여름 한정 소환석</div>
+                                      <div class="v2-dr2p">₩ 12,000</div>
+                                      <div class="v2-dr2m">
+                                        <span class="v2-qty" style="height:30px;opacity:.5;"><span style="line-height:28px;">&#8722;</span><b
+                                                style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                            <span class="v2-fix">수량 1 고정</span>
+                                        <span class="v2-del">삭제</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="v2-dgrpf">
+                                  <span class="sum">합계<b>₩ 12,000</b></span>
+                                  <span class="ws-pay">결제하기</span>
+                                </div>
+                              </div>
+                              <div class="v2-dgrp solo">
+                                <div class="v2-dgrph">
+                                  <b>따로 결제 · 수량 한정</b>
+                                  <span class="why">묶을 수 없음</span>
+                                </div>
+                                <div class="v2-dgrpb">
+                                  <div class="v2-dr2">
+                                    <span class="v2-dchk">&#10003;</span>
+                                    <span class="v2-ii s"></span>
+                                    <div style="flex:1;min-width:0;">
+                                      <span class="tag-q" style="margin-bottom:5px;display:inline-block;">12개 남음</span>
+                                          <div class="v2-dr2n">카츄아의 비밀상자</div>
+                                      <div class="v2-dr2p">₩ 2,500</div>
+                                      <div class="v2-dr2m">
+                                        <span class="v2-qty" style="height:30px;opacity:.5;"><span style="line-height:28px;">&#8722;</span><b
+                                                style="line-height:28px;">1</b><span style="line-height:28px;">&#43;</span></span>
+                                            <span class="v2-fix">수량 1 고정</span>
+                                        <span class="v2-del">삭제</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="v2-dgrpf">
+                                  <span class="sum">합계<b>₩ 2,500</b></span>
+                                  <span class="ws-pay">결제하기</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="v2-dwf" style="position:relative;">
+                              <span class="hint">그룹마다 <b>주문번호가 따로</b> 생깁니다 · 환불도 그룹 단위입니다</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ═══════════════ 디스크립션 ═══════════════ -->
+            <div class="dcol">
+
+              <div class="warn">
+                <div class="warn-h">한 번에 담되, 결제는 조건별로 나눠 나간다</div>
+                <p class="warn-b">여러 상품을 함께 담는다. 다만 <b>결제 조건이 다른 상품은 한 세션에 담기지 않는다</b> —
+                  드로어 안에서 <b>결제 그룹</b>으로 쪼개지고 그룹마다 [결제하기]가 따로 있다.</p>
+              </div>
+
+              <div class="imm">
+                <div class="imm-h">그룹을 나누는 이유 — 셋</div>
+                <div class="imm-r"><span class="imm-k">재검증 시점</span><span class="imm-v">한정 상품은 <b>결제 세션 생성 시</b> 재고 ·
+                    기간을 다시 본다. 한 건이 마감되면 묶인 주문 <b>전체가 막힌다</b></span></div>
+                <div class="imm-r"><span class="imm-k">결제수단 집합</span><span class="imm-v">특정 PG만 되는 상품은 <b>채널 목록 자체가
+                      다르다</b> — 하나의 결제창에 담을 수 없다</span></div>
+                <div class="imm-r"><span class="imm-k">환불 단위</span><span class="imm-v">환불은 <b>주문번호 단위</b>다. 규정이 다른 상품이
+                    한 주문에 섞이면 <b>부분 환불이 안 된다</b></span></div>
+                <div class="imm-r"><span class="imm-k">주문번호</span><span class="imm-v">그룹 <b>1개 = 주문 1건</b>. 구매내역에도 따로
+                    쌓인다</span></div>
+                <div class="imm-r"><span class="imm-k">지급</span><span class="imm-v">그룹별로 <b>로덱스 1회 발송</b></span></div>
+              </div>
+
+              <div class="dr">
+                <div class="dr-h"><span class="mk">1</span><span class="dr-t">딤드</span><span class="src">공통</span>
+                </div>
+                <p class="dr-b">뒤 화면을 덮고 조작을 막는다. PC · TABLET에만 있다.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">불투명도</span><span class="spec-v"><b>44%</b> · 뒤 화면 스크롤
+                      잠금</span></div>
+                  <div class="spec-r"><span class="spec-k">닫기</span><span class="spec-v">딤 클릭 · [✕] · <span
+                        class="mono">ESC</span> 셋 다 동작한다</span></div>
+                  <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v">전체 화면이라 <b>딤이 없다</b> — [✕]와
+                      <b>기기 뒤로가기</b>로 닫는다</span></div>
+                  <div class="spec-r"><span class="spec-k">담은 것</span><span class="spec-v">닫아도 <b>유지</b>. <b>메뉴바 담기 아이콘</b>으로 다시 연다 —
+                      포털 GNB 가 아니라 웹샵 메뉴바에 둔다(웹샵 스코프)</span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">2</span><span class="dr-t">드로어 헤더</span><span
+                    class="src">개수</span></div>
+                <p class="dr-b">「담은 상품」 · 총 건수 · 닫기.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">개수</span><span class="spec-v">그룹 수가 아니라 <b>상품 건수</b>를 센다</span>
+                  </div>
+                  <div class="spec-r"><span class="spec-k">열림</span><span class="spec-v">카드 hover <b>[담기]</b> · 상세 모달 <b>[담기]</b> ·
+                      <b>메뉴바 담기 아이콘</b></span></div>
+                  <div class="spec-r"><span class="spec-k">상한</span><span class="spec-v">담을 수 있는 상품 <b>10건</b>까지 · 넘으면
+                      「먼저 결제하거나 비워 주세요」</span></div>
+                </div>
+              </div>
+
+              <div class="dr">
+                <div class="dr-h"><span class="mk">3</span><span class="dr-t">결제 그룹</span><span class="src">핵심</span>
+                </div>
+                <p class="dr-b">조건이 같은 상품끼리 묶인다. <b>유저가 묶고 푸는 것이 아니라 상품 속성이 정한다.</b></p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">함께 결제</span><span class="spec-v"><b>일반 상품</b>은 하나로 묶인다 — 수량
+                      조절 · 선택 해제 · 삭제 가능</span></div>
+                  <div class="spec-r"><span class="spec-k">따로 결제</span><span class="spec-v"><b>기간 한정</b> · <b>수량 한정</b> ·
+                      <b>PG 제한</b> 상품은 <b>1건씩 단독 그룹</b>. 수량 <span class="mono">1</span> 고정</span></div>
+                  <div class="spec-r"><span class="spec-k">헤더</span><span class="spec-v">그룹 이름 + 우측에 <b>왜 나뉘었는지</b> 한 줄 —
+                      유저가 버그로 오해하지 않게</span></div>
+                  <div class="spec-r"><span class="spec-k">색</span><span class="spec-v">단독 그룹은 <b>붉은 계열 테두리 · 헤더</b>로 일반
+                      그룹과 구분한다</span></div>
+                  <div class="spec-r"><span class="spec-k">합계</span><span class="spec-v">그룹 <b>안에서만</b> 합산한다 — 전체 총액을 두지
+                      않는다. 한 번에 나가는 돈이 아니다</span></div>
+                  <div class="spec-r"><span class="spec-k">결제하기</span><span class="spec-v">그룹마다 하나. 누르면 <b>그 그룹만</b> 통합
+                      결제창으로 간다. 나머지는 드로어에 <b>남는다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">선택 해제</span><span class="spec-v">체크를 풀면 합계에서 빠진다. 전부 풀면
+                      [결제하기] <b>비활성</b></span></div>
+                  <div class="spec-r"><span class="spec-k">판매 종료</span><span class="spec-v">담아 둔 사이 종료되면 해당 행을
+                      <b>비활성</b>하고 사유를 인라인으로 적는다 — 지우지 않는다</span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">4</span><span class="dr-t">안내</span><span class="src">하단</span>
+                </div>
+                <p class="dr-b">그룹이 나뉜 결과를 한 줄로 못 박는다.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">문구</span><span class="spec-v">「그룹마다 <b>주문번호가 따로</b> 생깁니다 · 환불도
+                      그룹 단위입니다」</span></div>
+                  <div class="spec-r"><span class="spec-k">총액</span><span class="spec-v">여기에 <b>두지 않는다</b> — 그룹 합계와 헷갈린다
+                      </span></div>
+                  <div class="spec-r"><span class="spec-k">동의</span><span class="spec-v">드로어에 두지 않는다 — <b>통합 결제창</b>이
+                      받는다</span></div>
+                </div>
+              </div>
+
+              <div class="warn">
+                <div class="warn-h">확정 필요 1건</div>
+                <p class="warn-b"><b>PG 제한 상품이 실제로 있는지.</b> 지금은 「특정 결제사만 되는 상품」을 전제로 그룹을 나눴다.
+                  그런 상품이 없다면 단독 그룹 조건은 <b>기간 한정 · 수량 한정 둘</b>로 줄어든다.</p>
               </div>
 
             </div>
@@ -10095,6 +10864,7 @@
                           <span class="ws-mi on">관심상품</span>
                           <span class="ws-mi">FAQ</span>
                         </div>
+                        <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
                         <span class="v2-cursel v2-menucur" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
                           <span class="v2-curdd">
                             <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
@@ -10134,7 +10904,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-a">확률형</span></span>
                               <span class="v2-like on">&#9829;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">스피드 부스터 패키지 10세트</span><span class="v2-pp">₩ 25,000</span>
@@ -10144,7 +10915,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-r">D-1</span></span>
                               <span class="v2-like on">&#9829;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                               <span class="v2-pn">여름 한정 소환석</span><span class="v2-pp">₩ 12,000</span>
@@ -10171,7 +10943,8 @@
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-like on">&#9829;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">존다 서포트 패키지 30일</span><span class="v2-pp">₩ 15,000</span>
@@ -10210,7 +10983,8 @@
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">고급 스킬북</span><span class="v2-pp">₩ 3,200</span>
@@ -10219,7 +10993,8 @@
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">의상</span>
                               <span class="v2-pn">축제 의상 세트</span><span class="v2-pp">₩ 7,500</span>
@@ -10228,7 +11003,8 @@
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">가을 성장 지원 패키지</span><span class="v2-pp">₩ 19,000</span>
@@ -10237,7 +11013,8 @@
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">포스 부스터 30일</span><span class="v2-pp">₩ 9,900</span>
@@ -10246,7 +11023,8 @@
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-like">&#9825;</span>
-                              <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                              <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                               <span class="v2-pn">추석 한정 의상 상자</span><span class="v2-pp">₩ 9,900</span>
@@ -10281,7 +11059,8 @@
                             <div class="v2-pc">
                               <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span
                                   class="v2-like">&#9825;</span>
-                                <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                               </div>
                               <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span><span
                                   class="v2-pn">스피드 부스터 패키지 10세트</span><span class="v2-pp">₩ 25,000</span></div>
@@ -10289,7 +11068,8 @@
                             <div class="v2-pc">
                               <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span
                                   class="v2-like">&#9825;</span>
-                                <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                               </div>
                               <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span><span
                                   class="v2-pn">존다 서포트 패키지 30일</span><span class="v2-pp">₩ 15,000</span></div>
@@ -10297,7 +11077,8 @@
                             <div class="v2-pc">
                               <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span
                                   class="v2-like">&#9825;</span>
-                                <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                               </div>
                               <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span><span
                                   class="v2-pn">카츄아의 비밀상자</span><span class="v2-pp">₩ 2,500</span></div>
@@ -10305,7 +11086,8 @@
                             <div class="v2-pc">
                               <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span
                                   class="v2-like">&#9825;</span>
-                                <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                               </div>
                               <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span><span
                                   class="v2-pn">포스 부스터</span><span class="v2-pp">₩ 25,000</span></div>
@@ -10313,7 +11095,8 @@
                             <div class="v2-pc">
                               <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span
                                   class="v2-like">&#9825;</span>
-                                <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                               </div>
                               <div class="v2-pb"><span class="tag" style="align-self:flex-start;">의상</span><span
                                   class="v2-pn">축제 의상 세트</span><span class="v2-pp">₩ 7,500</span></div>
@@ -10370,6 +11153,7 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">2</div>
                             <div class="ws-tbmenu" style="flex:1;"><span>상품구매</span><span>구매내역</span><span
                                 class="on">관심상품</span><span>FAQ</span></div>
+                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
                             <span class="v2-cursel" style="height:27px;font-size:11px;flex:none;" data-role="cur">통화
                               <b>KRW</b><i>&#9662;</i>
                               <span class="v2-curdd">
@@ -10404,7 +11188,8 @@
                                 <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                                   <span class="v2-bdg"><span class="tag-a">확률형</span></span>
                                   <span class="v2-like on">&#9829;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                                   <span class="v2-pn">스피드 부스터 패키지 10세트</span><span class="v2-pp">₩ 25,000</span>
@@ -10414,7 +11199,8 @@
                                 <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                                   <span class="v2-bdg"><span class="tag-r">D-1</span></span>
                                   <span class="v2-like on">&#9829;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                                   <span class="v2-pn">여름 한정 소환석</span><span class="v2-pp">₩ 12,000</span>
@@ -10484,6 +11270,7 @@
                             <div class="ws-mmenu" style="flex:1;border-bottom:0;">
                               <span>상품구매</span><span>구매내역</span><span class="on">관심상품</span><span>FAQ</span>
                             </div>
+                            <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>4</em></span>
                             <span class="v2-cursel" style="height:25px;font-size:10px;margin-right:10px;flex:none;"
                               data-role="cur"><b>KRW</b><i>&#9662;</i>
                               <span class="v2-curdd">
@@ -10518,7 +11305,8 @@
                                 <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                                   <span class="v2-bdg"><span class="tag-a">확률형</span></span>
                                   <span class="v2-like on">&#9829;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                                   <span class="v2-pn">스피드 부스터 패키지 10세트</span><span class="v2-pp">₩ 25,000</span>
@@ -10528,7 +11316,8 @@
                                 <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                                   <span class="v2-bdg"><span class="tag-r">D-1</span></span>
                                   <span class="v2-like on">&#9829;</span>
-                                  <span class="v2-hovacts"><span class="v2-hb p">구매하기</span></span>
+                                  <span class="v2-hovacts"><span class="v2-hb s">담기</span><span
+                                  class="v2-hb p">구매하기</span></span>
                                 </div>
                                 <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                                   <span class="v2-pn">여름 한정 소환석</span><span class="v2-pp">₩ 12,000</span>
@@ -11094,6 +11883,7 @@
                             <span class="ws-mi">관심상품</span>
                             <span class="ws-mi">FAQ</span>
                           </div>
+                          <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
                         </div>
 
                         <div class="hs-wrap">
@@ -11321,6 +12111,7 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">1</div>
                             <div class="ws-tbmenu" style="flex:1;"><span>상품구매</span><span
                                 class="on">구매내역</span><span>관심상품</span><span>FAQ</span></div>
+                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
                           </div>
                           <div class="hs-wrap" style="padding:16px 20px 22px;">
                             <div class="hs-main">
@@ -11434,6 +12225,7 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">1</div>
                             <div class="ws-mmenu" style="flex:1;border-bottom:0;"><span>상품구매</span><span
                                 class="on">구매내역</span><span>관심상품</span><span>FAQ</span></div>
+                            <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>4</em></span>
                           </div>
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
                             <div class="hs-per" style="margin-bottom:11px;">
@@ -11538,6 +12330,7 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">1</div>
                             <div class="ws-mmenu" style="flex:1;border-bottom:0;"><span>상품구매</span><span
                                 class="on">구매내역</span><span>관심상품</span><span>FAQ</span></div>
+                            <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>4</em></span>
                           </div>
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
                             <div class="hs-per" style="margin-bottom:11px;">
@@ -12099,7 +12892,7 @@
 
   <script>
     (function () {
-      var order = ["v2", "v8", "v6", "v9", "v10", "v7", "v11"];
+      var order = ["v2", "v8", "v12", "v6", "v9", "v10", "v7", "v11"];
       var stage = document.querySelector('.stage');
       var navBtns = Array.prototype.slice.call(document.querySelectorAll('.nv'));
       var descBtn = document.getElementById('descBtn');
