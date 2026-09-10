@@ -7319,6 +7319,294 @@
     /* 핀이 모달 좌우 바깥(-33px)에 놓이므로 overflow 를 잠그지 않는다.
      모서리는 헤더 · 푸터가 각각 처리한다 */
     /* 게임 · 지역 변경 모달 — 브릿지 웹샵 구역을 줄여서 재사용 */
+    /* ---- 카프라 센터 브릿지 ---- */
+    .kc-gnb {
+      height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      padding: 0 28px;
+      background: #fff;
+      border-bottom: 1px solid #E4E8ED;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .kc-gnb .gnb.on {
+      font-weight: 700;
+      color: #2F6490;
+      position: relative;
+    }
+
+    .kc-gnb .gnb.on::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -14px;
+      height: 2px;
+      background: #2F6490;
+    }
+
+    .gnb-i {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #232B35;
+      white-space: nowrap;
+    }
+
+    .gnb-cta {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 32px;
+      padding: 0 15px;
+      border-radius: 16px;
+      background: #2F6490;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex: none;
+    }
+
+    /* 페이지 머리 */
+    .kc-head {
+      padding: 30px 28px 0;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .kc-head b {
+      display: block;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -.03em;
+      color: #171B22;
+    }
+
+    .kc-head span {
+      display: block;
+      margin-top: 6px;
+      font-size: 12.5px;
+      color: #6C7480;
+    }
+
+    /* 지역 — 이 페이지에 하나뿐이고 아래 세 구역의 행선지를 다 정한다 */
+    .kc-rg {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 22px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #E4E8ED;
+      flex-wrap: wrap;
+    }
+
+    .kc-rg>b {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      color: #98A2AE;
+      margin-right: 5px;
+    }
+
+    .kc-rg>span {
+      padding: 7px 14px;
+      border: 1px solid #DCE2E8;
+      border-radius: 17px;
+      background: #fff;
+      font-size: 12px;
+      color: #545C69;
+      cursor: pointer;
+    }
+
+    .kc-rg>span.on {
+      border-color: #2F6490;
+      background: #2F6490;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* 구역 */
+    .kc-sec {
+      padding: 26px 28px 0;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .kc-sech {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .kc-sech b {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: #171B22;
+    }
+
+    .kc-sech em {
+      font-style: normal;
+      font-size: 11.5px;
+      color: #8A929E;
+    }
+
+    .kc-sech .free {
+      border: 1px solid #C6DBEA;
+      background: #EDF4F9;
+      color: #2F6490;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .kc-sech .out {
+      border: 1px solid #E1E6EC;
+      background: #F5F7F9;
+      color: #6C7480;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    /* 타이틀 카드 */
+    .kc-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .kc-grid.g3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .kc-grid.g2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .kc-card {
+      border: 1px solid #E1E6EC;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .kc-card.off {
+      opacity: .45;
+      cursor: default;
+    }
+
+    .kc-card .kv {
+      height: 104px;
+      background: #E7ECF1;
+      border-bottom: 1px solid #E1E6EC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9.5px;
+      color: #7A858F;
+      position: relative;
+    }
+
+    .kc-card .kv .badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+    }
+
+    .kc-card .nm {
+      display: block;
+      padding: 11px 12px 13px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #232B35;
+      line-height: 1.35;
+    }
+
+    .kc-card .nm s {
+      display: block;
+      margin-top: 4px;
+      text-decoration: none;
+      font-size: 10.5px;
+      color: #98A2AE;
+    }
+
+    .kc-card.off .nm s {
+      color: #8C3A3A;
+    }
+
+    /* 굿즈 · 외부 스토어 카드 */
+    .kc-tile {
+      border: 1px solid #E1E6EC;
+      border-radius: 6px;
+      background: #fff;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .kc-tile .th {
+      width: 54px;
+      height: 54px;
+      border: 1px dashed #C4CCD5;
+      border-radius: 5px;
+      background: #F7F9FB;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8.5px;
+      color: #98A2AE;
+      text-align: center;
+    }
+
+    .kc-tile .tx {
+      min-width: 0;
+    }
+
+    .kc-tile .tx b {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #232B35;
+    }
+
+    .kc-tile .tx span {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #8A929E;
+    }
+
+    .kc-tile .go {
+      margin-left: auto;
+      font-size: 11px;
+      color: #2F6490;
+      white-space: nowrap;
+      flex: none;
+    }
+
     .v2-ctxmd {
       width: 620px;
       background: #fff;
@@ -8180,14 +8468,15 @@
     <nav class="nav">
       <span class="brand"><b>RAGNAROK PORTAL</b><span>웹샵 화면정의서</span></span>
       <span class="nvg">웹샵</span>
-      <button type="button" class="nv on" data-go="v2"><b>01</b><span>웹샵 메인</span></button>
-      <button type="button" class="nv" data-go="v8"><b>02</b><span>상품 상세 모달</span></button>
-      <button type="button" class="nv" data-go="v12"><b>03</b><span>담기 · 주문 드로어</span></button>
-      <button type="button" class="nv" data-go="v6"><b>04</b><span>통합 결제창</span></button>
-      <button type="button" class="nv" data-go="v9"><b>05</b><span>결제 완료</span></button>
-      <button type="button" class="nv" data-go="v10"><b>06</b><span>구매내역</span></button>
-      <button type="button" class="nv" data-go="v7"><b>07</b><span>관심상품 · 최근 본</span></button>
-      <button type="button" class="nv" data-go="v11"><b>08</b><span>기타사항</span></button>
+      <button type="button" class="nv on" data-go="v1"><b>01</b><span>카프라 센터</span></button>
+      <button type="button" class="nv" data-go="v2"><b>02</b><span>웹샵 메인</span></button>
+      <button type="button" class="nv" data-go="v8"><b>03</b><span>상품 상세 모달</span></button>
+      <button type="button" class="nv" data-go="v12"><b>04</b><span>담기 · 주문 드로어</span></button>
+      <button type="button" class="nv" data-go="v6"><b>05</b><span>통합 결제창</span></button>
+      <button type="button" class="nv" data-go="v9"><b>06</b><span>결제 완료</span></button>
+      <button type="button" class="nv" data-go="v10"><b>07</b><span>구매내역</span></button>
+      <button type="button" class="nv" data-go="v7"><b>08</b><span>관심상품 · 최근 본</span></button>
+      <button type="button" class="nv" data-go="v11"><b>09</b><span>기타사항</span></button>
       <span class="ctl">
         <button type="button" class="desc-btn" id="descBtn" title="D">
           <i>&#9776;</i><span class="lbl-on">디스크립션 접기</span><span class="lbl-off">디스크립션 펴기</span>
@@ -8195,7 +8484,551 @@
       </span>
     </nav>
     <div class="stage">
-      <section class="screen on" id="v2">
+      <section class="screen on" id="v1">
+        <div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
+          <div class="wrap2">
+            <div class="wcol is-pc">
+              <div class="tabs">
+                <button type="button" class="tab tab-on" data-dev="pc">PC</button>
+                <button type="button" class="tab" data-dev="tb">TABLET</button>
+                <button type="button" class="tab" data-dev="mo">MO</button>
+              </div>
+
+              <!-- ═══════════════ PC ═══════════════ -->
+              <div class="pane pane-pc on">
+                <div class="wstage">
+                  <div class="pcframe" style="width:1440px;display:flex;flex-direction:column;position:relative;">
+                    <div class="v2-win full">
+                      <span class="v2-winlbl">카프라 센터 — 포털 GNB 안 · STORE 활성</span>
+
+                      <div class="v2-urlbar">
+                        <i></i><i></i><i></i>
+                        <div class="v2-url">https://<b>ragnarokland.com</b><em>/store</em></div>
+                      </div>
+
+                      <div style="position:relative;">
+                        <div class="mk" style="position:absolute;top:20px;left:-33px;">1</div>
+                        <div class="v2-hd">
+                          <div class="img" style="width:186px;height:30px;"><span class="sp" style="font-size:8px;">RAGNAROK PORTAL 로고</span>
+                          </div>
+                          <span class="v2-lgdiv"></span>
+                          <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
+                          <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
+                          <span class="svc"><span class="svc-m"></span>RO UGC<span class="svc-x">&#8599;</span></span>
+                          <div class="v2-hdu">
+                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" fill="none"
+                            stroke="currentColor" stroke-width="1.5">
+                            <circle cx="10" cy="10" r="7.2" />
+                            <path d="M2.8 10h14.4" />
+                            <path d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
+                          </svg> KO <span style="font-size:9px;">&#9662;</span></span>
+                            <span class="v2-lgdiv" style="height:16px;"></span>
+                            <span class="srch" style="display:flex;align-items:center;gap:6px;"><svg class="ico" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+                            <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor" stroke-width="1.7" />
+                            <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                          </svg><span class="ts">SEARCH</span></span>
+                            <span class="v2-av"></span>
+                          </div>
+                        </div>
+                        <div class="kc-gnb">
+                          <span class="gnb">RO IP</span>
+                          <span class="gnb">RO GAMES</span>
+                          <span class="gnb-i">LIBRARY <span style="font-size:9px;color:#8A929E;">&#9662;</span></span>
+                          <span class="gnb">NEWS</span>
+                          <span class="gnb-i">MEDIA <span style="font-size:9px;color:#8A929E;">&#9662;</span></span>
+                          <span class="gnb">RO FESTA</span>
+                          <span class="gnb on">STORE</span>
+                          <span class="gnb-cta">프론테라 광장</span>
+                        </div>
+                      </div>
+
+                      <div class="kc-head" style="position:relative;">
+                        <div class="mk" style="position:absolute;top:32px;left:-33px;">2</div>
+                        <b>카프라 센터</b>
+                        <span>라그나로크의 상점을 한자리에서.</span>
+                        <div style="position:relative;">
+                          <div class="mk" style="position:absolute;top:26px;left:-33px;">3</div>
+                          <div class="kc-rg">
+                            <b>지역</b>
+                            <span>글로벌</span>
+                            <span class="on">한국</span>
+                            <span>일본</span>
+                            <span>대만</span>
+                            <span>라탐</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="kc-sec">
+                        <div class="mk" style="position:absolute;top:26px;left:-33px;">4</div>
+                        <div class="kc-sech">
+                          <b>웹샵</b>
+                          <em>게임 아이템 · 유료 · 원페이 결제</em>
+                        </div>
+                        <div class="kc-grid">
+                          <div class="kc-card">
+                            <span class="kv">게임 키비주얼</span>
+                            <span class="nm">라그나로크 온라인<s>한국 서비스 중</s></span>
+                          </div>
+                          <div class="kc-card">
+                            <span class="kv">게임 키비주얼</span>
+                            <span class="nm">라그나로크 제로<s>한국 서비스 중</s></span>
+                          </div>
+                          <div class="kc-card off">
+                            <span class="kv">게임 키비주얼</span>
+                            <span class="nm">라그나로크 M<s>한국 미서비스</s></span>
+                          </div>
+                          <div class="kc-card">
+                            <span class="kv">게임 키비주얼</span>
+                            <span class="nm">라그나로크 X : 오리진<s>한국 서비스 중</s></span>
+                          </div>
+                          <div class="kc-card">
+                            <span class="kv">게임 키비주얼</span>
+                            <span class="nm">라그나로크 오리진<s>한국 서비스 중</s></span>
+                          </div>
+                          <div class="kc-card off">
+                            <span class="kv">게임 키비주얼</span>
+                            <span class="nm">라그나로크 비긴즈<s>한국 미서비스</s></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="kc-sec">
+                        <div class="mk" style="position:absolute;top:26px;left:-33px;">5</div>
+                        <div class="kc-sech">
+                          <b>웹 굿즈</b>
+                          <span class="free">무료 · 회원 전용</span>
+                          <em>게임 구분 없이 라그나로크 공통</em>
+                        </div>
+                        <div class="kc-grid g2">
+                          <div class="kc-tile">
+                            <span class="th">굿즈<br>이미지</span>
+                            <span class="tx"><b>디바이스 배경화면</b><span>PC · 모바일 · 스마트워치용 일러스트</span></span>
+                            <span class="go">받기 &#8594;</span>
+                          </div>
+                          <div class="kc-tile">
+                            <span class="th">굿즈<br>이미지</span>
+                            <span class="tx"><b>컬러링북</b><span>몬스터 · 캐릭터 도안 직접 색칠</span></span>
+                            <span class="go">받기 &#8594;</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="kc-sec" style="padding-bottom:34px;">
+                        <div class="mk" style="position:absolute;top:26px;left:-33px;">6</div>
+                        <div class="kc-sech">
+                          <b>공식 스토어</b>
+                          <span class="out">실물 굿즈 · 외부</span>
+                          <em>우리가 결제를 받지 않는다 — 지역에 맞는 스토어로 보낸다</em>
+                        </div>
+                        <div class="kc-grid g3">
+                          <div class="kc-tile">
+                            <span class="th">스토어<br>로고</span>
+                            <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
+                            <span class="go">이동 &#8599;</span>
+                          </div>
+                          <div class="kc-tile">
+                            <span class="th">스토어<br>로고</span>
+                            <span class="tx"><b>GNJOY 스토어</b><span>대만</span></span>
+                            <span class="go">이동 &#8599;</span>
+                          </div>
+                          <div class="kc-tile" style="border-color:#2F6490;">
+                            <span class="th">스토어<br>로고</span>
+                            <span class="tx"><b>라그나로크 스토어</b><span>한국 · 현재 지역</span></span>
+                            <span class="go">이동 &#8599;</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="v2-ft" style="position:relative;">
+                        <div class="mk" style="position:absolute;top:20px;left:-33px;">7</div>
+                        &copy; Gravity Co., Ltd. All Rights Reserved.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══════════════ TABLET ═══════════════ -->
+              <div class="pane pane-tb">
+                <div class="wstage">
+                  <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
+                    <div class="tg-tbwrap">
+                      <div class="tg-cell">
+                        <span class="tg-lbl"><em>TB</em>카프라 센터 — 타이틀 3열</span>
+                        <div class="ws-tb vp" style="margin-left:0;border:1px solid #C9D0D9;border-radius:6px;">
+                          <div class="v2-urlbar" style="height:34px;border-radius:5px 5px 0 0;"><i></i><i></i><i></i>
+                            <div class="v2-url">https://<b>ragnarokland.com</b><em>/store</em></div>
+                          </div>
+                          <div class="v2-hd tb">
+                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="21" height="15" aria-hidden="true">
+                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                              </svg></span>
+                            <div class="img" style="width:150px;height:26px;"><span class="sp" style="font-size:7.5px;">RAGNAROK PORTAL 로고</span>
+                            </div>
+                            <div class="v2-hdu" style="gap:12px;">
+                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+                          <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor" stroke-width="1.7" />
+                          <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                        </svg></span>
+                              <span class="v2-av"></span>
+                            </div>
+                          </div>
+                          <div class="kc-head" style="padding:22px 24px 0;">
+                            <b style="font-size:20px;">카프라 센터</b>
+                            <span>라그나로크의 상점을 한자리에서.</span>
+                            <div class="kc-rg">
+                              <b>지역</b>
+                              <span>글로벌</span>
+                              <span class="on">한국</span>
+                              <span>일본</span>
+                              <span>대만</span>
+                              <span>라탐</span>
+                            </div>
+                          </div>
+                          <div class="kc-sec">
+                            <div class="kc-sech">
+                              <b>웹샵</b>
+                              <em>게임 아이템 · 유료 · 원페이 결제</em>
+                            </div>
+                            <div class="kc-grid g3">
+                              <div class="kc-card">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 온라인<s>한국 서비스 중</s></span>
+                              </div>
+                              <div class="kc-card">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 제로<s>한국 서비스 중</s></span>
+                              </div>
+                              <div class="kc-card off">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 M<s>한국 미서비스</s></span>
+                              </div>
+                              <div class="kc-card">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 X : 오리진<s>한국 서비스 중</s></span>
+                              </div>
+                              <div class="kc-card">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 오리진<s>한국 서비스 중</s></span>
+                              </div>
+                              <div class="kc-card off">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 비긴즈<s>한국 미서비스</s></span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kc-sec">
+                            <div class="kc-sech">
+                              <b>웹 굿즈</b>
+                              <span class="free">무료 · 회원 전용</span>
+                              <em>게임 구분 없이 라그나로크 공통</em>
+                            </div>
+                            <div class="kc-grid g2">
+                              <div class="kc-tile">
+                                <span class="th">굿즈<br>이미지</span>
+                                <span class="tx"><b>디바이스 배경화면</b><span>PC · 모바일 · 스마트워치용 일러스트</span></span>
+                                <span class="go">받기 &#8594;</span>
+                              </div>
+                              <div class="kc-tile">
+                                <span class="th">굿즈<br>이미지</span>
+                                <span class="tx"><b>컬러링북</b><span>몬스터 · 캐릭터 도안 직접 색칠</span></span>
+                                <span class="go">받기 &#8594;</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kc-sec" style="padding-bottom:34px;">
+                            <div class="kc-sech">
+                              <b>공식 스토어</b>
+                              <span class="out">실물 굿즈 · 외부</span>
+                              <em>우리가 결제를 받지 않는다 — 지역에 맞는 스토어로 보낸다</em>
+                            </div>
+                            <div class="kc-grid g3">
+                              <div class="kc-tile">
+                                <span class="th">스토어<br>로고</span>
+                                <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
+                                <span class="go">이동 &#8599;</span>
+                              </div>
+                              <div class="kc-tile">
+                                <span class="th">스토어<br>로고</span>
+                                <span class="tx"><b>GNJOY 스토어</b><span>대만</span></span>
+                                <span class="go">이동 &#8599;</span>
+                              </div>
+                              <div class="kc-tile" style="border-color:#2F6490;">
+                                <span class="th">스토어<br>로고</span>
+                                <span class="tx"><b>라그나로크 스토어</b><span>한국 · 현재 지역</span></span>
+                                <span class="go">이동 &#8599;</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="v2-ft">&copy; Gravity Co., Ltd. All Rights Reserved.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ═══════════════ MO ═══════════════ -->
+              <div class="pane pane-mo">
+                <div class="wstage">
+                  <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
+                    <div class="tg-grid">
+                      <div class="tg-cell">
+                        <span class="tg-lbl"><em>MO</em>카프라 센터 — 타이틀 2열</span>
+                        <div class="ws-mo vp" style="margin-left:0;border:1px solid #C9D0D9;border-radius:6px;">
+                          <div class="v2-urlbar" style="height:30px;padding:0 10px;gap:7px;border-radius:5px 5px 0 0;">
+                            <i style="width:7px;height:7px;"></i>
+                            <div class="v2-url" style="height:20px;font-size:9.5px;"><b>ragnarokland.com</b><em>/store</em></div>
+                          </div>
+                          <div class="v2-hd mo">
+                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14" aria-hidden="true">
+                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                              </svg></span>
+                            <div class="img" style="width:112px;height:20px;"><span class="sp" style="font-size:6.5px;">RAGNAROK PORTAL 로고</span>
+                            </div>
+                            <div class="v2-hdu" style="gap:10px;">
+                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+                          <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor" stroke-width="1.7" />
+                          <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                        </svg></span>
+                              <span class="v2-av" style="width:21px;height:21px;"></span>
+                            </div>
+                          </div>
+                          <div class="kc-head" style="padding:18px 16px 0;">
+                            <b style="font-size:18px;">카프라 센터</b>
+                            <span style="font-size:11.5px;">라그나로크의 상점을 한자리에서.</span>
+                            <div class="kc-rg">
+                              <b>지역</b>
+                              <span>글로벌</span>
+                              <span class="on">한국</span>
+                              <span>일본</span>
+                              <span>대만</span>
+                              <span>라탐</span>
+                            </div>
+                          </div>
+                          <div class="kc-sec">
+                            <div class="kc-sech">
+                              <b>웹샵</b>
+                              <em>게임 아이템 · 유료 · 원페이 결제</em>
+                            </div>
+                            <div class="kc-grid g2">
+                              <div class="kc-card">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 온라인<s>한국 서비스 중</s></span>
+                              </div>
+                              <div class="kc-card">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 제로<s>한국 서비스 중</s></span>
+                              </div>
+                              <div class="kc-card off">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 M<s>한국 미서비스</s></span>
+                              </div>
+                              <div class="kc-card">
+                                <span class="kv">게임 키비주얼</span>
+                                <span class="nm">라그나로크 X : 오리진<s>한국 서비스 중</s></span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kc-sec">
+                            <div class="kc-sech">
+                              <b>웹 굿즈</b>
+                              <span class="free">무료 · 회원 전용</span>
+                              <em>게임 구분 없이 라그나로크 공통</em>
+                            </div>
+                            <div class="kc-grid">
+                              <div class="kc-tile">
+                                <span class="th">굿즈<br>이미지</span>
+                                <span class="tx"><b>디바이스 배경화면</b><span>PC · 모바일 · 스마트워치용 일러스트</span></span>
+                                <span class="go">받기 &#8594;</span>
+                              </div>
+                              <div class="kc-tile">
+                                <span class="th">굿즈<br>이미지</span>
+                                <span class="tx"><b>컬러링북</b><span>몬스터 · 캐릭터 도안 직접 색칠</span></span>
+                                <span class="go">받기 &#8594;</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="kc-sec" style="padding-bottom:34px;">
+                            <div class="kc-sech">
+                              <b>공식 스토어</b>
+                              <span class="out">실물 굿즈 · 외부</span>
+                              <em>우리가 결제를 받지 않는다 — 지역에 맞는 스토어로 보낸다</em>
+                            </div>
+                            <div class="kc-grid">
+                              <div class="kc-tile">
+                                <span class="th">스토어<br>로고</span>
+                                <span class="tx"><b>아마존 스토어</b><span>글로벌</span></span>
+                                <span class="go">이동 &#8599;</span>
+                              </div>
+                              <div class="kc-tile">
+                                <span class="th">스토어<br>로고</span>
+                                <span class="tx"><b>GNJOY 스토어</b><span>대만</span></span>
+                                <span class="go">이동 &#8599;</span>
+                              </div>
+                              <div class="kc-tile" style="border-color:#2F6490;">
+                                <span class="th">스토어<br>로고</span>
+                                <span class="tx"><b>라그나로크 스토어</b><span>한국 · 현재 지역</span></span>
+                                <span class="go">이동 &#8599;</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="v2-ft mo">&copy; Gravity Co., Ltd. All Rights Reserved.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ═══════════════ 디스크립션 ═══════════════ -->
+            <div class="dcol">
+
+              <div class="warn">
+                <div class="warn-h">이 페이지가 있어야 하는 이유 — 지역 하나가 세 구역의 행선지를 정한다</div>
+                <p class="warn-b">웹샵 · 웹 굿즈 · 공식 스토어는 성격이 다르지만 <b>지역이라는 값 하나를 공유</b>한다.
+                  그 값을 고르는 자리가 없으면 세 구역이 각자 지역을 물어야 한다. <b>브릿지가 그 값을 받아 아래로 내린다.</b></p>
+              </div>
+
+              <div class="imm">
+                <div class="imm-h">이 화면의 기준</div>
+                <div class="imm-r"><span class="imm-k">위치</span><span class="imm-v"><b>포털 페이지</b>다 — <span
+                      class="mono">ragnarokland.com/store</span>. 포털 GNB 가 그대로 있고 <span
+                      class="mono">STORE</span>가 활성이다</span></div>
+                <div class="imm-r"><span class="imm-k">브랜드</span><span class="imm-v">GNB 라벨은 <span
+                      class="mono">STORE</span>(영문 통일) · <b>「카프라 센터」는 이 페이지 안</b>에서 쓴다</span></div>
+                <div class="imm-r"><span class="imm-k">구역</span><span class="imm-v"><b>셋</b> — 웹샵(유료) · 웹 굿즈(무료) ·
+                    공식 스토어(외부). <b>결제가 걸린 건 웹샵뿐</b>이다</span></div>
+                <div class="imm-r"><span class="imm-k">지역</span><span class="imm-v">이 페이지에 <b>하나뿐</b>. 여기서만 고르고 아래
+                    세 구역이 그 값을 쓴다</span></div>
+                <div class="imm-r"><span class="imm-k">실물 굿즈</span><span class="imm-v"><b>우리가 결제를 받지 않는다</b> — 지역에 맞는
+                    외부 스토어로 보낸다. 배송 · 재고 · CS 는 우리 몫이 아니다</span></div>
+                <div class="imm-r"><span class="imm-k">웹 굿즈</span><span class="imm-v">게임 구분 <b>없음</b> — 라그나로크 공통이다.
+                    타이틀 아래에 두지 않는다</span></div>
+              </div>
+
+              <div class="dr">
+                <div class="dr-h"><span class="mk">1</span><span class="dr-t">포털 GNB</span><span class="src">2행</span>
+                </div>
+                <p class="dr-b">유틸 행 + GNB 행. <span class="mono">STORE</span> 활성.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">STORE</span><span class="spec-v">하단 언더바로 <b>활성 표기</b>. 드롭다운은
+                      <b>카프라 센터 · 웹샵 · 웹 굿즈 · 공식 스토어</b> 넷</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 영문</span><span class="spec-v">나머지 7개(RO IP · RO GAMES ·
+                      LIBRARY · NEWS · MEDIA · RO FESTA)가 <b>전부 영문</b>이다. 여기만 한글이면 층위가 깨진다</span></div>
+                  <div class="spec-r"><span class="spec-k">웹샵과 차이</span><span class="spec-v">웹샵은 <b>별도 도메인</b>이라 GNB 를
+                      들고 가지 않는다 — 거기서는 <b>[&#8249; 카프라 센터]</b> 앵커가 이 자리를 대신한다</span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">2</span><span class="dr-t">페이지 머리</span><span
+                    class="src">브랜드</span></div>
+                <p class="dr-b">「카프라 센터」 + 한 줄 설명.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">이름</span><span class="spec-v"><b>카프라</b>는 게임 내 상점 · 창고 NPC
+                      명칭이다 — IP 앵커로 쓴다</span></div>
+                  <div class="spec-r"><span class="spec-k">엠포리움</span><span class="spec-v">쓰지 않는다 — <b>게임 내에서 쓰지 않는
+                        단어</b>다</span></div>
+                  <div class="spec-r"><span class="spec-k">키비주얼</span><span class="spec-v">두지 않는다 — 아래 <b>타이틀 카드가 이미
+                        이미지</b>다. 배너를 얹으면 스크롤만 길어진다</span></div>
+                </div>
+              </div>
+
+              <div class="dr">
+                <div class="dr-h"><span class="mk">3</span><span class="dr-t">지역</span><span class="src">핵심</span>
+                </div>
+                <p class="dr-b">글로벌 · 한국 · 일본 · 대만 · 라탐. <b>이 값이 세 구역의 행선지를 정한다.</b></p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">웹샵</span><span class="spec-v">어느 <b>지사 서비스</b>인지 → <b>통화 ·
+                        결제수단</b>이 따라 결정된다</span></div>
+                  <div class="spec-r"><span class="spec-k">웹 굿즈</span><span class="spec-v"><b>언어만</b> 바뀐다 — 콘텐츠는
+                      공통이다</span></div>
+                  <div class="spec-r"><span class="spec-k">공식 스토어</span><span class="spec-v">한국 → 라그나로크 스토어 · 대만 →
+                      GNJOY · 그 외 → 아마존</span></div>
+                  <div class="spec-r"><span class="spec-k">기본값</span><span class="spec-v">접속 지역 추정이 아니라 <b>계정에 기억된
+                        값</b>. 처음이면 <b>글로벌</b></span></div>
+                  <div class="spec-r"><span class="spec-k">유지 범위</span><span class="spec-v">이 페이지와 <b>웹샵까지만</b>. RO
+                      GAMES 는 지사 사이트로 나가버려 돌아올 일이 없으므로 <b>공유하지 않는다</b></span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">4</span><span class="dr-t">웹샵 구역</span><span class="src">유료</span>
+                </div>
+                <p class="dr-b">타이틀 카드. 클릭하면 <b>그 게임 &#215; 선택 지역의 웹샵</b>으로 간다.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">축</span><span class="spec-v"><b>1단계 타이틀 · 2단계 지역</b>. 지역이
+                      위에 있으니 카드는 타이틀만 고르면 된다</span></div>
+                  <div class="spec-r"><span class="spec-k">타이틀</span><span class="spec-v">라그나로크 온라인 · 제로 · M · X :
+                      오리진 · 오리진 · 비긴즈 — <b>IP 전체</b>를 모은다</span></div>
+                  <div class="spec-r"><span class="spec-k">지역 서비스</span><span class="spec-v">라그나로크 온라인처럼 <b>한 타이틀이 여러
+                        지역</b>에서 서비스되는 경우가 있다 — 타이틀은 하나로 두고 지역으로 가른다</span></div>
+                  <div class="spec-r"><span class="spec-k">미서비스</span><span class="spec-v">그 지역에 없으면 <b>흐리게 + 클릭
+                        불가</b>하고 사유를 카드에 적는다. <b>숨기지 않는다</b> — 없다는 사실도 정보다</span></div>
+                  <div class="spec-r"><span class="spec-k">열 수</span><span class="spec-v">PC <b>6열</b> · TABLET
+                      <b>3열</b> · MO <b>2열</b></span></div>
+                  <div class="spec-r"><span class="spec-k">웹샵에서</span><span class="spec-v">이 구역을 <b>모달로 축소해 재사용</b>한다 —
+                      헤더 <b>[게임 &#183; 지역]</b>을 누르면 열린다</span></div>
+                </div>
+              </div>
+
+              <div class="dr">
+                <div class="dr-h"><span class="mk">5</span><span class="dr-t">웹 굿즈</span><span class="src">무료</span>
+                </div>
+                <p class="dr-b">디바이스 배경화면 · 컬러링북. <b>무료 · 회원 전용</b>.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">게임 구분</span><span class="spec-v"><b>없다</b> — 라그나로크 공통이다.
+                      타이틀 아래에 두면 제로 · M 유저가 못 본다</span></div>
+                  <div class="spec-r"><span class="spec-k">결제</span><span class="spec-v"><b>없다.</b> 장바구니 · 배송지 · 환불이
+                      전부 없다 — 그래서 웹샵 결제 동선을 방해하지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">회원 전용</span><span class="spec-v">받으려면 로그인이 필요하다 — <b>패스포트
+                        발급 유도 지점</b>이다. 돈 안 드는 것으로 계정을 받는다</span></div>
+                  <div class="spec-r"><span class="spec-k">비로그인</span><span class="spec-v">목록은 보이고 [받기]에서 <b>로그인 확인
+                        알럿</b></span></div>
+                  <div class="spec-r"><span class="spec-k">용도 고지</span><span class="spec-v">「개인 소장 · 비상업적 용도로만」 —
+                      <b>구역 하단</b>에 고정</span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">6</span><span class="dr-t">공식 스토어</span><span class="src">외부</span>
+                </div>
+                <p class="dr-b">실물 굿즈. <b>우리가 결제를 받지 않는다</b> — 외부 스토어로 보낸다.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">대상</span><span class="spec-v">아마존(글로벌) · GNJOY(대만) ·
+                      라그나로크 스토어(한국) — <b>새 탭</b> 이동</span></div>
+                  <div class="spec-r"><span class="spec-k">지역 연동</span><span class="spec-v">선택 지역의 스토어를 <b>먼저 · 강조</b>해
+                      보여주고 나머지도 함께 둔다 — 지역 밖 구매를 막지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">우리가 안 하는 것</span><span class="spec-v">재고 · 배송 · 교환 · 파손
+                      CS. <b>결제를 받지 않으므로 규정 충돌이 애초에 없다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v">「외부」 배지 + <b>&#8599;</b> 로 이탈을
+                      미리 알린다</span></div>
+                </div>
+              </div>
+
+              <div class="dr">
+                <div class="dr-h"><span class="mk">7</span><span class="dr-t">푸터</span><span class="src">포털</span>
+                </div>
+                <p class="dr-b">포털 공통 푸터를 쓴다.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">웹샵과 차이</span><span class="spec-v">웹샵 푸터는 <b>사업자 정보 · 약관</b>을
+                      져야 한다(전자상거래법). 이 페이지는 <b>결제가 없어</b> 포털 푸터로 충분하다</span></div>
+                </div>
+              </div>
+
+              <div class="warn">
+                <div class="warn-h">확정 필요 2건</div>
+                <p class="warn-b"><b>① 타이틀 목록.</b> 라그나로크 IP 중 웹샵을 여는 타이틀이 어디까지인지 — 지금은 6종을 예시로 그렸다.<br>
+                  <b>② 지역 &#215; 타이틀 매트릭스.</b> 어느 지역에 어느 타이틀이 서비스되는지 표가 있어야 미서비스 처리를 확정할 수 있다.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="screen" id="v2">
         <div style="width:100%;height:100%;background:#E9EBEF;display:flex;flex-direction:column;overflow:hidden;">
           <div class="wrap2">
             <div class="wcol is-pc">
@@ -13036,7 +13869,7 @@
 
   <script>
     (function () {
-      var order = ["v2", "v8", "v12", "v6", "v9", "v10", "v7", "v11"];
+      var order = ["v1", "v2", "v8", "v12", "v6", "v9", "v10", "v7", "v11"];
       var stage = document.querySelector('.stage');
       var navBtns = Array.prototype.slice.call(document.querySelectorAll('.nv'));
       var descBtn = document.getElementById('descBtn');
