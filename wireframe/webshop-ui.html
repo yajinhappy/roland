@@ -2238,9 +2238,19 @@
       letter-spacing: -.015em;
     }
 
+    /* 주문 정보 줄 안의 통화 셀렉터 */
+    .v2-cursel.pay {
+      margin-left: auto;
+      align-self: center;
+    }
+
+    .v2-cfdim[hidden] {
+      display: none;
+    }
+
     .ord-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 11px;
       padding: 14px;
       background: #F4F8FB;
@@ -2265,8 +2275,18 @@
     .ord-item .meta {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       min-width: 0;
+      flex: 1;
+    }
+
+    /* 가격 · 수량은 상품명 아래 줄로 내린다 — 한 줄에 몰면 빡빡하다 */
+    .ord-item .pq {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 3px;
     }
 
     .ord-item .ct2 {
@@ -2287,7 +2307,6 @@
     }
 
     .ord-item .prc {
-      margin-left: auto;
       flex: none;
       font-family: "IBM Plex Mono", monospace;
       font-size: 15px;
@@ -11863,6 +11882,16 @@
                       <span class="ptl"><u>RAGNAROK</u><b>ONE PAY</b></span>
                     </div>
 
+                    <!-- 통화 변경 확인 — 시스템 알럿 -->
+                    <div class="v2-cfdim" data-role="curalert" hidden>
+                      <div class="v2-cf">
+                        <em>pay.ragnarokland.com 내용:</em>
+                        <p>통화 변경 시 환율 및 이용 가능한 결제 수단이 재적용되어 새로고침됩니다.<br>변경하시겠습니까?</p>
+                        <div class="btns"><span class="no">취소</span><span class="ok">변경하기</span>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="pay-col" style="position:relative;">
                       <div class="mk" style="position:absolute;top:42px;left:-34px;">1</div>
                       <div class="mk" style="position:absolute;top:229px;left:-34px;">2</div>
@@ -11878,15 +11907,25 @@
                             <div class="ord-game">
                               <span class="k">게임</span>
                               <span class="v">라그나로크 온라인</span>
+                              <span class="v2-cursel pay" data-role="paycur">통화 <b>KRW</b><i>&#9662;</i>
+                                <span class="v2-curdd">
+                                  <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                  <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                  <span><em>JP</em>일본 <s>JPY</s></span>
+                                  <span><em>TW</em>대만 <s>TWD</s></span>
+                                </span>
+                              </span>
                             </div>
                             <div class="ord-item">
                               <span class="thumb">상품<br>이미지</span>
                               <span class="meta">
                                 <span class="ct2">패키지</span>
                                 <span class="nm">스피드 부스터 패키지 10세트</span>
+                                <span class="pq">
+                                  <span class="prc">₩ 25,000</span>
+                                  <span class="qty"><s>&times;</s><b>1</b></span>
+                                </span>
                               </span>
-                              <span class="prc">₩ 25,000</span>
-                              <span class="qty"><s>&times;</s><b>1</b></span>
                             </div>
                           </div>
                         </div>
@@ -12002,15 +12041,26 @@
                               <div class="ord-game">
                                 <span class="k">게임</span>
                                 <span class="v">라그나로크 온라인</span>
+                                <span class="v2-cursel pay" style="height:24px;font-size:10.5px;"
+                                  data-role="paycur">통화 <b>KRW</b><i>&#9662;</i>
+                                  <span class="v2-curdd">
+                                    <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                    <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                    <span><em>JP</em>일본 <s>JPY</s></span>
+                                    <span><em>TW</em>대만 <s>TWD</s></span>
+                                  </span>
+                                </span>
                               </div>
                               <div class="ord-item">
                                 <span class="thumb">상품<br>이미지</span>
                                 <span class="meta">
                                   <span class="ct2">패키지</span>
                                   <span class="nm">스피드 부스터 패키지 10세트</span>
+                                  <span class="pq">
+                                    <span class="prc">₩ 25,000</span>
+                                    <span class="qty"><s>&times;</s><b>1</b></span>
+                                  </span>
                                 </span>
-                                <span class="prc">₩ 25,000</span>
-                                <span class="qty"><s>&times;</s><b>1</b></span>
                               </div>
                             </div>
                           </div>
@@ -12135,15 +12185,26 @@
                               <div class="ord-game">
                                 <span class="k">게임</span>
                                 <span class="v">라그나로크 온라인</span>
+                                <span class="v2-cursel pay" style="height:22px;font-size:10px;"
+                                  data-role="paycur"><b>KRW</b><i>&#9662;</i>
+                                  <span class="v2-curdd">
+                                    <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                    <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                    <span><em>JP</em>일본 <s>JPY</s></span>
+                                    <span><em>TW</em>대만 <s>TWD</s></span>
+                                  </span>
+                                </span>
                               </div>
                               <div class="ord-item">
                                 <span class="thumb">상품<br>이미지</span>
                                 <span class="meta">
                                   <span class="ct2">패키지</span>
                                   <span class="nm">스피드 부스터 패키지 10세트</span>
+                                  <span class="pq">
+                                    <span class="prc">₩ 25,000</span>
+                                    <span class="qty"><s>&times;</s><b>1</b></span>
+                                  </span>
                                 </span>
-                                <span class="prc">₩ 25,000</span>
-                                <span class="qty"><s>&times;</s><b>1</b></span>
                               </div>
                             </div>
                           </div>
@@ -12286,14 +12347,34 @@
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">게임</span><span class="spec-v">게임명 1행 — <b>라그나로크
                         온라인</b></span></div>
-                  <div class="spec-r"><span class="spec-k">상품</span><span class="spec-v">썸네일 · 분류 · 상품명 · <b>단가</b> ·
-                      수량 — 웹샵에서 확정된 그대로</span></div>
+                  <div class="spec-r"><span class="spec-k">상품</span><span class="spec-v">썸네일 우측에 <b>분류 / 상품명 / 단가 ·
+                        수량</b> — <b>세 줄</b>로 쌓는다. 한 줄에 몰지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">수량</span><span class="spec-v"><span class="mono">&times;
                         1</span>을 흰 배경 칩으로 우측에. <b>변경 · 삭제 컨트롤을 두지 않는다</b></span></div>
                   <div class="spec-r"><span class="spec-k">합계</span><span class="spec-v">상품 영역은 <b>단가 × 수량</b>, 버튼은
                       <b>최종 결제 금액</b> — 같은 금액을 두 번 쓰지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">한정 상품</span><span class="spec-v">서버 · 계정 한정이면 게임 행 <b>오른쪽
                         끝</b>에 대상을 덧붙인다</span></div>
+                  <div class="spec-r"><span class="spec-k">통화</span><span class="spec-v">게임 행 <b>오른쪽</b>에 「통화 KRW
+                      &#9662;」 — 여기서 <b>바꿀 수 있다</b>. 해당 서비스에 허용된 통화만 뜬다</span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">1&#8242;</span><span class="dr-t">통화 변경 확인</span><span
+                    class="src">시스템 알럿</span></div>
+                <p class="dr-b">다른 통화를 고르면 뜬다. PC · TABLET · MO 동일.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">문구</span><span class="spec-v">「통화 변경 시 환율 및 이용 가능한 결제 수단이
+                      재적용되어 새로고침됩니다. 변경하시겠습니까?」</span></div>
+                  <div class="spec-r"><span class="spec-k">버튼</span><span class="spec-v"><b>[취소]</b> ·
+                      <b>[변경하기]</b></span></div>
+                  <div class="spec-r"><span class="spec-k">취소</span><span class="spec-v">통화를 <b>되돌린다</b> — 결제 세션은 그대로
+                      유지</span></div>
+                  <div class="spec-r"><span class="spec-k">변경하기</span><span class="spec-v"><b>결제 세션을 다시 만든다</b> — 환율 ·
+                      금액 · 이용 가능한 결제 수단이 재계산되고 화면이 새로고침된다</span></div>
+                  <div class="spec-r"><span class="spec-k">선택한 수단</span><span class="spec-v">바뀐 통화에서 <b>쓸 수 없으면 해제</b>된다
+                      — 다시 고르게 한다</span></div>
                 </div>
               </div>
 
@@ -12308,8 +12389,10 @@
                         타일이 두 번</b> 나온다 — 어느 쪽을 눌러야 하는지 헷갈리고, 두 번 결제한 것으로 오해할 여지가 생긴다</span></div>
                   <div class="spec-r"><span class="spec-k">저장</span><span class="spec-v">직전 수단은 <b>그대로 저장한다</b> — 화면에서 한
                       번만 보여줄 뿐이다</span></div>
-                  <div class="spec-r"><span class="spec-k">위치</span><span class="spec-v">배지가 붙은 타일은 <b>소속 그룹 맨 앞</b>에 둔다 —
-                      접힘 상태에서도 보이게</span></div>
+                  <div class="spec-r"><span class="spec-k">위치</span><span class="spec-v">배지가 붙은 타일은 <b>소속 그룹 맨 앞</b>에 둔다</span>
+                  </div>
+                  <div class="spec-r"><span class="spec-k">자동 포커싱</span><span class="spec-v">목록에 <b>내부 스크롤</b>이 걸려 있어도
+                      진입 시 <b>그 타일이 보이는 위치로 스크롤</b>해 둔다 — TABLET · MO 에서 특히 필요하다</span></div>
                 </div>
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">기본 선택</span><span class="spec-v"><b>없다</b> — 유저가 고르지 않은 수단으로
@@ -13067,6 +13150,56 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(resync);
     })();
   </script>
+  <script>
+  /* 최근에 쓴 수단이 있으면 목록을 그 자리로 스크롤해 둔다 — 내부 스크롤에 묻히지 않게 */
+  (function () {
+    function focusRecent() {
+      var w = document.querySelectorAll('.cwrap.fold');
+      for (var i = 0; i < w.length; i++) {
+        if (!w[i].offsetParent) continue;
+        var r = w[i].querySelector('.ct.rec');
+        if (!r) continue;
+        var grp = r.closest('.cgd');
+        var head = grp && grp.previousElementSibling;
+        var top = (head && head.classList.contains('cgrp') ? head.offsetTop : r.offsetTop);
+        w[i].scrollTop = Math.max(0, top - 10);
+      }
+    }
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('.tab, .nv, [data-role="chips"] > span')) setTimeout(focusRecent, 30);
+    });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', focusRecent);
+    } else { focusRecent(); }
+    window.addEventListener('load', focusRecent);
+  })();
+  </script>
+
+  <script>
+  /* 통화 변경 — 다른 통화를 고르면 확인 알럿을 띄운다 */
+  (function () {
+    document.addEventListener('click', function (e) {
+      var pick = e.target.closest('[data-role="paycur"] .v2-curdd > span');
+      if (pick) {
+        if (!pick.classList.contains('on')) {
+          var f = pick.closest('.pcframe') || document;
+          var a = f.querySelector('[data-role="curalert"]');
+          if (a) a.hidden = false;
+        }
+        return;
+      }
+      var open = document.querySelector('[data-role="curalert"]:not([hidden])');
+      if (!open) return;
+      if (!e.target.closest('.v2-cf') || e.target.closest('.btns > span')) open.hidden = true;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      var a = document.querySelectorAll('[data-role="curalert"]:not([hidden])');
+      for (var i = 0; i < a.length; i++) a[i].hidden = true;
+    });
+  })();
+  </script>
+
   <script>
   /* 한정 종류 칩 — 같은 구역 안에서 기간 · 수량만 걸러 본다 */
   (function () {
