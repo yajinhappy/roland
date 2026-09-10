@@ -4955,6 +4955,54 @@
       color: #6C7480;
     }
 
+    /* 카프라 센터 복귀 앵커 — 웹샵은 별도 도메인이라 포털 GNB 를 들고 오지 않는다 */
+    .v2-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      color: #545C69;
+      white-space: nowrap;
+      flex: none;
+      cursor: pointer;
+    }
+
+    .v2-back i {
+      font-style: normal;
+      font-size: 12px;
+      color: #98A2AE;
+    }
+
+    /* 현재 게임 · 지역. 클릭하면 변경 모달이 열린다 */
+    .v2-ctxsel {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 30px;
+      padding: 0 11px;
+      border: 1px solid #C9D0D9;
+      border-radius: 4px;
+      background: #FAFBFC;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #232B35;
+      white-space: nowrap;
+      flex: none;
+      cursor: pointer;
+    }
+
+    .v2-ctxsel:hover {
+      border-color: #2F6490;
+      color: #2F6490;
+    }
+
+    .v2-ctxsel i {
+      font-style: normal;
+      font-size: 9px;
+      color: #98A2AE;
+    }
+
     .v2-hdu {
       margin-left: auto;
       display: flex;
@@ -7270,6 +7318,111 @@
     /* ---- 상품 상세 모달 ---- */
     /* 핀이 모달 좌우 바깥(-33px)에 놓이므로 overflow 를 잠그지 않는다.
      모서리는 헤더 · 푸터가 각각 처리한다 */
+    /* 게임 · 지역 변경 모달 — 브릿지 웹샵 구역을 줄여서 재사용 */
+    .v2-ctxmd {
+      width: 620px;
+      background: #fff;
+      border-radius: 7px;
+      box-shadow: 0 18px 46px rgba(23, 27, 34, .26);
+      overflow: hidden;
+    }
+
+    .v2-ctxrg {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 18px;
+      border-bottom: 1px solid #E4E8ED;
+      background: #FAFBFC;
+      flex-wrap: wrap;
+    }
+
+    .v2-ctxrg>b {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: #98A2AE;
+      margin-right: 4px;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .v2-ctxrg>span {
+      padding: 6px 12px;
+      border: 1px solid #DCE2E8;
+      border-radius: 15px;
+      background: #fff;
+      font-size: 11.5px;
+      color: #545C69;
+      cursor: pointer;
+    }
+
+    .v2-ctxrg>span.on {
+      border-color: #2F6490;
+      background: #2F6490;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .v2-ctxgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 16px 18px 18px;
+    }
+
+    .v2-ctxg {
+      border: 1px solid #E1E6EC;
+      border-radius: 5px;
+      overflow: hidden;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .v2-ctxg.on {
+      border: 2px solid #2F6490;
+    }
+
+    .v2-ctxg.off {
+      opacity: .45;
+      cursor: default;
+    }
+
+    .v2-ctxg .kv {
+      height: 62px;
+      background: #E7ECF1;
+      border-bottom: 1px solid #E1E6EC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #7A858F;
+    }
+
+    .v2-ctxg .nm {
+      display: block;
+      padding: 9px 10px 10px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #232B35;
+      line-height: 1.35;
+    }
+
+    .v2-ctxg .st {
+      display: block;
+      margin-top: 3px;
+      font-size: 9.5px;
+      color: #98A2AE;
+      background: none;
+      height: auto;
+      padding: 0;
+      letter-spacing: 0;
+    }
+
+    .v2-ctxg.on .st {
+      color: #2F6490;
+      font-weight: 600;
+    }
+
     .v2-pmd {
       width: 620px;
       background: #fff;
@@ -8069,30 +8222,24 @@
                       <div style="position:relative;">
                         <div class="mk" style="position:absolute;top:20px;left:-33px;">1</div>
                         <div class="v2-hd">
-                          <div class="img" style="width:186px;height:30px;"><span class="sp"
-                              style="font-size:8px;">RAGNAROK
-                              PORTAL 로고 SVG</span></div>
+                          <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO LAND 로고</span>
+                          </div>
                           <span class="v2-lgdiv"></span>
-                          <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
-                          <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
-                          <span class="svc"><span class="svc-m"></span>RO UGC<span class="svc-x">&#8599;</span></span>
+                          <span class="v2-back"><i>&#8249;</i>카프라 센터</span>
+                          <span class="v2-lgdiv"></span>
+                          <span class="v2-ctxsel" data-role="ctx">라그나로크 온라인 &#183; 한국 <i>&#9662;</i></span>
                           <div class="v2-hdu">
-                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
-                                aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" fill="none"
+                                stroke="currentColor" stroke-width="1.5">
                                 <circle cx="10" cy="10" r="7.2" />
                                 <path d="M2.8 10h14.4" />
                                 <path
                                   d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
                               </svg> KO <span style="font-size:9px;">&#9662;</span></span>
-                            <span class="v2-lgdiv" style="height:16px;"></span>
-                            <span class="srch" style="display:flex;align-items:center;gap:6px;"><svg class="ico"
-                                viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-                                <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                  stroke-width="1.7" />
-                                <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                  stroke-linecap="round" />
-                              </svg><span class="ts">SEARCH</span></span>
-                            <span class="v2-av"></span>
+                            <span class="v2-ic">&#9825;<em>4</em></span>
+                            <span class="v2-ic v2-cart">&#128722;<em>1</em></span>
+                            <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
+                                style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                           </div>
                         </div>
                       </div>
@@ -8107,14 +8254,6 @@
                             <span class="ws-kvh">라그나로크 온라인</span>
                             <span class="ws-kvs">WEB SHOP</span>
                           </div>
-                          <span class="v2-cursel kv" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
-                            <span class="v2-curdd">
-                              <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
-                              <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
-                              <span><em>JP</em>일본 <s>JPY</s></span>
-                              <span><em>TW</em>대만 <s>TWD</s></span>
-                            </span>
-                          </span>
                         </div>
                       </div>
 
@@ -8127,7 +8266,14 @@
                           <span class="ws-mi">관심상품</span>
                           <span class="ws-mi">FAQ</span>
                         </div>
-                        <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
+                        <span class="v2-cursel v2-menucur" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
+                          <span class="v2-curdd">
+                            <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                            <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                            <span><em>JP</em>일본 <s>JPY</s></span>
+                            <span><em>TW</em>대만 <s>TWD</s></span>
+                          </span>
+                        </span>
                       </div>
 
                       <div class="v2-body" style="padding-top:16px;padding-bottom:34px;position:relative;">
@@ -8322,6 +8468,53 @@
                         &copy; Gravity Co., Ltd. All Rights Reserved.
                       </div>
 
+                      <!-- 게임 · 지역 변경 — 정의는 카프라 센터 브릿지에 있다 -->
+                      <div class="v2-mdim" data-role="ctxmodal" hidden>
+                        <div class="v2-ctxmd">
+                          <div class="v2-pmdh">
+                            <b>게임 · 지역 변경</b>
+                            <span class="v2-dwx" style="margin-left:auto;">&#10005;</span>
+                          </div>
+                          <div class="v2-ctxrg">
+                            <b>지역</b>
+                            <span>글로벌</span>
+                            <span class="on">한국</span>
+                            <span>일본</span>
+                            <span>대만</span>
+                            <span>라탐</span>
+                          </div>
+                          <div class="v2-ctxgrid">
+                            <div class="v2-ctxg on">
+                              <span class="kv">키비주얼</span>
+                              <span class="nm">라그나로크 온라인<span class="st">현재 보고 있는 웹샵</span></span>
+                            </div>
+                            <div class="v2-ctxg">
+                              <span class="kv">키비주얼</span>
+                              <span class="nm">라그나로크 제로<span class="st">한국 서비스 중</span></span>
+                            </div>
+                            <div class="v2-ctxg off">
+                              <span class="kv">키비주얼</span>
+                              <span class="nm">라그나로크 M<span class="st">한국 미서비스</span></span>
+                            </div>
+                            <div class="v2-ctxg">
+                              <span class="kv">키비주얼</span>
+                              <span class="nm">라그나로크 X : 오리진<span class="st">한국 서비스 중</span></span>
+                            </div>
+                            <div class="v2-ctxg">
+                              <span class="kv">키비주얼</span>
+                              <span class="nm">라그나로크 오리진<span class="st">한국 서비스 중</span></span>
+                            </div>
+                            <div class="v2-ctxg off">
+                              <span class="kv">키비주얼</span>
+                              <span class="nm">라그나로크 비긴즈<span class="st">한국 미서비스</span></span>
+                            </div>
+                          </div>
+                          <div class="v2-dwf" style="padding:12px 18px 14px;">
+                            <span class="hint">담은 상품은 <b>게임 &#215; 지역마다 따로</b> 보관됩니다 — 바꿔도 비워지지 않습니다</span>
+                          </div>
+                        </div>
+                      </div>
+
                       <!-- 카드 [구매하기] → 상세 모달. 정의는 02 화면에 있다 -->
                       <div class="v2-mdim" data-role="cardmodal" hidden>
                         <div class="v2-pmd">
@@ -8394,21 +8587,17 @@
                           </div>
                           <div class="v2-hd tb" style="position:relative;">
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">1</div>
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="21" height="15"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:150px;height:26px;"><span class="sp"
-                                style="font-size:7.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:12px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="17"
-                                  height="17" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp"
+                                style="font-size:7px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:18px;"></span>
+                            <span class="v2-back" style="font-size:10.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:26px;padding:0 8px;font-size:10.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:10px;">
+                              <span class="lang" style="font-size:10px;">KO</span>
+                              <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>1</em></span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
@@ -8416,15 +8605,6 @@
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">2</div>
                             <div class="ws-kvin"><span class="ws-glogo">게임<br>로고</span>
                               <div><span class="ws-kvh">라그나로크 온라인</span><span class="ws-kvs">WEB SHOP</span></div>
-                              <span class="v2-cursel kv" style="height:27px;font-size:11px;" data-role="cur">가격
-                                <b>KRW</b><i>&#9662;</i>
-                                <span class="v2-curdd">
-                                  <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
-                                  <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
-                                  <span><em>JP</em>일본 <s>JPY</s></span>
-                                  <span><em>TW</em>대만 <s>TWD</s></span>
-                                </span>
-                              </span>
                             </div>
                           </div>
                           <div
@@ -8432,7 +8612,14 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">3</div>
                             <div class="ws-tbmenu" style="flex:1;"><span
                                 class="on">상품구매</span><span>구매내역</span><span>관심상품</span><span>FAQ</span></div>
-                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
+                            <span class="v2-cursel" style="height:27px;font-size:11px;flex:none;" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
+                              <span class="v2-curdd">
+                                <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                <span><em>JP</em>일본 <s>JPY</s></span>
+                                <span><em>TW</em>대만 <s>TWD</s></span>
+                              </span>
+                            </span>
                           </div>
                           <div class="v2-body tb" style="padding:14px 20px 24px;">
                             <div class="v2-strip" style="margin-top:0;">
@@ -8580,21 +8767,17 @@
                           </div>
                           <div class="v2-hd mo" style="position:relative;">
                             <div class="mk" style="position:absolute;top:12px;left:-33px;">1</div>
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:112px;height:20px;"><span class="sp"
-                                style="font-size:6.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:10px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16"
-                                  height="16" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp"
+                                style="font-size:6px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:14px;"></span>
+                            <span class="v2-back" style="font-size:9.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:23px;padding:0 8px;font-size:9.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:7px;">
+                              <span class="lang" style="font-size:9.5px;">KO</span>
+                              <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>1</em></span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -8602,15 +8785,6 @@
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">2</div>
                             <div class="ws-kvin"><span class="ws-glogo">게임<br>로고</span>
                               <div><span class="ws-kvh">라그나로크 온라인</span><span class="ws-kvs">WEB SHOP</span></div>
-                              <span class="v2-cursel kv" style="height:25px;font-size:10px;"
-                                data-role="cur"><b>KRW</b><i>&#9662;</i>
-                                <span class="v2-curdd">
-                                  <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
-                                  <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
-                                  <span><em>JP</em>일본 <s>JPY</s></span>
-                                  <span><em>TW</em>대만 <s>TWD</s></span>
-                                </span>
-                              </span>
                             </div>
                           </div>
                           <div
@@ -8618,7 +8792,14 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">3</div>
                             <div class="ws-mmenu" style="flex:1;border-bottom:0;"><span
                                 class="on">상품구매</span><span>구매내역</span><span>관심상품</span><span>FAQ</span></div>
-                            <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>4</em></span>
+                            <span class="v2-cursel" style="height:25px;font-size:10px;margin-right:10px;flex:none;" data-role="cur"><b>KRW</b><i>&#9662;</i>
+                              <span class="v2-curdd">
+                                <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                <span><em>JP</em>일본 <s>JPY</s></span>
+                                <span><em>TW</em>대만 <s>TWD</s></span>
+                              </span>
+                            </span>
                           </div>
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
                             <div class="v2-strip" style="margin-top:0;padding:10px 11px 12px;">
@@ -8814,24 +8995,29 @@
               </div>
 
               <div class="dr">
-                <div class="dr-h"><span class="mk">1</span><span class="dr-t">헤더</span><span class="src">통합 GNB</span>
+                <div class="dr-h"><span class="mk">1</span><span class="dr-t">헤더</span><span class="src">1행</span>
                 </div>
-                <p class="dr-b">포털과 <b>같은 유틸 행</b>을 그대로 쓴다. 웹샵 전용 헤더를 따로 두지 않는다.</p>
+                <p class="dr-b">좌측 <b>복귀 앵커 + 현재 컨텍스트</b>, 우측 유틸 4종. 포털 GNB 를 들고 오지 않는다.</p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">출처</span><span class="spec-v"><b>라그나로크 포털 화면정의서</b>의 유틸 행 —
-                      정의가 바뀌면 웹샵도 따라간다</span></div>
-                  <div class="spec-r"><span class="spec-k">좌측</span><span class="spec-v"><b>포털 로고</b> · 구분선 · <b>AIWAN ·
-                        ROBOX · RO UGC</b> — 각 서비스로 새 탭 이동</span></div>
-                  <div class="spec-r"><span class="spec-k">우측</span><span class="spec-v">언어 · 구분선 · <b>검색</b> · <b>계정
-                        아바타</b> — 로그인 상태 기준</span></div>
-                  <div class="spec-r"><span class="spec-k">비로그인</span><span class="spec-v">아바타 자리에 <b>LOG IN</b></span>
-                  </div>
-                  <div class="spec-r"><span class="spec-k">웹샵 전용 아이콘</span><span class="spec-v">두지 않는다 — 좋아요는 <b>메뉴바
-                        [관심상품] 탭</b>이 받는다</span></div>
-                  <div class="spec-r"><span class="spec-k">게임 로고</span><span class="spec-v">헤더에서 뺀다 — 바로 아래 <b>배너</b>가
-                      어느 게임인지 이미 보여준다</span></div>
-                  <div class="spec-r"><span class="spec-k">TABLET · MO</span><span class="spec-v"><b>햄버거</b> + 로고 + 검색 +
-                      아바타 — 포털 규칙을 그대로 따른다</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 GNB 가 없나</span><span class="spec-v">웹샵은 <span
+                        class="mono">shop.ragnarokland.com</span> <b>별도 도메인</b>이다. LIBRARY · NEWS 같은 포털 콘텐츠 링크를
+                      결제 직전 화면에 <b>여덟 개나</b> 노출할 이유가 없다 — 포털로 나가는 길은 <b>푸터에만</b> 둔다</span></div>
+                  <div class="spec-r"><span class="spec-k">좌측</span><span class="spec-v"><b>RO LAND 로고</b> · 구분선 ·
+                      <b>[&#8249; 카프라 센터]</b> · 구분선 · <b>[게임 &#183; 지역]</b></span></div>
+                  <div class="spec-r"><span class="spec-k">카프라 센터</span><span class="spec-v">브릿지로 <b>돌아가는 앵커</b>. 포털
+                      GNB 의 <span class="mono">STORE</span> 활성 표시를 대신한다 — 지금 어디에 있는지가 이 한 칸으로 드러난다</span></div>
+                  <div class="spec-r"><span class="spec-k">게임 &#183; 지역</span><span class="spec-v">「라그나로크 온라인 &#183;
+                      한국」 — <b>현재 컨텍스트 표시 겸 변경 버튼</b>. 누르면 <b>변경 모달</b>이 열린다</span></div>
+                  <div class="spec-r"><span class="spec-k">우측</span><span class="spec-v">언어 · <b>좋아요</b>(개수 배지) ·
+                      <b>담기</b>(개수 배지) · 계정 — 넷</span></div>
+                  <div class="spec-r"><span class="spec-k">담기 아이콘</span><span class="spec-v">드로어를 닫아도 여기서 다시 연다. 0이면
+                      배지를 숨긴다. <b>포털 GNB 가 아니라 여기</b>에 둔다 — 웹샵 스코프다</span></div>
+                  <div class="spec-r"><span class="spec-k">좋아요</span><span class="spec-v">클릭 시 <b>관심상품 탭</b>으로 이동.
+                      비로그인은 <b>로그인 확인 알럿</b></span></div>
+                  <div class="spec-r"><span class="spec-k">게임 로고</span><span class="spec-v">헤더에서 뺀다 — 컨텍스트 칩과 바로 아래
+                      <b>배너</b>가 이미 어느 게임인지 말한다</span></div>
+                  <div class="spec-r"><span class="spec-k">TABLET · MO</span><span class="spec-v">로고 · 앵커 · 컨텍스트를 줄여
+                      한 줄에 유지한다. <b>컨텍스트는 줄이지 않는다</b> — 어느 게임 · 어느 지역인지가 탭보다 중요하다</span></div>
                 </div>
               </div>
 
@@ -8844,6 +9030,30 @@
                         SHOP</b> 좌측 하단 정렬</span></div>
                   <div class="spec-r"><span class="spec-k">설정</span><span class="spec-v">이미지 · 로고 · 타이틀명은 <b>게임별로
                         교체</b>된다</span></div>
+                </div>
+              </div>
+
+              <div class="dr-alt">
+                <div class="dr-h"><span class="mk">1&#8242;</span><span class="dr-t">게임 · 지역 변경 모달</span><span
+                    class="src">헤더에서</span></div>
+                <p class="dr-b">헤더의 <b>[게임 &#183; 지역]</b>을 누르면 열린다. <b>카프라 센터 브릿지의 웹샵 구역을 줄여서 그대로 쓴다.</b></p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v">상단 <b>지역 칩</b> 한 줄 + <b>타이틀
+                        카드</b> 3열 — 브릿지와 같은 구성이다</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 재사용</span><span class="spec-v">브릿지로 나갔다 돌아오게 하면 보던 목록을
+                      잃는다. <b>같은 화면을 모달로 얹어</b> 그 자리에서 갈아탄다</span></div>
+                  <div class="spec-r"><span class="spec-k">지역</span><span class="spec-v">글로벌 · 한국 · 일본 · 대만 · 라탐 —
+                      고르면 <b>타이틀 카드의 서비스 여부가 다시 계산</b>된다</span></div>
+                  <div class="spec-r"><span class="spec-k">미서비스</span><span class="spec-v">그 지역에 없는 타이틀은 <b>흐리게 + 클릭
+                        불가</b>. 숨기지 않는다 — 없다는 사실도 정보다</span></div>
+                  <div class="spec-r"><span class="spec-k">고르면</span><span class="spec-v">모달이 닫히고 <b>그 게임 &#215; 지역의
+                        웹샵</b>으로 갈아탄다. 통화 · 가격 · 결제수단이 함께 바뀐다</span></div>
+                  <div class="spec-r"><span class="spec-k">담은 상품</span><span class="spec-v"><b>게임 &#215; 지역마다 따로
+                        보관</b>한다 — 바꿔도 비워지지 않고 돌아오면 그대로 있다. <b>통화가 다르니 합칠 수 없다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">담기 배지</span><span class="spec-v">헤더 배지는 <b>현재 웹샵의 개수</b>만
+                      센다</span></div>
+                  <div class="spec-r"><span class="spec-k">닫기</span><span class="spec-v">딤 클릭 · [✕] · <span
+                        class="mono">ESC</span></span></div>
                 </div>
               </div>
 
@@ -9057,36 +9267,30 @@
                       </div>
 
                       <div class="v2-hd">
-                        <div class="img" style="width:186px;height:30px;"><span class="sp"
-                            style="font-size:8px;">RAGNAROK
-                            PORTAL 로고 SVG</span></div>
+                        <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO LAND 로고</span>
+                        </div>
                         <span class="v2-lgdiv"></span>
-                        <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
-                        <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
-                        <span class="svc"><span class="svc-m"></span>RO UGC<span class="svc-x">&#8599;</span></span>
+                        <span class="v2-back"><i>&#8249;</i>카프라 센터</span>
+                        <span class="v2-lgdiv"></span>
+                        <span class="v2-ctxsel" data-role="ctx">라그나로크 온라인 &#183; 한국 <i>&#9662;</i></span>
                         <div class="v2-hdu">
-                          <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
-                              aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
-                              <circle cx="10" cy="10" r="7.2" />
-                              <path d="M2.8 10h14.4" />
-                              <path
-                                d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
-                            </svg> KO <span style="font-size:9px;">&#9662;</span></span>
-                          <span class="v2-lgdiv" style="height:16px;"></span>
-                          <span class="srch" style="display:flex;align-items:center;gap:6px;"><svg class="ico"
-                              viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-                              <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor" stroke-width="1.7" />
-                              <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                stroke-linecap="round" />
-                            </svg><span class="ts">SEARCH</span></span>
-                          <span class="v2-av"></span>
+                          <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" fill="none"
+                                stroke="currentColor" stroke-width="1.5">
+                                <circle cx="10" cy="10" r="7.2" />
+                                <path d="M2.8 10h14.4" />
+                                <path
+                                  d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
+                              </svg> KO <span style="font-size:9px;">&#9662;</span></span>
+                          <span class="v2-ic">&#9825;<em>4</em></span>
+                          <span class="v2-ic v2-cart">&#128722;<em>1</em></span>
+                          <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
+                              style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                         </div>
                       </div>
 
                       <div class="v2-menurow">
                         <div class="ws-menu"><span class="ws-mi on">상품구매</span><span class="ws-mi">구매내역</span><span
                             class="ws-mi">관심상품</span><span class="ws-mi">FAQ</span></div>
-                        <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
                         <span class="v2-cursel v2-menucur" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
                           <span class="v2-curdd">
                             <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
@@ -9273,28 +9477,23 @@
                             <div class="v2-url">https://<b>shop.ragnarokland.com</b><em>/ro</em></div>
                           </div>
                           <div class="v2-hd tb">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="21" height="15"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:150px;height:26px;"><span class="sp"
-                                style="font-size:7.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:12px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="17"
-                                  height="17" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp"
+                                style="font-size:7px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:18px;"></span>
+                            <span class="v2-back" style="font-size:10.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:26px;padding:0 8px;font-size:10.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:10px;">
+                              <span class="lang" style="font-size:10px;">KO</span>
+                              <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>1</em></span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
                           <div style="display:flex;align-items:center;border-bottom:1px solid #E4E8ED;padding:0 20px;">
                             <div class="ws-tbmenu" style="flex:1;"><span
                                 class="on">상품구매</span><span>구매내역</span><span>관심상품</span><span>FAQ</span></div>
-                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
                             <span class="v2-cursel" style="height:27px;font-size:11px;flex:none;" data-role="cur">통화
                               <b>KRW</b><i>&#9662;</i>
                               <span class="v2-curdd">
@@ -9444,21 +9643,17 @@
                             </div>
                           </div>
                           <div class="v2-hd mo">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:112px;height:20px;"><span class="sp"
-                                style="font-size:6.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:10px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16"
-                                  height="16" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp"
+                                style="font-size:6px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:14px;"></span>
+                            <span class="v2-back" style="font-size:9.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:23px;padding:0 8px;font-size:9.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:7px;">
+                              <span class="lang" style="font-size:9.5px;">KO</span>
+                              <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>1</em></span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -9696,30 +9891,24 @@
                       <div style="position:relative;">
                         <div class="mk" style="position:absolute;top:20px;left:-33px;">1</div>
                         <div class="v2-hd">
-                          <div class="img" style="width:186px;height:30px;"><span class="sp"
-                              style="font-size:8px;">RAGNAROK
-                              PORTAL 로고 SVG</span></div>
+                          <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO LAND 로고</span>
+                          </div>
                           <span class="v2-lgdiv"></span>
-                          <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
-                          <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
-                          <span class="svc"><span class="svc-m"></span>RO UGC<span class="svc-x">&#8599;</span></span>
+                          <span class="v2-back"><i>&#8249;</i>카프라 센터</span>
+                          <span class="v2-lgdiv"></span>
+                          <span class="v2-ctxsel" data-role="ctx">라그나로크 온라인 &#183; 한국 <i>&#9662;</i></span>
                           <div class="v2-hdu">
-                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
-                                aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" fill="none"
+                                stroke="currentColor" stroke-width="1.5">
                                 <circle cx="10" cy="10" r="7.2" />
                                 <path d="M2.8 10h14.4" />
                                 <path
                                   d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
                               </svg> KO <span style="font-size:9px;">&#9662;</span></span>
-                            <span class="v2-lgdiv" style="height:16px;"></span>
-                            <span class="srch" style="display:flex;align-items:center;gap:6px;"><svg class="ico"
-                                viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-                                <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                  stroke-width="1.7" />
-                                <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                  stroke-linecap="round" />
-                              </svg><span class="ts">SEARCH</span></span>
-                            <span class="v2-av"></span>
+                            <span class="v2-ic">&#9825;<em>4</em></span>
+                            <span class="v2-ic v2-cart">&#128722;<em>1</em></span>
+                            <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
+                                style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                           </div>
                         </div>
                       </div>
@@ -9730,7 +9919,14 @@
                           <span class="ws-mi">관심상품</span>
                           <span class="ws-mi">FAQ</span>
                         </div>
-                        <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
+                        <span class="v2-cursel v2-menucur" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
+                          <span class="v2-curdd">
+                            <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                            <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                            <span><em>JP</em>일본 <s>JPY</s></span>
+                            <span><em>TW</em>대만 <s>TWD</s></span>
+                          </span>
+                        </span>
                       </div>
 
                       <div class="v2-body" style="padding-top:16px;flex:1;overflow:hidden;">
@@ -9908,21 +10104,17 @@
                             <div class="v2-url">https://<b>shop.ragnarokland.com</b><em>/ro</em></div>
                           </div>
                           <div class="v2-hd tb" style="position:relative;">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="21" height="15"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:150px;height:26px;"><span class="sp"
-                                style="font-size:7.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:12px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="17"
-                                  height="17" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp"
+                                style="font-size:7px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:18px;"></span>
+                            <span class="v2-back" style="font-size:10.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:26px;padding:0 8px;font-size:10.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:10px;">
+                              <span class="lang" style="font-size:10px;">KO</span>
+                              <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>1</em></span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
@@ -9930,7 +10122,14 @@
 
                             <div class="ws-tbmenu" style="flex:1;"><span
                                 class="on">상품구매</span><span>구매내역</span><span>관심상품</span><span>FAQ</span></div>
-                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
+                            <span class="v2-cursel" style="height:27px;font-size:11px;flex:none;" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
+                              <span class="v2-curdd">
+                                <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                <span><em>JP</em>일본 <s>JPY</s></span>
+                                <span><em>TW</em>대만 <s>TWD</s></span>
+                              </span>
+                            </span>
                           </div>
                           <div class="v2-dim"></div>
                           <div class="v2-dw half">
@@ -10030,21 +10229,17 @@
                             <div class="v2-url" style="height:20px;font-size:9.5px;"><b>shop.ragnarokland.com</b><em>/ro</em></div>
                           </div>
                           <div class="v2-hd mo" style="position:relative;">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:112px;height:20px;"><span class="sp"
-                                style="font-size:6.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:10px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16"
-                                  height="16" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp"
+                                style="font-size:6px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:14px;"></span>
+                            <span class="v2-back" style="font-size:9.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:23px;padding:0 8px;font-size:9.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:7px;">
+                              <span class="lang" style="font-size:9.5px;">KO</span>
+                              <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>1</em></span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -10221,7 +10416,8 @@
                   <div class="spec-r"><span class="spec-k">함께 결제</span><span class="spec-v"><b>일반 상품</b>은 하나로 묶인다 — 수량
                       조절 · 선택 해제 · 삭제 가능</span></div>
                   <div class="spec-r"><span class="spec-k">따로 결제</span><span class="spec-v"><b>기간 한정</b> · <b>수량 한정</b> ·
-                      <b>PG 제한</b> 상품은 <b>1건씩 단독 그룹</b>. 수량 <span class="mono">1</span> 고정</span></div>
+                      <b>PG 제한</b> 셋 중 하나라도 걸리면 <b>1건씩 단독 그룹</b>. 수량 <span class="mono">1</span>
+                      고정</span></div>
                   <div class="spec-r"><span class="spec-k">헤더</span><span class="spec-v">그룹 이름 + 우측에 <b>왜 나뉘었는지</b> 한 줄 —
                       유저가 버그로 오해하지 않게</span></div>
                   <div class="spec-r"><span class="spec-k">색</span><span class="spec-v">단독 그룹은 <b>붉은 계열 테두리 · 헤더</b>로 일반
@@ -10252,9 +10448,9 @@
               </div>
 
               <div class="warn">
-                <div class="warn-h">확정 필요 1건</div>
-                <p class="warn-b"><b>PG 제한 상품이 실제로 있는지.</b> 지금은 「특정 결제사만 되는 상품」을 전제로 그룹을 나눴다.
-                  그런 상품이 없다면 단독 그룹 조건은 <b>기간 한정 · 수량 한정 둘</b>로 줄어든다.</p>
+                <div class="warn-h">단독 그룹이 되는 조건 — 셋</div>
+                <p class="warn-b"><b>기간 한정 · 수량 한정 · PG 제한.</b> 셋 중 하나라도 걸리면 그 상품은 <b>단독 그룹</b>이다.
+                  PG 제한은 취급 결제사가 상품마다 다른 경우로, <b>채널 목록이 달라</b> 한 결제 세션에 담을 수 없다.</p>
               </div>
 
             </div>
@@ -10827,30 +11023,24 @@
                       <div style="position:relative;">
                         <div class="mk" style="position:absolute;top:20px;left:-33px;">1</div>
                         <div class="v2-hd">
-                          <div class="img" style="width:186px;height:30px;"><span class="sp"
-                              style="font-size:8px;">RAGNAROK
-                              PORTAL 로고 SVG</span></div>
+                          <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO LAND 로고</span>
+                          </div>
                           <span class="v2-lgdiv"></span>
-                          <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
-                          <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
-                          <span class="svc"><span class="svc-m"></span>RO UGC<span class="svc-x">&#8599;</span></span>
+                          <span class="v2-back"><i>&#8249;</i>카프라 센터</span>
+                          <span class="v2-lgdiv"></span>
+                          <span class="v2-ctxsel" data-role="ctx">라그나로크 온라인 &#183; 한국 <i>&#9662;</i></span>
                           <div class="v2-hdu">
-                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
-                                aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" fill="none"
+                                stroke="currentColor" stroke-width="1.5">
                                 <circle cx="10" cy="10" r="7.2" />
                                 <path d="M2.8 10h14.4" />
                                 <path
                                   d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
                               </svg> KO <span style="font-size:9px;">&#9662;</span></span>
-                            <span class="v2-lgdiv" style="height:16px;"></span>
-                            <span class="srch" style="display:flex;align-items:center;gap:6px;"><svg class="ico"
-                                viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-                                <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                  stroke-width="1.7" />
-                                <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                  stroke-linecap="round" />
-                              </svg><span class="ts">SEARCH</span></span>
-                            <span class="v2-av"></span>
+                            <span class="v2-ic">&#9825;<em>4</em></span>
+                            <span class="v2-ic v2-cart">&#128722;<em>1</em></span>
+                            <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
+                                style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                           </div>
                         </div>
                       </div>
@@ -10864,7 +11054,6 @@
                           <span class="ws-mi on">관심상품</span>
                           <span class="ws-mi">FAQ</span>
                         </div>
-                        <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
                         <span class="v2-cursel v2-menucur" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
                           <span class="v2-curdd">
                             <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
@@ -11130,21 +11319,17 @@
                           </div>
                           <div class="v2-hd tb" style="position:relative;">
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">1</div>
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="21" height="15"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:150px;height:26px;"><span class="sp"
-                                style="font-size:7.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:12px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="17"
-                                  height="17" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp"
+                                style="font-size:7px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:18px;"></span>
+                            <span class="v2-back" style="font-size:10.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:26px;padding:0 8px;font-size:10.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:10px;">
+                              <span class="lang" style="font-size:10px;">KO</span>
+                              <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>1</em></span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
@@ -11153,7 +11338,6 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">2</div>
                             <div class="ws-tbmenu" style="flex:1;"><span>상품구매</span><span>구매내역</span><span
                                 class="on">관심상품</span><span>FAQ</span></div>
-                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
                             <span class="v2-cursel" style="height:27px;font-size:11px;flex:none;" data-role="cur">통화
                               <b>KRW</b><i>&#9662;</i>
                               <span class="v2-curdd">
@@ -11246,21 +11430,17 @@
                           </div>
                           <div class="v2-hd mo" style="position:relative;">
                             <div class="mk" style="position:absolute;top:12px;left:-33px;">1</div>
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:112px;height:20px;"><span class="sp"
-                                style="font-size:6.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:10px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16"
-                                  height="16" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp"
+                                style="font-size:6px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:14px;"></span>
+                            <span class="v2-back" style="font-size:9.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:23px;padding:0 8px;font-size:9.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:7px;">
+                              <span class="lang" style="font-size:9.5px;">KO</span>
+                              <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>1</em></span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -11270,7 +11450,6 @@
                             <div class="ws-mmenu" style="flex:1;border-bottom:0;">
                               <span>상품구매</span><span>구매내역</span><span class="on">관심상품</span><span>FAQ</span>
                             </div>
-                            <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>4</em></span>
                             <span class="v2-cursel" style="height:25px;font-size:10px;margin-right:10px;flex:none;"
                               data-role="cur"><b>KRW</b><i>&#9662;</i>
                               <span class="v2-curdd">
@@ -11502,29 +11681,24 @@
                       </div>
 
                       <div class="v2-hd">
-                        <div class="img" style="width:186px;height:30px;"><span class="sp"
-                            style="font-size:8px;">RAGNAROK
-                            PORTAL 로고 SVG</span></div>
+                        <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO LAND 로고</span>
+                        </div>
                         <span class="v2-lgdiv"></span>
-                        <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
-                        <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
-                        <span class="svc"><span class="svc-m"></span>RO UGC<span class="svc-x">&#8599;</span></span>
+                        <span class="v2-back"><i>&#8249;</i>카프라 센터</span>
+                        <span class="v2-lgdiv"></span>
+                        <span class="v2-ctxsel" data-role="ctx">라그나로크 온라인 &#183; 한국 <i>&#9662;</i></span>
                         <div class="v2-hdu">
-                          <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
-                              aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
-                              <circle cx="10" cy="10" r="7.2" />
-                              <path d="M2.8 10h14.4" />
-                              <path
-                                d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
-                            </svg> KO <span style="font-size:9px;">&#9662;</span></span>
-                          <span class="v2-lgdiv" style="height:16px;"></span>
-                          <span class="srch" style="display:flex;align-items:center;gap:6px;"><svg class="ico"
-                              viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-                              <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor" stroke-width="1.7" />
-                              <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                stroke-linecap="round" />
-                            </svg><span class="ts">SEARCH</span></span>
-                          <span class="v2-av"></span>
+                          <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" fill="none"
+                                stroke="currentColor" stroke-width="1.5">
+                                <circle cx="10" cy="10" r="7.2" />
+                                <path d="M2.8 10h14.4" />
+                                <path
+                                  d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
+                              </svg> KO <span style="font-size:9px;">&#9662;</span></span>
+                          <span class="v2-ic">&#9825;<em>4</em></span>
+                          <span class="v2-ic v2-cart">&#128722;<em>1</em></span>
+                          <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
+                              style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                         </div>
                       </div>
 
@@ -11594,21 +11768,17 @@
                             </div>
                           </div>
                           <div class="v2-hd tb">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="21" height="15"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:150px;height:26px;"><span class="sp"
-                                style="font-size:7.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:12px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="17"
-                                  height="17" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp"
+                                style="font-size:7px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:18px;"></span>
+                            <span class="v2-back" style="font-size:10.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:26px;padding:0 8px;font-size:10.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:10px;">
+                              <span class="lang" style="font-size:10px;">KO</span>
+                              <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>1</em></span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
@@ -11667,21 +11837,17 @@
                             </div>
                           </div>
                           <div class="v2-hd mo">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:112px;height:20px;"><span class="sp"
-                                style="font-size:6.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:10px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16"
-                                  height="16" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp"
+                                style="font-size:6px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:14px;"></span>
+                            <span class="v2-back" style="font-size:9.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:23px;padding:0 8px;font-size:9.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:7px;">
+                              <span class="lang" style="font-size:9.5px;">KO</span>
+                              <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>1</em></span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -11847,30 +12013,24 @@
                           <div class="v2-url">https://<b>shop.ragnarokland.com</b><em>/ro/orders</em></div>
                         </div>
                         <div class="v2-hd">
-                          <div class="img" style="width:186px;height:30px;"><span class="sp"
-                              style="font-size:8px;">RAGNAROK
-                              PORTAL 로고 SVG</span></div>
+                          <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO LAND 로고</span>
+                          </div>
                           <span class="v2-lgdiv"></span>
-                          <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
-                          <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
-                          <span class="svc"><span class="svc-m"></span>RO UGC<span class="svc-x">&#8599;</span></span>
+                          <span class="v2-back"><i>&#8249;</i>카프라 센터</span>
+                          <span class="v2-lgdiv"></span>
+                          <span class="v2-ctxsel" data-role="ctx">라그나로크 온라인 &#183; 한국 <i>&#9662;</i></span>
                           <div class="v2-hdu">
-                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
-                                aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15" aria-hidden="true" fill="none"
+                                stroke="currentColor" stroke-width="1.5">
                                 <circle cx="10" cy="10" r="7.2" />
                                 <path d="M2.8 10h14.4" />
                                 <path
                                   d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
                               </svg> KO <span style="font-size:9px;">&#9662;</span></span>
-                            <span class="v2-lgdiv" style="height:16px;"></span>
-                            <span class="srch" style="display:flex;align-items:center;gap:6px;"><svg class="ico"
-                                viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-                                <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                  stroke-width="1.7" />
-                                <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                  stroke-linecap="round" />
-                              </svg><span class="ts">SEARCH</span></span>
-                            <span class="v2-av"></span>
+                            <span class="v2-ic">&#9825;<em>4</em></span>
+                            <span class="v2-ic v2-cart">&#128722;<em>1</em></span>
+                            <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
+                                style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                           </div>
                         </div>
 
@@ -11883,7 +12043,6 @@
                             <span class="ws-mi">관심상품</span>
                             <span class="ws-mi">FAQ</span>
                           </div>
-                          <span class="v2-ic v2-cart">&#128722;<em>4</em></span>
                         </div>
 
                         <div class="hs-wrap">
@@ -12088,21 +12247,17 @@
                             <div class="v2-url">https://<b>shop.ragnarokland.com</b><em>/ro/orders</em></div>
                           </div>
                           <div class="v2-hd tb">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="21" height="15"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:150px;height:26px;"><span class="sp"
-                                style="font-size:7.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:12px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="17"
-                                  height="17" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp"
+                                style="font-size:7px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:18px;"></span>
+                            <span class="v2-back" style="font-size:10.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:26px;padding:0 8px;font-size:10.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:10px;">
+                              <span class="lang" style="font-size:10px;">KO</span>
+                              <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>1</em></span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
@@ -12111,7 +12266,6 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">1</div>
                             <div class="ws-tbmenu" style="flex:1;"><span>상품구매</span><span
                                 class="on">구매내역</span><span>관심상품</span><span>FAQ</span></div>
-                            <span class="v2-ic v2-cart" style="width:26px;height:26px;">&#128722;<em>4</em></span>
                           </div>
                           <div class="hs-wrap" style="padding:16px 20px 22px;">
                             <div class="hs-main">
@@ -12202,21 +12356,17 @@
                             </div>
                           </div>
                           <div class="v2-hd mo">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:112px;height:20px;"><span class="sp"
-                                style="font-size:6.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:10px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16"
-                                  height="16" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp"
+                                style="font-size:6px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:14px;"></span>
+                            <span class="v2-back" style="font-size:9.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:23px;padding:0 8px;font-size:9.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:7px;">
+                              <span class="lang" style="font-size:9.5px;">KO</span>
+                              <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>1</em></span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -12225,7 +12375,6 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">1</div>
                             <div class="ws-mmenu" style="flex:1;border-bottom:0;"><span>상품구매</span><span
                                 class="on">구매내역</span><span>관심상품</span><span>FAQ</span></div>
-                            <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>4</em></span>
                           </div>
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
                             <div class="hs-per" style="margin-bottom:11px;">
@@ -12307,21 +12456,17 @@
                             </div>
                           </div>
                           <div class="v2-hd mo">
-                            <span class="burger"><svg class="ico" viewBox="0 0 22 16" width="19" height="14"
-                                aria-hidden="true">
-                                <path d="M1 2.2h20M1 8h20M1 13.8h20" stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" />
-                              </svg></span>
-                            <div class="img" style="width:112px;height:20px;"><span class="sp"
-                                style="font-size:6.5px;">RAGNAROK PORTAL 로고</span></div>
-                            <div class="v2-hdu" style="gap:10px;">
-                              <span class="srch" style="display:flex;"><svg class="ico" viewBox="0 0 20 20" width="16"
-                                  height="16" aria-hidden="true">
-                                  <circle cx="8.5" cy="8.5" r="5.6" fill="none" stroke="currentColor"
-                                    stroke-width="1.7" />
-                                  <path d="M12.8 12.8 L17.6 17.6" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" />
-                                </svg></span>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp"
+                                style="font-size:6px;">RO LAND 로고</span></div>
+                            <span class="v2-lgdiv" style="height:14px;"></span>
+                            <span class="v2-back" style="font-size:9.5px;"><i>&#8249;</i>카프라 센터</span>
+                            <span class="v2-ctxsel" data-role="ctx"
+                              style="height:23px;padding:0 8px;font-size:9.5px;">RO 온라인 &#183; 한국
+                              <i>&#9662;</i></span>
+                            <div class="v2-hdu" style="gap:7px;">
+                              <span class="lang" style="font-size:9.5px;">KO</span>
+                              <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>1</em></span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -12330,7 +12475,6 @@
                             <div class="mk" style="position:absolute;top:10px;left:-33px;">1</div>
                             <div class="ws-mmenu" style="flex:1;border-bottom:0;"><span>상품구매</span><span
                                 class="on">구매내역</span><span>관심상품</span><span>FAQ</span></div>
-                            <span class="v2-ic v2-cart" style="width:23px;height:23px;">&#128722;<em>4</em></span>
                           </div>
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
                             <div class="hs-per" style="margin-bottom:11px;">
@@ -13333,7 +13477,36 @@
 
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
 
-      // 카드 [구매하기] → 같은 프레임 안의 상세 모달을 띄운다. 딤 · [✕] · ESC 로 닫는다
+      // 헤더 [게임 · 지역] → 변경 모달. 브릿지 웹샵 구역의 축소판이다
+    document.addEventListener('click', function (e) {
+      var ctx = e.target.closest('[data-role="ctx"]');
+      if (ctx) {
+        var win = ctx.closest('.v2-win');
+        var m = win && win.querySelector('[data-role="ctxmodal"]');
+        if (m) { m.hidden = false; return; }
+      }
+      var open = document.querySelector('[data-role="ctxmodal"]:not([hidden])');
+      if (!open) return;
+      // 지역 칩 · 게임 카드를 고르면 표시만 바꾸고 닫는다
+      var chip = e.target.closest('.v2-ctxrg > span');
+      if (chip) {
+        each(open.querySelectorAll('.v2-ctxrg > span'), function (x) { x.classList.remove('on'); });
+        chip.classList.add('on');
+        return;
+      }
+      var card = e.target.closest('.v2-ctxg');
+      if (card && !card.classList.contains('off')) {
+        each(open.querySelectorAll('.v2-ctxg'), function (x) { x.classList.remove('on'); });
+        card.classList.add('on');
+      }
+      if (!e.target.closest('.v2-ctxmd') || e.target.closest('.v2-dwx') || card) open.hidden = true;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      each(document.querySelectorAll('[data-role="ctxmodal"]:not([hidden])'), function (m) { m.hidden = true; });
+    });
+
+    // 카드 [구매하기] → 같은 프레임 안의 상세 모달을 띄운다. 딤 · [✕] · ESC 로 닫는다
       function cardModal(el) {
         var win = el.closest('.v2-win');
         return win ? win.querySelector('[data-role="cardmodal"]') : null;
