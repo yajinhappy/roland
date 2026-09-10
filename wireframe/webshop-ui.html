@@ -5997,34 +5997,39 @@
       padding: 3px 9px;
     }
 
-    /* 한정 종류 칩 — 구역은 하나, 안에서 갈라 본다 */
-    .v2-ltf {
-      margin-left: auto;
-      display: inline-flex;
-      gap: 3px;
-      padding: 2px;
-      border: 1px solid #E0BEBE;
-      border-radius: 4px;
-      background: #fff;
-      font-size: 10.5px;
-      flex: none;
+    /* 두 구역을 나란히 — 기간 한정 · 수량 한정 */
+    .v2-striprow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
-    .v2-ltf>span {
-      padding: 3px 9px;
-      border-radius: 3px;
-      color: #8C3A3A;
-      white-space: nowrap;
-      cursor: pointer;
+    .v2-srow.two {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .v2-ltf>span.on {
-      background: #7A2A2A;
-      color: #fff;
-      font-weight: 600;
+    /* 수량 한정 구역 — 황 계열. 기간과 같은 눈금으로 읽히면 안 된다 */
+    .v2-strip.q {
+      border-color: #DDCCA6;
+      background: linear-gradient(180deg, #FBF5E8 0%, #FDFBF6 62%);
     }
 
-    /* 수량 한정은 색을 달리 쓴다 — 기간과 같은 눈금으로 읽히면 안 된다 */
+    .v2-strip.q .v2-striph b {
+      color: #7A5A18;
+    }
+
+    .v2-strip.q .v2-striph em {
+      color: #A98D4F;
+    }
+
+    .v2-hot.q {
+      background: #B98A1F;
+    }
+
+    .v2-sc.q {
+      border-color: #E4D8BC;
+    }
+
     .v2-dday.q {
       color: #7A5A18;
     }
@@ -9713,43 +9718,49 @@
                         <div class="mk" style="position:absolute;top:252px;left:-33px;">7</div>
 
                         <!-- 4 · 마감 임박 -->
-                        <div class="v2-strip" style="margin-top:0;">
-                          <div class="v2-striph">
-                            <span class="v2-hot">HOT!</span>
-                            <b>한정 상품입니다!</b>
-                            <span class="v2-ltf" data-role="ltf">
-                              <span class="on" data-lt="ALL">전체</span>
-                              <span data-lt="T">기간 한정</span>
-                              <span data-lt="Q">수량 한정</span>
-                            </span>
+                        <div class="v2-striprow">
+                          <div class="v2-strip" style="margin-top:0;">
+                            <div class="v2-striph">
+                              <span class="v2-hot">HOT!</span>
+                              <b>기간 한정</b>
+                              <em>끝나면 다시 팔지 않습니다</em>
+                            </div>
+                            <div class="v2-srow two">
+                              <div class="v2-sc"><span class="v2-ii xs"></span>
+                                <div class="v2-sci"><span class="v2-scn">여름 한정 소환석</span><span class="v2-scp">₩
+                                    12,000</span>
+                                  <span class="v2-dday">&#9679; 남은 기간 <b>D-1</b></span><span class="v2-prog"><i
+                                      style="width:92%;"></i></span>
+                                </div>
+                              </div>
+                              <div class="v2-sc"><span class="v2-ii xs"></span>
+                                <div class="v2-sci"><span class="v2-scn">추석 한정 의상 상자</span><span class="v2-scp">₩
+                                    9,900</span>
+                                  <span class="v2-dday">&#9679; 남은 기간 <b>D-6</b></span><span class="v2-prog"><i
+                                      style="width:48%;"></i></span>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div class="v2-srow">
-                            <div class="v2-sc" data-lt="T"><span class="v2-ii xs"></span>
-                              <div class="v2-sci"><span class="v2-scn">여름 한정 소환석</span><span class="v2-scp">₩
-                                  12,000</span>
-                                <span class="v2-dday">&#9679; 남은 기간 <b>D-1</b></span><span class="v2-prog"><i
-                                    style="width:92%;"></i></span>
-                              </div>
+                          <div class="v2-strip q" style="margin-top:0;">
+                            <div class="v2-striph">
+                              <span class="v2-hot q">LIMIT</span>
+                              <b>수량 한정</b>
+                              <em>계정당 구매 수량이 정해져 있습니다</em>
                             </div>
-                            <div class="v2-sc" data-lt="T"><span class="v2-ii xs"></span>
-                              <div class="v2-sci"><span class="v2-scn">추석 한정 의상 상자</span><span class="v2-scp">₩
-                                  9,900</span>
-                                <span class="v2-dday">&#9679; 남은 기간 <b>D-6</b></span><span class="v2-prog"><i
-                                    style="width:48%;"></i></span>
+                            <div class="v2-srow two">
+                              <div class="v2-sc q"><span class="v2-ii xs"></span>
+                                <div class="v2-sci"><span class="v2-scn">카츄아의 비밀상자</span><span class="v2-scp">₩
+                                    2,500</span>
+                                  <span class="v2-dday q">&#9679; 인 당 <b>1개</b></span>
+                                </div>
                               </div>
-                            </div>
-                            <div class="v2-sc" data-lt="Q"><span class="v2-ii xs"></span>
-                              <div class="v2-sci"><span class="v2-scn">카츄아의 비밀상자</span><span class="v2-scp">₩
-                                  2,500</span>
-                                <span class="v2-dday q">&#9679; 남은 수량 <b>12개</b></span><span class="v2-prog q"><i
-                                    style="width:88%;"></i></span>
-                              </div>
-                            </div>
-                            <div class="v2-sc" data-lt="Q"><span class="v2-ii xs"></span>
-                              <div class="v2-sci"><span class="v2-scn">프론테라 기념 코인</span><span class="v2-scp">₩
-                                  5,500</span>
-                                <span class="v2-dday q">&#9679; 남은 수량 <b>240개</b></span><span class="v2-prog q"><i
-                                    style="width:40%;"></i></span>
+                              <div class="v2-sc q"><span class="v2-ii xs"></span>
+                                <div class="v2-sci"><span class="v2-scn">프론테라 기념 코인</span><span class="v2-scp">₩
+                                    5,500</span>
+                                  <span class="v2-dday q">&#9679; 구매 <b>2</b>/<b>5</b>개</span><span
+                                    class="v2-prog q"><i style="width:40%;"></i></span>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -10090,27 +10101,45 @@
                             <div class="v2-strip" style="margin-top:0;">
                               <div class="mk" style="position:absolute;top:12px;left:-33px;">4</div>
                               <div class="v2-striph"><span class="v2-hot"
-                                  style="height:19px;font-size:10px;">HOT!</span><b style="font-size:12.5px;">한정
-                                  상품입니다!</b>
-                                <span class="v2-ltf" data-role="ltf" style="font-size:10px;"><span class="on"
-                                    data-lt="ALL">전체</span><span data-lt="T">기간</span><span
-                                    data-lt="Q">수량</span></span>
+                                  style="height:19px;font-size:10px;">HOT!</span><b
+                                  style="font-size:12.5px;">기간 한정</b>
+                                <em style="font-size:10px;">끝나면 다시 팔지 않습니다</em>
                               </div>
                               <div class="v2-srow" style="grid-template-columns:repeat(2,1fr);">
-                                <div class="v2-sc" data-lt="T"><span class="v2-ii xs"
-                                    style="width:38px;height:38px;"></span>
+                                <div class="v2-sc"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
                                   <div class="v2-sci"><span class="v2-scn">여름 한정 소환석</span><span class="v2-scp">₩
                                       12,000</span>
                                     <span class="v2-dday">&#9679; <b>D-1</b></span><span class="v2-prog"><i
                                         style="width:92%;"></i></span>
                                   </div>
                                 </div>
-                                <div class="v2-sc" data-lt="Q"><span class="v2-ii xs"
-                                    style="width:38px;height:38px;"></span>
+                                <div class="v2-sc"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
+                                  <div class="v2-sci"><span class="v2-scn">추석 한정 의상 상자</span><span class="v2-scp">₩
+                                      9,900</span>
+                                    <span class="v2-dday">&#9679; <b>D-6</b></span><span class="v2-prog"><i
+                                        style="width:48%;"></i></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="v2-strip q" style="margin-top:10px;">
+                              <div class="v2-striph"><span class="v2-hot q"
+                                  style="height:19px;font-size:10px;">LIMIT</span><b
+                                  style="font-size:12.5px;">수량 한정</b>
+                                <em style="font-size:10px;">계정당 구매 수량이 정해져 있습니다</em>
+                              </div>
+                              <div class="v2-srow" style="grid-template-columns:repeat(2,1fr);">
+                                <div class="v2-sc q"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
                                   <div class="v2-sci"><span class="v2-scn">카츄아의 비밀상자</span><span class="v2-scp">₩
                                       2,500</span>
-                                    <span class="v2-dday q">&#9679; <b>12개</b></span><span class="v2-prog q"><i
-                                        style="width:88%;"></i></span>
+                                    <span class="v2-dday q">&#9679; 인 당 <b>1개</b></span>
+                                  </div>
+                                </div>
+                                <div class="v2-sc q"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
+                                  <div class="v2-sci"><span class="v2-scn">프론테라 기념 코인</span><span class="v2-scp">₩
+                                      5,500</span>
+                                    <span class="v2-dday q">&#9679; <b>2</b>/<b>5</b>개</span><span class="v2-prog q"><i
+                                        style="width:40%;"></i></span>
                                   </div>
                                 </div>
                               </div>
@@ -10274,10 +10303,7 @@
                               <div class="mk" style="position:absolute;top:10px;left:-33px;">4</div>
                               <div class="v2-striph" style="margin-bottom:9px;"><span class="v2-hot"
                                   style="height:18px;padding:0 7px;font-size:9.5px;">HOT!</span><b
-                                  style="font-size:12px;">한정 상품입니다!</b>
-                                <span class="v2-ltf" data-role="ltf" style="font-size:9.5px;"><span class="on"
-                                    data-lt="ALL">전체</span><span data-lt="T">기간</span><span
-                                    data-lt="Q">수량</span></span>
+                                  style="font-size:12px;">기간 한정</b>
                               </div>
                               <div class="v2-swrap">
                                 <span class="v2-snext">&#9654;</span>
@@ -10296,17 +10322,27 @@
                                           style="width:48%;"></i></span>
                                     </div>
                                   </div>
-                                  <div class="v2-sc" data-lt="Q"><span class="v2-ii xs"
+                                </div>
+                              </div>
+                            </div>
+                            <div class="v2-strip q" style="margin-top:10px;padding:10px 11px 12px;">
+                              <div class="v2-striph" style="margin-bottom:9px;"><span class="v2-hot q"
+                                  style="height:18px;padding:0 7px;font-size:9.5px;">LIMIT</span><b
+                                  style="font-size:12px;">수량 한정</b>
+                              </div>
+                              <div class="v2-swrap">
+                                <span class="v2-snext">&#9654;</span>
+                                <div class="v2-srow mo" data-role="scarousel">
+                                  <div class="v2-sc q"><span class="v2-ii xs"
                                       style="width:34px;height:34px;"></span>
                                     <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">카츄아의 비밀상자</span>
-                                      <span class="v2-dday q">&#9679; <b>12개</b> · ₩ 2,500</span><span
-                                        class="v2-prog q"><i style="width:88%;"></i></span>
+                                      <span class="v2-dday q">&#9679; 인 당 <b>1개</b> · ₩ 2,500</span>
                                     </div>
                                   </div>
-                                  <div class="v2-sc" data-lt="Q"><span class="v2-ii xs"
+                                  <div class="v2-sc q"><span class="v2-ii xs"
                                       style="width:34px;height:34px;"></span>
                                     <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">프론테라 기념 코인</span>
-                                      <span class="v2-dday q">&#9679; <b>240개</b> · ₩ 5,500</span><span
+                                      <span class="v2-dday q">&#9679; <b>2</b>/<b>5</b>개 · ₩ 5,500</span><span
                                         class="v2-prog q"><i style="width:40%;"></i></span>
                                     </div>
                                   </div>
@@ -10566,33 +10602,40 @@
                 <div class="dr-h"><span class="mk">4</span><span class="dr-t">한정 상품 기획전</span><span
                     class="src">후킹</span>
                 </div>
-                <p class="dr-b"><b>기간 한정 · 수량 한정</b>을 한 구역에서 보여준다. 목록 위에 <b>한 번만</b> 노출된다.</p>
+                <p class="dr-b"><b>기간 한정</b>과 <b>수량 한정</b>을 <b>구역으로 나눈다</b>. 목록 위에 <b>한 번만</b> 노출된다.</p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">헤드</span><span class="spec-v"><b>[HOT!]</b> 배지 + 「<b>한정
-                        상품입니다!</b>」 — 목록 헤더가 아니라 <b>기획전 배너</b>로 읽히게 한다</span></div>
-                  <div class="spec-r"><span class="spec-k">종류 칩</span><span class="spec-v">헤드 우측에 <b>전체 · 기간 한정 · 수량
-                        한정</b> — 구역을 둘로 쪼개지 않고 <b>한 구역에서 걸러 본다</b></span></div>
-                  <div class="spec-r"><span class="spec-k">왜 한 구역인가</span><span class="spec-v">권역별 한정 상품은 보통 <b>2~5종</b>이다
-                      — 구역을 나누면 한 줄에 1~2장만 남아 빈 칸이 생긴다. 고객이 찾는 건 <b>「한정」</b>이고, 기간이냐 수량이냐는 카드에서 바로 읽힌다</span>
-                  </div>
+                  <div class="spec-r"><span class="spec-k">헤드</span><span class="spec-v"><b>[HOT!] 기간 한정</b> ·
+                      <b>[LIMIT] 수량 한정</b> — 목록 헤더가 아니라 <b>기획전 배너</b>로 읽히게 한다</span></div>
+                  <div class="spec-r"><span class="spec-k">구역</span><span class="spec-v"><b>기간 한정</b>(붉은 계열) ·
+                      <b>수량 한정</b>(황 계열) <b>둘</b>. PC는 나란히, TABLET · MO는 위아래로 쌓는다</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 나누는가</span><span class="spec-v">지표의 성격이 다르다 — 기간은 <b>모두에게
+                        같은 마감</b>, 수량은 <b>내 계정에만 걸리는 한도</b>다. 섞으면 급한 정도를 잘못 비교한다</span></div>
+                  <div class="spec-r"><span class="spec-k">한쪽만 있으면</span><span class="spec-v">있는 구역만 노출하고 <b>가로를 다
+                      쓴다</b></span></div>
                   <div class="spec-r"><span class="spec-k">톤</span><span class="spec-v">붉은 계열 <b>그라데이션 배경 + 테두리</b>로 일반
                       목록과 층을 분리한다. 배너 이미지를 쓰지 않는다 — 상품이 매주 바뀌므로 운영이 못 따라간다</span></div>
-                  <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v">아이콘 · 상품명 · 가격 · <b>남은 기간
-                        (D-day)</b> 또는 <b>남은 수량</b> · <b>진행 바</b></span></div>
-                  <div class="spec-r"><span class="spec-k">두 지표의 색</span><span class="spec-v">기간은 <b>붉은 계열</b>, 수량은 <b>황
-                        계열</b> — 같은 눈금으로 읽히면 급한 정도를 잘못 비교한다</span></div>
-                  <div class="spec-r"><span class="spec-k">정렬</span><span class="spec-v">칩이 <b>전체</b>일 때는 기간 → 수량 순.
-                      <b>기간</b>은 마감 임박 순, <b>수량</b>은 잔여 적은 순 — 축이 다르므로 섞어 정렬하지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">개수</span><span class="spec-v">PC <b>4개</b>(기간 2 · 수량 2) ·
-                      TABLET <b>2개</b>(각 1)</span></div>
+                  <div class="spec-r"><span class="spec-k">기간 한정</span><span class="spec-v">아이콘 · 상품명 · 가격 · <b>남은 기간
+                        (D-day)</b> · <b>진행 바</b> — 마감 임박 순</span></div>
+                  <div class="spec-r"><span class="spec-k">수량 한정</span><span class="spec-v"><b>남은 재고가 아니라 내가 살 수 있는
+                        수량</b>이다 — <b>계정당 구매 한도</b></span></div>
+                  <div class="spec-r"><span class="spec-k">한도 표기</span><span class="spec-v">한도가 1이면 <b>「인 당 1개」</b> ·
+                      2 이상이면 <b>「구매 2/5개」</b> + 진행 바로 <b>내가 쓴 만큼</b>을 보여준다</span></div>
+                  <div class="spec-r"><span class="spec-k">비로그인</span><span class="spec-v">쓴 개수를 알 수 없으므로 <b>「인 당
+                        5개」</b>로만 적는다 — <span class="mono">0/5</span> 처럼 쓰지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">한도 소진</span><span class="spec-v"><span class="mono">5/5</span>
+                      가 되면 카드를 <b>흐리게</b> 하고 <b>[구매 완료]</b>로 바꾼다 — 목록에서 빼지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">재고와의 관계</span><span class="spec-v">전체 재고가 따로 있다면 <b>품절</b>은 별개
+                      상태다 — 한도와 섞어 적지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">개수</span><span class="spec-v">구역마다 PC <b>2개</b> · TABLET
+                      <b>2개</b> · MO <b>캐러셀</b></span></div>
                   <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v"><b>가로 캐러셀</b> — 2열로 욱여넣지 않는다.
                       카드 <b>1.6장</b>이 보이게 잘라 다음 카드가 걸치고, 우측 <b>[&#9654;]</b>로 한 칸씩 넘긴다</span></div>
                   <div class="spec-r"><span class="spec-k">왜 캐러셀인가</span><span class="spec-v">2열 4개는 카드가 작아져 상품명이 잘리고,
                       2개만 두면 기획전이 빈약해 보인다. <b>걸친 카드</b>가 더 있다는 신호를 준다</span></div>
                   <div class="spec-r"><span class="spec-k">끝에서</span><span class="spec-v">마지막까지 가면 <b>처음으로 되돌아간다</b> ·
                       스와이프로도 넘긴다(<span class="mono">scroll-snap</span>)</span></div>
-                  <div class="spec-r"><span class="spec-k">노출 조건</span><span class="spec-v">한정 상품이 <b>1건 이상</b>일 때만. 한
-                      종류만 있으면 <b>그 칩만</b> 남긴다</span></div>
+                  <div class="spec-r"><span class="spec-k">노출 조건</span><span class="spec-v">각 구역은 해당 상품이 <b>1건
+                      이상</b>일 때만. 둘 다 없으면 통째로 숨긴다</span></div>
                   <div class="spec-r"><span class="spec-k">스크롤</span><span class="spec-v">고정하지 않는다 — 스크롤하면 지나간다</span>
                   </div>
                 </div>
@@ -11483,7 +11526,7 @@
                                 <span class="v2-dchk">&#10003;</span>
                                 <span class="v2-ii s"></span>
                                 <div style="flex:1;min-width:0;">
-                                  <span class="tag-q" style="margin-bottom:5px;display:inline-block;">12개 남음</span>
+                                  <span class="tag-q" style="margin-bottom:5px;display:inline-block;">인 당 1개</span>
                                       <div class="v2-dr2n">카츄아의 비밀상자</div>
                                   <div class="v2-dr2p">₩ 2,500</div>
                                   <div class="v2-dr2m">
@@ -11726,7 +11769,7 @@
                                     <span class="v2-dchk">&#10003;</span>
                                     <span class="v2-ii s"></span>
                                     <div style="flex:1;min-width:0;">
-                                      <span class="tag-q" style="margin-bottom:5px;display:inline-block;">12개 남음</span>
+                                      <span class="tag-q" style="margin-bottom:5px;display:inline-block;">인 당 1개</span>
                                           <div class="v2-dr2n">카츄아의 비밀상자</div>
                                       <div class="v2-dr2p">₩ 2,500</div>
                                       <div class="v2-dr2m">
@@ -13218,23 +13261,6 @@
       if (e.key !== 'Escape') return;
       var a = document.querySelectorAll('[data-role="curalert"]:not([hidden])');
       for (var i = 0; i < a.length; i++) a[i].hidden = true;
-    });
-  })();
-  </script>
-
-  <script>
-  /* 한정 종류 칩 — 같은 구역 안에서 기간 · 수량만 걸러 본다 */
-  (function () {
-    document.addEventListener('click', function (e) {
-      var c = e.target.closest('[data-role="ltf"] > span');
-      if (!c) return;
-      var f = c.parentNode, strip = f.closest('.v2-strip'), k = c.getAttribute('data-lt');
-      var i, sp = f.querySelectorAll('span'), cards = strip.querySelectorAll('.v2-sc[data-lt]');
-      for (i = 0; i < sp.length; i++) sp[i].classList.remove('on');
-      c.classList.add('on');
-      for (i = 0; i < cards.length; i++) {
-        cards[i].style.display = (k === 'ALL' || cards[i].getAttribute('data-lt') === k) ? '' : 'none';
-      }
     });
   })();
   </script>
