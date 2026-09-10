@@ -2238,10 +2238,16 @@
       letter-spacing: -.015em;
     }
 
-    /* 주문 정보 줄 안의 통화 셀렉터 */
+    /* 결제수단 선택 줄의 통화 셀렉터 — 통화를 바꾸면 이 아래 목록이 바뀐다 */
+    .pay-lblrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .v2-cursel.pay {
       margin-left: auto;
-      align-self: center;
+      flex: none;
     }
 
     .v2-cfdim[hidden] {
@@ -2319,12 +2325,8 @@
       flex: none;
       display: flex;
       align-items: baseline;
-      gap: 2px;
+      gap: 3px;
       font-family: "IBM Plex Mono", monospace;
-      background: #fff;
-      border: 1px solid #D3DEE7;
-      border-radius: 4px;
-      padding: 5px 11px 6px;
     }
 
     .qty s {
@@ -11907,14 +11909,6 @@
                             <div class="ord-game">
                               <span class="k">게임</span>
                               <span class="v">라그나로크 온라인</span>
-                              <span class="v2-cursel pay" data-role="paycur">통화 <b>KRW</b><i>&#9662;</i>
-                                <span class="v2-curdd">
-                                  <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
-                                  <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
-                                  <span><em>JP</em>일본 <s>JPY</s></span>
-                                  <span><em>TW</em>대만 <s>TWD</s></span>
-                                </span>
-                              </span>
                             </div>
                             <div class="ord-item">
                               <span class="thumb">상품<br>이미지</span>
@@ -11932,7 +11926,27 @@
 
                         <!-- 2 · 결제수단 선택 -->
                         <div class="pay-sec">
-                          <span class="pay-lbl"><i>2</i> 결제수단 선택 <b>필수</b></span>
+                          <div class="pay-lblrow">
+                            <div class="pay-lblrow">
+                              <span class="pay-lbl"><i>2</i> 결제수단 선택 <b>필수</b></span>
+                              <span class="v2-cursel pay" style="height:25px;font-size:10.5px;" data-role="paycur">통화 <b>KRW</b><i>&#9662;</i>
+                                <span class="v2-curdd">
+                                  <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                  <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                  <span><em>JP</em>일본 <s>JPY</s></span>
+                                  <span><em>TW</em>대만 <s>TWD</s></span>
+                                </span>
+                              </span>
+                            </div>
+                            <span class="v2-cursel pay" data-role="paycur">통화 <b>KRW</b><i>&#9662;</i>
+                              <span class="v2-curdd">
+                                <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                <span><em>JP</em>일본 <s>JPY</s></span>
+                                <span><em>TW</em>대만 <s>TWD</s></span>
+                              </span>
+                            </span>
+                          </div>
                           <p class="recnote">최근 사용한 결제 수단이 저장되어 있습니다</p>
                           <div class="fopt" data-role="chips"><span class="on" data-f="ALL">ALL</span><span
                               data-f="HOSTED">Hosted Checkout</span><span class="off">CARD</span><span
@@ -12027,7 +12041,15 @@
               <div class="pane pane-tb">
                 <div class="wstage">
                   <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
-                    <div class="tbf" style="width:768px;background:#F7F8FA;border-radius:4px;overflow:hidden;">
+                    <div class="tbf"
+                      style="width:768px;background:#F7F8FA;border-radius:4px;overflow:hidden;position:relative;">
+                      <div class="v2-cfdim" data-role="curalert" hidden>
+                        <div class="v2-cf" style="width:400px;">
+                          <em>pay.ragnarokland.com 내용:</em>
+                          <p>통화 변경 시 환율 및 이용 가능한 결제 수단이 재적용되어 새로고침됩니다.<br>변경하시겠습니까?</p>
+                          <div class="btns"><span class="no">취소</span><span class="ok">변경하기</span></div>
+                        </div>
+                      </div>
                       <div class="sec pay-topbar" style="position:relative;"><span class="bk"></span><span
                           class="ptl"><u>RAGNAROK</u><b>ONE PAY</b></span></div>
                       <div class="pay-col" style="max-width:680px;padding:18px 22px 26px;">
@@ -12041,15 +12063,6 @@
                               <div class="ord-game">
                                 <span class="k">게임</span>
                                 <span class="v">라그나로크 온라인</span>
-                                <span class="v2-cursel pay" style="height:24px;font-size:10.5px;"
-                                  data-role="paycur">통화 <b>KRW</b><i>&#9662;</i>
-                                  <span class="v2-curdd">
-                                    <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
-                                    <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
-                                    <span><em>JP</em>일본 <s>JPY</s></span>
-                                    <span><em>TW</em>대만 <s>TWD</s></span>
-                                  </span>
-                                </span>
                               </div>
                               <div class="ord-item">
                                 <span class="thumb">상품<br>이미지</span>
@@ -12067,7 +12080,17 @@
 
                           <!-- 2 · 결제수단 선택 -->
                           <div class="pay-sec">
-                            <span class="pay-lbl"><i>2</i> 결제수단 선택 <b>필수</b></span>
+                            <div class="pay-lblrow">
+                              <span class="pay-lbl"><i>2</i> 결제수단 선택 <b>필수</b></span>
+                              <span class="v2-cursel pay" style="height:23px;font-size:10px;" data-role="paycur"><b>KRW</b><i>&#9662;</i>
+                                <span class="v2-curdd">
+                                  <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
+                                  <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
+                                  <span><em>JP</em>일본 <s>JPY</s></span>
+                                  <span><em>TW</em>대만 <s>TWD</s></span>
+                                </span>
+                              </span>
+                            </div>
                             <p class="recnote">최근 사용한 결제 수단이 저장되어 있습니다</p>
                             <div class="fopt" data-role="chips"><span class="on" data-f="ALL">ALL</span><span
                                 data-f="HOSTED">Hosted Checkout</span><span class="off">CARD</span><span
@@ -12171,7 +12194,15 @@
               <div class="pane pane-mo">
                 <div class="wstage">
                   <div class="pcframe" style="display:flex;flex-direction:column;position:relative;">
-                    <div class="mof" style="width:390px;background:#F7F8FA;border-radius:14px;overflow:hidden;">
+                    <div class="mof"
+                      style="width:390px;background:#F7F8FA;border-radius:14px;overflow:hidden;position:relative;">
+                      <div class="v2-cfdim mo" data-role="curalert" hidden>
+                        <div class="v2-cf mo" style="width:86%;">
+                          <em>pay.ragnarokland.com 내용:</em>
+                          <p>통화 변경 시 환율 및 이용 가능한 결제 수단이 재적용되어 새로고침됩니다.<br>변경하시겠습니까?</p>
+                          <div class="btns"><span class="no">취소</span><span class="ok">변경하기</span></div>
+                        </div>
+                      </div>
                       <div class="sec pay-topbar" style="height:48px;padding:0 16px;position:relative;"><span
                           class="bk"></span><span class="ptl"><u>RAGNAROK</u><b>ONE PAY</b></span></div>
                       <div class="pay-col" style="max-width:100%;padding:14px 14px 22px;">
@@ -12185,15 +12216,6 @@
                               <div class="ord-game">
                                 <span class="k">게임</span>
                                 <span class="v">라그나로크 온라인</span>
-                                <span class="v2-cursel pay" style="height:22px;font-size:10px;"
-                                  data-role="paycur"><b>KRW</b><i>&#9662;</i>
-                                  <span class="v2-curdd">
-                                    <span class="on"><em>KR</em>대한민국 <s>KRW</s></span>
-                                    <span><em>GLOBAL</em>글로벌 <s>USD</s></span>
-                                    <span><em>JP</em>일본 <s>JPY</s></span>
-                                    <span><em>TW</em>대만 <s>TWD</s></span>
-                                  </span>
-                                </span>
                               </div>
                               <div class="ord-item">
                                 <span class="thumb">상품<br>이미지</span>
@@ -12350,13 +12372,11 @@
                   <div class="spec-r"><span class="spec-k">상품</span><span class="spec-v">썸네일 우측에 <b>분류 / 상품명 / 단가 ·
                         수량</b> — <b>세 줄</b>로 쌓는다. 한 줄에 몰지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">수량</span><span class="spec-v"><span class="mono">&times;
-                        1</span>을 흰 배경 칩으로 우측에. <b>변경 · 삭제 컨트롤을 두지 않는다</b></span></div>
+                        1</span> — <b>박스를 두르지 않는다.</b> 칩으로 감싸면 누를 수 있는 것으로 읽힌다</span></div>
                   <div class="spec-r"><span class="spec-k">합계</span><span class="spec-v">상품 영역은 <b>단가 × 수량</b>, 버튼은
                       <b>최종 결제 금액</b> — 같은 금액을 두 번 쓰지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">한정 상품</span><span class="spec-v">서버 · 계정 한정이면 게임 행 <b>오른쪽
                         끝</b>에 대상을 덧붙인다</span></div>
-                  <div class="spec-r"><span class="spec-k">통화</span><span class="spec-v">게임 행 <b>오른쪽</b>에 「통화 KRW
-                      &#9662;」 — 여기서 <b>바꿀 수 있다</b>. 해당 서비스에 허용된 통화만 뜬다</span></div>
                 </div>
               </div>
 
@@ -12381,8 +12401,12 @@
               <div class="dr-alt">
                 <div class="dr-h"><span class="mk">2</span><span class="dr-t">결제수단 선택</span><span class="src">행 2 ·
                     핵심</span></div>
-                <p class="dr-b">칩 필터 → 채널 그리드 한 섹션. <b>정의는 원페이 문서</b>.</p>
+                <p class="dr-b">라벨 줄에 <b>통화</b> → 칩 필터 → 채널 그리드 한 섹션. <b>정의는 원페이 문서</b>.</p>
                 <div class="spec">
+                  <div class="spec-r"><span class="spec-k">통화</span><span class="spec-v">라벨 <b>오른쪽 끝</b>에 「통화 KRW
+                      &#9662;」 — 해당 서비스에 허용된 통화만 뜬다</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 여기인가</span><span class="spec-v">통화를 바꾸면 <b>이용 가능한 결제 수단이
+                        바뀐다</b> — 원인을 결과 바로 위에 둔다. 「게임 · 상품 정보」는 <b>읽기만 하는 블록</b>이라 조작 컨트롤을 섞지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">최근 수단</span><span class="spec-v"><b>별도 행을 두지 않는다</b> —
                       목록 안 해당 타일에 <b>「최근」 배지</b>만 붙인다</span></div>
                   <div class="spec-r"><span class="spec-k">그 이유</span><span class="spec-v">최근 수단이 1건이면 위아래에 <b>같은
@@ -13243,6 +13267,7 @@
 
       document.addEventListener('click', function (e) {
         var sort = e.target.closest('[data-role="sort"]');
+        var cur = e.target.closest('[data-role="cur"]');
 
         // 드롭다운 항목을 고른 경우 — 라벨을 바꾸고 닫는다
         var opt = e.target.closest('.v2-sortdd span');
