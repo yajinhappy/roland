@@ -1,3 +1,10 @@
 # OS
 Thumbs.db
 .DS_Store
+
+# 저장소에 올리지 않는 문서 — 로컬에는 남긴다
+wireframe/portal-main-auth-screens.html
+wiki/planning/portal-main-structure.html
+wiki/planning/land-auth.html
+wiki/benchmark/ip-portal.html
+wiki/benchmark/nc-auth.html
