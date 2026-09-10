@@ -7438,6 +7438,96 @@
       font-weight: 600;
     }
 
+    /* 타이틀 레일 — 굿즈샵 안에서 타이틀을 고른다 */
+    .kc-railw {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .kc-rail {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 2px 34px 4px 0;
+      scrollbar-width: none;
+    }
+
+    .kc-rail::-webkit-scrollbar {
+      display: none;
+    }
+
+    .kc-rail>span {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      flex: none;
+      width: 66px;
+      cursor: pointer;
+    }
+
+    .kc-rail .ci {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid #E1E6EC;
+      background: #EEF1F5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      line-height: 1.3;
+      color: #8A929E;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .kc-rail>span.on .ci {
+      border: 2px solid #2F6490;
+    }
+
+    .kc-rail .lb {
+      font-size: 10.5px;
+      color: #6C7480;
+      text-align: center;
+      line-height: 1.3;
+      word-break: keep-all;
+    }
+
+    .kc-rail>span.on .lb {
+      color: #2F6490;
+      font-weight: 600;
+    }
+
+    .kc-rgnote {
+      margin-left: auto;
+      font-size: 10px;
+      color: #98A2AE;
+      border: 0 !important;
+      background: none !important;
+      padding: 0 !important;
+      cursor: default !important;
+      white-space: nowrap;
+    }
+
+    .kc-railnx {
+      position: absolute;
+      top: 15px;
+      right: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid #DCE2E8;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(23, 27, 34, .14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #6C7480;
+      cursor: pointer;
+    }
+
     /* 층별 안내 — 로비의 층 안내판. 스크롤 없이 이 상점이 뭘 파는지 한눈에 */
     .kc-dir {
       margin-top: 22px;
@@ -7715,7 +7805,9 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-bottom: 12px;
+      margin: 0 0 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #EDF0F4;
       flex-wrap: wrap;
     }
 
@@ -8855,15 +8947,34 @@
                         <div class="kc-fl f2">
                           <span class="fl f2">2F</span>
                           <b>굿즈샵</b>
-                          <em>소장용. 결제 동선이 아예 없어 1F 결제를 방해하지 않는다</em>
+                          <em>타이틀 · 지역을 고르면 그에 맞는 굿즈 · 스토어가 나온다 — 결제 동선이 없어 1F 를 방해하지 않는다</em>
                           <span class="paid">무료 &#183; 외부</span>
+                        </div>
+
+                        <div class="kc-railw" data-role="grail">
+                          <div class="kc-rail">
+                            <span class="on"><span class="ci">키비주얼</span><span class="lb">RO 온라인</span></span>
+                            <span><span class="ci">키비주얼</span><span class="lb">RO 제로</span></span>
+                            <span><span class="ci">키비주얼</span><span class="lb">RO M</span></span>
+                            <span><span class="ci">키비주얼</span><span class="lb">RO 오리진</span></span>
+                          </div>
+                          <span class="kc-railnx">&#9654;</span>
+                        </div>
+                        <div class="kc-strg" data-role="grg">
+                          <b>지역</b>
+                          <span>글로벌</span>
+                          <span class="on">한국</span>
+                          <span>일본</span>
+                          <span>대만</span>
+                          <span>라탐</span>
+                          <span class="kc-rgnote">로그인 계정의 지역이 기본 선택</span>
                         </div>
 
                         <div class="kc-sub">
                           <div class="kc-sech">
                             <b>웹 굿즈</b>
                             <span class="free">무료 · 회원 전용</span>
-                            <em>게임 구분 없이 라그나로크 공통 — 지역을 묻지 않는다</em>
+                            <em>선택한 타이틀의 굿즈 — 지역은 언어만 따른다</em>
                           </div>
                           <div class="kc-grid g2">
                             <div class="kc-tile">
@@ -8884,15 +8995,7 @@
                           <div class="kc-sech">
                             <b>공식 스토어</b>
                             <span class="out">실물 굿즈 · 외부</span>
-                            <em>우리가 결제를 받지 않는다 — 지역은 이 구역에서만 묻는다</em>
-                          </div>
-                          <div class="kc-strg">
-                            <b>지역</b>
-                            <span>글로벌</span>
-                            <span class="on">한국</span>
-                            <span>일본</span>
-                            <span>대만</span>
-                            <span>라탐</span>
+                            <em>우리가 결제를 받지 않는다 — 위에서 고른 지역의 스토어로 보낸다</em>
                           </div>
                           <div class="kc-grid g3">
                             <div class="kc-tile" style="border-color:#2F6490;">
@@ -9032,15 +9135,34 @@
                             <div class="kc-fl f2">
                               <span class="fl f2">2F</span>
                               <b>굿즈샵</b>
-                              <em>소장용. 결제 동선이 아예 없어 1F 결제를 방해하지 않는다</em>
+                              <em>타이틀 · 지역을 고르면 그에 맞는 굿즈 · 스토어가 나온다 — 결제 동선이 없어 1F 를 방해하지 않는다</em>
                               <span class="paid">무료 &#183; 외부</span>
+                            </div>
+
+                            <div class="kc-railw" data-role="grail">
+                              <div class="kc-rail">
+                                <span class="on"><span class="ci">키비주얼</span><span class="lb">RO 온라인</span></span>
+                                <span><span class="ci">키비주얼</span><span class="lb">RO 제로</span></span>
+                                <span><span class="ci">키비주얼</span><span class="lb">RO M</span></span>
+                                <span><span class="ci">키비주얼</span><span class="lb">RO 오리진</span></span>
+                              </div>
+                              <span class="kc-railnx">&#9654;</span>
+                            </div>
+                            <div class="kc-strg" data-role="grg">
+                              <b>지역</b>
+                              <span>글로벌</span>
+                              <span class="on">한국</span>
+                              <span>일본</span>
+                              <span>대만</span>
+                              <span>라탐</span>
+                              <span class="kc-rgnote">로그인 계정의 지역이 기본 선택</span>
                             </div>
 
                             <div class="kc-sub">
                               <div class="kc-sech">
                                 <b>웹 굿즈</b>
                                 <span class="free">무료 · 회원 전용</span>
-                                <em>게임 구분 없이 라그나로크 공통 — 지역을 묻지 않는다</em>
+                                <em>선택한 타이틀의 굿즈 — 지역은 언어만 따른다</em>
                               </div>
                               <div class="kc-grid g2">
                                 <div class="kc-tile">
@@ -9060,15 +9182,7 @@
                               <div class="kc-sech">
                                 <b>공식 스토어</b>
                                 <span class="out">실물 굿즈 · 외부</span>
-                                <em>우리가 결제를 받지 않는다 — 지역은 이 구역에서만 묻는다</em>
-                              </div>
-                              <div class="kc-strg">
-                                <b>지역</b>
-                                <span>글로벌</span>
-                                <span class="on">한국</span>
-                                <span>일본</span>
-                                <span>대만</span>
-                                <span>라탐</span>
+                                <em>우리가 결제를 받지 않는다 — 위에서 고른 지역의 스토어로 보낸다</em>
                               </div>
                               <div class="kc-grid g3">
                                 <div class="kc-tile" style="border-color:#2F6490;">
@@ -9177,15 +9291,34 @@
                             <div class="kc-fl f2">
                               <span class="fl f2">2F</span>
                               <b>굿즈샵</b>
-                              <em>소장용. 결제 동선이 아예 없어 1F 결제를 방해하지 않는다</em>
+                              <em>타이틀 · 지역을 고르면 그에 맞는 굿즈 · 스토어가 나온다 — 결제 동선이 없어 1F 를 방해하지 않는다</em>
                               <span class="paid">무료 &#183; 외부</span>
+                            </div>
+
+                            <div class="kc-railw" data-role="grail">
+                              <div class="kc-rail">
+                                <span class="on"><span class="ci">키비주얼</span><span class="lb">RO 온라인</span></span>
+                                <span><span class="ci">키비주얼</span><span class="lb">RO 제로</span></span>
+                                <span><span class="ci">키비주얼</span><span class="lb">RO M</span></span>
+                                <span><span class="ci">키비주얼</span><span class="lb">RO 오리진</span></span>
+                              </div>
+                              <span class="kc-railnx">&#9654;</span>
+                            </div>
+                            <div class="kc-strg" data-role="grg">
+                              <b>지역</b>
+                              <span>글로벌</span>
+                              <span class="on">한국</span>
+                              <span>일본</span>
+                              <span>대만</span>
+                              <span>라탐</span>
+                              <span class="kc-rgnote">로그인 계정의 지역이 기본 선택</span>
                             </div>
 
                             <div class="kc-sub">
                               <div class="kc-sech">
                                 <b>웹 굿즈</b>
                                 <span class="free">무료 · 회원 전용</span>
-                                <em>게임 구분 없이 라그나로크 공통 — 지역을 묻지 않는다</em>
+                                <em>선택한 타이틀의 굿즈 — 지역은 언어만 따른다</em>
                               </div>
                               <div class="kc-grid">
                                 <div class="kc-tile">
@@ -9205,15 +9338,7 @@
                               <div class="kc-sech">
                                 <b>공식 스토어</b>
                                 <span class="out">실물 굿즈 · 외부</span>
-                                <em>우리가 결제를 받지 않는다 — 지역은 이 구역에서만 묻는다</em>
-                              </div>
-                              <div class="kc-strg">
-                                <b>지역</b>
-                                <span>글로벌</span>
-                                <span class="on">한국</span>
-                                <span>일본</span>
-                                <span>대만</span>
-                                <span>라탐</span>
+                                <em>우리가 결제를 받지 않는다 — 위에서 고른 지역의 스토어로 보낸다</em>
                               </div>
                               <div class="kc-grid">
                                 <div class="kc-tile" style="border-color:#2F6490;">
@@ -9259,7 +9384,9 @@
                 <div class="imm-r"><span class="imm-k">1차 분류</span><span class="imm-v"><b>타이틀</b>. 지역은 1F 안에서 · 공식
                     스토어 안에서 각각 묻는다</span></div>
                 <div class="imm-r"><span class="imm-k">전역 지역 칩</span><span class="imm-v"><b>두지 않는다</b> — 세 구역이 요구하는
-                    축이 다르다. 웹 굿즈는 지역이 아예 필요 없다</span></div>
+                    축이 다르다. 전역으로 올릴 값이 없다</span></div>
+                <div class="imm-r"><span class="imm-k">구역별 축</span><span class="imm-v">웹샵 <b>타이틀 + 지역</b> · 웹 굿즈
+                    <b>타이틀</b> · 공식 스토어 <b>지역</b> — 각자 자기 안에서 묻는다</span></div>
                 <div class="imm-r"><span class="imm-k">매트릭스</span><span class="imm-v">타이틀 카드에 <b>서비스 지역을 라벨로</b> 적는다
                     — 별도 안내도 · 미서비스 처리가 필요 없어진다</span></div>
                 <div class="imm-r"><span class="imm-k">위치</span><span class="imm-v"><b>포털 페이지</b> — <span
@@ -9356,15 +9483,54 @@
                 </div>
               </div>
 
+              <div class="dr">
+                <div class="dr-h"><span class="mk">5</span><span class="dr-t">2F 타이틀 · 지역</span><span
+                    class="src">굿즈샵 안</span></div>
+                <p class="dr-b">굿즈샵 머리 바로 아래 <b>타이틀 원형 레일 + 지역 줄</b>. 두 값이 아래 두 구역에 함께 걸린다.</p>
+                <div class="spec">
+                  <div class="spec-r"><span class="spec-k">왜 여기</span><span class="spec-v">타이틀을 요구하는 구역이 <b>1F 와 2F
+                        굿즈</b> 둘인데 성격이 다르다 — 1F 는 <b>진입</b>(어느 웹샵으로), 2F 는 <b>필터</b>(무엇을 볼지). 전역으로 올리면 둘이
+                      섞인다</span></div>
+                  <div class="spec-r"><span class="spec-k">모양</span><span class="spec-v"><b>원형 칩</b> + 타이틀명. 키비주얼을
+                      원으로 잘라 쓴다 — 1F 카드와 무게를 다르게 둔다</span></div>
+                  <div class="spec-r"><span class="spec-k">「전체」</span><span class="spec-v"><b>두지 않는다.</b> 전체를 켜면 카테고리
+                      타일에 타이틀 배지가 붙어야 하고 모양이 지저분해진다</span></div>
+                  <div class="spec-r"><span class="spec-k">기본 선택</span><span class="spec-v">맨 앞 타이틀이 <b>선택된 상태</b>로
+                      시작한다 — 빈 화면을 만들지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">노출 대상</span><span class="spec-v"><b>굿즈가 있는 타이틀만.</b> 온라인 ·
+                      제로만 있으면 칩이 둘뿐이다 — <b>1F 타이틀 목록과 개수가 다를 수 있다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">칩 1개</span><span class="spec-v">보유 타이틀이 하나면 <b>레일을 숨기고</b>
+                      그 타이틀 굿즈만 보여준다</span></div>
+                  <div class="spec-r"><span class="spec-k">굿즈 0건</span><span class="spec-v">레일과 웹 굿즈 구역을 <b>둘 다
+                        숨긴다</b>. 2F 에 공식 스토어만 남는다</span></div>
+                  <div class="spec-r"><span class="spec-k">넘침</span><span class="spec-v">가로 스크롤 + 우측 <b>[&#9654;]</b> —
+                      타이틀이 늘어도 줄이 늘지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">공식 스토어</span><span class="spec-v">레일 선택을 <b>함께 따른다</b> — 그
+                      타이틀 굿즈를 취급하는 스토어만 남긴다</span></div>
+                  <div class="spec-r"><span class="spec-k">지역 줄</span><span class="spec-v">레일 바로 아래 한 줄. <b>공식 스토어의
+                        행선지</b>를 정하고, 웹 굿즈는 <b>언어만</b> 따라간다</span></div>
+                  <div class="spec-r"><span class="spec-k">기본 지역</span><span class="spec-v"><b>로그인 계정에 저장된 지역</b>으로 열린다
+                      — 대부분 바꿀 일이 없다. 비로그인이면 <b>글로벌</b></span></div>
+                  <div class="spec-r"><span class="spec-k">바꾸면</span><span class="spec-v">계정에 <b>다시 기억</b>한다. 1F 의 지역
+                      선택과는 <b>별개 값</b>이다 — 굿즈를 다른 지역에서 보는 것이 이상하지 않다</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 1F 와 별개</span><span class="spec-v">1F 지역은 <b>결제 통화</b>를
+                      정하고 2F 지역은 <b>외부 스토어 행선지</b>를 정한다 — 묶으면 한쪽이 잘못된 값을 쓴다</span></div>
+                </div>
+              </div>
+
               <div class="dr-alt">
                 <div class="dr-h"><span class="mk">5</span><span class="dr-t">2F 웹 굿즈</span><span
                     class="src">무료</span></div>
-                <p class="dr-b">디바이스 배경화면 · 컬러링북. <b>무료 · 회원 전용</b> · <b>지역을 묻지 않는다</b>.</p>
+                <p class="dr-b">디바이스 배경화면 · 컬러링북. <b>무료 · 회원 전용</b> · <b>타이틀 필터</b>가 붙는다.</p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">게임 구분</span><span class="spec-v"><b>없다</b> — 라그나로크 공통이다.
-                      타이틀 아래에 두면 같은 콘텐츠가 <b>타이틀 &#215; 지역만큼 중복</b>된다</span></div>
+                  <div class="spec-r"><span class="spec-k">범위</span><span class="spec-v"><b>레일에서 고른 타이틀</b>의 굿즈만
+                      나온다 — 타일에 타이틀 배지를 붙이지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">카테고리</span><span class="spec-v">디바이스 배경화면 · 컬러링북 — 타일을
+                      누르면 그 카테고리 목록으로 간다</span></div>
+                  <div class="spec-r"><span class="spec-k">공통 굿즈</span><span class="spec-v">타이틀을 가리지 않는 굿즈는 <b>어느 타이틀을
+                        골라도 함께</b> 나온다 — 별도 「공통」 칩을 두지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">지역</span><span class="spec-v"><b>안 묻는다.</b> 언어만 따라가고 콘텐츠는
-                      같다</span></div>
+                      같다 — 굿즈는 지사별로 다르지 않다</span></div>
                   <div class="spec-r"><span class="spec-k">결제</span><span class="spec-v"><b>없다.</b> 장바구니 · 배송지 · 환불이
                       전부 없다 — 1F 결제 동선을 방해하지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">회원 전용</span><span class="spec-v">받으려면 로그인이 필요하다 — <b>패스포트
@@ -9381,8 +9547,8 @@
                     class="src">외부</span></div>
                 <p class="dr-b">실물 굿즈. <b>지역은 여기서만 묻는다.</b></p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">지역 탭</span><span class="spec-v">이 구역 <b>안</b>에 둔다 — 이 구역만
-                      지역을 요구하므로 전역으로 올릴 이유가 없다</span></div>
+                  <div class="spec-r"><span class="spec-k">지역</span><span class="spec-v"><b>위 지역 줄</b>을 따른다 — 이 구역에
+                      따로 두지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">대상</span><span class="spec-v">한국 → 라그나로크 스토어 · 대만 → GNJOY ·
                       그 외 → 아마존. <b>새 탭</b> 이동</span></div>
                   <div class="spec-r"><span class="spec-k">노출</span><span class="spec-v">선택 지역 스토어를 <b>먼저 · 강조</b>하고
@@ -14716,6 +14882,22 @@
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
       each(document.querySelectorAll('[data-role="pickmodal"]:not([hidden])'), function (m) { m.hidden = true; });
+    });
+
+    // 굿즈샵 타이틀 레일 — 칩 선택
+    document.addEventListener("click", function (e) {
+      var c = e.target.closest(".kc-rail > span");
+      if (c) {
+        each(c.parentNode.querySelectorAll("span.on"), function (x) { x.classList.remove("on"); });
+        c.classList.add("on");
+        return;
+      }
+      var nx = e.target.closest(".kc-railnx");
+      if (!nx) return;
+      var row = nx.parentNode.querySelector(".kc-rail");
+      if (!row) return;
+      var end = row.scrollWidth - row.clientWidth - 4;
+      row.scrollLeft = row.scrollLeft >= end ? 0 : row.scrollLeft + 82 * 3;
     });
 
     // 공식 스토어 지역 탭
