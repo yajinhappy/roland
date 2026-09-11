@@ -3004,6 +3004,52 @@
       font-family: inherit;
     }
 
+    .ws-rgn {
+      position: relative;
+    }
+
+    .ws-rgndd {
+      display: none;
+      position: absolute;
+      top: calc(100% + 7px);
+      left: 0;
+      z-index: 40;
+      min-width: 210px;
+      padding: 4px;
+      border: 1px solid #D5DBE2;
+      border-radius: 5px;
+      background: #fff;
+      box-shadow: 0 8px 26px rgba(23, 27, 34, .18);
+      text-align: left;
+    }
+
+    .ws-rgn.open .ws-rgndd {
+      display: block;
+    }
+
+    .ws-rgndd>span {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-family: "IBM Plex Sans KR", sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      letter-spacing: -.01em;
+      color: #434A57;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .ws-rgndd>span:hover {
+      background: #F1F4F7;
+    }
+
+    .ws-rgndd>span.on {
+      background: #EDF3F8;
+      color: #2F6490;
+      font-weight: 600;
+    }
+
     .ws-rgn:hover {
       color: #24506F;
     }
@@ -9638,8 +9684,8 @@
               </div>
 
               <div class="dr">
-                <div class="dr-h"><span class="mk">3</span><span class="dr-t">웹샵 메인으로 이동</span><span
-                    class="src">현재 안</span></div>
+                <div class="dr-h"><span class="mk">3</span><span class="dr-t">웹샵 메인으로 이동</span><span class="src">현재
+                    안</span></div>
                 <p class="dr-b"><span class="mono">WEB SHOP</span>을 누르면 <b>웹샵 메인으로 바로 간다.</b> 중간 화면을 두지 않는다.</p>
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">이동 대상</span><span class="spec-v"><b>로그인 계정의 타이틀 &#183;
@@ -9749,6 +9795,7 @@
                                   d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
                               </svg> KO <span style="font-size:9px;">&#9662;</span></span>
                             <span class="v2-ic">&#9825;<em>4</em></span>
+                            <span class="v2-ic" title="구매내역">&#128203;</span>
                             <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
                                 style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                           </div>
@@ -9762,8 +9809,16 @@
                         <div class="ws-kvin" style="padding-bottom:26px;">
                           <span class="ws-glogo">게임<br>로고</span>
                           <div>
-                            <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn"
-                                data-role="ctx">KOREA<i>&#9662;</i></span></span>
+                            <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn" data-role="rgn">KOREA<i>&#9662;</i>
+                                <span class="ws-rgndd">
+                                  <span class="on">Korea</span>
+                                  <span>North America</span>
+                                  <span>Latin America</span>
+                                  <span>Japan</span>
+                                  <span>Taiwan &#183; Hong Kong &#183; Macau</span>
+                                  <span>Thailand</span>
+                                </span>
+                              </span></span>
                             <span class="ws-kvs">WEB SHOP</span>
                           </div>
                           <span class="v2-cursel kv" data-role="cur">통화 <b>KRW</b><i>&#9662;</i>
@@ -9777,20 +9832,11 @@
                         </div>
                       </div>
 
-                      <!-- 3 · 메뉴바 + 통화 -->
-                      <div class="v2-menurow">
-                        <div class="mk" style="position:absolute;top:11px;left:-33px;">3</div>
-                        <div class="ws-menu">
-                          <span class="ws-mi on">상품구매</span>
-                          <span class="ws-mi">구매내역</span>
-                        </div>
-                      </div>
-
                       <div class="v2-body" style="padding-top:16px;padding-bottom:34px;position:relative;">
-                        <div class="mk" style="position:absolute;top:22px;left:-33px;">4</div>
-                        <div class="mk" style="position:absolute;top:152px;left:-33px;">5</div>
-                        <div class="mk" style="position:absolute;top:202px;left:-33px;">6</div>
-                        <div class="mk" style="position:absolute;top:252px;left:-33px;">7</div>
+                        <div class="mk" style="position:absolute;top:22px;left:-33px;">3</div>
+                        <div class="mk" style="position:absolute;top:152px;left:-33px;">4</div>
+                        <div class="mk" style="position:absolute;top:202px;left:-33px;">5</div>
+                        <div class="mk" style="position:absolute;top:252px;left:-33px;">6</div>
 
                         <!-- 4 · 마감 임박 -->
                         <div class="v2-striprow">
@@ -9811,14 +9857,16 @@
                                   </div>
                                 </div>
                                 <div class="v2-sc"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고농축 에르늄 30개 상자[홀그렌]</span><span class="v2-scp">₩
+                                  <div class="v2-sci"><span class="v2-scn">고농축 에르늄 30개 상자[홀그렌]</span><span
+                                      class="v2-scp">₩
                                       9,900</span>
                                     <span class="v2-dday">&#9679; 남은 기간 <b>D-6</b></span><span class="v2-prog"><i
                                         style="width:48%;"></i></span>
                                   </div>
                                 </div>
                                 <div class="v2-sc"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고농축 오리데오콘 30개상자[대장장이]</span><span class="v2-scp">₩
+                                  <div class="v2-sci"><span class="v2-scn">고농축 오리데오콘 30개상자[대장장이]</span><span
+                                      class="v2-scp">₩
                                       19,000</span>
                                     <span class="v2-dday">&#9679; 남은 기간 <b>D-9</b></span><span class="v2-prog"><i
                                         style="width:31%;"></i></span>
@@ -9844,7 +9892,8 @@
                               <span class="v2-snext q">&#9654;</span>
                               <div class="v2-srow two" data-role="scarousel">
                                 <div class="v2-sc q"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고밀도 브라디움 계정한정 패키지</span><span class="v2-scp">₩
+                                  <div class="v2-sci"><span class="v2-scn">고밀도 브라디움 계정한정 패키지</span><span
+                                      class="v2-scp">₩
                                       2,500</span>
                                     <span class="v2-dday q">&#9679; 인 당 <b>1개</b></span>
                                   </div>
@@ -10028,7 +10077,7 @@
                           </div>
                         </div>
                         <div class="ws-pg" style="position:relative;" data-role="pg">
-                          <div class="mk" style="position:absolute;top:2px;left:-33px;">8</div>
+                          <div class="mk" style="position:absolute;top:2px;left:-33px;">7</div>
                           <span class="dis">|&#9664;</span><span class="dis">&#9664;</span>
                           <span class="on">1</span><span>2</span><span>3</span>
                           <span>&#9654;</span><span>&#9654;|</span>
@@ -10037,84 +10086,8 @@
 
                       <!-- 8 · 푸터 -->
                       <div class="v2-ft" style="position:relative;">
-                        <div class="mk" style="position:absolute;top:20px;left:-33px;">9</div>
+                        <div class="mk" style="position:absolute;top:20px;left:-33px;">8</div>
                         &copy; Gravity Co., Ltd. All Rights Reserved.
-                      </div>
-
-                      <!-- 배너 권역 → 타이틀 × 권역 모달. 정의는 01 화면에 있다 -->
-                      <div class="v2-mdim" data-role="ctxmodal" style="bottom:auto;height:860px;" hidden>
-                        <div class="kc-bridge">
-                          <div class="v2-pmdh">
-                            <b>IN-GAME — 게임과 권역을 선택해주세요.</b>
-                            <span class="v2-dwx" style="margin-left:auto;">&#10005;</span>
-                          </div>
-                          <div class="kc-bgrid">
-                            <div class="kc-gcard">
-                              <div class="kc-gkv"><b>라그나로크 온라인</b><span class="ch">BI</span></div>
-                              <div class="kc-rgl">
-                                <span class="mine">Korea<em>내 지역</em></span>
-                                <span>Global</span>
-                                <span>Japan</span>
-                                <span>Taiwan &#183; Hong Kong &#183; Macau</span>
-                                <span>Thailand</span>
-                              </div>
-                            </div>
-                            <div class="kc-gcard">
-                              <div class="kc-gkv"><b>라그나로크 제로</b><span class="ch">BI</span></div>
-                              <div class="kc-rgl">
-                                <span>Global</span>
-                                <span>Americas</span>
-                                <span>Taiwan &#183; Hong Kong &#183; Macau</span>
-                              </div>
-                            </div>
-                            <div class="kc-gcard">
-                              <div class="kc-gkv"><b>라그나로크 뉴월드</b><span class="ch">BI</span></div>
-                              <div class="kc-rgl">
-                                <span>Taiwan &#183; Hong Kong &#183; Macau</span>
-                                <span>Southeast Asia</span>
-                                <span>Global</span>
-                              </div>
-                            </div>
-                            <div class="kc-gcard">
-                              <div class="kc-gkv"><b>라그나로크 오리진 클래식</b><span class="ch">BI</span></div>
-                              <div class="kc-rgl">
-                                <span>Asia</span>
-                              </div>
-                            </div>
-                            <div class="kc-gcard">
-                              <div class="kc-gkv"><b>라그나로크3</b><span class="ch">BI</span></div>
-                              <div class="kc-rgl">
-                                <span>Global</span>
-                              </div>
-                            </div>
-                            <div class="kc-gcard">
-                              <div class="kc-gkv"><b>라그나로크 M : Classic</b><span class="ch">BI</span></div>
-                              <div class="kc-rgl">
-                                <span class="mine">Korea<em>내 지역</em></span>
-                                <span>Southeast Asia</span>
-                                <span>Taiwan &#183; Hong Kong &#183; Macau</span>
-                                <span>Global</span>
-                              </div>
-                            </div>
-                            <div class="kc-gcard">
-                              <div class="kc-gkv"><b>라그나로크 아이들 어드벤처 플러스</b><span class="ch">BI</span></div>
-                              <div class="kc-rgl">
-                                <span class="mine">Korea<em>내 지역</em></span>
-                                <span>Taiwan &#183; Hong Kong &#183; Macau</span>
-                                <span>Global</span>
-                              </div>
-                            </div>
-                            <div class="kc-gcard">
-                              <div class="kc-gkv"><b>THE 라그나로크</b><span class="ch">BI</span></div>
-                              <div class="kc-rgl">
-                                <span class="mine">Korea<em>내 지역</em></span>
-                                <span>Southeast Asia</span>
-                                <span>Taiwan &#183; Hong Kong &#183; Macau</span>
-                                <span>China</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
 
                       <!-- 카드 [구매하기] → 상세 모달. 정의는 02 화면에 있다 -->
@@ -10191,6 +10164,7 @@
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic" style="width:26px;height:26px;" title="구매내역">&#128203;</span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
@@ -10198,8 +10172,16 @@
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">2</div>
                             <div class="ws-kvin"><span class="ws-glogo">게임<br>로고</span>
                               <div>
-                                <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn"
-                                    data-role="ctx" style="font-size:14px;">KOREA<i>&#9662;</i></span></span>
+                                <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn" data-role="rgn" style="font-size:14px;">KOREA<i>&#9662;</i>
+                                    <span class="ws-rgndd">
+                                      <span class="on">Korea</span>
+                                      <span>North America</span>
+                                      <span>Latin America</span>
+                                      <span>Japan</span>
+                                      <span>Taiwan &#183; Hong Kong &#183; Macau</span>
+                                      <span>Thailand</span>
+                                    </span>
+                                  </span></span>
                                 <span class="ws-kvs">IN-GAME </span>
                               </div>
                               <span class="v2-cursel kv" style="height:26px;font-size:10.5px;" data-role="cur">통화
@@ -10213,14 +10195,9 @@
                               </span>
                             </div>
                           </div>
-                          <div
-                            style="display:flex;align-items:center;border-bottom:1px solid #E4E8ED;padding:0 20px;position:relative;">
-                            <div class="mk" style="position:absolute;top:10px;left:-33px;">3</div>
-                            <div class="ws-tbmenu" style="flex:1;"><span class="on">상품구매</span><span>구매내역</span></div>
-                          </div>
                           <div class="v2-body tb" style="padding:14px 20px 24px;">
                             <div class="v2-strip" style="margin-top:0;">
-                              <div class="mk" style="position:absolute;top:12px;left:-33px;">4</div>
+                              <div class="mk" style="position:absolute;top:12px;left:-33px;">3</div>
                               <div class="v2-striph"><span class="v2-hot"
                                   style="height:19px;font-size:10px;">HOT!</span><b style="font-size:12.5px;">기간 한정</b>
                                 <em style="font-size:10px;">지금 이 기간에만 만나실 수 있습니다</em>
@@ -10234,7 +10211,8 @@
                                   </div>
                                 </div>
                                 <div class="v2-sc"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고농축 에르늄 30개 상자[홀그렌]</span><span class="v2-scp">₩
+                                  <div class="v2-sci"><span class="v2-scn">고농축 에르늄 30개 상자[홀그렌]</span><span
+                                      class="v2-scp">₩
                                       9,900</span>
                                     <span class="v2-dday">&#9679; <b>D-6</b></span><span class="v2-prog"><i
                                         style="width:48%;"></i></span>
@@ -10249,7 +10227,8 @@
                               </div>
                               <div class="v2-srow" style="grid-template-columns:repeat(2,1fr);">
                                 <div class="v2-sc q"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고밀도 브라디움 계정한정 패키지</span><span class="v2-scp">₩
+                                  <div class="v2-sci"><span class="v2-scn">고밀도 브라디움 계정한정 패키지</span><span
+                                      class="v2-scp">₩
                                       2,500</span>
                                     <span class="v2-dday q">&#9679; 인 당 <b>1개</b></span>
                                   </div>
@@ -10264,7 +10243,7 @@
                               </div>
                             </div>
                             <div class="v2-catrow" style="margin-top:16px;position:relative;">
-                              <div class="mk" style="position:absolute;top:4px;left:-33px;">5</div>
+                              <div class="mk" style="position:absolute;top:4px;left:-33px;">4</div>
                               <div class="ws-cats"><span class="chip-on">추천</span><span class="chip">전체</span><span
                                   class="chip">기간한정</span><span class="chip">패키지</span><span class="chip">의상</span>
                               </div>
@@ -10272,7 +10251,7 @@
                                   검색</span></div>
                             </div>
                             <div class="v2-sortrow" style="position:relative;">
-                              <div class="mk" style="position:absolute;top:4px;left:-33px;">6</div><span
+                              <div class="mk" style="position:absolute;top:4px;left:-33px;">5</div><span
                                 class="v2-count">전체 <b>24</b>개</span><span class="v2-sort" style="height:29px;"
                                 data-role="sort"><b class="v2-sortv">인기순</b> <i>&#9662;</i>
                                 <span class="v2-sortdd">
@@ -10285,7 +10264,7 @@
                               </span>
                             </div>
                             <div class="v2-grid tb" style="position:relative;">
-                              <div class="mk" style="position:absolute;top:0px;left:-33px;">7</div>
+                              <div class="mk" style="position:absolute;top:0px;left:-33px;">6</div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span><span class="v2-like on"
@@ -10356,14 +10335,14 @@
                               </div>
                             </div>
                             <div class="ws-pg" style="position:relative;" data-role="pg">
-                              <div class="mk" style="position:absolute;top:2px;left:-33px;">8</div>
+                              <div class="mk" style="position:absolute;top:2px;left:-33px;">7</div>
                               <span class="dis">|&#9664;</span><span class="dis">&#9664;</span>
                               <span class="on">1</span><span>2</span><span>3</span>
                               <span>&#9654;</span><span>&#9654;|</span>
                             </div>
                           </div>
                           <div class="v2-ft" style="position:relative;">
-                            <div class="mk" style="position:absolute;top:20px;left:-33px;">9</div>&copy; Gravity Co.,
+                            <div class="mk" style="position:absolute;top:20px;left:-33px;">8</div>&copy; Gravity Co.,
                             Ltd. All Rights Reserved.
                           </div>
                         </div>
@@ -10395,6 +10374,7 @@
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic" style="width:23px;height:23px;" title="구매내역">&#128203;</span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -10402,8 +10382,16 @@
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">2</div>
                             <div class="ws-kvin"><span class="ws-glogo">게임<br>로고</span>
                               <div>
-                                <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn"
-                                    data-role="ctx" style="font-size:11px;">KOREA<i>&#9662;</i></span></span>
+                                <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn" data-role="rgn" style="font-size:11px;">KOREA<i>&#9662;</i>
+                                    <span class="ws-rgndd">
+                                      <span class="on">Korea</span>
+                                      <span>North America</span>
+                                      <span>Latin America</span>
+                                      <span>Japan</span>
+                                      <span>Taiwan &#183; Hong Kong &#183; Macau</span>
+                                      <span>Thailand</span>
+                                    </span>
+                                  </span></span>
                                 <span class="ws-kvs">WEB SHOP</span>
                               </div>
                               <span class="v2-cursel kv" style="height:23px;font-size:9.5px;"
@@ -10417,15 +10405,9 @@
                               </span>
                             </div>
                           </div>
-                          <div
-                            style="display:flex;align-items:center;border-bottom:1px solid #E4E8ED;position:relative;">
-                            <div class="mk" style="position:absolute;top:10px;left:-33px;">3</div>
-                            <div class="ws-mmenu" style="flex:1;border-bottom:0;"><span
-                                class="on">상품구매</span><span>구매내역</span></div>
-                          </div>
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
                             <div class="v2-strip" style="margin-top:0;padding:10px 11px 12px;">
-                              <div class="mk" style="position:absolute;top:10px;left:-33px;">4</div>
+                              <div class="mk" style="position:absolute;top:10px;left:-33px;">3</div>
                               <div class="v2-striph" style="margin-bottom:9px;"><span class="v2-hot"
                                   style="height:18px;padding:0 7px;font-size:9.5px;">HOT!</span><b
                                   style="font-size:12px;">기간 한정</b>
@@ -10442,7 +10424,8 @@
                                   </div>
                                   <div class="v2-sc" data-lt="T"><span class="v2-ii xs"
                                       style="width:34px;height:34px;"></span>
-                                    <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">고농축 에르늄 30개 상자[홀그렌]</span>
+                                    <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">고농축 에르늄 30개
+                                        상자[홀그렌]</span>
                                       <span class="v2-dday">&#9679; <b>D-6</b> · ₩ 9,900</span><span class="v2-prog"><i
                                           style="width:48%;"></i></span>
                                     </div>
@@ -10459,7 +10442,8 @@
                                 <span class="v2-snext">&#9654;</span>
                                 <div class="v2-srow mo" data-role="scarousel">
                                   <div class="v2-sc q"><span class="v2-ii xs" style="width:34px;height:34px;"></span>
-                                    <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">고밀도 브라디움 계정한정 패키지</span>
+                                    <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">고밀도 브라디움 계정한정
+                                        패키지</span>
                                       <span class="v2-dday q">&#9679; 인 당 <b>1개</b> · ₩ 2,500</span>
                                     </div>
                                   </div>
@@ -10473,14 +10457,14 @@
                               </div>
                             </div>
                             <div class="v2-catrow mo" style="margin-top:14px;position:relative;">
-                              <div class="mk" style="position:absolute;top:4px;left:-33px;">5</div>
+                              <div class="mk" style="position:absolute;top:4px;left:-33px;">4</div>
                               <div class="ws-cats"><span class="chip-on">추천</span><span class="chip">전체</span><span
                                   class="chip">기간한정</span><span class="chip">패키지</span></div>
                               <div class="v2-tools"><span class="v2-sinp" style="height:30px;">&#9906; 상품명 검색</span>
                               </div>
                             </div>
                             <div class="v2-sortrow" style="margin-top:11px;position:relative;">
-                              <div class="mk" style="position:absolute;top:4px;left:-33px;">6</div>
+                              <div class="mk" style="position:absolute;top:4px;left:-33px;">5</div>
                               <span class="v2-count">전체 <b>24</b>개</span>
                               <span class="v2-sort" style="height:28px;" data-role="sort"><b class="v2-sortv">인기순</b>
                                 <i>&#9662;</i>
@@ -10494,7 +10478,7 @@
                               </span>
                             </div>
                             <div class="v2-grid mo" style="position:relative;">
-                              <div class="mk" style="position:absolute;top:0px;left:-33px;">7</div>
+                              <div class="mk" style="position:absolute;top:0px;left:-33px;">6</div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span><span class="v2-like on"
@@ -10588,14 +10572,14 @@
                               </div>
                             </div>
                             <div class="ws-pg mo" style="position:relative;" data-role="pg">
-                              <div class="mk" style="position:absolute;top:2px;left:-33px;">8</div>
+                              <div class="mk" style="position:absolute;top:2px;left:-33px;">7</div>
                               <span class="dis">|&#9664;</span><span class="dis">&#9664;</span>
                               <span class="on">1</span><span>2</span><span>3</span>
                               <span>&#9654;</span><span>&#9654;|</span>
                             </div>
                           </div>
                           <div class="v2-ft mo" style="position:relative;">
-                            <div class="mk" style="position:absolute;top:16px;left:-33px;">9</div>&copy; Gravity Co.,
+                            <div class="mk" style="position:absolute;top:16px;left:-33px;">8</div>&copy; Gravity Co.,
                             Ltd. All Rights Reserved.
                           </div>
                         </div>
@@ -10643,12 +10627,17 @@
                   <div class="spec-r"><span class="spec-k">왜 GNB 가 없나</span><span class="spec-v">웹샵은 <span
                         class="mono">shop.ragnarokland.com</span> <b>별도 도메인</b>이다. LIBRARY · NEWS 같은 포털 콘텐츠 링크를
                       결제 직전 화면에 <b>여덟 개나</b> 노출할 이유가 없다 — 포털로 나가는 길은 <b>푸터에만</b> 둔다</span></div>
-                  <div class="spec-r"><span class="spec-k">좌측</span><span class="spec-v"><b>RO LAND 로고</b> 하나</span>
+                  <div class="spec-r"><span class="spec-k">좌측</span><span class="spec-v"><b>RAGNAROK PORTAL 로고</b>
+                      하나</span>
                   </div>
                   <div class="spec-r"><span class="spec-k">뺀 것</span><span class="spec-v"><b>[&#8249; 포털]</b> ·
                       <b>[게임 &#183; 지역]</b> — 배너가 대신한다</span></div>
                   <div class="spec-r"><span class="spec-k">우측</span><span class="spec-v">언어 · <b>좋아요</b>(개수 배지) ·
-                      계정 — 셋. <b>담기가 없으므로 장바구니 아이콘을 두지 않는다</b></span></div>
+                      <b>구매내역</b> · 계정 — 넷</span></div>
+                  <div class="spec-r"><span class="spec-k">구매내역</span><span class="spec-v"><b>주문서 아이콘</b>으로 GNB 에 둔다 —
+                      탭이 아니라 <b>아이콘</b>이다. 자주 가지 않지만 <b>어디서든 닿아야</b> 하는 메뉴다</span></div>
+                  <div class="spec-r"><span class="spec-k">장바구니</span><span class="spec-v"><b>두지 않는다</b> — 담기가
+                      없다</span></div>
                   <div class="spec-r"><span class="spec-k">좋아요</span><span class="spec-v">관심상품 페이지로 이동 — <b>이번 범위
                         밖</b></span></div>
                 </div>
@@ -10669,65 +10658,27 @@
               </div>
 
               <div class="dr-alt">
-                <div class="dr-h"><span class="mk">2&#8242;</span><span class="dr-t">타이틀 &#215; 권역 모달</span><span
+                <div class="dr-h"><span class="mk">2&#8242;</span><span class="dr-t">권역 드롭다운</span><span
                     class="src">배너에서</span></div>
-                <p class="dr-b">배너의 <span class="mono">KOREA &#9662;</span>를 누르면 열린다. <b>01 화면의 모달과 같은 것</b>이다.</p>
+                <p class="dr-b">배너의 <span class="mono">KOREA &#9662;</span>를 누르면 열린다. <b>통화 셀렉터와 같은 형태</b>다.</p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v"><b>타이틀 카드 4열</b> · 카드마다 권역
-                      목록 — 정의는 01 화면</span></div>
-                  <div class="spec-r"><span class="spec-k">고르면</span><span class="spec-v">모달이 닫히고 <b>그 타이틀 &#215; 권역의
-                        웹샵</b>으로 갈아탄다. 통화 · 가격 · 결제수단이 함께 바뀐다</span></div>
-                  <div class="spec-r"><span class="spec-k">닫기</span><span class="spec-v">딤 클릭 · [✕] · <span
-                        class="mono">ESC</span></span></div>
-                </div>
-              </div>
-
-              <div class="dr">
-                <div class="dr-h"><span class="mk">3</span><span class="dr-t">메뉴바</span><span class="src">한
-                    줄</span></div>
-                <p class="dr-b">탭 <b>2개</b> — 상품구매 · 구매내역.</p>
-                <div class="spec">
-                  <div class="spec-r"><span class="spec-k">좌측</span><span class="spec-v"><b>상품구매 · 구매내역</b> 둘 고정 ·
-                      하단 언더바로 활성 표기</span></div>
-                  <div class="spec-r"><span class="spec-k">FAQ</span><span class="spec-v"><b>이 줄에 두지 않는다</b> — 등록 주체 ·
-                      노출 범위가 정해지지 않았다. <b>이번 범위 밖</b></span></div>
-                  <div class="spec-r"><span class="spec-k">통화</span><span class="spec-v">이 줄에 두지 않는다 — <b>배너 우측
-                        하단</b>으로 옮겼다</span></div>
-                  <div class="spec-r"><span class="spec-k">왜 여기인가</span><span class="spec-v">통화는 <b>웹샵에만 걸리는 설정</b>이다.
-                      포털 GNB는 여러 서비스가 함께 쓰는 줄이고 포털에는 결제가 없어 통화 개념 자체가 없다 — <b>언어는 포털 전역, 통화는 웹샵 전역</b>이라
-                      줄을 나눠 스코프를 드러낸다</span></div>
-                  <div class="spec-r"><span class="spec-k">자리의 이점</span><span class="spec-v">가격이 깔린 목록 <b>바로 위</b> — 바꾼
-                      결과가 같은 화면에서 즉시 보인다. 메뉴바는 좌측 <b>이동(탭)</b> · 우측 <b>설정(통화)</b>으로 성격이 갈린다</span></div>
-                  <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v">탭이 늘어도 통화는 <b>우측 고정</b>(<span
-                        class="mono">flex:none</span>)하고 <b>탭만 가로 스크롤</b>한다 — 설정이 밀려 사라지지 않게</span></div>
-                  <div class="spec-r"><span class="spec-k">넘칠 때</span><span class="spec-v">언어 <b>12개</b> · 통화 최대
-                      <b>6개</b>까지 늘어난다. 드롭다운은 <b>최대 높이 + 내부 스크롤</b> · <b>우측 정렬</b>로 열어 화면 밖으로 나가지 않게 한다</span>
-                  </div>
-                  <div class="spec-r"><span class="spec-k">목록 출처</span><span class="spec-v">지사가 아니라 <b>게임 서비스 단위</b>로
-                      정해진다 — 그 서비스에서 <b>실제 결제 가능한 통화</b>만 어드민에서 열어 준다</span></div>
-                  <div class="spec-r"><span class="spec-k">표기</span><span class="spec-v">「<b>국가 코드</b> · 국가명 · <b>통화
-                        코드</b>」 세 조각. 기호(&#8361; &#36;)만으로는 구분되지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">예 · LATAM</span><span class="spec-v"><span
-                        class="mono">GLOBAL(USD)</span> · <span class="mono">BR(BRL)</span> · <span
-                        class="mono">MX(MXN)</span> · <span class="mono">CL(CLP)</span> · <span
-                        class="mono">PE(PEN)</span> · <span class="mono">CO(COP)</span> — <b>여섯</b>뿐이다</span></div>
-                  <div class="spec-r"><span class="spec-k">전체 정책</span><span class="spec-v">가격 입력 · 미입력 처리 · 확정 시점 · 주문
-                      이후 표기는 <b>07 기타사항 &#183; 통화 정책</b>에 모아 두었다</span></div>
-                  <div class="spec-r"><span class="spec-k">항목 1개</span><span class="spec-v">허용 통화가 하나뿐인 서비스는 셀렉터를
-                      <b>비활성</b>으로 두고 코드만 보여 준다 — 라그나로크 온라인 1차가 그 경우(<span class="mono">KRW</span>)</span></div>
-                  <div class="spec-r"><span class="spec-k">기본값</span><span class="spec-v">접속 지역 추정이 아니라 <b>서비스 기본
-                        통화</b>로 연다. 유저가 고른 값은 계정에 기억한다</span></div>
-                  <div class="spec-r"><span class="spec-k">환산</span><span class="spec-v"><b>하지 않는다</b> — 통화별로 <b>따로 매긴
-                        가격표</b>를 쓴다. 환율로 나눈 금액을 보여 주지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">변경 시</span><span class="spec-v">가격 · <b>결제수단</b>이 함께
-                      바뀐다</span></div>
-                  <div class="spec-r"><span class="spec-k">결제창</span><span class="spec-v">결제창에서는 <b>통화를 바꾸지 않는다</b> — 결제
-                      직전 금액 변동을 만들지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">항목</span><span class="spec-v"><span class="mono">Korea ·
+                        North America · Latin America · Japan · Taiwan &#183; Hong Kong &#183; Macau ·
+                        Thailand</span></span></div>
+                  <div class="spec-r"><span class="spec-k">현재 권역</span><span class="spec-v">체크 없이 <b>배경 강조</b>로
+                      표시. 칩 라벨은 고른 권역으로 바뀐다</span></div>
+                  <div class="spec-r"><span class="spec-k">고르면</span><span class="spec-v"><b>그 권역의 웹샵</b>으로 갈아탄다 —
+                      통화 · 가격 · 결제수단이 함께 바뀐다</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 모달이 아닌가</span><span class="spec-v">고르는 값이
+                      <b>권역 하나뿐</b>이다. 타이틀까지 고르게 하는 <b>모달 안은 보류</b>(01 화면 참고)</span></div>
+                  <div class="spec-r"><span class="spec-k">타이틀 전환</span><span class="spec-v">이 줄에서 하지 않는다 —
+                      <b>포털 GNB</b>로 돌아가 다시 고른다</span></div>
+                  <div class="spec-r"><span class="spec-k">닫기</span><span class="spec-v">바깥 클릭 · 다시 클릭</span></div>
                 </div>
               </div>
 
               <div class="dr-alt">
-                <div class="dr-h"><span class="mk">4</span><span class="dr-t">한정 상품 기획전</span><span
+                <div class="dr-h"><span class="mk">3</span><span class="dr-t">한정 상품 기획전</span><span
                     class="src">후킹</span>
                 </div>
                 <p class="dr-b"><b>기간 한정</b>과 <b>수량 한정</b>을 <b>구역으로 나눈다</b>. 목록 위에 <b>한 번만</b> 노출된다.</p>
@@ -10776,7 +10727,7 @@
               </div>
 
               <div class="dr">
-                <div class="dr-h"><span class="mk">5</span><span class="dr-t">카테고리 · 검색</span><span class="src">좌 ·
+                <div class="dr-h"><span class="mk">4</span><span class="dr-t">카테고리 · 검색</span><span class="src">좌 ·
                     우</span></div>
                 <p class="dr-b">카테고리 칩(좌) · 상품명 검색(우) 한 줄.</p>
                 <div class="spec">
@@ -10792,7 +10743,7 @@
               </div>
 
               <div class="dr-alt">
-                <div class="dr-h"><span class="mk">6</span><span class="dr-t">정렬 줄</span><span class="src">분리</span>
+                <div class="dr-h"><span class="mk">5</span><span class="dr-t">정렬 줄</span><span class="src">분리</span>
                 </div>
                 <p class="dr-b">결과 수(좌) · 정렬(우). 그리드 바로 위 줄.</p>
                 <div class="spec">
@@ -10812,7 +10763,7 @@
               </div>
 
               <div class="dr">
-                <div class="dr-h"><span class="mk">7</span><span class="dr-t">상품 카드</span><span class="src">hover</span>
+                <div class="dr-h"><span class="mk">6</span><span class="dr-t">상품 카드</span><span class="src">hover</span>
                 </div>
                 <p class="dr-b">아이콘 · 배지 · 좋아요 · 분류 · 상품명 · 가격. 액션은 <b>hover에만</b> 나온다.</p>
                 <div class="spec">
@@ -10847,7 +10798,7 @@
               </div>
 
               <div class="dr">
-                <div class="dr-h"><span class="mk">8</span><span class="dr-t">페이지네이션</span><span class="src">그리드
+                <div class="dr-h"><span class="mk">7</span><span class="dr-t">페이지네이션</span><span class="src">그리드
                     아래</span></div>
                 <p class="dr-b">그리드 바로 아래 <b>중앙</b>. 더보기 버튼을 쓰지 않는다.</p>
                 <div class="spec">
@@ -10867,7 +10818,7 @@
               </div>
 
               <div class="dr-alt">
-                <div class="dr-h"><span class="mk">9</span><span class="dr-t">푸터</span><span class="src">기존 준용</span>
+                <div class="dr-h"><span class="mk">8</span><span class="dr-t">푸터</span><span class="src">기존 준용</span>
                 </div>
                 <p class="dr-b">저작권 한 줄. 기존 웹샵 화면정의서 준용.</p>
                 <div class="spec">
@@ -10931,13 +10882,13 @@
                                 d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
                             </svg> KO <span style="font-size:9px;">&#9662;</span></span>
                           <span class="v2-ic">&#9825;<em>4</em></span>
+                            <span class="v2-ic" title="구매내역">&#128203;</span>
                           <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
                               style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                         </div>
                       </div>
 
                       <div class="v2-menurow">
-                        <div class="ws-menu"><span class="ws-mi on">상품구매</span><span class="ws-mi">구매내역</span></div>
                       </div>
 
                       <div class="v2-body" style="flex:1;overflow:hidden;padding-top:16px;">
@@ -11127,11 +11078,11 @@
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic" style="width:26px;height:26px;" title="구매내역">&#128203;</span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
                           <div style="display:flex;align-items:center;border-bottom:1px solid #E4E8ED;padding:0 20px;">
-                            <div class="ws-tbmenu" style="flex:1;"><span class="on">상품구매</span><span>구매내역</span></div>
                           </div>
                           <div class="v2-body tb" style="flex:1;overflow:hidden;padding:14px 20px 20px;">
                             <div class="v2-catrow">
@@ -11279,6 +11230,7 @@
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic" style="width:23px;height:23px;" title="구매내역">&#128203;</span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -12167,6 +12119,7 @@
                                 d="M10 2.8c1.9 2 2.9 4.5 2.9 7.2s-1 5.2-2.9 7.2c-1.9-2-2.9-4.5-2.9-7.2S8.1 4.8 10 2.8z" />
                             </svg> KO <span style="font-size:9px;">&#9662;</span></span>
                           <span class="v2-ic">&#9825;<em>4</em></span>
+                            <span class="v2-ic" title="구매내역">&#128203;</span>
                           <span class="v2-acc"><span class="v2-av"></span>홍길동 <span
                               style="font-size:9px;color:#98A2AE;">&#9662;</span></span>
                         </div>
@@ -12243,6 +12196,7 @@
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic" style="width:26px;height:26px;" title="구매내역">&#128203;</span>
                               <span class="v2-av"></span>
                             </div>
                           </div>
@@ -12306,6 +12260,7 @@
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
+                              <span class="v2-ic" style="width:23px;height:23px;" title="구매내역">&#128203;</span>
                               <span class="v2-av" style="width:21px;height:21px;"></span>
                             </div>
                           </div>
@@ -13031,6 +12986,23 @@
         if (e.target.closest('[data-role="itemshop"]')) {
           if (window.goScreen) window.goScreen('v2');
         }
+      });
+
+      // 배너 권역 드롭다운 — 통화 셀렉터와 같은 방식
+      document.addEventListener('click', function (e) {
+        var pick = e.target.closest('.ws-rgndd > span');
+        if (pick) {
+          var box = pick.closest('.ws-rgn');
+          each(box.querySelectorAll('.ws-rgndd > span'), function (x) { x.classList.remove('on'); });
+          pick.classList.add('on');
+          box.childNodes[0].nodeValue = pick.textContent.toUpperCase();
+          box.classList.remove('open');
+          e.stopPropagation();
+          return;
+        }
+        var rgn = e.target.closest('[data-role="rgn"]');
+        each(document.querySelectorAll('.ws-rgn.open'), function (x) { if (x !== rgn) x.classList.remove('open'); });
+        if (rgn) rgn.classList.toggle('open');
       });
 
       // 굿즈샵 타이틀 레일 — 칩 선택
