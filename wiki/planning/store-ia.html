@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>카프라 센터 정보구조</title>
+<title>카프라 스토어 정보구조</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -326,7 +326,7 @@
 <div class="shell">
 
 <nav class="lnb">
-  <span class="bmark">카프라 센터 정보구조</span>
+  <span class="bmark">카프라 스토어 정보구조</span>
   <span class="bsub">Ragnarok Portal &#183; 2026-09</span>
 
   <div class="grp">문제</div>
@@ -351,10 +351,18 @@
 
 <header class="mast">
   <p class="kick">Design &#183; Store IA</p>
-  <h1>카프라 센터 정보구조</h1>
+  <h1>카프라 스토어 정보구조</h1>
   <p class="stand"><b>지역 · 타이틀 · 구역 세 축을 어떤 순서로 쌓을지의 문제다.</b>
   세 구역(웹샵 · 웹 굿즈 · 공식 스토어)이 요구하는 축이 서로 달라서, 순서를 잘못 잡으면 같은 콘텐츠가 수십 개 경로로 중복된다.</p>
 </header>
+<div class="note bad" style="margin-top:22px;">
+  <span class="lb">문서 상태 &#183; 검토 기록</span>
+  <p>이 문서는 축 순서를 <b>비교하고 고른 과정</b>이다. 여기서 전제로 둔
+  <b>「카프라 센터」 경유 페이지는 폐기</b>됐고, 구역도 <b>IN-GAME SHOP · MERCH SHOP 둘</b>로 정리됐다.
+  <b>확정 구조는 <a href="kafra-store.html">카프라 스토어 브랜딩 &#183; 카테고리 구조</a></b>를 본다.
+  이 문서는 <b>왜 타이틀을 먼저 골랐는지</b>의 근거로만 남긴다.</p>
+</div>
+
 
 <section id="a1">
   <h3>세 구역이 요구하는 축이 다르다</h3>
@@ -433,7 +441,7 @@
 <section id="b1">
   <h3>안 A &#183; 지역 먼저</h3>
 
-  <pre>카프라 센터
+  <pre>카프라 스토어
   지역  [글로벌] 한국  일본  대만  라탐        &#8592; 페이지에 하나
   ├ 1F 아이템샵   타이틀 카드 6장 &#8594; 웹샵
   └ 2F 굿즈샵     웹 굿즈 / 공식 스토어</pre>
@@ -461,7 +469,7 @@
 <section id="b2">
   <h3>안 B &#183; 타이틀 먼저</h3>
 
-  <pre>카프라 센터
+  <pre>카프라 스토어
   타이틀  [RO 온라인] [제로] [M] [X] [오리진] [비긴즈]
     └ 지역  한국  일본  대만  라탐
         └ 웹샵 / 웹 굿즈 / 공식 스토어      &#8592; 여기가 문제</pre>
@@ -495,7 +503,7 @@
 <section id="b3">
   <h3>안 C &#183; 구역 먼저</h3>
 
-  <pre>카프라 센터
+  <pre>카프라 스토어
   ├ 웹샵      &#8594; 타이틀 &#8594; 지역 &#8594; 상품 목록
   ├ 웹 굿즈    &#8594; 목록
   └ 공식 스토어 &#8594; 지역 &#8594; 외부</pre>
@@ -525,7 +533,7 @@
   <p class="lede">안 B 의 중복은 <b>굿즈를 타이틀 아래에 넣을 때만</b> 생긴다. 형제로 두면 생기지 않는다.
   그리고 지역은 <b>전역 값이 아니라 구역별 값</b>으로 내린다.</p>
 
-  <pre>카프라 센터
+  <pre>카프라 스토어
 ├ 1F 아이템샵
 │    [RO 온라인]      [RO 제로]     [RO M]
 │     한국·일본·대만·라탐  한국·대만    대만·일본     &#8592; 카드에 서비스 지역을 적는다
@@ -647,7 +655,7 @@
   <div class="note">
     <span class="lb">RO GAMES 와 겹치는 문제</span>
     <p>둘 다 타이틀 목록이 된다. <b>행선지로 가른다</b> &#8212; RO GAMES 는 게임을 <b>하러</b>(지사 게임 사이트로 나감),
-    카프라 센터 1F 는 아이템을 <b>사러</b>(포털 내부 웹샵). 카드 라벨과 이동 대상을 다르게 두면 혼동되지 않는다.</p>
+    카프라 스토어 1F 는 아이템을 <b>사러</b>(포털 내부 웹샵). 카드 라벨과 이동 대상을 다르게 두면 혼동되지 않는다.</p>
   </div>
 </section>
 
@@ -703,12 +711,12 @@
 <footer class="doc">
   <h4>관련 문서</h4>
   <ul>
-    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 화면정의서</a></b> &#8212; 01 카프라 센터 · 02 웹샵 메인 · 헤더 [게임 &#183; 지역] 모달</li>
-    <li><b><a href="store-ia.html">카프라 센터 정보구조</a>
+    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 화면정의서</a></b> &#8212; 01 KAFRA STORE 진입 · 02 인게임샵 메인 · 배너 [타이틀 &#183; 권역] 모달</li>
+    <li><b><a href="store-ia.html">카프라 스토어 정보구조</a>
 <a href="webshop-payment-prd.html">웹샵/통합결제 기획</a></b> &#8212; 상위 기준 문서</li>
     <li><b><a href="payment-webshop-structure.html">웹샵/통합결제 구조</a></b> &#8212; 지사 도입 절차 · 거래 단위 원칙</li>
   </ul>
-  <p style="margin-top:14px">라그나로크 포털 &#183; 카프라 센터 정보구조 &#183; 2026-09-10</p>
+  <p style="margin-top:14px">라그나로크 포털 &#183; 카프라 스토어 정보구조 &#183; 2026-09-10</p>
 </footer>
 
 </main>
