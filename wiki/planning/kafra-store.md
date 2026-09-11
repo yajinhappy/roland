@@ -23,16 +23,19 @@
 
 국내 7개사 · 해외 9개사를 확인했다. 세 가지가 반복된다.
 
-1. **디지털과 실물은 거의 항상 분리한다** — 16개 중 11개. 분리 이유는 브랜드가 아니라 **운영**이다(수령처 · 청약철회 · 운영 주체 · 확률 표기).
+1. **디지털과 실물은 거의 항상 분리한다** — 16개 중 10개(자체 구축 기준). 분리 이유는 브랜드가 아니라 **운영**이다(수령처 · 청약철회 · 운영 주체 · 확률 표기).
 2. **이름에는 파는 물건이 들어간다** — Web · Online 같은 *장소*가 아니라 Item · Currency · Gear · Merch 같은 *대상*이 이름을 만든다.
 3. **그릇 단어(Shop / Store)로는 구분하지 않는다.**
+
+> **결제 주체가 구조를 결정한다.** PUBG Mobile 의 Midasbuy 는 퍼블리셔(텐센트) 플랫폼이지 IP 보유자(Krafton)의 몰이 아니다.
+> 라그나로크는 **지사가 결제 주체**이므로 자체 구축이 기본이고, 퍼블리싱을 맡긴 권역은 그 퍼블리셔 플랫폼을 쓰게 된다.
 
 | 회사 | 디지털 | 실물 MD |
 |---|---|---|
 | Blizzard | Battle.net Shop | **Blizzard Gear Store** |
 | HoYoverse | **Top-Up Center** | Merch (hoyo.global) |
 | Riot | 인게임 상점 | Riot Games Store (merch.riotgames.com) |
-| Krafton / PUBG M | Midasbuy 「PUBG Mobile Official Shop」 | PUBG 공식 merch store |
+| Tencent / PUBG M<br>(IP: Krafton) | **Midasbuy** — 텐센트 자체 플랫폼. **자체 구축몰이 아니라 퍼블리셔 플랫폼 입점** | PUBG 공식 merch store |
 | 넥슨 | NEXON SHOPPING | **NEXON ESSENTIAL** (타이틀별 스토어) |
 | 넷마블 | 게임별 **「공식 웹상점」** | 넷마블스토어 |
 | 스마일게이트 | STOVE 스토어 | 스마일게이트샵 |
