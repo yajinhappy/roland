@@ -5407,6 +5407,42 @@
       line-height: 1.4;
     }
 
+    /* 카드 안 한정 조건 — 기간 · 인 당 한도를 함께 적는다 */
+    .v2-lim {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .v2-lim em {
+      font-style: normal;
+      font-size: 9.5px;
+      line-height: 1;
+      padding: 3px 6px 4px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .v2-lim em.t {
+      color: #8C3A3A;
+      background: #F9EEEE;
+      border: 1px solid #E7D2D2;
+    }
+
+    .v2-lim em.q {
+      color: #7A5A18;
+      background: #FBF5E8;
+      border: 1px solid #E4D8BC;
+    }
+
+    .v2-pc.hov .v2-lim em,
+    .v2-grid:not(.mo) .v2-pc:hover .v2-lim em {
+      background: transparent;
+      color: #E9EDF2;
+      border-color: rgba(255, 255, 255, .42);
+    }
+
     .v2-pp {
       font-size: 14px;
       font-weight: 600;
@@ -9783,8 +9819,8 @@
                       <div style="position:relative;">
                         <div class="mk" style="position:absolute;top:20px;left:-33px;">1</div>
                         <div class="v2-hd">
-                          <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO
-                              LAND 로고</span>
+                          <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RAGNAROK
+                              PORTAL 로고</span>
                           </div>
                           <div class="v2-hdu">
                             <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
@@ -9807,7 +9843,7 @@
                         <div class="mk" style="position:absolute;top:16px;left:-33px;">2</div>
                         <span class="ws-kvsafe"></span>
                         <div class="ws-kvin" style="padding-bottom:26px;">
-                          <span class="ws-glogo">게임<br>로고</span>
+                          <span class="ws-glogo">BI</span>
                           <div>
                             <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn" data-role="rgn">KOREA<i>&#9662;</i>
                                 <span class="ws-rgndd">
@@ -9834,95 +9870,9 @@
 
                       <div class="v2-body" style="padding-top:16px;padding-bottom:34px;position:relative;">
                         <div class="mk" style="position:absolute;top:22px;left:-33px;">3</div>
-                        <div class="mk" style="position:absolute;top:152px;left:-33px;">4</div>
-                        <div class="mk" style="position:absolute;top:202px;left:-33px;">5</div>
-                        <div class="mk" style="position:absolute;top:252px;left:-33px;">6</div>
-
-                        <!-- 4 · 마감 임박 -->
-                        <div class="v2-striprow">
-                          <div class="v2-strip" style="margin-top:0;">
-                            <div class="v2-striph">
-                              <span class="v2-hot">HOT!</span>
-                              <b>기간 한정</b>
-                              <em>지금 이 기간에만 만나실 수 있습니다</em>
-                            </div>
-                            <div class="v2-swrap">
-                              <span class="v2-snext">&#9654;</span>
-                              <div class="v2-srow two" data-role="scarousel">
-                                <div class="v2-sc"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고밀도 브라디움 패키지</span><span class="v2-scp">₩
-                                      12,000</span>
-                                    <span class="v2-dday">&#9679; 남은 기간 <b>D-1</b></span><span class="v2-prog"><i
-                                        style="width:92%;"></i></span>
-                                  </div>
-                                </div>
-                                <div class="v2-sc"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고농축 에르늄 30개 상자[홀그렌]</span><span
-                                      class="v2-scp">₩
-                                      9,900</span>
-                                    <span class="v2-dday">&#9679; 남은 기간 <b>D-6</b></span><span class="v2-prog"><i
-                                        style="width:48%;"></i></span>
-                                  </div>
-                                </div>
-                                <div class="v2-sc"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고농축 오리데오콘 30개상자[대장장이]</span><span
-                                      class="v2-scp">₩
-                                      19,000</span>
-                                    <span class="v2-dday">&#9679; 남은 기간 <b>D-9</b></span><span class="v2-prog"><i
-                                        style="width:31%;"></i></span>
-                                  </div>
-                                </div>
-                                <div class="v2-sc"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">존다 서포트 패키지</span><span class="v2-scp">₩
-                                      6,500</span>
-                                    <span class="v2-dday">&#9679; 남은 기간 <b>D-14</b></span><span class="v2-prog"><i
-                                        style="width:18%;"></i></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="v2-strip q" style="margin-top:0;">
-                            <div class="v2-striph">
-                              <span class="v2-hot q">LIMIT</span>
-                              <b>수량 한정</b>
-                              <em>계정당 구매 수량이 정해져 있습니다</em>
-                            </div>
-                            <div class="v2-swrap">
-                              <span class="v2-snext q">&#9654;</span>
-                              <div class="v2-srow two" data-role="scarousel">
-                                <div class="v2-sc q"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고밀도 브라디움 계정한정 패키지</span><span
-                                      class="v2-scp">₩
-                                      2,500</span>
-                                    <span class="v2-dday q">&#9679; 인 당 <b>1개</b></span>
-                                  </div>
-                                </div>
-                                <div class="v2-sc q"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">올마이티 패키지</span><span class="v2-scp">₩
-                                      5,500</span>
-                                    <span class="v2-dday q">&#9679; 구매 <b>2</b>/<b>5</b>개</span><span
-                                      class="v2-prog q"><i style="width:40%;"></i></span>
-                                  </div>
-                                </div>
-                                <div class="v2-sc q"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">인피니티 패키지</span><span class="v2-scp">₩
-                                      3,900</span>
-                                    <span class="v2-dday q">&#9679; 구매 <b>0</b>/<b>3</b>개</span><span
-                                      class="v2-prog q"><i style="width:0%;"></i></span>
-                                  </div>
-                                </div>
-                                <div class="v2-sc q"><span class="v2-ii xs"></span>
-                                  <div class="v2-sci"><span class="v2-scn">힘내그라 패키지</span><span class="v2-scp">₩
-                                      1,900</span>
-                                    <span class="v2-dday q">&#9679; 인 당 <b>2개</b></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
+                        <div class="mk" style="position:absolute;top:152px;left:-33px;">3</div>
+                        <div class="mk" style="position:absolute;top:202px;left:-33px;">4</div>
+                        <div class="mk" style="position:absolute;top:252px;left:-33px;">5</div>
                         <!-- 5 · 카테고리 좌 · 검색 우 -->
                         <div class="v2-catrow" style="margin-top:20px;">
                           <div class="ws-cats">
@@ -9972,7 +9922,7 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-bdg"><span class="tag-r">D-3</span></span><span
+                              <span class="v2-bdg"><span class="tag-r">한정</span></span><span
                                 class="v2-like">&#9825;</span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
@@ -9988,6 +9938,7 @@
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">카츄아의 비밀상자</span>
+                              <span class="v2-lim"><em class="t">남은 기간 D-3</em><em class="q">1일 1회</em></span>
                             </div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 2,500</b><i>&#8250;</i></span>
@@ -10010,6 +9961,7 @@
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">올마이티 패키지</span>
+                              <span class="v2-lim"><em class="q">구매 2/5개</em><em class="t">이번 주까지</em></span>
                             </div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 7,500</b><i>&#8250;</i></span>
@@ -10020,7 +9972,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
-                              <span class="v2-pn">인피니티 패키지</span>
+                              <span class="v2-pn">고밀도 브라디움 계정한정 패키지</span>
+                                <span class="v2-lim"><em class="q">인 당 1개</em></span>
                             </div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 3,200</b><i>&#8250;</i></span>
@@ -10029,11 +9982,12 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-bdg"><span class="tag-r">D-1</span></span><span
+                              <span class="v2-bdg"><span class="tag-r">한정</span></span><span
                                 class="v2-like on">&#9829;</span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                               <span class="v2-pn">고밀도 브라디움 패키지</span>
+                              <span class="v2-lim"><em class="t">남은 기간 D-1</em><em class="q">인 당 2개</em></span>
                             </div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 12,000</b><i>&#8250;</i></span>
@@ -10077,7 +10031,7 @@
                           </div>
                         </div>
                         <div class="ws-pg" style="position:relative;" data-role="pg">
-                          <div class="mk" style="position:absolute;top:2px;left:-33px;">7</div>
+                          <div class="mk" style="position:absolute;top:2px;left:-33px;">6</div>
                           <span class="dis">|&#9664;</span><span class="dis">&#9664;</span>
                           <span class="on">1</span><span>2</span><span>3</span>
                           <span>&#9654;</span><span>&#9654;|</span>
@@ -10086,7 +10040,7 @@
 
                       <!-- 8 · 푸터 -->
                       <div class="v2-ft" style="position:relative;">
-                        <div class="mk" style="position:absolute;top:20px;left:-33px;">8</div>
+                        <div class="mk" style="position:absolute;top:20px;left:-33px;">7</div>
                         &copy; Gravity Co., Ltd. All Rights Reserved.
                       </div>
 
@@ -10102,8 +10056,8 @@
                           <div class="v2-pmdb">
                             <!-- 2 · 이미지 -->
                             <div class="v2-pmdl" style="position:relative;">
-                              <div class="v2-pmdimg"><span class="v2-ii lg"
-                                  style="width:100px;height:100px;">아이템<br>아이콘</span></div>
+                              <div class="v2-pmdimg"><span class="v2-ii"
+                                  >아이템<br>아이콘</span></div>
                             </div>
 
                             <!-- 3 · 정보 -->
@@ -10159,8 +10113,8 @@
                           </div>
                           <div class="v2-hd tb" style="position:relative;">
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">1</div>
-                            <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RO
-                                LAND 로고</span></div>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RAGNAROK
+                                PORTAL 로고</span></div>
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
@@ -10170,7 +10124,7 @@
                           </div>
                           <div class="ws-title tb" style="height:230px;">
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">2</div>
-                            <div class="ws-kvin"><span class="ws-glogo">게임<br>로고</span>
+                            <div class="ws-kvin"><span class="ws-glogo">BI</span>
                               <div>
                                 <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn" data-role="rgn" style="font-size:14px;">KOREA<i>&#9662;</i>
                                     <span class="ws-rgndd">
@@ -10196,54 +10150,8 @@
                             </div>
                           </div>
                           <div class="v2-body tb" style="padding:14px 20px 24px;">
-                            <div class="v2-strip" style="margin-top:0;">
-                              <div class="mk" style="position:absolute;top:12px;left:-33px;">3</div>
-                              <div class="v2-striph"><span class="v2-hot"
-                                  style="height:19px;font-size:10px;">HOT!</span><b style="font-size:12.5px;">기간 한정</b>
-                                <em style="font-size:10px;">지금 이 기간에만 만나실 수 있습니다</em>
-                              </div>
-                              <div class="v2-srow" style="grid-template-columns:repeat(2,1fr);">
-                                <div class="v2-sc"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고밀도 브라디움 패키지</span><span class="v2-scp">₩
-                                      12,000</span>
-                                    <span class="v2-dday">&#9679; <b>D-1</b></span><span class="v2-prog"><i
-                                        style="width:92%;"></i></span>
-                                  </div>
-                                </div>
-                                <div class="v2-sc"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고농축 에르늄 30개 상자[홀그렌]</span><span
-                                      class="v2-scp">₩
-                                      9,900</span>
-                                    <span class="v2-dday">&#9679; <b>D-6</b></span><span class="v2-prog"><i
-                                        style="width:48%;"></i></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="v2-strip q" style="margin-top:10px;">
-                              <div class="v2-striph"><span class="v2-hot q"
-                                  style="height:19px;font-size:10px;">LIMIT</span><b style="font-size:12.5px;">수량 한정</b>
-                                <em style="font-size:10px;">특별한 한정 혜택!</em>
-                              </div>
-                              <div class="v2-srow" style="grid-template-columns:repeat(2,1fr);">
-                                <div class="v2-sc q"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
-                                  <div class="v2-sci"><span class="v2-scn">고밀도 브라디움 계정한정 패키지</span><span
-                                      class="v2-scp">₩
-                                      2,500</span>
-                                    <span class="v2-dday q">&#9679; 인 당 <b>1개</b></span>
-                                  </div>
-                                </div>
-                                <div class="v2-sc q"><span class="v2-ii xs" style="width:38px;height:38px;"></span>
-                                  <div class="v2-sci"><span class="v2-scn">올마이티 패키지</span><span class="v2-scp">₩
-                                      5,500</span>
-                                    <span class="v2-dday q">&#9679; <b>2</b>/<b>5</b>개</span><span class="v2-prog q"><i
-                                        style="width:40%;"></i></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                             <div class="v2-catrow" style="margin-top:16px;position:relative;">
-                              <div class="mk" style="position:absolute;top:4px;left:-33px;">4</div>
+                              <div class="mk" style="position:absolute;top:4px;left:-33px;">3</div>
                               <div class="ws-cats"><span class="chip-on">추천</span><span class="chip">전체</span><span
                                   class="chip">기간한정</span><span class="chip">패키지</span><span class="chip">의상</span>
                               </div>
@@ -10251,7 +10159,7 @@
                                   검색</span></div>
                             </div>
                             <div class="v2-sortrow" style="position:relative;">
-                              <div class="mk" style="position:absolute;top:4px;left:-33px;">5</div><span
+                              <div class="mk" style="position:absolute;top:4px;left:-33px;">4</div><span
                                 class="v2-count">전체 <b>24</b>개</span><span class="v2-sort" style="height:29px;"
                                 data-role="sort"><b class="v2-sortv">인기순</b> <i>&#9662;</i>
                                 <span class="v2-sortdd">
@@ -10264,7 +10172,7 @@
                               </span>
                             </div>
                             <div class="v2-grid tb" style="position:relative;">
-                              <div class="mk" style="position:absolute;top:0px;left:-33px;">6</div>
+                              <div class="mk" style="position:absolute;top:0px;left:-33px;">5</div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span><span class="v2-like on"
@@ -10279,7 +10187,7 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
-                                    class="v2-bdg"><span class="tag-r">D-3</span></span><span class="v2-like"
+                                    class="v2-bdg"><span class="tag-r">한정</span></span><span class="v2-like"
                                     style="width:21px;height:21px;font-size:10px;">&#9825;</span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
@@ -10335,14 +10243,14 @@
                               </div>
                             </div>
                             <div class="ws-pg" style="position:relative;" data-role="pg">
-                              <div class="mk" style="position:absolute;top:2px;left:-33px;">7</div>
+                              <div class="mk" style="position:absolute;top:2px;left:-33px;">6</div>
                               <span class="dis">|&#9664;</span><span class="dis">&#9664;</span>
                               <span class="on">1</span><span>2</span><span>3</span>
                               <span>&#9654;</span><span>&#9654;|</span>
                             </div>
                           </div>
                           <div class="v2-ft" style="position:relative;">
-                            <div class="mk" style="position:absolute;top:20px;left:-33px;">8</div>&copy; Gravity Co.,
+                            <div class="mk" style="position:absolute;top:20px;left:-33px;">7</div>&copy; Gravity Co.,
                             Ltd. All Rights Reserved.
                           </div>
                         </div>
@@ -10369,8 +10277,8 @@
                           </div>
                           <div class="v2-hd mo" style="position:relative;">
                             <div class="mk" style="position:absolute;top:12px;left:-33px;">1</div>
-                            <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RO
-                                LAND 로고</span></div>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RAGNAROK
+                                PORTAL 로고</span></div>
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
@@ -10380,7 +10288,7 @@
                           </div>
                           <div class="ws-title mo" style="height:150px;">
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">2</div>
-                            <div class="ws-kvin"><span class="ws-glogo">게임<br>로고</span>
+                            <div class="ws-kvin"><span class="ws-glogo">BI</span>
                               <div>
                                 <span class="ws-kvrow"><span class="ws-kvh">라그나로크 온라인</span><span class="ws-rgn" data-role="rgn" style="font-size:11px;">KOREA<i>&#9662;</i>
                                     <span class="ws-rgndd">
@@ -10406,65 +10314,15 @@
                             </div>
                           </div>
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
-                            <div class="v2-strip" style="margin-top:0;padding:10px 11px 12px;">
-                              <div class="mk" style="position:absolute;top:10px;left:-33px;">3</div>
-                              <div class="v2-striph" style="margin-bottom:9px;"><span class="v2-hot"
-                                  style="height:18px;padding:0 7px;font-size:9.5px;">HOT!</span><b
-                                  style="font-size:12px;">기간 한정</b>
-                              </div>
-                              <div class="v2-swrap">
-                                <span class="v2-snext">&#9654;</span>
-                                <div class="v2-srow mo" data-role="scarousel">
-                                  <div class="v2-sc" data-lt="T"><span class="v2-ii xs"
-                                      style="width:34px;height:34px;"></span>
-                                    <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">고밀도 브라디움 패키지</span>
-                                      <span class="v2-dday">&#9679; <b>D-1</b> · ₩ 12,000</span><span class="v2-prog"><i
-                                          style="width:92%;"></i></span>
-                                    </div>
-                                  </div>
-                                  <div class="v2-sc" data-lt="T"><span class="v2-ii xs"
-                                      style="width:34px;height:34px;"></span>
-                                    <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">고농축 에르늄 30개
-                                        상자[홀그렌]</span>
-                                      <span class="v2-dday">&#9679; <b>D-6</b> · ₩ 9,900</span><span class="v2-prog"><i
-                                          style="width:48%;"></i></span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="v2-strip q" style="margin-top:10px;padding:10px 11px 12px;">
-                              <div class="v2-striph" style="margin-bottom:9px;"><span class="v2-hot q"
-                                  style="height:18px;padding:0 7px;font-size:9.5px;">LIMIT</span><b
-                                  style="font-size:12px;">수량 한정</b>
-                              </div>
-                              <div class="v2-swrap">
-                                <span class="v2-snext">&#9654;</span>
-                                <div class="v2-srow mo" data-role="scarousel">
-                                  <div class="v2-sc q"><span class="v2-ii xs" style="width:34px;height:34px;"></span>
-                                    <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">고밀도 브라디움 계정한정
-                                        패키지</span>
-                                      <span class="v2-dday q">&#9679; 인 당 <b>1개</b> · ₩ 2,500</span>
-                                    </div>
-                                  </div>
-                                  <div class="v2-sc q"><span class="v2-ii xs" style="width:34px;height:34px;"></span>
-                                    <div class="v2-sci"><span class="v2-scn" style="font-size:11px;">올마이티 패키지</span>
-                                      <span class="v2-dday q">&#9679; <b>2</b>/<b>5</b>개 · ₩ 5,500</span><span
-                                        class="v2-prog q"><i style="width:40%;"></i></span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                             <div class="v2-catrow mo" style="margin-top:14px;position:relative;">
-                              <div class="mk" style="position:absolute;top:4px;left:-33px;">4</div>
+                              <div class="mk" style="position:absolute;top:4px;left:-33px;">3</div>
                               <div class="ws-cats"><span class="chip-on">추천</span><span class="chip">전체</span><span
                                   class="chip">기간한정</span><span class="chip">패키지</span></div>
                               <div class="v2-tools"><span class="v2-sinp" style="height:30px;">&#9906; 상품명 검색</span>
                               </div>
                             </div>
                             <div class="v2-sortrow" style="margin-top:11px;position:relative;">
-                              <div class="mk" style="position:absolute;top:4px;left:-33px;">5</div>
+                              <div class="mk" style="position:absolute;top:4px;left:-33px;">4</div>
                               <span class="v2-count">전체 <b>24</b>개</span>
                               <span class="v2-sort" style="height:28px;" data-role="sort"><b class="v2-sortv">인기순</b>
                                 <i>&#9662;</i>
@@ -10478,7 +10336,7 @@
                               </span>
                             </div>
                             <div class="v2-grid mo" style="position:relative;">
-                              <div class="mk" style="position:absolute;top:0px;left:-33px;">6</div>
+                              <div class="mk" style="position:absolute;top:0px;left:-33px;">5</div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span><span class="v2-like on"
@@ -10493,7 +10351,7 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
-                                    class="v2-bdg"><span class="tag-r">D-3</span></span><span class="v2-like"
+                                    class="v2-bdg"><span class="tag-r">한정</span></span><span class="v2-like"
                                     style="width:20px;height:20px;font-size:9px;">&#9825;</span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
@@ -10549,7 +10407,7 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
-                                    class="v2-bdg"><span class="tag-r">D-1</span></span><span class="v2-like on"
+                                    class="v2-bdg"><span class="tag-r">한정</span></span><span class="v2-like on"
                                     style="width:20px;height:20px;font-size:9px;">&#9829;</span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
@@ -10572,14 +10430,14 @@
                               </div>
                             </div>
                             <div class="ws-pg mo" style="position:relative;" data-role="pg">
-                              <div class="mk" style="position:absolute;top:2px;left:-33px;">7</div>
+                              <div class="mk" style="position:absolute;top:2px;left:-33px;">6</div>
                               <span class="dis">|&#9664;</span><span class="dis">&#9664;</span>
                               <span class="on">1</span><span>2</span><span>3</span>
                               <span>&#9654;</span><span>&#9654;|</span>
                             </div>
                           </div>
                           <div class="v2-ft mo" style="position:relative;">
-                            <div class="mk" style="position:absolute;top:16px;left:-33px;">8</div>&copy; Gravity Co.,
+                            <div class="mk" style="position:absolute;top:16px;left:-33px;">7</div>&copy; Gravity Co.,
                             Ltd. All Rights Reserved.
                           </div>
                         </div>
@@ -10677,57 +10535,8 @@
                 </div>
               </div>
 
-              <div class="dr-alt">
-                <div class="dr-h"><span class="mk">3</span><span class="dr-t">한정 상품 기획전</span><span
-                    class="src">후킹</span>
-                </div>
-                <p class="dr-b"><b>기간 한정</b>과 <b>수량 한정</b>을 <b>구역으로 나눈다</b>. 목록 위에 <b>한 번만</b> 노출된다.</p>
-                <div class="spec">
-                  <div class="spec-r"><span class="spec-k">헤드</span><span class="spec-v"><b>[HOT!] 기간 한정</b> ·
-                      <b>[LIMIT] 수량 한정</b> — 목록 헤더가 아니라 <b>기획전 배너</b>로 읽히게 한다</span></div>
-                  <div class="spec-r"><span class="spec-k">구역</span><span class="spec-v"><b>기간 한정</b>(붉은 계열) ·
-                      <b>수량 한정</b>(황 계열) <b>둘</b>. PC는 나란히, TABLET · MO는 위아래로 쌓는다</span></div>
-                  <div class="spec-r"><span class="spec-k">왜 나누는가</span><span class="spec-v">지표의 성격이 다르다 — 기간은 <b>모두에게
-                        같은 마감</b>, 수량은 <b>내 계정에만 걸리는 한도</b>다. 섞으면 급한 정도를 잘못 비교한다</span></div>
-                  <div class="spec-r"><span class="spec-k">한쪽만 있으면</span><span class="spec-v">있는 구역만 노출하고 <b>가로를 다
-                        쓴다</b></span></div>
-                  <div class="spec-r"><span class="spec-k">톤</span><span class="spec-v">붉은 계열 <b>그라데이션 배경 + 테두리</b>로 일반
-                      목록과 층을 분리한다. 배너 이미지를 쓰지 않는다 — 상품이 매주 바뀌므로 운영이 못 따라간다</span></div>
-                  <div class="spec-r"><span class="spec-k">기간 한정</span><span class="spec-v">아이콘 · 상품명 · 가격 · <b>남은 기간
-                        (D-day)</b> · <b>진행 바</b> — 마감 임박 순</span></div>
-                  <div class="spec-r"><span class="spec-k">수량 한정</span><span class="spec-v"><b>남은 재고가 아니라 내가 살 수 있는
-                        수량</b>이다 — <b>계정당 구매 한도</b></span></div>
-                  <div class="spec-r"><span class="spec-k">한도 표기</span><span class="spec-v">한도가 1이면 <b>「인 당 1개」</b> ·
-                      2 이상이면 <b>「구매 2/5개」</b> + 진행 바로 <b>내가 쓴 만큼</b>을 보여준다</span></div>
-                  <div class="spec-r"><span class="spec-k">비로그인</span><span class="spec-v">쓴 개수를 알 수 없으므로 <b>「인 당
-                        5개」</b>로만 적는다 — <span class="mono">0/5</span> 처럼 쓰지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">한도 소진</span><span class="spec-v"><span
-                        class="mono">5/5</span>
-                      가 되면 카드를 <b>흐리게</b> 하고 <b>[구매 완료]</b>로 바꾼다 — 목록에서 빼지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">재고와의 관계</span><span class="spec-v">전체 재고가 따로 있다면 <b>품절</b>은
-                      별개
-                      상태다 — 한도와 섞어 적지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">노출 방식</span><span class="spec-v">구역마다 <b>가로 캐러셀</b> —
-                      <b>두 장이 꽉 차고 세 번째가 10~20% 걸친다.</b> 딱 떨어지게 두면 더 있다는 신호가 없다</span></div>
-                  <div class="spec-r"><span class="spec-k">넘기기</span><span class="spec-v">우측 <b>[&#9654;]</b>로 한 칸씩 ·
-                      스와이프(<span class="mono">scroll-snap</span>)도 된다. 끝에서 <b>처음으로 돌아온다</b></span></div>
-                  <div class="spec-r"><span class="spec-k">개수</span><span class="spec-v">한 구역 <b>최대 8개</b>까지 채우고,
-                      <b>2개 이하</b>면 캐러셀을 쓰지 않고 그대로 편다</span></div>
-                  <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v"><b>가로 캐러셀</b> — 2열로 욱여넣지 않는다.
-                      카드 <b>1.6장</b>이 보이게 잘라 다음 카드가 걸치고, 우측 <b>[&#9654;]</b>로 한 칸씩 넘긴다</span></div>
-                  <div class="spec-r"><span class="spec-k">왜 캐러셀인가</span><span class="spec-v">2열 4개는 카드가 작아져 상품명이 잘리고,
-                      2개만 두면 기획전이 빈약해 보인다. <b>걸친 카드</b>가 더 있다는 신호를 준다</span></div>
-                  <div class="spec-r"><span class="spec-k">끝에서</span><span class="spec-v">마지막까지 가면 <b>처음으로 되돌아간다</b> ·
-                      스와이프로도 넘긴다(<span class="mono">scroll-snap</span>)</span></div>
-                  <div class="spec-r"><span class="spec-k">노출 조건</span><span class="spec-v">각 구역은 해당 상품이 <b>1건
-                        이상</b>일 때만. 둘 다 없으면 통째로 숨긴다</span></div>
-                  <div class="spec-r"><span class="spec-k">스크롤</span><span class="spec-v">고정하지 않는다 — 스크롤하면 지나간다</span>
-                  </div>
-                </div>
-              </div>
-
               <div class="dr">
-                <div class="dr-h"><span class="mk">4</span><span class="dr-t">카테고리 · 검색</span><span class="src">좌 ·
+                <div class="dr-h"><span class="mk">3</span><span class="dr-t">카테고리 · 검색</span><span class="src">좌 ·
                     우</span></div>
                 <p class="dr-b">카테고리 칩(좌) · 상품명 검색(우) 한 줄.</p>
                 <div class="spec">
@@ -10743,7 +10552,7 @@
               </div>
 
               <div class="dr-alt">
-                <div class="dr-h"><span class="mk">5</span><span class="dr-t">정렬 줄</span><span class="src">분리</span>
+                <div class="dr-h"><span class="mk">4</span><span class="dr-t">정렬 줄</span><span class="src">분리</span>
                 </div>
                 <p class="dr-b">결과 수(좌) · 정렬(우). 그리드 바로 위 줄.</p>
                 <div class="spec">
@@ -10763,7 +10572,7 @@
               </div>
 
               <div class="dr">
-                <div class="dr-h"><span class="mk">6</span><span class="dr-t">상품 카드</span><span class="src">hover</span>
+                <div class="dr-h"><span class="mk">5</span><span class="dr-t">상품 카드</span><span class="src">hover</span>
                 </div>
                 <p class="dr-b">아이콘 · 배지 · 좋아요 · 분류 · 상품명 · 가격. 액션은 <b>hover에만</b> 나온다.</p>
                 <div class="spec">
@@ -10790,6 +10599,21 @@
                       <b>구매는 모달</b>이 받는다</span></div>
                   <div class="spec-r"><span class="spec-k">좋아요 하트</span><span class="spec-v">우상단 · 카드 클릭과 <b>이벤트 분리</b>.
                       비로그인이면 <b>로그인 확인 알럿</b></span></div>
+                  <div class="spec-r"><span class="spec-k">한정 표기</span><span class="spec-v">상품명 아래에 <b>조건 배지</b>를
+                      붙인다 — <b>기간은 붉은 계열</b>, <b>인 당 한도는 황 계열</b>. <b>둘은 겹칠 수 있고 그때는 나란히</b> 적는다</span>
+                  </div>
+                  <div class="spec-r"><span class="spec-k">기간 조건</span><span class="spec-v"><span class="mono">남은 기간
+                        D-3</span> · <span class="mono">이번 주까지</span> — <b>판매가 끝나는 시점</b>을 말한다</span></div>
+                  <div class="spec-r"><span class="spec-k">한도 조건</span><span class="spec-v"><span class="mono">인 당
+                        1개</span> · <span class="mono">구매 2/5개</span> · <span class="mono">1일 1회</span> —
+                      <b>내 계정에 걸리는 한도</b>다. 재고가 아니다</span></div>
+                  <div class="spec-r"><span class="spec-k">겹칠 때</span><span class="spec-v">「<span class="mono">남은 기간
+                        D-1</span> <span class="mono">인 당 2개</span>」처럼 <b>기간 먼저, 한도 뒤</b>. 기간이 끝나면 한도도
+                      의미가 없으므로 <b>기간이 상위 조건</b>이다</span></div>
+                  <div class="spec-r"><span class="spec-k">별도 구역</span><span class="spec-v"><b>두지 않는다.</b> 한정 상품도
+                      목록 안에 있고, <b>카테고리 칩 <span class="mono">한정상품</span></b>으로 걸러 본다</span></div>
+                  <div class="spec-r"><span class="spec-k">썸네일 배지</span><span class="spec-v">좌상단 <b>「한정」</b> ·
+                      <b>「확률형」</b>. 구체적인 조건은 <b>아래 텍스트</b>가 맡는다</span></div>
                   <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v">hover 없음 — <b>카드 탭 = 상세 모달</b>.
                       오버레이를 띄우지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">판매 종료</span><span class="spec-v">카드를 <b>흐리게</b> 하고
@@ -10798,7 +10622,7 @@
               </div>
 
               <div class="dr">
-                <div class="dr-h"><span class="mk">7</span><span class="dr-t">페이지네이션</span><span class="src">그리드
+                <div class="dr-h"><span class="mk">6</span><span class="dr-t">페이지네이션</span><span class="src">그리드
                     아래</span></div>
                 <p class="dr-b">그리드 바로 아래 <b>중앙</b>. 더보기 버튼을 쓰지 않는다.</p>
                 <div class="spec">
@@ -10818,7 +10642,7 @@
               </div>
 
               <div class="dr-alt">
-                <div class="dr-h"><span class="mk">8</span><span class="dr-t">푸터</span><span class="src">기존 준용</span>
+                <div class="dr-h"><span class="mk">7</span><span class="dr-t">푸터</span><span class="src">기존 준용</span>
                 </div>
                 <p class="dr-b">저작권 한 줄. 기존 웹샵 화면정의서 준용.</p>
                 <div class="spec">
@@ -10870,8 +10694,8 @@
                       </div>
 
                       <div class="v2-hd">
-                        <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO
-                            LAND 로고</span>
+                        <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RAGNAROK
+                            PORTAL 로고</span>
                         </div>
                         <div class="v2-hdu">
                           <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
@@ -10924,7 +10748,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span><span
-                                class="v2-pn">카츄아의 비밀상자</span></div>
+                                class="v2-pn">카츄아의 비밀상자</span>
+                                  <span class="v2-lim"><em class="t">남은 기간 D-3</em><em class="q">1일 1회</em></span></div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 2,500</b><i>&#8250;</i></span>
                             </div>
@@ -10944,7 +10769,8 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span><span
-                                class="v2-pn">올마이티 패키지</span></div>
+                                class="v2-pn">올마이티 패키지</span>
+                                  <span class="v2-lim"><em class="q">구매 2/5개</em><em class="t">이번 주까지</em></span></div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 7,500</b><i>&#8250;</i></span>
                             </div>
@@ -10967,8 +10793,8 @@
                             <!-- 2 · 이미지 -->
                             <div class="v2-pmdl" style="position:relative;">
                               <div class="mk" style="position:absolute;top:0;left:-33px;">2</div>
-                              <div class="v2-pmdimg"><span class="v2-ii lg"
-                                  style="width:100px;height:100px;">아이템<br>아이콘</span></div>
+                              <div class="v2-pmdimg"><span class="v2-ii"
+                                  >아이템<br>아이콘</span></div>
                             </div>
 
                             <!-- 3 · 정보 -->
@@ -11022,8 +10848,8 @@
 
                             <div class="v2-pmdb">
                               <div class="v2-pmdl">
-                                <div class="v2-pmdimg"><span class="v2-ii lg"
-                                    style="width:100px;height:100px;">아이템<br>아이콘</span></div>
+                                <div class="v2-pmdimg"><span class="v2-ii"
+                                    >아이템<br>아이콘</span></div>
                               </div>
 
                               <div class="v2-pmdr">
@@ -11073,8 +10899,8 @@
                             <div class="v2-url">https://<b>shop.ragnarokland.com</b><em>/ro</em></div>
                           </div>
                           <div class="v2-hd tb">
-                            <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RO
-                                LAND 로고</span></div>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RAGNAROK
+                                PORTAL 로고</span></div>
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
@@ -11107,7 +10933,7 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
-                                    class="v2-bdg"><span class="tag-r">D-3</span></span>
+                                    class="v2-bdg"><span class="tag-r">한정</span></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">존다 서포트 패키지</span></div>
@@ -11225,8 +11051,8 @@
                             </div>
                           </div>
                           <div class="v2-hd mo">
-                            <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RO
-                                LAND 로고</span></div>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RAGNAROK
+                                PORTAL 로고</span></div>
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
@@ -12107,8 +11933,8 @@
                       </div>
 
                       <div class="v2-hd">
-                        <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RO
-                            LAND 로고</span>
+                        <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RAGNAROK
+                            PORTAL 로고</span>
                         </div>
                         <div class="v2-hdu">
                           <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
@@ -12191,8 +12017,8 @@
                             </div>
                           </div>
                           <div class="v2-hd tb">
-                            <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RO
-                                LAND 로고</span></div>
+                            <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RAGNAROK
+                                PORTAL 로고</span></div>
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
@@ -12255,8 +12081,8 @@
                             </div>
                           </div>
                           <div class="v2-hd mo">
-                            <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RO
-                                LAND 로고</span></div>
+                            <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RAGNAROK
+                                PORTAL 로고</span></div>
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
