@@ -872,13 +872,14 @@
       white-space: nowrap;
     }
 
+    /* 상품 분류 — 박스를 두르지 않는다. 한정 조건 배지와 층을 나눈다 */
     .tag {
-      border: 1px solid #AECAE0;
-      background: #EBF3F9;
-      color: #2F6490;
-      font-size: 10px;
-      padding: 2px 7px;
-      border-radius: 3px;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      color: #8B939F;
+      font-size: 10.5px;
+      letter-spacing: -.01em;
       white-space: nowrap;
     }
 
@@ -10534,6 +10535,8 @@
                       의미가 없으므로 <b>기간이 상위 조건</b>이다</span></div>
                   <div class="spec-r"><span class="spec-k">별도 구역</span><span class="spec-v"><b>두지 않는다.</b> 한정 상품도
                       목록 안에 있고, <b>카테고리 칩 <span class="mono">한정상품</span></b>으로 걸러 본다</span></div>
+                  <div class="spec-r"><span class="spec-k">분류</span><span class="spec-v">상품명 위에 <b>작은
+                        텍스트</b>로만 — 박스를 두르지 않는다. <b>박스는 한정 조건만</b> 쓰게 해서 층을 나눈다</span></div>
                   <div class="spec-r"><span class="spec-k">배지 순서</span><span class="spec-v"><b>확률형 &#8594; 기간 &#8594;
                         한도</b>. 「한정」이라는 배지는 따로 두지 않는다 — <b>남은 기간 · 인 당 한도 자체가 이미 한정이라는 뜻</b>이라
                       같은 말을 두 번 하게 된다</span></div>
