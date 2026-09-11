@@ -5393,6 +5393,7 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
+      flex: 1;
     }
 
     .v2-pg {
@@ -5434,13 +5435,6 @@
       color: #7A5A18;
       background: #FBF5E8;
       border: 1px solid #E4D8BC;
-    }
-
-    .v2-pc.hov .v2-lim em,
-    .v2-grid:not(.mo) .v2-pc:hover .v2-lim em {
-      background: transparent;
-      color: #E9EDF2;
-      border-color: rgba(255, 255, 255, .42);
     }
 
     .v2-pp {
@@ -7125,7 +7119,7 @@
 
     .v2-pc.hov>.v2-act>.v2-abuy,
     .v2-grid:not(.mo) .v2-pc:hover>.v2-act>.v2-abuy {
-      background: transparent;
+      background: #2F6490;
     }
 
     .v2-pc.hov>.v2-act>.v2-abuy b,
@@ -7137,7 +7131,7 @@
 
     .v2-pc.hov>.v2-act,
     .v2-grid:not(.mo) .v2-pc:hover>.v2-act {
-      border-top-color: rgba(255, 255, 255, .22);
+      border-top-color: #2F6490;
     }
 
     .v2-pc.hov>.v2-act>.v2-abuy,
@@ -7146,46 +7140,17 @@
       color: #fff;
     }
 
-    /* hover — 카드 전면을 아래에서 위로 그라데이션이 덮는다.
-       분류 · 상품명 · 가격은 자리를 그대로 두고 글자만 흰색이 된다 */
-    .v2-hgrad {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background: linear-gradient(to top,
-          rgba(23, 27, 34, .95) 0%,
-          rgba(23, 27, 34, .88) 42%,
-          rgba(23, 27, 34, .62) 72%,
-          rgba(23, 27, 34, .22) 90%,
-          rgba(23, 27, 34, 0) 100%);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity .14s ease;
-    }
-
-    .v2-pc.hov>.v2-hgrad,
-    .v2-grid:not(.mo) .v2-pc:hover>.v2-hgrad {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* 글자는 자리를 지키고 색만 바뀐다 */
+    /* hover — 카드 색을 뒤집지 않는다. 가격 줄만 바뀐다 */
     .v2-pb,
     .v2-act {
       position: relative;
       z-index: 3;
     }
 
-    .v2-pc.hov .v2-pn,
-    .v2-grid:not(.mo) .v2-pc:hover .v2-pn {
-      color: #fff;
-    }
-
-    .v2-pc.hov .v2-pb>.tag,
-    .v2-grid:not(.mo) .v2-pc:hover .v2-pb>.tag {
-      color: #E2E8EF;
-      border-color: rgba(255, 255, 255, .42);
-      background: transparent;
+    .v2-pc.hov,
+    .v2-grid:not(.mo) .v2-pc:hover {
+      border-color: #2F6490;
+      box-shadow: 0 6px 18px rgba(47, 100, 144, .16);
     }
 
     /* ---- 우측 드로어 (딤드) — 관심상품 · 최근 본 ---- */
@@ -9918,20 +9883,18 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-bdg"><span class="tag-r">한정</span></span><span
+                              <span
                                 class="v2-like">&#9825;</span>
                             </div>
-                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
+                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">존다 서포트 패키지</span>
                             </div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 15,000</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc hov">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
@@ -9943,7 +9906,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 2,500</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
@@ -9954,7 +9916,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
@@ -9966,7 +9927,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 7,500</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
@@ -9978,21 +9938,19 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 3,200</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-bdg"><span class="tag-r">한정</span></span><span
+                              <span
                                 class="v2-like on">&#9829;</span>
                             </div>
-                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
+                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">고밀도 브라디움 패키지</span>
                               <span class="v2-lim"><em class="t">남은 기간 D-1</em><em class="q">인 당 2개</em></span>
                             </div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 12,000</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
@@ -10003,7 +9961,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 5,500</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
@@ -10014,7 +9971,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 9,900</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
@@ -10027,7 +9983,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 4,900</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                         </div>
                         <div class="ws-pg" style="position:relative;" data-role="pg">
@@ -10152,8 +10107,10 @@
                           <div class="v2-body tb" style="padding:14px 20px 24px;">
                             <div class="v2-catrow" style="margin-top:16px;position:relative;">
                               <div class="mk" style="position:absolute;top:4px;left:-33px;">3</div>
-                              <div class="ws-cats"><span class="chip-on">추천</span><span class="chip">전체</span><span
-                                  class="chip">기간한정</span><span class="chip">패키지</span><span class="chip">의상</span>
+                              <div class="ws-cats">
+                                <span class="chip-on">추천</span><span class="chip">전체</span>
+                                <span class="chip">한정상품</span><span class="chip">패키지</span>
+                                <span class="chip">의상</span><span class="chip">소비</span>
                               </div>
                               <div class="v2-tools"><span class="v2-sinp" style="width:180px;height:29px;">&#9906; 상품명
                                   검색</span></div>
@@ -10183,11 +10140,9 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
-                                <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
-                                    class="v2-bdg"><span class="tag-r">한정</span></span><span class="v2-like"
+                                <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span class="v2-like"
                                     style="width:21px;height:21px;font-size:10px;">&#9825;</span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
@@ -10195,7 +10150,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 15,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
@@ -10206,7 +10160,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 2,500</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
@@ -10217,7 +10170,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
@@ -10228,7 +10180,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 7,500</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
@@ -10239,7 +10190,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 3,200</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                             </div>
                             <div class="ws-pg" style="position:relative;" data-role="pg">
@@ -10316,8 +10266,11 @@
                           <div class="v2-body mo" style="padding-top:12px;padding-bottom:20px;">
                             <div class="v2-catrow mo" style="margin-top:14px;position:relative;">
                               <div class="mk" style="position:absolute;top:4px;left:-33px;">3</div>
-                              <div class="ws-cats"><span class="chip-on">추천</span><span class="chip">전체</span><span
-                                  class="chip">기간한정</span><span class="chip">패키지</span></div>
+                              <div class="ws-cats">
+                                <span class="chip-on">추천</span><span class="chip">전체</span>
+                                <span class="chip">한정상품</span><span class="chip">패키지</span>
+                                <span class="chip">의상</span><span class="chip">소비</span>
+                              </div>
                               <div class="v2-tools"><span class="v2-sinp" style="height:30px;">&#9906; 상품명 검색</span>
                               </div>
                             </div>
@@ -10347,11 +10300,9 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
-                                <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
-                                    class="v2-bdg"><span class="tag-r">한정</span></span><span class="v2-like"
+                                <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span class="v2-like"
                                     style="width:20px;height:20px;font-size:9px;">&#9825;</span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
@@ -10359,7 +10310,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 15,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
@@ -10370,7 +10320,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 2,500</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
@@ -10381,7 +10330,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
@@ -10392,7 +10340,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 7,500</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
@@ -10403,11 +10350,9 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 3,200</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
-                                <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
-                                    class="v2-bdg"><span class="tag-r">한정</span></span><span class="v2-like on"
+                                <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span class="v2-like on"
                                     style="width:20px;height:20px;font-size:9px;">&#9829;</span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
@@ -10415,7 +10360,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 12,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
@@ -10426,7 +10370,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 5,500</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                             </div>
                             <div class="ws-pg mo" style="position:relative;" data-role="pg">
@@ -10588,10 +10531,13 @@
                       둔다 — <b>좌측 가격 · 우측 끝 &#8250;</b>. 「구매하기」 글자는 쓰지 않는다, <b>가격 자체가 버튼</b>이다</span></div>
                   <div class="spec-r"><span class="spec-k">자리 고정</span><span class="spec-v">이 줄은 <b>높이 40px 고정</b>이다.
                       hover 에 생겼다 사라지지 않으므로 <b>카드 높이가 흔들리지 않는다</b></span></div>
-                  <div class="spec-r"><span class="spec-k">hover</span><span class="spec-v"><b>카드 전면</b>을 아래에서 위로
-                      그라데이션이 덮는다. <b>버튼을 얹지 않는다</b> — 어둡게 뜨는 것 자체가 「눌러도 된다」는 신호다</span></div>
-                  <div class="spec-r"><span class="spec-k">텍스트</span><span class="spec-v">분류 &#183; 상품명 &#183; 가격은
-                      <b>자리를 그대로 지키고 글자만 흰색</b>이 된다 — 위치가 움직이면 읽던 눈이 다시 찾아야 한다</span></div>
+                  <div class="spec-r"><span class="spec-k">hover</span><span class="spec-v"><b>가격 줄만</b> 바뀐다 —
+                      배경이 <b>강조색</b>으로, 글자가 흰색으로. 카드 테두리에도 <b>같은 색</b>이 들어간다</span></div>
+                  <div class="spec-r"><span class="spec-k">색을 뒤집지 않는 이유</span><span class="spec-v">카드 전면을 덮으면
+                      <b>분류 · 상품명 · 한정 조건이 한꺼번에 다른 색</b>이 된다. 목록을 훑는 동안 색이 계속 뒤집혀 피로하다 —
+                      <b>누를 자리 하나만</b> 바뀌면 된다</span></div>
+                  <div class="spec-r"><span class="spec-k">정렬</span><span class="spec-v">한정 조건이 있는 카드와 없는 카드의
+                      <b>가격 줄 높이를 맞춘다</b> — 정보 영역이 남는 높이를 먹고 가격 줄은 <b>바닥에 붙는다</b></span></div>
                   <div class="spec-r"><span class="spec-k">클릭</span><span class="spec-v">카드 <b>어디를 눌러도</b> 상품 상세 모달이
                       열린다 — 썸네일 &#183; 상품명 &#183; 가격 줄 모두 같은 동작. 별도 페이지로 이동하지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">왜 버튼을 빼나</span><span class="spec-v">카드에서 결제까지 가려면 <b>확률 고지 ·
@@ -10612,8 +10558,9 @@
                       의미가 없으므로 <b>기간이 상위 조건</b>이다</span></div>
                   <div class="spec-r"><span class="spec-k">별도 구역</span><span class="spec-v"><b>두지 않는다.</b> 한정 상품도
                       목록 안에 있고, <b>카테고리 칩 <span class="mono">한정상품</span></b>으로 걸러 본다</span></div>
-                  <div class="spec-r"><span class="spec-k">썸네일 배지</span><span class="spec-v">좌상단 <b>「한정」</b> ·
-                      <b>「확률형」</b>. 구체적인 조건은 <b>아래 텍스트</b>가 맡는다</span></div>
+                  <div class="spec-r"><span class="spec-k">썸네일 배지</span><span class="spec-v"><b>「확률형」만</b> 둔다.
+                      「한정」은 붙이지 않는다 — <b>남은 기간 · 인 당 한도 자체가 이미 한정이라는 뜻</b>이라 같은 말을 두 번 하게
+                      된다</span></div>
                   <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v">hover 없음 — <b>카드 탭 = 상세 모달</b>.
                       오버레이를 띄우지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">판매 종료</span><span class="spec-v">카드를 <b>흐리게</b> 하고
@@ -10717,8 +10664,11 @@
 
                       <div class="v2-body" style="flex:1;overflow:hidden;padding-top:16px;">
                         <div class="v2-catrow">
-                          <div class="ws-cats"><span class="chip-on">추천</span><span class="chip">전체</span><span
-                              class="chip">기간한정</span><span class="chip">패키지</span></div>
+                          <div class="ws-cats">
+                            <span class="chip-on">추천</span><span class="chip">전체</span>
+                            <span class="chip">한정상품</span><span class="chip">패키지</span>
+                            <span class="chip">의상</span><span class="chip">소비</span>
+                          </div>
                           <div class="v2-tools"><span class="v2-sinp" style="width:250px;">&#9906; 상품명 검색</span></div>
                         </div>
                         <div class="v2-sortrow"><span class="v2-count">전체 <b>24</b>개</span><span class="v2-sort">인기순
@@ -10732,17 +10682,15 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                             </div>
-                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span><span
+                            <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span><span
                                 class="v2-pn">존다 서포트 패키지</span></div>
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 15,000</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
@@ -10753,7 +10701,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 2,500</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
@@ -10763,7 +10710,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
@@ -10774,7 +10720,6 @@
                             <div class="v2-act">
                               <span class="v2-abuy"><b>₩ 7,500</b><i>&#8250;</i></span>
                             </div>
-                            <span class="v2-hgrad"></span>
                           </div>
                         </div>
                       </div>
@@ -10912,8 +10857,11 @@
                           </div>
                           <div class="v2-body tb" style="flex:1;overflow:hidden;padding:14px 20px 20px;">
                             <div class="v2-catrow">
-                              <div class="ws-cats"><span class="chip-on">추천</span><span class="chip">전체</span><span
-                                  class="chip">기간한정</span></div>
+                              <div class="ws-cats">
+                                <span class="chip-on">추천</span><span class="chip">전체</span>
+                                <span class="chip">한정상품</span><span class="chip">패키지</span>
+                                <span class="chip">의상</span><span class="chip">소비</span>
+                              </div>
                               <div class="v2-tools"><span class="v2-sinp" style="width:180px;height:29px;">&#9906; 상품명
                                   검색</span></div>
                             </div>
@@ -10929,18 +10877,15 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
-                                <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
-                                    class="v2-bdg"><span class="tag-r">한정</span></span>
+                                <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">존다 서포트 패키지</span></div>
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 15,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
@@ -10950,7 +10895,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 2,500</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
@@ -10960,7 +10904,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
@@ -10970,7 +10913,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 7,500</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
@@ -10980,7 +10922,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 3,200</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                             </div>
                           </div>
@@ -11070,7 +11011,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 25,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span>
@@ -11080,7 +11020,6 @@
                                 <div class="v2-act">
                                   <span class="v2-abuy"><b>₩ 15,000</b><i>&#8250;</i></span>
                                 </div>
-                                <span class="v2-hgrad"></span>
                               </div>
                             </div>
                           </div>
