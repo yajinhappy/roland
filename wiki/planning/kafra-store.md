@@ -10,10 +10,10 @@
 | 항목 | 확정 |
 |---|---|
 | 상점 브랜드 | **Kafra Store** |
-| 1뎁스 | **Web Shop**(게임에서 쓰는 것) · **Merch Shop**(소장하는 것) |
+| 1뎁스 | **Web Shop**(게임에서 쓰는 것) · **Goods Shop**(소장하는 것) |
 | 분류 기준 | 상품 형태가 아니라 **용도** |
 | 운영 | **원 브랜드, 권역별 운영** — 주문 · 결제 · 배송 · CS는 지사 기존 체계 유지 |
-| 이번 범위 | Web Shop 6개 화면. Merch Shop 은 **진입 지점만** 정의 |
+| 이번 범위 | Web Shop 6개 화면. Goods Shop 은 **진입 지점만** 정의 |
 
 ---
 
@@ -72,8 +72,10 @@
 - EN / PT / ES **번역 불필요**
 - 라그나로크 IP **전 타이틀 공통 NPC** — 타이틀 편중 없음
 
-**Web Shop / Merch Shop**
+**Web Shop / Goods Shop**
 - **용도 기준**이라 코인 · 포인트가 늘어도 구조가 버틴다. 형태 기준이면 **디지털 굿즈**가 어느 쪽에도 못 들어간다
+- **「굿즈」가 통하는 시장을 기준으로 삼는다.** 영어권 표준은 `Merch` · `Gear` 이고 `Goods` 는 「물품 · 화물」로 읽혀 어색하다. 그럼에도 **굿즈 수요의 중심은 한국 · 일본**이고 그쪽에서 `Merch` 는 **뜻이 통하지 않는다** — **「어색함」보다 「의미 불통」이 비싼 실수**라고 봤다
+- **WEB SHOP 과 짝이 맞는다.** 둘 다 그 시장에서 굳은 말이라 한 쌍으로 읽힌다
 - 어미를 `Shop` 으로 통일해 **동급으로** 읽히게 하고, 구분은 앞 단어(In-Game / Merch)가 진다
 - `Store` 안에 `Shop` 둘 — **층위가 명칭에서 드러난다**
 
@@ -91,19 +93,19 @@ Kafra Store
 │   ├─ Packages
 │   └─ Items         Costumes · Consumables · Services
 │      ※ 타이틀 필터 : RO / ROZ / 추후 타이틀
-└─ Merch Shop        소장하는 것 · 권역별 운영
-    ├─ Merch         유형별 Plush · Figures · Apparel · Stationery · Pins & Acrylic
-    │                캐릭터별 Poring Family · Baphomet · Kafra …
-    ├─ Digital Goods 월페이퍼 · OST · 이모티콘
-    └─ Bundles       Merch + Game Code   ← Web Shop 에 배너 교차 노출
+└─ Goods Shop          소장하는 것 · 권역별 운영
+    ├─ Physical Goods  유형별 Plush · Figures · Apparel · Stationery · Pins & Acrylic
+    │                  캐릭터별 Poring Family · Baphomet · Kafra …
+    ├─ Digital Goods   월페이퍼 · OST · 이모티콘
+    └─ Bundles         Physical Goods + Game Code   ← Web Shop 에 배너 교차 노출
 ```
 
 - **Featured** — 두 축을 가로지르는 큐레이션. 기념 기획전은 `Collection` 명칭 사용(예: 24th Anniversary Collection)
-- **Bundles** — 배송 상품이므로 Merch Shop 소속, Web Shop 에는 배너로 교차 노출
+- **Bundles** — 배송 상품이므로 Goods Shop 소속, Web Shop 에는 배너로 교차 노출
 - **Coins** — 카테고리명은 권역 공통, 상품명만 현지화. 충전은 **기존 계정 지갑**과 연결
-- **필터** — Web Shop 은 타이틀, Merch Shop 은 캐릭터
+- **필터** — Web Shop 은 타이틀, Goods Shop 은 캐릭터
 
-**세계관 마이크로카피(선택)** — 구매 아이템 보관함 `Kafra Storage` · Merch Shop 장바구니 `Pushcart`. 내비게이션 명칭은 기능어를 유지한다.
+**세계관 마이크로카피(선택)** — 구매 아이템 보관함 `Kafra Storage` · Goods Shop 장바구니 `Pushcart`. 내비게이션 명칭은 기능어를 유지한다.
 
 ---
 
@@ -112,7 +114,7 @@ Kafra Store
 ```
 포털 GNB   [ KAFRA STORE ▾ ]
               ├ WEB SHOP   → 타이틀 × 권역 모달
-              └ MERCH SHOP     → 이번 범위 밖
+              └ GOODS SHOP     → 이번 범위 밖
 ```
 
 - **마우스 오버**로 열린다. 항목은 둘뿐이고 설명 · 배지를 붙이지 않는다
@@ -263,8 +265,8 @@ Kafra Store
 |---|---|
 | 브랜드명 · 1뎁스 구조 · 카테고리 체계 | 주문 · 결제 · 배송 · CS |
 
-- **Merch Shop 운영 방식은 권역이 고른다** — 자사몰 또는 라이선시 · 외부몰 링크(현행 국내 굿즈몰의 위탁 구조 수용)
-- **굿즈 미운영 권역** — Merch Shop 비노출 또는 Digital Goods 만
+- **Goods Shop 운영 방식은 권역이 고른다** — 자사몰 또는 라이선시 · 외부몰 링크(현행 국내 굿즈몰의 위탁 구조 수용)
+- **굿즈 미운영 권역** — Goods Shop 비노출 또는 Digital Goods 만
 - 선례 — 유비소프트는 스토어는 하나로 두고 **고객지원 플랫폼만 MERCH 로 분리**했다
 
 **권역별 적용 단계**
@@ -281,11 +283,11 @@ Kafra Store
 | 대상 | 변경 |
 |---|---|
 | 포털 GNB 라벨 | `KAFRA CENTER` → `KAFRA STORE` |
-| 드롭다운 | `WEB SHOP` → `WEB SHOP` · `GOODS SHOP` → `MERCH SHOP` |
+| 드롭다운 | `WEB SHOP` → `WEB SHOP` · `GOODS SHOP` → `GOODS SHOP` |
 | 화면명 · 디스크립션 | 「카프라 센터」 → 「카프라 스토어」 · 「웹샵」 → 「웹샵」 |
 | 기존 설계 문서의 「웹샵」 | **유지** — 업계 표준 용어(D2C 채널)로서의 웹샵 |
 | 파일명 · 도메인 | **유지** — `webshop-ui.html` · `shop.ragnarokland.com` |
-| Merch Shop 화면 | 이번 범위 밖. **진입 지점만** 정의 |
+| Goods Shop 화면 | 이번 범위 밖. **진입 지점만** 정의 |
 
 > [카프라 스토어 정보구조](store-ia.html) 는 **검토 기록**으로 남긴다 — 「카프라 센터 페이지를 둔다」는 폐기된 전제 위에 서 있으므로, **왜 타이틀을 먼저 골랐는지**의 근거로만 참조한다. 문서 상단에 그 취지를 명시했다.
 
@@ -297,7 +299,7 @@ Kafra Store
 |---|---|---|
 | **iRO 명칭 인접** | 북미 iRO(WarpPortal) 인게임 캐시샵명 `Kafra Shop`, 포인트명 `Kafra Shop Points(KP)` | `Store` 로 층위 구분 · **아이템명에 카프라 미사용** · WarpPortal 사전 공유 |
 | **상표** | Kafra Store 권역별 사용 가능 여부 | **법무 확인** |
-| **다국어** | Web Shop / Merch Shop 의 PT · ES 표기 | LQA |
+| **다국어** | Web Shop / Goods Shop 의 PT · ES 표기 | LQA |
 | **권역별 코인명** | 권역마다 명칭 상이 | `Coins` 공통 카테고리명, 상품명만 현지화 |
 | **정책 차이** | 두 축 간 청약철회 · 확률 표기 · 배송 정책 상이 | **1뎁스 단위로 정책 · 약관 분리** |
 | **권역 단위 성격** | 묶음 권역의 통화가 여럿일 수 있음 | 4-1 확정 필요 3건 참고 |
@@ -308,12 +310,12 @@ Kafra Store
 
 **확정 요청**
 - 브랜드명 **Kafra Store**
-- 1뎁스 **Web Shop / Merch Shop**
+- 1뎁스 **Web Shop / Goods Shop**
 - 타이틀 × 권역 매트릭스 8종
 
 **다음 단계**
 1. 권역별 적용안 수립
-2. Merch Shop 화면 정의 (이번 범위 밖)
+2. Goods Shop 화면 정의 (이번 범위 밖)
 3. 언어팩(EN / PT / ES) 반영 및 LQA
 4. Kafra Store 상표 법무 검토 · WarpPortal 사전 공유
 5. `store-ia.html` 내용 개정
@@ -326,7 +328,7 @@ Kafra Store
 유저 입장에서 「라그나로크 상품 구매처」가 하나로 인지되는 것 자체가 목적이다. 굿즈 + 게임 쿠폰 번들처럼 두 영역을 넘나드는 상품이 늘고 있고(엔씨 · 넷마블 · 펄어비스 · 데브시스터즈 공통), **입구가 하나여야 교차 노출이 가능하다.**
 
 **굿즈가 없는 권역은**
-Merch Shop 비노출 또는 Digital Goods 만. 권역별 부분 적용이 가능한 구조로 설계했다.
+Goods Shop 비노출 또는 Digital Goods 만. 권역별 부분 적용이 가능한 구조로 설계했다.
 
 **iRO 유저가 헷갈리지 않나**
 iRO `Kafra Shop` 은 게임 내 캐시샵, `Kafra Store` 는 포털 레벨 상점으로 층위가 다르다. 포인트명을 분리하면 혼동 여지는 낮다.
