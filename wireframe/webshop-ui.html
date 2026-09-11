@@ -1468,6 +1468,12 @@
 
 
     /* ---- 통합 결제창 — 7행 위계 ---- */
+    /* 확률형이 섞였을 때만 붙는 동의 — 조건부임을 색으로 구분한다 */
+    .agree.odds {
+      border-color: #E0BEBE;
+      background: #FBF3F3;
+    }
+
     .pay-sec {
       display: flex;
       flex-direction: column;
@@ -10199,6 +10205,7 @@
                           <div class="v2-pmdf" style="position:relative;">
                             <div class="v2-pmdfr">
                               <span class="v2-pmdlike">&#9825;</span>
+                              <span class="v2-pmdadd s">담기</span>
                               <span class="v2-pmdadd">₩ 25,000 · 구매하기</span>
                             </div>
                           </div>
@@ -10880,8 +10887,8 @@
                   <div class="spec-r"><span class="spec-k">클릭</span><span class="spec-v">카드 <b>어디를 눌러도</b> 상품 상세 모달이
                       열린다 — 썸네일 &#183; 상품명 &#183; 가격 줄 모두 같은 동작. 별도 페이지로 이동하지 않는다</span></div>
                   <div class="spec-r"><span class="spec-k">왜 버튼을 빼나</span><span class="spec-v">카드에서 결제까지 가려면 <b>확률 고지 ·
-                        수량 · 통화</b>가 필요한데 카드 안에 담을 수 없다. 카드는 <b>고르는 자리</b>까지만 맡고 담기 &#183; 구매는
-                      <b>모달</b>이 받는다</span></div>
+                        수량 · 통화</b>가 필요한데 카드 안에 담을 수 없다. 카드는 <b>고르는 자리</b>까지만 맡고
+                      <b>담기 &#183; 구매는 모달</b>이 받는다</span></div>
                   <div class="spec-r"><span class="spec-k">좋아요 하트</span><span class="spec-v">우상단 · 카드 클릭과 <b>이벤트 분리</b>.
                       비로그인이면 <b>로그인 확인 알럿</b></span></div>
                   <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v">hover 없음 — <b>카드 탭 = 상세 모달</b>.
@@ -11098,6 +11105,7 @@
                             <div class="mk" style="position:absolute;top:20px;left:-33px;">5</div>
                             <div class="v2-pmdfr">
                               <span class="v2-pmdlike">&#9825;</span>
+                              <span class="v2-pmdadd s">담기</span>
                               <span class="v2-pmdadd">₩ 25,000 · 구매하기</span>
                             </div>
                           </div>
@@ -11141,6 +11149,7 @@
                             <div class="v2-pmdf">
                               <div class="v2-pmdfr">
                                 <span class="v2-pmdlike">&#9825;</span>
+                                <span class="v2-pmdadd s">담기</span>
                                 <span class="v2-pmdadd">₩ 9,900 · 구매하기</span>
                               </div>
                             </div>
@@ -11294,6 +11303,7 @@
                                 <div class="mk" style="position:absolute;top:18px;left:-33px;">5</div>
                                 <div class="v2-pmdfr">
                                   <span class="v2-pmdlike" style="width:46px;padding:11px 0;">&#9825;</span>
+                                  <span class="v2-pmdadd s" style="padding:11px 0;font-size:12.5px;">담기</span>
                                   <span class="v2-pmdadd" style="padding:11px 0;font-size:13px;">₩ 25,000 ·
                                     구매하기</span>
                                 </div>
@@ -11399,6 +11409,7 @@
                                 <div class="mk" style="position:absolute;top:16px;left:-33px;">5</div>
                                 <div class="v2-pmdfr">
                                   <span class="v2-pmdlike" style="width:44px;padding:11px 0;">&#9825;</span>
+                                  <span class="v2-pmdadd s" style="padding:11px 0;font-size:12.5px;">담기</span>
                                   <span class="v2-pmdadd" style="padding:11px 0;font-size:13px;">₩ 25,000 ·
                                     구매하기</span>
                                 </div>
@@ -11434,8 +11445,8 @@
                     않는다</span></div>
                 <div class="imm-r"><span class="imm-k">유의사항</span><span class="imm-v">모달에 전문을 넣지 않는다 — 요약 설명 마지막 줄에
                     <b>핵심 제약</b>(거래 불가 등)만 붙인다</span></div>
-                <div class="imm-r"><span class="imm-k">결제</span><span class="imm-v">[구매하기] → <b>주문 드로어</b> →
-                    [결제하기] → <b>통합 결제창</b>. <b>결제 진입점은 드로어 하나</b>다</span></div>
+                <div class="imm-r"><span class="imm-k">결제</span><span class="imm-v"><b>[구매하기]</b> → 통합 결제창(단건) ·
+                    <b>[담기]</b> → 드로어 → [결제하기] → 통합 결제창(복수)</span></div>
                 <div class="imm-r"><span class="imm-k">청약철회</span><span class="imm-v">상품마다 같으므로 <b>결제 단계 고지</b>로 옮긴다 —
                     상품별 입력이 아니다</span></div>
               </div>
@@ -11510,23 +11521,25 @@
               <div class="dr">
                 <div class="dr-h"><span class="mk">5</span><span class="dr-t">모달 푸터</span><span class="src">구매하기</span>
                 </div>
-                <p class="dr-b">좋아요 · <b>구매하기</b> 둘. <b>담기와 동의를 두지 않는다.</b></p>
+                <p class="dr-b">좋아요 · <b>담기</b> · <b>구매하기</b> 셋. <b>동의는 두지 않는다.</b></p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v">좌측 <b>좋아요</b> · 우측
-                      <b>구매하기</b> 전폭 버튼</span></div>
+                  <div class="spec-r"><span class="spec-k">구성</span><span class="spec-v">좌측 <b>좋아요</b> ·
+                      <b>담기</b> · 우측 <b>구매하기</b> 전폭 버튼</span></div>
                   <div class="spec-r"><span class="spec-k">버튼</span><span class="spec-v">「<b>₩ 금액 · 구매하기</b>」 — 수량을 반영한
                       <b>합계</b>를 버튼에 적는다</span></div>
-                  <div class="spec-r"><span class="spec-k">이동</span><span class="spec-v">누르면 <b>주문 드로어</b>가 열리고
-                      <b>이 상품만 체크</b>된 상태로 들어간다. 결제창으로 직행하지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">왜 드로어를 거치나</span><span class="spec-v">결제 그룹 규칙(<b>한정 상품 단독
-                        그룹 · PG 제한 · 수량 1 고정</b>)이 드로어에 있다. 단건이라고 건너뛰면 <b>같은 규칙을 두 곳에</b> 구현해야 하고,
-                      단건일 때만 규칙이 빠지는 예외가 생긴다</span></div>
-                  <div class="spec-r"><span class="spec-k">담기</span><span class="spec-v"><b>두지 않는다</b> — 담기는 <b>카드
-                        호버</b>가 받는다. 모달은 <b>보고 사는 자리</b>다</span></div>
-                  <div class="spec-r"><span class="spec-k">동의</span><span class="spec-v"><b>두지 않는다</b> — 실제 결제가 일어나는
-                      <b>통합 결제창 3행</b>에서 한 번만 받는다. 모달과 결제창 두 곳에서 받으면 <b>같은 동의를 두 번</b> 묻게 된다</span></div>
-                  <div class="spec-r"><span class="spec-k">확률 고지</span><span class="spec-v">모달에 <b>그대로 남는다</b> — 동의를
-                      옮긴 것이지 <b>고지를 옮긴 것이 아니다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">[구매하기]</span><span class="spec-v">누르면 <b>통합 결제창</b>으로 창
+                      전체 전환 — <b>단건 즉시 구매</b>다. 드로어를 거치지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">[담기]</span><span class="spec-v"><b>주문 드로어</b>에 넣는다. 목록으로
+                      돌아가 <b>더 담을 수 있다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">두 길의 차이</span><span class="spec-v"><b>단건</b>은 그룹이 하나뿐이라
+                      드로어가 할 일이 없다. <b>복수</b>일 때만 결제 그룹을 갈라야 하므로 드로어를 거친다</span></div>
+                  <div class="spec-r"><span class="spec-k">단건 제약</span><span class="spec-v">한정 상품 &#183; PG 제한 상품도
+                      <b>결제창이 상품 속성을 받아</b> 이용 가능한 결제수단을 좁힌다 — 드로어를 건너뛰어도 제약은 유지된다</span></div>
+                  <div class="spec-r"><span class="spec-k">동의 · 유의사항</span><span class="spec-v"><b>모달에 두지 않는다</b> —
+                      실제 결제가 일어나는 <b>통합 결제창 3행</b>에서 한 번만 받는다</span></div>
+                  <div class="spec-r"><span class="spec-k">고지와 동의의 분리</span><span class="spec-v"><b>확률 고지(표)는
+                        모달</b>, <b>동의 체크는 결제창</b>. 어느 길로 들어와도 <b>결제창을 거치지 않고 결제되는 경로는 없다</b> —
+                      단건 즉시 구매도 마찬가지다</span></div>
                   <div class="spec-r"><span class="spec-k">좋아요</span><span class="spec-v">아이콘 버튼. 눌러도 모달은 닫히지 않는다</span>
                   </div>
                   <div class="spec-r"><span class="spec-k">판매 종료</span><span class="spec-v">모달을 여는 사이 종료되면 [구매하기]를
@@ -12080,10 +12093,10 @@
                 </div>
                 <p class="dr-b">「담은 상품」 · 총 건수 · 닫기.</p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">여는 법</span><span class="spec-v">상세 모달
-                      <b>[구매하기]</b> · 헤더 <b>&#128722; 아이콘</b> 둘</span></div>
-                  <div class="spec-r"><span class="spec-k">모달에서 왔을 때</span><span class="spec-v"><b>그 상품만 체크</b>된 상태로
-                      열린다 — 이미 담겨 있던 것은 체크가 풀린다</span></div>
+                  <div class="spec-r"><span class="spec-k">여는 법</span><span class="spec-v">상세 모달 <b>[담기]</b> ·
+                      헤더 <b>&#128722; 아이콘</b> 둘</span></div>
+                  <div class="spec-r"><span class="spec-k">담은 뒤</span><span class="spec-v">드로어가 열리되 <b>딤이 없어</b>
+                      목록으로 돌아가 더 담을 수 있다</span></div>
                 </div>
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">개수</span><span class="spec-v">그룹 수가 아니라 <b>상품 건수</b>를
@@ -12299,6 +12312,9 @@
                         <!-- 3 · 결제 동의 -->
                         <div class="pay-sec">
                           <span class="pay-lbl"><i>3</i> 결제 동의 <b>필수</b></span>
+                          <div class="agree must odds"><span class="cb"></span><span class="tt"><b>[필수]</b> 이 주문에는
+                              <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span
+                              class="lk">확률 보기</span></div>
                           <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편 수령
                                 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상을 확인했습니다.</span><span class="lk">전문</span></div>
                           <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 만 19세 미만은 법정대리인의
@@ -12453,6 +12469,9 @@
                           <!-- 3 · 결제 동의 -->
                           <div class="pay-sec">
                             <span class="pay-lbl"><i>3</i> 결제 동의 <b>필수</b></span>
+                            <div class="agree must odds"><span class="cb"></span><span class="tt"><b>[필수]</b> 이 주문에는
+                                <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span
+                                class="lk">확률 보기</span></div>
                             <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편
                                   수령 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상을 확인했습니다.</span><span class="lk">전문</span></div>
                             <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 만 19세 미만은
@@ -12608,6 +12627,9 @@
                           <!-- 3 · 결제 동의 -->
                           <div class="pay-sec">
                             <span class="pay-lbl"><i>3</i> 결제 동의 <b>필수</b></span>
+                            <div class="agree must odds"><span class="cb"></span><span class="tt"><b>[필수]</b> 이 주문에는
+                                <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span
+                                class="lk">확률 보기</span></div>
                             <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편
                                   수령 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상을 확인했습니다.</span><span class="lk">전문</span></div>
                             <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 만 19세 미만은
@@ -12640,8 +12662,8 @@
 
               <div class="imm">
                 <div class="imm-h">인게임샵 → 결제창 인계</div>
-                <div class="imm-r"><span class="imm-k">진입</span><span class="imm-v">주문 드로어 <b>[결제하기]</b> → <b>창 전체
-                      전환</b>. 단건 · 복수 모두 <b>드로어를 거친다</b></span></div>
+                <div class="imm-r"><span class="imm-k">진입</span><span class="imm-v">상세 모달 <b>[구매하기]</b>(단건) ·
+                    주문 드로어 <b>[결제하기]</b>(복수) — 둘 다 <b>창 전체 전환</b></span></div>
                 <div class="imm-r"><span class="imm-k">넘기는 값</span><span class="imm-v">게임 · 상품 · 단가 · 수량 · 통화 —
                     <b>결제창에서 바꾸지 않는다</b></span></div>
                 <div class="imm-r"><span class="imm-k">통화</span><span class="imm-v">인게임샵에서 확정된 통화로 진입한다 — 결제창에 <b>통화 선택
@@ -12726,14 +12748,18 @@
               <div class="dr">
                 <div class="dr-h"><span class="mk">3</span><span class="dr-t">결제 동의</span><span class="src">행
                     3</span></div>
-                <p class="dr-b">필수 동의 <b>2건</b>. <b>동의를 받는 유일한 자리</b>다.</p>
+                <p class="dr-b">필수 동의 <b>2~3건</b>. <b>동의를 받는 유일한 자리</b>다.</p>
                 <div class="spec">
                   <div class="spec-r"><span class="spec-k">유일한 동의</span><span class="spec-v">모달 · 드로어에는 동의를 두지 않는다 —
                       <b>실제 결제가 일어나는 화면</b>에서 한 번만 받는다</span></div>
-                  <div class="spec-r"><span class="spec-k">확률 상품 포함 시</span><span class="spec-v">그룹에 확률형이 있으면 여기에
-                      <b>확률 정보 확인</b> 항목이 <b>한 줄 더</b> 붙는다</span></div>
-                  <div class="spec-r"><span class="spec-k">필수</span><span class="spec-v">청약철회 제한 고지 · <b>만 19세 미만 법정대리인
-                        동의</b></span></div>
+                  <div class="spec-r"><span class="spec-k">확률 동의</span><span class="spec-v">주문에 확률형이 섞이면 <b>맨 위에 한
+                        줄 더</b> — 「<b>[필수] 확률 정보를 확인했으며 구매에 동의합니다</b>」 + <b>[확률 보기]</b></span></div>
+                  <div class="spec-r"><span class="spec-k">조건부</span><span class="spec-v">확률형이 없으면 <b>이 줄은 없다</b>.
+                      있을 때만 붙으므로 <b>붉은 계열</b>로 구분한다</span></div>
+                  <div class="spec-r"><span class="spec-k">[확률 보기]</span><span class="spec-v">상세 모달의 <b>확률 고지 표</b>를
+                      결제창에서 다시 연다 — 모달을 거치지 않은 <b>단건 즉시 구매</b>에서도 확인할 수 있어야 한다</span></div>
+                  <div class="spec-r"><span class="spec-k">상시 필수</span><span class="spec-v">청약철회 제한 고지 · <b>만 19세 미만
+                        법정대리인 동의</b> 2건</span></div>
                   <div class="spec-r"><span class="spec-k">CTA 조건</span><span class="spec-v">필수 동의 <b>전부</b> + 결제수단
                       <b>1개 선택</b> — 두 조건이 모두 충족되어야 결제 버튼이 활성된다</span></div>
                   <div class="spec-r"><span class="spec-k">문구 관리</span><span class="spec-v">상품 유형별 <b>어드민 입력</b>. 통화 선택이
