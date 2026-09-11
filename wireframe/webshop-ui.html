@@ -6004,8 +6004,29 @@
       gap: 12px;
     }
 
+    /* 두 장이 꽉 차고 세 번째가 걸친다 — 더 있다는 신호를 카드 자체가 준다 */
     .v2-srow.two {
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      grid-template-columns: none;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-right: 26px;
+      scrollbar-width: none;
+    }
+
+    .v2-srow.two::-webkit-scrollbar {
+      display: none;
+    }
+
+    .v2-srow.two>.v2-sc {
+      flex: 0 0 40%;
+      scroll-snap-align: start;
+    }
+
+    .v2-snext.q {
+      border-color: #DDCCA6;
+      color: #7A5A18;
     }
 
     /* 수량 한정 구역 — 황 계열. 기간과 같은 눈금으로 읽히면 안 된다 */
@@ -9735,19 +9756,36 @@
                               <b>기간 한정</b>
                               <em>지금 이 기간에만 만나실 수 있습니다</em>
                             </div>
-                            <div class="v2-srow two">
-                              <div class="v2-sc"><span class="v2-ii xs"></span>
-                                <div class="v2-sci"><span class="v2-scn">여름 한정 소환석</span><span class="v2-scp">₩
-                                    12,000</span>
-                                  <span class="v2-dday">&#9679; 남은 기간 <b>D-1</b></span><span class="v2-prog"><i
-                                      style="width:92%;"></i></span>
+                            <div class="v2-swrap">
+                              <span class="v2-snext">&#9654;</span>
+                              <div class="v2-srow two" data-role="scarousel">
+                                <div class="v2-sc"><span class="v2-ii xs"></span>
+                                  <div class="v2-sci"><span class="v2-scn">여름 한정 소환석</span><span class="v2-scp">₩
+                                      12,000</span>
+                                    <span class="v2-dday">&#9679; 남은 기간 <b>D-1</b></span><span class="v2-prog"><i
+                                        style="width:92%;"></i></span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="v2-sc"><span class="v2-ii xs"></span>
-                                <div class="v2-sci"><span class="v2-scn">추석 한정 의상 상자</span><span class="v2-scp">₩
-                                    9,900</span>
-                                  <span class="v2-dday">&#9679; 남은 기간 <b>D-6</b></span><span class="v2-prog"><i
-                                      style="width:48%;"></i></span>
+                                <div class="v2-sc"><span class="v2-ii xs"></span>
+                                  <div class="v2-sci"><span class="v2-scn">추석 한정 의상 상자</span><span class="v2-scp">₩
+                                      9,900</span>
+                                    <span class="v2-dday">&#9679; 남은 기간 <b>D-6</b></span><span class="v2-prog"><i
+                                        style="width:48%;"></i></span>
+                                  </div>
+                                </div>
+                                <div class="v2-sc"><span class="v2-ii xs"></span>
+                                  <div class="v2-sci"><span class="v2-scn">가을 성장 지원 패키지</span><span class="v2-scp">₩
+                                      19,000</span>
+                                    <span class="v2-dday">&#9679; 남은 기간 <b>D-9</b></span><span class="v2-prog"><i
+                                        style="width:31%;"></i></span>
+                                  </div>
+                                </div>
+                                <div class="v2-sc"><span class="v2-ii xs"></span>
+                                  <div class="v2-sci"><span class="v2-scn">겨울 축제 소환권</span><span class="v2-scp">₩
+                                      6,500</span>
+                                    <span class="v2-dday">&#9679; 남은 기간 <b>D-14</b></span><span class="v2-prog"><i
+                                        style="width:18%;"></i></span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -9758,18 +9796,34 @@
                               <b>수량 한정</b>
                               <em>계정당 구매 수량이 정해져 있습니다</em>
                             </div>
-                            <div class="v2-srow two">
-                              <div class="v2-sc q"><span class="v2-ii xs"></span>
-                                <div class="v2-sci"><span class="v2-scn">카츄아의 비밀상자</span><span class="v2-scp">₩
-                                    2,500</span>
-                                  <span class="v2-dday q">&#9679; 인 당 <b>1개</b></span>
+                            <div class="v2-swrap">
+                              <span class="v2-snext q">&#9654;</span>
+                              <div class="v2-srow two" data-role="scarousel">
+                                <div class="v2-sc q"><span class="v2-ii xs"></span>
+                                  <div class="v2-sci"><span class="v2-scn">카츄아의 비밀상자</span><span class="v2-scp">₩
+                                      2,500</span>
+                                    <span class="v2-dday q">&#9679; 인 당 <b>1개</b></span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="v2-sc q"><span class="v2-ii xs"></span>
-                                <div class="v2-sci"><span class="v2-scn">프론테라 기념 코인</span><span class="v2-scp">₩
-                                    5,500</span>
-                                  <span class="v2-dday q">&#9679; 구매 <b>2</b>/<b>5</b>개</span><span class="v2-prog q"><i
-                                      style="width:40%;"></i></span>
+                                <div class="v2-sc q"><span class="v2-ii xs"></span>
+                                  <div class="v2-sci"><span class="v2-scn">프론테라 기념 코인</span><span class="v2-scp">₩
+                                      5,500</span>
+                                    <span class="v2-dday q">&#9679; 구매 <b>2</b>/<b>5</b>개</span><span
+                                      class="v2-prog q"><i style="width:40%;"></i></span>
+                                  </div>
+                                </div>
+                                <div class="v2-sc q"><span class="v2-ii xs"></span>
+                                  <div class="v2-sci"><span class="v2-scn">모험가 기념 훈장</span><span class="v2-scp">₩
+                                      3,900</span>
+                                    <span class="v2-dday q">&#9679; 구매 <b>0</b>/<b>3</b>개</span><span
+                                      class="v2-prog q"><i style="width:0%;"></i></span>
+                                  </div>
+                                </div>
+                                <div class="v2-sc q"><span class="v2-ii xs"></span>
+                                  <div class="v2-sci"><span class="v2-scn">포링 한정 이모티콘</span><span class="v2-scp">₩
+                                      1,900</span>
+                                    <span class="v2-dday q">&#9679; 인 당 <b>2개</b></span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -10634,8 +10688,12 @@
                   <div class="spec-r"><span class="spec-k">재고와의 관계</span><span class="spec-v">전체 재고가 따로 있다면 <b>품절</b>은
                       별개
                       상태다 — 한도와 섞어 적지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">개수</span><span class="spec-v">구역마다 PC <b>2개</b> · TABLET
-                      <b>2개</b> · MO <b>캐러셀</b></span></div>
+                  <div class="spec-r"><span class="spec-k">노출 방식</span><span class="spec-v">구역마다 <b>가로 캐러셀</b> —
+                      <b>두 장이 꽉 차고 세 번째가 10~20% 걸친다.</b> 딱 떨어지게 두면 더 있다는 신호가 없다</span></div>
+                  <div class="spec-r"><span class="spec-k">넘기기</span><span class="spec-v">우측 <b>[&#9654;]</b>로 한 칸씩 ·
+                      스와이프(<span class="mono">scroll-snap</span>)도 된다. 끝에서 <b>처음으로 돌아온다</b></span></div>
+                  <div class="spec-r"><span class="spec-k">개수</span><span class="spec-v">한 구역 <b>최대 8개</b>까지 채우고,
+                      <b>2개 이하</b>면 캐러셀을 쓰지 않고 그대로 편다</span></div>
                   <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v"><b>가로 캐러셀</b> — 2열로 욱여넣지 않는다.
                       카드 <b>1.6장</b>이 보이게 잘라 다음 카드가 걸치고, 우측 <b>[&#9654;]</b>로 한 칸씩 넘긴다</span></div>
                   <div class="spec-r"><span class="spec-k">왜 캐러셀인가</span><span class="spec-v">2열 4개는 카드가 작아져 상품명이 잘리고,
@@ -13487,7 +13545,8 @@
         var row = btn.parentNode.querySelector('[data-role="scarousel"]');
         if (!row) return;
         var card = row.querySelector('.v2-sc');
-        var step = card ? card.offsetWidth + 8 : 160;
+        var gap = row.classList.contains('two') ? 10 : 8;
+        var step = card ? card.offsetWidth + gap : 160;
         var end = row.scrollWidth - row.clientWidth - 4;
         row.scrollLeft = row.scrollLeft >= end ? 0 : row.scrollLeft + step;
       });
