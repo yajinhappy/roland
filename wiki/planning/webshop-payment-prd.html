@@ -523,7 +523,7 @@
       <line x1="730" y1="150" x2="756" y2="150" class="ln" marker-end="url(#gm)"/>
 
       <rect x="760" y="124" width="174" height="52" rx="5" class="bx-mute"/>
-      <text x="847" y="146" class="ds" text-anchor="middle">재화 지급</text>
+      <text x="847" y="146" class="ds" text-anchor="middle">아이템 지급</text>
       <text x="847" y="164" class="dx f" text-anchor="middle">게임 계정 우편함</text>
 
       <line x1="20" y1="258" x2="940" y2="258" class="ln-hair"/>
@@ -588,7 +588,7 @@
   <p><b>③ 환불 정책 — 1단계는 최종 판매 원칙.</b>
   해외 현지 결제수단 상당수가 시스템 취소 기능을 제공하지 않는다.
   구현할 수 없는 정책을 약관에 담지 않기 위해 <b>결제 완료 후 자동 환불은 제공하지 않고 고객센터 접수로 처리</b>한다는 원칙을
-  결제 화면에 사전 고지한다. 예외 건은 지사가 인게임 재화 회수를 확인한 뒤 수동 처리하며, 처리자와 사유를 기록으로 남긴다.
+  결제 화면에 사전 고지한다. 예외 건은 지사가 인게임 아이템 회수를 확인한 뒤 수동 처리하며, 처리자와 사유를 기록으로 남긴다.
   자동화는 로드맵 3단계 과제다.</p>
 
   <div class="grp2">6 · 추진 로드맵</div>
@@ -613,7 +613,7 @@
 
       <rect x="650" y="30" width="290" height="40" rx="5" class="bx-mute"/>
       <text x="795" y="55" class="ds" text-anchor="middle">Phase 3 · 자동화 고도화</text>
-      <text x="664" y="96" class="dx">· 재화 자동 회수 연동</text>
+      <text x="664" y="96" class="dx">· 아이템 자동 회수 연동</text>
       <text x="664" y="116" class="dx">· 온라인 환불 자동화</text>
       <text x="664" y="136" class="dx">· 적용 결제사 범위 확대</text>
 
@@ -715,7 +715,7 @@
 <section id="b1">
   <h3><span class="sn">2.1</span>전체 아키텍처</h3>
 
-  <p class="lead1">사용자 접점은 4종이고 결제는 통합 결제창 하나를 경유한다. 이후 결제 처리 엔진이 지사 결제사와 게임 재화 지급으로 분기한다.</p>
+  <p class="lead1">사용자 접점은 4종이고 결제는 통합 결제창 하나를 경유한다. 이후 결제 처리 엔진이 지사 결제사와 게임 아이템 지급으로 분기한다.</p>
 
   <figure class="dia">
     <svg viewBox="0 0 960 616" role="img" aria-label="통합웹샵 및 결제 허브 전체 아키텍처">
@@ -786,7 +786,7 @@
       <line x1="70" y1="566" x2="890" y2="566" class="ln-hair"/>
       <text x="480" y="594" class="dt" text-anchor="middle">본사는 결제 인프라만 제공하며 대금은 지사 법인 계좌로 직결된다</text>
     </svg>
-    <figcaption>접점 4종 · 결제창 1개. 자금은 지사 법인 계좌로, 재화는 게임 서버로 분기한다.</figcaption>
+    <figcaption>접점 4종 · 결제창 1개. 자금은 지사 법인 계좌로, 아이템은 게임 서버로 분기한다.</figcaption>
   </figure>
 </section>
 
@@ -1116,7 +1116,7 @@
         <tr>
           <td><b>인게임 상점 클라이언트</b></td>
           <td>클라이언트 내장 브라우저(WebView2 · CefSharp)로 <span class="mono">payment_url</span> 호출.
-            결제 완료 시 <b>인게임 브릿지 · 딥링크 이벤트</b>로 창 종료 및 재화 갱신</td>
+            결제 완료 시 <b>인게임 브릿지 · 딥링크 이벤트</b>로 창 종료 및 아이템 갱신</td>
         </tr>
       </tbody>
     </table>
@@ -1135,7 +1135,7 @@
             <b>반환</b> <span class="mono">session_token · payment_url · expires_at</span></td>
         </tr>
         <tr>
-          <td><b>재화 지급 수신 웹훅</b><br><span class="mono">POST /v1/payments/fulfill</span></td>
+          <td><b>아이템 지급 수신 웹훅</b><br><span class="mono">POST /v1/payments/fulfill</span></td>
           <td><b>HQ Billing</b><br>&rarr; Game · Portal</td>
           <td>승인 완료 즉시 지사 엔드포인트로 <b>비동기 호출</b><br>
             <span class="mono">order_no · user_id · product_code · amount · signature</span><br>
@@ -1317,7 +1317,7 @@
     <span class="lb">지사 수신단 필수 스펙</span>
     <p>재시도 및 네트워크 재전송 과정의 중복 지급을 차단하기 위해
     지사 수신단에 <span class="mono">order_no</span>를 <b>Unique Key로 검증하는 멱등성 처리를 필수 스펙으로 강제</b>한다.
-    처리 완료된 주문번호로 웹훅이 인입되면 <b>재화를 지급하지 않고 HTTP <span class="mono">200 OK</span>를 반환</b>한다.</p>
+    처리 완료된 주문번호로 웹훅이 인입되면 <b>아이템을 지급하지 않고 HTTP <span class="mono">200 OK</span>를 반환</b>한다.</p>
   </div>
 
   <p class="cap">재시도와 멱등성은 함께 적용해야 한다. 멱등성 없는 재시도는 중복 지급으로 귀결된다.</p>
@@ -1395,14 +1395,14 @@
   <div class="note bad">
     <span class="lb">사전 고지 — Final Sale 원칙</span>
     <p>결제창에 명시한다 —
-    「디지털 재화 특성상 결제 완료 후 <b>시스템 자동 환불이 불가</b>하며, 환불 문의는 <b>지사 고객센터(CS)</b>를 통해 접수해야 합니다」</p>
+    「디지털 아이템 특성상 결제 완료 후 <b>시스템 자동 환불이 불가</b>하며, 환불 문의는 <b>지사 고객센터(CS)</b>를 통해 접수해야 합니다」</p>
   </div>
 
   <div class="grp2">CS 기반 수동 환불 및 마킹</div>
 
   <div class="flow">
     <div class="row"><span class="mono">1</span><div><b>유저가 지사 고객센터로 환불 요청 접수</b></div></div>
-    <div class="row"><span class="mono">2</span><div><b>지사 운영팀 · GM이 인게임 재화 회수 및 고객 안내 완료</b><p>수동 계좌 송금 또는 마일리지 · 무료 캐시 대체 지급</p></div></div>
+    <div class="row"><span class="mono">2</span><div><b>지사 운영팀 · GM이 인게임 아이템 회수 및 고객 안내 완료</b><p>수동 계좌 송금 또는 마일리지 · 무료 캐시 대체 지급</p></div></div>
     <div class="row"><span class="mono">3</span><div><b>관리자가 결제 어드민에서 해당 주문 조회 후 <span class="mono">[수동 환불 처리]</span> 실행</b></div></div>
     <div class="row key"><span class="mono">4</span><div><b>주문 상태 갱신 및 감사 로그 기록</b>
       <p><span class="mono">PAID</span> &rarr; <span class="mono">MANUAL_REFUNDED</span>.
@@ -1411,7 +1411,7 @@
 
   <div class="note q">
     <span class="lb">후속 단계 — 로드맵 3단계</span>
-    <p>게임사 <b>재화 자동 회수 연동</b>과 지원 결제사 대상 <b>온라인 취소 자동화</b>는 로드맵 3단계 과제다.</p>
+    <p>게임사 <b>아이템 자동 회수 연동</b>과 지원 결제사 대상 <b>온라인 취소 자동화</b>는 로드맵 3단계 과제다.</p>
   </div>
 </section>
 

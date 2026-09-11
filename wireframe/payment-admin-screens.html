@@ -2247,7 +2247,7 @@
                   <thead><tr>
                     <th style="width:72px;">법인</th><th style="width:150px;">주문번호</th>
                     <th style="width:158px;">상품 · 금액</th><th style="width:130px;">사유 코드</th>
-                    <th style="width:182px;">결제 채널 · 판정</th><th style="width:196px;">재화 상태</th>
+                    <th style="width:182px;">결제 채널 · 판정</th><th style="width:196px;">아이템 상태</th>
                     <th style="width:150px;">처리</th><th>담당</th>
                   </tr></thead>
                   <tbody>
@@ -2291,23 +2291,23 @@
         <p class="dr-b">두 번 갈린다. 첫 번째는 <b>운영 모드</b>(자동 · CS 검토), 두 번째는 <b>PG Capability</b>(API · 수기). 두 번째 판정은 사람이 바꿀 수 없다.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">자동 조건</span><span class="spec-v">미수령 · 미사용 · 7일 이내 — 3개 모두 충족</span></div>
-          <div class="spec-r"><span class="spec-k">자동 절차</span><span class="spec-v">게임 서버 실시간 검증 → PG 환불 API → 재화 회수 → 원장 역분개</span></div>
+          <div class="spec-r"><span class="spec-k">자동 절차</span><span class="spec-v">게임 서버 실시간 검증 → PG 환불 API → 아이템 회수 → 원장 역분개</span></div>
           <div class="spec-r"><span class="spec-k">우선순위</span><span class="spec-v"><b>Capability가 정책보다 상위</b> — 조건을 충족해도 채널이 불가면 수기로 간다</span></div>
         </div>
       </div>
 
       <div class="dr">
         <div class="dr-h"><span class="mk">3</span><span class="dr-t">원클릭 API 취소</span><span class="src">API 호출</span></div>
-        <p class="dr-b">PG 취소 API 호출에 성공하면 즉시 게임 서버로 <span class="mono">POST /revoke</span> 를 호출해 재화를 회수하고 원장을 역분개한다.</p>
+        <p class="dr-b">PG 취소 API 호출에 성공하면 즉시 게임 서버로 <span class="mono">POST /revoke</span> 를 호출해 아이템을 회수하고 원장을 역분개한다.</p>
         <div class="spec">
-          <div class="spec-r"><span class="spec-k">순서</span><span class="spec-v">PG 취소 <b>성공 후에</b> 회수 — 순서가 바뀌면 재화만 사라진다</span></div>
-          <div class="spec-r"><span class="spec-k">회수 실패</span><span class="spec-v">재화 소모 시 계정 임시 동결 또는 잔여분 부분 환불</span></div>
+          <div class="spec-r"><span class="spec-k">순서</span><span class="spec-v">PG 취소 <b>성공 후에</b> 회수 — 순서가 바뀌면 아이템만 사라진다</span></div>
+          <div class="spec-r"><span class="spec-k">회수 실패</span><span class="spec-v">아이템 소모 시 계정 임시 동결 또는 잔여분 부분 환불</span></div>
           <div class="spec-r"><span class="spec-k">원장</span><span class="spec-v">역분개로만 수정 · 원 전표는 불변 유지</span></div>
         </div>
         </div>
 
       <div class="dr-alt">
-        <div class="dr-h"><span class="mk">4</span><span class="dr-t">재화 상태</span><span class="src">게임 서버 조회</span></div>
+        <div class="dr-h"><span class="mk">4</span><span class="dr-t">아이템 상태</span><span class="src">게임 서버 조회</span></div>
         <p class="dr-b">환불 판단의 사실관계. 게임 서버에 실시간 조회해 <b>미수령 · 미사용 · 일부 소모 · 전량 소모</b> 4단계로 표기한다.</p>
         <div class="spec">
           <div class="spec-r"><span class="spec-k">미수령</span><span class="spec-v">우편함 대기 중 — 전액 환불 · 회수 불필요</span></div>

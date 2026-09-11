@@ -47,7 +47,7 @@
 | URL | 이름 | 파는 것 |
 |---|---|---|
 | `shop.supercell.com` | Official Supercell **Shop** | 실물 굿즈 |
-| `store.supercell.com` | Supercell **Store** | 인게임 재화(젬) |
+| `store.supercell.com` | Supercell **Store** | 인게임 코인(젬) |
 
 직관과 정반대다. **Shop / Store 차이로 두 영역을 가르면 안 된다.**
 
@@ -84,7 +84,7 @@
 Kafra Store
 ├─ [가로축] Featured : New · Limited · Event      ← 두 축 공통, 메인 상단
 ├─ In-Game Shop      게임에서 쓰는 것 · 계정으로 받기
-│   ├─ Coins         권역 재화 (예: JoyCoin)
+│   ├─ Coins         권역 코인 (예: JoyCoin)
 │   ├─ Packages
 │   └─ Items         Costumes · Consumables · Services
 │      ※ 타이틀 필터 : RO / ROZ / 추후 타이틀
@@ -217,7 +217,7 @@ Kafra Store
 
 | | 문구 | 조건 |
 |---|---|---|
-| 상시 | `[필수]` 인게임 재화는 우편 수령 후 청약철회가 제한됩니다. 결제 정보 · 지급 대상을 확인했습니다. | 항상 |
+| 상시 | `[필수]` 인게임 아이템은 우편 수령 후 청약철회가 제한됩니다. 결제 정보 · 지급 대상을 확인했습니다. | 항상 |
 | 상시 | `[필수]` 만 19세 미만은 법정대리인의 동의가 필요하며, 동의 없는 결제는 취소될 수 있습니다. | 항상 |
 | 조건부 | `[필수]` 이 주문에는 **확률형 상품**이 포함되어 있습니다. **확률 정보를 확인**했으며 구매에 동의합니다. + `[확률 보기]` | 확률형 포함 시 |
 
@@ -292,10 +292,10 @@ Kafra Store
 
 | 항목 | 내용 | 대응 |
 |---|---|---|
-| **iRO 명칭 인접** | 북미 iRO(WarpPortal) 인게임 캐시샵명 `Kafra Shop`, 재화명 `Kafra Shop Points(KP)` | `Store` 로 층위 구분 · **재화명에 카프라 미사용** · WarpPortal 사전 공유 |
+| **iRO 명칭 인접** | 북미 iRO(WarpPortal) 인게임 캐시샵명 `Kafra Shop`, 포인트명 `Kafra Shop Points(KP)` | `Store` 로 층위 구분 · **아이템명에 카프라 미사용** · WarpPortal 사전 공유 |
 | **상표** | Kafra Store 권역별 사용 가능 여부 | **법무 확인** |
 | **다국어** | In-Game Shop / Merch Shop 의 PT · ES 표기 | LQA |
-| **권역별 재화명** | 권역마다 명칭 상이 | `Coins` 공통 카테고리명, 상품명만 현지화 |
+| **권역별 코인명** | 권역마다 명칭 상이 | `Coins` 공통 카테고리명, 상품명만 현지화 |
 | **정책 차이** | 두 축 간 청약철회 · 확률 표기 · 배송 정책 상이 | **1뎁스 단위로 정책 · 약관 분리** |
 | **권역 단위 성격** | 묶음 권역의 통화가 여럿일 수 있음 | 4-1 확정 필요 3건 참고 |
 
@@ -326,7 +326,7 @@ Kafra Store
 Merch Shop 비노출 또는 Digital Goods 만. 권역별 부분 적용이 가능한 구조로 설계했다.
 
 **iRO 유저가 헷갈리지 않나**
-iRO `Kafra Shop` 은 게임 내 캐시샵, `Kafra Store` 는 포털 레벨 상점으로 층위가 다르다. 재화명을 분리하면 혼동 여지는 낮다.
+iRO `Kafra Shop` 은 게임 내 캐시샵, `Kafra Store` 는 포털 레벨 상점으로 층위가 다르다. 포인트명을 분리하면 혼동 여지는 낮다.
 
 **사내에서 쓰던 「웹샵」은 못 쓰나**
 쓴다. D2C 웹상점을 가리키는 업계 표준 용어이고 사업 · 기술 문서에서는 정확한 말이다. 바꾸는 것은 **유저가 보는 메뉴 라벨**뿐이다.
