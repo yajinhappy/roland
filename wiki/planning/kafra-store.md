@@ -10,10 +10,10 @@
 | 항목 | 확정 |
 |---|---|
 | 상점 브랜드 | **Kafra Store** |
-| 1뎁스 | **In-Game Shop**(게임에서 쓰는 것) · **Merch Shop**(소장하는 것) |
+| 1뎁스 | **Web Shop**(게임에서 쓰는 것) · **Merch Shop**(소장하는 것) |
 | 분류 기준 | 상품 형태가 아니라 **용도** |
 | 운영 | **원 브랜드, 권역별 운영** — 주문 · 결제 · 배송 · CS는 지사 기존 체계 유지 |
-| 이번 범위 | In-Game Shop 6개 화면. Merch Shop 은 **진입 지점만** 정의 |
+| 이번 범위 | Web Shop 6개 화면. Merch Shop 은 **진입 지점만** 정의 |
 
 ---
 
@@ -72,7 +72,7 @@
 - EN / PT / ES **번역 불필요**
 - 라그나로크 IP **전 타이틀 공통 NPC** — 타이틀 편중 없음
 
-**In-Game Shop / Merch Shop**
+**Web Shop / Merch Shop**
 - **용도 기준**이라 코인 · 포인트가 늘어도 구조가 버틴다. 형태 기준이면 **디지털 굿즈**가 어느 쪽에도 못 들어간다
 - 어미를 `Shop` 으로 통일해 **동급으로** 읽히게 하고, 구분은 앞 단어(In-Game / Merch)가 진다
 - `Store` 안에 `Shop` 둘 — **층위가 명칭에서 드러난다**
@@ -86,7 +86,7 @@
 ```
 Kafra Store
 ├─ [가로축] Featured : New · Limited · Event      ← 두 축 공통, 메인 상단
-├─ In-Game Shop      게임에서 쓰는 것 · 계정으로 받기
+├─ Web Shop      게임에서 쓰는 것 · 계정으로 받기
 │   ├─ Coins         권역 코인 (예: JoyCoin)
 │   ├─ Packages
 │   └─ Items         Costumes · Consumables · Services
@@ -95,13 +95,13 @@ Kafra Store
     ├─ Merch         유형별 Plush · Figures · Apparel · Stationery · Pins & Acrylic
     │                캐릭터별 Poring Family · Baphomet · Kafra …
     ├─ Digital Goods 월페이퍼 · OST · 이모티콘
-    └─ Bundles       Merch + Game Code   ← In-Game Shop 에 배너 교차 노출
+    └─ Bundles       Merch + Game Code   ← Web Shop 에 배너 교차 노출
 ```
 
 - **Featured** — 두 축을 가로지르는 큐레이션. 기념 기획전은 `Collection` 명칭 사용(예: 24th Anniversary Collection)
-- **Bundles** — 배송 상품이므로 Merch Shop 소속, In-Game Shop 에는 배너로 교차 노출
+- **Bundles** — 배송 상품이므로 Merch Shop 소속, Web Shop 에는 배너로 교차 노출
 - **Coins** — 카테고리명은 권역 공통, 상품명만 현지화. 충전은 **기존 계정 지갑**과 연결
-- **필터** — In-Game Shop 은 타이틀, Merch Shop 은 캐릭터
+- **필터** — Web Shop 은 타이틀, Merch Shop 은 캐릭터
 
 **세계관 마이크로카피(선택)** — 구매 아이템 보관함 `Kafra Storage` · Merch Shop 장바구니 `Pushcart`. 내비게이션 명칭은 기능어를 유지한다.
 
@@ -111,13 +111,13 @@ Kafra Store
 
 ```
 포털 GNB   [ KAFRA STORE ▾ ]
-              ├ IN-GAME SHOP   → 타이틀 × 권역 모달
+              ├ WEB SHOP   → 타이틀 × 권역 모달
               └ MERCH SHOP     → 이번 범위 밖
 ```
 
 - **마우스 오버**로 열린다. 항목은 둘뿐이고 설명 · 배지를 붙이지 않는다
 - **경유 페이지를 만들지 않는다** — 「카프라 센터」 같은 브릿지 페이지는 폐기
-- `IN-GAME SHOP` 클릭 → **타이틀 × 권역 모달**(4열). 고르면 그 타이틀 × 권역의 인게임샵으로 간다
+- `WEB SHOP` 클릭 → **타이틀 × 권역 모달**(4열). 고르면 그 타이틀 × 권역의 웹샵으로 간다
 
 ### 4-1. 타이틀 × 권역 (8종 확정)
 
@@ -143,12 +143,12 @@ Kafra Store
 
 ---
 
-## 5. In-Game Shop 화면 구조
+## 5. Web Shop 화면 구조
 
 | # | 화면 | 비고 |
 |---|---|---|
 | 01 | KAFRA STORE 진입 | GNB 메뉴 + 타이틀 × 권역 모달 |
-| 02 | 인게임샵 메인 | 배너 · 메뉴바 · 한정 구역 · 상품 그리드 |
+| 02 | 웹샵 메인 | 배너 · 메뉴바 · 한정 구역 · 상품 그리드 |
 | 03 | 상품 상세 모달 | 확률형 / 비확률형 2종 |
 | 04 | 담기 · 주문 드로어 | 결제 그룹 분리 |
 | 05 | 통합 결제창 | 라그나로크 원페이 |
@@ -271,7 +271,7 @@ Kafra Store
 
 | 단계 | 범위 | 비고 |
 |---|---|---|
-| 1 | In-Game Shop + Digital Goods | 배송이 없어 권역 제약이 작다. 미주 선행 검토 |
+| 1 | Web Shop + Digital Goods | 배송이 없어 권역 제약이 작다. 미주 선행 검토 |
 | 2 | 실물 굿즈(Merch · Bundles) | LATAM 통관 · 관세 확인 후 |
 
 ---
@@ -281,8 +281,8 @@ Kafra Store
 | 대상 | 변경 |
 |---|---|
 | 포털 GNB 라벨 | `KAFRA CENTER` → `KAFRA STORE` |
-| 드롭다운 | `WEB SHOP` → `IN-GAME SHOP` · `GOODS SHOP` → `MERCH SHOP` |
-| 화면명 · 디스크립션 | 「카프라 센터」 → 「카프라 스토어」 · 「웹샵」 → 「인게임샵」 |
+| 드롭다운 | `WEB SHOP` → `WEB SHOP` · `GOODS SHOP` → `MERCH SHOP` |
+| 화면명 · 디스크립션 | 「카프라 센터」 → 「카프라 스토어」 · 「웹샵」 → 「웹샵」 |
 | 기존 설계 문서의 「웹샵」 | **유지** — 업계 표준 용어(D2C 채널)로서의 웹샵 |
 | 파일명 · 도메인 | **유지** — `webshop-ui.html` · `shop.ragnarokland.com` |
 | Merch Shop 화면 | 이번 범위 밖. **진입 지점만** 정의 |
@@ -297,7 +297,7 @@ Kafra Store
 |---|---|---|
 | **iRO 명칭 인접** | 북미 iRO(WarpPortal) 인게임 캐시샵명 `Kafra Shop`, 포인트명 `Kafra Shop Points(KP)` | `Store` 로 층위 구분 · **아이템명에 카프라 미사용** · WarpPortal 사전 공유 |
 | **상표** | Kafra Store 권역별 사용 가능 여부 | **법무 확인** |
-| **다국어** | In-Game Shop / Merch Shop 의 PT · ES 표기 | LQA |
+| **다국어** | Web Shop / Merch Shop 의 PT · ES 표기 | LQA |
 | **권역별 코인명** | 권역마다 명칭 상이 | `Coins` 공통 카테고리명, 상품명만 현지화 |
 | **정책 차이** | 두 축 간 청약철회 · 확률 표기 · 배송 정책 상이 | **1뎁스 단위로 정책 · 약관 분리** |
 | **권역 단위 성격** | 묶음 권역의 통화가 여럿일 수 있음 | 4-1 확정 필요 3건 참고 |
@@ -308,7 +308,7 @@ Kafra Store
 
 **확정 요청**
 - 브랜드명 **Kafra Store**
-- 1뎁스 **In-Game Shop / Merch Shop**
+- 1뎁스 **Web Shop / Merch Shop**
 - 타이틀 × 권역 매트릭스 8종
 
 **다음 단계**
