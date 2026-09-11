@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>결제 개요</title>
+<title>카프라 스토어 브랜딩 · 카테고리 구조</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -324,129 +324,430 @@
 <!-- △△△ 접근 게이트 △△△ -->
 
 <div class="shell">
-
 <nav class="lnb">
-  <span class="bmark">결제 개요</span>
-  <span class="bsub">Ragnarok Portal · 2026-09</span>
+  <span class="bmark">카프라 스토어 브랜딩 · 카테고리 구조</span>
+  <span class="bsub">Ragnarok Portal &#183; 2026-09</span>
 
+  <div class="grp">결론</div>
+  <a href="#a1">확정 사항</a>
+  <a href="#a2">한 장 요약</a>
+
+  <div class="grp">명칭</div>
+  <a href="#b1">브랜드 &#183; Kafra Store</a>
+  <a href="#b2">1뎁스 &#183; In-Game Shop / Merch Shop</a>
+  <a href="#b3">검토 후 제외한 후보</a>
+
+  <div class="grp">구조</div>
+  <a href="#c1">카테고리 트리</a>
+  <a href="#c2">구조 원칙</a>
+  <a href="#c3">세계관 마이크로카피</a>
+
+  <div class="grp">운영</div>
+  <a href="#d1">원 브랜드, 권역별 운영</a>
+  <a href="#d2">권역별 적용 단계</a>
+
+  <div class="grp">이행</div>
+  <a href="#e1">문서 · 화면 반영 범위</a>
+  <a href="#e2">리스크와 확인 필요</a>
+  <a href="#e3">예상 질의</a>
 </nav>
 
 <main>
 
 <header class="mast">
-  <p class="kick">Design · Payment</p>
-  <h1>결제 개요</h1>
-  <p class="stand"><b>지사별로 개별 구축했던 결제를 본사가 단일 구성으로 제공하고 각 지사가 연동해 사용한다.</b>
-  통합 결제창 1종 · 웹샵 템플릿 1종이며, PG 연동은 PG사당 1회로 끝난다.</p>
+  <p class="kick">Design &#183; Kafra Store</p>
+  <h1>카프라 스토어 브랜딩 &#183; 카테고리 구조</h1>
+  <p class="stand"><b>라그나로크 IP 공식 상점을 <span class="mono">Kafra Store</span> 하나로 묶고,
+  그 아래를 용도 기준 두 축으로 가른다.</b>
+  게임에서 쓰는 것은 <span class="mono">In-Game Shop</span>, 소장하는 것은 <span class="mono">Merch Shop</span>.
+  주문 · 결제 · 배송 · CS는 지사별 기존 체계를 유지한다.</p>
 </header>
 
-<section id="o1">
-  <h3>구조</h3>
+<section id="a1">
+  <h3>확정 사항</h3>
 
-  <figure class="dia" style="margin-top:14px;">
-    <svg viewBox="0 0 960 306" role="img" aria-label="통합 결제 구조와 자금 경로">
-      <defs>
-        <marker id="oa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0,1 L9,5 L0,9 z" fill="var(--ink-faint)"/>
-        </marker>
-      </defs>
+  <div class="flow">
+    <div class="row key">
+      <span class="k">01</span>
+      <span class="b"><span class="t">브랜드명 &#8212; Kafra Store</span>
+        <span class="d">라그나로크 IP 공식 상점의 상위 브랜드. 포털 GNB 라벨로 선다.
+          기존 <span class="mono">KAFRA CENTER</span>를 대체한다.</span></span>
+    </div>
+    <div class="row key">
+      <span class="k">02</span>
+      <span class="b"><span class="t">1뎁스 &#8212; In-Game Shop / Merch Shop</span>
+        <span class="d">상품 형태가 아니라 <b>용도</b>로 가른다. 기존
+          <span class="mono">WEB SHOP</span> / <span class="mono">GOODS SHOP</span>을 대체한다.</span></span>
+    </div>
+    <div class="row">
+      <span class="k">03</span>
+      <span class="b"><span class="t">운영 &#8212; 원 브랜드, 권역별 운영</span>
+        <span class="d">브랜드 · 1뎁스 · 카테고리 체계만 전 권역 공통. 주문 이후는 지사 기존 체계를 그대로 쓴다.</span></span>
+    </div>
+  </div>
 
-      <rect x="410" y="20" width="140" height="32" rx="5" class="bx-mute"/>
-      <text x="480" y="41" class="ds" text-anchor="middle">유저</text>
-      <line x1="480" y1="52" x2="480" y2="70" class="ln" marker-end="url(#oa)"/>
+  <div class="note q">
+    <span class="lb">왜 이 두 단어인가</span>
+    <p><b>In-Game Shop</b> &#8212; 「게임 안에서 쓴다」가 라벨만으로 읽힌다.<br>
+    <b>Merch Shop</b> &#8212; 「소장한다」는 하나의 용도 아래 <b>실물 굿즈 · 디지털 굿즈(월페이퍼 · OST · 이모티콘) ·
+    번들</b>이 모두 들어간다. 형태로 갈랐다면 디지털 굿즈가 어디에도 못 들어간다.</p>
+  </div>
+</section>
 
-      <rect x="240" y="74" width="480" height="56" rx="5" class="bx-key"/>
-      <text x="480" y="98" class="dt a" text-anchor="middle">통합 결제 모듈 — 본사가 만들어 제공</text>
-      <text x="480" y="118" class="ds" text-anchor="middle">통합 결제창 · 웹샵 · PG 연동 · 어드민</text>
+<section id="a2">
+  <h3>한 장 요약</h3>
 
-      <line x1="480" y1="130" x2="480" y2="148" class="ln"/>
-      <line x1="330" y1="148" x2="630" y2="148" class="ln"/>
-      <line x1="330" y1="148" x2="330" y2="166" class="ln" marker-end="url(#oa)"/>
-      <line x1="480" y1="148" x2="480" y2="166" class="ln" marker-end="url(#oa)"/>
-      <line x1="630" y1="148" x2="630" y2="166" class="ln" marker-end="url(#oa)"/>
+  <figure class="dia">
+    <svg viewBox="0 0 960 300" role="img" aria-label="카프라 스토어 구조 요약">
+      <g>
+        <rect class="bx-key" x="330" y="14" width="300" height="46" rx="5"/>
+        <text class="dh" x="480" y="36" text-anchor="middle">Kafra Store</text>
+        <text class="dx" x="480" y="52" text-anchor="middle">라그나로크 IP 공식 상점 · 포털 GNB</text>
 
-      <rect x="260" y="168" width="140" height="38" rx="5" class="bx-mute"/>
-      <text x="330" y="192" class="ds" text-anchor="middle">지사 A</text>
-      <rect x="410" y="168" width="140" height="38" rx="5" class="bx-mute"/>
-      <text x="480" y="192" class="ds" text-anchor="middle">지사 B</text>
-      <rect x="560" y="168" width="140" height="38" rx="5" class="bx-mute"/>
-      <text x="630" y="192" class="ds" text-anchor="middle">지사 C</text>
+        <path class="ln" d="M480,60 L480,80 M230,80 L730,80 M230,80 L230,100 M730,80 L730,100"/>
 
-      <text x="480" y="228" class="ds f" text-anchor="middle">상품 · 가격 · 결제수단은 각 지사가 정한다</text>
+        <rect class="bx-pill" x="80" y="100" width="300" height="44" rx="5"/>
+        <text class="dt" x="230" y="122" text-anchor="middle">In-Game Shop</text>
+        <text class="dx" x="230" y="137" text-anchor="middle">게임에서 쓰는 것 · 계정으로 받기</text>
 
-      <line x1="70" y1="248" x2="890" y2="248" class="ln-hair"/>
+        <rect class="bx-pill" x="580" y="100" width="300" height="44" rx="5"/>
+        <text class="dt" x="730" y="122" text-anchor="middle">Merch Shop</text>
+        <text class="dx" x="730" y="137" text-anchor="middle">소장하는 것 · 권역별 운영</text>
 
-      <text x="70" y="282" class="dl a">돈</text>
-      <rect x="250" y="262" width="110" height="32" rx="5" class="bx-mute"/>
-      <text x="305" y="283" class="ds" text-anchor="middle">PG사</text>
-      <line x1="360" y1="278" x2="398" y2="278" class="ln" marker-end="url(#oa)"/>
-      <rect x="402" y="262" width="160" height="32" rx="5" class="bx-key"/>
-      <text x="482" y="283" class="ds a" text-anchor="middle">각 지사 계좌</text>
-      <text x="582" y="283" class="ds f">본사를 거치지 않는다 · 본사 수수료 없음</text>
+        <path class="ln-hair" d="M230,144 L230,164 M730,144 L730,164"/>
+
+        <g class="chip">
+          <rect x="80" y="164" width="90" height="26" rx="4"/>
+          <text x="125" y="181" text-anchor="middle">Coins</text>
+          <rect x="185" y="164" width="90" height="26" rx="4"/>
+          <text x="230" y="181" text-anchor="middle">Packages</text>
+          <rect x="290" y="164" width="90" height="26" rx="4"/>
+          <text x="335" y="181" text-anchor="middle">Items</text>
+
+          <rect x="580" y="164" width="90" height="26" rx="4"/>
+          <text x="625" y="181" text-anchor="middle">Merch</text>
+          <rect x="685" y="164" width="90" height="26" rx="4"/>
+          <text x="730" y="181" text-anchor="middle">Digital Goods</text>
+          <rect x="790" y="164" width="90" height="26" rx="4"/>
+          <text x="835" y="181" text-anchor="middle">Bundles</text>
+        </g>
+
+        <text class="dx" x="230" y="212" text-anchor="middle">타이틀 필터 &#183; 권역 통화</text>
+        <text class="dx" x="730" y="212" text-anchor="middle">캐릭터 필터 &#183; 배송지</text>
+
+        <path class="ln" d="M790,190 Q560,250 335,196" stroke-dasharray="4 3"/>
+        <text class="a" x="560" y="252" text-anchor="middle" font-size="10.5">Bundles 는 Merch Shop 소속 · In-Game Shop 에 배너 교차 노출</text>
+
+        <rect class="bx-mute" x="330" y="266" width="300" height="26" rx="4"/>
+        <text class="ds" x="480" y="284" text-anchor="middle">Featured &#183; New / Limited / Event &#8212; 두 축 공통</text>
+      </g>
     </svg>
+    <figcaption class="cap">Store 하나 아래 Shop 둘. 층위가 명칭에서 드러난다.</figcaption>
   </figure>
+</section>
 
-  <p>결제 대금은 본사를 경유하지 않고 <b>각 지사 법인 계좌로 직접 입금</b>된다.
-  본사는 인프라를 제공하고, <b>판매 상품과 가격은 지사가 결정한다.</b></p>
+<div class="part">
+  <span class="n">NAMING</span>
+  <h2>명칭</h2>
+  <p>근거는 <a href="../benchmark/store-branding.html">IP 상점 브랜딩 벤치마킹</a>에 있다.</p>
+</div>
 
-  <h3>역할</h3>
+<section id="b1">
+  <h3>브랜드 &#183; Kafra Store</h3>
+
+  <ul class="rule">
+    <li><b>세계관 고유명사다.</b> 카프라는 게임 내 카프라 사(社) 유래 명칭이다.
+      상위 브랜드는 고유명사, 하위 내비게이션은 기능어 &#8212; FF14 Mog Station · 쿠키런스토어가 정착시킨 방식이다</li>
+    <li><b>이미 「라그나로크 공식 구매처」로 인지돼 있다.</b> 2007년부터 캐시샵 이름
+      <span class="mono">Kafra Shop</span>으로 쓰였다</li>
+    <li><b>번역이 필요 없다.</b> EN · PT · ES 공통 표기가 가능해 언어팩 관리 부담이 없다</li>
+    <li><b>타이틀 편중이 없다.</b> 카프라는 라그나로크 IP 전 타이틀 공통 NPC다</li>
+  </ul>
+
+  <div class="note">
+    <span class="lb">KAFRA CENTER 에서 바뀐 점</span>
+    <p><span class="mono">Center</span>는 <b>무엇을 하는 곳인지 말하지 않는다.</b>
+    <span class="mono">Store</span>로 바꾸면 브랜드 이름 안에 <b>「사는 곳」</b>이 들어가고,
+    하위 두 <span class="mono">Shop</span>과 <b>층위 차이</b>도 단어로 드러난다.</p>
+  </div>
+</section>
+
+<section id="b2">
+  <h3>1뎁스 &#183; In-Game Shop / Merch Shop</h3>
 
   <div class="tscroll">
     <table>
-      <thead><tr><th style="width:50%;">본사가 하는 것</th><th>지사가 하는 것</th></tr></thead>
+      <thead><tr><th style="width:150px;">구분</th><th style="width:140px;">영문</th><th style="width:110px;">국문(내부)</th><th>포함 범위</th></tr></thead>
       <tbody>
-        <tr><td>PG 계약 조건 협상</td><td>법인 · 통화 · 정산 계좌 등록</td></tr>
-        <tr><td>인증키 발급 · 보관</td><td>쓸 결제수단 선택 · 금액 범위</td></tr>
-        <tr><td>통합 결제창 · 웹샵 · 어드민 제공</td><td>상품 등록 · 가격 책정</td></tr>
-        <tr><td>게임 연동 규격 정의</td><td>게임사 연동 · 확인</td></tr>
-        <tr><td>—</td><td>환불 처리 · 정산 확인</td></tr>
+        <tr><td><b>게임에서 쓰는 것</b></td><td><b>In-Game Shop</b></td><td>인게임샵</td>
+          <td>코인 · 패키지 · 아이템(코스튬 · 소비 · 서비스)</td></tr>
+        <tr><td><b>소장하는 것</b></td><td><b>Merch Shop</b></td><td>굿즈샵</td>
+          <td>실물 굿즈 · 디지털 굿즈 · 번들</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p class="cap">PG 계약은 <b>조건은 본사가 협상하고 명의는 지사가 갖는다.</b> 대금이 지사 계좌로 들어와야 하기 때문이다.</p>
+  <h4>이 분류를 고른 이유</h4>
+  <ul class="rule">
+    <li><b>용도 기준이라 확장에 견딘다.</b> 코인 · 포인트 상품이 늘어도 구조가 흔들리지 않는다.
+      형태 기준(디지털/실물)이면 <b>디지털 굿즈</b>가 어느 쪽에도 안 들어간다</li>
+    <li><b>어미를 Shop으로 통일해 동급으로 읽히게 했다.</b>
+      Supercell처럼 Shop/Store를 섞으면 <b>어느 쪽이 게임 아이템인지 알 수 없다</b></li>
+    <li><b>「Store 안에 Shop 둘」</b> &#8212; 층위가 명칭에서 드러난다</li>
+    <li><b>Merch는 미주 영어권 표준 표현</b>이고 PT · ES 팬덤에서도 통용된다.
+      <span class="mono">Goods</span>는 영어권에서 「물품 · 화물」로 읽힌다</li>
+  </ul>
+</section>
 
-  <h3>유저 결제 흐름</h3>
+<section id="b3">
+  <h3>검토 후 제외한 후보</h3>
 
-<pre>상품 선택  →  <b>지급 대상 확정</b>  →  통화 · 결제수단 선택 · 결제  →  <b>지급 요청</b>  →  계정 우편함 수령
-                    ↑                                                   ↑
-              <span class="f">게임 서버가 제공할 API는 이 둘 · 재화 회수는 Phase 2</span></pre>
-
-  <p>게임팀은 <b>PG 규격을 알 필요가 없다.</b> 결제 모듈이 PG 연동을 담당하고, 게임 서버는 표준 API만 제공한다.</p>
-
-  <h3>화면</h3>
-
+  <h4>브랜드명</h4>
   <div class="tscroll">
     <table>
-      <thead><tr><th style="width:120px;">누가 보나</th><th style="width:60px;">개수</th><th>화면</th></tr></thead>
+      <thead><tr><th style="width:200px;">후보</th><th>제외 사유</th></tr></thead>
       <tbody>
-        <tr><td><b>유저</b></td><td>2</td><td>웹샵 · 통합 결제창</td></tr>
-        <tr><td><b>관리자 · 본사</b></td><td>2</td><td>결제 모듈 관리 · 키 발급</td></tr>
-        <tr><td><b>관리자 · 지사</b></td><td>8</td><td>결제 준비도 · 법인 · 결제수단 · 게임 연동 · 상품 가격 · 모니터링 · 환불 · 정산 대사</td></tr>
+        <tr><td>Prontera Market</td><td>「프론테라 광장」 명칭을 이미 써서 혼선 우려</td></tr>
+        <tr><td>RAGNAROK STORE</td><td>직관적이나 개성이 약하고, 현행 굿즈몰(라그나로크 온라인 스토어)과 혼동</td></tr>
+        <tr><td>Alberta Trading Co.</td><td>세계관 적합도는 높으나 인지도가 낮다</td></tr>
+        <tr><td>Poring 계열</td><td><span class="mono">Get! Poring</span> 타이틀명과 중복</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>어드민은 <b>시스템 하나</b>고 로그인한 사람에 따라 보이는 화면이 다르다.
-  지사 계정으로 들어오면 자기 법인 화면만 보인다.</p>
+  <h4>1뎁스</h4>
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:200px;">후보</th><th>검토 결과</th></tr></thead>
+      <tbody>
+        <tr><td>Item Shop</td><td><b>코인 · 포인트 상품을 담지 못한다</b> &#8594; 제외</td></tr>
+        <tr><td>Merch &amp; More</td><td>디지털 굿즈 포함 의미가 명확하나 다소 캐주얼 &#8594; <b>차선안</b></td></tr>
+        <tr><td>Collection</td><td>쇼핑몰에서 상품 라인명으로 쓰여 상점으로 인지되지 않는다 &#8594;
+          <b>기획전 명칭으로 전용</b></td></tr>
+        <tr><td>Fan Shop</td><td>친숙하나 인게임 상품과 경계가 모호하다</td></tr>
+        <tr><td>Gift Shop</td><td>「선물하기」 기능으로 오인될 수 있다</td></tr>
+        <tr><td>Gear Shop</td><td>RO에서 <b>장비 아이템</b>으로 읽혀 In-Game Shop과 혼동</td></tr>
+        <tr><td>Collectibles</td><td>피규어 위주로 좁게 읽히고, Digital Collectibles는 미국에서 NFT를 연상시킨다</td></tr>
+        <tr><td>Play / Collect</td><td>Play가 포털 게임 실행 버튼과 혼동된다</td></tr>
+        <tr><td>Kafra Service / Kafra Storage</td><td>Storage가 <b>구매 보관함</b>으로 오인된다</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-  <h3>정해야 할 것</h3>
+<div class="part">
+  <span class="n">STRUCTURE</span>
+  <h2>구조</h2>
+  <p>1뎁스 아래를 어떻게 채우는가.</p>
+</div>
 
-  <p><b>국가별 데이터 이전 법적 확인</b>이 다른 결정의 전제다.
-  어드민을 하나로 통합하는 전제가 여기 걸려 있고, 막히는 나라가 있으면 그 나라만 분리해야 한다.
-  이 항목을 포함한 미결 15건은 <a href="payment.html#review">결제 설계 — 검토 필요사항</a>에 있다.</p>
+<section id="c1">
+  <h3>카테고리 트리</h3>
+
+  <pre><b>Kafra Store</b>
+&#9500;&#9472; <span class="a">[가로축] Featured</span>  New &#183; Limited &#183; Event      <span class="f">스토어 메인 상단 · 두 축 공통</span>
+&#9500;&#9472; <b>In-Game Shop</b>   <span class="f">게임에서 쓰는 것 · 계정으로 받기</span>
+&#9474;   &#9500;&#9472; Coins       <span class="f">권역 재화 (예: JoyCoin)</span>
+&#9474;   &#9500;&#9472; Packages
+&#9474;   &#9492;&#9472; Items       <span class="f">Costumes &#183; Consumables &#183; Services</span>
+&#9474;      <span class="f">※ 타이틀 필터: RO / ROZ / 추후 타이틀</span>
+&#9492;&#9472; <b>Merch Shop</b>     <span class="f">소장하는 것 · 권역별 운영</span>
+    &#9500;&#9472; Merch          <span class="f">유형별 Plush &#183; Figures &#183; Apparel &#183; Stationery &#183; Pins &amp; Acrylic</span>
+    &#9474;                  <span class="f">캐릭터별 Poring Family &#183; Baphomet &#183; Kafra …</span>
+    &#9500;&#9472; Digital Goods  <span class="f">월페이퍼 &#183; OST &#183; 이모티콘</span>
+    &#9492;&#9472; Bundles        <span class="f">Merch + Game Code</span>  <span class="a">&#8592; In-Game Shop 에 배너 교차 노출</span></pre>
+</section>
+
+<section id="c2">
+  <h3>구조 원칙</h3>
+
+  <div class="cols">
+    <div class="card b">
+      <h5>Featured</h5>
+      <ul>
+        <li>두 축을 <b>가로지르는 큐레이션</b>. 스토어 메인 상단에 배치</li>
+        <li>닌텐도 <b>Exclusives · Sales</b> 배치를 참고</li>
+        <li>기념 기획전은 <b>Collection</b> 명칭 활용 (예: 24th Anniversary Collection)</li>
+      </ul>
+    </div>
+    <div class="card b">
+      <h5>Bundles</h5>
+      <ul>
+        <li><b>배송 상품</b>이므로 Merch Shop 소속</li>
+        <li>In-Game Shop 에는 <b>배너로 교차 노출</b></li>
+        <li>번들은 국내 4개사 공통 패턴 &#8212; 입구가 하나여야 교차가 성립</li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h5>Coins</h5>
+      <ul>
+        <li>카테고리명은 <b>권역 공통</b>으로 고정</li>
+        <li>상품명(JoyCoin 등)만 <b>권역별 현지화</b></li>
+        <li>충전 플로우는 <b>기존 계정 지갑</b>과 연결 &#8212; 중복 구현 지양</li>
+      </ul>
+    </div>
+    <div class="card a">
+      <h5>필터</h5>
+      <ul>
+        <li>In-Game Shop &#8212; <b>타이틀 필터</b></li>
+        <li>Merch Shop &#8212; <b>캐릭터 필터</b></li>
+        <li>축이 다른 이유: 아이템은 게임별, 굿즈는 캐릭터별로 찾는다</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="c3">
+  <h3>세계관 마이크로카피</h3>
+
+  <p class="lede">선택 적용. <b>브랜드와 부가 기능에만</b> 쓰고 내비게이션 명칭은 기능어를 유지한다
+  &#8212; FF14 운영 방식과 같다.</p>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:200px;">기능</th><th style="width:180px;">명칭</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>구매 아이템 보관함</td><td><b>Kafra Storage</b></td><td>게임 내 카프라 창고와 기능이 일치한다</td></tr>
+        <tr><td>장바구니(Merch Shop)</td><td><b>Pushcart</b></td><td>상인 직업 카트 모티프</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">OPERATION</span>
+  <h2>운영</h2>
+  <p>브랜드는 하나, 운영은 지사 체계를 그대로.</p>
+</div>
+
+<section id="d1">
+  <h3>원 브랜드, 권역별 운영</h3>
+
+  <ul class="rule">
+    <li><b>공통</b> &#8212; 브랜드명 · 1뎁스 구조 · 카테고리 체계는 전 권역 동일</li>
+    <li><b>지사 유지</b> &#8212; 주문 · 결제 · 배송 · CS는 기존 체계를 그대로 쓴다</li>
+    <li><b>Merch Shop 운영 방식은 권역 선택</b> &#8212; 자사몰 운영 또는
+      라이선시 · 외부몰 링크 연결(현행 국내 굿즈몰의 위탁 구조를 그대로 수용)</li>
+    <li><b>굿즈 미운영 권역</b> &#8212; Merch Shop 비노출 또는 <b>Digital Goods만</b> 운영</li>
+  </ul>
+
+  <div class="note q">
+    <span class="lb">선례</span>
+    <p>유비소프트는 <b>스토어는 하나로 두고 고객지원 플랫폼만 MERCH로 분리</b>했다.
+    「브랜드 통합 · 운영 분리」가 실현 가능하다는 증거다.</p>
+  </div>
+</section>
+
+<section id="d2">
+  <h3>권역별 적용 단계</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:110px;">단계</th><th style="width:260px;">범위</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td><b>1단계</b></td><td>In-Game Shop + Digital Goods</td>
+          <td>배송이 없어 권역 제약이 작다. 미주 권역 선행 적용 검토</td></tr>
+        <tr><td><b>2단계</b></td><td>실물 굿즈(Merch · Bundles)</td>
+          <td>LATAM <b>통관 · 관세 부담</b> 확인 후 결정</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="part">
+  <span class="n">ROLLOUT</span>
+  <h2>이행</h2>
+  <p>확정에 따라 바뀌는 것과, 아직 열려 있는 것.</p>
+</div>
+
+<section id="e1">
+  <h3>문서 · 화면 반영 범위</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:200px;">대상</th><th style="width:230px;">변경</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td>포털 GNB 라벨</td><td><span class="mono">KAFRA CENTER</span> &#8594;
+          <span class="mono">KAFRA STORE</span></td><td>화면정의서 반영</td></tr>
+        <tr><td>드롭다운 항목</td><td><span class="mono">WEB SHOP</span> &#8594; <span class="mono">IN-GAME SHOP</span><br>
+          <span class="mono">GOODS SHOP</span> &#8594; <span class="mono">MERCH SHOP</span></td><td>화면정의서 반영</td></tr>
+        <tr><td>화면명 · 디스크립션</td><td>「카프라 센터」 &#8594; 「카프라 스토어」<br>「웹샵」 &#8594; 「인게임샵」</td>
+          <td>화면정의서 반영</td></tr>
+        <tr><td>기존 설계 문서의 <b>「웹샵」</b></td><td><b>유지</b></td>
+          <td><b>업계 표준 용어</b>로서의 웹샵(D2C 채널)은 그대로 둔다.
+            바꾸는 것은 <b>유저가 보는 라벨</b>이다</td></tr>
+        <tr><td>파일명 · URL</td><td><b>유지</b></td>
+          <td><span class="mono">webshop-ui.html</span> ·
+            <span class="mono">shop.ragnarokland.com</span> &#8212; 링크 유지를 위해 변경하지 않는다</td></tr>
+        <tr><td>Merch Shop 화면</td><td>&#8212;</td><td><b>이번 범위 밖.</b> 진입 지점만 정의</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="e2">
+  <h3>리스크와 확인 필요</h3>
+
+  <div class="tscroll">
+    <table>
+      <thead><tr><th style="width:150px;">항목</th><th style="width:38%;">내용</th><th>대응</th></tr></thead>
+      <tbody>
+        <tr><td><b>iRO 명칭 인접</b></td>
+          <td>북미 iRO(WarpPortal)의 인게임 캐시샵명이 <span class="mono">Kafra Shop</span>,
+            재화명이 <span class="mono">Kafra Shop Points(KP)</span>다</td>
+          <td><span class="mono">Store</span>로 층위를 구분하고 <b>재화명에는 카프라를 쓰지 않는다</b>.
+            WarpPortal 사전 공유</td></tr>
+        <tr><td><b>상표</b></td><td>Kafra Store 권역별 상표 사용 가능 여부</td><td><b>법무 확인 필요</b></td></tr>
+        <tr><td><b>다국어 표기</b></td><td>In-Game Shop / Merch Shop 의 PT · ES 표기</td><td>LQA 확인</td></tr>
+        <tr><td><b>권역별 재화명 상이</b></td><td>권역마다 재화 명칭이 다르다</td>
+          <td><span class="mono">Coins</span> 공통 카테고리명 사용, 상품명만 현지화</td></tr>
+        <tr><td><b>정책 차이</b></td><td>두 축 간 청약철회 · 확률 표기 · 배송 정책이 다르다</td>
+          <td><b>1뎁스 단위로 정책 · 약관 분리</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="e3">
+  <h3>예상 질의</h3>
+
+  <h4>주문은 권역별로 따로 하는데 굳이 하나로 묶는 이유는</h4>
+  <p>유저 입장에서 <b>「라그나로크 상품 구매처」가 하나로 인지되는 것</b> 자체가 목적이다.
+  굿즈 + 게임 쿠폰 번들처럼 두 영역을 넘나드는 상품이 늘고 있고,
+  <b>입구가 하나여야 교차 노출이 가능하다.</b></p>
+
+  <h4>굿즈가 없는 권역은</h4>
+  <p>Merch Shop 비노출 또는 Digital Goods만 운영한다. <b>권역별 부분 적용이 가능한 구조</b>로 설계했다.</p>
+
+  <h4>iRO 유저가 헷갈리지 않나</h4>
+  <p>iRO <span class="mono">Kafra Shop</span>은 <b>게임 내 캐시샵</b>, <span class="mono">Kafra Store</span>는
+  <b>포털 레벨 상점</b>으로 층위가 다르다. 재화명을 분리하면 혼동 여지는 낮다. WarpPortal 의견을 사전 수렴한다.</p>
+
+  <h4>사내에서 쓰던 「웹샵」은 못 쓰나</h4>
+  <p>쓴다. <b>D2C 웹상점을 가리키는 업계 표준 용어</b>이고, 사업 · 기술 문서에서는 정확한 말이다.
+  바꾸는 것은 <b>유저가 보는 메뉴 라벨</b>뿐이다.</p>
 </section>
 
 <footer class="doc">
   <h4>관련 문서</h4>
   <ul>
-    <li><b><a href="store-ia.html">카프라 센터 정보구조</a>
-<a href="webshop-payment-prd.html">웹샵/통합결제 기획</a></b> — 상위 기준 문서. 아키텍처 · 프로비저닝 · 장애 대응 · 환불 정책</li>
-    <li><b><a href="payment.html">결제 설계</a></b> — 프로세스와 구조. 검토 필요사항 15건</li>
-    <li><b><a href="payment-webshop-structure.html">웹샵/통합결제 구조</a></b> — 지사 도입 절차 · 자금 경로 · 거래 단위 원칙</li>
-    <li><b><a href="global-payment.html">글로벌 결제 설계 (상세)</a></b> — 규격 · 필드</li>
+    <li><b><a href="../benchmark/store-branding.html">IP 상점 브랜딩 벤치마킹</a></b> &#8212; 이 안의 근거가 되는 국내외 16개 사례</li>
+    <li><b><a href="store-ia.html">카프라 센터 정보구조</a></b> &#8212; 타이틀 · 권역 축 순서 검토
+      <span class="verdict ko no">명칭 갱신 필요</span></li>
+    <li><b><a href="../../wireframe/webshop-ui.html">웹샵 화면정의서</a></b> &#8212; 01 KAFRA STORE 진입 · 02 인게임샵 메인</li>
+    <li><b><a href="webshop-payment-prd.html">웹샵/통합결제 기획</a></b> ·
+      <b><a href="payment-webshop-structure.html">웹샵/통합결제 구조</a></b> &#8212; 채널 용어로서의 「웹샵」 유지</li>
   </ul>
-  <p style="margin-top:14px">라그나로크 포털 · 결제 개요 · 2026-09-08</p>
+
+  <h4>다음 단계</h4>
+  <ul>
+    <li>권역별 적용안 수립</li>
+    <li>GNB · 스토어 메인 와이어프레임 작성</li>
+    <li>언어팩(EN / PT / ES) 반영 및 LQA</li>
+    <li>Kafra Store 상표 법무 검토 · WarpPortal 사전 공유</li>
+  </ul>
+
+  <p style="margin-top:14px">라그나로크 포털 &#183; 카프라 스토어 브랜딩 &#183; 카테고리 구조 &#183; 2026-09-11</p>
 </footer>
 
 </main>
@@ -486,7 +787,6 @@
     <a href="payment-webshop-structure.html">웹샵/통합결제 구조</a>
     <div class="g">벤치마킹</div>
     <a href="../benchmark/pg-multi-entity.html">PG 다중법인 구조 벤치마킹</a>
-    <a href="../benchmark/store-branding.html">IP 상점 브랜딩 벤치마킹</a>
     <a href="../benchmark/game-platform-payment.html">게임플랫폼 벤치마킹</a>
     <a href="../benchmark/webshop-payment.html">웹샵 벤치마킹</a>
     <div class="g">전체</div>
