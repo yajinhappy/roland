@@ -5438,6 +5438,21 @@
       flex: none;
     }
 
+    .v2-qty.off {
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .v2-qty>span {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .v2-qty:not(.off)>span:hover {
+      background: #EDF1F5;
+      color: #2F6490;
+    }
+
     .v2-qty>span {
       width: 30px;
       text-align: center;
@@ -9548,7 +9563,8 @@
                           style="margin-left:0;border:1px solid #C9D0D9;border-radius:6px;position:relative;overflow:hidden;">
                           <div class="v2-urlbar" style="height:30px;padding:0 10px;gap:7px;border-radius:5px 5px 0 0;">
                             <i style="width:7px;height:7px;"></i>
-                            <div class="v2-url" style="width:21px;height:21px;font-size:10px;"><b>ragnarokland.com</b></div>
+                            <div class="v2-url" style="width:21px;height:21px;font-size:10px;"><b>ragnarokland.com</b>
+                            </div>
                           </div>
                           <div style="flex:1;background:#F2F4F7;min-height:220px;"></div>
                           <div class="v2-mdim">
@@ -11496,7 +11512,11 @@
                   <div class="spec-r"><span class="spec-k">배지</span><span class="spec-v">상품명 위에 <b>분류</b> · 기간 한정이면
                       <b>D-N</b></span></div>
                   <div class="spec-r"><span class="spec-k">수량</span><span class="spec-v"><b>가격 오른쪽</b> 스테퍼 — 기본 상한
-                      10 · <b>한정 상품은 1 고정</b>이며 비활성 표시한다. MO는 <b>가격 아래 전폭</b></span></div>
+                      10 · MO는 <b>가격 아래 전폭</b></span></div>
+                  <div class="spec-r"><span class="spec-k">금액 반영</span><span class="spec-v">수량을 바꾸면 <b>[구매하기] 버튼의
+                        금액</b>이 즉시 따라 바뀐다 — 단가 &#215; 수량</span></div>
+                  <div class="spec-r"><span class="spec-k">1개 고정</span><span class="spec-v">한정 상품 &#183; 계정당 1개 상품은
+                      스테퍼를 <b>비활성</b>한다 — 흐리게 + <b>클릭이 먹지 않게</b>. 옆에 「<b>수량 1 고정</b>」을 적는다</span></div>
                   <div class="spec-r"><span class="spec-k">미입력</span><span class="spec-v">설명이 비면 <b>블록 자체를
                         숨긴다</b></span></div>
                 </div>
@@ -11731,7 +11751,7 @@
                                   <div class="v2-dr2n">여름 한정 소환석</div>
                                   <div class="v2-dr2p">₩ 12,000</div>
                                   <div class="v2-dr2m">
-                                    <span class="v2-qty" style="height:30px;opacity:.5;"><span
+                                    <span class="v2-qty off" style="height:30px;"><span
                                         style="line-height:28px;">&#8722;</span><b style="line-height:28px;">1</b><span
                                         style="line-height:28px;">&#43;</span></span>
                                     <span class="v2-fix">수량 1 고정</span>
@@ -11759,7 +11779,7 @@
                                   <div class="v2-dr2n">카츄아의 비밀상자</div>
                                   <div class="v2-dr2p">₩ 2,500</div>
                                   <div class="v2-dr2m">
-                                    <span class="v2-qty" style="height:30px;opacity:.5;"><span
+                                    <span class="v2-qty off" style="height:30px;"><span
                                         style="line-height:28px;">&#8722;</span><b style="line-height:28px;">1</b><span
                                         style="line-height:28px;">&#43;</span></span>
                                     <span class="v2-fix">수량 1 고정</span>
@@ -11874,7 +11894,7 @@
                                       <div class="v2-dr2n">여름 한정 소환석</div>
                                       <div class="v2-dr2p">₩ 12,000</div>
                                       <div class="v2-dr2m">
-                                        <span class="v2-qty" style="height:30px;opacity:.5;"><span
+                                        <span class="v2-qty off" style="height:30px;"><span
                                             style="line-height:28px;">&#8722;</span><b
                                             style="line-height:28px;">1</b><span
                                             style="line-height:28px;">&#43;</span></span>
@@ -11989,7 +12009,7 @@
                                       <div class="v2-dr2n">여름 한정 소환석</div>
                                       <div class="v2-dr2p">₩ 12,000</div>
                                       <div class="v2-dr2m">
-                                        <span class="v2-qty" style="height:30px;opacity:.5;"><span
+                                        <span class="v2-qty off" style="height:30px;"><span
                                             style="line-height:28px;">&#8722;</span><b
                                             style="line-height:28px;">1</b><span
                                             style="line-height:28px;">&#43;</span></span>
@@ -12018,7 +12038,7 @@
                                       <div class="v2-dr2n">카츄아의 비밀상자</div>
                                       <div class="v2-dr2p">₩ 2,500</div>
                                       <div class="v2-dr2m">
-                                        <span class="v2-qty" style="height:30px;opacity:.5;"><span
+                                        <span class="v2-qty off" style="height:30px;"><span
                                             style="line-height:28px;">&#8722;</span><b
                                             style="line-height:28px;">1</b><span
                                             style="line-height:28px;">&#43;</span></span>
@@ -12136,6 +12156,8 @@
                       결제창으로 간다. 나머지는 드로어에 <b>남는다</b></span></div>
                   <div class="spec-r"><span class="spec-k">선택 해제</span><span class="spec-v">체크를 풀면 합계에서 빠진다. 전부 풀면
                       [결제하기] <b>비활성</b></span></div>
+                  <div class="spec-r"><span class="spec-k">수량</span><span class="spec-v">행마다 스테퍼. 바꾸면 <b>그룹 합계가 즉시
+                        재계산</b>된다. <b>수량 1 고정</b> 상품은 비활성</span></div>
                   <div class="spec-r"><span class="spec-k">판매 종료</span><span class="spec-v">담아 둔 사이 종료되면 해당 행을
                       <b>비활성</b>하고 사유를 인라인으로 적는다 — 지우지 않는다</span></div>
                 </div>
@@ -12313,9 +12335,9 @@
                         <div class="pay-sec">
                           <span class="pay-lbl"><i>3</i> 결제 동의 <b>필수</b></span>
                           <div class="agree must odds"><span class="cb"></span><span class="tt"><b>[필수]</b> 이 주문에는
-                              <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span
-                              class="lk">확률 보기</span></div>
-                          <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편 수령
+                              <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span class="lk">확률
+                              보기</span></div>
+                          <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 인게임 아이템은 <b>우편 수령
                                 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상을 확인했습니다.</span><span class="lk">전문</span></div>
                           <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 만 19세 미만은 법정대리인의
                               동의가 필요하며, 동의 없는 결제는 취소될 수 있습니다.</span></div>
@@ -12470,8 +12492,8 @@
                           <div class="pay-sec">
                             <span class="pay-lbl"><i>3</i> 결제 동의 <b>필수</b></span>
                             <div class="agree must odds"><span class="cb"></span><span class="tt"><b>[필수]</b> 이 주문에는
-                                <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span
-                                class="lk">확률 보기</span></div>
+                                <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span class="lk">확률
+                                보기</span></div>
                             <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편
                                   수령 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상을 확인했습니다.</span><span class="lk">전문</span></div>
                             <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 만 19세 미만은
@@ -12628,8 +12650,8 @@
                           <div class="pay-sec">
                             <span class="pay-lbl"><i>3</i> 결제 동의 <b>필수</b></span>
                             <div class="agree must odds"><span class="cb"></span><span class="tt"><b>[필수]</b> 이 주문에는
-                                <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span
-                                class="lk">확률 보기</span></div>
+                                <b>확률형 상품</b>이 포함되어 있습니다. <b>확률 정보를 확인</b>했으며 구매에 동의합니다.</span><span class="lk">확률
+                                보기</span></div>
                             <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 인게임 재화는 <b>우편
                                   수령 후 청약철회가 제한</b>됩니다. 결제 정보 · 지급 대상을 확인했습니다.</span><span class="lk">전문</span></div>
                             <div class="agree must"><span class="cb"></span><span class="tt"><b>[필수]</b> 만 19세 미만은
@@ -13207,6 +13229,20 @@
         b.addEventListener('click', function () { go(b.dataset.go); });
       });
 
+      // 흐름 이어 보기 — 화면이 나뉘어 있어도 눌러서 다음 단계로 넘어간다
+      function shutModals() {
+        document.querySelectorAll('.v2-mdim:not([hidden])').forEach(function (m) {
+          if (m.hasAttribute('data-role')) m.hidden = true;
+        });
+      }
+      document.addEventListener('click', function (e) {
+        var t = e.target;
+        if (t.closest('.v2-pmdadd.s')) { shutModals(); go('v12'); return; }
+        if (t.closest('.v2-pmdadd')) { shutModals(); go('v6'); return; }
+        if (t.closest('.v2-dgrpf .ws-pay')) { go('v6'); return; }
+        if (t.closest('.paybtn')) { go('v9'); return; }
+      });
+
       document.querySelectorAll('.screen .tab').forEach(function (t) {
         t.addEventListener('click', function () {
           var col = t.closest('.wcol');
@@ -13522,6 +13558,61 @@
       } else { focusRecent(); }
       window.addEventListener('load', focusRecent);
     })();
+  </script>
+
+  <script>
+  /* 수량 스테퍼 — 모달 · 드로어에서 실제로 오르내린다.
+     1개 고정 상품(.off)은 이벤트가 닿지 않는다 */
+  (function () {
+    function num(t) { var m = String(t).replace(/[^0-9]/g, ''); return m ? parseInt(m, 10) : 0; }
+    function won(v) { return '\u20A9 ' + v.toLocaleString('en-US'); }
+
+    /* 단가는 처음 값에서 한 번만 기억한다 */
+    function unit(el, price, qty) {
+      if (!el.dataset.unit) el.dataset.unit = String(Math.round(price / (qty || 1)));
+      return parseInt(el.dataset.unit, 10);
+    }
+
+    function syncModal(q) {
+      var md = q.closest('.v2-pmd');
+      if (!md) return;
+      var pEl = md.querySelector('.v2-pmdp');
+      var btn = md.querySelector('.v2-pmdadd:not(.s)');
+      if (!pEl || !btn) return;
+      var n = num(q.querySelector('b').textContent) || 1;
+      var u = unit(md, num(pEl.textContent), 1);
+      btn.textContent = won(u * n) + ' \u00B7 구매하기';
+    }
+
+    function syncGroup(q) {
+      var g = q.closest('.v2-dgrp');
+      if (!g) return;
+      var sum = 0;
+      g.querySelectorAll('.v2-dr2').forEach(function (row) {
+        var pEl = row.querySelector('.v2-dr2p'), qEl = row.querySelector('.v2-qty b');
+        if (!pEl) return;
+        var n = qEl ? (num(qEl.textContent) || 1) : 1;
+        sum += unit(row, num(pEl.textContent), 1) * n;
+      });
+      var tot = g.querySelector('.v2-dgrpf .sum b');
+      if (tot) tot.textContent = won(sum);
+    }
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.v2-qty > span');
+      if (!btn) return;
+      var q = btn.parentNode;
+      if (q.classList.contains('off')) return;
+      var b = q.querySelector('b');
+      if (!b) return;
+      var cur = num(b.textContent) || 1;
+      var up = btn === q.lastElementChild;
+      var next = Math.min(99, Math.max(1, cur + (up ? 1 : -1)));
+      b.textContent = String(next);
+      syncModal(q);
+      syncGroup(q);
+    });
+  })();
   </script>
 
   <script>
