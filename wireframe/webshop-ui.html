@@ -13561,58 +13561,58 @@
   </script>
 
   <script>
-  /* 수량 스테퍼 — 모달 · 드로어에서 실제로 오르내린다.
-     1개 고정 상품(.off)은 이벤트가 닿지 않는다 */
-  (function () {
-    function num(t) { var m = String(t).replace(/[^0-9]/g, ''); return m ? parseInt(m, 10) : 0; }
-    function won(v) { return '\u20A9 ' + v.toLocaleString('en-US'); }
+    /* 수량 스테퍼 — 모달 · 드로어에서 실제로 오르내린다.
+       1개 고정 상품(.off)은 이벤트가 닿지 않는다 */
+    (function () {
+      function num(t) { var m = String(t).replace(/[^0-9]/g, ''); return m ? parseInt(m, 10) : 0; }
+      function won(v) { return '\u20A9 ' + v.toLocaleString('en-US'); }
 
-    /* 단가는 처음 값에서 한 번만 기억한다 */
-    function unit(el, price, qty) {
-      if (!el.dataset.unit) el.dataset.unit = String(Math.round(price / (qty || 1)));
-      return parseInt(el.dataset.unit, 10);
-    }
+      /* 단가는 처음 값에서 한 번만 기억한다 */
+      function unit(el, price, qty) {
+        if (!el.dataset.unit) el.dataset.unit = String(Math.round(price / (qty || 1)));
+        return parseInt(el.dataset.unit, 10);
+      }
 
-    function syncModal(q) {
-      var md = q.closest('.v2-pmd');
-      if (!md) return;
-      var pEl = md.querySelector('.v2-pmdp');
-      var btn = md.querySelector('.v2-pmdadd:not(.s)');
-      if (!pEl || !btn) return;
-      var n = num(q.querySelector('b').textContent) || 1;
-      var u = unit(md, num(pEl.textContent), 1);
-      btn.textContent = won(u * n) + ' \u00B7 구매하기';
-    }
+      function syncModal(q) {
+        var md = q.closest('.v2-pmd');
+        if (!md) return;
+        var pEl = md.querySelector('.v2-pmdp');
+        var btn = md.querySelector('.v2-pmdadd:not(.s)');
+        if (!pEl || !btn) return;
+        var n = num(q.querySelector('b').textContent) || 1;
+        var u = unit(md, num(pEl.textContent), 1);
+        btn.textContent = won(u * n) + ' \u00B7 구매하기';
+      }
 
-    function syncGroup(q) {
-      var g = q.closest('.v2-dgrp');
-      if (!g) return;
-      var sum = 0;
-      g.querySelectorAll('.v2-dr2').forEach(function (row) {
-        var pEl = row.querySelector('.v2-dr2p'), qEl = row.querySelector('.v2-qty b');
-        if (!pEl) return;
-        var n = qEl ? (num(qEl.textContent) || 1) : 1;
-        sum += unit(row, num(pEl.textContent), 1) * n;
+      function syncGroup(q) {
+        var g = q.closest('.v2-dgrp');
+        if (!g) return;
+        var sum = 0;
+        g.querySelectorAll('.v2-dr2').forEach(function (row) {
+          var pEl = row.querySelector('.v2-dr2p'), qEl = row.querySelector('.v2-qty b');
+          if (!pEl) return;
+          var n = qEl ? (num(qEl.textContent) || 1) : 1;
+          sum += unit(row, num(pEl.textContent), 1) * n;
+        });
+        var tot = g.querySelector('.v2-dgrpf .sum b');
+        if (tot) tot.textContent = won(sum);
+      }
+
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.v2-qty > span');
+        if (!btn) return;
+        var q = btn.parentNode;
+        if (q.classList.contains('off')) return;
+        var b = q.querySelector('b');
+        if (!b) return;
+        var cur = num(b.textContent) || 1;
+        var up = btn === q.lastElementChild;
+        var next = Math.min(99, Math.max(1, cur + (up ? 1 : -1)));
+        b.textContent = String(next);
+        syncModal(q);
+        syncGroup(q);
       });
-      var tot = g.querySelector('.v2-dgrpf .sum b');
-      if (tot) tot.textContent = won(sum);
-    }
-
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest('.v2-qty > span');
-      if (!btn) return;
-      var q = btn.parentNode;
-      if (q.classList.contains('off')) return;
-      var b = q.querySelector('b');
-      if (!b) return;
-      var cur = num(b.textContent) || 1;
-      var up = btn === q.lastElementChild;
-      var next = Math.min(99, Math.max(1, cur + (up ? 1 : -1)));
-      b.textContent = String(next);
-      syncModal(q);
-      syncGroup(q);
-    });
-  })();
+    })();
   </script>
 
   <script>
