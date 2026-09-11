@@ -5257,6 +5257,7 @@
 
     /* ---- 6 · 상품 카드 ---- */
     .v2-pc {
+      cursor: pointer;
       border: 1px solid #E1E6EC;
       border-radius: 5px;
       background: #fff;
@@ -7065,28 +7066,6 @@
       visibility: visible;
     }
 
-    /* 액션 셋 — 썸네일 한가운데 */
-    .v2-hact {
-      position: absolute;
-      inset: 0;
-      z-index: 4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(6px);
-      transition: opacity .14s ease, transform .14s ease;
-    }
-
-    .v2-pc.hov .v2-hact,
-    .v2-grid:not(.mo) .v2-pc:hover .v2-hact {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
     /* 글자는 자리를 지키고 색만 바뀐다 */
     .v2-pb,
     .v2-act {
@@ -7104,41 +7083,6 @@
       color: #E2E8EF;
       border-color: rgba(255, 255, 255, .42);
       background: transparent;
-    }
-
-    .v2-hi {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      font-size: 9.5px;
-      letter-spacing: -.01em;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .v2-hi i {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, .55);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-style: normal;
-      font-size: 12px;
-    }
-
-    .v2-hi:hover i {
-      background: rgba(255, 255, 255, .18);
-      border-color: #fff;
-    }
-
-    .v2-hi.p i {
-      background: #fff;
-      border-color: #fff;
-      color: #2F6490;
-      font-weight: 600;
     }
 
     /* ---- 우측 드로어 (딤드) — 관심상품 · 최근 본 ---- */
@@ -10006,11 +9950,6 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-a">확률형</span></span><span
                                 class="v2-like on">&#9829;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">스피드 부스터 패키지 10세트</span>
@@ -10024,11 +9963,6 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-r">D-3</span></span><span
                                 class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                               <span class="v2-pn">존다 서포트 패키지 30일</span>
@@ -10040,11 +9974,6 @@
                           </div>
                           <div class="v2-pc hov">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">카츄아의 비밀상자</span>
@@ -10056,11 +9985,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">포스 부스터</span>
@@ -10072,11 +9996,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">의상</span>
                               <span class="v2-pn">축제 의상 세트</span>
@@ -10088,11 +10007,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">고급 스킬북</span>
@@ -10106,11 +10020,6 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-r">D-1</span></span><span
                                 class="v2-like on">&#9829;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                               <span class="v2-pn">여름 한정 소환석</span>
@@ -10122,11 +10031,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">경험치 부스터 7일</span>
@@ -10138,11 +10042,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">모험가 스타터 패키지</span>
@@ -10156,11 +10055,6 @@
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
                               <span class="v2-bdg"><span class="tag-a">확률형</span></span><span
                                 class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">신비한 열매 상자</span>
@@ -10436,11 +10330,6 @@
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span><span class="v2-like on"
                                     style="width:21px;height:21px;font-size:10px;">&#9829;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">스피드 부스터 패키지 10세트</span></div>
@@ -10453,11 +10342,6 @@
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-r">D-3</span></span><span class="v2-like"
                                     style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">존다 서포트 패키지 30일</span></div>
@@ -10469,11 +10353,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">카츄아의 비밀상자</span></div>
@@ -10485,11 +10364,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">포스 부스터</span></div>
@@ -10501,11 +10375,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">축제 의상 세트</span></div>
@@ -10517,11 +10386,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:21px;height:21px;font-size:10px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">고급 스킬북</span></div>
@@ -10676,11 +10540,6 @@
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span><span class="v2-like on"
                                     style="width:20px;height:20px;font-size:9px;">&#9829;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">스피드 부스터 패키지 10세트</span></div>
@@ -10693,11 +10552,6 @@
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-r">D-3</span></span><span class="v2-like"
                                     style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">존다 서포트 패키지 30일</span></div>
@@ -10709,11 +10563,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">카츄아의 비밀상자</span></div>
@@ -10725,11 +10574,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">포스 부스터</span></div>
@@ -10741,11 +10585,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">축제 의상 세트</span></div>
@@ -10757,11 +10596,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">고급 스킬북</span></div>
@@ -10774,11 +10608,6 @@
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-r">D-1</span></span><span class="v2-like on"
                                     style="width:20px;height:20px;font-size:9px;">&#9829;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">여름 한정 소환석</span></div>
@@ -10790,11 +10619,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span><span
                                     class="v2-like" style="width:20px;height:20px;font-size:9px;">&#9825;</span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">경험치 부스터 7일</span></div>
@@ -11050,29 +10874,20 @@
                   <div class="spec-r"><span class="spec-k">자리 고정</span><span class="spec-v">이 줄은 <b>높이 40px 고정</b>이다.
                       hover 에 생겼다 사라지지 않으므로 <b>카드 높이가 흔들리지 않는다</b></span></div>
                   <div class="spec-r"><span class="spec-k">hover</span><span class="spec-v"><b>카드 전면</b>을 아래에서 위로
-                      그라데이션이 덮고, <b>썸네일 한가운데</b>에 <b>상세 &#183; 담기 &#183; 구매</b> 셋이 뜬다</span></div>
+                      그라데이션이 덮는다. <b>버튼을 얹지 않는다</b> — 어둡게 뜨는 것 자체가 「눌러도 된다」는 신호다</span></div>
                   <div class="spec-r"><span class="spec-k">텍스트</span><span class="spec-v">분류 &#183; 상품명 &#183; 가격은
                       <b>자리를 그대로 지키고 글자만 흰색</b>이 된다 — 위치가 움직이면 읽던 눈이 다시 찾아야 한다</span></div>
-                  <div class="spec-r"><span class="spec-k">액션 표기</span><span class="spec-v"><b>원형 아이콘 + 한 줄 라벨</b>.
-                      아이콘만 두면 무엇인지 모르고, 글자만 두면 좁은 카드에서 줄바꿈된다</span></div>
-                  <div class="spec-r"><span class="spec-k">구매 강조</span><span class="spec-v">셋 중 <b>[구매]만 채운 원</b>.
-                      나머지 둘은 <b>테두리만</b></span></div>
-                  <div class="spec-r"><span class="spec-k">[상세]</span><span class="spec-v"><b>상품 상세 모달</b>이 열린다 — 별도
-                      페이지로 이동하지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">[담기]</span><span class="spec-v">드로어에 넣고 <b>헤더 배지 +1</b>.
-                      <b>딤이 없어</b> 목록에서 계속 담을 수 있다</span></div>
-                  <div class="spec-r"><span class="spec-k">[구매]</span><span class="spec-v"><b>주문 드로어</b>가 열리고 이 상품만
-                      체크된다 — 모달을 거치지 않는 <b>빠른 길</b>. 아래 [구매하기] 줄과 <b>같은 동작</b>이다</span></div>
-                  <div class="spec-r"><span class="spec-k">확률형</span><span class="spec-v">카드에서 바로 [구매]로 들어가도
-                      <b>확률 고지 없이 결제되지 않는다</b> — 고지는 <b>상세 모달</b>, 동의는 <b>통합 결제창</b>이 받는다</span></div>
-                  <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v">hover 가 없으므로 <b>[구매하기] 줄만</b>
-                      남고, 카드 탭은 <b>상세 모달</b>이다</span></div>
+                  <div class="spec-r"><span class="spec-k">클릭</span><span class="spec-v">카드 <b>어디를 눌러도</b> 상품 상세 모달이
+                      열린다 — 썸네일 &#183; 상품명 &#183; 가격 줄 모두 같은 동작. 별도 페이지로 이동하지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">왜 버튼을 빼나</span><span class="spec-v">카드에서 결제까지 가려면 <b>확률 고지 ·
+                        수량 · 통화</b>가 필요한데 카드 안에 담을 수 없다. 카드는 <b>고르는 자리</b>까지만 맡고 담기 &#183; 구매는
+                      <b>모달</b>이 받는다</span></div>
                   <div class="spec-r"><span class="spec-k">좋아요 하트</span><span class="spec-v">우상단 · 카드 클릭과 <b>이벤트 분리</b>.
                       비로그인이면 <b>로그인 확인 알럿</b></span></div>
                   <div class="spec-r"><span class="spec-k">MO</span><span class="spec-v">hover 없음 — <b>카드 탭 = 상세 모달</b>.
                       오버레이를 띄우지 않는다</span></div>
-                  <div class="spec-r"><span class="spec-k">판매 종료</span><span class="spec-v">오버레이를 <b>띄우지 않는다</b> — 살 수
-                      없는 카드에 구매 버튼을 얹지 않는다</span></div>
+                  <div class="spec-r"><span class="spec-k">판매 종료</span><span class="spec-v">카드를 <b>흐리게</b> 하고
+                      hover 그라데이션과 클릭을 <b>막는다</b> — 가격 줄에 사유를 적는다</span></div>
                 </div>
               </div>
 
@@ -11183,11 +10998,6 @@
                         <div class="v2-grid">
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span><span
                                 class="v2-pn">스피드 부스터 패키지 10세트</span></div>
@@ -11198,11 +11008,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span><span
                                 class="v2-pn">존다 서포트 패키지 30일</span></div>
@@ -11213,11 +11018,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span><span
                                 class="v2-pn">카츄아의 비밀상자</span></div>
@@ -11228,11 +11028,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span><span
                                 class="v2-pn">포스 부스터</span></div>
@@ -11243,11 +11038,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">의상</span><span
                                 class="v2-pn">축제 의상 세트</span></div>
@@ -11405,11 +11195,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-a">확률형</span></span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">스피드 부스터 패키지 10세트</span></div>
@@ -11421,11 +11206,6 @@
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span><span
                                     class="v2-bdg"><span class="tag-r">D-3</span></span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">존다 서포트 패키지 30일</span></div>
@@ -11436,11 +11216,6 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">카츄아의 비밀상자</span></div>
@@ -11451,11 +11226,6 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">포스 부스터</span></div>
@@ -11466,11 +11236,6 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">축제 의상 세트</span></div>
@@ -11481,11 +11246,6 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:110px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:9px 10px 11px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11.5px;">고급 스킬북</span></div>
@@ -11576,11 +11336,6 @@
                             <div class="v2-grid mo">
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">스피드 부스터 패키지</span></div>
@@ -11591,11 +11346,6 @@
                               </div>
                               <div class="v2-pc">
                                 <div class="v2-pi" style="height:96px;"><span class="v2-ii s"></span>
-                                  <span class="v2-hact">
-                                    <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                    <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                    <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                                  </span>
                                 </div>
                                 <div class="v2-pb" style="padding:8px 9px 10px;gap:4px;"><span class="v2-pn"
                                     style="font-size:11px;">존다 서포트 패키지</span></div>
@@ -11849,11 +11599,6 @@
                         <div class="v2-grid">
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">패키지</span>
                               <span class="v2-pn">스피드 부스터 패키지 10세트</span>
@@ -11865,11 +11610,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">기간한정</span>
                               <span class="v2-pn">여름 한정 소환석</span>
@@ -11881,11 +11621,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">카츄아의 비밀상자</span>
@@ -11897,11 +11632,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">소비</span>
                               <span class="v2-pn">포스 부스터 30일</span>
@@ -11913,11 +11643,6 @@
                           </div>
                           <div class="v2-pc">
                             <div class="v2-pi"><span class="v2-ii">아이템<br>아이콘</span><span class="v2-like">&#9825;</span>
-                              <span class="v2-hact">
-                                <span class="v2-hi"><i>&#9906;</i>상세</span>
-                                <span class="v2-hi"><i>&#128722;</i>담기</span>
-                                <span class="v2-hi p"><i>&#8250;</i>구매</span>
-                              </span>
                             </div>
                             <div class="v2-pb"><span class="tag" style="align-self:flex-start;">의상</span>
                               <span class="v2-pn">축제 의상 세트</span>
@@ -12355,8 +12080,8 @@
                 </div>
                 <p class="dr-b">「담은 상품」 · 총 건수 · 닫기.</p>
                 <div class="spec">
-                  <div class="spec-r"><span class="spec-k">여는 법</span><span class="spec-v">카드 <b>[담기]</b> ·
-                      상세 모달 <b>[구매하기]</b> · 헤더 <b>&#128722; 아이콘</b> 셋</span></div>
+                  <div class="spec-r"><span class="spec-k">여는 법</span><span class="spec-v">상세 모달
+                      <b>[구매하기]</b> · 헤더 <b>&#128722; 아이콘</b> 둘</span></div>
                   <div class="spec-r"><span class="spec-k">모달에서 왔을 때</span><span class="spec-v"><b>그 상품만 체크</b>된 상태로
                       열린다 — 이미 담겨 있던 것은 체크가 풀린다</span></div>
                 </div>
@@ -13953,11 +13678,11 @@
         return win ? win.querySelector('[data-role="cardmodal"]') : null;
       }
       document.addEventListener('click', function (e) {
-        var det = e.target.closest('.v2-hi');
-        if (det && det.textContent.indexOf('상세') === 0) {
-          var m = cardModal(det); if (m) m.hidden = false; return;
+        var card = e.target.closest('.v2-pc');
+        if (card) {
+          if (e.target.closest('.v2-like')) return;
+          var m = cardModal(card); if (m) m.hidden = false; return;
         }
-        if (det || e.target.closest('.v2-act')) return;
         var open = document.querySelector('[data-role="cardmodal"]:not([hidden])');
         if (!open) return;
         var inside = e.target.closest('.v2-pmd');
