@@ -8675,14 +8675,37 @@
       line-height: 1.4;
     }
 
+    /* 가격 — 원가에 줄을 긋고 그 아래 할인율 + 할인가 */
     .v2-pmdp {
+      font-family: "IBM Plex Mono", monospace;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      align-items: flex-start;
+    }
+
+    .v2-pmdp s {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #98A2AE;
+      text-decoration-thickness: 1px;
+    }
+
+    .v2-pmdp b {
       font-size: 22px;
       font-weight: 600;
       color: #171B22;
-      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: -.01em;
+    }
+
+    .v2-pmdp b i {
+      font-style: normal;
+      color: #C03636;
+      margin-right: 7px;
     }
 
     .v2-pmdp em {
+      display: none;
       font-style: normal;
       font-size: 11px;
       color: #6C7480;
@@ -9370,7 +9393,7 @@
                         <div class="mk" style="position:absolute;top:20px;left:-33px;">1</div>
                         <div class="v2-hd">
                           <div class="img" style="width:186px;height:30px;"><span class="sp"
-                              style="font-size:8px;">RAGNAROK PORTAL 로고</span>
+                              style="font-size:8px;">RAGNAROK STORE 로고</span>
                           </div>
                           <span class="svc"><span class="svc-m"></span>AIWAN<span class="svc-x">&#8599;</span></span>
                           <span class="svc"><span class="svc-m"></span>ROBOX<span class="svc-x">&#8599;</span></span>
@@ -9779,7 +9802,7 @@
                         <div class="mk" style="position:absolute;top:20px;left:-33px;">1</div>
                         <div class="v2-hd">
                           <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RAGNAROK
-                              PORTAL 로고</span>
+                              STORE 로고</span>
                           </div>
                           <div class="v2-hdu">
                             <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
@@ -10012,7 +10035,7 @@
                                 <div class="v2-pmdn">스피드 부스터 패키지 10세트</div>
                               </div>
                               <div class="v2-pmdprow">
-                                <div class="v2-pmdp">₩ 25,000 <em>KRW</em></div>
+                                <div class="v2-pmdp"><s>₩ 25,000</s><b><i>20%</i>₩ 20,000</b> <em>KRW</em></div>
                                 <span class="v2-qty"><span>&#8722;</span><b>1</b><span>&#43;</span></span>
                               </div>
 
@@ -10033,7 +10056,7 @@
                           <div class="v2-pmdf" style="position:relative;">
                             <div class="v2-pmdfr">
                               <span class="v2-pmdlike">&#9825;</span>
-                              <span class="v2-pmdadd">₩ 25,000 · 구매하기</span>
+                              <span class="v2-pmdadd">₩ 20,000 · 구매하기</span>
                             </div>
                           </div>
                         </div>
@@ -10059,7 +10082,7 @@
                           <div class="v2-hd tb" style="position:relative;">
                             <div class="mk" style="position:absolute;top:14px;left:-33px;">1</div>
                             <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RAGNAROK
-                                PORTAL 로고</span></div>
+                                STORE 로고</span></div>
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
@@ -10218,7 +10241,7 @@
                           <div class="v2-hd mo" style="position:relative;">
                             <div class="mk" style="position:absolute;top:12px;left:-33px;">1</div>
                             <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RAGNAROK
-                                PORTAL 로고</span></div>
+                                STORE 로고</span></div>
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
@@ -10418,7 +10441,7 @@
                   <div class="spec-r"><span class="spec-k">왜 GNB 가 없나</span><span class="spec-v">웹샵은 <span
                         class="mono">shop.ragnarokland.com</span> <b>별도 도메인</b>이다. LIBRARY · NEWS 같은 포털 콘텐츠 링크를
                       결제 직전 화면에 <b>여덟 개나</b> 노출할 이유가 없다 — 포털로 나가는 길은 <b>푸터에만</b> 둔다</span></div>
-                  <div class="spec-r"><span class="spec-k">좌측</span><span class="spec-v"><b>RAGNAROK PORTAL 로고</b>
+                  <div class="spec-r"><span class="spec-k">좌측</span><span class="spec-v"><b>RAGNAROK STORE 로고</b>
                       하나</span>
                   </div>
                   <div class="spec-r"><span class="spec-k">뺀 것</span><span class="spec-v"><b>[&#8249; 포털]</b> ·
@@ -10643,7 +10666,7 @@
 
                       <div class="v2-hd">
                         <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RAGNAROK
-                            PORTAL 로고</span>
+                            STORE 로고</span>
                         </div>
                         <div class="v2-hdu">
                           <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
@@ -10749,7 +10772,7 @@
                                 <div class="v2-pmdn">스피드 부스터 패키지 10세트</div>
                               </div>
                               <div class="v2-pmdprow">
-                                <div class="v2-pmdp">₩ 25,000 <em>KRW</em></div>
+                                <div class="v2-pmdp"><s>₩ 25,000</s><b><i>20%</i>₩ 20,000</b> <em>KRW</em></div>
                                 <span class="v2-qty"><span>&#8722;</span><b>1</b><span>&#43;</span></span>
                               </div>
 
@@ -10772,7 +10795,7 @@
                             <div class="mk" style="position:absolute;top:20px;left:-33px;">5</div>
                             <div class="v2-pmdfr">
                               <span class="v2-pmdlike">&#9825;</span>
-                              <span class="v2-pmdadd">₩ 25,000 · 구매하기</span>
+                              <span class="v2-pmdadd">₩ 20,000 · 구매하기</span>
                             </div>
                           </div>
                         </div>
@@ -10802,7 +10825,7 @@
                                   <div class="v2-pmdn">포스 부스터 패키지 10세트</div>
                                 </div>
                                 <div class="v2-pmdprow">
-                                  <div class="v2-pmdp">₩ 9,900 <em>KRW</em></div>
+                                  <div class="v2-pmdp"><b>₩ 9,900</b> <em>KRW</em></div>
                                   <span class="v2-qty"><span>&#8722;</span><b>1</b><span>&#43;</span></span>
                                 </div>
 
@@ -10844,7 +10867,7 @@
                           </div>
                           <div class="v2-hd tb">
                             <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RAGNAROK
-                                PORTAL 로고</span></div>
+                                STORE 로고</span></div>
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
@@ -10962,7 +10985,7 @@
                                 <div class="mk" style="position:absolute;top:18px;left:-33px;">5</div>
                                 <div class="v2-pmdfr">
                                   <span class="v2-pmdlike" style="width:46px;padding:11px 0;">&#9825;</span>
-                                  <span class="v2-pmdadd" style="padding:11px 0;font-size:13px;">₩ 25,000 ·
+                                  <span class="v2-pmdadd" style="padding:11px 0;font-size:13px;">₩ 20,000 ·
                                     구매하기</span>
                                 </div>
                               </div>
@@ -10992,7 +11015,7 @@
                           </div>
                           <div class="v2-hd mo">
                             <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RAGNAROK
-                                PORTAL 로고</span></div>
+                                STORE 로고</span></div>
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
@@ -11065,7 +11088,7 @@
                                 <div class="mk" style="position:absolute;top:16px;left:-33px;">5</div>
                                 <div class="v2-pmdfr">
                                   <span class="v2-pmdlike" style="width:44px;padding:11px 0;">&#9825;</span>
-                                  <span class="v2-pmdadd" style="padding:11px 0;font-size:13px;">₩ 25,000 ·
+                                  <span class="v2-pmdadd" style="padding:11px 0;font-size:13px;">₩ 20,000 ·
                                     구매하기</span>
                                 </div>
                               </div>
@@ -11146,6 +11169,11 @@
                       제약. <b>자유 텍스트 한 칸</b>으로 받는다</span></div>
                   <div class="spec-r"><span class="spec-k">길이 제한</span><span class="spec-v"><b>글자 수 상한</b> 적용</span>
                   </div>
+                  <div class="spec-r"><span class="spec-k">할인 표기</span><span class="spec-v">원가에 <b>취소선</b>을 긋고
+                      그 아래 <b>할인율 + 할인가</b> — <span class="mono">₩ 25,000</span> /
+                      <span class="mono">20% &#8361; 20,000</span>. 할인이 없으면 <b>한 줄</b>만 쓴다</span></div>
+                  <div class="spec-r"><span class="spec-k">버튼 금액</span><span class="spec-v"><b>할인가</b>를 적는다 — 수량을
+                      곱한 값이다</span></div>
                   <div class="spec-r"><span class="spec-k">가격</span><span class="spec-v">금액 + <b>통화 코드</b> 병기</span>
                   </div>
                   <div class="spec-r"><span class="spec-k">배지</span><span class="spec-v">상품명 위에 <b>분류</b> · 기간 한정이면
@@ -11872,7 +11900,7 @@
 
                       <div class="v2-hd">
                         <div class="img" style="width:132px;height:26px;"><span class="sp" style="font-size:8px;">RAGNAROK
-                            PORTAL 로고</span>
+                            STORE 로고</span>
                         </div>
                         <div class="v2-hdu">
                           <span class="lang"><svg class="ico" viewBox="0 0 20 20" width="15" height="15"
@@ -11956,7 +11984,7 @@
                           </div>
                           <div class="v2-hd tb">
                             <div class="img" style="width:104px;height:22px;"><span class="sp" style="font-size:7px;">RAGNAROK
-                                PORTAL 로고</span></div>
+                                STORE 로고</span></div>
                             <div class="v2-hdu" style="gap:10px;">
                               <span class="lang" style="font-size:10px;">KO</span>
                               <span class="v2-ic" style="width:26px;height:26px;">&#9825;<em>4</em></span>
@@ -12020,7 +12048,7 @@
                           </div>
                           <div class="v2-hd mo">
                             <div class="img" style="width:78px;height:18px;"><span class="sp" style="font-size:6px;">RAGNAROK
-                                PORTAL 로고</span></div>
+                                STORE 로고</span></div>
                             <div class="v2-hdu" style="gap:7px;">
                               <span class="lang" style="font-size:9.5px;">KO</span>
                               <span class="v2-ic" style="width:23px;height:23px;">&#9825;<em>4</em></span>
